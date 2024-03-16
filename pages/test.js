@@ -21,7 +21,7 @@ export default function Test() {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                跳出視窗(modal)標題
+                跳出視窗(modal)標題測試
               </h5>
               <button
                 type="button"
