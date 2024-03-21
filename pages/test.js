@@ -1,14 +1,18 @@
+import ForgetPassword from '@/components/forget-password'
+
 export default function Test() {
   return (
-    <div className="d-flex justify-content-center align-items-center">
-      <button
-        type="button"
-        className="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-      >
-        按我來測試跳出視窗(modal)
-      </button>
+    <>
+      <ForgetPassword />
+      {/* <div className="d-flex justify-content-center align-items-center">
+        <button
+          type="button"
+          className="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          按我來測試跳出視窗(modal)
+        </button> */}
 
       <div
         className="modal fade"
@@ -34,6 +38,6 @@ export default function Test() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
