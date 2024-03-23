@@ -1,48 +1,62 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import Dropdown from 'react-bootstrap/Dropdown'
 import style from '@/styles/navbar.module.css'
+import { TbMessage, FaUser } from 'react-icons/tb'
 
 export default function Navbar({ pageName = '' }) {
+  const [isHovered, setIsHovered] = useState(false)
+  const handleMouserEnter = () => {
+    setIsHovered(true)
+  }
+  const handleMouseLeave = () => {
+    setIsHovered(false)
+  }
   return (
     <>
       {/* topbar start */}
-      <div className="container-fluid topBar">
-        <div className="row bg-secondary py-1 px-xl-5 border-bottom border-3 topBar-a">
-          <div className="col-lg-6 d-none d-lg-block">
-            <div className="d-inline-flex align-items-center h-100">
-              <Link className="text-body mr-3" href="">
+      <div className={style.topBar}>
+        <div className={style.row}>
+          <div className={style.colA}>
+            <div className="">
+              <Link className={(style.textBody, style.rowA)} href="">
                 <strong>認識DEAL</strong>
               </Link>
-              <Link className="text-body mr-3" href="">
+              <Link className={style.textBody} href="">
                 <strong>幫助中心</strong>
               </Link>
-              <Link className="text-body mr-3" href="">
+              <Link className={style.textBody} href="">
                 <strong>隱私條款</strong>
               </Link>
-              <Link className="text-body mr-3" href="">
+              <Link className={style.textBody} href="">
                 <strong>使用條款</strong>
               </Link>
             </div>
           </div>
-          <div className="col-lg-6 text-center text-lg-right">
+          <div className={style.colB}>
             <div className="d-inline-flex align-items-center">
-              <div className="btn-group">
-                <button
-                  type="button"
-                  className="btn btn-sm btn-light dropdown-toggle rounded"
-                  data-toggle="dropdown"
+              <Dropdown>
+                <Dropdown.Toggle
+                  id="dropdown-basic"
+                  onMouseEnter={handleMouserEnter}
+                  onMouseLeave={handleMouseLeave}
+                  style={{
+                    backgroundColor: isHovered ? '#d6d4d4' : '#F5F5F5',
+                    border: 'none',
+                  }}
                 >
-                  <i className="fa-solid fa-comments"></i>
-                </button>
-                <div className="dropdown-menu dropdown-menu-right rounded">
-                  <button className="dropdown-item" type="button">
+                  <TbMessage />
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item href="#/action-1">
                     <div className="textBox d-flex align-items-center justify-content-between border-bottom border-2">
                       <div className="boxLeft d-flex">
                         <div className="mt-3 position-relative">
                           <Image
                             className="border border-1 rounded-circle"
-                            src="/public/imgs/logo-sm.png"
+                            src="/logo-sm.png"
                             alt=""
                             width={50}
                             height={50}
@@ -63,9 +77,9 @@ export default function Navbar({ pageName = '' }) {
                         <p>時間</p>
                       </div>
                     </div>
-                  </button>
-                </div>
-              </div>
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
               <div className="btn-group ms-2">
                 <button
                   type="button"

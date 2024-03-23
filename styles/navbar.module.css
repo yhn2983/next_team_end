@@ -1,7 +1,33 @@
-.topBar-a{
-  height: 50px;
+.topBar{
+  height: 60px;
+  background-color: rgb(246, 244, 244);
 }
 
-.topBar-b{
-  height: 180px;
+.row{
+  display: flex;
+  justify-content: space-between;
 }
+
+.rowA{
+  margin: 0 10px 0 30px;
+  text-decoration: none;
+  color: black;
+}
+
+.colA{
+  margin-top: 3px;
+}
+
+.colB{
+  margin-right: 10px;
+}
+
+.textBody{
+  margin: 0 10px;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+
