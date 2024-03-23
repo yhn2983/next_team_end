@@ -1,15 +1,16 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import jwt from 'jsonwebtoken'
+import { JWT_LOGIN_POST } from '@/components/config'
 
 const AuthContext = createContext()
 
-const authStorageKey = 'shin-auth'
+const authStorageKey = 'lee-auth'
 
 export function AuthContextProvider({ children }) {
   const [auth, setAuth] = useState({})
 
   const login = async (email, password) => {
-    const response = await fetch('http://localhost:3001/api/auth/login', {
+    const response = await fetch(JWT_LOGIN_POST, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
