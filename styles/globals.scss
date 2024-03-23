@@ -32,17 +32,6 @@ $border-radius-lg: 0.2em;
 // 導入所有 bootstrap 樣式
 @import '~bootstrap/scss/bootstrap';
 // ↓↓↓  其它客製樣式要寫在這行的"下面" ↓↓↓
-<<<<<<< HEAD
-$btnMemberBg:#e96d3f;
-$btnMemberHoverBg:rgb(142, 38, 38);
-
-.btnForget{
-  background-color: $btnMemberBg;
-  color: white;
-}
-.btnForget:hover{
-  background-color: $btnMemberHoverBg;
-=======
 h1,
 h2,
 h3 {
@@ -79,7 +68,6 @@ h6 {
   .navbar-dark .navbar-nav .nav-link {
     padding: 5px 0px;
   }
->>>>>>> raye
 }
 
 // google Noto Sans TC 字體

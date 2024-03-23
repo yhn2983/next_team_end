@@ -1,11 +1,6 @@
 import { useEffect } from 'react'
 import '@/styles/globals.scss'
-<<<<<<< HEAD
-import DefaultLayout from '@/components/layout/default-layout'
-import { AuthContextProvider } from '@/context/auth-context'
-=======
 import DefaultLayout from '@/components/common/default-layout'
->>>>>>> raye
 
 export default function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -13,18 +8,5 @@ export default function MyApp({ Component, pageProps }) {
     import('bootstrap/dist/js/bootstrap')
   }, [])
 
-<<<<<<< HEAD
-  // 使用預設排版檔案
-  // 對應`components/layout/default-layout/index.js`
-  const getLayout =
-    Component.getLayout || ((page) => <DefaultLayout>{page}</DefaultLayout>)
-
-  return (
-    <AuthContextProvider>
-      {getLayout(<Component {...pageProps} />)}
-    </AuthContextProvider>
-  )
-=======
   return <Component {...pageProps} />
->>>>>>> raye
 }
