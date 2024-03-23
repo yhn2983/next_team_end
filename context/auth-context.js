@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import jwt from 'jsonwebtoken'
 import { JWT_LOGIN_POST } from '@/components/config'
+import { JWT_REGISTER_POST } from '@/components/config'
 
 const AuthContext = createContext()
 
@@ -45,6 +46,39 @@ export function AuthContextProvider({ children }) {
     setAuth({})
   }
 
+  const register = async (
+    email,
+    password,
+    name,
+    nickname,
+    mobile,
+    birthday,
+    address
+  ) => {
+    const response = await fetch(JWT_REGISTER_POST, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+        name,
+        nickname,
+        mobile,
+        birthday,
+        address,
+      }),
+    })
+
+    if (response.ok) {
+      const data = await response.json()
+      return data.status === 'success'
+    } else {
+      return false
+    }
+  }
+
   useEffect(() => {
     const str = localStorage.getItem(authStorageKey)
     if (str) {
@@ -58,7 +92,7 @@ export function AuthContextProvider({ children }) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ auth, login, logout }}>
+    <AuthContext.Provider value={{ auth, login, logout, register }}>
       {children}
     </AuthContext.Provider>
   )
