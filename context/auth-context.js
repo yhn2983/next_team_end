@@ -13,7 +13,7 @@ const logoutState = {
   token: '',
 }
 
-const authStorageKey = 'shin-auth'
+const authStorageKey = 'lee-auth'
 
 export function AuthContextProvider({ children }) {
   const [auth, setAuth] = useState(logoutState)
@@ -29,17 +29,14 @@ export function AuthContextProvider({ children }) {
     })
     if (!r.ok) return false // 登入沒有成功
     const result = await r.json()
-    if (result.status !== 'success') return false // 登入沒有成功
+    if (!result.success) return false // 登入沒有成功
 
-    const token = result.data.accessToken
-    const payload = JSON.parse(atob(token.split('.')[1]))
-    const { id, nickname } = payload
+    // 儲存用戶資訊到 localStorage
+    localStorage.setItem(authStorageKey, JSON.stringify(result.data))
 
-    localStorage.setItem(
-      authStorageKey,
-      JSON.stringify({ id, nickname, email, token })
-    )
-    setAuth({ id, nickname, email, token })
+    // 儲存 accessToken 到 auth 狀態
+    setAuth({ ...auth, token: result.data.accessToken })
+
     return true
   }
 
@@ -49,17 +46,14 @@ export function AuthContextProvider({ children }) {
   }
 
   const getAuthHeader = () => {
-    if (auth.token) {
-      const payload = JSON.parse(atob(auth.token.split('.')[1]))
-      const { id, nickname } = payload
-      console.log(`User ID: ${id}, Nickname: ${nickname}`)
-
+    if (auth.id) {
       return {
         Authorization: `Bearer ${auth.token}`,
       }
     }
     return {}
   }
+
   useEffect(() => {
     const str = localStorage.getItem(authStorageKey)
     if (str) {

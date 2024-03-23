@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import '@/styles/globals.scss'
 import DefaultLayout from '@/components/layout/default-layout'
 import { AuthContextProvider } from '@/context/auth-context'
-import LoginModal from '@/components/login-modal'
 
 export default function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -15,11 +14,9 @@ export default function MyApp({ Component, pageProps }) {
   const getLayout =
     Component.getLayout || ((page) => <DefaultLayout>{page}</DefaultLayout>)
 
-  return getLayout(
+  return (
     <AuthContextProvider>
-      {/* Other components */}
-      <LoginModal />
-      {/* Other components */}
+      {getLayout(<Component {...pageProps} />)}
     </AuthContextProvider>
   )
 }
