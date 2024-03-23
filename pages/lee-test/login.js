@@ -1,20 +1,27 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useAuth } from '@/context/auth-context'
 import { useRouter } from 'next/router'
 
 export default function LoginPage() {
   const router = useRouter()
-  const { login } = useAuth()
+  const { auth, login } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  useEffect(() => {
+    if (auth.token) {
+      router.push('/lee-test/logout')
+    }
+  }, [auth, router])
+
   const onSubmit = (e) => {
     e.preventDefault()
+
     login(email, password).then((result) => {
       if (result) {
         alert('登入成功')
-        router.push('/')
+        router.push('/lee-test/logout')
       } else {
         alert('登入失敗')
       }
