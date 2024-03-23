@@ -1,57 +1,47 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { JWT_LOGIN_POST } from '@/components/config'
+import jwt from 'jsonwebtoken'
 
 const AuthContext = createContext()
 
-// 1. 保有登入的狀態
-// 2. 登入的功能
-// 3. 登出
-const logoutState = {
-  id: 0, // 如果不是 0 表示已經登入
-  email: '',
-  nickname: '',
-  token: '',
-}
-
-const authStorageKey = 'lee-auth'
+const authStorageKey = 'shin-auth'
 
 export function AuthContextProvider({ children }) {
-  const [auth, setAuth] = useState(logoutState)
+  const [auth, setAuth] = useState({})
 
   const login = async (email, password) => {
-    // 處理登入的狀況
-    const r = await fetch(JWT_LOGIN_POST, {
+    const response = await fetch('http://localhost:3001/api/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email, password }),
     })
-    if (!r.ok) return false // 登入沒有成功
-    const result = await r.json()
-    if (!result.success) return false // 登入沒有成功
 
-    // 儲存用戶資訊到 localStorage
-    localStorage.setItem(authStorageKey, JSON.stringify(result.data))
+    if (!response.ok) return false
 
-    // 儲存 accessToken 到 auth 狀態
-    setAuth({ ...auth, token: result.data.accessToken })
+    const data = await response.json()
+
+    if (data.status !== 'success') return false
+
+    const decoded = jwt.decode(data.data.accessToken)
+
+    const authData = {
+      id: decoded.id,
+      email: decoded.email,
+      nickname: decoded.nickname,
+      token: data.data.accessToken,
+    }
+
+    localStorage.setItem(authStorageKey, JSON.stringify(authData))
+
+    setAuth(authData)
 
     return true
   }
 
   const logout = () => {
     localStorage.removeItem(authStorageKey)
-    setAuth({ ...logoutState })
-  }
-
-  const getAuthHeader = () => {
-    if (auth.id) {
-      return {
-        Authorization: `Bearer ${auth.token}`,
-      }
-    }
-    return {}
+    setAuth({})
   }
 
   useEffect(() => {
@@ -67,7 +57,7 @@ export function AuthContextProvider({ children }) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ auth, login, logout, getAuthHeader }}>
+    <AuthContext.Provider value={{ auth, login, logout }}>
       {children}
     </AuthContext.Provider>
   )

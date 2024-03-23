@@ -11,7 +11,6 @@ export default function LoginPage() {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    console.log({ email, password })
     login(email, password).then((result) => {
       if (result) {
         alert('登入成功')
