@@ -1,19 +1,24 @@
 // 檔案位置: styles/global.scss
 // 變數覆蓋用 (Variable overrides)
 // 全站配色 colors
-$primary: #894505;
-$secondary: rgba(44, 226, 31, 0.5);
-$success: #7eb4e6;
-$danger: #ff4136;
-
 $primary: #e96d3f;
 $secondary: #F5F5F5;
 $light: #FFFFFF;
 $dark: rgb(142, 38, 38);
+$success: #7eb4e6;
+$danger: #ff4136;
+$body-bg: $secondary;
 $body-color: #6C757D;
+$headings-color: $dark;
+$enable-responsive-font-sizes: true;
+$enable-rounded: false;
+$btn-focus-box-shadow: none;
+$btn-active-box-shadow: none;
+$input-btn-focus-box-shadow: none;
+$input-placeholder-color: #999999;
 
 // 按鈕圓角邊 button radius
-$border-radius: 0.5em;
+$border-radius: 0em;
 $border-radius-sm: 0.2em;
 $border-radius-lg: 0.2em;
 
@@ -21,15 +26,42 @@ $border-radius-lg: 0.2em;
 // 導入所有 bootstrap 樣式
 @import '~bootstrap/scss/bootstrap';
 // ↓↓↓  其它客製樣式要寫在這行的"下面" ↓↓↓
-$btnMemberBg:#e96d3f;
-$btnMemberHoverBg:rgb(142, 38, 38);
-
-.btnForget{
-  background-color: $btnMemberBg;
-  color: white;
+h1,
+h2,
+h3 {
+  font-weight: 700 !important;
 }
-.btnForget:hover{
-  background-color: $btnMemberHoverBg;
+
+h4,
+h5,
+h6 {
+  font-weight: 500 !important;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mb-30 {
+  margin-bottom: 30px;
+}
+
+.pb-30 {
+  padding-bottom: 30px;
+}
+
+.p-30 {
+  padding: 30px;
+}
+
+.btn.btn-primary {
+  color: $dark !important;
+}
+
+@media (max-width: 991.98px) {
+  .navbar-dark .navbar-nav .nav-link {
+    padding: 5px 0px;
+  }
 }
 
 // google Noto Sans TC 字體
