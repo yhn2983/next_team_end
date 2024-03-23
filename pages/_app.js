@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import '@/styles/globals.scss'
+import { AuthContextProvider } from '@/context/auth-context'
 
 export default function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -7,5 +8,9 @@ export default function MyApp({ Component, pageProps }) {
     import('bootstrap/dist/js/bootstrap')
   }, [])
 
-  return <Component {...pageProps} />
+  return (
+    <AuthContextProvider>
+      <Component {...pageProps} />
+    </AuthContextProvider>
+  )
 }

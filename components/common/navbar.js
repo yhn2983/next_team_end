@@ -2,10 +2,21 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Dropdown from 'react-bootstrap/Dropdown'
+// style-----
 import style from '@/styles/navbar.module.css'
-import { TbMessage, FaUser } from 'react-icons/tb'
+// icons-----
+import { TbMessage } from 'react-icons/tb'
+import { FaUser, FaClipboardList } from 'react-icons/fa'
+import { IoLogIn } from 'react-icons/io5'
+import { GiArchiveRegister } from 'react-icons/gi'
+import { FaCircleUser, FaTreeCity } from 'react-icons/fa6'
+import { RiCoupon3Fill } from 'react-icons/ri'
+// hook------
+import { useAuth } from '@/context/auth-context'
 
 export default function Navbar({ pageName = '' }) {
+  const { auth, logout } = useAuth()
+
   const [isHovered, setIsHovered] = useState(false)
   const handleMouserEnter = () => {
     setIsHovered(true)
@@ -46,9 +57,8 @@ export default function Navbar({ pageName = '' }) {
                     border: 'none',
                   }}
                 >
-                  <TbMessage />
+                  <TbMessage style={{ fontSize: '20px' }} />
                 </Dropdown.Toggle>
-
                 <Dropdown.Menu>
                   <Dropdown.Item href="#/action-1">
                     <div className="textBox d-flex align-items-center justify-content-between border-bottom border-2">
@@ -78,6 +88,65 @@ export default function Navbar({ pageName = '' }) {
                       </div>
                     </div>
                   </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+              <Dropdown style={{ marginLeft: '5px' }}>
+                <Dropdown.Toggle
+                  id="dropdown-basic"
+                  onMouseEnter={handleMouserEnter}
+                  onMouseLeave={handleMouseLeave}
+                  style={{
+                    backgroundColor: isHovered ? '#d6d4d4' : '#F5F5F5',
+                    border: 'none',
+                  }}
+                >
+                  <FaUser />
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  {auth.id ? (
+                    <>
+                      <Dropdown.Item href="#/action-1">
+                        <FaCircleUser
+                          style={{ fontSize: '20px', marginRight: '2px' }}
+                        />
+                        &nbsp;會員中心
+                      </Dropdown.Item>
+                      <Dropdown.Item href="#/action-2">
+                        <FaClipboardList
+                          style={{ fontSize: '20px', marginRight: '2px' }}
+                        />
+                        &nbsp;訂購紀錄
+                      </Dropdown.Item>
+                      <Dropdown.Item href="#/action-3">
+                        <FaTreeCity />
+                        &nbsp;小碳點紀錄
+                      </Dropdown.Item>
+                      <Dropdown.Item href="#/action-4">
+                        <RiCoupon3Fill />
+                        &nbsp;優惠券紀錄
+                      </Dropdown.Item>
+                      <Dropdown.Item href="#/action-5">登出</Dropdown.Item>
+                    </>
+                  ) : (
+                    <>
+                      <Dropdown.Item href="#/action-1">
+                        <IoLogIn
+                          style={{ fontSize: '20px', marginRight: '2px' }}
+                        />
+                        &nbsp;登入
+                      </Dropdown.Item>
+                      <Dropdown.Item href="#/action-2">
+                        <GiArchiveRegister
+                          style={{
+                            fontSize: '20px',
+                            marginRight: '2px',
+                            color: '#2f4f4f',
+                          }}
+                        />
+                        &nbsp;註冊
+                      </Dropdown.Item>
+                    </>
+                  )}
                 </Dropdown.Menu>
               </Dropdown>
               <div className="btn-group ms-2">

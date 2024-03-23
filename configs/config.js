@@ -12,5 +12,8 @@ export const PROD_ITEM = `${API_SERVER}/products` // GET
 // 修改通訊錄單筆資料 主鍵為 sid,  `${PROD_ITEM_UPDATE_PUT}/${sid}`
 export const PROD_ITEM_UPDATE_PUT = `${API_SERVER}/products/edit` // PUT
 
+// *** JWT ***
+export const JWT_LOGIN_POST = `${API_SERVER}/login-jwt` // 登入, POST
+
 // 加入或移除 喜愛清單 "/like-toggle-jwt/:pid"
 export const JWT_TOGGLE_LIKE = `${API_SERVER}/like-toggle-jwt` // GET
