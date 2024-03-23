@@ -1,12 +1,14 @@
 import Navbar from './navbar'
 import Footer from './footer'
 
-export default function DefaultLayout({ children }) {
+export default function DefaultLayout({ children, pageName = '' }) {
   return (
     <>
-      <Navbar />
-      <main>{children}</main>
-      <Footer />
+      <div className="container-fluid">
+        <Navbar pageName={pageName} />
+        <main className="container-fluid">{children}</main>
+        <Footer />
+      </div>
     </>
   )
 }

@@ -1,13 +1,14 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import style from '@/styles/navbar.module.css'
 
 export default function Navbar({ pageName = '' }) {
   return (
     <>
       {/* topbar start */}
       <div className="container-fluid topBar">
-        <div className="row bg-secondary py-1 px-xl-5 border-bottom border-3">
+        <div className="row bg-secondary py-1 px-xl-5 border-bottom border-3 topBar-a">
           <div className="col-lg-6 d-none d-lg-block">
             <div className="d-inline-flex align-items-center h-100">
               <Link className="text-body mr-3" href="">
@@ -189,7 +190,7 @@ export default function Navbar({ pageName = '' }) {
             </div>
           </div>
         </div>
-        <div className="row align-items-center px-xl-4 d-none d-lg-flex bg-light">
+        <div className="row align-items-center px-xl-4 d-none d-lg-flex bg-light topBar-b">
           <div className="col-lg-2">
             <Link href="" className="text-decoration-none">
               <Image
