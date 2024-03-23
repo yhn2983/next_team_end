@@ -26,6 +26,43 @@ $border-radius-lg: 0.2em;
 // 導入所有 bootstrap 樣式
 @import '~bootstrap/scss/bootstrap';
 // ↓↓↓  其它客製樣式要寫在這行的"下面" ↓↓↓
+h1,
+h2,
+h3 {
+  font-weight: 700 !important;
+}
+
+h4,
+h5,
+h6 {
+  font-weight: 500 !important;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mb-30 {
+  margin-bottom: 30px;
+}
+
+.pb-30 {
+  padding-bottom: 30px;
+}
+
+.p-30 {
+  padding: 30px;
+}
+
+.btn.btn-primary {
+  color: $dark !important;
+}
+
+@media (max-width: 991.98px) {
+  .navbar-dark .navbar-nav .nav-link {
+    padding: 5px 0px;
+  }
+}
 
 // google Noto Sans TC 字體
 @import 'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&display=swap';
