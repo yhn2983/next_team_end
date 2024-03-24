@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Link from 'next/link'
+
 //import styles from '@/styles/home.module.css'
 import DefaultLayout from '@/components/common/default-layout'
 

@@ -17,7 +17,7 @@ import {
   FaShoppingCart,
   FaHeart,
 } from 'react-icons/fa'
-import { IoLogIn, IoLanguage, IoCloseCircle } from 'react-icons/io5'
+import { IoLogIn, IoLanguage } from 'react-icons/io5'
 import { GiArchiveRegister } from 'react-icons/gi'
 import { FaCircleUser, FaTreeCity, FaBars } from 'react-icons/fa6'
 import { RiCoupon3Fill, RiLogoutBoxRFill } from 'react-icons/ri'
@@ -209,19 +209,18 @@ export default function Navbar({ pageName = '' }) {
           <div className="col-2">
             <Link href="" className="text-decoration-none">
               <Image
-                className="logo9"
+                className={style.logo}
                 src="/logo9.png"
                 alt=""
                 width={500}
                 height={500}
-                style={{ width: '150px', height: '150px' }}
               />
             </Link>
           </div>
           <div className="col-lg-7 text-left d-flex">
-            <Form.Select
+            <select
               aria-label="Default select example"
-              className="shadow-lg overflow-auto"
+              className="form-select shadow-lg overflow-auto form-control"
               style={{ marginRight: '20px', height: '38px' }}
             >
               <option selected disabled>
@@ -249,7 +248,7 @@ export default function Navbar({ pageName = '' }) {
               <option value="20">澎湖縣</option>
               <option value="21">金門縣</option>
               <option value="22">連江縣</option>
-            </Form.Select>
+            </select>
             <InputGroup className="mb-3">
               <Form.Control
                 placeholder="挖掘寶物吧！"
@@ -403,30 +402,6 @@ export default function Navbar({ pageName = '' }) {
         </div>
       </div>
       {/* Navbar End */}
-      {/* ad start */}
-      <div className={style.adArea}>
-        <Image
-          className="border border-primary rounded-circle shadow-lg "
-          src="/ad.png"
-          alt=""
-          width={200}
-          height={200}
-        />
-        <span
-          className="badge rounded-pill px-3 py-1"
-          style={{ fontSize: '20px' }}
-        >
-          加入我們
-        </span>
-        <button
-          type="button"
-          className="btn translate-middle"
-          data-bs-dismiss="card"
-        >
-          <IoCloseCircle style={{ fontSize: '30px', color: '#e96d3f' }} />
-        </button>
-      </div>
-      {/* ad end */}
     </>
   )
 }

@@ -5,6 +5,15 @@ import Image from 'next/image'
 import footerStyle from './footer.module.css'
 // react bootstrap
 // react icons-----
+import {
+  FaUserFriends,
+  FaRegHandPointDown,
+  FaFacebookSquare,
+  FaInstagramSquare,
+} from 'react-icons/fa'
+import { SlArrowDown } from 'react-icons/sl'
+import { FaSquareXTwitter, FaLinkedin, FaAnglesUp } from 'react-icons/fa6'
+import { IoCloseCircle } from 'react-icons/io5'
 // hook------
 
 export default function Footer() {
@@ -18,7 +27,10 @@ export default function Footer() {
           <div className="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
             <h5 className="text-secondary text-uppercase mb-4">
               <strong>
-                <i className="fa-solid fa-user-group"></i>
+                <FaUserFriends
+                  className={`mb-2 ${footerStyle.footerContent}`}
+                />
+                &nbsp;
                 <span className={footerStyle.footerContent}>廣告合作夥伴</span>
               </strong>
             </h5>
@@ -26,24 +38,60 @@ export default function Footer() {
               <div
                 className={`me-5 d-flex align-items-center justify-content-center ${footerStyle.adbox}`}
               >
-                <Link href=""></Link>
+                <Link href="">
+                  <Image
+                    className=""
+                    src="/n1.png"
+                    alt=""
+                    width={136}
+                    height={136}
+                    style={{ borderRadius: '30px' }}
+                  />
+                </Link>
               </div>
               <div
                 className={`d-flex align-items-center justify-content-center ${footerStyle.adbox}`}
               >
-                <Link href=""></Link>
+                <Link href="">
+                  <Image
+                    className=""
+                    src="/n2.png"
+                    alt=""
+                    width={136}
+                    height={136}
+                    style={{ borderRadius: '30px' }}
+                  />
+                </Link>
               </div>
             </div>
             <div className="adboxBottom d-flex mt-4">
               <div
                 className={`me-5 d-flex align-items-center justify-content-center ${footerStyle.adbox}`}
               >
-                <Link href=""></Link>
+                <Link href="">
+                  <Image
+                    className=""
+                    src="/n3.png"
+                    alt=""
+                    width={136}
+                    height={136}
+                    style={{ borderRadius: '30px' }}
+                  />
+                </Link>
               </div>
               <div
                 className={`d-flex align-items-center justify-content-center ${footerStyle.adbox}`}
               >
-                <Link href=""></Link>
+                <Link href="">
+                  <Image
+                    className=""
+                    src="/n4.png"
+                    alt=""
+                    width={136}
+                    height={136}
+                    style={{ borderRadius: '30px' }}
+                  />
+                </Link>
               </div>
             </div>
           </div>
@@ -52,72 +100,134 @@ export default function Footer() {
               <div className="col-md-4 mb-5">
                 <h5 className="text-secondary text-uppercase mb-4">
                   <strong>
-                    <i className="fa-regular fa-hand-point-down"></i>
+                    <FaRegHandPointDown
+                      className={`mb-2 ${footerStyle.footerContent}`}
+                    />
+                    &nbsp;
                     <span className={footerStyle.footerContent}>探索DEAL</span>
                   </strong>
                 </h5>
                 <div className="d-flex flex-column justify-content-start">
                   <Link className="text-secondary mb-3" href="#">
-                    <i className="fa fa-angle-right mr-2"></i>
-                    <span className={footerStyle.selectOptions}>探索商品</span>
-                  </Link>
-                  <Link className="text-secondary mb-3" href="#">
-                    <i className="fa fa-angle-right mr-2"></i>
-                    <span className={footerStyle.selectOptions}>隨機探索</span>
-                  </Link>
-                  <Link className="text-secondary mb-3" href="#">
-                    <i className="fa fa-angle-right mr-2"></i>
                     <span className={footerStyle.selectOptions}>
+                      <SlArrowDown
+                        className="me-2"
+                        style={{ fontSize: '15px' }}
+                      />
+                      探索商品
+                    </span>
+                  </Link>
+                  <Link className="text-secondary mb-3" href="#">
+                    <span className={footerStyle.selectOptions}>
+                      <SlArrowDown
+                        className="me-2"
+                        style={{ fontSize: '15px' }}
+                      />
+                      隨機探索
+                    </span>
+                  </Link>
+                  <Link className="text-secondary mb-3" href="#">
+                    <span className={footerStyle.selectOptions}>
+                      <SlArrowDown
+                        className="me-2"
+                        style={{ fontSize: '15px' }}
+                      />
                       領取優惠券
                     </span>
                   </Link>
                   <Link className="text-secondary mb-3" href="#">
-                    <i className="fa fa-angle-right mr-2"></i>
                     <span className={footerStyle.selectOptions}>
+                      <SlArrowDown
+                        className="me-2"
+                        style={{ fontSize: '15px' }}
+                      />
                       小碳點等級
                     </span>
                   </Link>
                   <Link className="text-secondary mb-3" href="#">
-                    <i className="fa fa-angle-right mr-2"></i>
-                    <span className={footerStyle.selectOptions}>加入DEAL</span>
+                    <span className={footerStyle.selectOptions}>
+                      <SlArrowDown
+                        className="me-2"
+                        style={{ fontSize: '15px' }}
+                      />
+                      加入DEAL
+                    </span>
                   </Link>
                   <Link className="text-secondary" href="#">
-                    <i className="fa fa-angle-right mr-2"></i>
-                    <span className={footerStyle.selectOptions}>廣告合作</span>
+                    <span className={footerStyle.selectOptions}>
+                      <SlArrowDown
+                        className="me-2"
+                        style={{ fontSize: '15px' }}
+                      />
+                      廣告合作
+                    </span>
                   </Link>
                 </div>
               </div>
               <div className="col-md-4 mb-5">
                 <h5 className="text-secondary text-uppercase mb-4">
                   <strong>
-                    <i className="fa-solid fa-hand-point-down"></i>
+                    <FaRegHandPointDown
+                      className={`mb-2 ${footerStyle.footerContent}`}
+                    />
+                    &nbsp;
                     <span className={footerStyle.footerContent}>了解DEAL</span>
                   </strong>
                 </h5>
                 <div className="d-flex flex-column justify-content-start">
                   <Link className="text-secondary mb-3 ps-2" href="#">
-                    <i className="fa fa-angle-right mr-2"></i>
-                    <span className={footerStyle.selectOptions}>DEAL介紹</span>
+                    <span className={footerStyle.selectOptions}>
+                      <SlArrowDown
+                        className="me-2"
+                        style={{ fontSize: '15px' }}
+                      />
+                      DEAL介紹
+                    </span>
                   </Link>
                   <Link className="text-secondary mb-3 ps-2" href="#">
-                    <i className="fa fa-angle-right mr-2"></i>
-                    <span className={footerStyle.selectOptions}>ESG介紹</span>
+                    <span className={footerStyle.selectOptions}>
+                      <SlArrowDown
+                        className="me-2"
+                        style={{ fontSize: '15px' }}
+                      />
+                      ESG介紹
+                    </span>
                   </Link>
                   <Link className="text-secondary mb-3 ps-2" href="#">
-                    <i className="fa fa-angle-right mr-2"></i>
-                    <span className={footerStyle.selectOptions}>隱私條款</span>
+                    <span className={footerStyle.selectOptions}>
+                      <SlArrowDown
+                        className="me-2"
+                        style={{ fontSize: '15px' }}
+                      />
+                      隱私條款
+                    </span>
                   </Link>
                   <Link className="text-secondary mb-3 ps-2" href="#">
-                    <i className="fa fa-angle-right mr-2"></i>
-                    <span className={footerStyle.selectOptions}>使用條款</span>
+                    <span className={footerStyle.selectOptions}>
+                      <SlArrowDown
+                        className="me-2"
+                        style={{ fontSize: '15px' }}
+                      />
+                      使用條款
+                    </span>
                   </Link>
                   <Link className="text-secondary mb-3 ps-2" href="#">
-                    <i className="fa fa-angle-right mr-2"></i>
-                    <span className={footerStyle.selectOptions}>幫助中心</span>
+                    <span className={footerStyle.selectOptions}>
+                      <SlArrowDown
+                        className="me-2"
+                        style={{ fontSize: '15px' }}
+                      />
+                      幫助中心
+                    </span>
                   </Link>
-                  <Link className="text-secondary" href="#">
-                    <i className="fa fa-angle-right mr-2 ps-2"></i>
-                    <span className={footerStyle.selectOptions}>聯繫我們</span>
+                  <Link className="text-secondary ps-2" href="#">
+                    <span className={footerStyle.selectOptions}>
+                      <SlArrowDown
+                        className="me-2"
+                        style={{ fontSize: '15px' }}
+                      />
+                      聯繫我們
+                    </span>
                   </Link>
                 </div>
               </div>
@@ -130,7 +240,7 @@ export default function Footer() {
                     </span>
                   </strong>
                 </h5>
-                <span className={footerStyle.selectOptions2}>
+                <span className={footerStyle.selectOptions}>
                   還沒成為DEAL會員嗎？快來註冊！
                 </span>
                 <form action="" className="mt-2">
@@ -156,20 +266,40 @@ export default function Footer() {
                   </div>
                 </form>
                 <h6 className="text-secondary text-uppercase mt-4 mb-3">
-                  <span style={{ color: 'white' }}>Follow Us</span>
+                  <span
+                    style={{
+                      color: 'white',
+                      fontSize: '20px',
+                      paddingLeft: '4px',
+                    }}
+                  >
+                    Follow Us
+                  </span>
                 </h6>
-                <div className="d-flex">
-                  <Link className="btn btn-primary btn-square mr-2" href="#">
-                    <i className="fab fa-twitter text-secondary"></i>
+                <div className="d-flex ps-2">
+                  <Link className="" href="#">
+                    <FaSquareXTwitter
+                      className={footerStyle.socialIcons}
+                      style={{ color: 'black', backgroundColor: 'white' }}
+                    />
                   </Link>
-                  <Link className="btn btn-primary btn-square mr-2" href="#">
-                    <i className="fab fa-facebook-f text-secondary"></i>
+                  <Link className="" href="#">
+                    <FaFacebookSquare
+                      className={footerStyle.socialIcons}
+                      style={{ backgroundColor: 'white' }}
+                    />
                   </Link>
-                  <Link className="btn btn-primary btn-square mr-2" href="#">
-                    <i className="fab fa-linkedin-in text-secondary"></i>
+                  <Link className="" href="#">
+                    <FaLinkedin
+                      className={footerStyle.socialIcons}
+                      style={{ color: '#1163cd', backgroundColor: 'white' }}
+                    />
                   </Link>
-                  <Link className="btn btn-primary btn-square" href="#">
-                    <i className="fab fa-instagram text-secondary"></i>
+                  <Link className="" href="#">
+                    <FaInstagramSquare
+                      className={footerStyle.socialIcons}
+                      style={{ color: 'purple', backgroundColor: 'white' }}
+                    />
                   </Link>
                 </div>
               </div>
@@ -180,15 +310,16 @@ export default function Footer() {
           className="row border-top mx-xl-5 pt-5"
           style={{ borderColor: 'rgba(256, 256, 256, .1)' }}
         >
-          <div className="col d-flex align-items-center justify-content-around ">
+          <div className="col d-flex align-items-center justify-content-around pt-2">
             <div className="d-flex">
-              <div className="logo-pic me-1">
+              <div className="me-1">
                 <Image
                   className="rounded-circle"
-                  src="/logo-sm.png"
+                  src="/logo9.png"
                   alt=""
-                  width={50}
-                  height={50}
+                  width={200}
+                  height={200}
+                  style={{ width: '60px', height: '60px' }}
                 />
               </div>
               <div className="copyright">
@@ -286,7 +417,7 @@ export default function Footer() {
                     style={{ width: '50px', height: '50px' }}
                   />
                 </div>
-                <div className="country ms-2">
+                <div className="country ms-3">
                   <Image
                     className="rounded-circle"
                     src="/us.png"
@@ -296,7 +427,7 @@ export default function Footer() {
                     style={{ width: '50px', height: '50px' }}
                   />
                 </div>
-                <div className="country ms-2">
+                <div className="country ms-3">
                   <Image
                     className="rounded-circle"
                     src="/japan.png"
@@ -306,7 +437,7 @@ export default function Footer() {
                     style={{ width: '50px', height: '50px' }}
                   />
                 </div>
-                <div className="country ms-2">
+                <div className="country ms-3">
                   <Image
                     className="rounded-circle"
                     src="/south-korea.png"
@@ -316,7 +447,7 @@ export default function Footer() {
                     style={{ width: '50px', height: '50px' }}
                   />
                 </div>
-                <div className="country ms-2">
+                <div className="country ms-3">
                   <Image
                     className="rounded-circle"
                     src="/china.png"
@@ -327,7 +458,7 @@ export default function Footer() {
                   />
                 </div>
               </div>
-              <div className="lanselect ms-3">
+              <div className="lanselect ms-3 mt-3">
                 <select
                   className="form-select form-select-sm shadow-xl"
                   aria-label=".form-select-sm example"
@@ -343,6 +474,37 @@ export default function Footer() {
         </div>
       </div>
       {/* Footer End */}
+      {/* ad start */}
+      <div className={footerStyle.adArea}>
+        <Image
+          className="border border-primary rounded-circle shadow-lg "
+          src="/ad.png"
+          alt=""
+          width={200}
+          height={200}
+        />
+        <span
+          className="badge rounded-pill px-3 py-1"
+          style={{ fontSize: '20px' }}
+        >
+          加入我們
+        </span>
+        <button
+          type="button"
+          className="btn translate-middle"
+          data-bs-dismiss="card"
+        >
+          <IoCloseCircle style={{ fontSize: '30px', color: '#e96d3f' }} />
+        </button>
+      </div>
+      {/* ad end */}
+      {/* Back to Top */}
+      <Link href="#" className="btn">
+        <FaAnglesUp
+          className={footerStyle.backToTop}
+          style={{ fontSize: '45px' }}
+        />
+      </Link>
     </>
   )
 }
