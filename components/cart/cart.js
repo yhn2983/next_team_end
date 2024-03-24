@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from '@/components/cart/cart.module.css'
-
 import { useCart } from '@/hooks/use-cart'
 
 export default function CartList() {

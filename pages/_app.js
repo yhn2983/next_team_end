@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import '@/styles/globals.scss'
 import { AuthContextProvider } from '@/context/auth-context'
+import { CartProvider } from '@/hooks/use-cart'
 
 export default function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -10,7 +11,9 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <AuthContextProvider>
-      <Component {...pageProps} />
+      <CartProvider>
+        <Component {...pageProps} />
+      </CartProvider>
     </AuthContextProvider>
   )
 }
