@@ -1,0 +1,38 @@
+.footerArea{
+  height: 600px;
+  background-color:#8e2626;
+}
+
+.footerArea .rounded-circle {
+  width: 30px;
+  height: 30px;
+  box-shadow: 0 0 8px rgb(74, 72, 72);
+}
+
+.selectOptions{
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+  padding-left: 8px;
+}
+
+.footerContent{
+  font-size: 30px;
+  color: white;
+}
+
+.footerContent2{
+  font-size: 20px;
+  color: white;
+}
+
+.adbox{
+  width: 140px;
+  height: 140px;
+  border: 2px solid white;
+  border-radius: 30px;
+  background-color: #908e8e;
+  color: rgb(241, 145, 35);
+}
+
+
