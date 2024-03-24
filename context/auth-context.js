@@ -21,17 +21,17 @@ export function AuthContextProvider({ children }) {
 
     if (!response.ok) return false
 
-    const data = await response.json()
+    const result = await response.json()
 
-    if (data.status !== 'success') return false
+    if (result.status !== 'success') return false
 
-    const decoded = jwt.decode(data.data.accessToken)
+    const decoded = jwt.decode(result.data.accessToken)
 
     const authData = {
       id: decoded.id,
       email: decoded.email,
       nickname: decoded.nickname,
-      token: data.data.accessToken,
+      token: result.data.accessToken,
     }
 
     localStorage.setItem(authStorageKey, JSON.stringify(authData))

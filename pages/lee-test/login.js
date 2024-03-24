@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/context/auth-context'
 import { useRouter } from 'next/router'
+import styles from '@/styles/lee-form.module.scss'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -31,13 +32,13 @@ export default function LoginPage() {
   return (
     <>
       <Head>
-        <title>會員登入</title>
+        <title>歡迎登入</title>
       </Head>
       <div className="container d-flex justify-content-center">
-        <div className="border-dark border border-3 rounded p-3 w-75">
+        <div className={`p-3 w-75 round ${styles.myloginform}`}>
           <form name="form1" onSubmit={onSubmit}>
             <div className="mb-3">
-              <h3 className="text-center">會員登入</h3>
+              <h3 className="text-center">歡迎登入</h3>
             </div>
             <div className="mb-3">
               <div className="user-account">
@@ -72,7 +73,7 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn">
               登入
             </button>
           </form>

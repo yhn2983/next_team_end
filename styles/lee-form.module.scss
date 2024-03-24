@@ -1,0 +1,22 @@
+@import './variables.scss';
+
+.myloginform {
+  background-color: $light;
+  border: 2px solid $dark;
+  border-radius: $border-radius-sm;
+  
+  h3 {
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 10px;
+    color: $dark;
+  }
+
+  button{
+    background:$primary;
+    color: $light;
+  }
+  button:hover{
+    background:$dark;
+    color: $light;
+  }
+}
