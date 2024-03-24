@@ -472,6 +472,13 @@ export default function Footer() {
             </div>
           </div>
         </div>
+        {/* Back to Top */}
+        <Link href="#" className="btn">
+          <FaAnglesUp
+            className={footerStyle.backToTop}
+            style={{ fontSize: '40px' }}
+          />
+        </Link>
       </div>
       {/* Footer End */}
       {/* ad start */}
@@ -505,13 +512,6 @@ export default function Footer() {
         </button>
       </div>
       {/* ad end */}
-      {/* Back to Top */}
-      <Link href="#" className="btn">
-        <FaAnglesUp
-          className={footerStyle.backToTop}
-          style={{ fontSize: '45px' }}
-        />
-      </Link>
     </>
   )
 }
