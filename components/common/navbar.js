@@ -24,17 +24,25 @@ import { RiCoupon3Fill, RiLogoutBoxRFill } from 'react-icons/ri'
 // hook------
 import { useAuth } from '@/context/auth-context'
 //import { useCart } from '@/hooks/use-cart'
+//import Cart from '@/components/cart/cart'
 
 export default function Navbar({ pageName = '' }) {
   const { auth, logout } = useAuth()
-  //const { totalItems } = useCart()
+  //const { totalItems, totalPrice } = useCart()
 
-  const [isHovered, setIsHovered] = useState(false)
-  const handleMouserEnter = () => {
-    setIsHovered(true)
+  const [isMessageHovered, setIsMessageHovered] = useState(false)
+  const [isUserHovered, setIsUserHovered] = useState(false)
+  const [isLanHovered, setIsLanHovered] = useState(false)
+
+  const handleMouserEnter = (type) => {
+    if (type === 'message') setIsMessageHovered(true)
+    if (type === 'user') setIsUserHovered(true)
+    if (type === 'language') setIsLanHovered(true)
   }
-  const handleMouseLeave = () => {
-    setIsHovered(false)
+  const handleMouseLeave = (type) => {
+    if (type === 'message') setIsMessageHovered(false)
+    if (type === 'user') setIsUserHovered(false)
+    if (type === 'language') setIsLanHovered(false)
   }
 
   return (
@@ -63,10 +71,10 @@ export default function Navbar({ pageName = '' }) {
               <Dropdown>
                 <Dropdown.Toggle
                   id="dropdown-basic"
-                  onMouseEnter={handleMouserEnter}
-                  onMouseLeave={handleMouseLeave}
+                  onMouseEnter={() => handleMouserEnter('message')}
+                  onMouseLeave={() => handleMouseLeave('message')}
                   style={{
-                    backgroundColor: isHovered ? '#d6d4d4' : '#F5F5F5',
+                    backgroundColor: isMessageHovered ? '#d6d4d4' : '#F5F5F5',
                     border: 'none',
                   }}
                 >
@@ -106,10 +114,10 @@ export default function Navbar({ pageName = '' }) {
               <Dropdown className={style.ml5}>
                 <Dropdown.Toggle
                   id="dropdown-basic"
-                  onMouseEnter={handleMouserEnter}
-                  onMouseLeave={handleMouseLeave}
+                  onMouseEnter={() => handleMouserEnter('user')}
+                  onMouseLeave={() => handleMouseLeave('user')}
                   style={{
-                    backgroundColor: isHovered ? '#d6d4d4' : '#F5F5F5',
+                    backgroundColor: isUserHovered ? '#d6d4d4' : '#F5F5F5',
                     border: 'none',
                   }}
                 >
@@ -161,10 +169,10 @@ export default function Navbar({ pageName = '' }) {
               <Dropdown className={style.ml5}>
                 <Dropdown.Toggle
                   id="dropdown-basic"
-                  onMouseEnter={handleMouserEnter}
-                  onMouseLeave={handleMouseLeave}
+                  onMouseEnter={() => handleMouserEnter('language')}
+                  onMouseLeave={() => handleMouseLeave('language')}
                   style={{
-                    backgroundColor: isHovered ? '#d6d4d4' : '#F5F5F5',
+                    backgroundColor: isLanHovered ? '#d6d4d4' : '#F5F5F5',
                     border: 'none',
                   }}
                 >
