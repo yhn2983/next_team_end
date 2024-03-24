@@ -494,7 +494,14 @@ export default function Footer() {
           className="btn translate-middle"
           data-bs-dismiss="card"
         >
-          <IoCloseCircle style={{ fontSize: '30px', color: '#e96d3f' }} />
+          <IoCloseCircle
+            style={{
+              fontSize: '30px',
+              color: '#e96d3f',
+              backgroundColor: 'white',
+              borderRadius: '50%',
+            }}
+          />
         </button>
       </div>
       {/* ad end */}
