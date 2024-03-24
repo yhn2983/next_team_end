@@ -423,7 +423,7 @@ export default function Navbar({ pageName = '' }) {
           className="btn translate-middle"
           data-bs-dismiss="card"
         >
-          <IoCloseCircle style={{ fontSize: '30px' }} />
+          <IoCloseCircle style={{ fontSize: '30px', color: '#e96d3f' }} />
         </button>
       </div>
       {/* ad end */}
