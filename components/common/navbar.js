@@ -1,21 +1,33 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import Dropdown from 'react-bootstrap/Dropdown'
 // style-----
-import style from '@/styles/navbar.module.css'
-// icons-----
+import style from './navbar.module.css'
+import cartstyle from '@/components/cart/cart.module.css'
+// react bootstrap
+import Dropdown from 'react-bootstrap/Dropdown'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import InputGroup from 'react-bootstrap/InputGroup'
+// react icons-----
 import { TbMessage } from 'react-icons/tb'
-import { FaUser, FaClipboardList } from 'react-icons/fa'
-import { IoLogIn } from 'react-icons/io5'
+import {
+  FaUser,
+  FaClipboardList,
+  FaShoppingCart,
+  FaHeart,
+} from 'react-icons/fa'
+import { IoLogIn, IoLanguage, IoCloseCircle } from 'react-icons/io5'
 import { GiArchiveRegister } from 'react-icons/gi'
-import { FaCircleUser, FaTreeCity } from 'react-icons/fa6'
-import { RiCoupon3Fill } from 'react-icons/ri'
+import { FaCircleUser, FaTreeCity, FaBars } from 'react-icons/fa6'
+import { RiCoupon3Fill, RiLogoutBoxRFill } from 'react-icons/ri'
 // hook------
 import { useAuth } from '@/context/auth-context'
+//import { useCart } from '@/hooks/use-cart'
 
 export default function Navbar({ pageName = '' }) {
   const { auth, logout } = useAuth()
+  //const { totalItems } = useCart()
 
   const [isHovered, setIsHovered] = useState(false)
   const handleMouserEnter = () => {
@@ -24,10 +36,11 @@ export default function Navbar({ pageName = '' }) {
   const handleMouseLeave = () => {
     setIsHovered(false)
   }
+
   return (
     <>
       {/* topbar start */}
-      <div className={style.topBar}>
+      <div className="container-fluid">
         <div className={style.row}>
           <div className={style.colA}>
             <div className="">
@@ -57,7 +70,7 @@ export default function Navbar({ pageName = '' }) {
                     border: 'none',
                   }}
                 >
-                  <TbMessage style={{ fontSize: '20px' }} />
+                  <TbMessage className={style.fs20} />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item href="#/action-1">
@@ -90,7 +103,7 @@ export default function Navbar({ pageName = '' }) {
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-              <Dropdown style={{ marginLeft: '5px' }}>
+              <Dropdown className={style.ml5}>
                 <Dropdown.Toggle
                   id="dropdown-basic"
                   onMouseEnter={handleMouserEnter}
@@ -106,150 +119,66 @@ export default function Navbar({ pageName = '' }) {
                   {auth.id ? (
                     <>
                       <Dropdown.Item href="#/action-1">
-                        <FaCircleUser
-                          style={{ fontSize: '20px', marginRight: '2px' }}
-                        />
-                        &nbsp;會員中心
+                        <FaCircleUser className={(style.fs20, style.mr2)} />
+                        &nbsp;<strong>會員中心</strong>
                       </Dropdown.Item>
                       <Dropdown.Item href="#/action-2">
-                        <FaClipboardList
-                          style={{ fontSize: '20px', marginRight: '2px' }}
-                        />
-                        &nbsp;訂購紀錄
+                        <FaClipboardList className={(style.fs20, style.mr2)} />
+                        &nbsp;<strong>訂購紀錄</strong>
                       </Dropdown.Item>
                       <Dropdown.Item href="#/action-3">
-                        <FaTreeCity />
-                        &nbsp;小碳點紀錄
+                        <FaTreeCity className={(style.fs20, style.mr2)} />
+                        &nbsp;<strong>小碳點紀錄</strong>
                       </Dropdown.Item>
                       <Dropdown.Item href="#/action-4">
-                        <RiCoupon3Fill />
-                        &nbsp;優惠券紀錄
+                        <RiCoupon3Fill className={(style.fs20, style.mr2)} />
+                        &nbsp;<strong>優惠券紀錄</strong>
                       </Dropdown.Item>
-                      <Dropdown.Item href="#/action-5">登出</Dropdown.Item>
+                      <Dropdown.Item href="#/action-5">
+                        <RiLogoutBoxRFill className={(style.fs20, style.mr2)} />
+                        &nbsp;<strong>登出</strong>
+                      </Dropdown.Item>
                     </>
                   ) : (
                     <>
                       <Dropdown.Item href="#/action-1">
-                        <IoLogIn
-                          style={{ fontSize: '20px', marginRight: '2px' }}
-                        />
-                        &nbsp;登入
+                        <IoLogIn className={(style.fs20, style.mr2)} />
+                        &nbsp;<strong>登入</strong>
                       </Dropdown.Item>
                       <Dropdown.Item href="#/action-2">
                         <GiArchiveRegister
+                          className={(style.fs20, style.mr2)}
                           style={{
-                            fontSize: '20px',
-                            marginRight: '2px',
                             color: '#2f4f4f',
                           }}
                         />
-                        &nbsp;註冊
+                        &nbsp;<strong>註冊</strong>
                       </Dropdown.Item>
                     </>
                   )}
                 </Dropdown.Menu>
               </Dropdown>
-              <div className="btn-group ms-2">
-                <button
-                  type="button"
-                  className="btn btn-sm btn-light dropdown-toggle rounded"
-                  data-toggle="dropdown"
+              <Dropdown className={style.ml5}>
+                <Dropdown.Toggle
+                  id="dropdown-basic"
+                  onMouseEnter={handleMouserEnter}
+                  onMouseLeave={handleMouseLeave}
+                  style={{
+                    backgroundColor: isHovered ? '#d6d4d4' : '#F5F5F5',
+                    border: 'none',
+                  }}
                 >
-                  <i className="fa-solid fa-user"></i>
-                </button>
-                <div className="dropdown-menu dropdown-menu-right rounded">
-                  <button
-                    className="dropdown-item"
-                    type="button"
-                    data-bs-toggle="modal"
-                    data-bs-target="#userModal"
-                  >
-                    <strong>
-                      <i className="fa-solid fa-address-book fa-lg"></i> 登入
-                    </strong>
-                  </button>
-                  <button className="dropdown-item" type="button">
-                    <strong>
-                      <i className="fa-solid fa-user-plus"></i> 註冊
-                    </strong>
-                  </button>
-                </div>
-              </div>
-              <div className="btn-group ms-2">
-                <button
-                  type="button"
-                  className="btn btn-sm btn-light dropdown-toggle rounded"
-                  data-toggle="dropdown"
-                >
-                  <i className="fa-solid fa-user"></i>
-                </button>
-                <div className="dropdown-menu dropdown-menu-right rounded">
-                  <button
-                    className="dropdown-item"
-                    type="button"
-                    data-bs-toggle="modal"
-                    data-bs-target="#userModal"
-                  >
-                    <strong>
-                      <i className="fa-solid fa-address-card"></i>
-                      會員中心
-                    </strong>
-                  </button>
-                  <button className="dropdown-item" type="button">
-                    <strong>
-                      <i
-                        className="fa-solid fa-rectangle-list"
-                        style={{ color: '#2d69d2' }}
-                      ></i>
-                      訂購紀錄
-                    </strong>
-                  </button>
-                  <button className="dropdown-item" type="button">
-                    <strong>
-                      <i
-                        className="fa-solid fa-tree-city"
-                        style={{ color: '#1d9315' }}
-                      ></i>
-                      小碳點紀錄
-                    </strong>
-                  </button>
-                  <button className="dropdown-item" type="button">
-                    <strong>
-                      <i
-                        className="fa-solid fa-ticket"
-                        style={{ color: '#55c3b6' }}
-                      ></i>
-                      優惠券紀錄
-                    </strong>
-                  </button>
-                  <button className="dropdown-item" type="button">
-                    <strong>
-                      <i className="fa-solid fa-right-from-bracket"></i>
-                      登出
-                    </strong>
-                  </button>
-                </div>
-              </div>
-              <div className="btn-group mx-2">
-                <button
-                  type="button"
-                  className="btn btn-sm btn-light dropdown-toggle rounded"
-                  data-toggle="dropdown"
-                >
-                  <i
-                    className="fa-solid fa-language fa-lg"
-                    style={{ color: '#3f44ee' }}
-                  ></i>
-                </button>
-                <div className="dropdown-menu dropdown-menu-right rounded">
-                  <button className="dropdown-item" type="button">
-                    <strong>．中文</strong>
-                  </button>
-                  <button className="dropdown-item" type="button">
-                    <strong>．English</strong>
-                  </button>
-                </div>
-              </div>
+                  <IoLanguage />
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item href="#/action-1">
+                    &nbsp;<strong>．中文</strong>
+                  </Dropdown.Item>
+                  <Dropdown.Item href="#/action-2">
+                    &nbsp;<strong>．English</strong>
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </div>
             <div className="d-inline-flex align-items-center d-block d-lg-none">
               <Link href="" className="btn px-0 ml-2">
@@ -273,25 +202,30 @@ export default function Navbar({ pageName = '' }) {
             </div>
           </div>
         </div>
-        <div className="row align-items-center px-xl-4 d-none d-lg-flex bg-light topBar-b">
-          <div className="col-lg-2">
+        <div
+          className="row align-items-center px-xl-4 d-none d-lg-flex"
+          style={{ height: '160px' }}
+        >
+          <div className="col-2">
             <Link href="" className="text-decoration-none">
               <Image
                 className="logo9"
-                src="/public/imgs/logo9.png"
+                src="/logo9.png"
                 alt=""
                 width={500}
                 height={500}
+                style={{ width: '150px', height: '150px' }}
               />
             </Link>
           </div>
-          <div className="col-lg-7 text-left d-flex searchArea">
-            <select
-              className="form-select shadow-lg"
+          <div className="col-lg-7 text-left d-flex">
+            <Form.Select
               aria-label="Default select example"
+              className="shadow-lg overflow-auto"
+              style={{ marginRight: '20px', height: '38px' }}
             >
               <option selected disabled>
-                <p className="optionColor">想要就近省運費！</p>
+                <p className="">想要就近省運費！</p>
               </option>
               <option value="1">台北市</option>
               <option value="2">新北市</option>
@@ -315,125 +249,63 @@ export default function Navbar({ pageName = '' }) {
               <option value="20">澎湖縣</option>
               <option value="21">金門縣</option>
               <option value="22">連江縣</option>
-            </select>
-            <form action="" className="mx-2 form-search shadow-lg">
-              <div className="input-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="搜尋"
-                />
-                <div className="input-group-append">
-                  <span className="input-group-text bg-transparent text-primary">
-                    <i className="fa fa-search"></i>
-                  </span>
-                </div>
-              </div>
-            </form>
+            </Form.Select>
+            <InputGroup className="mb-3">
+              <Form.Control
+                placeholder="挖掘寶物吧！"
+                aria-label="Recipient's username"
+                aria-describedby="basic-addon2"
+              />
+              <Button variant="outline-secondary" id="button-addon2">
+                搜尋
+              </Button>
+            </InputGroup>
           </div>
-          <div className="col-lg-2 col-6 adArea"></div>
+          <div className="col-lg-3 col-6 adArea"></div>
         </div>
       </div>
       {/* Topbar End */}
-
       {/* Navbar Start */}
-      <div className="container-fluid bg-dark mb-30 navbarArea">
+      <div
+        className="container-fluid mb-30 navbarArea"
+        style={{ heigth: '300px', backgroundColor: '#8e2626' }}
+      >
         <div className="row px-xl-5">
           <div className="col-lg-3 d-none d-lg-block">
-            <button
-              className="btn d-flex align-items-center justify-content-between bg-primary w-100 dropdown-toggle text-secondary"
-              type="button"
-              data-toggle="dropdown"
-              aria-expanded="false"
-              style={{ height: '65px', padding: '0 30px' }}
-            >
-              <h6 className="text-dark m-0 cate">
-                <i className="fa fa-bars mr-2"></i>
-                <strong>商品分類</strong>
-              </h6>
-            </button>
-            <nav
-              className="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light dropdown-menu dropdown-menu-right"
-              id="navbar-vertical"
-              style={{ width: 'calc(100% - 30px)', zIndex: '999' }}
-            >
-              <div
-                className="navbar-nav w-100 overflow-auto shadow-lg"
-                style={{ height: '450px' }}
+            <Dropdown>
+              <Dropdown.Toggle
+                id="dropdown-basic"
+                style={{
+                  width: 'calc(100% - 20px)',
+                  zIndex: '999',
+                  height: '65px',
+                  padding: '0 30px',
+                  backgroundColor: '#e96d3f',
+                  border: 'none',
+                }}
               >
-                <Link href="" className="nav-item nav-link">
-                  免費禮物
-                </Link>
-                <Link href="" className="nav-item nav-link">
-                  電腦科技
-                </Link>
-                <Link href="" className="nav-item nav-link">
-                  手機配件
-                </Link>
-                <Link href="" className="nav-item nav-link">
-                  男裝服飾
-                </Link>
-                <Link href="" className="nav-item nav-link">
-                  女裝服飾
-                </Link>
-                <Link href="" className="nav-item nav-link">
-                  美妝保養
-                </Link>
-                <Link href="" className="nav-item nav-link">
-                  名牌精品
-                </Link>
-                <Link href="" className="nav-item nav-link">
-                  電玩遊戲
-                </Link>
-                <Link href="" className="nav-item nav-link">
-                  耳機錄音
-                </Link>
-                <Link href="" className="nav-item nav-link">
-                  相機拍攝
-                </Link>
-                <Link href="" className="nav-item nav-link">
-                  家具家居
-                </Link>
-                <Link href="" className="nav-item nav-link">
-                  電視電器
-                </Link>
-                <Link href="" className="nav-item nav-link">
-                  嬰兒孩童
-                </Link>
-                <Link href="" className="nav-item nav-link">
-                  健康營養品
-                </Link>
-                <Link href="" className="nav-item nav-link">
-                  運動用品
-                </Link>
-                <Link href="" className="nav-item nav-link">
-                  食物飲料
-                </Link>
-                <Link href="" className="nav-item nav-link">
-                  寵物用品
-                </Link>
-                <Link href="" className="nav-item nav-link">
-                  門票票券
-                </Link>
-                <Link href="" className="nav-item nav-link">
-                  機車汽車
-                </Link>
-                <Link href="" className="nav-item nav-link">
-                  其他
-                </Link>
-              </div>
-            </nav>
+                <strong>
+                  <FaBars className="mb-1" />
+                  &nbsp;<span style={{ fontSize: '19px' }}>商品分類</span>
+                </strong>
+              </Dropdown.Toggle>
+              <Dropdown.Menu style={{ width: 'calc(100% - 20px)' }}>
+                <Dropdown.Item href="#/action-1">免費禮物</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           </div>
           <div className="col-lg-9">
-            <nav className="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
+            <nav className="navbar navbar-expand-lg navbar-dark py-3 py-lg-0 px-0">
               <Link href="" className="text-decoration-none d-block d-lg-none">
                 <Image
-                  className="logo8 rounded-circle"
-                  src="/public/imgs/logo9.png"
+                  className="logo rounded-circle"
+                  src="/logo-sm.png"
                   alt=""
-                  width={500}
-                  height={500}
+                  width={50}
+                  height={50}
                 />
+                &nbsp;&nbsp;
+                <span style={{ color: 'white' }}>DEAL - 2ND HAND SHOP</span>
               </Link>
               <button
                 type="button"
@@ -446,207 +318,84 @@ export default function Navbar({ pageName = '' }) {
               <div
                 className="collapse navbar-collapse justify-content-between"
                 id="navbarCollapse"
+                style={{ paddingTop: '10px', marginLeft: '50px' }}
               >
                 <div className="navbar-nav mr-auto py-0">
-                  <Link href="index.html" className="nav-item nav-link active">
-                    <strong>首頁</strong>
-                  </Link>
-                  <Link href="shop.html" className="nav-item nav-link">
-                    <strong>探索商品</strong>
-                  </Link>
-                  <Link href="shop.html" className="nav-item nav-link">
-                    <strong>隨機探索</strong>
-                  </Link>
-                  <Link href="shop.html" className="nav-item nav-link">
-                    <strong>領取優惠券</strong>
-                  </Link>
-                  <Link href="contact.html" className="nav-item nav-link">
-                    <strong>聯絡我們</strong>
-                  </Link>
-                  <Link href="detail.html" className="nav-item nav-link">
-                    Shop Detail
-                  </Link>
-                  <div className="nav-item dropdown">
-                    <Link
-                      href="#"
-                      className="nav-link dropdown-toggle"
-                      data-toggle="dropdown"
-                    >
-                      Pages <i className="fa fa-angle-down mt-1"></i>
-                    </Link>
-                    <div className="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                      <Link href="cart.html" className="dropdown-item">
-                        Shopping Cart
-                      </Link>
-                      <Link href="checkout.html" className="dropdown-item">
-                        Checkout
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-                <div className="navbar-nav ml-auto py-0 d-none d-lg-block">
-                  <Link href="" className="btn px-0">
-                    <i className="fas fa-heart text-primary"></i>
-                    <span
-                      className="badge text-secondary border border-secondary rounded-circle"
-                      style={{ paddingBottom: '2px' }}
-                    >
-                      0
-                    </span>
-                  </Link>
-                  <Link href="" className="btn px-0 ml-3">
-                    <i className="fas fa-shopping-cart text-primary"></i>
-                    <span
-                      className="badge text-secondary border border-secondary rounded-circle"
-                      style={{ paddingBottom: '2px' }}
-                    >
-                      0
-                    </span>
-                  </Link>
-                  <button
-                    className="btn btn-sm dropdown-toggle px-0"
-                    type="button"
-                    data-toggle="dropdown"
-                    aria-expanded="false"
+                  <Link
+                    href="/"
+                    className={`nav-item nav-link me-5 ${
+                      pageName === 'home' ? 'active' : ''
+                    }`}
                   >
-                    <i className="fa-solid fa-caret-down text-secondary"></i>
-                  </button>
-                  <ul className="dropdown-menu dropdown-menu-right overflow-auto shadow cart px-3">
-                    <h4 className="mt-2">
-                      <strong>購物車</strong>
-                    </h4>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                    <li className="pt-2">
-                      <div className="d-flex flex-column">
-                        <div className="prod1 d-flex">
-                          <Link href="">
-                            <Image
-                              className="cart-img"
-                              src="/public/imgs/gift.jpg"
-                              alt=""
-                              width={50}
-                              height={50}
-                            />
-                          </Link>
-                          <div className="txt ms-3">
-                            <div className="title">
-                              <Link className="text-decoration-none" href="">
-                                皮革背心大衣
-                              </Link>
-                            </div>
-                            <div className="price">NT$3980</div>
-                            <div className="icon">
-                              <i className="fa-regular fa-trash-can"></i>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="d-flex justify-content-between px-3 mt-2">
-                          <div className="qty d-flex">
-                            <div className="minus border border-1 border-dark ps-2">
-                              -
-                            </div>
-                            <input
-                              type="text"
-                              className="number border-top border-end border-bottom border-1 border-dark"
-                              id=""
-                              name=""
-                            />
-                            <div className="plus border-top border-end border-bottom border-1 border-dark px-1">
-                              +
-                            </div>
-                          </div>
-                          <div className="totalprice">NT$3980</div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                    <li className="pt-2">
-                      <div className="d-flex flex-column">
-                        <div className="prod1 d-flex">
-                          <Link href="">
-                            <Image
-                              className="cart-img"
-                              src="/public/imgs/gift.jpg"
-                              alt=""
-                              width={50}
-                              height={50}
-                            />
-                          </Link>
-                          <div className="txt ms-3">
-                            <div className="title">
-                              <Link className="text-decoration-none" href="">
-                                皮革背心大衣
-                              </Link>
-                            </div>
-                            <div className="price">NT$3980</div>
-                            <div className="icon">
-                              <i className="fa-regular fa-trash-can"></i>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="d-flex justify-content-between px-3 mt-2">
-                          <div className="qty d-flex">
-                            <div className="minus border border-1 border-dark ps-2">
-                              -
-                            </div>
-                            <input
-                              type="text"
-                              className="number border-top border-end border-bottom border-1 border-dark"
-                              id=""
-                              name=""
-                            />
-                            <div className="plus border-top border-end border-bottom border-1 border-dark px-1">
-                              +
-                            </div>
-                          </div>
-                          <div className="totalprice">NT$3980</div>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="pt-4">
-                      <div className="coupon d-flex justify-content-end">
-                        {/* Button trigger modal */}
-                        <button
-                          type="button"
-                          className="btn coupon-btn rounded"
-                          data-bs-toggle="modal"
-                          data-bs-target="#exampleModal"
-                        >
-                          <div className="coupon-title d-flex justify-content-between mt-2">
-                            <h5 className="coupon-title px-1">優惠券</h5>
-                            <i className="fa-solid fa-angle-right ms-1 pt-1"></i>
-                          </div>
-                          <div className="content coupon-content">
-                            <p>別忘了您的優惠券！</p>
-                          </div>
-                        </button>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="price-count">
-                        <div className="total">
-                          <p>合計</p>
-                        </div>
-                        <div className="final-price">
-                          <h4>NT$6660</h4>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                    <li className="py-2">
-                      <div className="submit-buttom">
-                        <button className="btn pay-btn-color" type="submit">
-                          結帳囉！
-                        </button>
-                      </div>
-                    </li>
-                  </ul>
+                    <strong>
+                      <span style={{ fontSize: '19px' }}>首頁</span>
+                    </strong>
+                  </Link>
+                  <Link
+                    href="#"
+                    className={`nav-item nav-link me-5 ${
+                      pageName === 'prodSearch' ? 'active' : ''
+                    }`}
+                  >
+                    <strong>
+                      <span style={{ fontSize: '19px' }}>探索商品</span>
+                    </strong>
+                  </Link>
+                  <Link
+                    href="#"
+                    className={`nav-item nav-link me-5 ${
+                      pageName === 'randomSearch' ? 'active' : ''
+                    }`}
+                  >
+                    <strong>
+                      <span style={{ fontSize: '19px' }}>隨機探索</span>
+                    </strong>
+                  </Link>
+                  <Link
+                    href="#"
+                    className={`nav-item nav-link me-5 ${
+                      pageName === 'coupon' ? 'active' : ''
+                    }`}
+                  >
+                    <strong>
+                      <span style={{ fontSize: '19px' }}>領取優惠券</span>
+                    </strong>
+                  </Link>
+                  <Link
+                    href="#"
+                    className={`nav-item nav-link ${
+                      pageName === 'contact' ? 'active' : ''
+                    }`}
+                  >
+                    <strong>
+                      <span style={{ fontSize: '19px' }}>聯絡我們</span>
+                    </strong>
+                  </Link>
+                </div>
+                <div className="">
+                  <div className="">
+                    <Link href="" className="btn px-0">
+                      <FaHeart style={{ color: 'white' }} />
+                      <span
+                        className="badge text-secondary border border-secondary rounded-circle"
+                        style={{ paddingBottom: '2px' }}
+                      >
+                        0
+                      </span>
+                    </Link>
+                    <Link
+                      href="/cs-0308/checkout/cart"
+                      className={cartstyle['button']}
+                    >
+                      <FaShoppingCart />
+                      <span
+                        className="badge text-secondary border border-secondary rounded-circle"
+                        style={{ paddingBottom: '2px' }}
+                      >
+                        0
+                      </span>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </nav>
@@ -654,6 +403,30 @@ export default function Navbar({ pageName = '' }) {
         </div>
       </div>
       {/* Navbar End */}
+      {/* ad start */}
+      <div className={style.adArea}>
+        <Image
+          className="border border-primary rounded-circle shadow-lg "
+          src="/ad.png"
+          alt=""
+          width={200}
+          height={200}
+        />
+        <span
+          className="badge rounded-pill px-3 py-1"
+          style={{ fontSize: '20px' }}
+        >
+          加入我們
+        </span>
+        <button
+          type="button"
+          className="btn translate-middle"
+          data-bs-dismiss="card"
+        >
+          <IoCloseCircle style={{ fontSize: '30px' }} />
+        </button>
+      </div>
+      {/* ad end */}
     </>
   )
 }

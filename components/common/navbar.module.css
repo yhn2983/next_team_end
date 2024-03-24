@@ -40,6 +40,30 @@
   margin-right: 2px;
 }
 
+.adArea {
+  position: absolute;
+  right: 50px;
+  bottom: 50px;
+  
+}
+
+.adArea Image {
+  position: relative;
+}
+
+.adArea span {
+  position: absolute;
+  bottom: 0;
+  left: 50px;
+  background-color: #e96d3f;
+  color: #F5F5F5;
+}
+
+.adArea button {
+  position: absolute;
+  top: 25px;
+  left: 170px;
+}
 
 
 
