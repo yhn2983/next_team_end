@@ -10,6 +10,7 @@ export default function LoginPage() {
   const { auth, login } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
   // 記錄錯誤訊息用的狀態
   const [error, setError] = useState({
     username: '',
@@ -23,15 +24,22 @@ export default function LoginPage() {
     }
   }, [auth, router])
 
+  // 表單送出的事件處理函式
   const onSubmit = async (e) => {
+    // 取消表單送出的預設行為，要改用fetch/ajax來送出表單資料
     e.preventDefault()
+    // e.target指的是表單元素
 
+    // 這裡可以作自訂的表單檢查 --- START ---
+    // 信號代表有沒有錯誤
     let hasError = false
+    // 記錄錯誤的物件
     const newError = {
       email: '',
       password: '',
     }
 
+    // if(user.username)指的是"有填寫"的情況，所以反之為"沒填寫"的情況
     if (!email) {
       newError.email = 'Email為必填'
       hasError = true
@@ -43,6 +51,8 @@ export default function LoginPage() {
     }
 
     if (password.length < 6) {
+      // 指定預設值語法，如果已經有上個錯誤訊息的話，不會再加入這個訊息
+      // 同欄位多個檢查時才會使用
       newError.password ||= '密碼至少要6個字元'
       hasError = true
     }
@@ -55,7 +65,11 @@ export default function LoginPage() {
     if (hasError) {
       setError(newError)
       return
+      // 流程控制，有錯誤訊息則先跳出處理函式不繼續送到伺服器
     }
+    // 這裡可以作自訂的表單檢查 --- END ---
+
+    // 這裡之後送到伺服器(資料庫)中
 
     const result = await login(email, password)
     if (result) {
@@ -150,6 +164,14 @@ export default function LoginPage() {
           </form>
         </div>
       </div>
+      {/*       <style jsx>
+        {`
+          .error {
+            font-size: 12px;
+            color: red;
+          }
+        `}
+      </style> */}
     </>
   )
 }
