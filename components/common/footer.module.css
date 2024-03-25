@@ -1,5 +1,5 @@
 .footerArea{
-  height: 660px;
+  height: 700px;
   background-color:#8e2626;
 }
 
@@ -27,8 +27,8 @@
 }
 
 .adbox{
-  width: 140px;
-  height: 140px;
+  width: 180px;
+  height: 180px;
   border: 2px solid white;
   border-radius: 30px;
   background-color: #908e8e;

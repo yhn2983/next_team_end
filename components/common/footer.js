@@ -23,7 +23,7 @@ export default function Footer() {
       <div
         className={`container-fluid text-secondary mt-5 pt-5 ${footerStyle.footerArea}`}
       >
-        <div className="row px-xl-5 pt-4">
+        <div className="row px-xl-5 pt-2">
           <div className="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
             <h5 className="text-secondary text-uppercase mb-4">
               <strong>
@@ -43,8 +43,8 @@ export default function Footer() {
                     className=""
                     src="/n1.png"
                     alt=""
-                    width={136}
-                    height={136}
+                    width={176}
+                    height={176}
                     style={{ borderRadius: '30px' }}
                   />
                 </Link>
@@ -57,8 +57,8 @@ export default function Footer() {
                     className=""
                     src="/n2.png"
                     alt=""
-                    width={136}
-                    height={136}
+                    width={176}
+                    height={176}
                     style={{ borderRadius: '30px' }}
                   />
                 </Link>
@@ -73,8 +73,8 @@ export default function Footer() {
                     className=""
                     src="/n3.png"
                     alt=""
-                    width={136}
-                    height={136}
+                    width={176}
+                    height={176}
                     style={{ borderRadius: '30px' }}
                   />
                 </Link>
@@ -87,8 +87,8 @@ export default function Footer() {
                     className=""
                     src="/n4.png"
                     alt=""
-                    width={136}
-                    height={136}
+                    width={176}
+                    height={176}
                     style={{ borderRadius: '30px' }}
                   />
                 </Link>
