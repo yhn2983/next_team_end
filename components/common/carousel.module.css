@@ -1,24 +1,95 @@
-.news {
-  position: relative;
-  background-size: cover;
-  background-image: url('/father.png');
-  background-position: center center;
-  background-size: cover;
-  width: 600px;
-  height: 340px;
+@import "https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Nothing+You+Could+Do&family=Protest+Riot&display=swap";
+
+@import "https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Kalam:wght@300;400;700&family=Nothing+You+Could+Do&family=Protest+Riot&display=swap";
+
+.adArea{
+  border-radius: 5px;
+  overflow: hidden;
+}
+.adImg{
+  opacity: 0.8;
   border-radius: 5px;
 }
-
-.new::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(255, 255, 255, 0.5);
+.title {
+  font-family: "Nothing You Could Do", cursive;
+  font-weight: 400;
+  font-style: normal;
+  color: #eaea1e;
+  text-shadow: 0 0 0.2em yellowgreen, 0 0 0.2em yellowgreen,0 0 0.2em yellowgreen;
+  font-size: 90px;
 }
 
-.content {
+.title2 {
+  font-family: "Gochi Hand", cursive;
+  font-weight: 400;
+  font-style: normal;
+  text-shadow: rgb(31, 31, 31) 0.1em 0.1em 0.2em;
+  font-size: 130px;
+}
+
+.title3{
+  font-weight: bold;
+  text-shadow: rgb(221, 221, 221) 0.1em 0.1em 0.2em;
+  color: rgba(0, 0, 0, 0.729);
+  font-size: 90px;
+}
+
+.txt{
+  font-size: 35px;
+  margin-top: 60px;
+  text-shadow: rgb(35, 35, 35) 0.1em 0.1em 0.2em;
+}
+
+.txt2{
+  font-size: 35px;
+  text-shadow: rgb(35, 35, 35) 0.1em 0.1em 0.2em;
+}
+
+.txt3{
+  font-size: 35px;
+  text-shadow: rgb(35, 35, 35) 0.1em 0.1em 0.2em;
+  margin-top: 110px;
+}
+
+.bg1, .bg2 {
   position: relative;
+  width: 600px;
+  height: 335px;
+  overflow: hidden;
 }
+
+.nohover {
+  object-fit: cover;
+  opacity: 0.7;
+  border-radius: 5px;
+  transform:scale(1,1);
+  transition: all 0.5s ease-out;
+}
+
+.hover{
+  object-fit: cover;
+  opacity: 0.8;
+  border-radius: 5px;
+  transform:scale(1.2,1.2);
+  transition: all 0.5s ease-out;
+}
+
+.content{
+  position: absolute;
+  top: 100px;
+  left: 50px;
+}
+
+.content2 {
+  position: absolute;
+  top: 120px;
+  right: 30px;
+}
+
+.shadow{
+  text-shadow: rgba(125, 125, 125, 0.801) 0.1em 0.1em 0.2em;
+}
+
+
+
+
