@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 // style-----
@@ -33,7 +33,6 @@ export default function Navbar({ pageName = '' }) {
   const [isMessageHovered, setIsMessageHovered] = useState(false)
   const [isUserHovered, setIsUserHovered] = useState(false)
   const [isLanHovered, setIsLanHovered] = useState(false)
-
   const handleMouseEnter = (type) => {
     if (type === 'message') setIsMessageHovered(true)
     if (type === 'user') setIsUserHovered(true)
@@ -155,14 +154,18 @@ export default function Navbar({ pageName = '' }) {
                   ) : (
                     <>
                       <Dropdown.Item href="#/action-1">
-                        <IoLogIn className={(style.fs20, style.mr2)} />
+                        <IoLogIn
+                          className={style.mr2}
+                          style={{ fontSize: '25px' }}
+                        />
                         &nbsp;<strong>登入</strong>
                       </Dropdown.Item>
                       <Dropdown.Item href="#/action-2">
                         <GiArchiveRegister
-                          className={(style.fs20, style.mr2)}
+                          className={style.mr2}
                           style={{
                             color: '#2f4f4f',
+                            fontSize: '22px',
                           }}
                         />
                         &nbsp;<strong>註冊</strong>
@@ -238,7 +241,7 @@ export default function Navbar({ pageName = '' }) {
               style={{ marginRight: '20px', height: '38px' }}
             >
               <option selected disabled>
-                <p className="">想要就近省運費！</p>
+                想要就近省運費!
               </option>
               <option value="1">台北市</option>
               <option value="2">新北市</option>
