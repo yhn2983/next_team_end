@@ -10,6 +10,12 @@ export default function LoginPage() {
   const { auth, login } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  // 記錄錯誤訊息用的狀態
+  const [error, setError] = useState({
+    username: '',
+    password: '',
+  })
+  // 註冊表單有另外一種更新表單狀態的寫法
 
   useEffect(() => {
     if (auth.token) {
@@ -19,6 +25,37 @@ export default function LoginPage() {
 
   const onSubmit = async (e) => {
     e.preventDefault()
+
+    let hasError = false
+    const newError = {
+      email: '',
+      password: '',
+    }
+
+    if (!email) {
+      newError.email = 'Email為必填'
+      hasError = true
+    }
+
+    if (!password) {
+      newError.password = '密碼為必填'
+      hasError = true
+    }
+
+    if (password.length < 6) {
+      newError.password ||= '密碼至少要6個字元'
+      hasError = true
+    }
+
+    if (password.length > 10) {
+      newError.password ||= '密碼至多為10個字元'
+      hasError = true
+    }
+
+    if (hasError) {
+      setError(newError)
+      return
+    }
 
     const result = await login(email, password)
     if (result) {
@@ -36,14 +73,15 @@ export default function LoginPage() {
       </Head>
       <div className="container d-flex justify-content-center">
         <div className={`p-3 w-75 round ${styles.myloginform}`}>
+          {/* 用form標籤就不會用onClick */}
           <form name="form1" onSubmit={onSubmit}>
-            <div className="mb-3">
-              <h3 className="text-center">歡迎登入</h3>
+            <div className="mb-4">
+              <h2 className="text-center">歡迎登入</h2>
             </div>
             <div className="mb-3">
               <div className="user-account">
                 <label className="form-label ms-2" htmlFor="email">
-                  email
+                  <strong>email:{''}</strong>
                 </label>
                 <input
                   className="form-control rounded"
@@ -54,12 +92,13 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
+                <div className={styles.error}>{error.email}</div>
               </div>
             </div>
             <div className="mb-3">
               <div className="user-password">
                 <label className="form-label ms-2" htmlFor="password">
-                  密碼
+                  <strong>密碼:{''}</strong>
                 </label>
                 <input
                   className="form-control rounded"
@@ -70,11 +109,12 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                <div className={styles.error}>{error.password}</div>
                 <Link
                   href="/lee-test/forgetpassword"
                   className="text-decoration-none"
                 >
-                  <p className="ms-2 mt-3">
+                  <p className="ms-2 mt-4">
                     <strong>忘記密碼？</strong>
                   </p>
                 </Link>
