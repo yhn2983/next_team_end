@@ -29,90 +29,96 @@ export default function CarouselS1({ pageName = '' }) {
             <Carousel fade>
               <Carousel.Item
                 style={{
-                  background: isHovered ? '#5f616180' : '',
+                  background: isHovered ? '#48494980' : '',
                 }}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
               >
-                <Image
-                  text="First slide"
-                  src="/ad1.png"
-                  alt=""
-                  width={1500}
-                  height={680}
-                  style={{
-                    opacity: '0.9',
-                    borderRadius: '5px',
-                  }}
-                />
+                <div style={{ borderRadius: '5px', overflow: 'hidden' }}>
+                  <Image
+                    text="First slide"
+                    src="/ad1.png"
+                    alt=""
+                    width={1500}
+                    height={680}
+                    style={{
+                      opacity: '0.9',
+                      borderRadius: '5px',
+                    }}
+                  />
+                </div>
                 <Carousel.Caption
                   style={{
                     marginBottom: '230px',
                   }}
                 >
-                  <h1>
+                  <h1 style={{ fontSize: '80px' }}>
                     <strong>Let's make a DEAL</strong>
                   </h1>
                   <p>
                     <strong>挖掘寶物，也可以愛護地球</strong>
                   </p>
-                  <button type="button" class="btn btn-outline-secondary">
+                  <button type="button" className="btn btn-outline-secondary">
                     Secondary
                   </button>
                 </Carousel.Caption>
               </Carousel.Item>
               <Carousel.Item
                 style={{
-                  background: isHovered ? '#5f616180' : '',
+                  background: isHovered ? '#48494980' : '',
                 }}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
               >
-                <Image
-                  text="Second slide"
-                  src="/woman2.jpg"
-                  alt=""
-                  width={1500}
-                  height={680}
-                  style={{
-                    opacity: '0.9',
-                    borderRadius: '5px',
-                  }}
-                />
+                <div style={{ borderRadius: '5px', overflow: 'hidden' }}>
+                  <Image
+                    text="Second slide"
+                    src="/woman2.jpg"
+                    alt=""
+                    width={1500}
+                    height={680}
+                    style={{
+                      opacity: '0.9',
+                    }}
+                  />
+                </div>
                 <Carousel.Caption style={{ marginBottom: '230px' }}>
                   <h1>WOMAN'S DAY</h1>
                   <p>
                     <strong>女裝折扣 蓄勢待發</strong>
                   </p>
-                  <button type="button" class="btn btn-outline-secondary">
+                  <button type="button" className="btn btn-outline-secondary">
                     Secondary
                   </button>
                 </Carousel.Caption>
               </Carousel.Item>
               <Carousel.Item
                 style={{
-                  background: isHovered ? '#5f616180' : '',
+                  background: isHovered ? '#3b3c3c80' : '',
+                  borderRadius: '5px',
                 }}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
               >
-                <Image
-                  text="Third slide"
-                  src="/globalday.jpg"
-                  alt=""
-                  width={1500}
-                  height={680}
-                  style={{
-                    opacity: '0.9',
-                    borderRadius: '5px',
-                  }}
-                />
+                <div style={{ borderRadius: '5px', overflow: 'hidden' }}>
+                  <Image
+                    text="Third slide"
+                    src="/globalday.jpg"
+                    alt=""
+                    width={1500}
+                    height={680}
+                    style={{
+                      opacity: '0.9',
+                      borderRadius: '5px',
+                    }}
+                  />
+                </div>
                 <Carousel.Caption style={{ marginBottom: '230px' }}>
                   <h1>世界地球日</h1>
                   <p>
                     <strong>小碳點大翻倍</strong>
                   </p>
-                  <button type="button" class="btn btn-outline-secondary">
+                  <button type="button" className="btn btn-outline-secondary">
                     Secondary
                   </button>
                 </Carousel.Caption>
@@ -120,22 +126,12 @@ export default function CarouselS1({ pageName = '' }) {
             </Carousel>
           </div>
           <div className="col-lg-4" style={{ paddingLeft: '30px' }}>
-            <div
-              className="product-offer mb-1 rounded"
-              style={{ height: '340px' }}
-            >
-              <Image
-                className="Image-fluid"
-                src="/father.png"
-                alt=""
-                width={600}
-                height={330}
-              />
-              <div className="offer-text">
-                <h6 className="text-white text-uppercase">
+            <div className={`product-offer mb-2 rounded ${style.news}`}>
+              <div className={style.content}>
+                <h3 className="mb-3">爸爸辛苦了！</h3>
+                <h6 className="text-uppercase">
                   <strong>\ 父親節大折扣 /</strong>
                 </h6>
-                <h3 className="text-white mb-3">爸爸辛苦了！</h3>
                 <Link href="" className="btn btn-primary">
                   Shop Now
                 </Link>
@@ -144,10 +140,14 @@ export default function CarouselS1({ pageName = '' }) {
             <div className="product-offer rounded" style={{ height: '340px' }}>
               <Image
                 className="Image-fluid"
-                src="/good.png"
+                src="/cool.png"
                 alt=""
                 width={600}
-                height={330}
+                height={335}
+                style={{
+                  opacity: '0.7',
+                  borderRadius: '5px',
+                }}
               />
               <div className="offer-text">
                 <h6 className="text-white text-uppercase">
