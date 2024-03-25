@@ -11,12 +11,13 @@
     color: $dark;
   }
 
-  button{
-    background:$primary;
+  button {
+    background: $primary;
     color: $light;
-  }
-  button:hover{
-    background:$dark;
-    color: $light;
+
+    &:hover {
+      background: $dark;
+      color: $light;
+    }
   }
 }

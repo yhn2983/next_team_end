@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useAuth } from '@/context/auth-context'
 import { useRouter } from 'next/router'
 import styles from '@/styles/lee-form.module.scss'
+import Link from 'next/link'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -70,12 +71,40 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                <a className="text-decoration-none">
+                  <p className="ms-2 mt-2">
+                    <strong>忘記密碼？</strong>
+                  </p>
+                </a>
               </div>
             </div>
-
-            <button type="submit" className="btn">
-              登入
-            </button>
+            <div className="register mt-2 ms-1">
+              <p>
+                不是會員？
+                <Link href="/lee-test/signup" className="text-decoration-none">
+                  <strong>
+                    來去註冊
+                    <i className="fa-brands fa-golang" />
+                  </strong>
+                </Link>
+              </p>
+            </div>
+            <hr />
+            <div className="login-with-line">
+              <button type="submit" className="btn">
+                <strong>登入</strong>
+              </button>
+              <button
+                type="button"
+                className="btn rounded line-btn btn-outline-primary"
+                style={{ marginLeft: '15px' }}
+              >
+                <strong>
+                  <i className="fab fa-line" style={{ color: '#00c300' }}></i>{' '}
+                  連動LINE登入
+                </strong>
+              </button>
+            </div>
           </form>
         </div>
       </div>
