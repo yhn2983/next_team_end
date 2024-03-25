@@ -34,7 +34,7 @@ export default function Navbar({ pageName = '' }) {
   const [isUserHovered, setIsUserHovered] = useState(false)
   const [isLanHovered, setIsLanHovered] = useState(false)
 
-  const handleMouserEnter = (type) => {
+  const handleMouseEnter = (type) => {
     if (type === 'message') setIsMessageHovered(true)
     if (type === 'user') setIsUserHovered(true)
     if (type === 'language') setIsLanHovered(true)
@@ -71,14 +71,18 @@ export default function Navbar({ pageName = '' }) {
               <Dropdown>
                 <Dropdown.Toggle
                   id="dropdown-basic"
-                  onMouseEnter={() => handleMouserEnter('message')}
+                  onMouseEnter={() => handleMouseEnter('message')}
                   onMouseLeave={() => handleMouseLeave('message')}
                   style={{
                     backgroundColor: isMessageHovered ? '#d6d4d4' : '#F5F5F5',
                     border: 'none',
+                    color: '#8e2626',
                   }}
                 >
-                  <TbMessage className={style.fs20} />
+                  <TbMessage
+                    className={style.fs20}
+                    style={{ color: '#8e2626' }}
+                  />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item href="#/action-1">
@@ -114,14 +118,15 @@ export default function Navbar({ pageName = '' }) {
               <Dropdown className={style.ml5}>
                 <Dropdown.Toggle
                   id="dropdown-basic"
-                  onMouseEnter={() => handleMouserEnter('user')}
+                  onMouseEnter={() => handleMouseEnter('user')}
                   onMouseLeave={() => handleMouseLeave('user')}
                   style={{
                     backgroundColor: isUserHovered ? '#d6d4d4' : '#F5F5F5',
                     border: 'none',
+                    color: '#8e2626',
                   }}
                 >
-                  <FaUser />
+                  <FaUser style={{ color: '#8e2626' }} />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   {auth.id ? (
@@ -169,14 +174,15 @@ export default function Navbar({ pageName = '' }) {
               <Dropdown className={style.ml5}>
                 <Dropdown.Toggle
                   id="dropdown-basic"
-                  onMouseEnter={() => handleMouserEnter('language')}
+                  onMouseEnter={() => handleMouseEnter('language')}
                   onMouseLeave={() => handleMouseLeave('language')}
                   style={{
                     backgroundColor: isLanHovered ? '#d6d4d4' : '#F5F5F5',
                     border: 'none',
+                    color: '#8e2626',
                   }}
                 >
-                  <IoLanguage />
+                  <IoLanguage style={{ color: '#8e2626' }} />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item href="#/action-1">
@@ -263,7 +269,10 @@ export default function Navbar({ pageName = '' }) {
                 aria-label="Recipient's username"
                 aria-describedby="basic-addon2"
               />
-              <Button variant="outline-secondary" id="button-addon2">
+              <Button
+                id="button-addon2"
+                style={{ backgroundColor: '#e96d3f', border: '#e96d3f' }}
+              >
                 搜尋
               </Button>
             </InputGroup>
