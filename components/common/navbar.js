@@ -16,6 +16,7 @@ import {
   FaClipboardList,
   FaShoppingCart,
   FaHeart,
+  FaHandPointRight,
 } from 'react-icons/fa'
 import { IoLogIn, IoLanguage } from 'react-icons/io5'
 import { GiArchiveRegister } from 'react-icons/gi'
@@ -280,7 +281,35 @@ export default function Navbar({ pageName = '' }) {
               </Button>
             </InputGroup>
           </div>
-          <div className="col-lg-3 col-6 adArea"></div>
+          <div className="col-lg-3 col-6" style={{ paddingLeft: '300px' }}>
+            <div
+              className=""
+              style={{
+                border: '3px dotted #8e2626',
+                borderRadius: '20px',
+                padding: '10px 5px',
+              }}
+            >
+              <h4 style={{ paddingLeft: '5px' }}>
+                <strong>不知道從哪裡開始？</strong>
+              </h4>
+              <span style={{ paddingLeft: '20px' }}>
+                試試這個&nbsp;
+                <FaHandPointRight style={{ color: '#8e2626' }} />
+                &nbsp;
+                <Link href="">
+                  <button
+                    type="button"
+                    className={`btn btn-sm ${style.searchBtn}`}
+                    href=""
+                    style={{ backgroundColor: '#e96d3f', color: 'white' }}
+                  >
+                    隨機探索
+                  </button>
+                </Link>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
       {/* Topbar End */}

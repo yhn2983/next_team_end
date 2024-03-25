@@ -67,6 +67,38 @@
   margin-right: 2px;
 }
 
+.randomSearch{
+  border: 3px dotted #8e2626;
+  border-radius: 20px;
+  padding: 10px 5px;
+}
+
+.searchBtn{
+  -webkit-animation: btnMove 0.1s infinite alternate;
+  animation: btnMove 0.3s infinite alternate;
+}
+
+@-webkit-keyframes btnMove {
+  0% {
+    transform: translateY(-1px);
+  }
+  
+  100% {
+    transform: translateY(1px);
+  }
+  }
+  
+  @keyframes btnMove {
+  0% {
+    transform: translateY(-1px);
+  }
+  
+  100% {
+    transform: translateY(1px);
+  }
+  }
+
+
 
 
 
