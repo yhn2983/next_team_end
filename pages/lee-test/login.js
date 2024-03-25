@@ -17,17 +17,16 @@ export default function LoginPage() {
     }
   }, [auth, router])
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
 
-    login(email, password).then((result) => {
-      if (result) {
-        alert('登入成功')
-        router.push('/lee-test/logout')
-      } else {
-        alert('登入失敗')
-      }
-    })
+    const result = await login(email, password)
+    if (result) {
+      alert('登入成功')
+      router.push('/lee-test/logout')
+    } else {
+      alert('登入失敗')
+    }
   }
 
   return (
@@ -71,11 +70,14 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <a className="text-decoration-none">
-                  <p className="ms-2 mt-2">
+                <Link
+                  href="/lee-test/forgetpassword"
+                  className="text-decoration-none"
+                >
+                  <p className="ms-2 mt-3">
                     <strong>忘記密碼？</strong>
                   </p>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="register mt-2 ms-1">
