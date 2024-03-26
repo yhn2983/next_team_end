@@ -9,6 +9,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
+import Modal from 'react-bootstrap/Modal'
 // react icons-----
 import { TbMessage } from 'react-icons/tb'
 import {
@@ -31,6 +32,7 @@ export default function Navbar({ pageName = '' }) {
   const { auth, logout } = useAuth()
   //const { totalItems, totalPrice } = useCart()
 
+  // ---Hover status---
   const [isMessageHovered, setIsMessageHovered] = useState(false)
   const [isUserHovered, setIsUserHovered] = useState(false)
   const [isLanHovered, setIsLanHovered] = useState(false)
@@ -44,6 +46,11 @@ export default function Navbar({ pageName = '' }) {
     if (type === 'user') setIsUserHovered(false)
     if (type === 'language') setIsLanHovered(false)
   }
+
+  // ---Modal---
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   return (
     <>
@@ -154,7 +161,7 @@ export default function Navbar({ pageName = '' }) {
                     </>
                   ) : (
                     <>
-                      <Dropdown.Item href="#/action-1">
+                      <Dropdown.Item href="#/action-1" onClick={handleShow}>
                         <IoLogIn
                           className={style.mr2}
                           style={{ fontSize: '25px' }}
@@ -451,6 +458,22 @@ export default function Navbar({ pageName = '' }) {
         </div>
       </div>
       {/* Navbar End */}
+      {/* Login Modal start */}
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      {/* Login Modal end */}
     </>
   )
 }
