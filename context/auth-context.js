@@ -33,7 +33,7 @@ export function AuthContextProvider({ children }) {
       nickname: decoded.nickname,
       token: result.data.accessToken,
     }
-
+    // 把 authData 存到 localStorage
     localStorage.setItem(authStorageKey, JSON.stringify(authData))
 
     setAuth(authData)
@@ -41,6 +41,7 @@ export function AuthContextProvider({ children }) {
     return true
   }
 
+  // 登出時，移除 localStorage 的 authData
   const logout = () => {
     localStorage.removeItem(authStorageKey)
     setAuth({})
@@ -79,6 +80,7 @@ export function AuthContextProvider({ children }) {
     }
   }
 
+  // 每次重新整理頁面時，檢查 localStorage 有沒有 authData
   useEffect(() => {
     const str = localStorage.getItem(authStorageKey)
     if (str) {
