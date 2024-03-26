@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 // style-----
-import footerStyle from './footer.module.css'
+import style from './footer.module.css'
 // react bootstrap
 // react icons-----
 import {
@@ -21,22 +21,20 @@ export default function Footer() {
     <>
       {/* Footer Start */}
       <div
-        className={`container-fluid text-secondary mt-5 pt-5 ${footerStyle.footerArea}`}
+        className={`container-fluid text-secondary mt-5 pt-5 ${style.footerArea}`}
       >
         <div className="row px-xl-5 pt-2">
           <div className="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
             <h5 className="text-secondary text-uppercase mb-4">
               <strong>
-                <FaUserFriends
-                  className={`mb-2 ${footerStyle.footerContent}`}
-                />
+                <FaUserFriends className={`mb-2 ${style.footerContent}`} />
                 &nbsp;
-                <span className={footerStyle.footerContent}>廣告合作夥伴</span>
+                <span className={style.footerContent}>廣告合作夥伴</span>
               </strong>
             </h5>
             <div className="adboxTop d-flex">
               <div
-                className={`me-5 d-flex align-items-center justify-content-center ${footerStyle.adbox}`}
+                className={`me-5 d-flex align-items-center justify-content-center ${style.adbox}`}
               >
                 <Link href="">
                   <Image
@@ -50,7 +48,7 @@ export default function Footer() {
                 </Link>
               </div>
               <div
-                className={`d-flex align-items-center justify-content-center ${footerStyle.adbox}`}
+                className={`d-flex align-items-center justify-content-center ${style.adbox}`}
               >
                 <Link href="">
                   <Image
@@ -66,7 +64,7 @@ export default function Footer() {
             </div>
             <div className="adboxBottom d-flex mt-4">
               <div
-                className={`me-5 d-flex align-items-center justify-content-center ${footerStyle.adbox}`}
+                className={`me-5 d-flex align-items-center justify-content-center ${style.adbox}`}
               >
                 <Link href="">
                   <Image
@@ -80,7 +78,7 @@ export default function Footer() {
                 </Link>
               </div>
               <div
-                className={`d-flex align-items-center justify-content-center ${footerStyle.adbox}`}
+                className={`d-flex align-items-center justify-content-center ${style.adbox}`}
               >
                 <Link href="">
                   <Image
@@ -101,15 +99,15 @@ export default function Footer() {
                 <h5 className="text-secondary text-uppercase mb-4">
                   <strong>
                     <FaRegHandPointDown
-                      className={`mb-2 ${footerStyle.footerContent}`}
+                      className={`mb-2 ${style.footerContent}`}
                     />
                     &nbsp;
-                    <span className={footerStyle.footerContent}>探索DEAL</span>
+                    <span className={style.footerContent}>探索DEAL</span>
                   </strong>
                 </h5>
                 <div className="d-flex flex-column justify-content-start">
                   <Link className="text-secondary mb-3" href="#">
-                    <span className={footerStyle.selectOptions}>
+                    <span className={style.selectOptions}>
                       <SlArrowDown
                         className="me-2"
                         style={{ fontSize: '15px' }}
@@ -118,7 +116,7 @@ export default function Footer() {
                     </span>
                   </Link>
                   <Link className="text-secondary mb-3" href="#">
-                    <span className={footerStyle.selectOptions}>
+                    <span className={style.selectOptions}>
                       <SlArrowDown
                         className="me-2"
                         style={{ fontSize: '15px' }}
@@ -127,7 +125,7 @@ export default function Footer() {
                     </span>
                   </Link>
                   <Link className="text-secondary mb-3" href="#">
-                    <span className={footerStyle.selectOptions}>
+                    <span className={style.selectOptions}>
                       <SlArrowDown
                         className="me-2"
                         style={{ fontSize: '15px' }}
@@ -136,7 +134,7 @@ export default function Footer() {
                     </span>
                   </Link>
                   <Link className="text-secondary mb-3" href="#">
-                    <span className={footerStyle.selectOptions}>
+                    <span className={style.selectOptions}>
                       <SlArrowDown
                         className="me-2"
                         style={{ fontSize: '15px' }}
@@ -145,7 +143,7 @@ export default function Footer() {
                     </span>
                   </Link>
                   <Link className="text-secondary mb-3" href="#">
-                    <span className={footerStyle.selectOptions}>
+                    <span className={style.selectOptions}>
                       <SlArrowDown
                         className="me-2"
                         style={{ fontSize: '15px' }}
@@ -154,7 +152,7 @@ export default function Footer() {
                     </span>
                   </Link>
                   <Link className="text-secondary" href="#">
-                    <span className={footerStyle.selectOptions}>
+                    <span className={style.selectOptions}>
                       <SlArrowDown
                         className="me-2"
                         style={{ fontSize: '15px' }}
@@ -168,15 +166,15 @@ export default function Footer() {
                 <h5 className="text-secondary text-uppercase mb-4">
                   <strong>
                     <FaRegHandPointDown
-                      className={`mb-2 ${footerStyle.footerContent}`}
+                      className={`mb-2 ${style.footerContent}`}
                     />
                     &nbsp;
-                    <span className={footerStyle.footerContent}>了解DEAL</span>
+                    <span className={style.footerContent}>了解DEAL</span>
                   </strong>
                 </h5>
                 <div className="d-flex flex-column justify-content-start">
                   <Link className="text-secondary mb-3 ps-2" href="#">
-                    <span className={footerStyle.selectOptions}>
+                    <span className={style.selectOptions}>
                       <SlArrowDown
                         className="me-2"
                         style={{ fontSize: '15px' }}
@@ -185,7 +183,7 @@ export default function Footer() {
                     </span>
                   </Link>
                   <Link className="text-secondary mb-3 ps-2" href="#">
-                    <span className={footerStyle.selectOptions}>
+                    <span className={style.selectOptions}>
                       <SlArrowDown
                         className="me-2"
                         style={{ fontSize: '15px' }}
@@ -194,7 +192,7 @@ export default function Footer() {
                     </span>
                   </Link>
                   <Link className="text-secondary mb-3 ps-2" href="#">
-                    <span className={footerStyle.selectOptions}>
+                    <span className={style.selectOptions}>
                       <SlArrowDown
                         className="me-2"
                         style={{ fontSize: '15px' }}
@@ -203,7 +201,7 @@ export default function Footer() {
                     </span>
                   </Link>
                   <Link className="text-secondary mb-3 ps-2" href="#">
-                    <span className={footerStyle.selectOptions}>
+                    <span className={style.selectOptions}>
                       <SlArrowDown
                         className="me-2"
                         style={{ fontSize: '15px' }}
@@ -212,7 +210,7 @@ export default function Footer() {
                     </span>
                   </Link>
                   <Link className="text-secondary mb-3 ps-2" href="#">
-                    <span className={footerStyle.selectOptions}>
+                    <span className={style.selectOptions}>
                       <SlArrowDown
                         className="me-2"
                         style={{ fontSize: '15px' }}
@@ -221,7 +219,7 @@ export default function Footer() {
                     </span>
                   </Link>
                   <Link className="text-secondary ps-2" href="#">
-                    <span className={footerStyle.selectOptions}>
+                    <span className={style.selectOptions}>
                       <SlArrowDown
                         className="me-2"
                         style={{ fontSize: '15px' }}
@@ -235,12 +233,10 @@ export default function Footer() {
                 <h5 className="text-secondary text-uppercase mb-4">
                   <strong>
                     <i className="fa-solid fa-hands-asl-interpreting"></i>
-                    <span className={footerStyle.footerContent}>
-                      成為DEAL會員
-                    </span>
+                    <span className={style.footerContent}>成為DEAL會員</span>
                   </strong>
                 </h5>
-                <span className={footerStyle.selectOptions}>
+                <span className={style.selectOptions}>
                   還沒成為DEAL會員嗎？快來註冊！
                 </span>
                 <form action="" className="mt-2">
@@ -279,25 +275,25 @@ export default function Footer() {
                 <div className="d-flex ps-2">
                   <Link className="" href="#">
                     <FaSquareXTwitter
-                      className={footerStyle.socialIcons}
+                      className={style.socialIcons}
                       style={{ color: 'black', backgroundColor: 'white' }}
                     />
                   </Link>
                   <Link className="" href="#">
                     <FaFacebookSquare
-                      className={footerStyle.socialIcons}
+                      className={style.socialIcons}
                       style={{ backgroundColor: 'white' }}
                     />
                   </Link>
                   <Link className="" href="#">
                     <FaLinkedin
-                      className={footerStyle.socialIcons}
+                      className={style.socialIcons}
                       style={{ color: '#1163cd', backgroundColor: 'white' }}
                     />
                   </Link>
                   <Link className="" href="#">
                     <FaInstagramSquare
-                      className={footerStyle.socialIcons}
+                      className={style.socialIcons}
                       style={{ color: 'purple', backgroundColor: 'white' }}
                     />
                   </Link>
@@ -475,14 +471,14 @@ export default function Footer() {
         {/* Back to Top */}
         <Link href="#" className="btn">
           <FaAnglesUp
-            className={footerStyle.backToTop}
+            className={style.backToTop}
             style={{ fontSize: '40px' }}
           />
         </Link>
       </div>
       {/* Footer End */}
       {/* ad start */}
-      <div className={footerStyle.adArea}>
+      <div className={style.adArea}>
         <Image
           className="border border-primary rounded-circle shadow-lg "
           src="/ad.png"

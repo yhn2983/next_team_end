@@ -1,0 +1,114 @@
+.sectionTitle {
+  content: "";
+  width: 92%;
+  border-top: 3px dashed #8e2626;
+  margin-top: 20px;
+  margin-left: 15px;
+}
+
+.categoryArea {
+  background-color: white;
+  border: 2px solid #8e2626;
+}
+
+.line {
+  width: 45px;
+  height: auto;
+  padding-bottom: 20px;
+}
+
+.item {
+  width: 80px;
+  height: 80px;
+  border: 2px solid lightgrey;
+  background-size: cover;
+  background-position: center center;
+  box-shadow: 0 0 10px black;
+  overflow: hidden;
+  transform:scale(1,1);
+  transition: all 0.5s ease-out;
+}
+
+.item:hover {
+  transform:scale(1.2,1.2);
+}
+
+.item1 {
+  background-image: url(/gift.jpg);
+}
+
+.item2 {
+  background-image: url(//computer.png);
+}
+
+.item3 {
+  background-image: url(//phone.png);
+}
+
+.item4 {
+  background-image: url(//man.png);
+}
+
+.item5 {
+  background-image: url(//woman-sm.png);
+}
+
+.item6 {
+  background-image: url(//beauty.png);
+}
+
+.item7 {
+  background-image: url(//luxury.png);
+}
+
+.item8 {
+  background-image: url(//game.png);
+}
+
+.item9 {
+  background-image: url(//earphone.png);
+}
+
+.item10 {
+  background-image: url(//camera.png);
+}
+
+.item11 {
+  background-image: url(//home.png);
+}
+
+.item12 {
+  background-image: url(//tv.png);
+}
+
+.item13 {
+  background-image: url(//baby.png);
+}
+
+.item14 {
+  background-image: url(//health.png);
+}
+
+.item15 {
+  background-image: url(//sport.png);
+}
+
+.item16 {
+  background-image: url(//food.png);
+}
+
+.item17 {
+  background-image: url(//pet.png);
+}
+
+.item18 {
+  background-image: url(//ticket.png);
+}
+
+.item19 {
+  background-image: url(//car.png);
+}
+
+.item20 {
+  background-image: url(//other.png);
+}
