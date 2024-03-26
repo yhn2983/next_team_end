@@ -1,5 +1,15 @@
 @import './variables.scss';
 
+.listGroupItem {
+  cursor: pointer !important;
+  border: none !important;
+  border-bottom: 1px solid #dee2e6 !important;
+
+  &:hover {
+    background-color: #c7def5; // 你可以根據需要更改這個值
+  }
+}
+
 .myloginform {
   width: 500px;
   background-color: $form-bg;
@@ -35,10 +45,13 @@
 
   a {
     text-decoration: none !important;
+    margin: 0;
+    padding: 0;
   }
 
+
   background-color: '#eee';
-  .photobtn{
+  button{
     height: 40px;
     border: 1px solid $dark;
     border-radius: 0.3rem;
@@ -47,6 +60,7 @@
     font-weight: 600;
     &:hover{
       background-color: $dark;
+      color: #ffffff !important;
     }
   }
 }
