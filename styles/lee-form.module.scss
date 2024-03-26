@@ -30,3 +30,23 @@
     margin-top: 6px;
   }
 }
+
+.profilesStyle{
+
+  a {
+    text-decoration: none !important;
+  }
+
+  background-color: '#eee';
+  .photobtn{
+    height: 40px;
+    border: 1px solid $dark;
+    border-radius: 0.3rem;
+    background-color: $primary;
+    color: #ffffff;
+    font-weight: 600;
+    &:hover{
+      background-color: $dark;
+    }
+  }
+}

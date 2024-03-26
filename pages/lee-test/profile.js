@@ -1,10 +1,12 @@
 import React from 'react'
 import Image from 'next/image'
+import styles from '@/styles/lee-form.module.scss'
+import Link from 'next/link'
 
 export default function Profile() {
   return (
     <>
-      <section style={{ backgroundColor: '#eee' }}>
+      <section className={`${styles.profilesStyle}`}>
         <div className="container py-5">
           <div className="row">
             <div className="col-lg-4">
@@ -13,12 +15,14 @@ export default function Profile() {
                   <Image
                     src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
                     alt="avatar"
-                    width={130}
-                    height={150}
+                    width={160}
+                    height={180}
                     className="rounded-circle"
                   />
-                  <h5 className="my-4">便宜二手商品</h5>
-                  <button type="button">上船大頭貼照</button>
+                  <h5 className="my-4">小光的部屋</h5>
+                  <button type="button" className={`mb-4 ${styles.photobtn}`}>
+                    上船大頭貼照
+                  </button>
                   {/* <div className="content text-center m-4">
                     <div className="ratings">
                       <span className="product-rating">4.6</span>
@@ -47,17 +51,25 @@ export default function Profile() {
                   </div>
                 </div>
               </div>
-              <div className="card mb-lg-0r text-cente mb-4">
+              <div className="card mb-lg-0r text-center mb-4">
                 <div className="card-body p-0 text-center">
                   <ul className="list-group list-group-flush rounded-3">
-                    <li className="list-group-item p-3">
-                      <p className="mb-0">修改個人資料</p>
-                    </li>
+                    <Link
+                      href="/your-target-url"
+                      className={{ margin: '0', padding: '0' }}
+                    >
+                      <li
+                        className="list-group-item p-3"
+                        style={{ cursor: 'pointer' }}
+                      >
+                        修改個人資料
+                      </li>
+                    </Link>
                     <li className="list-group-item p-3">
                       <p className="mb-0">更改密碼</p>
                     </li>
                     <li className="list-group-item p-3">
-                      <p className="mb-0">暫時還沒想到要做什麼功能</p>
+                      <p className="mb-0">個人賣場</p>
                     </li>
                     <li className="list-group-item p-3">
                       <p className="mb-0">暫時還沒想到要做什麼功能</p>
