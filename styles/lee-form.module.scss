@@ -1,6 +1,7 @@
 @import './variables.scss';
 
 .myloginform {
+  width: 500px;
   background-color: $form-bg;
   border: 2px solid $dark;
   border-radius: $border-radius-sm;

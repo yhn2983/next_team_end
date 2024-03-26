@@ -86,7 +86,7 @@ export default function LoginPage() {
         <title>歡迎登入</title>
       </Head>
       <div className="container d-flex justify-content-center">
-        <div className={`p-3 w-75 round ${styles.myloginform}`}>
+        <div className={`p-3 round ${styles.myloginform}`}>
           {/* 用form標籤就不會用onClick */}
           <form name="form1" onSubmit={onSubmit}>
             <div className="mb-4">
