@@ -8,10 +8,10 @@ export default function DefaultLayout({ children, pageName = '' }) {
     <>
       <div className="container-fluid">
         <Navbar pageName={pageName} />
-        <CarouselS1 pageName={pageName} />
+        <CarouselS1 />
         <Category />
         <main className="container-fluid">{children}</main>
-        <Footer pageName={pageName} />
+        <Footer />
       </div>
     </>
   )
