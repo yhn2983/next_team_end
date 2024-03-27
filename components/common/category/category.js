@@ -13,7 +13,7 @@ export default function Category() {
       {/* Categories Start */}
       <div
         className="container-fluid"
-        style={{ padding: '0 100px', marginTop: '50px' }}
+        style={{ padding: '0 100px', marginTop: '80px' }}
       >
         <div className="d-flex">
           <h2 className="mb-4">
@@ -25,13 +25,16 @@ export default function Category() {
           className={`row mt-1 rounded-pill py-3 shadow-lg ${style.categoryArea}`}
         >
           <div className="col">
-            <div className="d-flex justify-content-between align-items-center pt-3">
+            <div
+              className="d-flex justify-content-between align-items-center pt-3 mb-3"
+              style={{ padding: '0 100px' }}
+            >
               <div className="set d-flex flex-column justify-content-center">
-                <div className="item item1 rounded-circle"></div>
-                <div className="txt d-flex justify-content-center mt-2">
-                  <p>
+                <div className={`${style.item} ${style.item1}`}></div>
+                <div className="txt d-flex justify-content-center mt-3">
+                  <h5>
                     <strong>免費禮物</strong>
-                  </p>
+                  </h5>
                 </div>
               </div>
               <div>
@@ -44,11 +47,11 @@ export default function Category() {
                 />
               </div>
               <div className="set d-flex flex-column justify-content-center">
-                <div className="item item2 rounded-circle"></div>
-                <div className="txt d-flex justify-content-center mt-2">
-                  <p>
+                <div className={`${style.item} ${style.item2}`}></div>
+                <div className="txt d-flex justify-content-center mt-3">
+                  <h5>
                     <strong>電腦科技</strong>
-                  </p>
+                  </h5>
                 </div>
               </div>
               <div>
@@ -61,11 +64,11 @@ export default function Category() {
                 />
               </div>
               <div className="set d-flex flex-column justify-content-center">
-                <div className="item item3 rounded-circle"></div>
-                <div className="txt d-flex justify-content-center mt-2">
-                  <p>
+                <div className={`${style.item} ${style.item3}`}></div>
+                <div className="txt d-flex justify-content-center mt-3">
+                  <h5>
                     <strong>手機配件</strong>
-                  </p>
+                  </h5>
                 </div>
               </div>
               <div>
@@ -78,11 +81,11 @@ export default function Category() {
                 />
               </div>
               <div className="set d-flex flex-column justify-content-center">
-                <div className="item item4 rounded-circle"></div>
-                <div className="txt d-flex justify-content-center mt-2">
-                  <p>
+                <div className={`${style.item} ${style.item4}`}></div>
+                <div className="txt d-flex justify-content-center mt-3">
+                  <h5>
                     <strong>男裝服飾</strong>
-                  </p>
+                  </h5>
                 </div>
               </div>
               <div>
@@ -95,11 +98,11 @@ export default function Category() {
                 />
               </div>
               <div className="set d-flex flex-column justify-content-center">
-                <div className="item item5 rounded-circle"></div>
-                <div className="txt d-flex justify-content-center mt-2">
-                  <p>
+                <div className={`${style.item} ${style.item5}`}></div>
+                <div className="txt d-flex justify-content-center mt-3">
+                  <h5>
                     <strong>女裝服飾</strong>
-                  </p>
+                  </h5>
                 </div>
               </div>
               <div>
@@ -112,11 +115,11 @@ export default function Category() {
                 />
               </div>
               <div className="set d-flex flex-column justify-content-center">
-                <div className="item item6 rounded-circle"></div>
-                <div className="txt d-flex justify-content-center mt-2">
-                  <p>
+                <div className={`${style.item} ${style.item6}`}></div>
+                <div className="txt d-flex justify-content-center mt-3">
+                  <h5>
                     <strong>美妝保養</strong>
-                  </p>
+                  </h5>
                 </div>
               </div>
               <div>
@@ -129,11 +132,11 @@ export default function Category() {
                 />
               </div>
               <div className="set d-flex flex-column justify-content-center">
-                <div className="item item7 rounded-circle"></div>
-                <div className="txt d-flex justify-content-center mt-2">
-                  <p>
+                <div className={`${style.item} ${style.item7}`}></div>
+                <div className="txt d-flex justify-content-center mt-3">
+                  <h5>
                     <strong>名牌精品</strong>
-                  </p>
+                  </h5>
                 </div>
               </div>
               <div>
@@ -146,11 +149,11 @@ export default function Category() {
                 />
               </div>
               <div className="set d-flex flex-column justify-content-center">
-                <div className="item item8 rounded-circle"></div>
-                <div className="txt d-flex justify-content-center mt-2">
-                  <p>
+                <div className={`${style.item} ${style.item8}`}></div>
+                <div className="txt d-flex justify-content-center mt-3">
+                  <h5>
                     <strong>電玩遊戲</strong>
-                  </p>
+                  </h5>
                 </div>
               </div>
               <div>
@@ -163,11 +166,11 @@ export default function Category() {
                 />
               </div>
               <div className="set d-flex flex-column justify-content-center">
-                <div className="item item9 rounded-circle"></div>
-                <div className="txt d-flex justify-content-center mt-2">
-                  <p>
+                <div className={`${style.item} ${style.item9}`}></div>
+                <div className="txt d-flex justify-content-center mt-3">
+                  <h5>
                     <strong>耳機錄音</strong>
-                  </p>
+                  </h5>
                 </div>
               </div>
               <div>
@@ -180,21 +183,24 @@ export default function Category() {
                 />
               </div>
               <div className="set d-flex flex-column justify-content-center">
-                <div className="item item10 rounded-circle"></div>
-                <div className="txt d-flex justify-content-center mt-2">
-                  <p>
+                <div className={`${style.item} ${style.item10}`}></div>
+                <div className="txt d-flex justify-content-center mt-3">
+                  <h5>
                     <strong>相機拍攝</strong>
-                  </p>
+                  </h5>
                 </div>
               </div>
             </div>
-            <div className="wrap2 d-flex justify-content-between align-items-center mt-2">
+            <div
+              className="wrap2 d-flex justify-content-between align-items-center mt-2"
+              style={{ padding: '0 100px' }}
+            >
               <div className="set d-flex flex-column justify-content-center">
-                <div className="item item11 rounded-circle"></div>
-                <div className="txt d-flex justify-content-center mt-2">
-                  <p>
+                <div className={`${style.item} ${style.item11}`}></div>
+                <div className="txt d-flex justify-content-center mt-3">
+                  <h5>
                     <strong>家具家居</strong>
-                  </p>
+                  </h5>
                 </div>
               </div>
               <div>
@@ -207,11 +213,11 @@ export default function Category() {
                 />
               </div>
               <div className="set d-flex flex-column justify-content-center">
-                <div className="item item12 rounded-circle"></div>
-                <div className="txt d-flex justify-content-center mt-2">
-                  <p>
+                <div className={`${style.item} ${style.item12}`}></div>
+                <div className="txt d-flex justify-content-center mt-3">
+                  <h5>
                     <strong>電視電器</strong>
-                  </p>
+                  </h5>
                 </div>
               </div>
               <div>
@@ -224,11 +230,11 @@ export default function Category() {
                 />
               </div>
               <div className="set d-flex flex-column justify-content-center">
-                <div className="item item13 rounded-circle"></div>
-                <div className="txt d-flex justify-content-center mt-2">
-                  <p>
+                <div className={`${style.item} ${style.item13}`}></div>
+                <div className="txt d-flex justify-content-center mt-3">
+                  <h5>
                     <strong>嬰兒孩童</strong>
-                  </p>
+                  </h5>
                 </div>
               </div>
               <div>
@@ -241,11 +247,11 @@ export default function Category() {
                 />
               </div>
               <div className="set d-flex flex-column justify-content-center">
-                <div className="item item14 rounded-circle"></div>
-                <div className="txt d-flex justify-content-center mt-2">
-                  <p>
+                <div className={`${style.item} ${style.item14}`}></div>
+                <div className="txt d-flex justify-content-center mt-3">
+                  <h5>
                     <strong>健康營養品</strong>
-                  </p>
+                  </h5>
                 </div>
               </div>
               <div>
@@ -258,11 +264,11 @@ export default function Category() {
                 />
               </div>
               <div className="set d-flex flex-column justify-content-center">
-                <div className="item item15 rounded-circle"></div>
-                <div className="txt d-flex justify-content-center mt-2">
-                  <p>
+                <div className={`${style.item} ${style.item15}`}></div>
+                <div className="txt d-flex justify-content-center mt-3">
+                  <h5>
                     <strong>運動用品</strong>
-                  </p>
+                  </h5>
                 </div>
               </div>
               <div>
@@ -275,11 +281,11 @@ export default function Category() {
                 />
               </div>
               <div className="set d-flex flex-column justify-content-center">
-                <div className="item item16 rounded-circle"></div>
-                <div className="txt d-flex justify-content-center mt-2">
-                  <p>
+                <div className={`${style.item} ${style.item16}`}></div>
+                <div className="txt d-flex justify-content-center mt-3">
+                  <h5>
                     <strong>食物飲料</strong>
-                  </p>
+                  </h5>
                 </div>
               </div>
               <div>
@@ -292,11 +298,11 @@ export default function Category() {
                 />
               </div>
               <div className="set d-flex flex-column justify-content-center">
-                <div className="item item17 rounded-circle"></div>
-                <div className="txt d-flex justify-content-center mt-2">
-                  <p>
+                <div className={`${style.item} ${style.item17}`}></div>
+                <div className="txt d-flex justify-content-center mt-3">
+                  <h5>
                     <strong>寵物用品</strong>
-                  </p>
+                  </h5>
                 </div>
               </div>
               <div>
@@ -309,11 +315,11 @@ export default function Category() {
                 />
               </div>
               <div className="set d-flex flex-column justify-content-center">
-                <div className="item item18 rounded-circle"></div>
-                <div className="txt d-flex justify-content-center mt-2">
-                  <p>
+                <div className={`${style.item} ${style.item18}`}></div>
+                <div className="txt d-flex justify-content-center mt-3">
+                  <h5>
                     <strong>門票票券</strong>
-                  </p>
+                  </h5>
                 </div>
               </div>
               <div>
@@ -326,11 +332,11 @@ export default function Category() {
                 />
               </div>
               <div className="set d-flex flex-column justify-content-center">
-                <div className="item item19 rounded-circle"></div>
-                <div className="txt d-flex justify-content-center mt-2">
-                  <p>
+                <div className={`${style.item} ${style.item19}`}></div>
+                <div className="txt d-flex justify-content-center mt-3">
+                  <h5>
                     <strong>機車汽車</strong>
-                  </p>
+                  </h5>
                 </div>
               </div>
               <div>
@@ -343,11 +349,11 @@ export default function Category() {
                 />
               </div>
               <div className="set d-flex flex-column justify-content-center">
-                <div className="item item20 rounded-circle"></div>
-                <div className="txt d-flex justify-content-center mt-2">
-                  <p>
+                <div className={`${style.item} ${style.item20}`}></div>
+                <div className="txt d-flex justify-content-center mt-3">
+                  <h5>
                     <strong>其他</strong>
-                  </p>
+                  </h5>
                 </div>
               </div>
             </div>
