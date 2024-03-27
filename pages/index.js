@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Category from '@/components/common/category/category'
+import Category from '@/components/home/category/category'
 
 //import styles from '@/styles/home.module.css'
 import DefaultLayout from '@/components/common/default-layout'
