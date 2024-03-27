@@ -1,12 +1,21 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+.vscode
 public
+
+
+
+
+components/common/cta-button.js
+components/icons
+components/configs/index.js
 context/auth-context.js
 
 # dependencies
 /node_modules
 /.pnp
 .pnp.js
+
 
 # testing
 /coverage
