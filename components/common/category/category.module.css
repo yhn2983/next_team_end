@@ -113,3 +113,8 @@
 .item20 {
   background-image: url("/other.png");
 }
+
+.link{
+  text-decoration: none;
+  color: black;
+}

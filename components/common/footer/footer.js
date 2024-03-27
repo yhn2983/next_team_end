@@ -236,7 +236,7 @@ export default function Footer() {
                     <span className={style.footerContent}>成為DEAL會員</span>
                   </strong>
                 </h5>
-                <span className={style.selectOptions}>
+                <span className={style.option}>
                   還沒成為DEAL會員嗎？快來註冊！
                 </span>
                 <form action="" className="mt-2">
