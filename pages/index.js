@@ -6,7 +6,7 @@ import DefaultLayout from '@/components/common/default-layout'
 
 export default function Home() {
   return (
-    <DefaultLayout>
+    <DefaultLayout pageName="home">
       <Head>
         <title>首頁 | DEAL-2ND HAND SHOP</title>
       </Head>
