@@ -23,6 +23,7 @@ import { IoLogIn, IoLanguage } from 'react-icons/io5'
 import { GiArchiveRegister } from 'react-icons/gi'
 import { FaCircleUser, FaTreeCity, FaBars } from 'react-icons/fa6'
 import { RiCoupon3Fill, RiLogoutBoxRFill } from 'react-icons/ri'
+import { FaAnglesUp } from 'react-icons/fa6'
 // hook------
 import { useAuth } from '@/context/auth-context'
 //import { useCart } from '@/hooks/use-cart'
@@ -55,7 +56,7 @@ export default function Navbar({ pageName = '' }) {
   return (
     <>
       {/* topbar start */}
-      <div className="container-fluid">
+      <div id="top" className="container-fluid">
         <div className={style.row}>
           <div className={style.colA}>
             <div className="">
@@ -474,6 +475,10 @@ export default function Navbar({ pageName = '' }) {
         </Modal.Footer>
       </Modal>
       {/* Login Modal end */}
+      {/* Back to Top */}
+      <Link href="#top" className="btn">
+        <FaAnglesUp className={style.backToTop} style={{ fontSize: '40px' }} />
+      </Link>
     </>
   )
 }

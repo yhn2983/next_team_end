@@ -468,13 +468,6 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        {/* Back to Top */}
-        <Link href="#" className="btn">
-          <FaAnglesUp
-            className={style.backToTop}
-            style={{ fontSize: '40px' }}
-          />
-        </Link>
       </div>
       {/* Footer End */}
       {/* ad start */}

@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Category from '@/components/home/category/category'
+import ProdA from '@/components/home/product/prod-a'
 
 //import styles from '@/styles/home.module.css'
 import DefaultLayout from '@/components/common/default-layout'
@@ -11,6 +12,7 @@ export default function Home() {
         <title>首頁 | DEAL-2ND HAND SHOP</title>
       </Head>
       <Category />
+      <ProdA />
       <h2>Home</h2>
     </DefaultLayout>
   )
