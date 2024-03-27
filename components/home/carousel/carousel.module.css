@@ -70,8 +70,12 @@
   object-fit: cover;
   opacity: 0.8;
   border-radius: 5px;
-  transform:scale(1.2,1.2);
   transition: all 0.5s ease-out;
+  -moz-transform:rotate(3deg);
+  -webkit-transform:rotate(3deg);
+  -o-transform:rotate(3deg);
+  -ms-transform:rotate(3deg);
+  transform:rotate(3deg) scale(1.1,1.1);
 }
 
 .content{

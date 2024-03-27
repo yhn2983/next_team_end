@@ -1,0 +1,44 @@
+.productOffer {
+  position: relative;
+  overflow: hidden;
+  width: 900px;
+  height: 500px;
+}
+
+.offerImg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: .5s;
+}
+
+.productOffer:hover .offerImg {
+  transform: scale(1.1) rotate(-3deg);
+}
+
+.offerText {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.productOffer:hover .offerText {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(103, 102, 102, 0.416);
+  z-index: 1;
+}

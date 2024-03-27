@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import Category from '@/components/home/category/category'
 import ProdA from '@/components/home/product/prod-a'
+import Offer from '@/components/home/offer/offer'
+import ProdB from '@/components/home/product/prod-b'
 
 //import styles from '@/styles/home.module.css'
 import DefaultLayout from '@/components/common/default-layout'
@@ -13,6 +15,8 @@ export default function Home() {
       </Head>
       <Category />
       <ProdA />
+      <Offer />
+      <ProdB />
       <h2>Home</h2>
     </DefaultLayout>
   )
