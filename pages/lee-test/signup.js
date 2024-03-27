@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/context/auth-context'
 import { useRouter } from 'next/router'
+import styles from '@/styles/lee-form.module.scss'
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -41,12 +42,12 @@ export default function RegisterPage() {
         <title>會員註冊</title>
       </Head>
       <div className="container d-flex justify-content-center">
-        <div className="border-dark border border-3 rounded p-3 w-75">
+        <div className={`${styles.registerForm} p-3`}>
           <form name="form1" onSubmit={onSubmit}>
             <div className="mb-3">
               <h3 className="text-center">會員註冊</h3>
             </div>
-            <div className="mb-3">
+            <div className="mb-5">
               <label className="form-label ms-2" htmlFor="email">
                 Email
               </label>
@@ -60,7 +61,7 @@ export default function RegisterPage() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="mb-3">
+            <div className="mb-5">
               <label className="form-label ms-2" htmlFor="password">
                 密碼
               </label>
@@ -74,7 +75,7 @@ export default function RegisterPage() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div className="mb-3">
+            <div className="mb-5">
               <label className="form-label ms-2" htmlFor="name">
                 姓名
               </label>
@@ -88,7 +89,7 @@ export default function RegisterPage() {
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
-            <div className="mb-3">
+            <div className="mb-5">
               <label className="form-label ms-2" htmlFor="nickname">
                 暱稱
               </label>
@@ -102,7 +103,7 @@ export default function RegisterPage() {
                 onChange={(e) => setNickname(e.target.value)}
               />
             </div>
-            <div className="mb-3">
+            <div className="mb-5">
               <label className="form-label ms-2" htmlFor="mobile">
                 手機號碼
               </label>
@@ -116,7 +117,7 @@ export default function RegisterPage() {
                 onChange={(e) => setMobile(e.target.value)}
               />
             </div>
-            <div className="mb-3">
+            <div className="mb-5">
               <label className="form-label ms-2" htmlFor="birthday">
                 生日
               </label>
@@ -129,7 +130,7 @@ export default function RegisterPage() {
                 onChange={(e) => setBirthday(e.target.value)}
               />
             </div>
-            <div className="mb-3">
+            <div className="mb-5">
               <label className="form-label ms-2" htmlFor="address">
                 地址
               </label>
@@ -143,8 +144,8 @@ export default function RegisterPage() {
                 onChange={(e) => setAddress(e.target.value)}
               />
             </div>
-            <button type="submit" className="btn btn-primary">
-              註冊
+            <button type="submit" className="btn">
+              <strong>註冊</strong>
             </button>
           </form>
         </div>

@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 export default function LoginPage() {
   const router = useRouter()
-  const { auth, login } = useAuth()
+  const { auth, login, checkAuth } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -19,10 +19,15 @@ export default function LoginPage() {
   // 註冊表單有另外一種更新表單狀態的寫法
 
   useEffect(() => {
-    if (auth.token) {
-      router.push('/lee-test/logout')
+    const checkLoginStatus = async () => {
+      const user = await checkAuth()
+      if (user) {
+        router.push('/lee-test/logout')
+      }
     }
-  }, [auth, router])
+
+    checkLoginStatus()
+  }, [checkAuth, router])
 
   // 表單送出的事件處理函式
   const onSubmit = async (e) => {
