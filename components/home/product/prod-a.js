@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 // style-----
-import style from './prod.module.css'
+import style from './prodA.module.css'
 // react bootstrap
 // react icons-----
 import { BsFillCartFill } from 'react-icons/bs'
