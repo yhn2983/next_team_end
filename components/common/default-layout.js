@@ -1,6 +1,6 @@
 import Navbar from './navbar/navbar'
 import Footer from './footer/footer'
-import CarouselS1 from './carousel/carousel'
+import CarouselS1 from '../home/carousel/carousel'
 
 export default function DefaultLayout({ children, pageName = '' }) {
   return (
