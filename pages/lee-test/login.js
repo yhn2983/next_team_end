@@ -13,7 +13,7 @@ export default function LoginPage() {
 
   // 記錄錯誤訊息用的狀態
   const [error, setError] = useState({
-    username: '',
+    email: '',
     password: '',
   })
   // 註冊表單有另外一種更新表單狀態的寫法
@@ -44,7 +44,7 @@ export default function LoginPage() {
       password: '',
     }
 
-    // if(user.username)指的是"有填寫"的情況，所以反之為"沒填寫"的情況
+    // if(user.email)指的是"有填寫"的情況，所以反之為"沒填寫"的情況
     if (!email) {
       newError.email = 'Email為必填'
       hasError = true

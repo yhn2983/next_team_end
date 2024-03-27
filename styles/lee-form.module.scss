@@ -1,5 +1,13 @@
 @import './variables.scss';
 
+.error{
+  color: red;
+  height: 10px;
+  position: relative;
+  margin-left: 5px;
+  margin-top: 6px;
+}
+
 .listGroupItem {
   cursor: pointer !important;
   border: none !important;
@@ -86,12 +94,5 @@
       background: $dark;
       color: $light;
     }
-  }
-  .error{
-    color: red;
-    height: 10px;
-    position: relative;
-    margin-left: 5px;
-    margin-top: 6px;
   }
 }

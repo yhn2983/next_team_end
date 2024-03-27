@@ -1,13 +1,12 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import jwt from 'jsonwebtoken'
+// import jwt from 'jsonwebtoken'
 import { JWT_LOGIN_POST } from '@/components/config'
-import { JWT_REGISTER_POST } from '@/components/config'
 import { CHECK_AUTH_ROUTE } from '@/components/config'
 import { JWT_LOGOUT_POST } from '@/components/config'
 
 const AuthContext = createContext()
 
-const authStorageKey = 'lee-auth'
+// const authStorageKey = 'lee-auth'
 
 export function AuthContextProvider({ children }) {
   const [auth, setAuth] = useState({})
@@ -18,10 +17,10 @@ export function AuthContextProvider({ children }) {
       credentials: 'include', // 需要添加這行以便在跨域請求中發送cookies
     })
     if (response.ok) {
-      const data = await response.json()
-      if (data.status === 'success') {
-        setAuth(data.data.user) // 確保這裡正確地設置了 auth 狀態
-        return data.data.user
+      const result = await response.json()
+      if (result.status === 'success') {
+        setAuth(result.data.user) // 確保這裡正確地設置了 auth 狀態
+        return result.data.user
       }
     }
     return null
@@ -86,39 +85,6 @@ export function AuthContextProvider({ children }) {
     return false
   }
 
-  const register = async (
-    email,
-    password,
-    name,
-    nickname,
-    mobile,
-    birthday,
-    address
-  ) => {
-    const response = await fetch(JWT_REGISTER_POST, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email,
-        password,
-        name,
-        nickname,
-        mobile,
-        birthday,
-        address,
-      }),
-    })
-
-    if (response.ok) {
-      const data = await response.json()
-      return data.status === 'success'
-    } else {
-      return false
-    }
-  }
-
   /* 這是localStorage的方式
   // 每次重新整理頁面時，檢查 localStorage 有沒有 authData
   useEffect(() => {
@@ -140,7 +106,7 @@ export function AuthContextProvider({ children }) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ auth, login, logout, register, checkAuth }}>
+    <AuthContext.Provider value={{ auth, login, logout, checkAuth }}>
       {children}
     </AuthContext.Provider>
   )
