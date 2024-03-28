@@ -5,6 +5,7 @@ import validator from 'validator'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { JWT_REGISTER_POST } from '@/components/config'
+import router from 'next/router'
 
 export default function RegisterPage() {
   // 跳出對話框
@@ -123,9 +124,12 @@ export default function RegisterPage() {
     if (data.status === 'success') {
       MySwal.fire({
         title: '恭喜',
-        text: '你已經成功註冊為會員',
+        text: '你已經成功註冊為會員，為您跳轉到登入頁面',
         icon: 'success',
       })
+
+      // 跳轉到登入頁 用next的router
+      router.push('/lee-test/login')
     } else {
       MySwal.fire({
         title: '錯誤!',
@@ -263,6 +267,25 @@ export default function RegisterPage() {
             </div>
             <button type="submit" className="btn">
               <strong>註冊</strong>
+            </button>
+            <button
+              type="button"
+              className="btn ms-2"
+              onClick={() => {
+                setUser({
+                  name: '陳桂林',
+                  email: '12345678@gmail.com',
+                  nickname: '桂林仔',
+                  password: '123456',
+                  mobile: '0912345678',
+                  birthday: '1992-01-01',
+                  address: '台北市大安區',
+                  agree: true,
+                })
+                setError(initError)
+              }}
+            >
+              一鍵輸入
             </button>
           </form>
         </div>
