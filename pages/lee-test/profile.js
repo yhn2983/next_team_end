@@ -54,7 +54,7 @@ export default function Profile() {
               <div className="card mb-lg-0r text-center mb-4">
                 <div className="card-body p-0 text-center">
                   <ul className="list-group list-group-flush rounded-3">
-                    <Link href="/your-target-url">
+                    <Link href="/lee-test/update-profile">
                       <li
                         className={`list-group-item p-3 ${styles.listGroupItem}`}
                       >
