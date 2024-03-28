@@ -26,9 +26,18 @@ export default function Offer() {
                 height={500}
               />
               <div className={style.offerText}>
-                <h6 className="text-white text-uppercase">認識DEAL</h6>
-                <h3 className="text-white mb-3">DEAL緣起</h3>
-                <Link href="" className="btn btn-primary">
+                <h2 className="text-white">認識DEAL</h2>
+                <h1 className="text-white mb-3">DEAL緣起</h1>
+                <Link
+                  href=""
+                  className="btn"
+                  style={{
+                    backgroundColor: '#8e2626',
+                    color: 'white',
+                    boxShadow: '0 0 10px #adadaeb4',
+                    marginLeft: '300px',
+                  }}
+                >
                   了解更多
                 </Link>
               </div>
@@ -43,10 +52,19 @@ export default function Offer() {
                 width={900}
                 height={500}
               />
-              <div className={style.offerText}>
-                <h6 className="text-white text-uppercase">認識ESG</h6>
-                <h3 className="text-white mb-3">致力於三面平衡</h3>
-                <Link href="" className="btn btn-primary">
+              <div className={style.offerTextB}>
+                <h2 className="text-white text-uppercase">認識ESG</h2>
+                <h1 className="text-white mb-3">致力於三面平衡</h1>
+                <Link
+                  href=""
+                  className="btn"
+                  style={{
+                    backgroundColor: '#8e2626',
+                    color: 'white',
+                    boxShadow: '0 0 10px #adadaeb4',
+                    marginRight: '350px',
+                  }}
+                >
                   了解更多
                 </Link>
               </div>
