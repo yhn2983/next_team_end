@@ -1,31 +1,27 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import styles from '@/styles/lee-form.module.scss'
-import validator from 'validator'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { CHECK_AUTH_ROUTE } from '@/components/config'
-import router from 'next/router'
-import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { useAuth } from '@/context/auth-context'
+import { JWT_UPDATE_USER_POST } from '@/components/config'
 
 export default function UpdateProfilePage() {
   const MySwal = withReactContent(Swal)
+  const { auth, checkAuth } = useAuth()
+  const router = useRouter()
 
   const [user, setUser] = useState({
-    email: '',
     name: '',
-    nickname: '',
     mobile: '',
-    birthday: '',
     address: '',
   })
 
   const initError = {
-    email: '',
     name: '',
-    nickname: '',
     mobile: '',
-    birthday: '',
     address: '',
   }
 
@@ -35,44 +31,39 @@ export default function UpdateProfilePage() {
     setUser({ ...user, [e.target.name]: e.target.value })
   }
 
-  const checkError = () => {
-    let hasError = false
-    const newError = { ...initError }
+  // const checkError = () => {
+  //   let hasError = false
+  //   const newError = { ...initError }
 
-    if (!user.name) {
-      newError.name = '姓名為必填'
-    }
+  //   if (!user.name) {
+  //     newError.name = '姓名為必填'
+  //     hasError = true
+  //   }
 
-    if (!user.email) {
-      newError.email = 'Email為必填'
-    }
+  //   if (!user.mobile) {
+  //     newError.mobile = '手機號碼為必填'
+  //     hasError = true
+  //   }
 
-    if (!validator.isEmail(user.email)) {
-      newError.email ||= 'Email格式錯誤'
-    }
+  //   if (!user.address) {
+  //     newError.address = '地址為必填'
+  //     hasError = true
+  //   }
 
-    for (const property in newError) {
-      if (newError[property]) {
-        hasError = true
-      }
-    }
+  //   if (hasError) {
+  //     setError(newError)
+  //     return
+  //   }
 
-    return { hasError, newError }
-  }
+  //   setError(initError)
+  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const { hasError, newError } = checkError()
+    // checkError()
 
-    if (hasError) {
-      setError(newError)
-      return
-    }
-
-    setError(initError)
-
-    const response = await fetch(CHECK_AUTH_ROUTE, {
+    const response = await fetch(JWT_UPDATE_USER_POST, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -100,25 +91,22 @@ export default function UpdateProfilePage() {
     }
   }
 
-  // 在這裡加入 useEffect 來從伺服器取得用戶的當前資訊，並設定到 user 狀態中
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchUserData = async () => {
       const response = await fetch(CHECK_AUTH_ROUTE, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(user),
+        method: 'GET',
+        credentials: 'include',
       })
       const data = await response.json()
 
       if (data.status === 'success') {
-        setUser(data.data)
+        const { name = '', mobile = '', address = '' } = data.data.user
+        const newMobile = '0' + mobile
+        setUser({ name, mobile: newMobile, address })
       }
     }
 
-    fetchUser()
+    fetchUserData()
   }, [])
 
   return (
@@ -141,7 +129,6 @@ export default function UpdateProfilePage() {
                 type="text"
                 name="name"
                 id="name"
-                placeholder="輸入姓名"
                 value={user.name}
                 onChange={handleFieldChange}
               />
@@ -156,7 +143,6 @@ export default function UpdateProfilePage() {
                 type="text"
                 name="mobile"
                 id="mobile"
-                placeholder="輸入手機號碼"
                 value={user.mobile}
                 onChange={handleFieldChange}
               />
@@ -171,7 +157,6 @@ export default function UpdateProfilePage() {
                 type="text"
                 name="address"
                 id="address"
-                placeholder="輸入地址"
                 value={user.address}
                 onChange={handleFieldChange}
               />

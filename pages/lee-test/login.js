@@ -174,7 +174,7 @@ export default function LoginPage() {
               </button>
               <button type="button" className="btn rounded ms-3">
                 <strong>
-                  <i class="fab fa-google" style={{ color: '#4286F3' }}></i>{' '}
+                  <i className="fab fa-google" style={{ color: '#4286F3' }}></i>{' '}
                   連動GOOGLE登入
                 </strong>
               </button>
