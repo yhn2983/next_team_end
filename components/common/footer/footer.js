@@ -12,7 +12,7 @@ import {
   FaInstagramSquare,
 } from 'react-icons/fa'
 import { SlArrowDown } from 'react-icons/sl'
-import { FaSquareXTwitter, FaLinkedin, FaAnglesUp } from 'react-icons/fa6'
+import { FaSquareXTwitter, FaLinkedin } from 'react-icons/fa6'
 import { IoCloseCircle } from 'react-icons/io5'
 // hook------
 
