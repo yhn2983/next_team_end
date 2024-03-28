@@ -284,6 +284,7 @@ export default function Navbar({ pageName = '' }) {
               <Button
                 id="button-addon2"
                 style={{ backgroundColor: '#e96d3f', border: '#e96d3f' }}
+                className={style.inputSearch}
               >
                 搜尋
               </Button>
@@ -308,7 +309,7 @@ export default function Navbar({ pageName = '' }) {
                 <Link href="">
                   <button
                     type="button"
-                    className={`btn btn-sm ${style.searchBtn}`}
+                    className={style.searchBtn}
                     href=""
                     style={{ backgroundColor: '#e96d3f', color: 'white' }}
                   >

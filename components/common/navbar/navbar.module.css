@@ -55,6 +55,11 @@
 }
 }
 
+.inputSearch:hover{
+  background-color: #8e2626;
+  box-shadow: 0 0 10px gray;
+}
+
 .fs20{
   font-size: 20px;
 }
@@ -74,8 +79,17 @@
 }
 
 .searchBtn{
+  box-shadow: 0 0 10px gray;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
   -webkit-animation: btnMove 0.1s infinite alternate;
   animation: btnMove 0.3s infinite alternate;
+}
+
+.searchBtn:hover{
+  background-color: #8e2626;
 }
 
 @-webkit-keyframes btnMove {
@@ -97,6 +111,8 @@
     transform: translateY(1px);
   }
   }
+
+  
 
   .backToTop {
     padding: 5px 5px;

@@ -57,7 +57,7 @@ export default function Offer() {
                 <h1 className="text-white mb-3">致力於三面平衡</h1>
                 <Link
                   href=""
-                  className="btn"
+                  className={`btn ${style.moreBtn}`}
                   style={{
                     backgroundColor: '#8e2626',
                     color: 'white',

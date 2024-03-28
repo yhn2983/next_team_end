@@ -23,24 +23,27 @@ export default function ProdA() {
           </h2>
           <span className={style.productArea}></span>
         </div>
-        <div className="row px-xl-5">
+        <div className="row px-xl-5 ms-3">
           <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div className={`product-item bg-light mb-4 ${style.productItem}`}>
+            <div
+              className={`product-item bg-light ${style.productItem}`}
+              style={{ marginBottom: '60px' }}
+            >
               <div className="overflow-hidden">
-                <div className="" style={{ overflow: 'hidden' }}>
+                <div style={{ overflow: 'hidden' }}>
                   <Image
                     className={`img-fluid w-100 ${style.imgAct}`}
                     src="/pot.jpg"
                     alt=""
                     width={261}
-                    height={169}
+                    height={180}
                   />
                 </div>
                 <div className={style.productAction}>
-                  <Link href="" className={`btn btn-square ${style.iconA}`}>
+                  <Link href="" className="">
                     <BsFillCartFill className={style.iconAInner} />
                   </Link>
-                  <Link href="" className={`btn btn-square ${style.iconB}`}>
+                  <Link href="" className="">
                     <AiOutlineHeart className={style.iconBInner} />
                   </Link>
                 </div>
@@ -71,7 +74,10 @@ export default function ProdA() {
             </div>
           </div>
           <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div className={`product-item bg-light mb-4 ${style.productItem}`}>
+            <div
+              className={`product-item bg-light ${style.productItem}`}
+              style={{ marginBottom: '60px' }}
+            >
               <div className="overflow-hidden">
                 <div className="" style={{ overflow: 'hidden' }}>
                   <Image
@@ -79,14 +85,14 @@ export default function ProdA() {
                     src="/pot.jpg"
                     alt=""
                     width={261}
-                    height={169}
+                    height={180}
                   />
                 </div>
                 <div className={style.productAction}>
-                  <Link href="" className={`btn btn-square ${style.iconA}`}>
+                  <Link href="" className="">
                     <BsFillCartFill className={style.iconAInner} />
                   </Link>
-                  <Link href="" className={`btn btn-square ${style.iconB}`}>
+                  <Link href="" className="">
                     <AiOutlineHeart className={style.iconBInner} />
                   </Link>
                 </div>
@@ -117,7 +123,10 @@ export default function ProdA() {
             </div>
           </div>
           <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div className={`product-item bg-light mb-4 ${style.productItem}`}>
+            <div
+              className={`product-item bg-light ${style.productItem}`}
+              style={{ marginBottom: '60px' }}
+            >
               <div className="overflow-hidden">
                 <div className="" style={{ overflow: 'hidden' }}>
                   <Image
@@ -125,14 +134,14 @@ export default function ProdA() {
                     src="/pot.jpg"
                     alt=""
                     width={261}
-                    height={169}
+                    height={180}
                   />
                 </div>
                 <div className={style.productAction}>
-                  <Link href="" className={`btn btn-square ${style.iconA}`}>
+                  <Link href="" className="">
                     <BsFillCartFill className={style.iconAInner} />
                   </Link>
-                  <Link href="" className={`btn btn-square ${style.iconB}`}>
+                  <Link href="" className="">
                     <AiOutlineHeart className={style.iconBInner} />
                   </Link>
                 </div>
@@ -163,7 +172,10 @@ export default function ProdA() {
             </div>
           </div>
           <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div className={`product-item bg-light mb-4 ${style.productItem}`}>
+            <div
+              className={`product-item bg-light ${style.productItem}`}
+              style={{ marginBottom: '60px' }}
+            >
               <div className="overflow-hidden">
                 <div className="" style={{ overflow: 'hidden' }}>
                   <Image
@@ -171,14 +183,14 @@ export default function ProdA() {
                     src="/pot.jpg"
                     alt=""
                     width={261}
-                    height={169}
+                    height={180}
                   />
                 </div>
                 <div className={style.productAction}>
-                  <Link href="" className={`btn btn-square ${style.iconA}`}>
+                  <Link href="" className="">
                     <BsFillCartFill className={style.iconAInner} />
                   </Link>
-                  <Link href="" className={`btn btn-square ${style.iconB}`}>
+                  <Link href="" className="">
                     <AiOutlineHeart className={style.iconBInner} />
                   </Link>
                 </div>
@@ -209,7 +221,10 @@ export default function ProdA() {
             </div>
           </div>
           <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div className={`product-item bg-light mb-4 ${style.productItem}`}>
+            <div
+              className={`product-item bg-light ${style.productItem}`}
+              style={{ marginBottom: '60px' }}
+            >
               <div className="overflow-hidden">
                 <div className="" style={{ overflow: 'hidden' }}>
                   <Image
@@ -217,14 +232,14 @@ export default function ProdA() {
                     src="/pot.jpg"
                     alt=""
                     width={261}
-                    height={169}
+                    height={180}
                   />
                 </div>
                 <div className={style.productAction}>
-                  <Link href="" className={`btn btn-square ${style.iconA}`}>
+                  <Link href="" className="">
                     <BsFillCartFill className={style.iconAInner} />
                   </Link>
-                  <Link href="" className={`btn btn-square ${style.iconB}`}>
+                  <Link href="" className="">
                     <AiOutlineHeart className={style.iconBInner} />
                   </Link>
                 </div>
@@ -255,7 +270,10 @@ export default function ProdA() {
             </div>
           </div>
           <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div className={`product-item bg-light mb-4 ${style.productItem}`}>
+            <div
+              className={`product-item bg-light ${style.productItem}`}
+              style={{ marginBottom: '60px' }}
+            >
               <div className="overflow-hidden">
                 <div className="" style={{ overflow: 'hidden' }}>
                   <Image
@@ -263,14 +281,14 @@ export default function ProdA() {
                     src="/pot.jpg"
                     alt=""
                     width={261}
-                    height={169}
+                    height={180}
                   />
                 </div>
                 <div className={style.productAction}>
-                  <Link href="" className={`btn btn-square ${style.iconA}`}>
+                  <Link href="" className="">
                     <BsFillCartFill className={style.iconAInner} />
                   </Link>
-                  <Link href="" className={`btn btn-square ${style.iconB}`}>
+                  <Link href="" className="">
                     <AiOutlineHeart className={style.iconBInner} />
                   </Link>
                 </div>
@@ -301,7 +319,10 @@ export default function ProdA() {
             </div>
           </div>
           <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div className={`product-item bg-light mb-4 ${style.productItem}`}>
+            <div
+              className={`product-item bg-light ${style.productItem}`}
+              style={{ marginBottom: '60px' }}
+            >
               <div className="overflow-hidden">
                 <div className="" style={{ overflow: 'hidden' }}>
                   <Image
@@ -309,14 +330,14 @@ export default function ProdA() {
                     src="/pot.jpg"
                     alt=""
                     width={261}
-                    height={169}
+                    height={180}
                   />
                 </div>
                 <div className={style.productAction}>
-                  <Link href="" className={`btn btn-square ${style.iconA}`}>
+                  <Link href="" className="">
                     <BsFillCartFill className={style.iconAInner} />
                   </Link>
-                  <Link href="" className={`btn btn-square ${style.iconB}`}>
+                  <Link href="" className="">
                     <AiOutlineHeart className={style.iconBInner} />
                   </Link>
                 </div>
@@ -347,7 +368,10 @@ export default function ProdA() {
             </div>
           </div>
           <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div className={`product-item bg-light mb-4 ${style.productItem}`}>
+            <div
+              className={`product-item bg-light ${style.productItem}`}
+              style={{ marginBottom: '60px' }}
+            >
               <div className="overflow-hidden">
                 <div className="" style={{ overflow: 'hidden' }}>
                   <Image
@@ -355,14 +379,14 @@ export default function ProdA() {
                     src="/pot.jpg"
                     alt=""
                     width={261}
-                    height={169}
+                    height={180}
                   />
                 </div>
                 <div className={style.productAction}>
-                  <Link href="" className={`btn btn-square ${style.iconA}`}>
+                  <Link href="" className="">
                     <BsFillCartFill className={style.iconAInner} />
                   </Link>
-                  <Link href="" className={`btn btn-square ${style.iconB}`}>
+                  <Link href="" className="">
                     <AiOutlineHeart className={style.iconBInner} />
                   </Link>
                 </div>
@@ -394,7 +418,7 @@ export default function ProdA() {
           </div>
         </div>
         <div className="row">
-          <div className="col-4" style={{ marginLeft: '955px' }}>
+          <div className="col-4" style={{ marginLeft: '945px' }}>
             <Link href="">
               <button type="button" className={style.moreBtn} href="">
                 <strong>探索更多</strong>

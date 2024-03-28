@@ -161,16 +161,10 @@ export default function CarouselS1({ pageName = '' }) {
                 >
                   <strong>爸爸辛苦了！</strong>
                 </h4>
-                <Link
-                  href=""
-                  className="btn"
-                  style={{
-                    backgroundColor: '#e96d3f',
-                    color: 'white',
-                    marginLeft: '95px',
-                  }}
-                >
-                  開始購物
+                <Link href="" style={{ marginLeft: '95px' }}>
+                  <button type="button" className={style.moreBtn} href="">
+                    <strong>開始購物</strong>
+                  </button>
                 </Link>
               </div>
             </div>
@@ -203,16 +197,11 @@ export default function CarouselS1({ pageName = '' }) {
                 >
                   <strong>企業親子二手市集活動招募中！</strong>
                 </h5>
-                <Link
-                  href=""
-                  className="btn"
-                  style={{
-                    backgroundColor: '#e96d3f',
-                    color: 'white',
-                    marginLeft: '120px',
-                  }}
-                >
-                  報名活動
+
+                <Link href="" style={{ marginLeft: '120px' }}>
+                  <button type="button" className={style.moreBtn} href="">
+                    <strong>報名活動</strong>
+                  </button>
                 </Link>
               </div>
             </div>

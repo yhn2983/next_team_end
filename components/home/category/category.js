@@ -15,10 +15,10 @@ export default function Category() {
       {/* Categories Start */}
       <div
         className="container-fluid"
-        style={{ padding: '0 100px', marginTop: '80px' }}
+        style={{ padding: '0 100px', marginTop: '100px' }}
       >
         <div className="d-flex">
-          <h2 className="mb-4">
+          <h2 className="mb-5">
             <strong>商品分類</strong>
           </h2>
           <span className={style.sectionTitle}></span>
