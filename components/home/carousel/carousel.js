@@ -33,7 +33,7 @@ export default function CarouselS1({ pageName = '' }) {
       >
         <div className="row px-xl-5">
           <div className="col-lg-8">
-            <Carousel fade>
+            <Carousel fade style={{ boxShadow: '0 0 20px #92918f94' }}>
               <Carousel.Item
                 style={{
                   background: isHovered ? '#48494980' : '',
@@ -139,15 +139,18 @@ export default function CarouselS1({ pageName = '' }) {
             </Carousel>
           </div>
           <div className="col-lg-4" style={{ paddingLeft: '30px' }}>
-            <div className={`mb-2 rounded ${style.bg1}`}>
+            <div
+              className={`mb-2 rounded ${style.bg1}`}
+              style={{ boxShadow: '0 0 20px #92918f94' }}
+              onMouseEnter={() => handleMouseEnter('smallOne')}
+              onMouseLeave={() => handleMouseLeave('smallOne')}
+            >
               <Image
                 src="/father.png"
                 alt=""
                 width={600}
                 height={335}
                 className={isHoveredSmallOne ? style.hover : style.nohover}
-                onMouseEnter={() => handleMouseEnter('smallOne')}
-                onMouseLeave={() => handleMouseLeave('smallOne')}
               />
               <div className={style.content}>
                 <h1 className={`mt-3 ${style.shadow}`}>
@@ -168,15 +171,18 @@ export default function CarouselS1({ pageName = '' }) {
                 </Link>
               </div>
             </div>
-            <div className={`rounded ${style.bg2}`}>
+            <div
+              className={`rounded ${style.bg2}`}
+              style={{ marginTop: '12px', boxShadow: '0 0 20px #92918f94' }}
+              onMouseEnter={() => handleMouseEnter('smallTwo')}
+              onMouseLeave={() => handleMouseLeave('smallTwo')}
+            >
               <Image
                 src="/cool.png"
                 alt=""
                 width={600}
                 height={335}
                 className={isHoveredSmallTwo ? style.hover : style.nohover}
-                onMouseEnter={() => handleMouseEnter('smallTwo')}
-                onMouseLeave={() => handleMouseLeave('smallTwo')}
               />
               <div className={style.content2}>
                 <h1

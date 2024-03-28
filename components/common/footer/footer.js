@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 // style-----
@@ -17,6 +17,11 @@ import { IoCloseCircle } from 'react-icons/io5'
 // hook------
 
 export default function Footer() {
+  const [isClose, setIsClose] = useState(false)
+  const handleCloseBtn = () => {
+    if (!isClose) setIsClose(true)
+  }
+
   return (
     <>
       {/* Footer Start */}
@@ -471,7 +476,10 @@ export default function Footer() {
       </div>
       {/* Footer End */}
       {/* ad start */}
-      <div className={style.adArea}>
+      <div
+        className={style.adArea}
+        style={{ visibility: isClose ? 'hidden' : '' }}
+      >
         <Image
           className="border border-primary rounded-circle shadow-lg "
           src="/ad.png"
@@ -497,6 +505,7 @@ export default function Footer() {
               backgroundColor: 'white',
               borderRadius: '50%',
             }}
+            onClick={handleCloseBtn}
           />
         </button>
       </div>
