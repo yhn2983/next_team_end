@@ -17,7 +17,7 @@ export default function ProdA() {
         className="container-fluid"
         style={{ padding: '0 100px', marginTop: '100px' }}
       >
-        <div className="d-flex" style={{ padding: '30px 0' }}>
+        <div className="d-flex" style={{ padding: '30px 0', color: '#8e2626' }}>
           <h2 className="mb-4">
             <strong>探索商品</strong>
           </h2>

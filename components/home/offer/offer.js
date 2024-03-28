@@ -13,8 +13,14 @@ export default function Offer() {
       {/* Offer Start */}
       <div
         className="container-fluid offerArea"
-        style={{ padding: '0 140px', marginTop: '80px' }}
+        style={{ padding: '0 100px', marginTop: '80px' }}
       >
+        <div className="d-flex" style={{ padding: '30px 0', color: '#8e2626' }}>
+          <h2 className="mb-4">
+            <strong>企業運營與環境永續</strong>
+          </h2>
+          <span className={style.offerArea}></span>
+        </div>
         <div className="row px-xl-5">
           <div className="col-md-6">
             <div className={`mb-30 rounded ${style.productOffer}`}>

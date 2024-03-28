@@ -56,7 +56,7 @@
 }
 
 .inputSearch:hover{
-  background-color: #8e2626;
+  background-color: #8e2626 !important;
   box-shadow: 0 0 10px gray;
 }
 
@@ -89,7 +89,7 @@
 }
 
 .searchBtn:hover{
-  background-color: #8e2626;
+  background-color: #8e2626 !important;
 }
 
 @-webkit-keyframes btnMove {

@@ -22,7 +22,7 @@ export default function ProdB() {
         style={{ padding: '0 100px', marginTop: '100px' }}
       >
         <div className="d-flex" style={{ padding: '30px 0' }}>
-          <h2 className="mb-4">
+          <h2 className="mb-4" style={{ color: '#8e2626' }}>
             <strong>交給DEAL幫您探索商品</strong>
           </h2>
           <span className={style.productArea}></span>
@@ -479,7 +479,10 @@ export default function ProdB() {
               </div>
             </div>
           </div>
-          <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
+          <div
+            className="col-lg-3 col-md-4 col-sm-6 pb-1"
+            style={{ marginBottom: '60px' }}
+          >
             <div className={style.card}>
               <div className={style.slide}>
                 <Image
@@ -540,6 +543,15 @@ export default function ProdB() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-4" style={{ marginLeft: '945px' }}>
+            <Link href="">
+              <button type="button" className={style.moreBtn} href="">
+                <strong>探索更多</strong>
+              </button>
+            </Link>
           </div>
         </div>
       </div>

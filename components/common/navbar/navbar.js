@@ -430,12 +430,15 @@ export default function Navbar({ pageName = '' }) {
                   </Link>
                 </div>
                 <div className="">
-                  <div className="">
+                  <div className="d-flex align-items-center">
                     <Link href="" className="btn px-0">
-                      <FaHeart style={{ color: 'white' }} />
+                      <FaHeart
+                        className="mb-1"
+                        style={{ color: 'white', fontSize: '20px' }}
+                      />
                       <span
-                        className="badge text-secondary border border-secondary rounded-circle"
-                        style={{ paddingBottom: '2px' }}
+                        className="badge text-light border border-light rounded-circle ms-1"
+                        style={{ paddingBottom: '2px', fontSize: '15px' }}
                       >
                         0
                       </span>
@@ -443,11 +446,15 @@ export default function Navbar({ pageName = '' }) {
                     <Link
                       href="/cs-0308/checkout/cart"
                       className={cartstyle['button']}
+                      style={{ marginLeft: '10px' }}
                     >
-                      <FaShoppingCart />
+                      <FaShoppingCart
+                        className="mb-1"
+                        style={{ fontSize: '20px' }}
+                      />
                       <span
-                        className="badge text-secondary border border-secondary rounded-circle"
-                        style={{ paddingBottom: '2px' }}
+                        className="badge text-light border border-light rounded-circle ms-1"
+                        style={{ paddingBottom: '2px', fontSize: '15px' }}
                       >
                         0
                       </span>
