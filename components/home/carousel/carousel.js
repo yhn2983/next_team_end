@@ -33,7 +33,10 @@ export default function CarouselS1({ pageName = '' }) {
       >
         <div className="row px-xl-5">
           <div className="col-lg-8">
-            <Carousel fade style={{ boxShadow: '0 0 20px #92918f94' }}>
+            <Carousel
+              fade
+              style={{ boxShadow: '0 0 15px #92918f94', borderRadius: '5px' }}
+            >
               <Carousel.Item
                 style={{
                   background: isHovered ? '#48494980' : '',

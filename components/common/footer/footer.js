@@ -480,19 +480,22 @@ export default function Footer() {
         className={style.adArea}
         style={{ visibility: isClose ? 'hidden' : '' }}
       >
-        <Image
-          className="border border-primary rounded-circle shadow-lg "
-          src="/ad.png"
-          alt=""
-          width={200}
-          height={200}
-        />
-        <span
-          className="badge rounded-pill px-3 py-1"
-          style={{ fontSize: '20px' }}
-        >
-          加入我們
-        </span>
+        <Link href="">
+          <Image
+            className="rounded-circle shadow-lg"
+            src="/ad.png"
+            alt=""
+            width={200}
+            height={200}
+            style={{ border: '3px solid #8e2626' }}
+          />
+          <span
+            className="badge rounded-pill px-3 py-1"
+            style={{ fontSize: '20px' }}
+          >
+            加入我們
+          </span>
+        </Link>
         <button
           type="button"
           className="btn translate-middle"

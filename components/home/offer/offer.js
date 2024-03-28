@@ -21,7 +21,7 @@ export default function Offer() {
           </h2>
           <span className={style.offerArea}></span>
         </div>
-        <div className="row px-xl-5">
+        <div className="row px-xl-5 ms-4">
           <div className="col-md-6">
             <div className={`mb-30 rounded ${style.productOffer}`}>
               <Image

@@ -25,12 +25,12 @@ import { FaCircleUser, FaTreeCity, FaBars } from 'react-icons/fa6'
 import { RiCoupon3Fill, RiLogoutBoxRFill } from 'react-icons/ri'
 import { FaAnglesUp } from 'react-icons/fa6'
 // hook------
-import { useAuth } from '@/context/auth-context'
+//import { useAuth } from '@/context/auth-context'
 //import { useCart } from '@/hooks/use-cart'
 //import Cart from '@/components/cart/cart'
 
 export default function Navbar({ pageName = '' }) {
-  const { auth, logout } = useAuth()
+  //const { auth, logout } = useAuth()
   //const { totalItems, totalPrice } = useCart()
 
   // ---Hover status---
@@ -57,10 +57,10 @@ export default function Navbar({ pageName = '' }) {
     <>
       {/* topbar start */}
       <div id="top" className="container-fluid">
-        <div className={style.row}>
-          <div className={style.colA}>
-            <div className="">
-              <Link className={(style.textBody, style.rowA)} href="">
+        <div className={`row ${style.row}`}>
+          <div className="col d-flex justify-content-between">
+            <div className="mt-2">
+              <Link className={style.textBody} href="">
                 <strong>認識DEAL</strong>
               </Link>
               <Link className={style.textBody} href="">
@@ -73,8 +73,6 @@ export default function Navbar({ pageName = '' }) {
                 <strong>使用條款</strong>
               </Link>
             </div>
-          </div>
-          <div className={style.colB}>
             <div className="d-inline-flex align-items-center">
               <Dropdown>
                 <Dropdown.Toggle
@@ -137,7 +135,7 @@ export default function Navbar({ pageName = '' }) {
                   <FaUser style={{ color: '#8e2626' }} />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  {auth.id ? (
+                  {isUserHovered ? (
                     <>
                       <Dropdown.Item href="#/action-1">
                         <FaCircleUser className={(style.fs20, style.mr2)} />
@@ -206,6 +204,8 @@ export default function Navbar({ pageName = '' }) {
                 </Dropdown.Menu>
               </Dropdown>
             </div>
+          </div>
+          <div className={style.colB}>
             <div className="d-inline-flex align-items-center d-block d-lg-none">
               <Link href="" className="btn px-0 ml-2">
                 <i className="fas fa-heart text-dark"></i>
@@ -275,7 +275,7 @@ export default function Navbar({ pageName = '' }) {
               <option value="21">金門縣</option>
               <option value="22">連江縣</option>
             </select>
-            <InputGroup className="mb-3">
+            <InputGroup className="mb-3 shadow-lg">
               <Form.Control
                 placeholder="挖掘寶物吧！"
                 aria-label="Recipient's username"

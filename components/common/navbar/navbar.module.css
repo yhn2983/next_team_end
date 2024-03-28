@@ -12,10 +12,6 @@
   color: black;
 }
 
-.colA{
-  margin-top: 5px;
-}
-
 .colB{
   margin-right: 10px;
 }
@@ -26,6 +22,12 @@
   color: black;
   font-weight: bold;
   margin-top: 5px;
+  padding: 2px 2px;
+}
+
+.textBody:hover{
+  border-radius: 15px;
+  background-color: rgba(186, 185, 185, 0.568);
 }
 
 .logo {

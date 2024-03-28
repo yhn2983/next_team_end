@@ -54,10 +54,6 @@
   z-index: 11;
 }
 
-.adArea Image {
-  position: relative;
-}
-
 .adArea span {
   position: absolute;
   bottom: 0;

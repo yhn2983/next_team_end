@@ -14,6 +14,7 @@ export default function ProdB() {
   const handleClick = () => {
     setIsClicked(!isClicked)
   }
+
   return (
     <>
       {/* Products2 Start */}
@@ -108,33 +109,50 @@ export default function ProdB() {
             </div>
           </div>
           <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div className={style.card}>
-              <div className={style.slide}>
+            <div
+              className={style.card}
+              style={{ marginBottom: '60px' }}
+              onClick={handleClick}
+            >
+              <div
+                className={isClicked ? style.slideB : style.slide}
+                style={{ overflow: 'hidden' }}
+              >
                 <Image
                   className={style.slideImg}
                   src="/openit.png"
                   alt=""
-                  width={465}
-                  height={600}
+                  width={430}
+                  height={500}
                 />
               </div>
-              <div className={`bg-light flex-column ${style.slideBack}`}>
+              <div
+                className={`bg-light flex-column ${style.slideBack} ${
+                  isClicked ? style.slideBackB : style.slideBack
+                }`}
+              >
                 <div className="overflow-hidden">
-                  <div className="overflow-hidden">
+                  <div style={{ overflow: 'hidden' }}>
                     <Image
-                      className={style.imgAct}
+                      className={`img-fluid w-100 ${
+                        isClicked ? style.imgAct : ''
+                      }`}
                       src="/pot.jpg"
                       alt=""
-                      width={425}
-                      height={360}
+                      width={430}
+                      height={180}
                     />
                   </div>
                   <div className={style.productAction}>
-                    <Link href="" className={`btn btn-square ${style.iconA}`}>
-                      <BsFillCartFill className={style.iconAInner} />
+                    <Link href="" className="btn btn-square">
+                      <BsFillCartFill
+                        className={isClicked ? style.iconAInner : ''}
+                      />
                     </Link>
-                    <Link href="" className={`btn btn-square ${style.iconB}`}>
-                      <AiOutlineHeart className={style.iconBInner} />
+                    <Link href="" className="btn btn-square">
+                      <AiOutlineHeart
+                        className={isClicked ? style.iconBInner : ''}
+                      />
                     </Link>
                   </div>
                 </div>
@@ -170,33 +188,50 @@ export default function ProdB() {
             </div>
           </div>
           <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div className={style.card}>
-              <div className={style.slide}>
+            <div
+              className={style.card}
+              style={{ marginBottom: '60px' }}
+              onClick={handleClick}
+            >
+              <div
+                className={isClicked ? style.slideB : style.slide}
+                style={{ overflow: 'hidden' }}
+              >
                 <Image
                   className={style.slideImg}
                   src="/openit.png"
                   alt=""
-                  width={465}
-                  height={600}
+                  width={430}
+                  height={500}
                 />
               </div>
-              <div className={`bg-light flex-column ${style.slideBack}`}>
+              <div
+                className={`bg-light flex-column ${style.slideBack} ${
+                  isClicked ? style.slideBackB : style.slideBack
+                }`}
+              >
                 <div className="overflow-hidden">
-                  <div className="overflow-hidden">
+                  <div style={{ overflow: 'hidden' }}>
                     <Image
-                      className={style.imgAct}
+                      className={`img-fluid w-100 ${
+                        isClicked ? style.imgAct : ''
+                      }`}
                       src="/pot.jpg"
                       alt=""
-                      width={425}
-                      height={360}
+                      width={430}
+                      height={180}
                     />
                   </div>
                   <div className={style.productAction}>
-                    <Link href="" className={`btn btn-square ${style.iconA}`}>
-                      <BsFillCartFill className={style.iconAInner} />
+                    <Link href="" className="btn btn-square">
+                      <BsFillCartFill
+                        className={isClicked ? style.iconAInner : ''}
+                      />
                     </Link>
-                    <Link href="" className={`btn btn-square ${style.iconB}`}>
-                      <AiOutlineHeart className={style.iconBInner} />
+                    <Link href="" className="btn btn-square">
+                      <AiOutlineHeart
+                        className={isClicked ? style.iconBInner : ''}
+                      />
                     </Link>
                   </div>
                 </div>
@@ -232,33 +267,50 @@ export default function ProdB() {
             </div>
           </div>
           <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div className={style.card}>
-              <div className={style.slide}>
+            <div
+              className={style.card}
+              style={{ marginBottom: '60px' }}
+              onClick={handleClick}
+            >
+              <div
+                className={isClicked ? style.slideB : style.slide}
+                style={{ overflow: 'hidden' }}
+              >
                 <Image
                   className={style.slideImg}
                   src="/openit.png"
                   alt=""
-                  width={465}
-                  height={600}
+                  width={430}
+                  height={500}
                 />
               </div>
-              <div className={`bg-light flex-column ${style.slideBack}`}>
+              <div
+                className={`bg-light flex-column ${style.slideBack} ${
+                  isClicked ? style.slideBackB : style.slideBack
+                }`}
+              >
                 <div className="overflow-hidden">
-                  <div className="overflow-hidden">
+                  <div style={{ overflow: 'hidden' }}>
                     <Image
-                      className={style.imgAct}
+                      className={`img-fluid w-100 ${
+                        isClicked ? style.imgAct : ''
+                      }`}
                       src="/pot.jpg"
                       alt=""
-                      width={425}
-                      height={360}
+                      width={430}
+                      height={180}
                     />
                   </div>
                   <div className={style.productAction}>
-                    <Link href="" className={`btn btn-square ${style.iconA}`}>
-                      <BsFillCartFill className={style.iconAInner} />
+                    <Link href="" className="btn btn-square">
+                      <BsFillCartFill
+                        className={isClicked ? style.iconAInner : ''}
+                      />
                     </Link>
-                    <Link href="" className={`btn btn-square ${style.iconB}`}>
-                      <AiOutlineHeart className={style.iconBInner} />
+                    <Link href="" className="btn btn-square">
+                      <AiOutlineHeart
+                        className={isClicked ? style.iconBInner : ''}
+                      />
                     </Link>
                   </div>
                 </div>
@@ -294,33 +346,50 @@ export default function ProdB() {
             </div>
           </div>
           <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div className={style.card}>
-              <div className={style.slide}>
+            <div
+              className={style.card}
+              style={{ marginBottom: '60px' }}
+              onClick={handleClick}
+            >
+              <div
+                className={isClicked ? style.slideB : style.slide}
+                style={{ overflow: 'hidden' }}
+              >
                 <Image
                   className={style.slideImg}
                   src="/openit.png"
                   alt=""
-                  width={465}
-                  height={600}
+                  width={430}
+                  height={500}
                 />
               </div>
-              <div className={`bg-light flex-column ${style.slideBack}`}>
+              <div
+                className={`bg-light flex-column ${style.slideBack} ${
+                  isClicked ? style.slideBackB : style.slideBack
+                }`}
+              >
                 <div className="overflow-hidden">
-                  <div className="overflow-hidden">
+                  <div style={{ overflow: 'hidden' }}>
                     <Image
-                      className={style.imgAct}
+                      className={`img-fluid w-100 ${
+                        isClicked ? style.imgAct : ''
+                      }`}
                       src="/pot.jpg"
                       alt=""
-                      width={425}
-                      height={360}
+                      width={430}
+                      height={180}
                     />
                   </div>
                   <div className={style.productAction}>
-                    <Link href="" className={`btn btn-square ${style.iconA}`}>
-                      <BsFillCartFill className={style.iconAInner} />
+                    <Link href="" className="btn btn-square">
+                      <BsFillCartFill
+                        className={isClicked ? style.iconAInner : ''}
+                      />
                     </Link>
-                    <Link href="" className={`btn btn-square ${style.iconB}`}>
-                      <AiOutlineHeart className={style.iconBInner} />
+                    <Link href="" className="btn btn-square">
+                      <AiOutlineHeart
+                        className={isClicked ? style.iconBInner : ''}
+                      />
                     </Link>
                   </div>
                 </div>
@@ -356,33 +425,50 @@ export default function ProdB() {
             </div>
           </div>
           <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div className={style.card}>
-              <div className={style.slide}>
+            <div
+              className={style.card}
+              style={{ marginBottom: '60px' }}
+              onClick={handleClick}
+            >
+              <div
+                className={isClicked ? style.slideB : style.slide}
+                style={{ overflow: 'hidden' }}
+              >
                 <Image
                   className={style.slideImg}
                   src="/openit.png"
                   alt=""
-                  width={465}
-                  height={600}
+                  width={430}
+                  height={500}
                 />
               </div>
-              <div className={`bg-light flex-column ${style.slideBack}`}>
+              <div
+                className={`bg-light flex-column ${style.slideBack} ${
+                  isClicked ? style.slideBackB : style.slideBack
+                }`}
+              >
                 <div className="overflow-hidden">
-                  <div className="overflow-hidden">
+                  <div style={{ overflow: 'hidden' }}>
                     <Image
-                      className={style.imgAct}
+                      className={`img-fluid w-100 ${
+                        isClicked ? style.imgAct : ''
+                      }`}
                       src="/pot.jpg"
                       alt=""
-                      width={425}
-                      height={360}
+                      width={430}
+                      height={180}
                     />
                   </div>
                   <div className={style.productAction}>
-                    <Link href="" className={`btn btn-square ${style.iconA}`}>
-                      <BsFillCartFill className={style.iconAInner} />
+                    <Link href="" className="btn btn-square">
+                      <BsFillCartFill
+                        className={isClicked ? style.iconAInner : ''}
+                      />
                     </Link>
-                    <Link href="" className={`btn btn-square ${style.iconB}`}>
-                      <AiOutlineHeart className={style.iconBInner} />
+                    <Link href="" className="btn btn-square">
+                      <AiOutlineHeart
+                        className={isClicked ? style.iconBInner : ''}
+                      />
                     </Link>
                   </div>
                 </div>
@@ -418,33 +504,50 @@ export default function ProdB() {
             </div>
           </div>
           <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div className={style.card}>
-              <div className={style.slide}>
+            <div
+              className={style.card}
+              style={{ marginBottom: '60px' }}
+              onClick={handleClick}
+            >
+              <div
+                className={isClicked ? style.slideB : style.slide}
+                style={{ overflow: 'hidden' }}
+              >
                 <Image
                   className={style.slideImg}
                   src="/openit.png"
                   alt=""
-                  width={465}
-                  height={600}
+                  width={430}
+                  height={500}
                 />
               </div>
-              <div className={`bg-light flex-column ${style.slideBack}`}>
+              <div
+                className={`bg-light flex-column ${style.slideBack} ${
+                  isClicked ? style.slideBackB : style.slideBack
+                }`}
+              >
                 <div className="overflow-hidden">
-                  <div className="overflow-hidden">
+                  <div style={{ overflow: 'hidden' }}>
                     <Image
-                      className={style.imgAct}
+                      className={`img-fluid w-100 ${
+                        isClicked ? style.imgAct : ''
+                      }`}
                       src="/pot.jpg"
                       alt=""
-                      width={425}
-                      height={360}
+                      width={430}
+                      height={180}
                     />
                   </div>
                   <div className={style.productAction}>
-                    <Link href="" className={`btn btn-square ${style.iconA}`}>
-                      <BsFillCartFill className={style.iconAInner} />
+                    <Link href="" className="btn btn-square">
+                      <BsFillCartFill
+                        className={isClicked ? style.iconAInner : ''}
+                      />
                     </Link>
-                    <Link href="" className={`btn btn-square ${style.iconB}`}>
-                      <AiOutlineHeart className={style.iconBInner} />
+                    <Link href="" className="btn btn-square">
+                      <AiOutlineHeart
+                        className={isClicked ? style.iconBInner : ''}
+                      />
                     </Link>
                   </div>
                 </div>
@@ -483,33 +586,46 @@ export default function ProdB() {
             className="col-lg-3 col-md-4 col-sm-6 pb-1"
             style={{ marginBottom: '60px' }}
           >
-            <div className={style.card}>
-              <div className={style.slide}>
+            <div className={style.card} onClick={handleClick}>
+              <div
+                className={isClicked ? style.slideB : style.slide}
+                style={{ overflow: 'hidden' }}
+              >
                 <Image
                   className={style.slideImg}
                   src="/openit.png"
                   alt=""
-                  width={465}
-                  height={600}
+                  width={430}
+                  height={500}
                 />
               </div>
-              <div className={`bg-light flex-column ${style.slideBack}`}>
+              <div
+                className={`bg-light flex-column ${style.slideBack} ${
+                  isClicked ? style.slideBackB : style.slideBack
+                }`}
+              >
                 <div className="overflow-hidden">
-                  <div className="overflow-hidden">
+                  <div style={{ overflow: 'hidden' }}>
                     <Image
-                      className={style.imgAct}
+                      className={`img-fluid w-100 ${
+                        isClicked ? style.imgAct : ''
+                      }`}
                       src="/pot.jpg"
                       alt=""
-                      width={425}
-                      height={360}
+                      width={430}
+                      height={180}
                     />
                   </div>
                   <div className={style.productAction}>
-                    <Link href="" className={`btn btn-square ${style.iconA}`}>
-                      <BsFillCartFill className={style.iconAInner} />
+                    <Link href="" className="btn btn-square">
+                      <BsFillCartFill
+                        className={isClicked ? style.iconAInner : ''}
+                      />
                     </Link>
-                    <Link href="" className={`btn btn-square ${style.iconB}`}>
-                      <AiOutlineHeart className={style.iconBInner} />
+                    <Link href="" className="btn btn-square">
+                      <AiOutlineHeart
+                        className={isClicked ? style.iconBInner : ''}
+                      />
                     </Link>
                   </div>
                 </div>
