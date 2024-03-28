@@ -163,14 +163,19 @@ export default function LoginPage() {
               <button type="submit" className="btn">
                 <strong>登入</strong>
               </button>
-              <button
-                type="button"
-                className="btn rounded line-btn btn-outline-primary"
-                style={{ marginLeft: '15px' }}
-              >
+            </div>
+            <div className="mt-2 mb-2">你也可以</div>
+            <div className="login-with-line">
+              <button type="button" className="btn rounded">
                 <strong>
                   <i className="fab fa-line" style={{ color: '#00c300' }}></i>{' '}
                   連動LINE登入
+                </strong>
+              </button>
+              <button type="button" className="btn rounded ms-3">
+                <strong>
+                  <i class="fab fa-google" style={{ color: '#4286F3' }}></i>{' '}
+                  連動GOOGLE登入
                 </strong>
               </button>
             </div>
