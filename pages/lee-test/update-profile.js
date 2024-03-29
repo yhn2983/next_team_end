@@ -61,17 +61,26 @@ export default function UpdateProfilePage() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    // checkError()
+    // 確認用戶的認證狀態
+    await checkAuth()
 
-    const response = await fetch(JWT_UPDATE_USER_POST, {
-      method: 'POST',
+    // 從 auth 物件中獲取用戶的 ID
+    const userId = auth.userData.id
+
+    // 將用戶的 ID 和 "/profile" 添加到請求的 URL 中
+    const response = await fetch(`${JWT_UPDATE_USER_POST}/${userId}/profile`, {
+      method: 'PUT',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(user),
+      credentials: 'include', // 將 cookies 包含在請求中
     })
+
     const data = await response.json()
+
+    console.log(data)
 
     if (data.status === 'success') {
       MySwal.fire({
