@@ -13,7 +13,8 @@ export default function Profile() {
     mobile: '',
     birthday: '',
     address: '',
-    carbonPoints: 0,
+    carbon_points_got: 0,
+    carbon_points_have: 0,
   })
 
   useEffect(() => {
@@ -32,7 +33,9 @@ export default function Profile() {
           mobile = '',
           birthday = '',
           address = '',
-          carbonPoints = 0,
+          carbon_points_got = 0,
+          carbon_points_have = 0,
+          level_desc = '等待任務中',
         } = data.data.user
 
         // 處理手機號碼補0
@@ -48,7 +51,9 @@ export default function Profile() {
           mobile: newMobile,
           birthday: formattedBirthday,
           address,
-          carbonPoints,
+          carbon_points_got,
+          carbon_points_have,
+          level_desc,
         })
       }
     }
@@ -196,36 +201,35 @@ export default function Profile() {
                   <hr />
                   <div className="row">
                     <div className="col-sm-3">
-                      <p className="mb-0">小碳點</p>
+                      <p className="mb-0">累積小碳點</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">{user.carbonPoints}</p>
+                      <p className="text-muted mb-0">
+                        {user.carbon_points_got}
+                      </p>
                     </div>
                   </div>
                   <hr />
                   <div className="row">
-                    <div className="col-sm-3 mt-1">
-                      <p className="mb-0">關於我</p>
+                    <div className="col-sm-3">
+                      <p className="mb-0">持有小碳點</p>
                     </div>
-                    <div className="col-sm-9 mt-1">
-                      <div className="card">
-                        <div className="card-body">
-                          <p className="text-muted">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing
-                            elit. In, error. Consectetur ullam sed minima.
-                            Numquam dicta, optio repellat quae necessitatibus
-                            ipsam voluptatem omnis! Ipsum facere sed esse nam?
-                            Nesciunt amet temporibus beatae magnam ad harum
-                            perferendis dolore deserunt dolorum vero, laborum
-                            fuga culpa incidunt eum aliquam. Minus quisquam
-                            fugit est Lorem, ipsum dolor sit amet consectetur
-                            adipisicing elit. Necessitatibus hic ex corporis at,
-                            blanditiis corrupti repellat. Dolor n
-                          </p>
-                        </div>
-                      </div>
+                    <div className="col-sm-9">
+                      <p className="text-muted mb-0">
+                        {user.carbon_points_have}
+                      </p>
                     </div>
                   </div>
+                  <hr />
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <p className="mb-0">會員等級</p>
+                    </div>
+                    <div className="col-sm-9">
+                      <p className="text-muted mb-0">{user.level_desc}</p>
+                    </div>
+                  </div>
+                  <hr />
                 </div>
               </div>
             </div>

@@ -35,21 +35,23 @@ export function AuthContextProvider({ children }) {
       method: 'GET',
       credentials: 'include',
     })
-    if (response.ok) {
+    if (response && response.ok) {
       const result = await response.json()
-      if (result.status === 'success') {
-        setAuth({
-          isAuth: true,
-          userData: {
-            id: result.data.user.id,
-            email: result.data.user.email,
-            nickname: result.data.user.nickname,
-          },
-        })
-        return true
+      if (result && result.status === 'success') {
+        const user = result.data && result.data.user
+        if (user) {
+          setAuth({
+            isAuth: true,
+            userData: {
+              id: user.id,
+              email: user.email,
+              nickname: user.nickname,
+            },
+          })
+          return true
+        }
       }
     }
-    return false
   }
 
   const login = async (email, password) => {
