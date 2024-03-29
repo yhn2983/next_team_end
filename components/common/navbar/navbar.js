@@ -299,24 +299,49 @@ export default function Navbar({ pageName = '' }) {
                 padding: '10px 5px',
               }}
             >
-              <h4 style={{ paddingLeft: '5px' }}>
-                <strong>不知道從哪裡開始？</strong>
-              </h4>
-              <span style={{ paddingLeft: '20px' }}>
-                試試這個&nbsp;
-                <FaHandPointRight style={{ color: '#8e2626' }} />
-                &nbsp;
-                <Link href="">
-                  <button
-                    type="button"
-                    className={style.searchBtn}
-                    href=""
-                    style={{ backgroundColor: '#e96d3f', color: 'white' }}
-                  >
-                    隨機探索
-                  </button>
-                </Link>
-              </span>
+              {pageName === 'randomSearch' ? (
+                <>
+                  <h4 className="ms-1" style={{ paddingLeft: '5px' }}>
+                    <strong>已經有想要的商品？</strong>
+                  </h4>
+                  <span style={{ paddingLeft: '20px' }}>
+                    前往這裡&nbsp;
+                    <FaHandPointRight style={{ color: '#8e2626' }} />
+                    &nbsp;
+                    <Link href="/shop/shopSearch">
+                      <button
+                        type="button"
+                        className={style.searchBtn}
+                        href=""
+                        style={{ backgroundColor: '#e96d3f', color: 'white' }}
+                      >
+                        探索商品
+                      </button>
+                    </Link>
+                  </span>
+                </>
+              ) : (
+                <>
+                  <h4 className="ms-1" style={{ paddingLeft: '5px' }}>
+                    <strong>不知道從哪裡開始？</strong>
+                  </h4>
+                  <span style={{ paddingLeft: '20px' }}>
+                    試試這個&nbsp;
+                    <FaHandPointRight style={{ color: '#8e2626' }} />
+                    &nbsp;
+                    <Link href="/shop/randomSearch">
+                      <button
+                        type="button"
+                        className={style.searchBtn}
+                        href=""
+                        style={{ backgroundColor: '#e96d3f', color: 'white' }}
+                      >
+                        隨機探索
+                      </button>
+                    </Link>
+                  </span>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -389,9 +414,9 @@ export default function Navbar({ pageName = '' }) {
                     </strong>
                   </Link>
                   <Link
-                    href="#"
+                    href="/shop/product-search"
                     className={`nav-item nav-link me-5 ${
-                      pageName === 'prodSearch' ? 'active' : ''
+                      pageName === 'productSearch' ? 'active' : ''
                     }`}
                   >
                     <strong>
