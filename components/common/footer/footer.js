@@ -10,8 +10,8 @@ import {
   FaRegHandPointDown,
   FaFacebookSquare,
   FaInstagramSquare,
+  FaAngleRight,
 } from 'react-icons/fa'
-import { SlArrowDown } from 'react-icons/sl'
 import { FaSquareXTwitter, FaLinkedin } from 'react-icons/fa6'
 import { IoCloseCircle } from 'react-icons/io5'
 // hook------
@@ -111,9 +111,9 @@ export default function Footer() {
                   </strong>
                 </h5>
                 <div className="d-flex flex-column justify-content-start">
-                  <Link className="text-secondary mb-3" href="#">
+                  <Link className="mb-3" href="#">
                     <span className={style.selectOptions}>
-                      <SlArrowDown
+                      <FaAngleRight
                         className="me-2"
                         style={{ fontSize: '15px' }}
                       />
@@ -122,7 +122,7 @@ export default function Footer() {
                   </Link>
                   <Link className="text-secondary mb-3" href="#">
                     <span className={style.selectOptions}>
-                      <SlArrowDown
+                      <FaAngleRight
                         className="me-2"
                         style={{ fontSize: '15px' }}
                       />
@@ -131,7 +131,7 @@ export default function Footer() {
                   </Link>
                   <Link className="text-secondary mb-3" href="#">
                     <span className={style.selectOptions}>
-                      <SlArrowDown
+                      <FaAngleRight
                         className="me-2"
                         style={{ fontSize: '15px' }}
                       />
@@ -140,7 +140,7 @@ export default function Footer() {
                   </Link>
                   <Link className="text-secondary mb-3" href="#">
                     <span className={style.selectOptions}>
-                      <SlArrowDown
+                      <FaAngleRight
                         className="me-2"
                         style={{ fontSize: '15px' }}
                       />
@@ -149,7 +149,7 @@ export default function Footer() {
                   </Link>
                   <Link className="text-secondary mb-3" href="#">
                     <span className={style.selectOptions}>
-                      <SlArrowDown
+                      <FaAngleRight
                         className="me-2"
                         style={{ fontSize: '15px' }}
                       />
@@ -158,7 +158,7 @@ export default function Footer() {
                   </Link>
                   <Link className="text-secondary" href="#">
                     <span className={style.selectOptions}>
-                      <SlArrowDown
+                      <FaAngleRight
                         className="me-2"
                         style={{ fontSize: '15px' }}
                       />
@@ -180,7 +180,7 @@ export default function Footer() {
                 <div className="d-flex flex-column justify-content-start">
                   <Link className="text-secondary mb-3 ps-2" href="#">
                     <span className={style.selectOptions}>
-                      <SlArrowDown
+                      <FaAngleRight
                         className="me-2"
                         style={{ fontSize: '15px' }}
                       />
@@ -189,7 +189,7 @@ export default function Footer() {
                   </Link>
                   <Link className="text-secondary mb-3 ps-2" href="#">
                     <span className={style.selectOptions}>
-                      <SlArrowDown
+                      <FaAngleRight
                         className="me-2"
                         style={{ fontSize: '15px' }}
                       />
@@ -198,7 +198,7 @@ export default function Footer() {
                   </Link>
                   <Link className="text-secondary mb-3 ps-2" href="#">
                     <span className={style.selectOptions}>
-                      <SlArrowDown
+                      <FaAngleRight
                         className="me-2"
                         style={{ fontSize: '15px' }}
                       />
@@ -207,7 +207,7 @@ export default function Footer() {
                   </Link>
                   <Link className="text-secondary mb-3 ps-2" href="#">
                     <span className={style.selectOptions}>
-                      <SlArrowDown
+                      <FaAngleRight
                         className="me-2"
                         style={{ fontSize: '15px' }}
                       />
@@ -216,7 +216,7 @@ export default function Footer() {
                   </Link>
                   <Link className="text-secondary mb-3 ps-2" href="#">
                     <span className={style.selectOptions}>
-                      <SlArrowDown
+                      <FaAngleRight
                         className="me-2"
                         style={{ fontSize: '15px' }}
                       />
@@ -225,7 +225,7 @@ export default function Footer() {
                   </Link>
                   <Link className="text-secondary ps-2" href="#">
                     <span className={style.selectOptions}>
-                      <SlArrowDown
+                      <FaAngleRight
                         className="me-2"
                         style={{ fontSize: '15px' }}
                       />
@@ -299,7 +299,10 @@ export default function Footer() {
                   <Link className="" href="#">
                     <FaInstagramSquare
                       className={style.socialIcons}
-                      style={{ color: 'purple', backgroundColor: 'white' }}
+                      style={{
+                        backgroundColor: 'white',
+                        color: 'purple',
+                      }}
                     />
                   </Link>
                 </div>

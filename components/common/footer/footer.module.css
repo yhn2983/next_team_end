@@ -47,6 +47,10 @@
   margin-right: 15px;
 }
 
+.socialIcons:hover{
+  opacity: 0.8;
+}
+
 .adArea {
   position: fixed;
   right: 80px;
