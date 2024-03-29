@@ -2,8 +2,59 @@ import React from 'react'
 import Image from 'next/image'
 import styles from '@/styles/lee-form.module.scss'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { CHECK_AUTH_ROUTE } from '@/components/config'
 
 export default function Profile() {
+  const [user, setUser] = useState({
+    name: '',
+    nickname: '',
+    email: '',
+    mobile: '',
+    birthday: '',
+    address: '',
+    carbonPoints: 0,
+  })
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const response = await fetch(CHECK_AUTH_ROUTE, {
+        method: 'GET',
+        credentials: 'include',
+      })
+      const data = await response.json()
+
+      if (data.status === 'success') {
+        const {
+          name = '',
+          nickname = '',
+          email = '',
+          mobile = '',
+          birthday = '',
+          address = '',
+          carbonPoints = 0,
+        } = data.data.user
+
+        // 處理手機號碼補0
+        const newMobile = '0' + mobile
+
+        // 處理生日格式
+        const formattedBirthday = new Date(birthday).toISOString().split('T')[0]
+
+        setUser({
+          name,
+          nickname,
+          email,
+          mobile: newMobile,
+          birthday: formattedBirthday,
+          address,
+          carbonPoints,
+        })
+      }
+    }
+
+    fetchUserData()
+  }, [])
   return (
     <>
       <section className={`${styles.profilesStyle}`}>
@@ -19,7 +70,7 @@ export default function Profile() {
                     height={185}
                     className="rounded-circle"
                   />
-                  <h5 className="my-4">小光的部屋</h5>
+                  <h5 className="my-4">{user.nickname}</h5>
                   <button type="button" className={`mb-4 ${styles.photobtn}`}>
                     上傳大頭貼照
                   </button>
@@ -94,7 +145,7 @@ export default function Profile() {
                       <p className="mb-0">真實姓名</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">森田光</p>
+                      <p className="text-muted mb-0">{user.name}</p>
                     </div>
                   </div>
                   <hr />
@@ -103,7 +154,7 @@ export default function Profile() {
                       <p className="mb-0">暱稱</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">小光的部屋</p>
+                      <p className="text-muted mb-0">{user.nickname}</p>
                     </div>
                   </div>
                   <hr />
@@ -112,7 +163,7 @@ export default function Profile() {
                       <p className="mb-0">Email</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">example@example.com</p>
+                      <p className="text-muted mb-0">{user.email}</p>
                     </div>
                   </div>
                   <hr />
@@ -121,7 +172,7 @@ export default function Profile() {
                       <p className="mb-0">手機</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">0919895563</p>
+                      <p className="text-muted mb-0">{user.mobile}</p>
                     </div>
                   </div>
                   <hr />
@@ -130,7 +181,7 @@ export default function Profile() {
                       <p className="mb-0">生日</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">1996/01/28</p>
+                      <p className="text-muted mb-0">{user.birthday}</p>
                     </div>
                   </div>
                   <hr />
@@ -139,7 +190,7 @@ export default function Profile() {
                       <p className="mb-0">地址</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">高雄市前金區</p>
+                      <p className="text-muted mb-0">{user.address}</p>
                     </div>
                   </div>
                   <hr />
@@ -148,7 +199,7 @@ export default function Profile() {
                       <p className="mb-0">小碳點</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">87</p>
+                      <p className="text-muted mb-0">{user.carbonPoints}</p>
                     </div>
                   </div>
                   <hr />

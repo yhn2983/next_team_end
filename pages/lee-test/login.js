@@ -18,12 +18,13 @@ export default function LoginPage() {
   })
   // 註冊表單有另外一種更新表單狀態的寫法
 
-  // 檢查是否已經登入，如果已經登入就導向登出頁面
   useEffect(() => {
     const checkLoginStatus = async () => {
       const isAuth = await checkAuth()
       if (isAuth) {
-        router.push('/lee-test/logout')
+        setTimeout(() => {
+          router.push('/lee-test/logout')
+        }, 0)
       }
     }
 
