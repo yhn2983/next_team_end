@@ -22,7 +22,7 @@ export default function Home() {
       setTimeout(() => {
         setIsLoading(false)
         setProgress(100)
-      }, 2000)
+      }, 100)
     }
   }, [isLoading])
 
