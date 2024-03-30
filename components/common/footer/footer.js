@@ -41,7 +41,7 @@ export default function Footer() {
               <div
                 className={`me-5 d-flex align-items-center justify-content-center ${style.adbox}`}
               >
-                <Link href="">
+                <Link href="/help-center/ad-partner">
                   <Image
                     className=""
                     src="/n1.png"
@@ -55,7 +55,7 @@ export default function Footer() {
               <div
                 className={`d-flex align-items-center justify-content-center ${style.adbox}`}
               >
-                <Link href="">
+                <Link href="/help-center/ad-partner">
                   <Image
                     className=""
                     src="/n2.png"
@@ -71,7 +71,7 @@ export default function Footer() {
               <div
                 className={`me-5 d-flex align-items-center justify-content-center ${style.adbox}`}
               >
-                <Link href="">
+                <Link href="/help-center/ad-partner">
                   <Image
                     className=""
                     src="/n3.png"
@@ -85,7 +85,7 @@ export default function Footer() {
               <div
                 className={`d-flex align-items-center justify-content-center ${style.adbox}`}
               >
-                <Link href="">
+                <Link href="/help-center/ad-partner">
                   <Image
                     className=""
                     src="/n4.png"
@@ -165,7 +165,7 @@ export default function Footer() {
                   </Link>
                   <Link
                     className="text-secondary mb-3"
-                    href="#"
+                    href="/help-center/joinDeal"
                     style={{ textDecoration: 'none' }}
                   >
                     <span className={style.selectOptions}>
@@ -178,7 +178,7 @@ export default function Footer() {
                   </Link>
                   <Link
                     className="text-secondary"
-                    href="#"
+                    href="/help-center/ad-partner"
                     style={{ textDecoration: 'none' }}
                   >
                     <span className={style.selectOptions}>
@@ -204,7 +204,7 @@ export default function Footer() {
                 <div className="d-flex flex-column justify-content-start">
                   <Link
                     className="text-secondary mb-3 ps-2"
-                    href="#"
+                    href="/help-center/deal"
                     style={{ textDecoration: 'none' }}
                   >
                     <span className={style.selectOptions}>
@@ -212,12 +212,12 @@ export default function Footer() {
                         className="me-2"
                         style={{ fontSize: '15px' }}
                       />
-                      DEAL介紹
+                      認識DEAL
                     </span>
                   </Link>
                   <Link
                     className="text-secondary mb-3 ps-2"
-                    href="#"
+                    href="/help-center/esg"
                     style={{ textDecoration: 'none' }}
                   >
                     <span className={style.selectOptions}>
@@ -225,12 +225,12 @@ export default function Footer() {
                         className="me-2"
                         style={{ fontSize: '15px' }}
                       />
-                      ESG介紹
+                      認識ESG
                     </span>
                   </Link>
                   <Link
                     className="text-secondary mb-3 ps-2"
-                    href="#"
+                    href="/help-center/privacy-rule"
                     style={{ textDecoration: 'none' }}
                   >
                     <span className={style.selectOptions}>
@@ -243,7 +243,7 @@ export default function Footer() {
                   </Link>
                   <Link
                     className="text-secondary mb-3 ps-2"
-                    href="#"
+                    href="/help-center/using-rule"
                     style={{ textDecoration: 'none' }}
                   >
                     <span className={style.selectOptions}>
@@ -269,7 +269,7 @@ export default function Footer() {
                   </Link>
                   <Link
                     className="text-secondary ps-2"
-                    href="#"
+                    href="/contact-us"
                     style={{ textDecoration: 'none' }}
                   >
                     <span className={style.selectOptions}>
@@ -399,7 +399,7 @@ export default function Footer() {
               <div className="txt ms-4">
                 <Link
                   className="text-decoration-none text-secondary me-3"
-                  href=""
+                  href="/contact-us"
                 >
                   <strong>
                     <span style={{ fontSize: '22px', color: 'white' }}>
@@ -411,7 +411,7 @@ export default function Footer() {
               <div className="txt ms-4">
                 <Link
                   className="text-decoration-none text-secondary me-3"
-                  href=""
+                  href="/help-center/esg"
                 >
                   <strong>
                     <span style={{ fontSize: '22px', color: 'white' }}>
@@ -423,7 +423,7 @@ export default function Footer() {
               <div className="txt ms-4">
                 <Link
                   className="text-decoration-none text-secondary me-3"
-                  href=""
+                  href="/help-center/join-deal"
                 >
                   <strong>
                     <span style={{ fontSize: '22px', color: 'white' }}>
@@ -435,7 +435,7 @@ export default function Footer() {
               <div className="txt ms-4">
                 <Link
                   className="text-decoration-none text-secondary me-3"
-                  href=""
+                  href="/help-center/using-rule"
                 >
                   <strong>
                     <span style={{ fontSize: '22px', color: 'white' }}>
@@ -447,7 +447,7 @@ export default function Footer() {
               <div className="txt ms-4">
                 <Link
                   className="text-decoration-none text-secondary me-3"
-                  href=""
+                  href="/help-center/privacy-rule"
                 >
                   <strong>
                     <span style={{ fontSize: '22px', color: 'white' }}>

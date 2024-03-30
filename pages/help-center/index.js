@@ -78,7 +78,7 @@ export default function HelpCenter() {
         >
           <div className="row px-xl-5">
             <div className="col-lg-3 col-md-6">
-              <Link className="text-decoration-none" href="">
+              <Link className="text-decoration-none" href="/help-center/deal">
                 <div
                   className={`card border-seconary border-4 ${style.card}`}
                   style={{ marginBottom: '80px' }}
@@ -99,7 +99,7 @@ export default function HelpCenter() {
               </Link>
             </div>
             <div className="col-lg-3">
-              <Link className="text-decoration-none" href="">
+              <Link className="text-decoration-none" href="/help-center/esg">
                 <div
                   className={`card border-seconary border-4 ms-5 ${style.card}`}
                 >
@@ -119,7 +119,10 @@ export default function HelpCenter() {
               </Link>
             </div>
             <div className="col-lg-3">
-              <Link className="text-decoration-none" href="">
+              <Link
+                className="text-decoration-none"
+                href="/help-center/ad-partner"
+              >
                 <div
                   className={`card border-seconary border-4 ms-5 ${style.card}`}
                 >
@@ -139,7 +142,10 @@ export default function HelpCenter() {
               </Link>
             </div>
             <div className="col-lg-3">
-              <Link className="text-decoration-none" href="">
+              <Link
+                className="text-decoration-none"
+                href="/help-center/using-rule"
+              >
                 <div
                   className={`card border-seconary border-4 ms-5 ${style.card}`}
                 >
@@ -159,7 +165,10 @@ export default function HelpCenter() {
               </Link>
             </div>
             <div className="col-lg-3">
-              <Link className="text-decoration-none" href="">
+              <Link
+                className="text-decoration-none"
+                href="/help-center/privacy-rule"
+              >
                 <div className={`card border-seconary border-4 ${style.card}`}>
                   <Image
                     src="/privacy.png"
@@ -177,7 +186,10 @@ export default function HelpCenter() {
               </Link>
             </div>
             <div className="col-lg-3">
-              <Link className="text-decoration-none" href="">
+              <Link
+                className="text-decoration-none"
+                href="/help-center/language-setting"
+              >
                 <div
                   className={`card border-seconary border-4 ms-5 ${style.card}`}
                 >
@@ -197,7 +209,7 @@ export default function HelpCenter() {
               </Link>
             </div>
             <div className="col-lg-3">
-              <Link className="text-decoration-none" href="">
+              <Link className="text-decoration-none" href="/help-center/faqs">
                 <div
                   className={`card border-seconary border-4 ms-5 ${style.card}`}
                 >
@@ -217,7 +229,10 @@ export default function HelpCenter() {
               </Link>
             </div>
             <div className="col-lg-3">
-              <Link className="text-decoration-none" href="">
+              <Link
+                className="text-decoration-none"
+                href="/help-center/join-deal"
+              >
                 <div
                   className={`card border-seconary border-4 ms-5 ${style.card}`}
                 >

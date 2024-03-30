@@ -44,7 +44,7 @@
   transition: .5s;
   border: 3px solid #e96d3f; 
   position: relative;
-  width: 90%;
+  width: 85%;
 }
 
 .productItem:hover {

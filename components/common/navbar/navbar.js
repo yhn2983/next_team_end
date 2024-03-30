@@ -63,13 +63,13 @@ export default function Navbar({ pageName = '' }) {
               <Link className={style.textBody} href="/help-center">
                 <strong>幫助中心</strong>
               </Link>
-              <Link className={style.textBody} href="">
+              <Link className={style.textBody} href="/help-center/deal">
                 <strong>認識DEAL</strong>
               </Link>
-              <Link className={style.textBody} href="">
+              <Link className={style.textBody} href="/help-center/privacy-rule">
                 <strong>隱私條款</strong>
               </Link>
-              <Link className={style.textBody} href="">
+              <Link className={style.textBody} href="/help-center/using-rule">
                 <strong>使用條款</strong>
               </Link>
             </div>
@@ -137,45 +137,79 @@ export default function Navbar({ pageName = '' }) {
                 <Dropdown.Menu>
                   {isUserHovered ? (
                     <>
-                      <Dropdown.Item href="#/action-1">
-                        <FaCircleUser className={(style.fs20, style.mr2)} />
-                        &nbsp;<strong>會員中心</strong>
+                      <Dropdown.Item
+                        href="#/action-1"
+                        style={{ fontSize: '20px' }}
+                      >
+                        <FaCircleUser
+                          className={style.mr2}
+                          style={{ color: '#3939f4' }}
+                        />
+                        &nbsp;
+                        <strong>會員中心</strong>
                       </Dropdown.Item>
-                      <Dropdown.Item href="#/action-2">
-                        <FaClipboardList className={(style.fs20, style.mr2)} />
+                      <Dropdown.Item
+                        href="#/action-2"
+                        style={{ fontSize: '20px' }}
+                      >
+                        <FaClipboardList
+                          className={(style.fs20, style.mr2)}
+                          style={{ color: '#5a0982' }}
+                        />
                         &nbsp;<strong>訂購紀錄</strong>
                       </Dropdown.Item>
-                      <Dropdown.Item href="#/action-3">
-                        <FaTreeCity className={(style.fs20, style.mr2)} />
+                      <Dropdown.Item
+                        href="#/action-3"
+                        style={{ fontSize: '20px' }}
+                      >
+                        <FaTreeCity
+                          className={(style.fs20, style.mr2)}
+                          style={{ color: '#0d8209' }}
+                        />
                         &nbsp;<strong>小碳點紀錄</strong>
                       </Dropdown.Item>
-                      <Dropdown.Item href="#/action-4">
-                        <RiCoupon3Fill className={(style.fs20, style.mr2)} />
+                      <Dropdown.Item
+                        href="#/action-4"
+                        style={{ fontSize: '20px' }}
+                      >
+                        <RiCoupon3Fill
+                          className={(style.fs20, style.mr2)}
+                          style={{ color: '#ce690b' }}
+                        />
                         &nbsp;<strong>優惠券紀錄</strong>
                       </Dropdown.Item>
-                      <Dropdown.Item href="#/action-5">
+                      <Dropdown.Item
+                        href="#/action-5"
+                        style={{ fontSize: '20px' }}
+                      >
                         <RiLogoutBoxRFill className={(style.fs20, style.mr2)} />
                         &nbsp;<strong>登出</strong>
                       </Dropdown.Item>
                     </>
                   ) : (
                     <>
-                      <Dropdown.Item href="#/action-1" onClick={handleShow}>
+                      <Dropdown.Item
+                        href="#/action-1"
+                        style={{ fontSize: '20px' }}
+                        onClick={handleShow}
+                      >
                         <IoLogIn
                           className={style.mr2}
                           style={{ fontSize: '25px' }}
                         />
                         &nbsp;<strong>登入</strong>
                       </Dropdown.Item>
-                      <Dropdown.Item href="#/action-2">
+                      <Dropdown.Item
+                        href="#/action-2"
+                        style={{ fontSize: '20px' }}
+                      >
                         <GiArchiveRegister
                           className={style.mr2}
                           style={{
                             color: '#2f4f4f',
-                            fontSize: '22px',
                           }}
                         />
-                        &nbsp;<strong>註冊</strong>
+                        &nbsp;<strong> 註冊</strong>
                       </Dropdown.Item>
                     </>
                   )}
@@ -195,10 +229,10 @@ export default function Navbar({ pageName = '' }) {
                   <IoLanguage style={{ color: '#8e2626' }} />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1">
+                  <Dropdown.Item href="#/action-1" style={{ fontSize: '20px' }}>
                     &nbsp;<strong>．中文</strong>
                   </Dropdown.Item>
-                  <Dropdown.Item href="#/action-2">
+                  <Dropdown.Item href="#/action-2" style={{ fontSize: '20px' }}>
                     &nbsp;<strong>．English</strong>
                   </Dropdown.Item>
                 </Dropdown.Menu>
@@ -451,9 +485,9 @@ export default function Navbar({ pageName = '' }) {
                     </strong>
                   </Link>
                   <Link
-                    href="#"
+                    href="/contact-us"
                     className={`nav-item nav-link ${
-                      pageName === 'contact' ? 'active' : ''
+                      pageName === 'contactUs' ? 'active' : ''
                     }`}
                   >
                     <strong>
