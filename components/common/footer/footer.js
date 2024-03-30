@@ -111,7 +111,11 @@ export default function Footer() {
                   </strong>
                 </h5>
                 <div className="d-flex flex-column justify-content-start">
-                  <Link className="mb-3" href="#">
+                  <Link
+                    className="mb-3"
+                    href="/shop/product-search"
+                    style={{ textDecoration: 'none' }}
+                  >
                     <span className={style.selectOptions}>
                       <FaAngleRight
                         className="me-2"
@@ -120,7 +124,11 @@ export default function Footer() {
                       探索商品
                     </span>
                   </Link>
-                  <Link className="text-secondary mb-3" href="#">
+                  <Link
+                    className="text-secondary mb-3"
+                    href="/shop/random-search"
+                    style={{ textDecoration: 'none' }}
+                  >
                     <span className={style.selectOptions}>
                       <FaAngleRight
                         className="me-2"
@@ -129,7 +137,11 @@ export default function Footer() {
                       隨機探索
                     </span>
                   </Link>
-                  <Link className="text-secondary mb-3" href="#">
+                  <Link
+                    className="text-secondary mb-3"
+                    href="#"
+                    style={{ textDecoration: 'none' }}
+                  >
                     <span className={style.selectOptions}>
                       <FaAngleRight
                         className="me-2"
@@ -138,7 +150,11 @@ export default function Footer() {
                       領取優惠券
                     </span>
                   </Link>
-                  <Link className="text-secondary mb-3" href="#">
+                  <Link
+                    className="text-secondary mb-3"
+                    href="#"
+                    style={{ textDecoration: 'none' }}
+                  >
                     <span className={style.selectOptions}>
                       <FaAngleRight
                         className="me-2"
@@ -147,7 +163,11 @@ export default function Footer() {
                       小碳點等級
                     </span>
                   </Link>
-                  <Link className="text-secondary mb-3" href="#">
+                  <Link
+                    className="text-secondary mb-3"
+                    href="#"
+                    style={{ textDecoration: 'none' }}
+                  >
                     <span className={style.selectOptions}>
                       <FaAngleRight
                         className="me-2"
@@ -156,7 +176,11 @@ export default function Footer() {
                       加入DEAL
                     </span>
                   </Link>
-                  <Link className="text-secondary" href="#">
+                  <Link
+                    className="text-secondary"
+                    href="#"
+                    style={{ textDecoration: 'none' }}
+                  >
                     <span className={style.selectOptions}>
                       <FaAngleRight
                         className="me-2"
@@ -178,7 +202,11 @@ export default function Footer() {
                   </strong>
                 </h5>
                 <div className="d-flex flex-column justify-content-start">
-                  <Link className="text-secondary mb-3 ps-2" href="#">
+                  <Link
+                    className="text-secondary mb-3 ps-2"
+                    href="#"
+                    style={{ textDecoration: 'none' }}
+                  >
                     <span className={style.selectOptions}>
                       <FaAngleRight
                         className="me-2"
@@ -187,7 +215,11 @@ export default function Footer() {
                       DEAL介紹
                     </span>
                   </Link>
-                  <Link className="text-secondary mb-3 ps-2" href="#">
+                  <Link
+                    className="text-secondary mb-3 ps-2"
+                    href="#"
+                    style={{ textDecoration: 'none' }}
+                  >
                     <span className={style.selectOptions}>
                       <FaAngleRight
                         className="me-2"
@@ -196,7 +228,11 @@ export default function Footer() {
                       ESG介紹
                     </span>
                   </Link>
-                  <Link className="text-secondary mb-3 ps-2" href="#">
+                  <Link
+                    className="text-secondary mb-3 ps-2"
+                    href="#"
+                    style={{ textDecoration: 'none' }}
+                  >
                     <span className={style.selectOptions}>
                       <FaAngleRight
                         className="me-2"
@@ -205,7 +241,11 @@ export default function Footer() {
                       隱私條款
                     </span>
                   </Link>
-                  <Link className="text-secondary mb-3 ps-2" href="#">
+                  <Link
+                    className="text-secondary mb-3 ps-2"
+                    href="#"
+                    style={{ textDecoration: 'none' }}
+                  >
                     <span className={style.selectOptions}>
                       <FaAngleRight
                         className="me-2"
@@ -214,7 +254,11 @@ export default function Footer() {
                       使用條款
                     </span>
                   </Link>
-                  <Link className="text-secondary mb-3 ps-2" href="#">
+                  <Link
+                    className="text-secondary mb-3 ps-2"
+                    href="#"
+                    style={{ textDecoration: 'none' }}
+                  >
                     <span className={style.selectOptions}>
                       <FaAngleRight
                         className="me-2"
@@ -223,7 +267,11 @@ export default function Footer() {
                       幫助中心
                     </span>
                   </Link>
-                  <Link className="text-secondary ps-2" href="#">
+                  <Link
+                    className="text-secondary ps-2"
+                    href="#"
+                    style={{ textDecoration: 'none' }}
+                  >
                     <span className={style.selectOptions}>
                       <FaAngleRight
                         className="me-2"

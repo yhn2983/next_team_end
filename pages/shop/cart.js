@@ -8,6 +8,7 @@ import goToTopButton from '@/components/common/go-to-top-button'
 // style-----
 import style from './cart.module.css'
 // react bootstrap
+import Form from 'react-bootstrap/Form'
 // react icons-----
 import {
   FaPersonBreastfeeding,
@@ -91,6 +92,7 @@ export default function Cart() {
                     <th>價格</th>
                     <th>數量</th>
                     <th>金額</th>
+                    <th>可獲得小碳點</th>
                     <th>移除</th>
                   </tr>
                 </thead>
@@ -149,6 +151,7 @@ export default function Cart() {
                     <td className="align-middle" style={{ fontSize: '20px' }}>
                       $150
                     </td>
+                    <td style={{ fontSize: '20px' }}>10</td>
                     <td className="align-middle">
                       <button className="btn btn-sm">
                         <FaTrashCan
@@ -162,47 +165,41 @@ export default function Cart() {
               </table>
             </div>
             <div className="col-lg-4">
-              <form className="mt-2" action="">
-                <div className="input-group">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="輸入折扣碼"
-                  />
-                  <div className="input-group-append">
-                    <button
-                      className="btn"
-                      style={{ backgroundColor: '#e96d3f', color: 'white' }}
-                    >
-                      使用折扣碼
-                    </button>
-                  </div>
-                </div>
-              </form>
-              <div className="d-flex mt-5 mb-3">
+              <div className="d-flex mb-3">
                 <h3 className="mb-2" style={{ color: '#8e2626' }}>
                   <strong>購物車詳情</strong>
                 </h3>
                 <span className={style.titleArea}></span>
               </div>
               <div className="bg-light p-30 mb-5">
-                <div className="border-bottom pb-2">
-                  <div className="d-flex justify-content-between mb-3">
-                    <h6>Subtotal</h6>
-                    <h6>$150</h6>
+                <div className="border-bottom px-4 pt-4 pb-3">
+                  <div className="d-flex justify-content-between mb-2">
+                    <h5 className="font-weight-medium">運費</h5>
+                    <h5 className="font-weight-medium">$10</h5>
                   </div>
-                  <div className="d-flex justify-content-between">
-                    <h6 className="font-weight-medium">Shipping</h6>
-                    <h6 className="font-weight-medium">$10</h6>
+                  <div className="d-flex justify-content-between mb-2">
+                    <h5 className="font-weight-medium">總金額</h5>
+                    <h5 className="font-weight-medium">$10</h5>
                   </div>
                 </div>
-                <div className="pt-2">
+                <div className="p-4">
                   <div className="d-flex justify-content-between mt-2">
-                    <h5>Total</h5>
-                    <h5>$160</h5>
+                    <h5>
+                      <strong>總付款金額</strong>
+                    </h5>
+                    <h5>
+                      <strong>$160</strong>
+                    </h5>
                   </div>
-                  <button className="btn btn-block btn-primary font-weight-bold my-3 py-3">
-                    Proceed To Checkout
+                  <button
+                    className="btn btn-block font-weight-bold my-3 py-3 d-flex"
+                    style={{
+                      backgroundColor: '#e96d3f',
+                      color: 'white',
+                      marginLeft: '561px',
+                    }}
+                  >
+                    <strong style={{ fontSize: '20px' }}>去結帳</strong>
                   </button>
                 </div>
               </div>
