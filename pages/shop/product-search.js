@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -7,7 +8,6 @@ import 'react-datepicker/dist/react-datepicker.css'
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
 import style from './prodSearch.module.css'
-import { useState } from 'react'
 // react bootstrap
 // react icons-----
 import { BsFillCartFill } from 'react-icons/bs'
@@ -20,7 +20,7 @@ import {
 } from 'react-icons/fa'
 // hook------
 
-export default function Product() {
+export default function Shop() {
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
   return (
@@ -38,7 +38,7 @@ export default function Product() {
                   <div className="col-12">
                     <nav className="breadcrumb mb-30">
                       <Link
-                        className="breadcrumb-item "
+                        className="breadcrumb-item"
                         style={{ textDecoration: 'none' }}
                         href="/"
                       >

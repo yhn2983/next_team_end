@@ -117,19 +117,4 @@
   background-color: #8e2626;
 }
 
-.moreBtn{
-  background-color: #e96d3f;
-  color: white;
-  box-shadow: 0 0 10px gray;
-  text-decoration: none;
-  border: none;
-  border-radius: 5px;
-  padding: 5px 10px;
-  font-size: 25px;
-}
-
-.moreBtn:hover{
-  background-color: #8e2626;
-}
-
 

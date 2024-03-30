@@ -424,7 +424,7 @@ export default function Navbar({ pageName = '' }) {
                     </strong>
                   </Link>
                   <Link
-                    href="#"
+                    href="/shop/random-search"
                     className={`nav-item nav-link me-5 ${
                       pageName === 'randomSearch' ? 'active' : ''
                     }`}
@@ -469,7 +469,7 @@ export default function Navbar({ pageName = '' }) {
                       </span>
                     </Link>
                     <Link
-                      href="/cs-0308/checkout/cart"
+                      href="/shop/cart"
                       className={cartstyle['button']}
                       style={{ marginLeft: '10px' }}
                     >
