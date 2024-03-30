@@ -87,3 +87,30 @@
   color: #e96d3f;
   background-color: #8e2626;
 }
+
+.btnHover:hover{
+  box-shadow: 0 0 15px rgb(122, 120, 120);
+}
+
+.barterLeft,
+.barterRight {
+  height: 90%;
+}
+
+.prod {
+  width: 90%;
+}
+
+.prodPic {
+  width: 100%;
+  height: 80%;
+}
+
+.barterBtn {
+  background-color: #e96d3f !important;
+  color: white !important;
+}
+
+.barterBtn:hover{
+  background-color: #8e2626;
+}

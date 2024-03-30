@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -8,6 +8,7 @@ import DefaultLayout from '@/components/common/default-layout'
 import style from './detail.module.css'
 // react bootstrap
 import Carousel from 'react-bootstrap/Carousel'
+import Modal from 'react-bootstrap/Modal'
 // react icons-----
 import { BsFillCartFill } from 'react-icons/bs'
 import { AiOutlineHeart } from 'react-icons/ai'
@@ -17,6 +18,8 @@ import { TbArrowsExchange2 } from 'react-icons/tb'
 // hook------
 
 export default function Detail() {
+  const [show, setShow] = useState(false)
+
   return (
     <>
       <DefaultLayout>
@@ -50,7 +53,10 @@ export default function Detail() {
         {/* Breadcrumb End */}
 
         {/* Shop Detail Start */}
-        <div className="container-fluid pb-5 mt-4">
+        <div
+          className="container-fluid pb-5 mt-4"
+          style={{ padding: '0 100px' }}
+        >
           <div className="row px-xl-5">
             <div className="col-lg-5 mb-30">
               <Carousel fade>
@@ -66,7 +72,10 @@ export default function Detail() {
               </Carousel>
             </div>
             <div className="col-lg-7 h-auto">
-              <div className="h-100 bg-light p-5">
+              <div
+                className="h-100 bg-light py-5"
+                style={{ padding: '0 100px' }}
+              >
                 <h2 style={{ fontWeight: '900' }}>
                   <strong style={{ color: '#8e2626' }}>商品名稱</strong>
                 </h2>
@@ -137,7 +146,7 @@ export default function Detail() {
                   >
                     <div className="input-group-btn">
                       <button
-                        className="btn btn-minus"
+                        className={`btn btn-minus ${style.btnHover}`}
                         style={{ backgroundColor: '#8e2626' }}
                       >
                         <FaMinus style={{ color: 'white' }} />
@@ -150,7 +159,7 @@ export default function Detail() {
                     />
                     <div className="input-group-btn">
                       <button
-                        className="btn btn-plus"
+                        className={`btn btn-plus ${style.btnHover}`}
                         style={{ backgroundColor: '#8e2626' }}
                       >
                         <FaPlus style={{ color: 'white' }} />
@@ -158,7 +167,7 @@ export default function Detail() {
                     </div>
                   </div>
                   <button
-                    className="btn px-3 ms-4"
+                    className={`btn px-3 ms-4 ${style.btnHover}`}
                     style={{ backgroundColor: '#e96d3f' }}
                   >
                     <BsFillCartFill
@@ -170,14 +179,15 @@ export default function Detail() {
                 </div>
                 <div className="d-flex">
                   <button
-                    className="btn px-3 ms-2"
+                    className={`btn px-3 ms-2 ${style.btnHover}`}
                     style={{ backgroundColor: '#195a98', color: 'white' }}
                   >
                     <ImHammer2 style={{ fontSize: '20px' }} /> 議價
                   </button>
                   <button
-                    className="btn px-3 ms-4"
+                    className={`btn px-3 ms-4 ${style.btnHover}`}
                     style={{ backgroundColor: '#0f5808', color: 'white' }}
+                    onClick={() => setShow(true)}
                   >
                     <TbArrowsExchange2 style={{ fontSize: '20px' }} /> 以物易物
                   </button>
@@ -221,7 +231,10 @@ export default function Detail() {
         {/* Shop Detail End */}
         <hr className="mx-5" />
         {/* Products Start */}
-        <div className="container-fluid py-5 ms-2">
+        <div
+          className="container-fluid py-5"
+          style={{ padding: '0 80px 0 130px' }}
+        >
           <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4">
             <span className="pr-3" style={{ color: '#8e2626' }}>
               <strong>您可能也有興趣...</strong>
@@ -455,6 +468,172 @@ export default function Detail() {
           </div>
         </div>
         {/* Products End */}
+        {/* Barter Modal start */}
+        <Modal
+          size="xl"
+          show={show}
+          onHide={() => setShow(false)}
+          dialogClassName="modal-90w"
+          aria-labelledby="example-custom-modal-styling-title"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title
+              id="example-custom-modal-styling-title"
+              className="px-3"
+              style={{ color: '#8e2626' }}
+            >
+              <strong style={{ fontSize: '30px' }}>提出以物易物申請</strong>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="row">
+              <div className="col-6">
+                <div className="barterTitleLeft">
+                  <h5 className="ms-3">
+                    <strong>member1的商品</strong>
+                  </h5>
+                </div>
+                <div
+                  className={`border border-2 border-secondary rounded overflow-auto ${style.barterLeft}`}
+                >
+                  <div className="row mt-2 px-4">
+                    <div className="col-md-4 col-sm-12">
+                      <div
+                        className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
+                      >
+                        <div className="barterProdPic d-flex justify-content-center">
+                          <Image
+                            className={style.prodPic}
+                            src="/beauty.png"
+                            alt=""
+                            width={50}
+                            height={50}
+                          />
+                        </div>
+                        <div className="boxName d-flex justify-content-center">
+                          <div className="form-check">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              value=""
+                              id="flexCheckDefault"
+                            />
+                          </div>
+                          <div className="text-truncate">
+                            <strong>產品名稱</strong>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-md-4 col-sm-12">
+                      <div
+                        className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
+                      >
+                        <div className="barterProdPic d-flex justify-content-center">
+                          <Image
+                            className={style.prodPic}
+                            src="/beauty.png"
+                            alt=""
+                            width={50}
+                            height={50}
+                          />
+                        </div>
+                        <div className="boxName d-flex justify-content-center">
+                          <div className="form-check">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              value=""
+                              id="flexCheckDefault"
+                            />
+                          </div>
+                          <div className="text-truncate">
+                            <strong>產品名稱</strong>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-6">
+                <div className="barterTitleRight">
+                  <h5 className="ms-3">
+                    <strong>您的商品</strong>
+                  </h5>
+                </div>
+                <div
+                  className={`border border-2 border-secondary rounded overflow-auto ${style.barterRight}`}
+                >
+                  <div className="row mt-2 px-4">
+                    <div className="col-md-4 col-sm-12">
+                      <div
+                        className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
+                      >
+                        <div className="barterProdPic d-flex justify-content-center">
+                          <Image
+                            className={style.prodPic}
+                            src="/beauty.png"
+                            alt=""
+                            width={50}
+                            height={50}
+                          />
+                        </div>
+                        <div className="boxName d-flex justify-content-center">
+                          <div className="form-check">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              value=""
+                              id="flexCheckDefault"
+                            />
+                          </div>
+                          <div className="text-truncate">
+                            <strong>產品名稱</strong>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-md-4 col-sm-12">
+                      <div
+                        className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
+                      >
+                        <div className="barterProdPic d-flex justify-content-center">
+                          <Image
+                            className={style.prodPic}
+                            src="/beauty.png"
+                            alt=""
+                            width={50}
+                            height={50}
+                          />
+                        </div>
+                        <div className="boxName d-flex justify-content-center">
+                          <div className="form-check">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              value=""
+                              id="flexCheckDefault"
+                            />
+                          </div>
+                          <div className="text-truncate">
+                            <strong>產品名稱</strong>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <button type="button" className={`btn ${style.barterBtn}`}>
+              送出申請
+            </button>
+          </Modal.Footer>
+        </Modal>
+        {/* Barter Modal end */}
       </DefaultLayout>
     </>
   )
