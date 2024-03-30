@@ -11,8 +11,9 @@ import {
   FaFacebookSquare,
   FaInstagramSquare,
   FaAngleRight,
+  FaUserEdit,
 } from 'react-icons/fa'
-import { FaSquareXTwitter, FaLinkedin } from 'react-icons/fa6'
+import { FaSquareXTwitter, FaLinkedin, FaHandPointRight } from 'react-icons/fa6'
 import { IoCloseCircle } from 'react-icons/io5'
 // hook------
 
@@ -165,7 +166,7 @@ export default function Footer() {
                   </Link>
                   <Link
                     className="text-secondary mb-3"
-                    href="/help-center/joinDeal"
+                    href="/help-center/join-deal"
                     style={{ textDecoration: 'none' }}
                   >
                     <span className={style.selectOptions}>
@@ -285,36 +286,36 @@ export default function Footer() {
               <div className="col-md-4 mb-5">
                 <h5 className="text-secondary text-uppercase mb-4">
                   <strong>
-                    <i className="fa-solid fa-hands-asl-interpreting"></i>
+                    <FaUserEdit className={`mb-2 ${style.footerContent}`} />
+                    &nbsp;
                     <span className={style.footerContent}>成為DEAL會員</span>
                   </strong>
                 </h5>
                 <span className={style.option}>
                   還沒成為DEAL會員嗎？快來註冊！
                 </span>
-                <form action="" className="mt-2">
-                  <div className="input-group">
-                    <input
-                      type="text"
-                      className="form-control rounded"
-                      placeholder="輸入您的email開始註冊"
-                      name="email"
-                    />
-                    <div className="input-group-append">
-                      <button
-                        className="btn btn-primary rounded"
-                        style={{
-                          backgroundColor: '#e96d3f',
-                          border: 'none',
-                          height: '43px',
-                        }}
-                      >
-                        <span>註冊</span>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-                <h6 className="text-secondary text-uppercase mt-4 mb-3">
+                <div className="mt-2">
+                  <FaHandPointRight
+                    className={style.point}
+                    style={{
+                      color: 'white',
+                      fontSize: '25px',
+                      marginRight: '20px',
+                    }}
+                  />
+                  <button
+                    className={`btn rounded ${style.registerBtn}`}
+                    style={{
+                      backgroundColor: '#e96d3f',
+                      border: 'none',
+                      height: '43px',
+                      color: 'white',
+                    }}
+                  >
+                    <span style={{ fontSize: '20px' }}>註冊</span>
+                  </button>
+                </div>
+                <h6 className="text-secondary text-uppercase mt-5 mb-3">
                   <span
                     style={{
                       color: 'white',

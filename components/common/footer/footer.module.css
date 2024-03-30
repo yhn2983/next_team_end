@@ -71,6 +71,35 @@
   left: 170px;
 }
 
+.registerBtn:hover{
+  box-shadow: 0 0 10px gray;
+}
+
+.point {
+  -webkit-animation: pointMove 0.5s infinite alternate;
+  animation: pointMove 0.5s infinite alternate;
+}
+
+@-webkit-keyframes pointMove {
+0% {
+  transform: translateX(-3px);
+}
+
+100% {
+  transform: translateX(3px);
+}
+}
+
+@keyframes pointMove {
+0% {
+  transform: translateX(-3px);
+}
+
+100% {
+  transform: translateX(3px);
+}
+}
+
 
 
 
