@@ -267,7 +267,7 @@ export default function Navbar({ pageName = '' }) {
           style={{ height: '160px' }}
         >
           <div className="col-2">
-            <Link href="" className="text-decoration-none">
+            <Link href="/" className="text-decoration-none">
               <Image
                 className={`mt-2 ${style.logo}`}
                 src="/logo9.png"
@@ -342,7 +342,7 @@ export default function Navbar({ pageName = '' }) {
                     前往這裡&nbsp;
                     <FaHandPointRight style={{ color: '#8e2626' }} />
                     &nbsp;
-                    <Link href="/shop/shopSearch">
+                    <Link href="/shop">
                       <button
                         type="button"
                         className={style.searchBtn}
@@ -363,7 +363,7 @@ export default function Navbar({ pageName = '' }) {
                     試試這個&nbsp;
                     <FaHandPointRight style={{ color: '#8e2626' }} />
                     &nbsp;
-                    <Link href="/shop/randomSearch">
+                    <Link href="/shop/random-search">
                       <button
                         type="button"
                         className={style.searchBtn}
@@ -497,7 +497,7 @@ export default function Navbar({ pageName = '' }) {
                 </div>
                 <div className="">
                   <div className="d-flex align-items-center">
-                    <Link href="" className="btn px-0">
+                    <Link href="/shop/like" className="btn px-0">
                       <FaHeart
                         className="mb-1"
                         style={{ color: 'white', fontSize: '20px' }}

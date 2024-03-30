@@ -372,7 +372,11 @@ export default function Footer() {
                   alt=""
                   width={200}
                   height={200}
-                  style={{ width: '60px', height: '60px' }}
+                  style={{
+                    width: '60px',
+                    height: '60px',
+                    boxShadow: '0 0 10px white',
+                  }}
                 />
               </div>
               <div className="copyright">
@@ -391,7 +395,10 @@ export default function Footer() {
                   href="/help-center"
                 >
                   <strong>
-                    <span style={{ fontSize: '22px', color: 'white' }}>
+                    <span
+                      style={{ fontSize: '22px', color: 'white' }}
+                      className={style.list}
+                    >
                       幫助中心
                     </span>
                   </strong>
@@ -403,7 +410,10 @@ export default function Footer() {
                   href="/contact-us"
                 >
                   <strong>
-                    <span style={{ fontSize: '22px', color: 'white' }}>
+                    <span
+                      style={{ fontSize: '22px', color: 'white' }}
+                      className={style.list}
+                    >
                       聯絡我們
                     </span>
                   </strong>
@@ -415,7 +425,10 @@ export default function Footer() {
                   href="/help-center/esg"
                 >
                   <strong>
-                    <span style={{ fontSize: '22px', color: 'white' }}>
+                    <span
+                      style={{ fontSize: '22px', color: 'white' }}
+                      className={style.list}
+                    >
                       永續發展
                     </span>
                   </strong>
@@ -427,7 +440,10 @@ export default function Footer() {
                   href="/help-center/join-deal"
                 >
                   <strong>
-                    <span style={{ fontSize: '22px', color: 'white' }}>
+                    <span
+                      style={{ fontSize: '22px', color: 'white' }}
+                      className={style.list}
+                    >
                       公司職缺
                     </span>
                   </strong>
@@ -439,7 +455,10 @@ export default function Footer() {
                   href="/help-center/using-rule"
                 >
                   <strong>
-                    <span style={{ fontSize: '22px', color: 'white' }}>
+                    <span
+                      style={{ fontSize: '22px', color: 'white' }}
+                      className={style.list}
+                    >
                       使用條款
                     </span>
                   </strong>
@@ -451,7 +470,10 @@ export default function Footer() {
                   href="/help-center/privacy-rule"
                 >
                   <strong>
-                    <span style={{ fontSize: '22px', color: 'white' }}>
+                    <span
+                      style={{ fontSize: '22px', color: 'white' }}
+                      className={style.list}
+                    >
                       隱私政策
                     </span>
                   </strong>
