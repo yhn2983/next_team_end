@@ -10,7 +10,7 @@
 
 .card{
   margin: auto;
-  width: 90%;
+  width: 80%;
   height: 450px;
   overflow: hidden;
   transform-style: preserve-3d;
@@ -81,7 +81,7 @@
   position: absolute;
   opacity: 0;
   top: 0px;
-  left: 180px;
+  left: 155px;
   transform: translateY(0);
 }
 
@@ -93,7 +93,7 @@
   position: absolute;
   opacity: 0;
   top: 0px;
-  left: 240px;
+  left: 215px;
   transform: translateY(0);
 }
 
@@ -103,7 +103,7 @@
   position: absolute;
   opacity: 1;
   top: 110px;
-  left: 180px;
+  left: 155px;
   transform: translateY(80%);
   transition: transform 0.3s ease;
 }
@@ -114,7 +114,7 @@
   position: absolute;
   opacity: 1;
   top: 110px;
-  left: 240px;
+  left: 215px;
   transform: translateY(80%);
   transition: transform 0.5s ease;
 }
