@@ -24,7 +24,7 @@ export default function Ad() {
               <div className={`bg-light p-4 ${style.act}`}>
                 <Link
                   className="d-flex justify-content-center"
-                  href=""
+                  href="/activity"
                   style={{ textDecoration: 'none', color: '#8e2626' }}
                 >
                   <h2>

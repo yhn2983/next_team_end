@@ -72,7 +72,7 @@
 }
 
 .registerBtn:hover{
-  box-shadow: 0 0 10px gray;
+  opacity: 0.8;
 }
 
 .point {

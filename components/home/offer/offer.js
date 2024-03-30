@@ -35,8 +35,8 @@ export default function Offer() {
                 <h2 className="text-white">認識DEAL</h2>
                 <h1 className="text-white mb-3">DEAL緣起</h1>
                 <Link
-                  href=""
-                  className="btn"
+                  href="/help-center/deal"
+                  className={`btn ${style.moreBtn}`}
                   style={{
                     backgroundColor: '#8e2626',
                     color: 'white',
@@ -62,7 +62,7 @@ export default function Offer() {
                 <h2 className="text-white text-uppercase">認識ESG</h2>
                 <h1 className="text-white mb-3">致力於三面平衡</h1>
                 <Link
-                  href=""
+                  href="/help-center/esg"
                   className={`btn ${style.moreBtn}`}
                   style={{
                     backgroundColor: '#8e2626',

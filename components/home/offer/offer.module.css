@@ -95,5 +95,9 @@
   z-index: 1;
 }
 
+.moreBtn:hover{
+  background-color: #e96d3f !important;
+}
+
 
 

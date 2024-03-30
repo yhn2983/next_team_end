@@ -66,7 +66,7 @@ export default function CarouselS1({ pageName = '' }) {
                   <p className={style.txt}>
                     <strong>挖掘寶物，也可以愛護地球</strong>
                   </p>
-                  <Link href="">
+                  <Link href="/help-center/deal">
                     <button type="button" className="btn btn-outline-dark">
                       了解更多
                     </button>
@@ -100,7 +100,7 @@ export default function CarouselS1({ pageName = '' }) {
                   <p className={style.txt2}>
                     <strong>女裝折扣 蓄勢待發</strong>
                   </p>
-                  <Link href="">
+                  <Link href="/shop">
                     <button type="button" className="btn btn-outline-dark">
                       了解更多
                     </button>
@@ -132,7 +132,7 @@ export default function CarouselS1({ pageName = '' }) {
                   <p className={style.txt3}>
                     <strong>小碳點大翻倍</strong>
                   </p>
-                  <Link href="">
+                  <Link href="/shop">
                     <button type="button" className="btn btn-outline-dark">
                       了解更多
                     </button>
@@ -167,7 +167,7 @@ export default function CarouselS1({ pageName = '' }) {
                 >
                   <strong>爸爸辛苦了！</strong>
                 </h4>
-                <Link href="" style={{ marginLeft: '95px' }}>
+                <Link href="/shop" style={{ marginLeft: '95px' }}>
                   <button type="button" className={style.moreBtn} href="">
                     <strong>開始購物</strong>
                   </button>
@@ -206,8 +206,7 @@ export default function CarouselS1({ pageName = '' }) {
                 >
                   <strong>企業親子二手市集活動招募中！</strong>
                 </h5>
-
-                <Link href="" style={{ marginLeft: '120px' }}>
+                <Link href="/activity" style={{ marginLeft: '120px' }}>
                   <button type="button" className={style.moreBtn} href="">
                     <strong>報名活動</strong>
                   </button>
