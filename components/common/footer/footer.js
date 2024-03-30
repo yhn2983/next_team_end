@@ -113,7 +113,7 @@ export default function Footer() {
                 <div className="d-flex flex-column justify-content-start">
                   <Link
                     className="mb-3"
-                    href="/shop/product-search"
+                    href="/shop"
                     style={{ textDecoration: 'none' }}
                   >
                     <span className={style.selectOptions}>
@@ -256,7 +256,7 @@ export default function Footer() {
                   </Link>
                   <Link
                     className="text-secondary mb-3 ps-2"
-                    href="#"
+                    href="/help-center"
                     style={{ textDecoration: 'none' }}
                   >
                     <span className={style.selectOptions}>
@@ -277,7 +277,7 @@ export default function Footer() {
                         className="me-2"
                         style={{ fontSize: '15px' }}
                       />
-                      聯繫我們
+                      聯絡我們
                     </span>
                   </Link>
                 </div>
@@ -387,7 +387,7 @@ export default function Footer() {
               <div className="txt">
                 <Link
                   className="text-decoration-none text-secondary me-3"
-                  href="help.html"
+                  href="/help-center"
                 >
                   <strong>
                     <span style={{ fontSize: '22px', color: 'white' }}>

@@ -60,11 +60,11 @@ export default function Navbar({ pageName = '' }) {
         <div className={`row ${style.row}`}>
           <div className="col d-flex justify-content-between">
             <div className="mt-2">
-              <Link className={style.textBody} href="">
-                <strong>認識DEAL</strong>
+              <Link className={style.textBody} href="/help-center">
+                <strong>幫助中心</strong>
               </Link>
               <Link className={style.textBody} href="">
-                <strong>幫助中心</strong>
+                <strong>認識DEAL</strong>
               </Link>
               <Link className={style.textBody} href="">
                 <strong>隱私條款</strong>
@@ -414,7 +414,7 @@ export default function Navbar({ pageName = '' }) {
                     </strong>
                   </Link>
                   <Link
-                    href="/shop/product-search"
+                    href="/shop"
                     className={`nav-item nav-link me-5 ${
                       pageName === 'productSearch' ? 'active' : ''
                     }`}

@@ -221,7 +221,7 @@ export default function Detail() {
         {/* Shop Detail End */}
         <hr className="mx-5" />
         {/* Products Start */}
-        <div className="container-fluid py-5 ms-4">
+        <div className="container-fluid py-5 ms-2">
           <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4">
             <span className="pr-3" style={{ color: '#8e2626' }}>
               <strong>您可能也有興趣...</strong>
