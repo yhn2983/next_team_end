@@ -50,7 +50,7 @@ export default function Cart() {
           </div>
         </div>
         {/* Breadcrumb Start */}
-        <div className={`container-fluid mt-5 ${style.breadcrumbArea}`}>
+        <div className={`container-fluid ${style.breadcrumbArea}`}>
           <div className="row px-xl-5">
             <div className="col-12">
               <nav className="breadcrumb">

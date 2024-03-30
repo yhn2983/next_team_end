@@ -30,7 +30,7 @@ export default function RandomShop() {
           <div className="row">
             <div className="col">
               {/*  Breadcrumb Start */}
-              <div className={`container-fluid mt-3 ${style.breadcrumbArea}`}>
+              <div className={`container-fluid ${style.breadcrumbArea}`}>
                 <div className="row px-xl-5">
                   <div className="col-12">
                     <nav className="breadcrumb mb-30">

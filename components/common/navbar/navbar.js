@@ -235,7 +235,7 @@ export default function Navbar({ pageName = '' }) {
           <div className="col-2">
             <Link href="" className="text-decoration-none">
               <Image
-                className={style.logo}
+                className={`mt-2 ${style.logo}`}
                 src="/logo9.png"
                 alt=""
                 width={500}
@@ -344,12 +344,19 @@ export default function Navbar({ pageName = '' }) {
               )}
             </div>
           </div>
+          {/* Back to Top */}
+          <Link href="#top" className="btn">
+            <FaAnglesUp
+              className={style.backToTop}
+              style={{ fontSize: '40px' }}
+            />
+          </Link>
         </div>
       </div>
       {/* Topbar End */}
       {/* Navbar Start */}
       <div
-        className="container-fluid mb-30 navbarArea"
+        className="container-fluid"
         style={{ heigth: '300px', backgroundColor: '#8e2626' }}
       >
         <div className="row px-xl-5">
@@ -508,10 +515,6 @@ export default function Navbar({ pageName = '' }) {
         </Modal.Footer>
       </Modal>
       {/* Login Modal end */}
-      {/* Back to Top */}
-      <Link href="#top" className="btn">
-        <FaAnglesUp className={style.backToTop} style={{ fontSize: '40px' }} />
-      </Link>
     </>
   )
 }

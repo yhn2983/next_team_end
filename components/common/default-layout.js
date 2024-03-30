@@ -5,7 +5,7 @@ export default function DefaultLayout({ children, pageName = '' }) {
   return (
     <>
       <Navbar pageName={pageName} />
-      <main className="container-fluid">{children}</main>
+      <main className="">{children}</main>
       <Footer />
     </>
   )

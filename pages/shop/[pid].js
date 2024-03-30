@@ -24,7 +24,7 @@ export default function Detail() {
           <title>商品詳細內容 | DEAL-2ND HAND SHOP</title>
         </Head>
         {/* Breadcrumb Start */}
-        <div className={`container-fluid mt-3 ${style.breadcrumbArea}`}>
+        <div className={`container-fluid ${style.breadcrumbArea}`}>
           <div className="row px-xl-5">
             <div className="col-12">
               <nav className="breadcrumb mb-30" style={{ fontSize: '20px' }}>
