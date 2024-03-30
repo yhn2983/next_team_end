@@ -12,6 +12,7 @@ export default function Profile() {
     email: '',
     mobile: '',
     birthday: '',
+    photo: 'default.png',
     address: '',
     carbon_points_got: 0,
     carbon_points_have: 0,
@@ -23,43 +24,24 @@ export default function Profile() {
         method: 'GET',
         credentials: 'include',
       })
-      const data = await response.json()
+      const result = await response.json()
 
-      if (data.status === 'success') {
-        const {
-          name = '',
-          nickname = '',
-          email = '',
-          mobile = '',
-          birthday = '',
-          address = '',
-          carbon_points_got = 0,
-          carbon_points_have = 0,
-          level_desc = '等待任務中',
-        } = data.data.user
-
+      if (result.status === 'success') {
         // 處理手機號碼補0
-        const newMobile = '0' + mobile
+        result.data.user.mobile = '0' + result.data.user.mobile
 
         // 處理生日格式
-        const formattedBirthday = new Date(birthday).toISOString().split('T')[0]
+        result.data.user.birthday = new Date(result.data.user.birthday)
+          .toISOString()
+          .split('T')[0]
 
-        setUser({
-          name,
-          nickname,
-          email,
-          mobile: newMobile,
-          birthday: formattedBirthday,
-          address,
-          carbon_points_got,
-          carbon_points_have,
-          level_desc,
-        })
+        setUser(result.data.user)
       }
     }
 
     fetchUserData()
   }, [])
+
   return (
     <>
       <section className={`${styles.profilesStyle}`}>
@@ -69,11 +51,11 @@ export default function Profile() {
               <div className="card mb-4">
                 <div className="card-body text-center">
                   <Image
-                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                    src={user.photo ? `/${user.photo}` : '/default.png'}
                     alt="avatar"
-                    width={165}
+                    width={175}
                     height={185}
-                    className="rounded-circle"
+                    className="rounded-circle mt-2 secondary"
                   />
                   <h5 className="my-4">{user.nickname}</h5>
                   <button type="button" className={`mb-4 ${styles.photobtn}`}>
@@ -98,10 +80,7 @@ export default function Profile() {
                     <button type="button" className="btn">
                       追蹤
                     </button>
-                    <button
-                      type="button"
-                      className="btn btn-outline-primary ms-1"
-                    >
+                    <button type="button" className="btn ms-1">
                       傳訊息
                     </button>
                   </div>
