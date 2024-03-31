@@ -7,6 +7,7 @@ import { CHECK_AUTH_ROUTE } from '@/components/config'
 import { UPLOAD_AVATAR_ONE_POST } from '@/components/config'
 
 export default function Profile() {
+  // 使用 useState 建立 user 和 file 的狀態
   const [user, setUser] = useState({
     name: '',
     nickname: '',
@@ -19,8 +20,11 @@ export default function Profile() {
     carbon_points_have: 0,
   })
   const [file, setFile] = useState(null)
+
+  // 使用 useRef 建立一個參照到 input 元件的 ref
   const inputRef = useRef(null)
 
+  // 定義一個異步函數來從後端獲取使用者資料
   const fetchUserData = async () => {
     const response = await fetch(CHECK_AUTH_ROUTE, {
       method: 'GET',
@@ -34,23 +38,27 @@ export default function Profile() {
         .toISOString()
         .split('T')[0]
 
+      // 更新 user 和 file 的狀態
       setUser(result.data.user)
       setFile(result.data.user.photo)
     }
   }
 
+  // 使用 useEffect 在組件掛載時獲取使用者資料
   useEffect(() => {
     fetchUserData()
   }, [])
 
+  // 定義一個函數來模擬點擊 input 元件
   const handleClick = () => {
     inputRef.current.click()
   }
-
+  // 定義一個函數來處理檔案變更事件
   const handleFileChange = (e) => {
     handleUpload(e.target.files[0])
   }
 
+  // 定義一個異步函數來處理檔案上傳
   const handleUpload = async (file) => {
     try {
       const formData = new FormData()
@@ -64,6 +72,7 @@ export default function Profile() {
 
       const result = await response.json()
 
+      // 如果上傳成功，則重新獲取使用者資料
       if (result.status) {
         fetchUserData()
       }
