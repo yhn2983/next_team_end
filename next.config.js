@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   images: {
-    domains: ['via.placeholder.com', 'localhost'],
+    domains: ['via.placeholder.com', 'localhost', 'mdbcdn.b-cdn.net'],
   },
   // comment for render twice issue
   // avoid cors with proxy
@@ -17,9 +17,3 @@ const nextConfig = {
 }
 
 module.exports = nextConfig
-
-module.exports = {
-  images: {
-    domains: ['mdbcdn.b-cdn.net'],
-  },
-}

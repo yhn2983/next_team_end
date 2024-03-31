@@ -2,8 +2,9 @@ import React from 'react'
 import Image from 'next/image'
 import styles from '@/styles/lee-form.module.scss'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { CHECK_AUTH_ROUTE } from '@/components/config'
+import { UPLOAD_AVATAR_ONE_POST } from '@/components/config'
 
 export default function Profile() {
   const [user, setUser] = useState({
@@ -17,30 +18,59 @@ export default function Profile() {
     carbon_points_got: 0,
     carbon_points_have: 0,
   })
+  const [file, setFile] = useState(null)
+  const inputRef = useRef(null)
+
+  const fetchUserData = async () => {
+    const response = await fetch(CHECK_AUTH_ROUTE, {
+      method: 'GET',
+      credentials: 'include',
+    })
+    const result = await response.json()
+
+    if (result.status === 'success') {
+      result.data.user.mobile = '0' + result.data.user.mobile
+      result.data.user.birthday = new Date(result.data.user.birthday)
+        .toISOString()
+        .split('T')[0]
+
+      setUser(result.data.user)
+      setFile(result.data.user.photo)
+    }
+  }
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const response = await fetch(CHECK_AUTH_ROUTE, {
-        method: 'GET',
-        credentials: 'include',
-      })
-      const result = await response.json()
-
-      if (result.status === 'success') {
-        // 處理手機號碼補0
-        result.data.user.mobile = '0' + result.data.user.mobile
-
-        // 處理生日格式
-        result.data.user.birthday = new Date(result.data.user.birthday)
-          .toISOString()
-          .split('T')[0]
-
-        setUser(result.data.user)
-      }
-    }
-
     fetchUserData()
   }, [])
+
+  const handleClick = () => {
+    inputRef.current.click()
+  }
+
+  const handleFileChange = (e) => {
+    handleUpload(e.target.files[0])
+  }
+
+  const handleUpload = async (file) => {
+    try {
+      const formData = new FormData()
+      formData.append('avatar', file)
+
+      const response = await fetch(UPLOAD_AVATAR_ONE_POST, {
+        method: 'POST',
+        body: formData,
+        credentials: 'include',
+      })
+
+      const result = await response.json()
+
+      if (result.status) {
+        fetchUserData()
+      }
+    } catch (err) {
+      console.error('Upload failed:', err)
+    }
+  }
 
   return (
     <>
@@ -51,14 +81,28 @@ export default function Profile() {
               <div className="card mb-4">
                 <div className="card-body text-center">
                   <Image
-                    src={user.photo ? `/${user.photo}` : '/default.png'}
+                    src={
+                      file
+                        ? `http://localhost:3001/avatar/${file}`
+                        : '/default.png'
+                    }
                     alt="avatar"
                     width={175}
                     height={185}
                     className="rounded-circle mt-2 secondary"
                   />
                   <h5 className="my-4">{user.nickname}</h5>
-                  <button type="button" className={`mb-4 ${styles.photobtn}`}>
+                  <input
+                    type="file"
+                    ref={inputRef}
+                    onChange={handleFileChange}
+                    style={{ display: 'none' }} // 隱藏 input 元件
+                  />
+                  <button
+                    type="button"
+                    className={`mb-4 ${styles.photobtn}`}
+                    onClick={handleClick}
+                  >
                     上傳大頭貼照
                   </button>
                   {/* <div className="content text-center m-4">
