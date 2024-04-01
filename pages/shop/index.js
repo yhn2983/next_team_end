@@ -103,7 +103,6 @@ export default function Shop() {
                 <h3 className="mb-2" style={{ color: '#8e2626' }}>
                   <strong>商品分類篩選</strong>
                 </h3>
-                <span className={style.titleArea}></span>
               </div>
               <div className="mb-4 bg-light px-3 py-3">
                 <select
@@ -124,7 +123,6 @@ export default function Shop() {
                 <h3 className="mb-2" style={{ color: '#8e2626' }}>
                   <strong>商品子分類篩選</strong>
                 </h3>
-                <span className={style.titleAreaB}></span>
               </div>
               <div className="mb-4 bg-light px-3 py-3">
                 <select
@@ -145,7 +143,6 @@ export default function Shop() {
                 <h3 className="mb-2" style={{ color: '#8e2626' }}>
                   <strong>價格篩選</strong>
                 </h3>
-                <span className={style.titleAreaC}></span>
               </div>
               <div className="bg-light p-4 mb-4">
                 <form>
@@ -289,7 +286,6 @@ export default function Shop() {
                 <h3 className="mb-2" style={{ color: '#8e2626' }}>
                   <strong>商品狀態篩選</strong>
                 </h3>
-                <span className={style.titleAreaD}></span>
               </div>
               <div className="bg-light p-4 mb-4">
                 <form>
@@ -358,7 +354,6 @@ export default function Shop() {
                 <h3 className="mb-2" style={{ color: '#8e2626' }}>
                   <strong>上架時間篩選</strong>
                 </h3>
-                <span className={style.titleAreaD}></span>
               </div>
               <div className="bg-light p-4 mb-30">
                 <form>
@@ -527,7 +522,10 @@ export default function Shop() {
               <div className="row pb-3 mt-5">
                 {data.rows.map((v) => {
                   return (
-                    <div key={v.id} className="col-lg-4 col-md-6 col-sm-6 pb-1">
+                    <div
+                      key={v.id}
+                      className="col-lg-4 col-md-12 col-sm-12 pb-1"
+                    >
                       <div
                         className={`product-item bg-light ${style.productItem}`}
                         style={{ marginBottom: '60px' }}

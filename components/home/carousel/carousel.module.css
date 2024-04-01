@@ -16,7 +16,7 @@
   font-style: normal;
   color: #eaea1e;
   text-shadow: 0 0 0.2em yellowgreen, 0 0 0.2em yellowgreen,0 0 0.2em yellowgreen;
-  font-size: 75px;
+  font-size: 74px;
 }
 
 .title2 {
@@ -24,7 +24,7 @@
   font-weight: 400;
   font-style: normal;
   text-shadow: rgb(31, 31, 31) 0.1em 0.1em 0.2em;
-  font-size: 120px;
+  font-size: 110px;
 }
 
 .title3{
@@ -53,8 +53,8 @@
 
 .bg1, .bg2 {
   position: relative;
-  width: 600px;
-  height: 335px;
+  width: 530px;
+  height: 293px;
   overflow: hidden;
 }
 
@@ -80,14 +80,14 @@
 
 .content{
   position: absolute;
-  top: 100px;
-  left: 50px;
+  top: 80px;
+  left: 25px;
 }
 
 .content2 {
   position: absolute;
-  top: 120px;
-  right: 30px;
+  top: 110px;
+  right: 20px;
 }
 
 .shadow{

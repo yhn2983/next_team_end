@@ -27,15 +27,15 @@ export default function CarouselS1({ pageName = '' }) {
   return (
     <>
       {/*  Carousel Start */}
-      <div
-        className="container-fluid mt-4 mb-3 carouselArea"
-        style={{ padding: '0 80px' }}
-      >
+      <div className="container-fluid mt-5 mb-3" style={{ padding: '0 80px' }}>
         <div className="row px-xl-5">
-          <div className="col-lg-8">
+          <div className="col-lg-8 col-md-12 mb-3">
             <Carousel
               fade
-              style={{ boxShadow: '0 0 15px #92918f94', borderRadius: '5px' }}
+              style={{
+                boxShadow: '0 0 15px #92918f94',
+                borderRadius: '5px',
+              }}
             >
               <Carousel.Item
                 style={{
@@ -51,13 +51,13 @@ export default function CarouselS1({ pageName = '' }) {
                     src="/ad1.png"
                     alt=""
                     width={1500}
-                    height={680}
+                    height={600}
                     className={style.adImg}
                   />
                 </div>
                 <Carousel.Caption
                   style={{
-                    marginBottom: '130px',
+                    marginBottom: '110px',
                   }}
                 >
                   <h1 className={style.title}>
@@ -87,13 +87,13 @@ export default function CarouselS1({ pageName = '' }) {
                     src="/woman2.jpg"
                     alt=""
                     width={1500}
-                    height={680}
+                    height={600}
                     className={style.adImg}
                   />
                 </div>
                 <Carousel.Caption
                   style={{
-                    marginBottom: '150px',
+                    marginBottom: '110px',
                   }}
                 >
                   <h1 className={style.title2}>WOMAN'S DAY</h1>
@@ -121,12 +121,12 @@ export default function CarouselS1({ pageName = '' }) {
                     src="/globalday.jpg"
                     alt=""
                     width={1500}
-                    height={680}
+                    height={600}
                     className={style.adImg}
                   />
                 </div>
                 <Carousel.Caption
-                  style={{ marginBottom: '100px', marginLeft: '400px' }}
+                  style={{ marginBottom: '80px', marginLeft: '400px' }}
                 >
                   <h1 className={style.title3}>世界地球日</h1>
                   <p className={style.txt3}>
@@ -141,18 +141,18 @@ export default function CarouselS1({ pageName = '' }) {
               </Carousel.Item>
             </Carousel>
           </div>
-          <div className="col-lg-4" style={{ paddingLeft: '30px' }}>
+          <div className="col-lg-4 col-md-12" style={{ padding: '0 10px' }}>
             <div
               className={`mb-2 rounded ${style.bg1}`}
-              style={{ boxShadow: '0 0 20px #92918f94' }}
+              style={{ boxShadow: '0 0 20px #92918f94', marginRight: '30px' }}
               onMouseEnter={() => handleMouseEnter('smallOne')}
               onMouseLeave={() => handleMouseLeave('smallOne')}
             >
               <Image
                 src="/father.png"
                 alt=""
-                width={600}
-                height={335}
+                width={530}
+                height={293}
                 className={isHoveredSmallOne ? style.hover : style.nohover}
               />
               <div className={style.content}>
@@ -183,8 +183,8 @@ export default function CarouselS1({ pageName = '' }) {
               <Image
                 src="/cool.png"
                 alt=""
-                width={600}
-                height={335}
+                width={530}
+                height={293}
                 className={isHoveredSmallTwo ? style.hover : style.nohover}
               />
               <div className={style.content2}>

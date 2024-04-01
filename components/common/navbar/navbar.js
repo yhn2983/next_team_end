@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 // style-----
@@ -53,10 +53,18 @@ export default function Navbar({ pageName = '' }) {
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
+  // ---BackToTop---
+  const topRef = useRef(null)
+  const scrollToTop = () => {
+    if (topRef.current) {
+      topRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
     <>
       {/* topbar start */}
-      <div id="top" className="container-fluid">
+      <div id="" className="container-fluid">
         <div className={`row ${style.row}`}>
           <div className="col d-flex justify-content-between">
             <div className="mt-2">
@@ -239,28 +247,6 @@ export default function Navbar({ pageName = '' }) {
               </Dropdown>
             </div>
           </div>
-          <div className={style.colB}>
-            <div className="d-inline-flex align-items-center d-block d-lg-none">
-              <Link href="" className="btn px-0 ml-2">
-                <i className="fas fa-heart text-dark"></i>
-                <span
-                  className="badge text-dark border border-dark rounded-circle"
-                  style={{ paddingBottom: '2px' }}
-                >
-                  0
-                </span>
-              </Link>
-              <Link href="" className="btn px-0 ml-2">
-                <i className="fas fa-shopping-cart text-dark"></i>
-                <span
-                  className="badge text-dark border border-dark rounded-circle"
-                  style={{ paddingBottom: '2px' }}
-                >
-                  0
-                </span>
-              </Link>
-            </div>
-          </div>
         </div>
         <div
           className="row align-items-center px-xl-4 d-none d-lg-flex"
@@ -379,7 +365,7 @@ export default function Navbar({ pageName = '' }) {
             </div>
           </div>
           {/* Back to Top */}
-          <Link href="#top" className="btn">
+          <Link href="" className="btn" onClick={scrollToTop}>
             <FaAnglesUp
               className={style.backToTop}
               style={{ fontSize: '40px' }}
@@ -441,7 +427,10 @@ export default function Navbar({ pageName = '' }) {
               <div
                 className="collapse navbar-collapse justify-content-between"
                 id="navbarCollapse"
-                style={{ paddingTop: '10px', marginLeft: '50px' }}
+                style={{
+                  paddingTop: '10px',
+                  marginLeft: '50px',
+                }}
               >
                 <div className="navbar-nav mr-auto py-0">
                   <Link
@@ -495,41 +484,40 @@ export default function Navbar({ pageName = '' }) {
                     </strong>
                   </Link>
                 </div>
-                <div className="">
-                  <div className="d-flex align-items-center">
-                    <Link href="/shop/like" className="btn px-0">
-                      <FaHeart
-                        className="mb-1"
-                        style={{ color: 'white', fontSize: '20px' }}
-                      />
-                      <span
-                        className="badge text-light border border-light rounded-circle ms-1"
-                        style={{ paddingBottom: '2px', fontSize: '15px' }}
-                      >
-                        0
-                      </span>
-                    </Link>
-                    <Link
-                      href="/shop/cart"
-                      className={cartstyle['button']}
-                      style={{ marginLeft: '10px' }}
+                <div className="d-flex align-items-center ms-5">
+                  <Link href="/shop/like" className="btn px-0">
+                    <FaHeart
+                      className="mb-1"
+                      style={{ color: 'white', fontSize: '20px' }}
+                    />
+                    <span
+                      className="badge text-light border border-light rounded-circle ms-1"
+                      style={{ paddingBottom: '2px', fontSize: '15px' }}
                     >
-                      <FaShoppingCart
-                        className="mb-1"
-                        style={{ fontSize: '20px' }}
-                      />
-                      <span
-                        className="badge text-light border border-light rounded-circle ms-1"
-                        style={{ paddingBottom: '2px', fontSize: '15px' }}
-                      >
-                        0
-                      </span>
-                    </Link>
-                  </div>
+                      0
+                    </span>
+                  </Link>
+                  <Link
+                    href="/shop/cart"
+                    className={cartstyle['button']}
+                    style={{ marginLeft: '10px' }}
+                  >
+                    <FaShoppingCart
+                      className="mb-1"
+                      style={{ fontSize: '20px' }}
+                    />
+                    <span
+                      className="badge text-light border border-light rounded-circle ms-1"
+                      style={{ paddingBottom: '2px', fontSize: '15px' }}
+                    >
+                      0
+                    </span>
+                  </Link>
                 </div>
               </div>
             </nav>
           </div>
+          <div ref={topRef}></div>
         </div>
       </div>
       {/* Navbar End */}
