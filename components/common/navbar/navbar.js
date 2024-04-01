@@ -88,8 +88,11 @@ export default function Navbar({ pageName = '' }) {
     <>
       {/* topbar start */}
       <div className="container-fluid">
-        <div className="row py-1 px-xl-5 d-flex justify-content-between">
-          <div className="col-lg-6 d-none d-lg-block">
+        <div
+          className="row py-1 px-xl-5 d-flex justify-content-between align-items-center pt-1"
+          style={{ backgroundColor: '#f6f4f4' }}
+        >
+          <div className="col-lg-6 col-md-8">
             <div className="d-inline-flex align-items-center h-100">
               <Link className={style.textBody} href="/help-center">
                 <strong>幫助中心</strong>
@@ -105,7 +108,7 @@ export default function Navbar({ pageName = '' }) {
               </Link>
             </div>
           </div>
-          <div class="col-lg-6 text-end text-lg-right">
+          <div class="col-lg-6 col-md-4 text-end text-lg-right">
             <div className="d-inline-flex align-items-center">
               <Dropdown>
                 <Dropdown.Toggle
@@ -388,20 +391,13 @@ export default function Navbar({ pageName = '' }) {
             </div>
           </div>
         </div>
-        {/* Back to Top */}
-        <Link href="" className="btn" onClick={scrollToTop}>
-          <FaAnglesUp
-            className={style.backToTop}
-            style={{ fontSize: '40px' }}
-          />
-        </Link>
       </div>
       {/* Topbar End */}
       {/* Navbar Start */}
       <div className="container-fluid" style={{ backgroundColor: '#8e2626' }}>
         <div className="row px-xl-5">
           <div className="col-lg-3 d-none d-lg-block">
-            <Dropdown style={{ height: '100%' }}>
+            <Dropdown>
               <Dropdown.Toggle
                 id="dropdown-basic"
                 style={{
@@ -444,20 +440,21 @@ export default function Navbar({ pageName = '' }) {
           </div>
           <div className="col-lg-9">
             <nav className="navbar navbar-expand-lg navbar-dark py-3 py-lg-0 px-0">
-              <Link href="" className="text-decoration-none d-block d-lg-none">
+              <Link
+                href=""
+                className="text-decoration-none d-block d-lg-none pt-2"
+              >
                 <Image
                   className="logo rounded-circle"
                   src="/logo-sm.png"
                   alt=""
-                  width={50}
-                  height={50}
+                  width={70}
+                  height={70}
                 />
-                &nbsp;&nbsp;
-                <span style={{ color: 'white' }}>DEAL - 2ND HAND SHOP</span>
               </Link>
               <button
                 type="button"
-                className="navbar-toggler"
+                className="navbar-toggler mt-3"
                 data-toggle="collapse"
                 data-target="#navbarCollapse"
               >
@@ -576,6 +573,10 @@ export default function Navbar({ pageName = '' }) {
         </Modal.Footer>
       </Modal>
       {/* Login Modal end */}
+      {/* Back to Top */}
+      <Link href="" className="btn" onClick={scrollToTop}>
+        <FaAnglesUp className={style.backToTop} style={{ fontSize: '40px' }} />
+      </Link>
     </>
   )
 }
