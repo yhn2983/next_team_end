@@ -149,7 +149,7 @@ export default function Profile() {
                         修改個人檔案
                       </li>
                     </Link>
-                    <Link href="/your-target-url">
+                    <Link href="/lee-test/changepassword">
                       <li
                         className={`list-group-item p-3 ${styles.listGroupItem}`}
                       >
