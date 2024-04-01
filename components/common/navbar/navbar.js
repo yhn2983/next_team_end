@@ -87,10 +87,10 @@ export default function Navbar({ pageName = '' }) {
   return (
     <>
       {/* topbar start */}
-      <div id="" className="container-fluid">
-        <div className={`row ${style.row}`}>
-          <div className="col d-flex justify-content-between">
-            <div className="mt-2">
+      <div className="container-fluid">
+        <div className="row py-1 px-xl-5 d-flex justify-content-between">
+          <div className="col-lg-6 d-none d-lg-block">
+            <div className="d-inline-flex align-items-center h-100">
               <Link className={style.textBody} href="/help-center">
                 <strong>幫助中心</strong>
               </Link>
@@ -104,6 +104,8 @@ export default function Navbar({ pageName = '' }) {
                 <strong>使用條款</strong>
               </Link>
             </div>
+          </div>
+          <div class="col-lg-6 text-end text-lg-right">
             <div className="d-inline-flex align-items-center">
               <Dropdown>
                 <Dropdown.Toggle
@@ -271,26 +273,23 @@ export default function Navbar({ pageName = '' }) {
             </div>
           </div>
         </div>
-        <div
-          className="row align-items-center px-xl-4 d-none d-lg-flex"
-          style={{ height: '160px' }}
-        >
-          <div className="col-2">
+        <div className="row align-items-center py-3 px-xl-5 d-none d-lg-flex">
+          <div className="col-lg-3">
             <Link href="/" className="text-decoration-none">
               <Image
                 className={`mt-2 ${style.logo}`}
                 src="/logo9.png"
                 alt=""
-                width={500}
-                height={500}
+                width={150}
+                height={150}
               />
             </Link>
           </div>
-          <div className="col-lg-7 text-left d-flex">
+          <div className="col-lg-6 col-6 text-left d-flex">
             <select
               aria-label="Default select example"
               className="form-select shadow-lg overflow-auto form-control"
-              style={{ marginRight: '20px', height: '38px' }}
+              style={{ height: '38px', width: '48%' }}
             >
               <option selected disabled>
                 想要就近省運費!
@@ -318,7 +317,7 @@ export default function Navbar({ pageName = '' }) {
               <option value="21">金門縣</option>
               <option value="22">連江縣</option>
             </select>
-            <InputGroup className="mb-3 shadow-lg">
+            <InputGroup className="mb-3 shadow-lg" style={{ width: '48%' }}>
               <Form.Control
                 placeholder="挖掘寶物吧！"
                 aria-label="Recipient's username"
@@ -333,21 +332,22 @@ export default function Navbar({ pageName = '' }) {
               </Button>
             </InputGroup>
           </div>
-          <div className="col-lg-3 col-6" style={{ paddingLeft: '200px' }}>
+          <div className="col-lg-3 col-6 text-right">
             <div
-              className=""
+              className="ms-5"
               style={{
                 border: '3px dotted #8e2626',
                 borderRadius: '20px',
-                padding: '10px 5px',
+                padding: '8px 3px',
+                width: '90%',
               }}
             >
               {pageName === 'randomSearch' ? (
                 <>
-                  <h4 className="ms-1" style={{ paddingLeft: '5px' }}>
+                  <h5 className="ms-1" style={{ paddingLeft: '15px' }}>
                     <strong>已經有想要的商品？</strong>
-                  </h4>
-                  <span style={{ paddingLeft: '20px' }}>
+                  </h5>
+                  <span style={{ paddingLeft: '15px' }}>
                     前往這裡&nbsp;
                     <FaHandPointRight style={{ color: '#8e2626' }} />
                     &nbsp;
@@ -365,10 +365,10 @@ export default function Navbar({ pageName = '' }) {
                 </>
               ) : (
                 <>
-                  <h4 className="ms-1" style={{ paddingLeft: '5px' }}>
+                  <h5 className="ms-1" style={{ paddingLeft: '25px' }}>
                     <strong>不知道從哪裡開始？</strong>
-                  </h4>
-                  <span style={{ paddingLeft: '20px' }}>
+                  </h5>
+                  <span style={{ paddingLeft: '35px' }}>
                     試試這個&nbsp;
                     <FaHandPointRight style={{ color: '#8e2626' }} />
                     &nbsp;
@@ -387,24 +387,21 @@ export default function Navbar({ pageName = '' }) {
               )}
             </div>
           </div>
-          {/* Back to Top */}
-          <Link href="" className="btn" onClick={scrollToTop}>
-            <FaAnglesUp
-              className={style.backToTop}
-              style={{ fontSize: '40px' }}
-            />
-          </Link>
         </div>
+        {/* Back to Top */}
+        <Link href="" className="btn" onClick={scrollToTop}>
+          <FaAnglesUp
+            className={style.backToTop}
+            style={{ fontSize: '40px' }}
+          />
+        </Link>
       </div>
       {/* Topbar End */}
       {/* Navbar Start */}
-      <div
-        className="container-fluid"
-        style={{ heigth: '300px', backgroundColor: '#8e2626' }}
-      >
+      <div className="container-fluid" style={{ backgroundColor: '#8e2626' }}>
         <div className="row px-xl-5">
           <div className="col-lg-3 d-none d-lg-block">
-            <Dropdown>
+            <Dropdown style={{ height: '100%' }}>
               <Dropdown.Toggle
                 id="dropdown-basic"
                 style={{
@@ -477,7 +474,7 @@ export default function Navbar({ pageName = '' }) {
                 <div className="navbar-nav mr-auto py-0">
                   <Link
                     href="/"
-                    className={`nav-item nav-link me-5 ${
+                    className={`nav-item nav-link me-3 ${
                       pageName === 'home' ? 'active' : ''
                     }`}
                   >
@@ -487,7 +484,7 @@ export default function Navbar({ pageName = '' }) {
                   </Link>
                   <Link
                     href="/shop"
-                    className={`nav-item nav-link me-5 ${
+                    className={`nav-item nav-link me-3 ${
                       pageName === 'productSearch' ? 'active' : ''
                     }`}
                   >
@@ -497,7 +494,7 @@ export default function Navbar({ pageName = '' }) {
                   </Link>
                   <Link
                     href="/shop/random-search"
-                    className={`nav-item nav-link me-5 ${
+                    className={`nav-item nav-link me-3 ${
                       pageName === 'randomSearch' ? 'active' : ''
                     }`}
                   >
@@ -507,7 +504,7 @@ export default function Navbar({ pageName = '' }) {
                   </Link>
                   <Link
                     href="#"
-                    className={`nav-item nav-link me-5 ${
+                    className={`nav-item nav-link me-3 ${
                       pageName === 'coupon' ? 'active' : ''
                     }`}
                   >

@@ -11,10 +11,6 @@
   color: black;
 }
 
-/* .colB{
-  margin-right: 10px;
-} */
-
 .textBody{
   margin: 0 10px;
   text-decoration: none;
@@ -84,7 +80,7 @@
   text-decoration: none;
   border: none;
   border-radius: 5px;
-  padding: 5px 10px;
+  padding: 3px 5px;
   -webkit-animation: btnMove 0.1s infinite alternate;
   animation: btnMove 0.3s infinite alternate;
 }
