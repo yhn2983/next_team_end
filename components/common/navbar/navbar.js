@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { PROD_LIST } from '@/configs/config-r'
+import { useRouter } from 'next/router'
 // style-----
 import style from './navbar.module.css'
 import cartstyle from '@/components/cart/cart.module.css'
@@ -60,6 +62,27 @@ export default function Navbar({ pageName = '' }) {
       topRef.current.scrollIntoView({ behavior: 'smooth' })
     }
   }
+
+  // category
+  const [data, setData] = useState({
+    success: false,
+    cate: [],
+  })
+
+  useEffect(() => {
+    fetch(`${PROD_LIST}${location.search}`)
+      .then((r) => r.json())
+      .then((dataObj) => {
+        setData(dataObj)
+        console.log(dataObj)
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error)
+      })
+  }, [])
+  // Router-----
+  const router = useRouter()
+  const qs = { ...router.query }
 
   return (
     <>
@@ -398,8 +421,27 @@ export default function Navbar({ pageName = '' }) {
                   &nbsp;<span style={{ fontSize: '19px' }}>商品分類</span>
                 </strong>
               </Dropdown.Toggle>
-              <Dropdown.Menu style={{ width: 'calc(100% - 20px)' }}>
-                <Dropdown.Item href="#/action-1">免費禮物</Dropdown.Item>
+              <Dropdown.Menu
+                style={{
+                  width: 'calc(100% - 20px)',
+                  height: '500px',
+                  overflow: 'auto',
+                }}
+              >
+                {data.cate.map((v) => {
+                  if (v.parent_id == 0) {
+                    return (
+                      <Dropdown.Item
+                        key={v.id}
+                        href="#/action-1"
+                        className="mb-2"
+                        style={{ color: '#8e2626' }}
+                      >
+                        <strong>．{v.category_name}</strong>
+                      </Dropdown.Item>
+                    )
+                  }
+                })}
               </Dropdown.Menu>
             </Dropdown>
           </div>
