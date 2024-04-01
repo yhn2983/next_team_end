@@ -101,7 +101,7 @@ export default function ChangePasswordPage() {
         icon: 'success',
       })
 
-      router.push('/lee-test/profile')
+      router.push('/member/profile')
     } else {
       setError({ oldPassword: data.message })
     }

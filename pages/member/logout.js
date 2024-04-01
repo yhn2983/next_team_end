@@ -12,12 +12,12 @@ export default function Logout() {
     因為 localStorage.removeItem 是一個同步操作
     logout()
     await new Promise((resolve) => setTimeout(resolve, 200))
-    router.push('/lee-test/login')
+    router.push('/member/login')
     */
     const success = await logout()
     if (success) {
       await new Promise((resolve) => setTimeout(resolve, 200))
-      router.push('/lee-test/login')
+      router.push('/member/login')
     } else {
       // handle logout failure
     }

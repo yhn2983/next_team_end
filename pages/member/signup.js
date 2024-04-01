@@ -129,7 +129,7 @@ export default function RegisterPage() {
       })
 
       // 跳轉到登入頁 用next的router
-      router.push('/lee-test/login')
+      router.push('/member/login')
     } else {
       MySwal.fire({
         title: '錯誤!',

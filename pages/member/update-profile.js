@@ -99,7 +99,7 @@ export default function UpdateProfilePage() {
         icon: 'success',
       })
 
-      router.push('/lee-test/profile')
+      router.push('/member/profile')
     } else {
       MySwal.fire({
         title: '錯誤!',

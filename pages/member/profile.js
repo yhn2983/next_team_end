@@ -142,14 +142,14 @@ export default function Profile() {
               <div className={`card mb-lg-0r text-center mb-4 ${styles.card}`}>
                 <div className="card-body p-0 text-center">
                   <ul className="list-group list-group-flush rounded-3">
-                    <Link href="/lee-test/update-profile">
+                    <Link href="/member/update-profile">
                       <li
                         className={`list-group-item p-3 ${styles.listGroupItem}`}
                       >
                         修改個人檔案
                       </li>
                     </Link>
-                    <Link href="/lee-test/changepassword">
+                    <Link href="/member/changepassword">
                       <li
                         className={`list-group-item p-3 ${styles.listGroupItem}`}
                       >

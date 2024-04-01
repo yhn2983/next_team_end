@@ -23,7 +23,7 @@ export default function LoginPage() {
       const isAuth = await checkAuth()
       if (isAuth) {
         setTimeout(() => {
-          router.push('/lee-test/logout')
+          router.push('/member/logout')
         }, 0)
       }
     }
@@ -88,7 +88,7 @@ export default function LoginPage() {
     const result = await login(email, password)
     if (result) {
       alert('登入成功')
-      router.push('/lee-test/logout')
+      router.push('/member/logout')
     } else {
       alert('登入失敗')
     }
@@ -139,7 +139,7 @@ export default function LoginPage() {
                 />
                 <div className={styles.error}>{error.password}</div>
                 <Link
-                  href="/lee-test/forgetpassword"
+                  href="/member/forgetpassword"
                   className="text-decoration-none"
                 >
                   <p className="ms-2 mt-4">
@@ -151,7 +151,7 @@ export default function LoginPage() {
             <div className="register mt-2 ms-1">
               <p>
                 不是會員？
-                <Link href="/lee-test/signup" className="text-decoration-none">
+                <Link href="/member/signup" className="text-decoration-none">
                   <strong>
                     來去註冊
                     <i className="fa-brands fa-golang" />
