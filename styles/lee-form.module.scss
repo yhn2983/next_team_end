@@ -58,7 +58,7 @@
   }
 
 
-  background-color: '#eee';
+  background-color:	#F0F0F0; 
   button{
     height: 40px;
     border: 1px solid $secondary;
@@ -71,6 +71,21 @@
       color: #ffffff !important;
     }
   }
+
+  .card{
+    border: 1px solid $dark;
+    box-shadow: 6px 6px 0 0 rgb(255, 219, 219);
+    transition: all 0.3s ease;
+    &:hover {
+      transform: translateY(-5px);
+    }
+    .title{
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: $dark;
+      margin: 10px 0px 25px 5px;
+    }
+  } 
 }
 
 .registerForm{

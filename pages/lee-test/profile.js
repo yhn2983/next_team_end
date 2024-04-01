@@ -87,7 +87,7 @@ export default function Profile() {
         <div className="container py-5">
           <div className="row">
             <div className="col-lg-4">
-              <div className="card mb-4">
+              <div className={`card mb-4 ${styles.card}`}>
                 <div className="card-body text-center">
                   <Image
                     src={
@@ -139,14 +139,14 @@ export default function Profile() {
                   </div>
                 </div>
               </div>
-              <div className="card mb-lg-0r text-center mb-4">
+              <div className={`card mb-lg-0r text-center mb-4 ${styles.card}`}>
                 <div className="card-body p-0 text-center">
                   <ul className="list-group list-group-flush rounded-3">
                     <Link href="/lee-test/update-profile">
                       <li
                         className={`list-group-item p-3 ${styles.listGroupItem}`}
                       >
-                        修改個人資料
+                        修改個人檔案
                       </li>
                     </Link>
                     <Link href="/your-target-url">
@@ -160,14 +160,14 @@ export default function Profile() {
                       <li
                         className={`list-group-item p-3 ${styles.listGroupItem}`}
                       >
-                        個人賣場
+                        我的賣場
                       </li>
                     </Link>
                     <Link href="/your-target-url">
                       <li
                         className={`list-group-item p-3 ${styles.listGroupItem}`}
                       >
-                        預留功能
+                        我的訂單
                       </li>
                     </Link>
                   </ul>
@@ -175,8 +175,13 @@ export default function Profile() {
               </div>
             </div>
             <div className="col-lg-8">
-              <div className="card">
+              <div className={`card ${styles.card}`}>
                 <div className="card-body">
+                  <div className="row">
+                    <div className="col">
+                      <p className={`${styles.title}`}>我的個人檔案</p>
+                    </div>
+                  </div>
                   <div className="row">
                     <div className="col-sm-3">
                       <p className="mb-0">真實姓名</p>

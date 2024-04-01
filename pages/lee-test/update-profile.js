@@ -31,35 +31,45 @@ export default function UpdateProfilePage() {
     setUser({ ...user, [e.target.name]: e.target.value })
   }
 
-  // const checkError = () => {
-  //   let hasError = false
-  //   const newError = { ...initError }
+  const checkError = () => {
+    let hasError = false
+    const newError = { ...initError }
 
-  //   if (!user.name) {
-  //     newError.name = '姓名為必填'
-  //     hasError = true
-  //   }
+    if (!user.name) {
+      newError.name = '姓名為必填'
+      hasError = true
+    }
 
-  //   if (!user.mobile) {
-  //     newError.mobile = '手機號碼為必填'
-  //     hasError = true
-  //   }
+    if (!user.mobile) {
+      newError.mobile = '手機號碼為必填'
+      hasError = true
+    } else {
+      if (user.mobile.length !== 9) {
+        newError.mobile = '手機號碼必須為 9 位數'
+        hasError = true
+      }
+    }
 
-  //   if (!user.address) {
-  //     newError.address = '地址為必填'
-  //     hasError = true
-  //   }
+    if (!user.address) {
+      newError.address = '地址為必填'
+      hasError = true
+    }
 
-  //   if (hasError) {
-  //     setError(newError)
-  //     return
-  //   }
+    if (hasError) {
+      setError(newError)
+      return true
+    }
 
-  //   setError(initError)
-  // }
+    setError(initError)
+    return false
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    if (checkError()) {
+      return
+    }
 
     // 確認用戶的認證狀態
     await checkAuth()
@@ -110,8 +120,8 @@ export default function UpdateProfilePage() {
 
       if (data.status === 'success') {
         const { name = '', mobile = '', address = '' } = data.data.user
-        const newMobile = '0' + mobile
-        setUser({ name, mobile: newMobile, address })
+        // const newMobile = '0' + mobile
+        setUser({ name, mobile: mobile, address })
       }
     }
 
@@ -147,14 +157,20 @@ export default function UpdateProfilePage() {
               <label className="form-label ms-2" htmlFor="mobile">
                 手機號碼
               </label>
-              <input
-                className="form-control rounded"
-                type="text"
-                name="mobile"
-                id="mobile"
-                value={user.mobile}
-                onChange={handleFieldChange}
-              />
+              <div className="input-group">
+                <span className="input-group-text" id="basic-addon1">
+                  0
+                </span>
+                <input
+                  className="form-control rounded"
+                  type="text"
+                  name="mobile"
+                  id="mobile"
+                  value={user.mobile}
+                  onChange={handleFieldChange}
+                  aria-describedby="basic-addon1"
+                />
+              </div>
               <div className="error">{error.mobile}</div>
             </div>
             <div className="mb-1">
