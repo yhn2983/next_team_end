@@ -662,7 +662,7 @@ export default function ProdB() {
           </div>
         </div>
         <div className="row">
-          <div className="col-4" style={{ marginLeft: '945px' }}>
+          <div className="col-4" style={{ marginLeft: '790px' }}>
             <Link href="">
               <button type="button" className={style.moreBtn} href="">
                 <strong>探索更多</strong>

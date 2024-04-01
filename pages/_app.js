@@ -10,10 +10,10 @@ export default function MyApp({ Component, pageProps }) {
   }, [])
 
   return (
-    // <AuthContextProvider>
+    //<AuthContextProvider>
     <CartProvider>
       <Component {...pageProps} />
     </CartProvider>
-    // </AuthContextProvider>
+    //</AuthContextProvider>
   )
 }

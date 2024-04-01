@@ -18,7 +18,7 @@ export default function Category() {
         style={{ padding: '0 100px', marginTop: '100px' }}
       >
         <div className="d-flex">
-          <h2 className="mb-5">
+          <h2 className="mb-5" style={{ color: '#8e2626' }}>
             <strong>商品分類</strong>
           </h2>
           <span className={style.sectionTitle}></span>

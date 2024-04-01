@@ -126,7 +126,7 @@ export default function CarouselS1({ pageName = '' }) {
                   />
                 </div>
                 <Carousel.Caption
-                  style={{ marginBottom: '100px', marginLeft: '470px' }}
+                  style={{ marginBottom: '100px', marginLeft: '400px' }}
                 >
                   <h1 className={style.title3}>世界地球日</h1>
                   <p className={style.txt3}>

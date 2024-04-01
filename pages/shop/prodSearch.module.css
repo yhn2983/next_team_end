@@ -10,7 +10,7 @@
 
 .titleArea{
   content: "";
-  width: 61%;
+  width: 55%;
   border-top: 3px dashed #8e2626;
   margin-top: 16px;
   margin-left: 20px;
@@ -18,7 +18,7 @@
 
 .titleAreaB{
   content: "";
-  width: 56%;
+  width: 48%;
   border-top: 3px dashed #8e2626;
   margin-top: 16px;
   margin-left: 20px;
@@ -26,7 +26,7 @@
 
 .titleAreaC{
   content: "";
-  width: 73%;
+  width: 68%;
   border-top: 3px dashed #8e2626;
   margin-top: 16px;
   margin-left: 20px;
@@ -34,7 +34,7 @@
 
 .titleAreaD{
   content: "";
-  width: 62%;
+  width: 55%;
   border-top: 3px dashed #8e2626;
   margin-top: 16px;
   margin-left: 20px;
@@ -44,7 +44,8 @@
   transition: .5s;
   border: 3px solid #e96d3f; 
   position: relative;
-  width: 85%;
+  width: 95%;
+  height: 533px;
 }
 
 .productItem:hover {
@@ -73,7 +74,7 @@
   position: absolute;
   opacity: 0;
   top: 0px;
-  left: 160px;
+  left: 140px;
   transform: translateY(0);
 }
 
@@ -85,7 +86,7 @@
   position: absolute;
   opacity: 0;
   top: 0px;
-  left: 220px;
+  left: 200px;
   transform: translateY(0);
 }
 
@@ -95,7 +96,7 @@
   position: absolute;
   opacity: 1;
   top: 90px;
-  left: 160px;
+  left: 140px;
   transform: translateY(80%);
   transition: transform 0.3s ease;
 }
@@ -106,7 +107,7 @@
   position: absolute;
   opacity: 1;
   top: 90px;
-  left: 220px;
+  left: 200px;
   transform: translateY(80%);
   transition: transform 0.5s ease;
 }

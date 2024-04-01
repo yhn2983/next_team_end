@@ -1,6 +1,6 @@
 .offerArea{
   content: "";
-  width: 84%;
+  width: 82%;
   border-top: 3px dashed #8e2626;
   margin-top: 20px;
   margin-left: 15px;
@@ -9,8 +9,8 @@
 .productOffer {
   position: relative;
   overflow: hidden;
-  width: 900px;
-  height: 500px;
+  width: 750px;
+  height: 400px;
 }
 
 .productOffer {
@@ -56,7 +56,7 @@
 
 .offerTextB h2 {
   font-weight: 900;
-  margin-right: 350px;
+  margin-right: 320px;
   text-shadow: 0 0 10px rgba(128, 128, 128, 0.701);
 }
 

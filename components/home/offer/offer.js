@@ -22,14 +22,14 @@ export default function Offer() {
           <span className={style.offerArea}></span>
         </div>
         <div className="row px-xl-5 ms-4">
-          <div className="col-md-6">
-            <div className={`mb-30 rounded ${style.productOffer}`}>
+          <div className="col-md-6 ">
+            <div className={`rounded ${style.productOffer}`}>
               <Image
                 className={`img-fluid ${style.offerImg}`}
                 src="/offer1.png"
                 alt=""
-                width={900}
-                height={500}
+                width={600}
+                height={400}
               />
               <div className={style.offerText}>
                 <h2 className="text-white">認識DEAL</h2>
@@ -55,15 +55,17 @@ export default function Offer() {
                 className={`img-fluid ${style.offerImg}`}
                 src="/offer2.png"
                 alt=""
-                width={900}
-                height={500}
+                width={600}
+                height={400}
               />
               <div className={style.offerTextB}>
-                <h2 className="text-white text-uppercase">認識ESG</h2>
-                <h1 className="text-white mb-3">致力於三面平衡</h1>
+                <h2 className="text-white text-uppercase mt-2">認識ESG</h2>
+                <h2 className="text-white mb-3" style={{ fontSize: '55px' }}>
+                  致力於三面平衡
+                </h2>
                 <Link
                   href="/help-center/esg"
-                  className={`btn ${style.moreBtn}`}
+                  className={`btn mt-1 ${style.moreBtn}`}
                   style={{
                     backgroundColor: '#8e2626',
                     color: 'white',

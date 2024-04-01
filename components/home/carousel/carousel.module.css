@@ -16,7 +16,7 @@
   font-style: normal;
   color: #eaea1e;
   text-shadow: 0 0 0.2em yellowgreen, 0 0 0.2em yellowgreen,0 0 0.2em yellowgreen;
-  font-size: 90px;
+  font-size: 75px;
 }
 
 .title2 {
@@ -24,14 +24,14 @@
   font-weight: 400;
   font-style: normal;
   text-shadow: rgb(31, 31, 31) 0.1em 0.1em 0.2em;
-  font-size: 130px;
+  font-size: 120px;
 }
 
 .title3{
   font-weight: bold;
   text-shadow: rgb(221, 221, 221) 0.1em 0.1em 0.2em;
   color: rgba(0, 0, 0, 0.729);
-  font-size: 90px;
+  font-size: 70px;
 }
 
 .txt{

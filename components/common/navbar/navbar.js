@@ -324,7 +324,7 @@ export default function Navbar({ pageName = '' }) {
               </Button>
             </InputGroup>
           </div>
-          <div className="col-lg-3 col-6" style={{ paddingLeft: '300px' }}>
+          <div className="col-lg-3 col-6" style={{ paddingLeft: '200px' }}>
             <div
               className=""
               style={{
