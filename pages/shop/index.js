@@ -52,6 +52,7 @@ export default function Shop() {
     page: 0,
     totalPages: 0,
     rows: [],
+    cate: [],
   })
 
   useEffect(() => {
@@ -63,7 +64,10 @@ export default function Shop() {
       .catch((error) => {
         console.error('Error fetching data:', error)
       })
-  }, [])
+  }, [router])
+
+  // category
+  const [mainSelect, setMainSelect] = useState(null)
 
   const qs = { ...router.query }
 
@@ -93,7 +97,7 @@ export default function Shop() {
         {/* Breadcrumb End */}
 
         {/* Shop Start */}
-        <div className="container-fluid ps-5">
+        <div className="container-fluid ps-lg-5">
           <div className="row px-xl-5">
             {/* Shop Sidebar Start */}
             <div className="col-lg-3 col-md-4 mt-5">
@@ -107,13 +111,26 @@ export default function Shop() {
                 <select
                   className="form-select"
                   aria-label="Default select example"
+                  name=""
+                  value={mainSelect}
+                  onChange={(e) => setMainSelect(+e.target.value)}
                 >
-                  <option selected disabled>
+                  <option selected disabled value="disable">
                     開始搜尋吧！
                   </option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  {data.cate.map((v) => {
+                    if (v.parent_id == 0) {
+                      return (
+                        <option
+                          key={v.id}
+                          style={{ color: '#8e2626' }}
+                          value={v.id}
+                        >
+                          {v.category_name}
+                        </option>
+                      )
+                    }
+                  })}
                 </select>
               </div>
               {/* main-category end */}
@@ -128,12 +145,24 @@ export default function Shop() {
                   className="form-select"
                   aria-label="Default select example"
                 >
-                  <option selected disabled>
+                  <option selected disabled value="disable">
                     開始搜尋吧！
                   </option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  {data.cate.map((v) =>
+                    v.nodes.map((node) => {
+                      if (node.parent_id === mainSelect) {
+                        return (
+                          <option
+                            key={node.id}
+                            style={{ color: '#8e2626' }}
+                            value={node.id}
+                          >
+                            {node.category_name}
+                          </option>
+                        )
+                      }
+                    })
+                  )}
                 </select>
               </div>
               {/* sub-category end */}
@@ -606,10 +635,18 @@ export default function Shop() {
                                   </strong>
                                 </div>
                                 <span
-                                  className="mt-2 ms-2"
+                                  className="mt-2 ms-5"
                                   style={{ fontSize: '18px' }}
                                 >
-                                  ${v.product_price}
+                                  <strong>${v.product_price}</strong>
+                                </span>
+                                <span
+                                  className="mt-2 ms-5"
+                                  style={{ fontSize: '18px' }}
+                                >
+                                  <strong style={{ color: '#8e2626' }}>
+                                    {v.mc !== 0 ? v.mc : v.sc}c
+                                  </strong>
                                 </span>
                               </div>
                             </div>

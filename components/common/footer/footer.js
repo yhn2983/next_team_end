@@ -27,7 +27,7 @@ export default function Footer() {
     <>
       {/* Footer Start */}
       <div
-        className={`container-fluid text-secondary mt-5 pt-5 ${style.footerArea}`}
+        className={`container-fluid text-secondary pt-5 ${style.footerArea}`}
       >
         <div className="row px-xl-5 pt-2">
           <div className="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
