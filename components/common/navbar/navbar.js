@@ -93,7 +93,7 @@ export default function CustomNavbar({ pageName = '' }) {
           className="row py-1 px-xl-5 d-flex justify-content-between align-items-center pt-1"
           style={{ backgroundColor: '#f6f4f4' }}
         >
-          <div className="col-lg-6 col-md-8">
+          <div className="col-lg-6 col-md-12">
             <div className="d-inline-flex align-items-center h-100">
               <Link className={style.textBody} href="/help-center">
                 <strong>幫助中心</strong>
@@ -109,7 +109,7 @@ export default function CustomNavbar({ pageName = '' }) {
               </Link>
             </div>
           </div>
-          <div class="col-lg-6 col-md-4 text-end text-lg-right">
+          <div class="col-lg-6 col-md-12 text-center text-lg-end">
             <div className="d-inline-flex align-items-center">
               <Dropdown>
                 <Dropdown.Toggle
