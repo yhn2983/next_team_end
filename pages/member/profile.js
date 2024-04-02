@@ -5,8 +5,27 @@ import Link from 'next/link'
 import { useEffect, useState, useRef } from 'react'
 import { CHECK_AUTH_ROUTE } from '@/components/config'
 import { UPLOAD_AVATAR_ONE_POST } from '@/components/config'
+import { useAuth } from '@/context/auth-context'
+import { useRouter } from 'next/router'
 
 export default function Profile() {
+  const { checkAuth } = useAuth()
+  const router = useRouter()
+  const [isLoading, setISLoading] = useState(true)
+
+  // 如果使用者沒有登入，將他們重定向到登入頁面
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      const isAuth = await checkAuth()
+      if (!isAuth) {
+        // 如果使用者沒有登入，將他們重定向到登入頁面
+        router.push('/member/login')
+      }
+      setISLoading(false)
+    }
+    checkLoginStatus()
+  }, [router])
+
   // 使用 useState 建立 user 和 file 的狀態
   const [user, setUser] = useState({
     name: '',
@@ -18,6 +37,7 @@ export default function Profile() {
     address: '',
     carbon_points_got: 0,
     carbon_points_have: 0,
+    level_desc: '等待任務中',
   })
   const [file, setFile] = useState(null)
 
@@ -79,6 +99,10 @@ export default function Profile() {
     } catch (err) {
       console.error('Upload failed:', err)
     }
+  }
+
+  if (isLoading) {
+    return <div>正在努力加載資訊中...</div>
   }
 
   return (

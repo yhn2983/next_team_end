@@ -10,6 +10,7 @@ export default function LoginPage() {
   const { auth, login, checkAuth } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [hasChecked, setHasChecked] = useState(false)
 
   // 記錄錯誤訊息用的狀態
   const [error, setError] = useState({
@@ -20,16 +21,19 @@ export default function LoginPage() {
 
   useEffect(() => {
     const checkLoginStatus = async () => {
-      const isAuth = await checkAuth()
-      if (isAuth) {
-        setTimeout(() => {
-          router.push('/member/logout')
-        }, 0)
+      if (!hasChecked) {
+        const isAuth = await checkAuth()
+        if (isAuth) {
+          setTimeout(() => {
+            router.push('/member/profile')
+          }, 1000)
+        }
+        setHasChecked(true)
       }
     }
 
     checkLoginStatus()
-  }, [checkAuth, router])
+  }, [router, hasChecked])
 
   // 練習怎麼撈出登入的會員資料
   useEffect(() => {
@@ -88,7 +92,7 @@ export default function LoginPage() {
     const result = await login(email, password)
     if (result) {
       alert('登入成功')
-      router.push('/member/logout')
+      router.push('/member/profile')
     } else {
       alert('登入失敗')
     }
