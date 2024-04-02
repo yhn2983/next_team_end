@@ -12,6 +12,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Modal from 'react-bootstrap/Modal'
+import { Navbar, Nav } from 'react-bootstrap'
 // react icons-----
 import { TbMessage } from 'react-icons/tb'
 import {
@@ -31,7 +32,7 @@ import { FaAnglesUp } from 'react-icons/fa6'
 //import { useCart } from '@/hooks/use-cart'
 //import Cart from '@/components/cart/cart'
 
-export default function Navbar({ pageName = '' }) {
+export default function CustomNavbar({ pageName = '' }) {
   //const { auth, logout } = useAuth()
   //const { totalItems, totalPrice } = useCart()
 
@@ -86,7 +87,7 @@ export default function Navbar({ pageName = '' }) {
 
   return (
     <>
-      {/* topbar start */}
+      {/* Topbar Start*/}
       <div className="container-fluid">
         <div
           className="row py-1 px-xl-5 d-flex justify-content-between align-items-center pt-1"
@@ -276,11 +277,11 @@ export default function Navbar({ pageName = '' }) {
             </div>
           </div>
         </div>
-        <div className="row align-items-center py-3 px-xl-5 d-none d-lg-flex">
-          <div className="col-lg-3">
+        <div className="row align-items-center px-xl-5 d-none d-lg-flex">
+          <div className="col-lg-4">
             <Link href="/" className="text-decoration-none">
               <Image
-                className={`mt-2 ${style.logo}`}
+                className={`${style.logo}`}
                 src="/logo9.png"
                 alt=""
                 width={150}
@@ -288,43 +289,13 @@ export default function Navbar({ pageName = '' }) {
               />
             </Link>
           </div>
-          <div className="col-lg-6 col-6 text-left d-flex">
-            <select
-              aria-label="Default select example"
-              className="form-select shadow-lg overflow-auto form-control"
-              style={{ height: '38px', width: '48%' }}
-            >
-              <option selected disabled>
-                想要就近省運費!
-              </option>
-              <option value="1">台北市</option>
-              <option value="2">新北市</option>
-              <option value="3">桃園市</option>
-              <option value="4">台中市</option>
-              <option value="5">台南市</option>
-              <option value="6">高雄市</option>
-              <option value="7">基隆市</option>
-              <option value="8">新竹市</option>
-              <option value="9">新竹縣</option>
-              <option value="10">苗栗縣</option>
-              <option value="11">彰化縣</option>
-              <option value="12">南投縣</option>
-              <option value="13">雲林縣</option>
-              <option value="14">嘉義市</option>
-              <option value="15">嘉義縣</option>
-              <option value="16">屏東縣</option>
-              <option value="17">宜蘭縣</option>
-              <option value="18">花蓮縣</option>
-              <option value="19">台東縣</option>
-              <option value="20">澎湖縣</option>
-              <option value="21">金門縣</option>
-              <option value="22">連江縣</option>
-            </select>
-            <InputGroup className="mb-3 shadow-lg" style={{ width: '48%' }}>
+          <div className="col-lg-4 col-6 text-left">
+            <InputGroup className="ms-2 mb-3 shadow-lg ">
               <Form.Control
                 placeholder="挖掘寶物吧！"
                 aria-label="Recipient's username"
                 aria-describedby="basic-addon2"
+                className="form-control"
               />
               <Button
                 id="button-addon2"
@@ -335,22 +306,12 @@ export default function Navbar({ pageName = '' }) {
               </Button>
             </InputGroup>
           </div>
-          <div className="col-lg-3 col-6 text-right">
-            <div
-              className="ms-5"
-              style={{
-                border: '3px dotted #8e2626',
-                borderRadius: '20px',
-                padding: '8px 3px',
-                width: '90%',
-              }}
-            >
-              {pageName === 'randomSearch' ? (
-                <>
-                  <h5 className="ms-1" style={{ paddingLeft: '15px' }}>
-                    <strong>已經有想要的商品？</strong>
-                  </h5>
-                  <span style={{ paddingLeft: '15px' }}>
+          <div className="col-lg-4 col-6 d-flex justify-content-end">
+            {pageName === 'randomSearch' ? (
+              <>
+                <div className="">
+                  <h5>已經有想要的商品？</h5>
+                  <span>
                     前往這裡&nbsp;
                     <FaHandPointRight style={{ color: '#8e2626' }} />
                     &nbsp;
@@ -365,13 +326,15 @@ export default function Navbar({ pageName = '' }) {
                       </button>
                     </Link>
                   </span>
-                </>
-              ) : (
-                <>
-                  <h5 className="ms-1" style={{ paddingLeft: '25px' }}>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="">
+                  <h5 className="ms-1" style={{ paddingLeft: '15px' }}>
                     <strong>不知道從哪裡開始？</strong>
                   </h5>
-                  <span style={{ paddingLeft: '35px' }}>
+                  <span style={{ paddingLeft: '25px' }}>
                     試試這個&nbsp;
                     <FaHandPointRight style={{ color: '#8e2626' }} />
                     &nbsp;
@@ -386,15 +349,19 @@ export default function Navbar({ pageName = '' }) {
                       </button>
                     </Link>
                   </span>
-                </>
-              )}
-            </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
-      {/* Topbar End */}
+      {/* Topbar End*/}
+
       {/* Navbar Start */}
-      <div className="container-fluid" style={{ backgroundColor: '#8e2626' }}>
+      <div
+        className="container-fluid mb-30"
+        style={{ backgroundColor: '#8e2626' }}
+      >
         <div className="row px-xl-5">
           <div className="col-lg-3 d-none d-lg-block">
             <Dropdown>
@@ -439,10 +406,13 @@ export default function Navbar({ pageName = '' }) {
             </Dropdown>
           </div>
           <div className="col-lg-9">
-            <nav className="navbar navbar-expand-lg navbar-dark py-3 py-lg-0 px-0">
-              <Link
-                href=""
-                className="text-decoration-none d-block d-lg-none pt-2"
+            <Navbar
+              expand="lg"
+              className="navbar navbar-expand-lg navbar-dark py-3 py-lg-0 px-0"
+            >
+              <Navbar.Brand
+                href="/"
+                className="text-decoration-none d-block d-lg-none"
               >
                 <Image
                   className="logo rounded-circle"
@@ -451,111 +421,97 @@ export default function Navbar({ pageName = '' }) {
                   width={70}
                   height={70}
                 />
-              </Link>
-              <button
-                type="button"
-                className="navbar-toggler mt-3"
-                data-toggle="collapse"
-                data-target="#navbarCollapse"
-              >
-                <span className="navbar-toggler-icon"></span>
-              </button>
-              <div
-                className="collapse navbar-collapse justify-content-between"
-                id="navbarCollapse"
-                style={{
-                  paddingTop: '10px',
-                  marginLeft: '50px',
-                }}
-              >
-                <div className="navbar-nav mr-auto py-0">
-                  <Link
-                    href="/"
-                    className={`nav-item nav-link me-3 ${
-                      pageName === 'home' ? 'active' : ''
-                    }`}
+              </Navbar.Brand>
+              <Navbar.Toggle aria-controls="navbarCollapse" />
+              <Navbar.Collapse id="navbarCollapse">
+                <div className="d-flex justify-content-between w-100">
+                  <Nav
+                    className="navbar-nav mr-auto py-0"
+                    style={{ marginTop: '10px' }}
                   >
-                    <strong>
-                      <span style={{ fontSize: '19px' }}>首頁</span>
-                    </strong>
-                  </Link>
-                  <Link
-                    href="/shop"
-                    className={`nav-item nav-link me-3 ${
-                      pageName === 'productSearch' ? 'active' : ''
-                    }`}
-                  >
-                    <strong>
-                      <span style={{ fontSize: '19px' }}>探索商品</span>
-                    </strong>
-                  </Link>
-                  <Link
-                    href="/shop/random-search"
-                    className={`nav-item nav-link me-3 ${
-                      pageName === 'randomSearch' ? 'active' : ''
-                    }`}
-                  >
-                    <strong>
-                      <span style={{ fontSize: '19px' }}>隨機探索</span>
-                    </strong>
-                  </Link>
-                  <Link
-                    href="#"
-                    className={`nav-item nav-link me-3 ${
-                      pageName === 'coupon' ? 'active' : ''
-                    }`}
-                  >
-                    <strong>
-                      <span style={{ fontSize: '19px' }}>領取優惠券</span>
-                    </strong>
-                  </Link>
-                  <Link
-                    href="/contact-us"
-                    className={`nav-item nav-link ${
-                      pageName === 'contactUs' ? 'active' : ''
-                    }`}
-                  >
-                    <strong>
-                      <span style={{ fontSize: '19px' }}>聯絡我們</span>
-                    </strong>
-                  </Link>
-                </div>
-                <div className="d-flex align-items-center ms-5">
-                  <Link href="/shop/like" className="btn px-0">
-                    <FaHeart
-                      className="mb-1"
-                      style={{ color: 'white', fontSize: '20px' }}
-                    />
-                    <span
-                      className="badge text-light border border-light rounded-circle ms-1"
-                      style={{ paddingBottom: '2px', fontSize: '15px' }}
+                    <Nav.Link
+                      href="/"
+                      className={`nav-item nav-link me-3 ${
+                        pageName === 'home' ? 'active' : ''
+                      }`}
                     >
-                      0
-                    </span>
-                  </Link>
-                  <Link
-                    href="/shop/cart"
-                    className={cartstyle['button']}
-                    style={{ marginLeft: '10px' }}
-                  >
-                    <FaShoppingCart
-                      className="mb-1"
-                      style={{ fontSize: '20px' }}
-                    />
-                    <span
-                      className="badge text-light border border-light rounded-circle ms-1"
-                      style={{ paddingBottom: '2px', fontSize: '15px' }}
+                      <strong>
+                        <span style={{ fontSize: '19px' }}>首頁</span>
+                      </strong>
+                    </Nav.Link>
+                    <Nav.Link
+                      href="/shop"
+                      className={`nav-item nav-link me-3 ${
+                        pageName === 'productSearch' ? 'active' : ''
+                      }`}
                     >
-                      0
-                    </span>
-                  </Link>
+                      <strong>
+                        <span style={{ fontSize: '19px' }}>探索商品</span>
+                      </strong>
+                    </Nav.Link>
+                    <Nav.Link
+                      href="/shop/random-search"
+                      className={`nav-item nav-link me-3 ${
+                        pageName === 'randomSearch' ? 'active' : ''
+                      }`}
+                    >
+                      <strong>
+                        <span style={{ fontSize: '19px' }}>隨機探索</span>
+                      </strong>
+                    </Nav.Link>
+                    <Nav.Link
+                      href="#"
+                      className={`nav-item nav-link me-3 ${
+                        pageName === 'coupon' ? 'active' : ''
+                      }`}
+                    >
+                      <strong>
+                        <span style={{ fontSize: '19px' }}>領取優惠券</span>
+                      </strong>
+                    </Nav.Link>
+                    <Nav.Link
+                      href="/contact-us"
+                      className={`nav-item nav-link ${
+                        pageName === 'contactUs' ? 'active' : ''
+                      }`}
+                    >
+                      <strong>
+                        <span style={{ fontSize: '19px' }}>聯絡我們</span>
+                      </strong>
+                    </Nav.Link>
+                  </Nav>
+                  <Nav className="navbar-nav ml-auto py-0 d-none d-lg-block">
+                    <div className="d-flex">
+                      <Nav.Link href="" className="btn px-0">
+                        <FaHeart
+                          className="me-1"
+                          style={{ color: 'white', fontSize: '20px' }}
+                        />
+                        <span className="badge text-light border border-light rounded-circle mt-3">
+                          0
+                        </span>
+                      </Nav.Link>
+                      <Nav.Link
+                        href="/shop/cart"
+                        className="btn px-0 ml-3 ms-3"
+                      >
+                        <FaShoppingCart
+                          className="me-1"
+                          style={{ color: 'white', fontSize: '20px' }}
+                        />
+                        <span className="badge text-light border border-light rounded-circle mt-3">
+                          0
+                        </span>
+                      </Nav.Link>
+                    </div>
+                  </Nav>
                 </div>
-              </div>
-            </nav>
+              </Navbar.Collapse>
+            </Navbar>
           </div>
-          <div ref={topRef}></div>
         </div>
       </div>
+      <div ref={topRef}></div>
       {/* Navbar End */}
       {/* Login Modal start */}
       <Modal show={show} onHide={handleClose}>
