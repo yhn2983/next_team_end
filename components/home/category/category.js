@@ -24,12 +24,10 @@ export default function Category() {
               <AiOutlineSmallDash />
               <AiOutlineSmallDash />
               <AiOutlineSmallDash />
-              <AiOutlineSmallDash />
               <AiOutlineSmallDash className="me-2" />
               <AiTwotoneGift className="mb-2" />
               商品分類
               <AiOutlineSmallDash className="ms-2" />
-              <AiOutlineSmallDash />
               <AiOutlineSmallDash />
               <AiOutlineSmallDash />
               <AiOutlineSmallDash />
@@ -45,7 +43,7 @@ export default function Category() {
             >
               <div
                 className={`cat-item d-flex align-items-center mb-4 rounded mx-auto ${style.txt}`}
-                style={{ width: '80%' }}
+                style={{ width: '90%' }}
               >
                 <div
                   className="overflow-hidden rounded"
@@ -80,7 +78,7 @@ export default function Category() {
             >
               <div
                 className={`cat-item img-zoom d-flex align-items-center mb-4 rounded mx-auto ${style.txt}`}
-                style={{ width: '80%' }}
+                style={{ width: '90%' }}
               >
                 <div
                   className="overflow-hidden rounded"
@@ -111,7 +109,7 @@ export default function Category() {
             >
               <div
                 className={`cat-item img-zoom d-flex align-items-center mb-4 rounded mx-auto ${style.txt}`}
-                style={{ width: '80%' }}
+                style={{ width: '90%' }}
               >
                 <div
                   className="overflow-hidden rounded"
@@ -142,7 +140,7 @@ export default function Category() {
             >
               <div
                 className={`cat-item img-zoom d-flex align-items-center mb-4 rounded mx-auto ${style.txt}`}
-                style={{ width: '80%' }}
+                style={{ width: '90%' }}
               >
                 <div
                   className="overflow-hidden rounded"
@@ -173,7 +171,7 @@ export default function Category() {
             >
               <div
                 className={`cat-item img-zoom d-flex align-items-center mb-4 rounded mx-auto ${style.txt}`}
-                style={{ width: '80%' }}
+                style={{ width: '90%' }}
               >
                 <div
                   className="overflow-hidden rounded"
@@ -204,7 +202,7 @@ export default function Category() {
             >
               <div
                 className={`cat-item img-zoom d-flex align-items-center mb-4 rounded mx-auto ${style.txt}`}
-                style={{ width: '80%' }}
+                style={{ width: '90%' }}
               >
                 <div
                   className="overflow-hidden rounded"
@@ -235,7 +233,7 @@ export default function Category() {
             >
               <div
                 className={`cat-item img-zoom d-flex align-items-center mb-4 rounded mx-auto ${style.txt}`}
-                style={{ width: '80%' }}
+                style={{ width: '90%' }}
               >
                 <div
                   className="overflow-hidden rounded"
@@ -266,7 +264,7 @@ export default function Category() {
             >
               <div
                 className={`cat-item img-zoom d-flex align-items-center mb-4 rounded mx-auto ${style.txt}`}
-                style={{ width: '80%' }}
+                style={{ width: '90%' }}
               >
                 <div
                   className="overflow-hidden rounded"
@@ -297,7 +295,7 @@ export default function Category() {
             >
               <div
                 className={`cat-item img-zoom d-flex align-items-center mb-4 rounded mx-auto ${style.txt}`}
-                style={{ width: '80%' }}
+                style={{ width: '90%' }}
               >
                 <div
                   className="overflow-hidden rounded"
@@ -328,7 +326,7 @@ export default function Category() {
             >
               <div
                 className={`cat-item img-zoom d-flex align-items-center mb-4 rounded mx-auto ${style.txt}`}
-                style={{ width: '80%' }}
+                style={{ width: '90%' }}
               >
                 <div
                   className="overflow-hidden rounded"
@@ -359,7 +357,7 @@ export default function Category() {
             >
               <div
                 className={`cat-item img-zoom d-flex align-items-center mb-4 rounded mx-auto ${style.txt}`}
-                style={{ width: '80%' }}
+                style={{ width: '90%' }}
               >
                 <div
                   className="overflow-hidden rounded"
@@ -390,7 +388,7 @@ export default function Category() {
             >
               <div
                 className={`cat-item img-zoom d-flex align-items-center mb-4 rounded mx-auto ${style.txt}`}
-                style={{ width: '80%' }}
+                style={{ width: '90%' }}
               >
                 <div
                   className="overflow-hidden rounded"
@@ -421,7 +419,7 @@ export default function Category() {
             >
               <div
                 className={`cat-item img-zoom d-flex align-items-center mb-4 rounded mx-auto ${style.txt}`}
-                style={{ width: '80%' }}
+                style={{ width: '90%' }}
               >
                 <div
                   className="overflow-hidden rounded"
@@ -452,7 +450,7 @@ export default function Category() {
             >
               <div
                 className={`cat-item img-zoom d-flex align-items-center mb-4 rounded mx-auto ${style.txt}`}
-                style={{ width: '80%' }}
+                style={{ width: '90%' }}
               >
                 <div
                   className="overflow-hidden rounded"
@@ -483,7 +481,7 @@ export default function Category() {
             >
               <div
                 className={`cat-item img-zoom d-flex align-items-center mb-4 rounded mx-auto ${style.txt}`}
-                style={{ width: '80%' }}
+                style={{ width: '90%' }}
               >
                 <div
                   className="overflow-hidden rounded"
@@ -514,7 +512,7 @@ export default function Category() {
             >
               <div
                 className={`cat-item img-zoom d-flex align-items-center mb-4 rounded mx-auto ${style.txt}`}
-                style={{ width: '80%' }}
+                style={{ width: '90%' }}
               >
                 <div
                   className="overflow-hidden rounded"
@@ -545,7 +543,7 @@ export default function Category() {
             >
               <div
                 className={`cat-item img-zoom d-flex align-items-center mb-4 rounded mx-auto ${style.txt}`}
-                style={{ width: '80%' }}
+                style={{ width: '90%' }}
               >
                 <div
                   className="overflow-hidden rounded"
@@ -576,7 +574,7 @@ export default function Category() {
             >
               <div
                 className={`cat-item img-zoom d-flex align-items-center mb-4 rounded mx-auto ${style.txt}`}
-                style={{ width: '80%' }}
+                style={{ width: '90%' }}
               >
                 <div
                   className="overflow-hidden rounded"
@@ -607,7 +605,7 @@ export default function Category() {
             >
               <div
                 className={`cat-item img-zoom d-flex align-items-center mb-4 rounded mx-auto ${style.txt}`}
-                style={{ width: '80%' }}
+                style={{ width: '90%' }}
               >
                 <div
                   className="overflow-hidden rounded"
@@ -638,7 +636,7 @@ export default function Category() {
             >
               <div
                 className={`cat-item img-zoom d-flex align-items-center mb-4 rounded mx-auto ${style.txt}`}
-                style={{ width: '80%' }}
+                style={{ width: '90%' }}
               >
                 <div
                   className="overflow-hidden rounded"

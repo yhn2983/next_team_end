@@ -1,27 +1,14 @@
-.offerArea{
-  content: "";
-  width: 82%;
-  border-top: 3px dashed #8e2626;
-  margin-top: 20px;
-  margin-left: 15px;
-}
-
 .productOffer {
   position: relative;
   overflow: hidden;
-  width: 750px;
-  height: 400px;
-}
-
-.productOffer {
   box-shadow: 0 0 30px gray;
 }
 
 .offerImg {
   position: absolute;
-  width: 100%;
-  height: 100%;
   transition: .5s;
+  object-fit: cover;
+  width: 100%;
 }
 
 .productOffer:hover .offerImg {
@@ -41,29 +28,25 @@
   z-index: 1;
 }
 
-.offerText h2 {
-  font-weight: 900;
-  margin-left: 300px;
+.offerText h4 {
+  margin-left: 40%;
   text-shadow: 0 0 10px rgba(128, 128, 128, 0.701);
 }
 
-.offerText h1{
-  font-size: 60px;
+.offerText h3{
   font-weight: 900;
-  margin-left: 300px;
+  margin-left: 40%;
   text-shadow: 0 0 10px rgba(128, 128, 128, 0.701);
 }
 
-.offerTextB h2 {
-  font-weight: 900;
-  margin-right: 320px;
+.offerTextB h4 {
+  margin-right: 40%;
   text-shadow: 0 0 10px rgba(128, 128, 128, 0.701);
 }
 
-.offerTextB h1{
-  font-size: 60px;
+.offerTextB h3{
   font-weight: 900;
-  margin-right: 350px;
+  margin-right: 40%;
   text-shadow: 0 0 10px rgba(128, 128, 128, 0.701);
 }
 
