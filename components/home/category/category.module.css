@@ -1,9 +1,8 @@
 .sectionTitle {
   content: "";
-  width:91%;
+  width:20%;
   border-top: 3px dashed #8e2626;
   margin-top: 20px;
-  margin-left: 15px;
 }
 
 .categoryArea {
@@ -14,107 +13,31 @@
 .line {
   width: 45px;
   height: auto;
-  padding-bottom: 20px;
 }
 
 .item {
-  width: 110px;
-  height: 110px;
-  border: 2px solid lightgrey;
-  border-radius: 50%;
-  background-size: cover;
-  background-position: center center;
-  box-shadow: 0 0 10px black;
+  box-shadow: 0 0 10px rgb(120, 119, 119);
   overflow: hidden;
   transform:scale(1,1);
   transition: all 0.5s ease-out;
+  border-radius: 1px;
 }
 
-.item:hover {
+.txt:hover .item {
   transform:scale(1.2,1.2);
+  border-radius: 1px;
 }
 
-.item1 {
-  background-image: url('/gift.jpg');
+.txt{
+  background-color: #FFFFFF;
 }
 
-.item2 {
-  background-image: url("/computer.png");
+.txt:hover {
+background-color: #e96d3f;
+color: #FFFFFF;
+border-radius: 1px;
 }
 
-.item3 {
-  background-image: url("/phone.png");
-}
-
-.item4 {
-  background-image: url("/man.png");
-}
-
-.item5 {
-  background-image: url("/woman-sm.png");
-}
-
-.item6 {
-  background-image: url("/beauty.png");
-}
-
-.item7 {
-  background-image: url("/luxury.png");
-}
-
-.item8 {
-  background-image: url("/game.png");
-}
-
-.item9 {
-  background-image: url("/earphone.png");
-}
-
-.item10 {
-  background-image: url("/camera.png");
-}
-
-.item11 {
-  background-image: url("/home.png");
-}
-
-.item12 {
-  background-image: url("/tv.png");
-}
-
-.item13 {
-  background-image: url("/baby.png");
-}
-
-.item14 {
-  background-image: url("/health.png");
-}
-
-.item15 {
-  background-image: url("/sport.png");
-}
-
-.item16 {
-  background-image: url("/food.png");
-}
-
-.item17 {
-  background-image: url("/pet.png");
-}
-
-.item18 {
-  background-image: url("/ticket.png");
-}
-
-.item19 {
-  background-image: url("/car.png");
-}
-
-.item20 {
-  background-image: url("/other.png");
-}
-
-.link{
-  text-decoration: none;
-  color: black;
+.txt:hover .textBody{
+  color: #8e2626;
 }
