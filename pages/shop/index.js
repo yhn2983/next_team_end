@@ -285,13 +285,13 @@ export default function Shop() {
                   </div>
                   <div className="custom-control d-flex align-items-center justify-content-between">
                     <label className="custom-control-label" htmlFor="price-5">
-                      <strong style={{ fontSize: '18px' }}>自訂</strong>
+                      <strong style={{ fontSize: '16px' }}>自訂</strong>
                     </label>
                     <input
                       type="text"
                       aria-label="lowest price"
                       className="form-control"
-                      style={{ width: '43%' }}
+                      style={{ width: '40%' }}
                       placeholder="價格下限"
                     />
                     <span>
@@ -301,7 +301,7 @@ export default function Shop() {
                       type="text"
                       aria-label="highest price"
                       className="form-control"
-                      style={{ width: '43%' }}
+                      style={{ width: '40%' }}
                       placeholder="價格上限"
                     />
                   </div>

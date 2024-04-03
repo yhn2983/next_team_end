@@ -29,7 +29,7 @@ export default function Footer() {
       <div className={`container-fluid px-5 pt-5 ${style.footerArea}`}>
         <div className="row pt-2">
           <div className="col-lg-4 col-md-12 mb-5 pr-3 ">
-            <h5 className="text-uppercase mb-4 ms-5">
+            <h5 className="text-uppercase mb-4 text-center">
               <strong>
                 <FaUserFriends className={`mb-2 ${style.footerContent}`} />
                 &nbsp;
