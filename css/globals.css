@@ -273,17 +273,11 @@ p {
 }
 
 abbr[title] {
-<<<<<<< HEAD
-  text-decoration: underline dotted;
-  cursor: help;
-  text-decoration-skip-ink: none;
-=======
   -webkit-text-decoration: underline dotted;
           text-decoration: underline dotted;
   cursor: help;
   -webkit-text-decoration-skip-ink: none;
           text-decoration-skip-ink: none;
->>>>>>> lee
 }
 
 address {
