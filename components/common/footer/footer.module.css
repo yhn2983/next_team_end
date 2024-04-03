@@ -1,5 +1,5 @@
 .footerArea{
-  height: 700px;
+  height: 100%;
   background-color:#8e2626;
 }
 
@@ -10,7 +10,7 @@
 }
 
 .selectOptions, .option{
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 500;
   color: white;
   padding-left: 4px;
@@ -23,31 +23,21 @@
 }
 
 .footerContent{
-  font-size: 30px;
+  font-size: 23px;
   color: white;
 }
 
 .footerContent2{
-  font-size: 20px;
+  font-size: 18px;
   color: white;
 }
 
 .adbox{
-  width: 180px;
-  height: 180px;
   border: 2px solid white;
   border-radius: 30px;
   background-color: #908e8e;
   color: #e96d3f;
-}
-
-.socialIcons{
-  font-size: 30px;
-  margin-right: 15px;
-}
-
-.socialIcons:hover{
-  opacity: 0.8;
+  object-fit: cover;
 }
 
 .adArea {
@@ -101,13 +91,18 @@
 }
 
 .list{
-  padding: 3px 3px;
+  text-decoration: none;
+  width: 100%;
 }
 
 .list:hover{
   background-color: #f5f5f5ac;
   border-radius: 10px;
   color: #8e2626 !important;
+}
+
+.socialIcons{
+  font-size: 25px;
 }
 
 

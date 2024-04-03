@@ -26,73 +26,61 @@ export default function Footer() {
   return (
     <>
       {/* Footer Start */}
-      <div
-        className={`container-fluid text-secondary pt-5 ${style.footerArea}`}
-      >
-        <div className="row px-xl-5 pt-2">
-          <div className="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
-            <h5 className="text-secondary text-uppercase mb-4">
+      <div className={`container-fluid px-5 pt-5 ${style.footerArea}`}>
+        <div className="row pt-2">
+          <div className="col-lg-4 col-md-12 mb-5 pr-3 ">
+            <h5 className="text-uppercase mb-4 ms-5">
               <strong>
                 <FaUserFriends className={`mb-2 ${style.footerContent}`} />
                 &nbsp;
                 <span className={style.footerContent}>廣告合作夥伴</span>
               </strong>
             </h5>
-            <div className="adboxTop d-flex">
-              <div
-                className={`me-5 d-flex align-items-center justify-content-center ${style.adbox}`}
-              >
+            <div className="row d-flex">
+              <div className="col-lg-6 col-md-12 d-flex align-items-center justify-content-center pb-2">
                 <Link href="/help-center/ad-partner">
                   <Image
-                    className=""
+                    className={`${style.adbox}`}
                     src="/n1.png"
                     alt=""
-                    width={176}
-                    height={176}
+                    width={155}
+                    height={155}
                     style={{ borderRadius: '30px' }}
                   />
                 </Link>
               </div>
-              <div
-                className={`d-flex align-items-center justify-content-center ${style.adbox}`}
-              >
+              <div className="d-flex align-items-center justify-content-center col-lg-6 col-md-12 pb-2">
                 <Link href="/help-center/ad-partner">
                   <Image
-                    className=""
+                    className={`${style.adbox}`}
                     src="/n2.png"
                     alt=""
-                    width={176}
-                    height={176}
+                    width={155}
+                    height={155}
                     style={{ borderRadius: '30px' }}
                   />
                 </Link>
               </div>
-            </div>
-            <div className="adboxBottom d-flex mt-4">
-              <div
-                className={`me-5 d-flex align-items-center justify-content-center ${style.adbox}`}
-              >
+              <div className="d-flex align-items-center justify-content-center col-lg-6 col-md-12 mt-lg-3 pb-2">
                 <Link href="/help-center/ad-partner">
                   <Image
-                    className=""
+                    className={style.adbox}
                     src="/n3.png"
                     alt=""
-                    width={176}
-                    height={176}
+                    width={155}
+                    height={155}
                     style={{ borderRadius: '30px' }}
                   />
                 </Link>
               </div>
-              <div
-                className={`d-flex align-items-center justify-content-center ${style.adbox}`}
-              >
+              <div className="d-flex align-items-center justify-content-center col-lg-6 col-md-12 mt-lg-3">
                 <Link href="/help-center/ad-partner">
                   <Image
-                    className=""
+                    className={`${style.adbox}`}
                     src="/n4.png"
                     alt=""
-                    width={176}
-                    height={176}
+                    width={155}
+                    height={155}
                     style={{ borderRadius: '30px' }}
                   />
                 </Link>
@@ -101,8 +89,8 @@ export default function Footer() {
           </div>
           <div className="col-lg-8 col-md-12">
             <div className="row">
-              <div className="col-md-4 mb-5">
-                <h5 className="text-secondary text-uppercase mb-4">
+              <div className="col-lg-4 col-md-12 mb-5 text-center">
+                <h5 className="text-uppercase mb-4">
                   <strong>
                     <FaRegHandPointDown
                       className={`mb-2 ${style.footerContent}`}
@@ -126,7 +114,7 @@ export default function Footer() {
                     </span>
                   </Link>
                   <Link
-                    className="text-secondary mb-3"
+                    className="mb-3"
                     href="/shop/random-search"
                     style={{ textDecoration: 'none' }}
                   >
@@ -139,7 +127,7 @@ export default function Footer() {
                     </span>
                   </Link>
                   <Link
-                    className="text-secondary mb-3"
+                    className="mb-3"
                     href="#"
                     style={{ textDecoration: 'none' }}
                   >
@@ -152,7 +140,7 @@ export default function Footer() {
                     </span>
                   </Link>
                   <Link
-                    className="text-secondary mb-3"
+                    className="mb-3"
                     href="#"
                     style={{ textDecoration: 'none' }}
                   >
@@ -192,8 +180,8 @@ export default function Footer() {
                   </Link>
                 </div>
               </div>
-              <div className="col-md-4 mb-5">
-                <h5 className="text-secondary text-uppercase mb-4">
+              <div className="col-lg-4 col-md-12 mb-5 text-center">
+                <h5 className="text-uppercase mb-4">
                   <strong>
                     <FaRegHandPointDown
                       className={`mb-2 ${style.footerContent}`}
@@ -204,7 +192,7 @@ export default function Footer() {
                 </h5>
                 <div className="d-flex flex-column justify-content-start">
                   <Link
-                    className="text-secondary mb-3 ps-2"
+                    className="mb-3 ps-2"
                     href="/help-center/deal"
                     style={{ textDecoration: 'none' }}
                   >
@@ -217,7 +205,7 @@ export default function Footer() {
                     </span>
                   </Link>
                   <Link
-                    className="text-secondary mb-3 ps-2"
+                    className="mb-3 ps-2"
                     href="/help-center/esg"
                     style={{ textDecoration: 'none' }}
                   >
@@ -230,7 +218,7 @@ export default function Footer() {
                     </span>
                   </Link>
                   <Link
-                    className="text-secondary mb-3 ps-2"
+                    className="mb-3 ps-2"
                     href="/help-center/privacy-rule"
                     style={{ textDecoration: 'none' }}
                   >
@@ -243,7 +231,7 @@ export default function Footer() {
                     </span>
                   </Link>
                   <Link
-                    className="text-secondary mb-3 ps-2"
+                    className="mb-3 ps-2"
                     href="/help-center/using-rule"
                     style={{ textDecoration: 'none' }}
                   >
@@ -256,7 +244,7 @@ export default function Footer() {
                     </span>
                   </Link>
                   <Link
-                    className="text-secondary mb-3 ps-2"
+                    className="mb-3 ps-2"
                     href="/help-center"
                     style={{ textDecoration: 'none' }}
                   >
@@ -283,8 +271,8 @@ export default function Footer() {
                   </Link>
                 </div>
               </div>
-              <div className="col-md-4 mb-5">
-                <h5 className="text-secondary text-uppercase mb-4">
+              <div className="col-lg-4 col-md-12 mb-5 text-center">
+                <h5 className="text-uppercase mb-4">
                   <strong>
                     <FaUserEdit className={`mb-2 ${style.footerContent}`} />
                     &nbsp;
@@ -312,10 +300,10 @@ export default function Footer() {
                       color: 'white',
                     }}
                   >
-                    <span style={{ fontSize: '20px' }}>註冊</span>
+                    <span style={{ fontSize: '18px' }}>註冊</span>
                   </button>
                 </div>
-                <h6 className="text-secondary text-uppercase mt-5 mb-3">
+                <h6 className="text-uppercase mt-5 mb-3">
                   <span
                     style={{
                       color: 'white',
@@ -326,20 +314,20 @@ export default function Footer() {
                     Follow Us
                   </span>
                 </h6>
-                <div className="d-flex ps-2">
-                  <Link className="" href="#">
+                <div className="d-flex justify-content-center ps-2">
+                  <Link className="me-2" href="#">
                     <FaSquareXTwitter
                       className={style.socialIcons}
                       style={{ color: 'black', backgroundColor: 'white' }}
                     />
                   </Link>
-                  <Link className="" href="#">
+                  <Link className="me-2" href="#">
                     <FaFacebookSquare
                       className={style.socialIcons}
                       style={{ backgroundColor: 'white' }}
                     />
                   </Link>
-                  <Link className="" href="#">
+                  <Link className="me-2" href="#">
                     <FaLinkedin
                       className={style.socialIcons}
                       style={{ color: '#1163cd', backgroundColor: 'white' }}
@@ -360,200 +348,98 @@ export default function Footer() {
           </div>
         </div>
         <div
-          className="row border-top mx-xl-5 pt-5"
+          className="row border-top pt-3 d-flex justify-centent-between"
           style={{ borderColor: 'rgba(256, 256, 256, .1)' }}
         >
-          <div className="col d-flex align-items-center justify-content-around pt-2">
-            <div className="d-flex">
-              <div className="me-1">
-                <Image
-                  className="rounded-circle"
-                  src="/logo9.png"
-                  alt=""
-                  width={200}
-                  height={200}
-                  style={{
-                    width: '60px',
-                    height: '60px',
-                    boxShadow: '0 0 10px white',
-                  }}
-                />
-              </div>
-              <div className="copyright">
-                <p
-                  className="pt-3"
-                  style={{ fontSize: '20px', color: 'white' }}
-                >
-                  &nbsp;&copy; 2024 DEAL
-                </p>
-              </div>
+          <div className="col-lg-2 col-md-2 col-sm-12 pb-2 text-center">
+            <Image
+              className="rounded-circle"
+              src="/logo9.png"
+              alt=""
+              width={200}
+              height={200}
+              style={{
+                width: '60px',
+                height: '60px',
+                boxShadow: '0 0 10px white',
+              }}
+            />
+            <div className="pt-1" style={{ fontSize: '14px', color: 'white' }}>
+              &nbsp;&copy; 2024 DEAL
             </div>
-            <div className="footer-txt d-flex ms-5 pt-3">
-              <div className="txt">
-                <Link
-                  className="text-decoration-none text-secondary me-3"
-                  href="/help-center"
-                >
-                  <strong>
-                    <span
-                      style={{ fontSize: '22px', color: 'white' }}
-                      className={style.list}
-                    >
-                      幫助中心
-                    </span>
-                  </strong>
-                </Link>
-              </div>
-              <div className="txt ms-4">
-                <Link
-                  className="text-decoration-none text-secondary me-3"
-                  href="/contact-us"
-                >
-                  <strong>
-                    <span
-                      style={{ fontSize: '22px', color: 'white' }}
-                      className={style.list}
-                    >
-                      聯絡我們
-                    </span>
-                  </strong>
-                </Link>
-              </div>
-              <div className="txt ms-4">
-                <Link
-                  className="text-decoration-none text-secondary me-3"
-                  href="/help-center/esg"
-                >
-                  <strong>
-                    <span
-                      style={{ fontSize: '22px', color: 'white' }}
-                      className={style.list}
-                    >
-                      永續發展
-                    </span>
-                  </strong>
-                </Link>
-              </div>
-              <div className="txt ms-4">
-                <Link
-                  className="text-decoration-none text-secondary me-3"
-                  href="/help-center/join-deal"
-                >
-                  <strong>
-                    <span
-                      style={{ fontSize: '22px', color: 'white' }}
-                      className={style.list}
-                    >
-                      公司職缺
-                    </span>
-                  </strong>
-                </Link>
-              </div>
-              <div className="txt ms-4">
-                <Link
-                  className="text-decoration-none text-secondary me-3"
-                  href="/help-center/using-rule"
-                >
-                  <strong>
-                    <span
-                      style={{ fontSize: '22px', color: 'white' }}
-                      className={style.list}
-                    >
-                      使用條款
-                    </span>
-                  </strong>
-                </Link>
-              </div>
-              <div className="txt ms-4">
-                <Link
-                  className="text-decoration-none text-secondary me-3"
-                  href="/help-center/privacy-rule"
-                >
-                  <strong>
-                    <span
-                      style={{ fontSize: '22px', color: 'white' }}
-                      className={style.list}
-                    >
-                      隱私政策
-                    </span>
-                  </strong>
-                </Link>
-              </div>
-            </div>
-            <div className="language d-flex">
-              <div className="iconarea d-flex">
-                <div className="country ">
-                  <Image
-                    className="rounded-circle"
-                    src="/taiwan.png"
-                    alt=""
-                    width={512}
-                    height={512}
-                    style={{ width: '50px', height: '50px' }}
-                  />
-                </div>
-                <div className="country ms-3">
-                  <Image
-                    className="rounded-circle"
-                    src="/us.png"
-                    alt=""
-                    width={512}
-                    height={512}
-                    style={{ width: '50px', height: '50px' }}
-                  />
-                </div>
-                <div className="country ms-3">
-                  <Image
-                    className="rounded-circle"
-                    src="/japan.png"
-                    alt=""
-                    width={512}
-                    height={512}
-                    style={{ width: '50px', height: '50px' }}
-                  />
-                </div>
-                <div className="country ms-3">
-                  <Image
-                    className="rounded-circle"
-                    src="/south-korea.png"
-                    alt=""
-                    width={512}
-                    height={512}
-                    style={{ width: '50px', height: '50px' }}
-                  />
-                </div>
-                <div className="country ms-3">
-                  <Image
-                    className="rounded-circle"
-                    src="/china.png"
-                    alt=""
-                    width={512}
-                    height={512}
-                    style={{ width: '50px', height: '50px' }}
-                  />
-                </div>
-              </div>
-              <div className="lanselect ms-3 mt-3">
-                <select
-                  className="form-select form-select-sm shadow-xl"
-                  aria-label=".form-select-sm example"
-                >
-                  <option selected>繁體中文(台灣)</option>
-                  <option value="1">English</option>
-                  <option value="2">Japanese</option>
-                  <option value="3">Korean</option>
-                </select>
-              </div>
+          </div>
+          <div
+            className="col-lg-8 d-flex align-items-center text-center d-none d-sm-block pt-4"
+            style={{ padding: '0 4% 0 4%' }}
+          >
+            <Link
+              style={{
+                fontSize: '16px',
+                color: 'white',
+                marginRight: '5%',
+              }}
+              className={style.list}
+              href="/help-center"
+            >
+              <strong>幫助中心</strong>
+            </Link>
+            <Link
+              style={{ fontSize: '16px', color: 'white', marginRight: '5%' }}
+              className={style.list}
+              href="/contact-us"
+            >
+              <strong>聯絡我們</strong>
+            </Link>
+            <Link
+              style={{ fontSize: '16px', color: 'white', marginRight: '5%' }}
+              className={style.list}
+              href="/help-center/esg"
+            >
+              <strong>永續發展</strong>
+            </Link>
+            <Link
+              style={{ fontSize: '16px', color: 'white', marginRight: '5%' }}
+              className={style.list}
+              href="/help-center/join-deal"
+            >
+              <strong>公司職缺</strong>
+            </Link>
+            <Link
+              style={{ fontSize: '16px', color: 'white', marginRight: '5%' }}
+              className={style.list}
+              href="/help-center/using-rule"
+            >
+              <strong>使用條款</strong>
+            </Link>
+            <Link
+              style={{ fontSize: '16px', color: 'white', marginRight: '5%' }}
+              className={style.list}
+              href="/help-center/privacy-rule"
+            >
+              <strong>隱私政策</strong>
+            </Link>
+          </div>
+          <div
+            className="col-lg-2 col-md-2 d-none d-sm-block d-flex"
+            style={{ paddingRight: '5%' }}
+          >
+            <div className="pt-4" style={{ width: '100%' }}>
+              <select
+                className="form-select form-select-sm shadow-xl form-control"
+                aria-label=".form-select-sm example"
+              >
+                <option selected>繁體中文(台灣)</option>
+                <option value="1">English</option>
+                <option value="2">Japanese</option>
+                <option value="3">Korean</option>
+              </select>
             </div>
           </div>
         </div>
       </div>
       {/* Footer End */}
       {/* ad start */}
-      <div
-        className={style.adArea}
-        style={{ visibility: isClose ? 'hidden' : '' }}
-      >
+      <div className={style.adArea} style={{ display: isClose ? 'none' : '' }}>
         <Link href="">
           <Image
             className="rounded-circle shadow-lg"

@@ -22,14 +22,10 @@ export default function Ad() {
           <span className="pr-3" style={{ color: '#8e2626' }}>
             <strong>
               <AiOutlineSmallDash />
-              <AiOutlineSmallDash />
-              <AiOutlineSmallDash />
               <AiOutlineSmallDash className="me-2" />
               <MdOutlineVolunteerActivism className="mb-2" />
               DEAL近期大活動
               <AiOutlineSmallDash className="ms-2" />
-              <AiOutlineSmallDash />
-              <AiOutlineSmallDash />
               <AiOutlineSmallDash />
             </strong>
           </span>
