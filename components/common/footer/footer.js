@@ -37,7 +37,7 @@ export default function Footer() {
               </strong>
             </h5>
             <div className="row d-flex">
-              <div className="col-lg-6 col-md-12 d-flex align-items-center justify-content-center pb-2">
+              <div className="col-lg-6 col-md-6 col-xs-12 d-flex align-items-center justify-content-center pb-2">
                 <Link href="/help-center/ad-partner">
                   <Image
                     className={`${style.adbox}`}
@@ -49,7 +49,7 @@ export default function Footer() {
                   />
                 </Link>
               </div>
-              <div className="d-flex align-items-center justify-content-center col-lg-6 col-md-12 pb-2">
+              <div className="d-flex align-items-center justify-content-center col-lg-6 col-md-6 col-xs-12 pb-2">
                 <Link href="/help-center/ad-partner">
                   <Image
                     className={`${style.adbox}`}
@@ -61,7 +61,7 @@ export default function Footer() {
                   />
                 </Link>
               </div>
-              <div className="d-flex align-items-center justify-content-center col-lg-6 col-md-12 mt-lg-3 pb-2">
+              <div className="d-flex align-items-center justify-content-center col-lg-6 col-md-6 col-xs-12 mt-lg-3 pb-2">
                 <Link href="/help-center/ad-partner">
                   <Image
                     className={style.adbox}
@@ -73,7 +73,7 @@ export default function Footer() {
                   />
                 </Link>
               </div>
-              <div className="d-flex align-items-center justify-content-center col-lg-6 col-md-12 mt-lg-3">
+              <div className="d-flex align-items-center justify-content-center col-lg-6 col-md-6 col-xs-12 mt-lg-3">
                 <Link href="/help-center/ad-partner">
                   <Image
                     className={`${style.adbox}`}
@@ -89,7 +89,7 @@ export default function Footer() {
           </div>
           <div className="col-lg-8 col-md-12">
             <div className="row">
-              <div className="col-lg-4 col-md-12 mb-5 text-center">
+              <div className="col-lg-4 col-md-6 col-xs-12 mb-5 text-center">
                 <h5 className="text-uppercase mb-4">
                   <strong>
                     <FaRegHandPointDown
@@ -180,7 +180,7 @@ export default function Footer() {
                   </Link>
                 </div>
               </div>
-              <div className="col-lg-4 col-md-12 mb-5 text-center">
+              <div className="col-lg-4 col-md-6 col-xs-12 mb-5 text-center">
                 <h5 className="text-uppercase mb-4">
                   <strong>
                     <FaRegHandPointDown
@@ -351,7 +351,7 @@ export default function Footer() {
           className="row border-top pt-3 d-flex justify-centent-between"
           style={{ borderColor: 'rgba(256, 256, 256, .1)' }}
         >
-          <div className="col-lg-2 col-md-2 col-sm-12 pb-2 text-center">
+          <div className="col-lg-2 col-md-12 col-sm-12 pb-2 text-center">
             <Image
               className="rounded-circle"
               src="/logo9.png"
@@ -420,7 +420,7 @@ export default function Footer() {
             </Link>
           </div>
           <div
-            className="col-lg-2 col-md-2 d-none d-sm-block d-flex"
+            className="col-lg-2 d-none d-sm-none d-md-none d-lg-block d-flex"
             style={{ paddingRight: '5%' }}
           >
             <div className="pt-4" style={{ width: '100%' }}>
