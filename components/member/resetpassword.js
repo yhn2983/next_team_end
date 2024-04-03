@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import styles from '@/styles/lee-form.module.scss'
 import { PASSWORD_RESET_POST } from '@/components/config'
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 
 export default function ResetPasswordPage() {
   const [email, setEmail] = useState('')
   const [token, setToken] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const router = useRouter()
+  // const router = useRouter()
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -36,8 +36,8 @@ export default function ResetPasswordPage() {
       console.log(result)
 
       if (result.status === 'success') {
-        alert('密碼重設成功，為您跳轉到登入頁面')
-        router.push('/member/login')
+        alert('密碼重設成功，請重新登入')
+        // router.push('/member/login')
       } else {
         alert(result.message)
       }

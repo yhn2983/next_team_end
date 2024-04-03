@@ -5,7 +5,7 @@ import validator from 'validator'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { JWT_REGISTER_POST } from '@/components/config'
-import router from 'next/router'
+// import router from 'next/router'
 
 export default function RegisterPage() {
   // 跳出對話框
@@ -124,12 +124,12 @@ export default function RegisterPage() {
     if (data.status === 'success') {
       MySwal.fire({
         title: '恭喜',
-        text: '你已經成功註冊為會員，為您跳轉到登入頁面',
+        text: '你已經成功註冊為會員，請登入',
         icon: 'success',
       })
 
       // 跳轉到登入頁 用next的router
-      router.push('/member/login')
+      // router.push('/member/login')
     } else {
       MySwal.fire({
         title: '錯誤!',
