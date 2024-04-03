@@ -6,6 +6,7 @@ public/imgs
 /node_modules
 /.pnp
 .pnp.js
+/public/imgs
 
 # testing
 /coverage
@@ -41,4 +42,4 @@ package-lock.json
 yarn.lock
 /.temp/
 
-config.js
+/imgs

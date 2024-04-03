@@ -1,0 +1,26 @@
+.myloginform {
+  background-color: #f0f1f1;
+  border: 2px solid rgb(142, 38, 38);
+  border-radius: 0.2em;
+}
+.myloginform h2 {
+  border-bottom: 1px solid #dee2e6;
+  padding-top: 6px;
+  padding-bottom: 20px;
+  color: rgb(142, 38, 38);
+}
+.myloginform button {
+  background: #e96d3f;
+  color: #FFFFFF;
+}
+.myloginform button:hover {
+  background: rgb(142, 38, 38);
+  color: #FFFFFF;
+}
+.myloginform .error {
+  color: red;
+  height: 10px;
+  position: relative;
+  margin-left: 5px;
+  margin-top: 6px;
+}
