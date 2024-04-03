@@ -3,7 +3,6 @@
 .vscode
 
 /public
-context/auth-context.js
 components/icons
 components/configs/index.js
 
@@ -11,6 +10,7 @@ components/configs/index.js
 /node_modules
 /.pnp
 .pnp.js
+/public/imgs
 
 
 # testing
@@ -46,3 +46,5 @@ next-env.d.ts
 package-lock.json
 yarn.lock
 /.temp/
+
+/imgs

@@ -20,7 +20,6 @@ import {
   FaAngleLeft,
   FaAngleRight,
 } from 'react-icons/fa'
-import { IoSearch } from 'react-icons/io5'
 // loading bar & loading icon
 import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
@@ -556,17 +555,17 @@ export default function Shop() {
                       className="col-lg-4 col-md-12 col-sm-12 pb-1"
                     >
                       <div
-                        className={`product-item bg-light mb-5 mx-auto ${style.productItem}`}
+                        className={`product-item bg-light ${style.productItem}`}
                         style={{ marginBottom: '60px' }}
                       >
-                        <div className="overflow-hidden ">
+                        <div className="overflow-hidden">
                           <Link
                             href=""
                             style={{ textDecoration: 'none', color: 'black' }}
                           >
                             <div
-                              className="position-relative"
-                              style={{ overflow: 'hidden' }}
+                              className=""
+                              style={{ overflow: 'hidden', height: '360px' }}
                             >
                               <Image
                                 className={`img-fluid w-100 ${style.imgAct}`}
@@ -576,9 +575,10 @@ export default function Shop() {
                                     : `/${v.product_photos}`
                                 }
                                 alt=""
-                                width={266}
-                                height={266}
-                                style={{ height: '266px', objectFit: 'cover' }}
+                                width={261}
+                                height={100}
+                                style={{ height: '100%', objectFit: 'cover' }}
+                                accessKey=""
                               />
                             </div>
                           </Link>
@@ -589,34 +589,69 @@ export default function Shop() {
                             <Link href="" className="">
                               <AiOutlineHeart className={style.iconBInner} />
                             </Link>
-                            <Link href="" className="">
-                              <IoSearch className={style.iconCInner} />
-                            </Link>
                           </div>
                         </div>
-                        <div
-                          className="text-center py-4 px-2"
-                          style={{ height: '160px' }}
+                        <Link
+                          href=""
+                          style={{ textDecoration: 'none', color: 'black' }}
                         >
-                          <Link
-                            className="h6 text-decoration-none text-truncate text-wrap"
-                            href=""
-                          >
-                            <h5>
-                              <strong>{v.product_name}</strong>
-                            </h5>
-                          </Link>
-                          <span
-                            style={{
-                              fontSize: '18px',
-                              color:
-                                v.product_status == '1' ? 'green' : '#e96d3f',
-                            }}
-                          >
-                            {v.product_status == '1' ? '二手' : '全新'}
-                          </span>
-                          <span className="">${v.product_price}</span>
-                        </div>
+                          <div className="w-100 d-flex justify-content-start align-items-cneter ps-3 pe-2 mt-3">
+                            <div className="">
+                              <Image
+                                className="mt-3 mb-1 rounded-circle"
+                                src={`/${v.photo}`}
+                                alt=""
+                                width={70}
+                                height={70}
+                                title={v.nickname}
+                                style={{ objectFit: 'cover' }}
+                              ></Image>
+                            </div>
+                            <div className="text ms-3">
+                              <div
+                                className="text-decoration-none text-wrap text-truncate"
+                                style={{
+                                  fontSize: '18px',
+                                  width: '250px',
+                                  height: '100px',
+                                  overflow: 'wrap',
+                                }}
+                              >
+                                <strong>{v.product_name}</strong>
+                              </div>
+                              <div className="d-flex">
+                                <div
+                                  className="mt-2"
+                                  style={{
+                                    fontSize: '18px',
+                                    color:
+                                      v.product_status == '1'
+                                        ? 'green'
+                                        : '#e96d3f',
+                                  }}
+                                >
+                                  <strong>
+                                    {v.product_status == '1' ? '二手' : '全新'}
+                                  </strong>
+                                </div>
+                                <span
+                                  className="mt-2 ms-5"
+                                  style={{ fontSize: '18px' }}
+                                >
+                                  <strong>${v.product_price}</strong>
+                                </span>
+                                <span
+                                  className="mt-2 ms-5"
+                                  style={{ fontSize: '18px' }}
+                                >
+                                  <strong style={{ color: '#8e2626' }}>
+                                    {v.mc !== 0 ? v.mc : v.sc}c
+                                  </strong>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
                       </div>
                     </div>
                   )

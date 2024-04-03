@@ -28,7 +28,7 @@ export default function Offer() {
           <div className="col-lg-6 col-md-12 mb-md-3 mb-sm-3">
             <div
               className={`rounded me-lg-3 mb-3 ${style.productOffer}`}
-              style={{ height: '200px' }}
+              style={{ height: '400px' }}
             >
               <Image
                 className={`img-fluid ${style.offerImg}`}
@@ -36,6 +36,7 @@ export default function Offer() {
                 alt=""
                 width={550}
                 height={400}
+                style={{ height: '400px' }}
               />
               <div className={style.offerText}>
                 <h3 className="text-white">
@@ -60,14 +61,15 @@ export default function Offer() {
           <div className="col-lg-6 col-md-12">
             <div
               className={`mb-30 ms-lg-2 rounded ${style.productOffer}`}
-              style={{ height: '200px' }}
+              style={{ height: '400px' }}
             >
               <Image
                 className={`img-fluid ${style.offerImg}`}
-                src="/offer3.png"
+                src="/offer2.png"
                 alt=""
                 width={550}
                 height={400}
+                style={{ height: '400px' }}
               />
               <div className={style.offerTextB}>
                 <h3 className="text-white text-uppercase mt-2">
