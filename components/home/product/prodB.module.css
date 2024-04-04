@@ -1,7 +1,7 @@
 .card{
   margin: auto;
   width: 90%;
-  height: 340px;
+  height: 432px;
   overflow: hidden;
   transform-style: preserve-3d;
   transition: transform 0.6s;
@@ -47,9 +47,6 @@
 }
 
 .slideBackB {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border: 3px solid #e96d3f;
   transform: rotateY(0deg);
   transition: transform 0.8s;
@@ -155,7 +152,6 @@
 
 .imgAct{
   transition: .5s;
-  object-fit: cover;
 }
 
 .card:hover .imgAct{
@@ -176,7 +172,7 @@
 }
 
 .moreBtn:hover{
-  background-color: #8e2626;
+  background-color: #8e2626 !important;
 }
 
 

@@ -14,7 +14,7 @@ export default function Offer() {
     <>
       {/* Offer Start */}
       <div className="container-fluid pt-lg-5 mt-5 pt-sm-2 pb-3 px-lg-5">
-        <h2 className="section-title position-relative text-uppercase mx-xl-5 text-center mb-4">
+        <h2 className="section-title position-relative text-uppercase mx-xl-5 text-center mb-5">
           <span className="pr-3" style={{ color: '#8e2626' }}>
             <strong>
               <AiOutlineSmallDash className="me-2" />

@@ -1,13 +1,15 @@
+import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { PROD_LIST } from '@/configs/config-r'
 // page
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
 import style from './randomSearch.module.css'
-import { useState } from 'react'
 // react bootstrap
 // react icons-----
 import { BsFillCartFill } from 'react-icons/bs'
@@ -15,10 +17,38 @@ import { AiOutlineHeart } from 'react-icons/ai'
 // hook------
 
 export default function RandomShop() {
+  // Router-----
+  const router = useRouter()
+
   const [isClicked, setIsClicked] = useState(false)
   const handleClick = () => {
     setIsClicked(!isClicked)
   }
+
+  // Products-----
+  const [data, setData] = useState({
+    success: false,
+    page: 0,
+    totalPages: 0,
+    rows: [],
+    cate: [],
+  })
+
+  useEffect(() => {
+    fetch(`${PROD_LIST}${location.search}`)
+      .then((r) => r.json())
+      .then((dataObj) => {
+        setData(dataObj)
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error)
+      })
+  }, [router])
+
+  // category
+  const [mainSelect, setMainSelect] = useState(null)
+
+  const qs = { ...router.query }
 
   return (
     <>

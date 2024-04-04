@@ -24,6 +24,7 @@ import { IoSearch } from 'react-icons/io5'
 // loading bar & loading icon
 import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
+import { MarkdownFill } from 'react-bootstrap-icons'
 // hook------
 //import { useAuth } from '@/context/auth-context'
 
@@ -555,15 +556,15 @@ export default function Shop() {
                       key={v.id}
                       className="col-lg-4 col-md-12 col-sm-12 pb-1"
                     >
-                      <div
-                        className={`product-item bg-light mb-5 mx-auto ${style.productItem}`}
-                        style={{ marginBottom: '60px' }}
+                      <Link
+                        href=""
+                        style={{ textDecoration: 'none', color: 'black' }}
                       >
-                        <div className="overflow-hidden ">
-                          <Link
-                            href=""
-                            style={{ textDecoration: 'none', color: 'black' }}
-                          >
+                        <div
+                          className={`product-item bg-light mb-5 mx-auto ${style.productItem}`}
+                          style={{ marginBottom: '60px' }}
+                        >
+                          <div className="overflow-hidden ">
                             <div
                               className="position-relative"
                               style={{ overflow: 'hidden' }}
@@ -581,46 +582,60 @@ export default function Shop() {
                                 style={{ height: '266px', objectFit: 'cover' }}
                               />
                             </div>
-                          </Link>
-                          <div className={style.productAction}>
-                            <Link href="" className="">
-                              <BsFillCartFill className={style.iconAInner} />
-                            </Link>
-                            <Link href="" className="">
-                              <AiOutlineHeart className={style.iconBInner} />
-                            </Link>
-                            <Link href="" className="">
-                              <IoSearch className={style.iconCInner} />
-                            </Link>
+
+                            <div className={style.productAction}>
+                              <Link href="" className="">
+                                <BsFillCartFill className={style.iconAInner} />
+                              </Link>
+                              <Link href="" className="">
+                                <AiOutlineHeart className={style.iconBInner} />
+                              </Link>
+                              <Link href="" className="">
+                                <IoSearch className={style.iconCInner} />
+                              </Link>
+                            </div>
+                          </div>
+                          <div
+                            className="text-center py-3 px-2"
+                            style={{ height: '160px' }}
+                          >
+                            <div
+                              className="text-wrap text-truncate"
+                              style={{ height: '70%' }}
+                              href=""
+                            >
+                              <h5>
+                                <strong className="">{v.product_name}</strong>
+                              </h5>
+                            </div>
+                            <div className="d-flex justify-content-center ">
+                              <div
+                                className=""
+                                style={{
+                                  fontSize: '18px',
+                                  color:
+                                    v.product_status == '1'
+                                      ? 'green'
+                                      : '#e96d3f',
+                                }}
+                              >
+                                <strong>
+                                  {v.product_status == '1' ? '二手' : '全新'}
+                                </strong>
+                              </div>
+                              &nbsp;
+                              <div className="" style={{ fontSize: '18px' }}>
+                                <strong>${v.product_price}</strong>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                        <div
-                          className="text-center py-4 px-2"
-                          style={{ height: '160px' }}
-                        >
-                          <Link
-                            className="h6 text-decoration-none text-truncate text-wrap"
-                            href=""
-                          >
-                            <h5>
-                              <strong>{v.product_name}</strong>
-                            </h5>
-                          </Link>
-                          <span
-                            style={{
-                              fontSize: '18px',
-                              color:
-                                v.product_status == '1' ? 'green' : '#e96d3f',
-                            }}
-                          >
-                            {v.product_status == '1' ? '二手' : '全新'}
-                          </span>
-                          <span className="">${v.product_price}</span>
-                        </div>
-                      </div>
+                      </Link>
                     </div>
                   )
                 })}
+              </div>
+              <div className="row">
                 <div className="col-12">
                   <nav style={{ marginRight: '25px' }}>
                     <ul className="pagination pagination-lg justify-content-center">

@@ -15,7 +15,7 @@ export default function Ad() {
     <>
       {/* Activity Start */}
       <div
-        className="container-fluid pt-5 mt-5 pb-5"
+        className="container-fluid pt-5 mt-5 pb-5 px-lg-5"
         style={{ backgroundColor: '#F5F5F5' }}
       >
         <h2 className="section-title position-relative text-uppercase mx-xl-5 text-center mb-3">
