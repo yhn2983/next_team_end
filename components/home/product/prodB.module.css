@@ -17,25 +17,29 @@
 
 .slide {
   border: 3px solid #8e2626;
+  transform-style: preserve-3d;
   position: relative;
   position: absolute;
   top: 0;
   left: 0;
-  transition: transform 0.8s;
+  transition: transform 0.5s;
+  transform: rotateY(0deg);
 }
 
 .slideB {
   border: 3px solid #8e2626;
+  transform-style: preserve-3d;
   position: relative;
   position: absolute;
   top: 0;
   left: 0;
-  transition: transform 0.8s;
+  transition: transform 0.5s;
   transform: rotateY(180deg);
   backface-visibility: hidden;
 } 
 
 .slideBack {
+  transform-style: preserve-3d;
   display: flex;
   justify-content: center;
   border: 3px solid #e96d3f;
@@ -47,6 +51,7 @@
 }
 
 .slideBackB {
+  transform-style: preserve-3d;
   border: 3px solid #e96d3f;
   transform: rotateY(0deg);
   transition: transform 0.8s;

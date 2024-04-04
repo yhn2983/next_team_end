@@ -103,7 +103,7 @@ export default function Shop() {
         {/* Breadcrumb End */}
 
         {/* Shop Start */}
-        <div className="container-fluid ps-lg-5">
+        <div className="container-fluid">
           <div className="row px-xl-5">
             {/* Shop Sidebar Start */}
             <div className="col-lg-3 col-md-4 mt-5">
@@ -178,7 +178,7 @@ export default function Shop() {
                   <strong>價格篩選</strong>
                 </h3>
               </div>
-              <div className="bg-light p-4 mb-4">
+              <div className="bg-light p-3 mb-4">
                 <form>
                   <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                     <input
@@ -190,7 +190,7 @@ export default function Shop() {
                       className="custom-control-label mx-auto"
                       htmlFor="price-all"
                     >
-                      <strong style={{ fontSize: '18px' }}>全部商品</strong>
+                      <strong style={{ fontSize: '16px' }}>全部商品</strong>
                     </label>
                     <span
                       className="badge border font-weight-normal"
@@ -209,7 +209,7 @@ export default function Shop() {
                       className="custom-control-label mx-auto"
                       htmlFor="price-1"
                     >
-                      <strong style={{ fontSize: '18px' }}>$0 - $500</strong>
+                      <strong style={{ fontSize: '16px' }}>$0 - $500</strong>
                     </label>
                     <span
                       className="badge border font-weight-normal"
@@ -228,7 +228,7 @@ export default function Shop() {
                       className="custom-control-label mx-auto"
                       htmlFor="price-2"
                     >
-                      <strong style={{ fontSize: '18px' }}>$501 - $1000</strong>
+                      <strong style={{ fontSize: '16px' }}>$501 - $1000</strong>
                     </label>
                     <span
                       className="badge border font-weight-normal"
@@ -244,7 +244,7 @@ export default function Shop() {
                       id="price-3"
                     />
                     <label className="custom-control-label" htmlFor="price-3">
-                      <strong style={{ fontSize: '18px' }}>
+                      <strong style={{ fontSize: '16px' }}>
                         $1001 - $3000
                       </strong>
                     </label>
@@ -262,7 +262,7 @@ export default function Shop() {
                       id="price-4"
                     />
                     <label className="custom-control-label" htmlFor="price-4">
-                      <strong style={{ fontSize: '18px' }}>
+                      <strong style={{ fontSize: '16px' }}>
                         $3001 - $5000
                       </strong>
                     </label>
@@ -280,7 +280,7 @@ export default function Shop() {
                       id="price-5"
                     />
                     <label className="custom-control-label" htmlFor="price-5">
-                      <strong style={{ fontSize: '18px' }}>$5001↑</strong>
+                      <strong style={{ fontSize: '16px' }}>$5001↑</strong>
                     </label>
                     <span
                       className="badge border font-weight-normal"
@@ -289,27 +289,28 @@ export default function Shop() {
                       168
                     </span>
                   </div>
-                  <div className="custom-control d-flex align-items-center justify-content-between">
-                    <label className="custom-control-label" htmlFor="price-5">
-                      <strong style={{ fontSize: '16px' }}>自訂</strong>
-                    </label>
-                    <input
-                      type="text"
-                      aria-label="lowest price"
-                      className="form-control"
-                      style={{ width: '40%' }}
-                      placeholder="價格下限"
-                    />
-                    <span>
-                      <strong>-</strong>
-                    </span>
-                    <input
-                      type="text"
-                      aria-label="highest price"
-                      className="form-control"
-                      style={{ width: '40%' }}
-                      placeholder="價格上限"
-                    />
+                  <div className="custom-control">
+                    <div className="row">
+                      <div className="col-12 d-flex align-items-center justify-content-between mx-auto">
+                        <input
+                          type="text"
+                          aria-label="lowest price"
+                          className="form-control"
+                          style={{ width: '48%' }}
+                          placeholder="價格下限"
+                        />
+                        <span>
+                          <strong>-</strong>
+                        </span>
+                        <input
+                          type="text"
+                          aria-label="highest price"
+                          className="form-control"
+                          style={{ width: '48%' }}
+                          placeholder="價格上限"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </form>
               </div>
@@ -321,7 +322,7 @@ export default function Shop() {
                   <strong>商品狀態篩選</strong>
                 </h3>
               </div>
-              <div className="bg-light p-4 mb-4">
+              <div className="bg-light p-3 mb-4">
                 <form>
                   <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                     <input
@@ -333,7 +334,7 @@ export default function Shop() {
                       className="custom-control-label mx-auto"
                       htmlFor="price-all"
                     >
-                      <strong style={{ fontSize: '18px' }}>全部商品</strong>
+                      <strong style={{ fontSize: '16px' }}>全部商品</strong>
                     </label>
                     <span
                       className="badge border font-weight-normal"
@@ -352,7 +353,7 @@ export default function Shop() {
                       className="custom-control-label mx-auto"
                       htmlFor="color-1"
                     >
-                      <strong style={{ fontSize: '18px' }}>二手商品</strong>
+                      <strong style={{ fontSize: '16px' }}>二手商品</strong>
                     </label>
                     <span
                       className="badge border font-weight-normal"
@@ -371,7 +372,7 @@ export default function Shop() {
                       className="custom-control-label mx-auto"
                       htmlFor="color-2"
                     >
-                      <strong style={{ fontSize: '18px' }}>全新商品</strong>
+                      <strong style={{ fontSize: '16px' }}>全新商品</strong>
                     </label>
                     <span
                       className="badge border font-weight-normal"
@@ -389,7 +390,7 @@ export default function Shop() {
                   <strong>上架時間篩選</strong>
                 </h3>
               </div>
-              <div className="bg-light p-4 mb-30">
+              <div className="bg-light p-3 mb-30">
                 <form>
                   <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                     <input
@@ -398,7 +399,7 @@ export default function Shop() {
                       id="size-all"
                     />
                     <label className="custom-control-label" htmlFor="size-all">
-                      <strong style={{ fontSize: '18px' }}>全部商品</strong>
+                      <strong style={{ fontSize: '16px' }}>全部商品</strong>
                     </label>
                     <span
                       className="badge border font-weight-normal"
@@ -414,8 +415,8 @@ export default function Shop() {
                       id="size-1"
                     />
                     <label className="custom-control-label" htmlFor="size-1">
-                      <strong style={{ fontSize: '18px' }}>
-                        2010/01 - 2012/12
+                      <strong style={{ fontSize: '16px' }}>
+                        2010年 - 2012年
                       </strong>
                     </label>
                     <span
@@ -432,8 +433,8 @@ export default function Shop() {
                       id="size-2"
                     />
                     <label className="custom-control-label" htmlFor="size-2">
-                      <strong style={{ fontSize: '18px' }}>
-                        2013/01 - 2015/12
+                      <strong style={{ fontSize: '16px' }}>
+                        2013年 - 2015年
                       </strong>
                     </label>
                     <span
@@ -450,8 +451,8 @@ export default function Shop() {
                       id="size-3"
                     />
                     <label className="custom-control-label" htmlFor="size-3">
-                      <strong style={{ fontSize: '18px' }}>
-                        2016/01 - 2018/12
+                      <strong style={{ fontSize: '16px' }}>
+                        2016年 - 2018年
                       </strong>
                     </label>
                     <span
@@ -468,8 +469,8 @@ export default function Shop() {
                       id="size-4"
                     />
                     <label className="custom-control-label" htmlFor="size-4">
-                      <strong style={{ fontSize: '18px' }}>
-                        2019/01 - 2020/12
+                      <strong style={{ fontSize: '16px' }}>
+                        2019年 - 2020年
                       </strong>
                     </label>
                     <span
@@ -486,8 +487,8 @@ export default function Shop() {
                       id="size-5"
                     />
                     <label className="custom-control-label" htmlFor="size-5">
-                      <strong style={{ fontSize: '18px' }}>
-                        2021/01 - 2023/12
+                      <strong style={{ fontSize: '16px' }}>
+                        2021年 - 2023年
                       </strong>
                     </label>
                     <span
@@ -504,9 +505,7 @@ export default function Shop() {
                       id="size-6"
                     />
                     <label className="custom-control-label" htmlFor="size-6">
-                      <strong style={{ fontSize: '18px' }}>
-                        2024/01-2024/12
-                      </strong>
+                      <strong style={{ fontSize: '16px' }}>2024年</strong>
                     </label>
                     <span
                       className="badge border font-weight-normal"
@@ -515,44 +514,47 @@ export default function Shop() {
                       145
                     </span>
                   </div>
-                  <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                    <label className="custom-control-label" htmlFor="price-5">
-                      <strong style={{ fontSize: '18px' }}>自訂</strong>
-                    </label>
-                    <div className="d-flex" style={{ width: '90%' }}>
-                      <DatePicker
-                        className="form-control"
-                        selected={startDate}
-                        onChange={(date) => setStartDate(date)}
-                      />
-                      <div className="mt-2">
-                        <strong> - </strong>
+                  <div className="custom-control">
+                    <div className="row mx-auto">
+                      <div className="col-12 d-flex align-items-center justify-content-between">
+                        <DatePicker
+                          className="form-control"
+                          selected={startDate}
+                          onChange={(date) => setStartDate(date)}
+                          style={{ width: '50%' }}
+                        />
+                        <div className="">
+                          <strong> - </strong>
+                        </div>
+                        <DatePicker
+                          className="form-control"
+                          selected={endDate}
+                          onChange={(date) => setStartDate(date)}
+                          style={{ width: '50%' }}
+                        />
                       </div>
-                      <DatePicker
-                        className="form-control"
-                        selected={endDate}
-                        onChange={(date) => setStartDate(date)}
-                      />
                     </div>
                   </div>
                 </form>
               </div>
               {/* created_at End */}
-              <button
-                className="btn mt-3 ms-2"
-                type="submit"
-                style={{
-                  backgroundColor: '#e96d3f',
-                  color: 'white',
-                }}
-              >
-                開始搜尋
-              </button>
+              <div className="text-center">
+                <button
+                  className={`btn mt-3 ${style.searchBtn}`}
+                  type="submit"
+                  style={{
+                    backgroundColor: '#e96d3f',
+                    color: 'white',
+                  }}
+                >
+                  開始搜尋
+                </button>
+              </div>
             </div>
             {/* Shop Sidebar End */}
 
             {/* Shop Product Start*/}
-            <div className="col-lg-9 col-md-8 ps-5">
+            <div className="col-lg-9 col-md-8">
               <div className="row pb-3 mt-5">
                 {data.rows.map((v) => {
                   return (
@@ -640,9 +642,9 @@ export default function Shop() {
                 })}
               </div>
               <div className="row mb-5">
-                <div className="col-12">
+                <div className="col-lg-12">
                   <nav>
-                    <ul className="pagination pagination-lg justify-content-center">
+                    <ul className="pagination pagination justify-content-center">
                       <li className="page-item">
                         <Link className="page-link" href={`?page=1`}>
                           <FaAngleDoubleLeft style={{ color: '#e96d3f' }} />

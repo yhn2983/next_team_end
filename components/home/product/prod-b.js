@@ -11,16 +11,12 @@ import { AiOutlineSmallDash, AiOutlineHeart } from 'react-icons/ai'
 import { BsFillCartFill } from 'react-icons/bs'
 import { RiGameLine } from 'react-icons/ri'
 import { IoSearch } from 'react-icons/io5'
+import { shuffle } from 'lodash'
 // hook------
 
 export default function ProdB() {
   // Router-----
   const router = useRouter()
-
-  const [isClicked, setIsClicked] = useState(false)
-  const handleClick = () => {
-    setIsClicked(!isClicked)
-  }
 
   // Products-----
   const [data, setData] = useState({
@@ -28,6 +24,7 @@ export default function ProdB() {
     page: 0,
     totalPages: 0,
     rows: [],
+    rowsRandom: [],
     cate: [],
   })
 
@@ -42,8 +39,19 @@ export default function ProdB() {
       })
   }, [router])
 
-  // category
-  const [mainSelect, setMainSelect] = useState(null)
+  const [isBack, setIsBack] = useState(false)
+  const [randomRows, setRandomRows] = useState([])
+
+  useEffect(() => {
+    if (data.rowsRandom.length > 0) {
+      const shuffledRows = shuffle([...data.rowsRandom]).slice(0, 8)
+      setRandomRows(shuffledRows)
+    }
+  }, [data.rowsRandom])
+
+  const handleClick = () => {
+    setIsBack(!isBack)
+  }
 
   const qs = { ...router.query }
 
@@ -81,7 +89,7 @@ export default function ProdB() {
           </div>
         </div>
         <div className="row px-xl-5">
-          {data.rows.map((v) => {
+          {randomRows.map((v) => {
             return (
               <div key={v.id} className="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div
@@ -89,7 +97,7 @@ export default function ProdB() {
                   style={{ marginBottom: '60px' }}
                 >
                   <div
-                    className={isClicked ? style.slideB : style.slide}
+                    className={isBack ? style.slideB : style.slide}
                     style={{ overflow: 'hidden' }}
                   >
                     <Image
@@ -106,7 +114,7 @@ export default function ProdB() {
                   >
                     <div
                       className={`flex-column ${style.slideBack} ${
-                        isClicked ? style.slideBackB : style.slideBack
+                        isBack ? style.slideBackB : style.slideBack
                       }`}
                     >
                       <div className="overflow-hidden">
@@ -116,7 +124,7 @@ export default function ProdB() {
                         >
                           <Image
                             className={`img-fluid w-100 ${
-                              isClicked ? style.imgAct : ''
+                              isBack ? style.imgAct : ''
                             }`}
                             src={
                               v.product_photos.includes(',')

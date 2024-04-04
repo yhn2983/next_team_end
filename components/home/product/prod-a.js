@@ -21,6 +21,7 @@ export default function ProdA() {
     page: 0,
     totalPages: 0,
     rows: [],
+    rowsRandom: [],
     cate: [],
   })
 
@@ -60,7 +61,7 @@ export default function ProdA() {
           </span>
         </h2>
         <div className="row px-xl-5">
-          {data.rows.map((v) => {
+          {data.rowsRandom.slice(0, 8).map((v) => {
             return (
               <div key={v.id} className="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <Link
