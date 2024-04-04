@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 // style-----
@@ -13,11 +13,24 @@ import {
   FaAngleRight,
   FaUserEdit,
 } from 'react-icons/fa'
-import { FaSquareXTwitter, FaLinkedin, FaHandPointRight } from 'react-icons/fa6'
+import {
+  FaSquareXTwitter,
+  FaLinkedin,
+  FaHandPointRight,
+  FaAnglesUp,
+} from 'react-icons/fa6'
 import { IoCloseCircle } from 'react-icons/io5'
 // hook------
 
 export default function Footer() {
+  // ---BackToTop---
+  const topRef = useRef(null)
+  const scrollToTop = () => {
+    if (topRef.current) {
+      topRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   const [isClose, setIsClose] = useState(false)
   const handleCloseBtn = () => {
     if (!isClose) setIsClose(true)
@@ -25,6 +38,10 @@ export default function Footer() {
 
   return (
     <>
+      {/* Back to Top */}
+      <Link href="" className="btn" onClick={scrollToTop}>
+        <FaAnglesUp className={style.backToTop} style={{ fontSize: '40px' }} />
+      </Link>
       {/* Footer Start */}
       <div className={`container-fluid px-5 pt-5 ${style.footerArea}`}>
         <div className="row pt-2">
@@ -73,7 +90,7 @@ export default function Footer() {
                   />
                 </Link>
               </div>
-              <div className="d-flex align-items-center justify-content-center col-lg-6 col-md-6 col-xs-12 mt-lg-3">
+              <div className="d-flex align-items-center justify-content-center col-lg-6 col-md-6 col-xs-12 mt-lg-3 pb-2">
                 <Link href="/help-center/ad-partner">
                   <Image
                     className={`${style.adbox}`}
@@ -437,10 +454,11 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      <div ref={topRef}></div>
       {/* Footer End */}
       {/* ad start */}
       <div className={style.adArea} style={{ display: isClose ? 'none' : '' }}>
-        <Link href="">
+        <Link href="/help-center/join-deal">
           <Image
             className="rounded-circle shadow-lg"
             src="/ad.png"
@@ -460,6 +478,7 @@ export default function Footer() {
           type="button"
           className="btn translate-middle"
           data-bs-dismiss="card"
+          style={{ border: 'none' }}
         >
           <IoCloseCircle
             style={{

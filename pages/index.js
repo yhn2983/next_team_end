@@ -35,9 +35,9 @@ export default function Home() {
         <CarouselS1 />
         <Category />
         <ProdA />
-        <Offer />
-        <ProdB />
         <Ad />
+        <ProdB />
+        <Offer />
       </DefaultLayout>
     </>
   )

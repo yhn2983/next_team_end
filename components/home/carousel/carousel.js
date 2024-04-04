@@ -27,7 +27,7 @@ export default function CarouselS1({ pageName = '' }) {
   return (
     <>
       {/* Carousel Start*/}
-      <div className="container-fluid mb-3">
+      <div className="container-fluid mb-3 mt-4">
         <div className="row px-xl-5">
           <div className="col-lg-8">
             <Carousel

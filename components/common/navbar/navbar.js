@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { PROD_LIST } from '@/configs/config-r'
@@ -26,7 +26,6 @@ import { IoLogIn, IoLanguage } from 'react-icons/io5'
 import { GiArchiveRegister } from 'react-icons/gi'
 import { FaCircleUser, FaTreeCity, FaBars } from 'react-icons/fa6'
 import { RiCoupon3Fill, RiLogoutBoxRFill } from 'react-icons/ri'
-import { FaAnglesUp } from 'react-icons/fa6'
 // hook------
 //import { useAuth } from '@/context/auth-context'
 //import { useCart } from '@/hooks/use-cart'
@@ -56,17 +55,10 @@ export default function CustomNavbar({ pageName = '' }) {
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
-  // ---BackToTop---
-  const topRef = useRef(null)
-  const scrollToTop = () => {
-    if (topRef.current) {
-      topRef.current.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
-  // category
+  // Product & Category
   const [data, setData] = useState({
     success: false,
+    keyword: '',
     cate: [],
   })
 
@@ -84,6 +76,40 @@ export default function CustomNavbar({ pageName = '' }) {
   // Router-----
   const router = useRouter()
   const qs = { ...router.query }
+
+  // top search input
+  const onSearch = (e) => {
+    e.preventDefault()
+    let keyword = e.currentTarget.keyword?.value
+    keyword = keyword.trim()
+    if (keyword) {
+      router.push(`/shop?keyword=${keyword}`)
+    } else {
+      router.push(`/shop?`)
+    }
+  }
+
+  // shop search
+  const onmultiSearch = (e) => {
+    e.preventDefault()
+    let searchMain = e.currentTarget.searchMain?.value
+    let searchSub = e.currentTarget.searchSub?.value
+    let searchPriceA = e.currentTarget.searchPriceA?.value
+    let searchPriceB = e.currentTarget.searchPriceB?.value
+    let searchPriceC = e.currentTarget.searchPriceC?.value
+    let searchPriceD = e.currentTarget.searchPriceD?.value
+    let searchPriceE = e.currentTarget.searchPriceE?.value
+    let searchStart = e.currentTarget.searchStart?.value
+    let searchEnd = e.currentTarget.searchEnd?.value
+    let searchProdStatusA = e.currentTarget.searchProdStatusA?.value
+    let searchProdStatusB = e.currentTarget.searchProdStatusB?.value
+    let searchDateA = e.currentTarget.searchDateA?.value
+    let searchDateB = e.currentTarget.searchDateB?.value
+    let searchDateC = e.currentTarget.searchDateC?.value
+    let searchDateD = e.currentTarget.searchDateD?.value
+    let searchDateE = e.currentTarget.searchDateE?.value
+    let searchDateF = e.currentTarget.searchDateF?.value
+  }
 
   return (
     <>
@@ -290,21 +316,27 @@ export default function CustomNavbar({ pageName = '' }) {
             </Link>
           </div>
           <div className="col-lg-4 col-6 text-left">
-            <InputGroup className="ms-2 mb-3 shadow-lg ">
-              <Form.Control
-                placeholder="挖掘寶物吧！"
-                aria-label="Recipient's username"
-                aria-describedby="basic-addon2"
-                className="form-control"
-              />
-              <Button
-                id="button-addon2"
-                style={{ backgroundColor: '#e96d3f', border: '#e96d3f' }}
-                className={style.inputSearch}
-              >
-                搜尋
-              </Button>
-            </InputGroup>
+            <form role="search" onSubmit={onSearch}>
+              <InputGroup className="ms-2 mb-3 shadow-lg">
+                <Form.Control
+                  placeholder="挖掘寶物吧！"
+                  type="search"
+                  aria-label="search"
+                  aria-describedby="basic-addon2"
+                  className="form-control"
+                  name="keyword"
+                  defaultValue={router.query.keyword}
+                />
+                <Button
+                  type="submit"
+                  id="button-addon2"
+                  style={{ backgroundColor: '#e96d3f', border: '#e96d3f' }}
+                  className={style.inputSearch}
+                >
+                  搜尋
+                </Button>
+              </InputGroup>
+            </form>
           </div>
           <div className="col-lg-4 col-6 d-flex justify-content-end">
             {pageName === 'randomSearch' ? (
@@ -511,7 +543,6 @@ export default function CustomNavbar({ pageName = '' }) {
           </div>
         </div>
       </div>
-      <div ref={topRef}></div>
       {/* Navbar End */}
       {/* Login Modal start */}
       <Modal show={show} onHide={handleClose}>
@@ -529,10 +560,6 @@ export default function CustomNavbar({ pageName = '' }) {
         </Modal.Footer>
       </Modal>
       {/* Login Modal end */}
-      {/* Back to Top */}
-      <Link href="" className="btn" onClick={scrollToTop}>
-        <FaAnglesUp className={style.backToTop} style={{ fontSize: '40px' }} />
-      </Link>
     </>
   )
 }

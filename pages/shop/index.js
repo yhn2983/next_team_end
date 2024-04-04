@@ -21,6 +21,7 @@ import {
   FaAngleRight,
 } from 'react-icons/fa'
 import { IoSearch } from 'react-icons/io5'
+import { GoDash } from 'react-icons/go'
 // loading bar & loading icon
 import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
@@ -117,9 +118,10 @@ export default function Shop() {
                 <select
                   className="form-select"
                   aria-label="Default select example"
-                  name=""
+                  name="searchMain"
                   value={mainSelect}
                   onChange={(e) => setMainSelect(+e.target.value)}
+                  defaultValue={router.query.searchMain}
                 >
                   <option selected disabled value="disable">
                     開始搜尋吧！
@@ -162,6 +164,8 @@ export default function Shop() {
                             key={node.id}
                             style={{ color: '#8e2626' }}
                             value={node.id}
+                            name="searchSub"
+                            defaultValue={router.query.searchSub}
                           >
                             {node.category_name}
                           </option>
@@ -180,16 +184,14 @@ export default function Shop() {
               </div>
               <div className="bg-light p-3 mb-4">
                 <form>
-                  <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                  <div className="form-check d-flex align-items-center justify-content-between mb-3">
                     <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="price-all"
+                      className="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault"
+                      id="all"
                     />
-                    <label
-                      className="custom-control-label mx-auto"
-                      htmlFor="price-all"
-                    >
+                    <label className="form-check-label mx-auto" htmlFor="all">
                       <strong style={{ fontSize: '16px' }}>全部商品</strong>
                     </label>
                     <span
@@ -199,15 +201,17 @@ export default function Shop() {
                       1000
                     </span>
                   </div>
-                  <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                  <div className="form-check d-flex align-items-center justify-content-between mb-3">
                     <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="price-1"
+                      className="form-check-input"
+                      type="radio"
+                      id="searchPriceA"
+                      name="flexRadioDefault"
+                      defaultValue={router.query.searchPriceA}
                     />
                     <label
-                      className="custom-control-label mx-auto"
-                      htmlFor="price-1"
+                      className="form-check-label mx-auto"
+                      htmlFor="searchPriceA"
                     >
                       <strong style={{ fontSize: '16px' }}>$0 - $500</strong>
                     </label>
@@ -218,15 +222,17 @@ export default function Shop() {
                       150
                     </span>
                   </div>
-                  <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                  <div className="form-check d-flex align-items-center justify-content-between mb-3">
                     <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="price-2"
+                      className="form-check-input"
+                      type="radio"
+                      id="searchPriceB"
+                      name="flexRadioDefault"
+                      defaultValue={router.query.searchPriceB}
                     />
                     <label
-                      className="custom-control-label mx-auto"
-                      htmlFor="price-2"
+                      className="form-check-label mx-auto"
+                      htmlFor="searchPriceB"
                     >
                       <strong style={{ fontSize: '16px' }}>$501 - $1000</strong>
                     </label>
@@ -237,13 +243,18 @@ export default function Shop() {
                       295
                     </span>
                   </div>
-                  <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                  <div className="form-check d-flex align-items-center justify-content-between mb-3">
                     <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="price-3"
+                      className="form-check-input"
+                      type="radio"
+                      id="searchPriceC"
+                      name="flexRadioDefault"
+                      defaultValue={router.query.searchPriceC}
                     />
-                    <label className="custom-control-label" htmlFor="price-3">
+                    <label
+                      className="form-check-label mx-auto"
+                      htmlFor="searchPriceC"
+                    >
                       <strong style={{ fontSize: '16px' }}>
                         $1001 - $3000
                       </strong>
@@ -255,13 +266,18 @@ export default function Shop() {
                       246
                     </span>
                   </div>
-                  <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                  <div className="form-check d-flex align-items-center justify-content-between mb-3">
                     <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="price-4"
+                      className="form-check-input"
+                      type="radio"
+                      id="searchPriceD"
+                      name="flexRadioDefault"
+                      defaultValue={router.query.searchPriceD}
                     />
-                    <label className="custom-control-label" htmlFor="price-4">
+                    <label
+                      className="form-check-label mx-auto"
+                      htmlFor="searchPriceD"
+                    >
                       <strong style={{ fontSize: '16px' }}>
                         $3001 - $5000
                       </strong>
@@ -273,13 +289,18 @@ export default function Shop() {
                       145
                     </span>
                   </div>
-                  <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                  <div className="form-check d-flex align-items-center justify-content-between mb-3">
                     <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="price-5"
+                      className="form-check-input"
+                      type="radio"
+                      id="searchPriceE"
+                      name="flexRadioDefault"
+                      defaultValue={router.query.searchPriceE}
                     />
-                    <label className="custom-control-label" htmlFor="price-5">
+                    <label
+                      className="form-check-label mx-auto"
+                      htmlFor="searchPriceE"
+                    >
                       <strong style={{ fontSize: '16px' }}>$5001↑</strong>
                     </label>
                     <span
@@ -291,6 +312,29 @@ export default function Shop() {
                   </div>
                   <div className="custom-control">
                     <div className="row">
+                      <div className="col-12">
+                        <div className="form-check d-flex align-items-center justify-content-center mb-3">
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            id="searchPrice"
+                            name="flexRadioDefault"
+                          />
+                          <label
+                            className="form-check-label mx-auto"
+                            htmlFor="searchPrice"
+                          >
+                            <strong style={{ fontSize: '16px' }}>
+                              自訂區間
+                            </strong>
+                          </label>
+                          <div className="d-flex">
+                            <GoDash />
+                            <GoDash />
+                            <GoDash />
+                          </div>
+                        </div>
+                      </div>
                       <div className="col-12 d-flex align-items-center justify-content-between mx-auto">
                         <input
                           type="text"
@@ -298,6 +342,8 @@ export default function Shop() {
                           className="form-control"
                           style={{ width: '48%' }}
                           placeholder="價格下限"
+                          name="priceStart"
+                          defaultValue={router.query.priceStart}
                         />
                         <span>
                           <strong>-</strong>
@@ -308,6 +354,8 @@ export default function Shop() {
                           className="form-control"
                           style={{ width: '48%' }}
                           placeholder="價格上限"
+                          name="priceEnd"
+                          defaultValue={router.query.priceEnd}
                         />
                       </div>
                     </div>
@@ -324,16 +372,14 @@ export default function Shop() {
               </div>
               <div className="bg-light p-3 mb-4">
                 <form>
-                  <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                  <div className="form-check d-flex align-items-center justify-content-between mb-3">
                     <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="color-all"
+                      className="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault2"
+                      id="all"
                     />
-                    <label
-                      className="custom-control-label mx-auto"
-                      htmlFor="price-all"
-                    >
+                    <label className="form-check-label mx-auto" htmlFor="all">
                       <strong style={{ fontSize: '16px' }}>全部商品</strong>
                     </label>
                     <span
@@ -343,15 +389,17 @@ export default function Shop() {
                       1000
                     </span>
                   </div>
-                  <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                  <div className="form-check d-flex align-items-center justify-content-between mb-3">
                     <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="color-1"
+                      className="form-check-input"
+                      type="radio"
+                      id="searchProdStatusA"
+                      name="flexRadioDefault2"
+                      defaultValue={router.query.searchProdStatusA}
                     />
                     <label
                       className="custom-control-label mx-auto"
-                      htmlFor="color-1"
+                      htmlFor="searchProdStatusA"
                     >
                       <strong style={{ fontSize: '16px' }}>二手商品</strong>
                     </label>
@@ -364,13 +412,15 @@ export default function Shop() {
                   </div>
                   <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between">
                     <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="color-2"
+                      className="form-check-input"
+                      type="radio"
+                      id="searchProdStatusB"
+                      name="flexRadioDefault2"
+                      defaultValue={router.query.searchProdStatusB}
                     />
                     <label
                       className="custom-control-label mx-auto"
-                      htmlFor="color-2"
+                      htmlFor="searchProdStatusB"
                     >
                       <strong style={{ fontSize: '16px' }}>全新商品</strong>
                     </label>
@@ -392,13 +442,14 @@ export default function Shop() {
               </div>
               <div className="bg-light p-3 mb-30">
                 <form>
-                  <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                  <div className="form-check d-flex align-items-center justify-content-between mb-3">
                     <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="size-all"
+                      className="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault3"
+                      id="date-all"
                     />
-                    <label className="custom-control-label" htmlFor="size-all">
+                    <label className="custom-control-label" htmlFor="date-all">
                       <strong style={{ fontSize: '16px' }}>全部商品</strong>
                     </label>
                     <span
@@ -410,11 +461,16 @@ export default function Shop() {
                   </div>
                   <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                     <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="size-1"
+                      className="form-check-input"
+                      type="radio"
+                      id="searchDateA"
+                      name="flexRadioDefault3"
+                      defaultValue={router.query.searchDateA}
                     />
-                    <label className="custom-control-label" htmlFor="size-1">
+                    <label
+                      className="custom-control-label"
+                      htmlFor="searchDateA"
+                    >
                       <strong style={{ fontSize: '16px' }}>
                         2010年 - 2012年
                       </strong>
@@ -428,11 +484,16 @@ export default function Shop() {
                   </div>
                   <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                     <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="size-2"
+                      className="form-check-input"
+                      type="radio"
+                      id="searchDateB"
+                      name="flexRadioDefault3"
+                      defaultValue={router.query.searchDateB}
                     />
-                    <label className="custom-control-label" htmlFor="size-2">
+                    <label
+                      className="custom-control-label"
+                      htmlFor="searchDateB"
+                    >
                       <strong style={{ fontSize: '16px' }}>
                         2013年 - 2015年
                       </strong>
@@ -446,11 +507,16 @@ export default function Shop() {
                   </div>
                   <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                     <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="size-3"
+                      className="form-check-input"
+                      type="radio"
+                      id="searchDateC"
+                      name="flexRadioDefault3"
+                      defaultValue={router.query.searchDateC}
                     />
-                    <label className="custom-control-label" htmlFor="size-3">
+                    <label
+                      className="custom-control-label"
+                      htmlFor="searchDateC"
+                    >
                       <strong style={{ fontSize: '16px' }}>
                         2016年 - 2018年
                       </strong>
@@ -464,13 +530,18 @@ export default function Shop() {
                   </div>
                   <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                     <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="size-4"
+                      className="form-check-input"
+                      type="radio"
+                      id="searchDateD"
+                      name="flexRadioDefault3"
+                      defaultValue={router.query.searchDateD}
                     />
-                    <label className="custom-control-label" htmlFor="size-4">
+                    <label
+                      className="custom-control-label"
+                      htmlFor="searchDateD"
+                    >
                       <strong style={{ fontSize: '16px' }}>
-                        2019年 - 2020年
+                        2019年 - 2021年
                       </strong>
                     </label>
                     <span
@@ -482,13 +553,18 @@ export default function Shop() {
                   </div>
                   <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                     <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="size-5"
+                      className="form-check-input"
+                      type="radio"
+                      id="searchDateE"
+                      name="flexRadioDefault3"
+                      defaultValue={router.query.searchDateE}
                     />
-                    <label className="custom-control-label" htmlFor="size-5">
+                    <label
+                      className="custom-control-label"
+                      htmlFor="searchDateE"
+                    >
                       <strong style={{ fontSize: '16px' }}>
-                        2021年 - 2023年
+                        2022年 - 2023年
                       </strong>
                     </label>
                     <span
@@ -500,11 +576,16 @@ export default function Shop() {
                   </div>
                   <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                     <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="size-6"
+                      className="form-check-input"
+                      type="radio"
+                      id="searchDateF"
+                      name="flexRadioDefault3"
+                      defaultValue={router.query.searchDateF}
                     />
-                    <label className="custom-control-label" htmlFor="size-6">
+                    <label
+                      className="custom-control-label"
+                      htmlFor="searchDateF"
+                    >
                       <strong style={{ fontSize: '16px' }}>2024年</strong>
                     </label>
                     <span
@@ -515,13 +596,38 @@ export default function Shop() {
                     </span>
                   </div>
                   <div className="custom-control">
-                    <div className="row mx-auto">
+                    <div className="row">
+                      <div className="col-12">
+                        <div className="form-check d-flex align-items-center justify-content-center mb-3">
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            id="searchPrice"
+                            name="flexRadioDefault"
+                          />
+                          <label
+                            className="form-check-label mx-auto"
+                            htmlFor="searchPrice"
+                          >
+                            <strong style={{ fontSize: '16px' }}>
+                              自訂區間
+                            </strong>
+                          </label>
+                          <div className="d-flex">
+                            <GoDash />
+                            <GoDash />
+                            <GoDash />
+                          </div>
+                        </div>
+                      </div>
                       <div className="col-12 d-flex align-items-center justify-content-between">
                         <DatePicker
                           className="form-control"
                           selected={startDate}
                           onChange={(date) => setStartDate(date)}
                           style={{ width: '50%' }}
+                          name="searchDateStart"
+                          defaultValue={router.query.searchDateStart}
                         />
                         <div className="">
                           <strong> - </strong>
@@ -531,6 +637,8 @@ export default function Shop() {
                           selected={endDate}
                           onChange={(date) => setStartDate(date)}
                           style={{ width: '50%' }}
+                          name="searchDateEnd"
+                          defaultValue={router.query.searchDateEnd}
                         />
                       </div>
                     </div>
@@ -547,7 +655,7 @@ export default function Shop() {
                     color: 'white',
                   }}
                 >
-                  開始搜尋
+                  <strong>開始搜尋</strong>
                 </button>
               </div>
             </div>
@@ -556,10 +664,10 @@ export default function Shop() {
             {/* Shop Product Start*/}
             <div className="col-lg-9 col-md-8">
               <div className="row pb-3 mt-5">
-                {data.rows.map((v) => {
+                {data.rows.map((v, i) => {
                   return (
                     <div
-                      key={v.id}
+                      key={v.i}
                       className="col-lg-4 col-md-12 col-sm-12 pb-1"
                     >
                       <Link

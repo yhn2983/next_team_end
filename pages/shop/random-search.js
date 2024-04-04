@@ -104,9 +104,9 @@ export default function RandomShop() {
             </div>
           </div>
           <div className="row px-xl-5 mt-4">
-            {data.rows.map((v) => {
+            {data.rows.map((v, i) => {
               return (
-                <div key={v.id} className="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <div key={v.i} className="col-lg-3 col-md-4 col-sm-6 pb-1">
                   <div
                     className={`mb-5 ${style.card}`}
                     style={{ marginBottom: '60px' }}

@@ -43,14 +43,14 @@ export default function ProdB() {
   const [randomRows, setRandomRows] = useState([])
 
   useEffect(() => {
-    if (data.rowsRandom.length > 0) {
-      const shuffledRows = shuffle([...data.rowsRandom]).slice(0, 8)
-      setRandomRows(shuffledRows)
-    }
+    const shuffledRows = shuffle([...data.rowsRandom]).slice(0, 8)
+    setRandomRows(shuffledRows)
   }, [data.rowsRandom])
 
   const handleClick = () => {
     setIsBack(!isBack)
+    const shuffledRows = shuffle([...data.rowsRandom]).slice(0, 8)
+    setRandomRows(shuffledRows)
   }
 
   const qs = { ...router.query }
@@ -89,9 +89,9 @@ export default function ProdB() {
           </div>
         </div>
         <div className="row px-xl-5">
-          {randomRows.map((v) => {
+          {randomRows.map((v, i) => {
             return (
-              <div key={v.id} className="col-lg-3 col-md-4 col-sm-6 pb-1">
+              <div key={i} className="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div
                   className={`mb-5 ${style.card}`}
                   style={{ marginBottom: '60px' }}
