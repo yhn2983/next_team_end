@@ -4,6 +4,10 @@ import { useAuth } from '@/context/auth-context'
 import { useRouter } from 'next/router'
 import styles from '@/styles/lee-form.module.scss'
 import Link from 'next/link'
+import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google'
+import { GOOGLE_LOGIN_POST } from '@/components/config'
+import { GOOGLE_CLIENT_ID } from '@/components/config'
+import axios from 'axios'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -98,6 +102,26 @@ export default function LoginPage() {
     }
   }
 
+  function GoogleLogin() {
+    const googleLogin = useGoogleLogin({
+      onSuccess: async ({ code }) => {
+        const tokens = await axios.post(GOOGLE_LOGIN_POST, {
+          // http://localhost:3001/auth/google backend that will exchange the code
+          code,
+        })
+
+        console.log(tokens)
+      },
+      flow: 'auth-code',
+    })
+
+    return (
+      <button className="btn" onClick={() => googleLogin()}>
+        使用 Google 登入
+      </button>
+    )
+  }
+
   return (
     <>
       <Head>
@@ -171,18 +195,16 @@ export default function LoginPage() {
             </div>
             <div className="mt-2 mb-2">你也可以</div>
             <div className="login-with-line">
-              <button type="button" className="btn rounded">
-                <strong>
-                  <i className="fab fa-line" style={{ color: '#00c300' }}></i>{' '}
-                  連動LINE登入
-                </strong>
-              </button>
-              <button type="button" className="btn rounded ms-3">
-                <strong>
-                  <i className="fab fa-google" style={{ color: '#4286F3' }}></i>{' '}
-                  連動GOOGLE登入
-                </strong>
-              </button>
+              <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+                <GoogleLogin
+                  onSuccess={(credentialResponse) => {
+                    console.log(credentialResponse)
+                  }}
+                  onError={() => {
+                    console.log('Login Failed')
+                  }}
+                />
+              </GoogleOAuthProvider>
             </div>
           </form>
         </div>

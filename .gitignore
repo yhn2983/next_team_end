@@ -40,5 +40,5 @@ package-lock.json
 yarn.lock
 /.temp/
 
-config.js
+
 /imgs
