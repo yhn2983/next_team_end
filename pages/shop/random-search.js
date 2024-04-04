@@ -14,6 +14,7 @@ import style from './randomSearch.module.css'
 // react icons-----
 import { BsFillCartFill } from 'react-icons/bs'
 import { AiOutlineHeart } from 'react-icons/ai'
+import { IoSearch } from 'react-icons/io5'
 // hook------
 
 export default function RandomShop() {
@@ -77,25 +78,24 @@ export default function RandomShop() {
         {/* Breadcrumb End */}
 
         {/* Shop Start */}
-        <div className="container-fluid mt-2">
+        <div className="container-fluid mt-2 px-lg-5 mb-5">
           <div className="row">
-            <div className="col d-flex justify-content-center">
-              <div className="txt">
-                <h2>
-                  <strong>歡迎使用隨機探索！</strong>
-                </h2>
-                <h4>
-                  <strong>還沒有想法嗎? 動動滑鼠 點擊試試看吧！</strong>
-                </h4>
-              </div>
+            <div className="col-12 text-center">
+              <h2>
+                <strong>歡迎使用隨機探索！</strong>
+              </h2>
+              <h4>
+                <strong>還沒有想法嗎? 動動滑鼠 點擊試試看吧！</strong>
+              </h4>
+            </div>
+            <div className="col-12 text-center">
               <button
-                class="btn my-3"
+                class={`btn my-3 ${style.moreBtn}`}
                 type="submit"
                 style={{
                   backgroundColor: '#e96d3f',
                   color: 'white',
-                  marginLeft: '80px',
-                  fontSize: '20px',
+                  fontSize: '18px',
                 }}
                 onClick={handleClick}
               >
@@ -104,637 +104,107 @@ export default function RandomShop() {
             </div>
           </div>
           <div className="row px-xl-5 mt-4">
-            <div className="col-lg-3 col-md-4 col-sm-6 pb-1 mb-20">
-              <div
-                className={style.card}
-                style={{ marginBottom: '60px' }}
-                onClick={handleClick}
-              >
-                <div
-                  className={isClicked ? style.slideB : style.slide}
-                  style={{ overflow: 'hidden' }}
-                >
-                  <Image
-                    className={style.slideImg}
-                    src="/openit.png"
-                    alt=""
-                    width={430}
-                    height={500}
-                  />
-                </div>
-                <div
-                  className={`bg-light flex-column ${style.slideBack} ${
-                    isClicked ? style.slideBackB : style.slideBack
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <div style={{ overflow: 'hidden' }}>
+            {data.rows.map((v) => {
+              return (
+                <div key={v.id} className="col-lg-3 col-md-4 col-sm-6 pb-1">
+                  <div
+                    className={`mb-5 ${style.card}`}
+                    style={{ marginBottom: '60px' }}
+                  >
+                    <div
+                      className={isClicked ? style.slideB : style.slide}
+                      style={{ overflow: 'hidden' }}
+                    >
                       <Image
-                        className={`img-fluid w-100 ${
-                          isClicked ? style.imgAct : ''
-                        }`}
-                        src="/pot.jpg"
+                        className={style.slideImg}
+                        src="/openit.png"
                         alt=""
                         width={430}
-                        height={180}
+                        height={500}
                       />
                     </div>
-                    <div className={style.productAction}>
-                      <Link href="" className="btn btn-square">
-                        <BsFillCartFill
-                          className={isClicked ? style.iconAInner : ''}
-                        />
-                      </Link>
-                      <Link href="" className="btn btn-square">
-                        <AiOutlineHeart
-                          className={isClicked ? style.iconBInner : ''}
-                        />
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="text-center py-4 d-flex justify-content-between align-items-center">
-                    <div className="memberInfor">
-                      <Image
-                        src="/logo.png"
-                        alt=""
-                        width={60}
-                        height={60}
-                      ></Image>
-                      <div className="userId mt-2">Nickname</div>
-                    </div>
-                    <div className="mt-3" style={{ margin: '0 60px' }}>
-                      <Link
-                        className="h6 text-decoration-none text-truncate"
-                        href=""
-                        style={{ fontSize: '20px' }}
-                      >
-                        <strong>商品名稱</strong>
-                      </Link>
-                      <div className="d-flex align-items-center justify-content-center mt-3">
-                        <h5 className="" style={{ fontSize: '18px' }}>
-                          $價格
-                        </h5>
-                      </div>
-                    </div>
-                    <div className="">
-                      <span>全新or二手</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-              <div
-                className={style.card}
-                style={{ marginBottom: '60px' }}
-                onClick={handleClick}
-              >
-                <div
-                  className={isClicked ? style.slideB : style.slide}
-                  style={{ overflow: 'hidden' }}
-                >
-                  <Image
-                    className={style.slideImg}
-                    src="/openit.png"
-                    alt=""
-                    width={430}
-                    height={500}
-                  />
-                </div>
-                <div
-                  className={`bg-light flex-column ${style.slideBack} ${
-                    isClicked ? style.slideBackB : style.slideBack
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <div style={{ overflow: 'hidden' }}>
-                      <Image
-                        className={`img-fluid w-100 ${
-                          isClicked ? style.imgAct : ''
+                    <Link
+                      href=""
+                      style={{ textDecoration: 'none', color: 'black' }}
+                    >
+                      <div
+                        className={`flex-column ${style.slideBack} ${
+                          isClicked ? style.slideBackB : style.slideBack
                         }`}
-                        src="/pot.jpg"
-                        alt=""
-                        width={430}
-                        height={180}
-                      />
-                    </div>
-                    <div className={style.productAction}>
-                      <Link href="" className="btn btn-square">
-                        <BsFillCartFill
-                          className={isClicked ? style.iconAInner : ''}
-                        />
-                      </Link>
-                      <Link href="" className="btn btn-square">
-                        <AiOutlineHeart
-                          className={isClicked ? style.iconBInner : ''}
-                        />
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="text-center py-4 d-flex justify-content-between align-items-center">
-                    <div className="memberInfor">
-                      <Image
-                        src="/logo.png"
-                        alt=""
-                        width={60}
-                        height={60}
-                      ></Image>
-                      <div className="userId mt-2">Nickname</div>
-                    </div>
-                    <div className="mt-3" style={{ margin: '0 60px' }}>
-                      <Link
-                        className="h6 text-decoration-none text-truncate"
-                        href=""
-                        style={{ fontSize: '20px' }}
                       >
-                        <strong>商品名稱</strong>
-                      </Link>
-                      <div className="d-flex align-items-center justify-content-center mt-3">
-                        <h5 className="" style={{ fontSize: '18px' }}>
-                          $價格
-                        </h5>
+                        <div className="overflow-hidden">
+                          <div
+                            className="position-relative"
+                            style={{ overflow: 'hidden' }}
+                          >
+                            <Image
+                              className={`img-fluid w-100 ${
+                                isClicked ? style.imgAct : ''
+                              }`}
+                              src={
+                                v.product_photos.includes(',')
+                                  ? `/${v.product_photos.split(',')[0]}`
+                                  : `/${v.product_photos}`
+                              }
+                              alt=""
+                              width={266}
+                              height={266}
+                              style={{
+                                height: '266px',
+                                objectFit: 'cover',
+                              }}
+                            />
+                          </div>
+                          <div className={style.productAction}>
+                            <Link href="" className="">
+                              <BsFillCartFill className={style.iconAInner} />
+                            </Link>
+                            <Link href="" className="">
+                              <AiOutlineHeart className={style.iconBInner} />
+                            </Link>
+                            <Link href="" className="">
+                              <IoSearch className={style.iconCInner} />
+                            </Link>
+                          </div>
+                        </div>
+                        <div
+                          className="text-center py-3 px-2"
+                          style={{ height: '160px' }}
+                        >
+                          <div
+                            className="text-wrap text-truncate"
+                            style={{ height: '70%' }}
+                            href=""
+                          >
+                            <h5>
+                              <strong className="">{v.product_name}</strong>
+                            </h5>
+                          </div>
+                          <div className="d-flex justify-content-center ">
+                            <div
+                              className=""
+                              style={{
+                                fontSize: '18px',
+                                color:
+                                  v.product_status == '1' ? 'green' : '#e96d3f',
+                              }}
+                            >
+                              <strong>
+                                {v.product_status == '1' ? '二手' : '全新'}
+                              </strong>
+                            </div>
+                            &nbsp;
+                            <div className="" style={{ fontSize: '18px' }}>
+                              <strong>${v.product_price}</strong>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="">
-                      <span>全新or二手</span>
-                    </div>
+                    </Link>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-              <div
-                className={style.card}
-                style={{ marginBottom: '60px' }}
-                onClick={handleClick}
-              >
-                <div
-                  className={isClicked ? style.slideB : style.slide}
-                  style={{ overflow: 'hidden' }}
-                >
-                  <Image
-                    className={style.slideImg}
-                    src="/openit.png"
-                    alt=""
-                    width={430}
-                    height={500}
-                  />
-                </div>
-                <div
-                  className={`bg-light flex-column ${style.slideBack} ${
-                    isClicked ? style.slideBackB : style.slideBack
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <div style={{ overflow: 'hidden' }}>
-                      <Image
-                        className={`img-fluid w-100 ${
-                          isClicked ? style.imgAct : ''
-                        }`}
-                        src="/pot.jpg"
-                        alt=""
-                        width={430}
-                        height={180}
-                      />
-                    </div>
-                    <div className={style.productAction}>
-                      <Link href="" className="btn btn-square">
-                        <BsFillCartFill
-                          className={isClicked ? style.iconAInner : ''}
-                        />
-                      </Link>
-                      <Link href="" className="btn btn-square">
-                        <AiOutlineHeart
-                          className={isClicked ? style.iconBInner : ''}
-                        />
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="text-center py-4 d-flex justify-content-between align-items-center">
-                    <div className="memberInfor">
-                      <Image
-                        src="/logo.png"
-                        alt=""
-                        width={60}
-                        height={60}
-                      ></Image>
-                      <div className="userId mt-2">Nickname</div>
-                    </div>
-                    <div className="mt-3" style={{ margin: '0 60px' }}>
-                      <Link
-                        className="h6 text-decoration-none text-truncate"
-                        href=""
-                        style={{ fontSize: '20px' }}
-                      >
-                        <strong>商品名稱</strong>
-                      </Link>
-                      <div className="d-flex align-items-center justify-content-center mt-3">
-                        <h5 className="" style={{ fontSize: '18px' }}>
-                          $價格
-                        </h5>
-                      </div>
-                    </div>
-                    <div className="">
-                      <span>全新or二手</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-              <div
-                className={style.card}
-                style={{ marginBottom: '60px' }}
-                onClick={handleClick}
-              >
-                <div
-                  className={isClicked ? style.slideB : style.slide}
-                  style={{ overflow: 'hidden' }}
-                >
-                  <Image
-                    className={style.slideImg}
-                    src="/openit.png"
-                    alt=""
-                    width={430}
-                    height={500}
-                  />
-                </div>
-                <div
-                  className={`bg-light flex-column ${style.slideBack} ${
-                    isClicked ? style.slideBackB : style.slideBack
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <div style={{ overflow: 'hidden' }}>
-                      <Image
-                        className={`img-fluid w-100 ${
-                          isClicked ? style.imgAct : ''
-                        }`}
-                        src="/pot.jpg"
-                        alt=""
-                        width={430}
-                        height={180}
-                      />
-                    </div>
-                    <div className={style.productAction}>
-                      <Link href="" className="btn btn-square">
-                        <BsFillCartFill
-                          className={isClicked ? style.iconAInner : ''}
-                        />
-                      </Link>
-                      <Link href="" className="btn btn-square">
-                        <AiOutlineHeart
-                          className={isClicked ? style.iconBInner : ''}
-                        />
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="text-center py-4 d-flex justify-content-between align-items-center">
-                    <div className="memberInfor">
-                      <Image
-                        src="/logo.png"
-                        alt=""
-                        width={60}
-                        height={60}
-                      ></Image>
-                      <div className="userId mt-2">Nickname</div>
-                    </div>
-                    <div className="mt-3" style={{ margin: '0 60px' }}>
-                      <Link
-                        className="h6 text-decoration-none text-truncate"
-                        href=""
-                        style={{ fontSize: '20px' }}
-                      >
-                        <strong>商品名稱</strong>
-                      </Link>
-                      <div className="d-flex align-items-center justify-content-center mt-3">
-                        <h5 className="" style={{ fontSize: '18px' }}>
-                          $價格
-                        </h5>
-                      </div>
-                    </div>
-                    <div className="">
-                      <span>全新or二手</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-              <div
-                className={style.card}
-                style={{ marginBottom: '60px' }}
-                onClick={handleClick}
-              >
-                <div
-                  className={isClicked ? style.slideB : style.slide}
-                  style={{ overflow: 'hidden' }}
-                >
-                  <Image
-                    className={style.slideImg}
-                    src="/openit.png"
-                    alt=""
-                    width={430}
-                    height={500}
-                  />
-                </div>
-                <div
-                  className={`bg-light flex-column ${style.slideBack} ${
-                    isClicked ? style.slideBackB : style.slideBack
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <div style={{ overflow: 'hidden' }}>
-                      <Image
-                        className={`img-fluid w-100 ${
-                          isClicked ? style.imgAct : ''
-                        }`}
-                        src="/pot.jpg"
-                        alt=""
-                        width={430}
-                        height={180}
-                      />
-                    </div>
-                    <div className={style.productAction}>
-                      <Link href="" className="btn btn-square">
-                        <BsFillCartFill
-                          className={isClicked ? style.iconAInner : ''}
-                        />
-                      </Link>
-                      <Link href="" className="btn btn-square">
-                        <AiOutlineHeart
-                          className={isClicked ? style.iconBInner : ''}
-                        />
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="text-center py-4 d-flex justify-content-between align-items-center">
-                    <div className="memberInfor">
-                      <Image
-                        src="/logo.png"
-                        alt=""
-                        width={60}
-                        height={60}
-                      ></Image>
-                      <div className="userId mt-2">Nickname</div>
-                    </div>
-                    <div className="mt-3" style={{ margin: '0 60px' }}>
-                      <Link
-                        className="h6 text-decoration-none text-truncate"
-                        href=""
-                        style={{ fontSize: '20px' }}
-                      >
-                        <strong>商品名稱</strong>
-                      </Link>
-                      <div className="d-flex align-items-center justify-content-center mt-3">
-                        <h5 className="" style={{ fontSize: '18px' }}>
-                          $價格
-                        </h5>
-                      </div>
-                    </div>
-                    <div className="">
-                      <span>全新or二手</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-              <div
-                className={style.card}
-                style={{ marginBottom: '60px' }}
-                onClick={handleClick}
-              >
-                <div
-                  className={isClicked ? style.slideB : style.slide}
-                  style={{ overflow: 'hidden' }}
-                >
-                  <Image
-                    className={style.slideImg}
-                    src="/openit.png"
-                    alt=""
-                    width={430}
-                    height={500}
-                  />
-                </div>
-                <div
-                  className={`bg-light flex-column ${style.slideBack} ${
-                    isClicked ? style.slideBackB : style.slideBack
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <div style={{ overflow: 'hidden' }}>
-                      <Image
-                        className={`img-fluid w-100 ${
-                          isClicked ? style.imgAct : ''
-                        }`}
-                        src="/pot.jpg"
-                        alt=""
-                        width={430}
-                        height={180}
-                      />
-                    </div>
-                    <div className={style.productAction}>
-                      <Link href="" className="btn btn-square">
-                        <BsFillCartFill
-                          className={isClicked ? style.iconAInner : ''}
-                        />
-                      </Link>
-                      <Link href="" className="btn btn-square">
-                        <AiOutlineHeart
-                          className={isClicked ? style.iconBInner : ''}
-                        />
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="text-center py-4 d-flex justify-content-between align-items-center">
-                    <div className="memberInfor">
-                      <Image
-                        src="/logo.png"
-                        alt=""
-                        width={60}
-                        height={60}
-                      ></Image>
-                      <div className="userId mt-2">Nickname</div>
-                    </div>
-                    <div className="mt-3" style={{ margin: '0 60px' }}>
-                      <Link
-                        className="h6 text-decoration-none text-truncate"
-                        href=""
-                        style={{ fontSize: '20px' }}
-                      >
-                        <strong>商品名稱</strong>
-                      </Link>
-                      <div className="d-flex align-items-center justify-content-center mt-3">
-                        <h5 className="" style={{ fontSize: '18px' }}>
-                          $價格
-                        </h5>
-                      </div>
-                    </div>
-                    <div className="">
-                      <span>全新or二手</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-              <div
-                className={style.card}
-                style={{ marginBottom: '60px' }}
-                onClick={handleClick}
-              >
-                <div
-                  className={isClicked ? style.slideB : style.slide}
-                  style={{ overflow: 'hidden' }}
-                >
-                  <Image
-                    className={style.slideImg}
-                    src="/openit.png"
-                    alt=""
-                    width={430}
-                    height={500}
-                  />
-                </div>
-                <div
-                  className={`bg-light flex-column ${style.slideBack} ${
-                    isClicked ? style.slideBackB : style.slideBack
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <div style={{ overflow: 'hidden' }}>
-                      <Image
-                        className={`img-fluid w-100 ${
-                          isClicked ? style.imgAct : ''
-                        }`}
-                        src="/pot.jpg"
-                        alt=""
-                        width={430}
-                        height={180}
-                      />
-                    </div>
-                    <div className={style.productAction}>
-                      <Link href="" className="btn btn-square">
-                        <BsFillCartFill
-                          className={isClicked ? style.iconAInner : ''}
-                        />
-                      </Link>
-                      <Link href="" className="btn btn-square">
-                        <AiOutlineHeart
-                          className={isClicked ? style.iconBInner : ''}
-                        />
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="text-center py-4 d-flex justify-content-between align-items-center">
-                    <div className="memberInfor">
-                      <Image
-                        src="/logo.png"
-                        alt=""
-                        width={60}
-                        height={60}
-                      ></Image>
-                      <div className="userId mt-2">Nickname</div>
-                    </div>
-                    <div className="mt-3" style={{ margin: '0 60px' }}>
-                      <Link
-                        className="h6 text-decoration-none text-truncate"
-                        href=""
-                        style={{ fontSize: '20px' }}
-                      >
-                        <strong>商品名稱</strong>
-                      </Link>
-                      <div className="d-flex align-items-center justify-content-center mt-3">
-                        <h5 className="" style={{ fontSize: '18px' }}>
-                          $價格
-                        </h5>
-                      </div>
-                    </div>
-                    <div className="">
-                      <span>全新or二手</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              className="col-lg-3 col-md-4 col-sm-6 pb-1"
-              style={{ marginBottom: '60px' }}
-            >
-              <div className={style.card} onClick={handleClick}>
-                <div
-                  className={isClicked ? style.slideB : style.slide}
-                  style={{ overflow: 'hidden' }}
-                >
-                  <Image
-                    className={style.slideImg}
-                    src="/openit.png"
-                    alt=""
-                    width={430}
-                    height={500}
-                  />
-                </div>
-                <div
-                  className={`bg-light flex-column ${style.slideBack} ${
-                    isClicked ? style.slideBackB : style.slideBack
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <div style={{ overflow: 'hidden' }}>
-                      <Image
-                        className={`img-fluid w-100 ${
-                          isClicked ? style.imgAct : ''
-                        }`}
-                        src="/pot.jpg"
-                        alt=""
-                        width={430}
-                        height={180}
-                      />
-                    </div>
-                    <div className={style.productAction}>
-                      <Link href="" className="btn btn-square">
-                        <BsFillCartFill
-                          className={isClicked ? style.iconAInner : ''}
-                        />
-                      </Link>
-                      <Link href="" className="btn btn-square">
-                        <AiOutlineHeart
-                          className={isClicked ? style.iconBInner : ''}
-                        />
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="text-center py-4 d-flex justify-content-between align-items-center">
-                    <div className="memberInfor">
-                      <Image
-                        src="/logo.png"
-                        alt=""
-                        width={60}
-                        height={60}
-                      ></Image>
-                      <div className="userId mt-2">Nickname</div>
-                    </div>
-                    <div className="mt-3" style={{ margin: '0 60px' }}>
-                      <Link
-                        className="h6 text-decoration-none text-truncate"
-                        href=""
-                        style={{ fontSize: '20px' }}
-                      >
-                        <strong>商品名稱</strong>
-                      </Link>
-                      <div className="d-flex align-items-center justify-content-center mt-3">
-                        <h5 className="" style={{ fontSize: '18px' }}>
-                          $價格
-                        </h5>
-                      </div>
-                    </div>
-                    <div className="">
-                      <span>全新or二手</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              )
+            })}
             {/* Shop Product End */}
           </div>
         </div>

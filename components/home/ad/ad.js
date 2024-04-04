@@ -35,7 +35,10 @@ export default function Ad() {
             <h4 style={{ color: '#e96d3f' }}>
               <strong>歡慶DEAL開幕試營運 企業親子二手市集活動</strong>
             </h4>
-            <FaHandPointRight className={style.iconMove} />
+            <FaHandPointRight
+              className={style.iconMove}
+              style={{ color: '#8e2626' }}
+            />
             &nbsp;&nbsp;
             <Link href="/activity">
               <button type="button" className={style.moreBtn} href="">

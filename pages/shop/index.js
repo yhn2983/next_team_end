@@ -68,6 +68,10 @@ export default function Shop() {
       })
   }, [router])
 
+  // Pages
+  const startPage = Math.max(1, data.page - 2)
+  const endPage = Math.min(data.totalPages, startPage + 4)
+
   // category
   const [mainSelect, setMainSelect] = useState(null)
 
@@ -635,9 +639,9 @@ export default function Shop() {
                   )
                 })}
               </div>
-              <div className="row">
+              <div className="row mb-5">
                 <div className="col-12">
-                  <nav style={{ marginRight: '25px' }}>
+                  <nav>
                     <ul className="pagination pagination-lg justify-content-center">
                       <li className="page-item">
                         <Link className="page-link" href={`?page=1`}>
@@ -652,23 +656,28 @@ export default function Shop() {
                           <FaAngleLeft style={{ color: '#e96d3f' }} />
                         </Link>
                       </li>
-                      {Array.from({ length: 5 }, (v, i) => {
-                        const p = data.page - 2 + i
-                        if (p < 1 || p > data.totalPages) return null
-                        const active = p === data.page ? 'active' : ''
-                        const usp = new URLSearchParams({ ...qs, page: p })
-                        return (
-                          <li className={`page-item ${active}`} key={p}>
-                            <Link
-                              className="page-link"
-                              style={{ color: active ? 'white' : '#e96d3f' }}
-                              href={`?${usp}`}
-                            >
-                              {p}
-                            </Link>
-                          </li>
-                        )
-                      })}
+                      {Array.from(
+                        { length: endPage - startPage + 1 },
+                        (v, i) => {
+                          const p = startPage + i
+                          {
+                            /* if (p < 1 || p > data.totalPages) return null */
+                          }
+                          const active = p === data.page ? 'active' : ''
+                          const usp = new URLSearchParams({ ...qs, page: p })
+                          return (
+                            <li className={`page-item ${active}`} key={p}>
+                              <Link
+                                className="page-link"
+                                style={{ color: active ? 'white' : '#e96d3f' }}
+                                href={`?${usp}`}
+                              >
+                                {p}
+                              </Link>
+                            </li>
+                          )
+                        }
+                      )}
                       <li className="page-item">
                         <Link
                           className="page-link"
