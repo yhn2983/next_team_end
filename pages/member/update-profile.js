@@ -44,8 +44,8 @@ export default function UpdateProfilePage() {
       newError.mobile = '手機號碼為必填'
       hasError = true
     } else {
-      if (user.mobile.length !== 9) {
-        newError.mobile = '手機號碼必須為 9 位數'
+      if (user.mobile.length !== 10) {
+        newError.mobile = '手機號碼必須為 10 位數'
         hasError = true
       }
     }
@@ -120,7 +120,6 @@ export default function UpdateProfilePage() {
 
       if (data.status === 'success') {
         const { name = '', mobile = '', address = '' } = data.data.user
-        // const newMobile = '0' + mobile
         setUser({ name, mobile: mobile, address })
       }
     }
@@ -158,9 +157,6 @@ export default function UpdateProfilePage() {
                 手機號碼
               </label>
               <div className="input-group">
-                <span className="input-group-text" id="basic-addon1">
-                  0
-                </span>
                 <input
                   className="form-control rounded"
                   type="text"

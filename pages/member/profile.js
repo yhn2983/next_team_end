@@ -53,7 +53,6 @@ export default function Profile() {
     const result = await response.json()
 
     if (result.status === 'success') {
-      result.data.user.mobile = '0' + result.data.user.mobile
       result.data.user.birthday = new Date(result.data.user.birthday)
         .toISOString()
         .split('T')[0]
