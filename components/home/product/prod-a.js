@@ -142,7 +142,7 @@ export default function ProdA() {
         </div>
         <div className="row px-xl-5 text-center">
           <div className="col-12">
-            <Link href="">
+            <Link href="/shop">
               <button type="button" className={style.moreBtn} href="">
                 <strong>探索更多</strong>
               </button>

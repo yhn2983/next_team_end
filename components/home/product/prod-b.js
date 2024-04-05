@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
 import { PROD_LIST } from '@/configs/config-r'
+import { shuffle } from 'lodash'
 // style-----
 import style from './prodB.module.css'
 // react bootstrap
@@ -11,7 +12,6 @@ import { AiOutlineSmallDash, AiOutlineHeart } from 'react-icons/ai'
 import { BsFillCartFill } from 'react-icons/bs'
 import { RiGameLine } from 'react-icons/ri'
 import { IoSearch } from 'react-icons/io5'
-import { shuffle } from 'lodash'
 // hook------
 
 export default function ProdB() {
@@ -43,14 +43,14 @@ export default function ProdB() {
   const [randomRows, setRandomRows] = useState([])
 
   useEffect(() => {
-    const shuffledRows = shuffle([...data.rowsRandom]).slice(0, 8)
-    setRandomRows(shuffledRows)
-  }, [data.rowsRandom])
+    if (!isBack) {
+      const shuffledRows = shuffle([...data.rowsRandom]).slice(0, 8)
+      setRandomRows(shuffledRows)
+    }
+  }, [isBack, data.rowsRandom])
 
   const handleClick = () => {
     setIsBack(!isBack)
-    const shuffledRows = shuffle([...data.rowsRandom]).slice(0, 8)
-    setRandomRows(shuffledRows)
   }
 
   const qs = { ...router.query }

@@ -33,7 +33,7 @@ export default function Shop() {
   // Router-----
   const router = useRouter()
   // Auth-----
-  //const { auth, getAuthHeader } = useAuth()
+  // const { auth, getAuthHeader } = useAuth()
   // Date-----
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
@@ -75,6 +75,28 @@ export default function Shop() {
 
   // category
   const [mainSelect, setMainSelect] = useState(null)
+
+  // shop search
+  const onmultiSearch = (e) => {
+    e.preventDefault()
+    let searchMain = e.currentTarget.searchMain?.value
+    let searchSub = e.currentTarget.searchSub?.value
+    let searchPriceA = e.currentTarget.searchPriceA?.value
+    let searchPriceB = e.currentTarget.searchPriceB?.value
+    let searchPriceC = e.currentTarget.searchPriceC?.value
+    let searchPriceD = e.currentTarget.searchPriceD?.value
+    let searchPriceE = e.currentTarget.searchPriceE?.value
+    let searchStart = e.currentTarget.searchStart?.value
+    let searchEnd = e.currentTarget.searchEnd?.value
+    let searchProdStatusA = e.currentTarget.searchProdStatusA?.value
+    let searchProdStatusB = e.currentTarget.searchProdStatusB?.value
+    let searchDateA = e.currentTarget.searchDateA?.value
+    let searchDateB = e.currentTarget.searchDateB?.value
+    let searchDateC = e.currentTarget.searchDateC?.value
+    let searchDateD = e.currentTarget.searchDateD?.value
+    let searchDateE = e.currentTarget.searchDateE?.value
+    let searchDateF = e.currentTarget.searchDateF?.value
+  }
 
   const qs = { ...router.query }
 
@@ -666,10 +688,7 @@ export default function Shop() {
               <div className="row pb-3 mt-5">
                 {data.rows.map((v, i) => {
                   return (
-                    <div
-                      key={v.i}
-                      className="col-lg-4 col-md-12 col-sm-12 pb-1"
-                    >
+                    <div key={i} className="col-lg-4 col-md-12 col-sm-12 pb-1">
                       <Link
                         href=""
                         style={{ textDecoration: 'none', color: 'black' }}

@@ -6,6 +6,7 @@ import Image from 'next/image'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { PROD_LIST } from '@/configs/config-r'
+import { shuffle } from 'lodash'
 // page
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
@@ -21,17 +22,13 @@ export default function RandomShop() {
   // Router-----
   const router = useRouter()
 
-  const [isClicked, setIsClicked] = useState(false)
-  const handleClick = () => {
-    setIsClicked(!isClicked)
-  }
-
   // Products-----
   const [data, setData] = useState({
     success: false,
     page: 0,
     totalPages: 0,
     rows: [],
+    rowsRandom: [],
     cate: [],
   })
 
@@ -46,8 +43,19 @@ export default function RandomShop() {
       })
   }, [router])
 
-  // category
-  const [mainSelect, setMainSelect] = useState(null)
+  const [isBack, setIsBack] = useState(false)
+  const [randomRows, setRandomRows] = useState([])
+
+  useEffect(() => {
+    if (!isBack) {
+      const shuffledRows = shuffle([...data.rowsRandom]).slice(0, 12)
+      setRandomRows(shuffledRows)
+    }
+  }, [isBack, data.rowsRandom])
+
+  const handleClick = () => {
+    setIsBack(!isBack)
+  }
 
   const qs = { ...router.query }
 
@@ -104,15 +112,15 @@ export default function RandomShop() {
             </div>
           </div>
           <div className="row px-xl-5 mt-4">
-            {data.rows.map((v, i) => {
+            {randomRows.map((v, i) => {
               return (
-                <div key={v.i} className="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <div key={i} className="col-lg-3 col-md-4 col-sm-6 pb-1">
                   <div
                     className={`mb-5 ${style.card}`}
                     style={{ marginBottom: '60px' }}
                   >
                     <div
-                      className={isClicked ? style.slideB : style.slide}
+                      className={isBack ? style.slideB : style.slide}
                       style={{ overflow: 'hidden' }}
                     >
                       <Image
@@ -129,7 +137,7 @@ export default function RandomShop() {
                     >
                       <div
                         className={`flex-column ${style.slideBack} ${
-                          isClicked ? style.slideBackB : style.slideBack
+                          isBack ? style.slideBackB : style.slideBack
                         }`}
                       >
                         <div className="overflow-hidden">
@@ -139,7 +147,7 @@ export default function RandomShop() {
                           >
                             <Image
                               className={`img-fluid w-100 ${
-                                isClicked ? style.imgAct : ''
+                                isBack ? style.imgAct : ''
                               }`}
                               src={
                                 v.product_photos.includes(',')

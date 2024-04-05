@@ -59,6 +59,7 @@ export default function CustomNavbar({ pageName = '' }) {
   const [data, setData] = useState({
     success: false,
     keyword: '',
+    searchMain: '',
     cate: [],
   })
 
@@ -73,6 +74,7 @@ export default function CustomNavbar({ pageName = '' }) {
         console.error('Error fetching data:', error)
       })
   }, [])
+
   // Router-----
   const router = useRouter()
   const qs = { ...router.query }
@@ -87,28 +89,6 @@ export default function CustomNavbar({ pageName = '' }) {
     } else {
       router.push(`/shop?`)
     }
-  }
-
-  // shop search
-  const onmultiSearch = (e) => {
-    e.preventDefault()
-    let searchMain = e.currentTarget.searchMain?.value
-    let searchSub = e.currentTarget.searchSub?.value
-    let searchPriceA = e.currentTarget.searchPriceA?.value
-    let searchPriceB = e.currentTarget.searchPriceB?.value
-    let searchPriceC = e.currentTarget.searchPriceC?.value
-    let searchPriceD = e.currentTarget.searchPriceD?.value
-    let searchPriceE = e.currentTarget.searchPriceE?.value
-    let searchStart = e.currentTarget.searchStart?.value
-    let searchEnd = e.currentTarget.searchEnd?.value
-    let searchProdStatusA = e.currentTarget.searchProdStatusA?.value
-    let searchProdStatusB = e.currentTarget.searchProdStatusB?.value
-    let searchDateA = e.currentTarget.searchDateA?.value
-    let searchDateB = e.currentTarget.searchDateB?.value
-    let searchDateC = e.currentTarget.searchDateC?.value
-    let searchDateD = e.currentTarget.searchDateD?.value
-    let searchDateE = e.currentTarget.searchDateE?.value
-    let searchDateF = e.currentTarget.searchDateF?.value
   }
 
   return (
@@ -420,14 +400,14 @@ export default function CustomNavbar({ pageName = '' }) {
                   overflow: 'auto',
                 }}
               >
-                {data.cate.map((v) => {
+                {data.cate.map((v, i) => {
                   if (v.parent_id == 0) {
                     return (
                       <Dropdown.Item
-                        key={v.id}
-                        href="#/action-1"
-                        className="mb-2"
-                        style={{ color: '#8e2626' }}
+                        key={i}
+                        href={`/shop?searchMain=${v.category_name}`}
+                        className={`mb-2 ${style.itemClick}`}
+                        defaultValue={v.category_name}
                       >
                         <strong>．{v.category_name}</strong>
                       </Dropdown.Item>
