@@ -1,16 +1,62 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { PROD_LIST } from '@/configs/config-r'
+import { useRouter } from 'next/router'
 // style-----
 import style from './category.module.css'
 // react bootstrap
 // react icons-----
 import { AiTwotoneGift, AiOutlineSmallDash } from 'react-icons/ai'
 // hook------
-// config-----
-import { API_SERVER } from '@/configs/config-r'
 
 export default function Category() {
+  // Product & Category
+  const [data, setData] = useState({
+    success: false,
+    cate: [],
+  })
+
+  const itemPhoto = [
+    'gift.jpg',
+    'computer.png',
+    'phone.png',
+    'man.png',
+    'woman-sm.png',
+    'beauty.png',
+    'luxury.png',
+    'game.png',
+    'earphone.png',
+    'camera.png',
+    'home.png',
+    'tv.png',
+    'baby.png',
+    'health.png',
+    'health.png',
+    'food.png',
+    'pet.png',
+    'ticket.png',
+    'car.png',
+    'other.png',
+  ]
+  const mainName = data.cate.category_name
+
+  useEffect(() => {
+    fetch(`${PROD_LIST}${location.search}`)
+      .then((r) => r.json())
+      .then((dataObj) => {
+        setData(dataObj)
+        console.log(dataObj)
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error)
+      })
+  }, [])
+
+  // Router-----
+  const router = useRouter()
+  const qs = { ...router.query }
+
   return (
     <>
       {/* Categories Start */}
@@ -39,7 +85,7 @@ export default function Category() {
             <Link
               className="text-decoration-none"
               style={{ color: '#8e2626' }}
-              href=""
+              href={`/shop?=`}
             >
               <div
                 className={`cat-item d-flex align-items-center mb-4 rounded mx-auto ${style.txt}`}

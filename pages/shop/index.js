@@ -625,7 +625,7 @@ export default function Shop() {
                             className="form-check-input"
                             type="radio"
                             id="searchPrice"
-                            name="flexRadioDefault"
+                            name="flexRadioDefault3"
                           />
                           <label
                             className="form-check-label mx-auto"

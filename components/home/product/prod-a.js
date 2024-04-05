@@ -63,7 +63,7 @@ export default function ProdA() {
         <div className="row px-xl-5">
           {data.rowsRandom.slice(0, 8).map((v, i) => {
             return (
-              <div key={v.i} className="col-lg-3 col-md-4 col-sm-6 pb-1">
+              <div key={i} className="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <Link
                   href=""
                   style={{ textDecoration: 'none', color: 'black' }}

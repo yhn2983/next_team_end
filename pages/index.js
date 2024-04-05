@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 // parts of pages
 import DefaultLayout from '@/components/common/default-layout'
 import CarouselS1 from '@/components/home/carousel/carousel'
-import Category from '@/components/home/category/category'
+import Category from '@/components/home/category/category2'
 import ProdA from '@/components/home/product/prod-a'
 import Offer from '@/components/home/offer/offer'
 import ProdB from '@/components/home/product/prod-b'
