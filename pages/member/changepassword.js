@@ -26,7 +26,8 @@ export default function ChangePasswordPage() {
   const [error, setError] = useState(initError)
 
   const handleFieldChange = (e) => {
-    setPasswords({ ...passwords, [e.target.name]: e.target.value })
+    const value = e.target.value != null ? e.target.value : ''
+    setPasswords({ ...passwords, [e.target.name]: value })
   }
 
   const checkError = () => {

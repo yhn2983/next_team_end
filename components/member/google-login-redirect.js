@@ -1,6 +1,6 @@
 import React from 'react'
 import useFirebase from '@/hooks/use-firebase'
-import { useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import { useAuth } from '@/context/auth-context'
 import { GOOGLE_LOGIN_POST } from '@/components/config'
 import { API_SERVER } from '@/components/config'
@@ -13,9 +13,15 @@ export default function GoogleLoginRedirect() {
 
   const { logoutFirebase, loginGoogleRedirect, initApp } = useFirebase()
 
+  const isMounted = useRef(true)
+
   // 這裡要設定initApp，讓這個頁面能監聽firebase的google登入狀態
   useEffect(() => {
     initApp(callbackGoogleLoginRedirect)
+
+    return () => {
+      isMounted.current = false
+    }
   }, [])
 
   const callbackGoogleLoginRedirect = async (providerData) => {
@@ -31,6 +37,7 @@ export default function GoogleLoginRedirect() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(providerData),
+      credentials: 'include',
     })
 
     const res = await response.json()
@@ -43,7 +50,13 @@ export default function GoogleLoginRedirect() {
       console.log(jwtUser)
 
       const response = await fetch(
-        `http://localhost:3001/api/users/${jwtUser.id}`
+        `http://localhost:3001/api/users/${jwtUser.id}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        }
       )
       const res1 = await response.json()
       console.log(res1)
@@ -59,10 +72,12 @@ export default function GoogleLoginRedirect() {
         }
 
         // 設定到全域狀態中
-        setAuth({
-          isAuth: true,
-          userData,
-        })
+        if (isMounted.current) {
+          setAuth({
+            isAuth: true,
+            userData,
+          })
+        }
 
         toast.success('已成功登入')
       } else {
@@ -78,9 +93,9 @@ export default function GoogleLoginRedirect() {
   const handleCheckAuth = async () => {
     const res = await checkAuth()
 
-    console.log(res.status)
+    console.log(res)
 
-    if (res.status === 'success') {
+    if (res) {
       toast.success('已登入會員')
     } else {
       toast.error(`非會員身份`)
@@ -93,9 +108,10 @@ export default function GoogleLoginRedirect() {
     logoutFirebase()
 
     const res = await logout()
+    console.log(res)
 
     // 成功登出後，回復初始會員狀態
-    if (res.status === 'success') {
+    if (res) {
       toast.success('已成功登出')
 
       setAuth({

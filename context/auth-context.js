@@ -27,9 +27,7 @@ export function AuthContextProvider({ children }) {
   // 會員的初始狀態
   const initAuth = {
     isAuth: false, // 代表沒有登入
-    userData: {
-      initUserData,
-    },
+    userData: initUserData,
   }
 
   // 共享狀態
@@ -148,7 +146,9 @@ export function AuthContextProvider({ children }) {
 
   return (
     // 使用value屬性傳遞狀態
-    <AuthContext.Provider value={{ auth, login, logout, checkAuth, parseJwt }}>
+    <AuthContext.Provider
+      value={{ auth, login, logout, checkAuth, parseJwt, setAuth }}
+    >
       {children}
     </AuthContext.Provider>
   )

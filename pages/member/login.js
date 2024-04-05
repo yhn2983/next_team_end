@@ -25,9 +25,9 @@ export default function LoginPage() {
       if (!hasChecked) {
         const isAuth = await checkAuth()
         if (isAuth) {
-          setTimeout(() => {
-            router.push('/member/profile')
-          }, 1000)
+          // setTimeout(() => {
+          //   router.push('/member/profile')
+          // }, 1000)
         }
         setHasChecked(true)
       }
@@ -39,7 +39,12 @@ export default function LoginPage() {
   // 練習怎麼撈出登入的會員資料
   useEffect(() => {
     if (auth.userData) {
-      console.log(auth.userData.id, auth.userData.email, auth.userData.nickname)
+      console.log(
+        auth.userData.id,
+        auth.userData.email,
+        auth.userData.nickname,
+        auth.userData.google_uid
+      )
     }
   }, [auth])
 
@@ -93,7 +98,7 @@ export default function LoginPage() {
     const result = await login(email, password)
     if (result) {
       alert('登入成功')
-      router.push('/member/profile')
+      // router.push('/member/profile')
     } else {
       alert('登入失敗')
     }

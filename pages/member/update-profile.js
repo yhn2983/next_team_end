@@ -28,7 +28,8 @@ export default function UpdateProfilePage() {
   const [error, setError] = useState(initError)
 
   const handleFieldChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value })
+    const value = e.target.value != null ? e.target.value : ''
+    setUser({ ...user, [e.target.name]: value })
   }
 
   const checkError = () => {

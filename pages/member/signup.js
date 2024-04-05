@@ -39,10 +39,10 @@ export default function RegisterPage() {
   const [error, setError] = useState(initError)
 
   // 多欄位公用的事件處理函式
+  // 多欄位公用的事件處理函式
   const handleFieldChange = (e) => {
     const targetValue =
       e.target.name === 'agree' ? e.target.checked : e.target.value
-
     setUser({ ...user, [e.target.name]: targetValue })
   }
 
