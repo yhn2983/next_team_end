@@ -8,6 +8,14 @@ import { useRouter } from 'next/router'
 // 1. 建立一個 Context
 const AuthContext = createContext(null)
 
+export const initUserData = {
+  // 代表會員的資料
+  id: 0,
+  email: '',
+  nickname: '',
+  google_uid: '',
+}
+
 // const authStorageKey = 'lee-auth'
 
 // 2. 建立一個 Context Provider元件
@@ -20,10 +28,7 @@ export function AuthContextProvider({ children }) {
   const initAuth = {
     isAuth: false, // 代表沒有登入
     userData: {
-      // 代表會員的資料
-      id: 0,
-      email: '',
-      nickname: '',
+      initUserData,
     },
   }
 
@@ -46,6 +51,7 @@ export function AuthContextProvider({ children }) {
               id: user.id,
               email: user.email,
               nickname: user.nickname,
+              google_uid: user.google_uid,
             },
           })
           return true
@@ -113,6 +119,11 @@ export function AuthContextProvider({ children }) {
     return false
   }
 
+  const parseJwt = (token) => {
+    const base64Payload = token.split('.')[1]
+    const payload = Buffer.from(base64Payload, 'base64')
+    return JSON.parse(payload.toString())
+  }
   /* 這是localStorage的方式
   // 每次重新整理頁面時，檢查 localStorage 有沒有 authData
   useEffect(() => {
@@ -137,7 +148,7 @@ export function AuthContextProvider({ children }) {
 
   return (
     // 使用value屬性傳遞狀態
-    <AuthContext.Provider value={{ auth, login, logout, checkAuth }}>
+    <AuthContext.Provider value={{ auth, login, logout, checkAuth, parseJwt }}>
       {children}
     </AuthContext.Provider>
   )
