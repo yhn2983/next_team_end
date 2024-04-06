@@ -7,6 +7,7 @@ import { CHECK_AUTH_ROUTE } from '@/components/config'
 import { UPLOAD_AVATAR_ONE_POST } from '@/components/config'
 import { useAuth } from '@/context/auth-context'
 import { useRouter } from 'next/router'
+import GoogleFillModal from '@/components/member/google-fill-modal'
 
 export default function Profile() {
   const { checkAuth } = useAuth()
@@ -44,6 +45,9 @@ export default function Profile() {
   // 使用 useRef 建立一個參照到 input 元件的 ref
   const inputRef = useRef(null)
 
+  // 創建一個新的狀態變數來控制模態框是否打開
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   // 定義一個異步函數來從後端獲取使用者資料
   const fetchUserData = async () => {
     const response = await fetch(CHECK_AUTH_ROUTE, {
@@ -60,6 +64,11 @@ export default function Profile() {
       // 更新 user 和 file 的狀態
       setUser(result.data.user)
       setFile(result.data.user.photo)
+
+      // 如果使用者有 google_uid，則打開模態框
+      if (result.data.user.google_uid) {
+        setIsModalOpen(true)
+      }
     }
   }
 
@@ -296,6 +305,14 @@ export default function Profile() {
           </div>
         </div>
       </section>
+      <GoogleFillModal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        userData={user}
+        onSubmitted={() => {
+          setIsModalOpen(false)
+        }}
+      />
     </>
   )
 }
