@@ -494,7 +494,7 @@ export default function CustomNavbar({ pageName = '' }) {
                   </Nav>
                   <Nav className="navbar-nav ml-auto py-0 d-none d-lg-block">
                     <div className="d-flex">
-                      <Nav.Link href="" className="btn px-0">
+                      <Nav.Link href="/shop/like" className="btn px-0">
                         <FaHeart
                           className="me-1"
                           style={{ color: 'white', fontSize: '20px' }}

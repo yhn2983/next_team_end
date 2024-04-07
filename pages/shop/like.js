@@ -79,7 +79,7 @@ export default function Like() {
                     <td>
                       <button className="btn btn-sm">
                         <FaCartPlus
-                          className="mb-1"
+                          className={`mb-1 ${style.trashBtn}`}
                           style={{ fontSize: '25px', color: '#8e2626' }}
                         />
                       </button>
@@ -93,13 +93,13 @@ export default function Like() {
                       </Link>
                     </td>
                     <td>
-                      <Link href="">
+                      <Link href={`/shop`}>
                         <Image src="/pot.jpg" alt="" width={150} height={150} />
                       </Link>
                     </td>
                     <td className="align-middle" style={{ fontSize: '20px' }}>
                       <Link
-                        href=""
+                        href={`/shop`}
                         style={{ textDecoration: 'none', color: 'black' }}
                       >
                         鍋子
@@ -115,7 +115,7 @@ export default function Like() {
                       >
                         <div className="input-group-btn">
                           <button
-                            className="btn btn-sm btn-minus"
+                            className={`btn btn-sm btn-minus ${style.btnHover}`}
                             style={{
                               backgroundColor: '#8e2626',
                               color: 'white',
@@ -131,7 +131,7 @@ export default function Like() {
                         />
                         <div className="input-group-btn">
                           <button
-                            className="btn btn-sm btn-plus"
+                            className={`btn btn-sm btn-plus ${style.btnHover}`}
                             style={{
                               backgroundColor: '#8e2626',
                               color: 'white',
@@ -149,7 +149,7 @@ export default function Like() {
                     <td className="align-middle">
                       <button className="btn btn-sm">
                         <FaTrashCan
-                          className="mb-1"
+                          className={`mb-1 ${style.trashBtn}`}
                           style={{ fontSize: '20px', color: '#8e2626' }}
                         />
                       </button>

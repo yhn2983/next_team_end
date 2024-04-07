@@ -24,16 +24,16 @@ export default function Cart() {
       <Head>
         <title>購物車 | DEAL-2ND HAND SHOP</title>
       </Head>
-      <div className="container-fluid" id="top">
+      <div className="container-fluid">
         <div className="row">
           <div className="col">
             <nav className="navbar navbar-light bg-light">
               <div className="container-fluid d-flex justify-content-center">
-                <h5 className="slogan align-middle mt-3">
+                <h5 className="align-middle mt-3">
                   <FaSeedling style={{ color: '#51c332' }} />
                   <Link
                     className="colorSlogan text-decoration-none"
-                    href=""
+                    href="/activity"
                     style={{ color: '#8e2626' }}
                   >
                     <strong style={{ fontSize: '25px' }}>
@@ -119,7 +119,7 @@ export default function Cart() {
                       >
                         <div className="input-group-btn">
                           <button
-                            className="btn btn-sm btn-minus"
+                            className={`btn btn-sm btn-minus ${style.btnHover}`}
                             style={{
                               backgroundColor: '#8e2626',
                               color: 'white',
@@ -135,7 +135,7 @@ export default function Cart() {
                         />
                         <div className="input-group-btn">
                           <button
-                            className="btn btn-sm btn-plus"
+                            className={`btn btn-sm btn-plus ${style.btnHover}`}
                             style={{
                               backgroundColor: '#8e2626',
                               color: 'white',
@@ -153,7 +153,7 @@ export default function Cart() {
                     <td className="align-middle">
                       <button className="btn btn-sm">
                         <FaTrashCan
-                          className="mb-1"
+                          className={`mb-1 ${style.trashBtn}`}
                           style={{ fontSize: '20px', color: '#8e2626' }}
                         />
                       </button>
@@ -163,11 +163,10 @@ export default function Cart() {
               </table>
             </div>
             <div className="col-lg-4">
-              <div className="d-flex mb-3">
+              <div className="d-flex mb-3 justify-content-center">
                 <h3 className="mb-2" style={{ color: '#8e2626' }}>
-                  <strong>購物車詳情</strong>
+                  <strong>– 購物車詳情 –</strong>
                 </h3>
-                <span className={style.titleArea}></span>
               </div>
               <div className="bg-light p-30 mb-5">
                 <div className="border-bottom px-4 pt-4 pb-3">
@@ -190,11 +189,10 @@ export default function Cart() {
                     </h5>
                   </div>
                   <button
-                    className="btn btn-block font-weight-bold my-3 py-3 d-flex"
+                    className={`btn btn-block font-weight-bold d-flex ${style.checkBtn}`}
                     style={{
                       backgroundColor: '#e96d3f',
                       color: 'white',
-                      marginLeft: '561px',
                     }}
                   >
                     <strong style={{ fontSize: '20px' }}>去結帳</strong>

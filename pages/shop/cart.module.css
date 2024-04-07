@@ -47,3 +47,23 @@ margin-top: 50px;
     transform: translateY(-10px);
   }
 }
+
+.checkBtn{
+  box-shadow: 0 0 10px gray;
+  text-decoration: none;
+  border: none;
+  padding: 5px 10px;
+  font-size: 20px;
+}
+
+.checkBtn:hover{
+  background-color: #8e2626 !important;
+}
+
+.btnHover:hover{
+  box-shadow: 0 0 15px rgb(122, 120, 120);
+}
+
+.trashBtn:hover{
+  color: #e96d3f !important;
+}

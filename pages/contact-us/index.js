@@ -41,7 +41,7 @@ export default function ContactUs() {
               {/* Breadcrumb End */}
               {/* Contact Start */}
               <div class="container-fluid mt-3 px-5">
-                <div className="d-flex">
+                <div className="d-flex justify-content-center">
                   <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
                     <span class="pr-3" style={{ color: '#8e2626' }}>
                       <strong>
@@ -50,7 +50,6 @@ export default function ContactUs() {
                       </strong>
                     </span>
                   </h2>
-                  <span className={style.titleArea}></span>
                 </div>
                 <div class="row px-xl-5 mt-4">
                   <div class="col-lg-7 mb-5" style={{ paddingLeft: '120px' }}>
@@ -107,7 +106,7 @@ export default function ContactUs() {
                         </div>
                         <div>
                           <button
-                            class="btn py-2 px-4"
+                            class={`btn py-2 px-3 ${style.sendBtn}`}
                             type="submit"
                             id="sendMessageButton"
                             style={{
