@@ -41,7 +41,13 @@ export default function GoogleFillModal({
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify({
+        ...userData,
+        nickname: user.nickname,
+        mobile: user.mobile,
+        birthday: user.birthday,
+        address: user.address,
+      }), // 合併 userData 和 user
       credentials: 'include', // 將 cookies 包含在請求中
     })
 
@@ -54,6 +60,8 @@ export default function GoogleFillModal({
         title: '恭喜',
         text: '你已經成功更新會員資料',
         icon: 'success',
+      }).then(() => {
+        window.location.reload()
       })
     } else {
       MySwal.fire({
@@ -78,8 +86,20 @@ export default function GoogleFillModal({
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       shouldCloseOnOverlayClick={false}
+      style={{
+        content: {
+          width: '490px',
+          height: '540px',
+          top: '50%',
+          left: '50%',
+          right: 'auto',
+          bottom: 'auto',
+          marginRight: '-50%',
+          transform: 'translate(-50%, -50%)',
+          backgroundColor: '#F0F0F0', // 設置淺灰色的背景
+        },
+      }}
     >
-      <h2>請填寫以下資訊</h2>
       <div className={`${styles.googleFillModal} p-3`}>
         <form name="form1" onSubmit={handleSubmit}>
           <div className="mb-3">
@@ -140,7 +160,7 @@ export default function GoogleFillModal({
               onChange={handleFieldChange}
             />
           </div>
-          <button type="submit" className="btn">
+          <button type="submit" className="btn mt-3">
             <strong>送出</strong>
           </button>
         </form>

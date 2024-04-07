@@ -65,8 +65,8 @@ export default function Profile() {
       setUser(result.data.user)
       setFile(result.data.user.photo)
 
-      // 如果使用者有 google_uid，則打開模態框
-      if (result.data.user.google_uid) {
+      // 如果使用者的手機號碼未填寫或者不是 10 位數，則打開模態框
+      if (!result.data.user.mobile || result.data.user.mobile.length !== 10) {
         setIsModalOpen(true)
       }
     }
