@@ -24,11 +24,8 @@ import { IoCloseCircle } from 'react-icons/io5'
 
 export default function Footer() {
   // ---BackToTop---
-  const topRef = useRef(null)
   const scrollToTop = () => {
-    if (topRef.current) {
-      topRef.current.scrollIntoView({ behavior: 'smooth' })
-    }
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const [isClose, setIsClose] = useState(false)
@@ -39,9 +36,9 @@ export default function Footer() {
   return (
     <>
       {/* Back to Top */}
-      <Link href="" className="btn" onClick={scrollToTop}>
+      <button className="btn" onClick={scrollToTop}>
         <FaAnglesUp className={style.backToTop} style={{ fontSize: '40px' }} />
-      </Link>
+      </button>
       {/* Footer Start */}
       <div className={`container-fluid px-5 pt-5 ${style.footerArea}`}>
         <div className="row pt-2">
@@ -454,7 +451,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div ref={topRef}></div>
       {/* Footer End */}
       {/* ad start */}
       <div className={style.adArea} style={{ display: isClose ? 'none' : '' }}>
