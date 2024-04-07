@@ -33,36 +33,49 @@
 }
 
 .iconAInner{
-  font-size: 45px;
+  font-size: 35px;
   border: 1px solid #8e2626;
   color: #8e2626;  
   padding: 5px 6px;
   position: absolute;
   opacity: 0;
-  top: 0px;
-  left: 180px;
+  top: 0;
+  left: 19%;
   transform: translateY(0);
 }
 
 .iconBInner{
-  font-size: 45px;
+  font-size: 35px;
   border: none;
   color: #8e2626;
   padding: 5px 6px;
   position: absolute;
   opacity: 0;
-  top: 0px;
-  left: 240px;
+  top: 0;
+  left: 44%;
+  transform: translateY(0);
+}
+
+.iconCInner{
+  font-size: 35px;
+  border: none;
+  color: #8e2626;
+  padding: 5px 6px;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 69%;
   transform: translateY(0);
 }
 
 .productItem:hover .iconAInner{
   color: #8e2626;
   border: 1px solid #8e2626;
+  border-radius: 50%;
   position: absolute;
   opacity: 1;
-  top: 90px;
-  left: 180px;
+  top: 20%;
+  left: 19%;
   transform: translateY(80%);
   transition: transform 0.3s ease;
 }
@@ -70,10 +83,23 @@
 .productItem:hover .iconBInner{
   color: #8e2626;
   border: 1px solid #8e2626;
+  border-radius: 50%;
   position: absolute;
   opacity: 1;
-  top: 90px;
-  left: 240px;
+  top: 20%;
+  left: 44%;
+  transform: translateY(80%);
+  transition: transform 0.5s ease;
+}
+
+.productItem:hover .iconCInner{
+  color: #8e2626;
+  border: 1px solid #8e2626;
+  border-radius: 50%;
+  position: absolute;
+  opacity: 1;
+  top: 20%;
+  left: 69%;
   transform: translateY(80%);
   transition: transform 0.5s ease;
 }
@@ -84,6 +110,11 @@
 }
 
 .productItem:hover .iconBInner:hover{
+  color: #e96d3f;
+  background-color: #8e2626;
+}
+
+.productItem:hover .iconCInner:hover{
   color: #e96d3f;
   background-color: #8e2626;
 }

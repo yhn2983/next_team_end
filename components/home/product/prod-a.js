@@ -36,9 +36,6 @@ export default function ProdA() {
       })
   }, [router])
 
-  // category
-  const [mainSelect, setMainSelect] = useState(null)
-
   const qs = { ...router.query }
   return (
     <>

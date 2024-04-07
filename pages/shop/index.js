@@ -56,6 +56,25 @@ export default function Shop() {
     totalPages: 0,
     rows: [],
     cate: [],
+    searchMain: '',
+    searchSub: '',
+    searchPriceA: '',
+    searchPriceB: '',
+    searchPriceC: '',
+    searchPriceD: '',
+    searchPriceE: '',
+    priceStart: '',
+    priceEnd: '',
+    searchProdStatusA: '',
+    searchProdStatusB: '',
+    searchDateA: '',
+    searchDateB: '',
+    searchDateC: '',
+    searchDateD: '',
+    searchDateE: '',
+    searchDateF: '',
+    searchDateStart: '',
+    searchDateEnd: '',
   })
 
   useEffect(() => {
@@ -75,27 +94,95 @@ export default function Shop() {
 
   // category
   const [mainSelect, setMainSelect] = useState(null)
+  const [subSelect, setSubSelect] = useState(null)
 
   // shop search
   const onmultiSearch = (e) => {
     e.preventDefault()
-    let searchMain = e.currentTarget.searchMain?.value
-    let searchSub = e.currentTarget.searchSub?.value
-    let searchPriceA = e.currentTarget.searchPriceA?.value
-    let searchPriceB = e.currentTarget.searchPriceB?.value
-    let searchPriceC = e.currentTarget.searchPriceC?.value
-    let searchPriceD = e.currentTarget.searchPriceD?.value
-    let searchPriceE = e.currentTarget.searchPriceE?.value
-    let searchStart = e.currentTarget.searchStart?.value
-    let searchEnd = e.currentTarget.searchEnd?.value
-    let searchProdStatusA = e.currentTarget.searchProdStatusA?.value
-    let searchProdStatusB = e.currentTarget.searchProdStatusB?.value
-    let searchDateA = e.currentTarget.searchDateA?.value
-    let searchDateB = e.currentTarget.searchDateB?.value
-    let searchDateC = e.currentTarget.searchDateC?.value
-    let searchDateD = e.currentTarget.searchDateD?.value
-    let searchDateE = e.currentTarget.searchDateE?.value
-    let searchDateF = e.currentTarget.searchDateF?.value
+
+    const queryParams = new URLSearchParams()
+
+    const { currentTarget } = e
+
+    // Category search
+    const searchMain = currentTarget.searchMain?.value
+      ? currentTarget.searchMain.value
+      : ''
+    const searchSub = currentTarget.searchSub?.value
+      ? currentTarget.searchSub.value
+      : ''
+
+    // Price search
+    const searchPriceA = currentTarget.searchPrice.checked
+      ? currentTarget.searchPrice.value
+      : ''
+    const searchPriceB = currentTarget.searchPrice.checked
+      ? currentTarget.searchPrice.value
+      : ''
+    const searchPriceC = currentTarget.searchPrice.checked
+      ? currentTarget.searchPrice.value
+      : ''
+    const searchPriceD = currentTarget.searchPrice.checked
+      ? currentTarget.searchPrice.value
+      : ''
+    const searchPriceE = currentTarget.searchPrice.checked
+      ? currentTarget.searchPrice.value
+      : ''
+
+    // Product status search
+    const searchProdStatusA = currentTarget.searchProdStatus.checked
+      ? currentTarget.searchProdStatus.value
+      : ''
+    const searchProdStatusB = currentTarget.searchProdStatus.checked
+      ? currentTarget.searchProdStatus.value
+      : ''
+
+    // Date search
+    const searchDateA = currentTarget.searchDate.checked
+      ? currentTarget.searchDate.value
+      : ''
+    const searchDateB = currentTarget.searchDate.checked
+      ? currentTarget.searchDate.value
+      : ''
+    const searchDateC = currentTarget.searchDate.checked
+      ? currentTarget.searchDate.value
+      : ''
+    const searchDateD = currentTarget.searchDate.checked
+      ? currentTarget.searchDate.value
+      : ''
+    const searchDateE = currentTarget.searchDate.checked
+      ? currentTarget.searchDate.value
+      : ''
+    const searchDateF = currentTarget.searchDate.checked
+      ? currentTarget.searchDate.value
+      : ''
+    const searchDateStart = currentTarget.searchDateStart.checked
+      ? currentTarget.searchDateStart.value
+      : ''
+    const searchDateEnd = currentTarget.searchDateEnd.checked
+      ? currentTarget.searchDateEnd.value
+      : ''
+
+    // Append to queryParams only if checked
+    queryParams.append('searchMain', searchMain)
+    queryParams.append('searchSub', searchSub)
+    queryParams.append('searchPriceA', searchPriceA)
+    queryParams.append('searchPriceB', searchPriceB)
+    queryParams.append('searchPriceC', searchPriceC)
+    queryParams.append('searchPriceD', searchPriceD)
+    queryParams.append('searchPriceE', searchPriceE)
+    queryParams.append('searchProdStatusA', searchProdStatusA)
+    queryParams.append('searchProdStatusB', searchProdStatusB)
+    queryParams.append('searchDateA', searchDateA)
+    queryParams.append('searchDateB', searchDateB)
+    queryParams.append('searchDateC', searchDateC)
+    queryParams.append('searchDateD', searchDateD)
+    queryParams.append('searchDateE', searchDateE)
+    queryParams.append('searchDateF', searchDateF)
+    queryParams.append('searchDateStart', searchDateStart)
+    queryParams.append('searchDateEnd', searchDateEnd)
+
+    router.push(`/shop?${queryParams}`)
   }
 
   const qs = { ...router.query }
@@ -130,87 +217,90 @@ export default function Shop() {
           <div className="row px-xl-5">
             {/* Shop Sidebar Start */}
             <div className="col-lg-3 col-md-4 mt-5">
-              {/* main-category start */}
-              <div className="d-flex">
-                <h3 className="mb-2" style={{ color: '#8e2626' }}>
-                  <strong>商品分類篩選</strong>
-                </h3>
-              </div>
-              <div className="mb-4 bg-light px-3 py-3">
-                <select
-                  className="form-select"
-                  aria-label="Default select example"
-                  name="searchMain"
-                  value={mainSelect}
-                  onChange={(e) => setMainSelect(+e.target.value)}
-                  defaultValue={router.query.searchMain}
-                >
-                  <option selected disabled value="disable">
-                    開始搜尋吧！
-                  </option>
-                  {data.cate.map((v) => {
-                    if (v.parent_id == 0) {
-                      return (
-                        <option
-                          key={v.id}
-                          style={{ color: '#8e2626' }}
-                          value={v.id}
-                        >
-                          {v.category_name}
-                        </option>
-                      )
-                    }
-                  })}
-                </select>
-              </div>
-              {/* main-category end */}
-              {/* sub-category start */}
-              <div className="d-flex">
-                <h3 className="mb-2" style={{ color: '#8e2626' }}>
-                  <strong>商品子分類篩選</strong>
-                </h3>
-              </div>
-              <div className="mb-4 bg-light px-3 py-3">
-                <select
-                  className="form-select"
-                  aria-label="Default select example"
-                >
-                  <option selected disabled value="disable">
-                    開始搜尋吧！
-                  </option>
-                  {data.cate.map((v) =>
-                    v.nodes.map((node) => {
-                      if (node.parent_id === mainSelect) {
+              <form role="search" onSubmit={onmultiSearch}>
+                {/* main-category start */}
+                <div className="d-flex">
+                  <h3 className="mb-2" style={{ color: '#8e2626' }}>
+                    <strong>商品分類篩選</strong>
+                  </h3>
+                </div>
+                <div className="mb-4 bg-light px-3 py-3">
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                    name="searchMain"
+                    value={mainSelect}
+                    onChange={(e) => setMainSelect(+e.target.value)}
+                    defaultValue={router.query.searchMain}
+                  >
+                    <option selected disabled value="disable">
+                      開始搜尋吧！
+                    </option>
+                    {data.cate.map((v) => {
+                      if (v.parent_id == 0) {
                         return (
                           <option
-                            key={node.id}
+                            key={v.id}
                             style={{ color: '#8e2626' }}
-                            value={node.id}
-                            name="searchSub"
-                            defaultValue={router.query.searchSub}
+                            value={v.id}
+                            name="searchMain"
                           >
-                            {node.category_name}
+                            {v.category_name}
                           </option>
                         )
                       }
-                    })
-                  )}
-                </select>
-              </div>
-              {/* sub-category end */}
-              {/* Price Start */}
-              <div className="d-flex">
-                <h3 className="mb-2" style={{ color: '#8e2626' }}>
-                  <strong>價格篩選</strong>
-                </h3>
-              </div>
-              <div className="bg-light p-3 mb-4">
-                <form>
+                    })}
+                  </select>
+                </div>
+                {/* main-category end */}
+                {/* sub-category start */}
+                <div className="d-flex">
+                  <h3 className="mb-2" style={{ color: '#8e2626' }}>
+                    <strong>商品子分類篩選</strong>
+                  </h3>
+                </div>
+                <div className="mb-4 bg-light px-3 py-3">
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                    onChange={(e) => setSubSelect(+e.target.value)}
+                    value={subSelect}
+                    defaultValue={router.query.searchSub}
+                  >
+                    <option selected disabled value="disable">
+                      開始搜尋吧！
+                    </option>
+                    {data.cate.map((v) =>
+                      v.nodes.map((node) => {
+                        if (node.parent_id === mainSelect) {
+                          return (
+                            <option
+                              key={node.id}
+                              style={{ color: '#8e2626' }}
+                              value={node.id}
+                              name="searchSub"
+                            >
+                              {node.category_name}
+                            </option>
+                          )
+                        }
+                      })
+                    )}
+                  </select>
+                </div>
+                {/* sub-category end */}
+                {/* Price Start */}
+                <div className="d-flex">
+                  <h3 className="mb-2" style={{ color: '#8e2626' }}>
+                    <strong>價格篩選</strong>
+                  </h3>
+                </div>
+                <div className="bg-light p-3 mb-4">
                   <div className="form-check d-flex align-items-center justify-content-between mb-3">
                     <input
                       className="form-check-input"
                       type="radio"
-                      name="flexRadioDefault"
+                      name="searchPrice"
                       id="all"
                     />
                     <label className="form-check-label mx-auto" htmlFor="all">
@@ -228,7 +318,7 @@ export default function Shop() {
                       className="form-check-input"
                       type="radio"
                       id="searchPriceA"
-                      name="flexRadioDefault"
+                      name="searchPrice"
                       defaultValue={router.query.searchPriceA}
                     />
                     <label
@@ -249,7 +339,7 @@ export default function Shop() {
                       className="form-check-input"
                       type="radio"
                       id="searchPriceB"
-                      name="flexRadioDefault"
+                      name="searchPrice"
                       defaultValue={router.query.searchPriceB}
                     />
                     <label
@@ -270,7 +360,7 @@ export default function Shop() {
                       className="form-check-input"
                       type="radio"
                       id="searchPriceC"
-                      name="flexRadioDefault"
+                      name="searchPrice"
                       defaultValue={router.query.searchPriceC}
                     />
                     <label
@@ -293,7 +383,7 @@ export default function Shop() {
                       className="form-check-input"
                       type="radio"
                       id="searchPriceD"
-                      name="flexRadioDefault"
+                      name="searchPrice"
                       defaultValue={router.query.searchPriceD}
                     />
                     <label
@@ -316,7 +406,7 @@ export default function Shop() {
                       className="form-check-input"
                       type="radio"
                       id="searchPriceE"
-                      name="flexRadioDefault"
+                      name="searchPrice"
                       defaultValue={router.query.searchPriceE}
                     />
                     <label
@@ -333,72 +423,64 @@ export default function Shop() {
                     </span>
                   </div>
                   <div className="custom-control">
-                    <div className="row">
-                      <div className="col-12">
-                        <div className="form-check d-flex align-items-center justify-content-center mb-3">
-                          <input
-                            className="form-check-input"
-                            type="radio"
-                            id="searchPrice"
-                            name="flexRadioDefault"
-                          />
-                          <label
-                            className="form-check-label mx-auto"
-                            htmlFor="searchPrice"
-                          >
-                            <strong style={{ fontSize: '16px' }}>
-                              自訂區間
-                            </strong>
-                          </label>
-                          <div className="d-flex">
-                            <GoDash />
-                            <GoDash />
-                            <GoDash />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-12 d-flex align-items-center justify-content-between mx-auto">
-                        <input
-                          type="text"
-                          aria-label="lowest price"
-                          className="form-control"
-                          style={{ width: '48%' }}
-                          placeholder="價格下限"
-                          name="priceStart"
-                          defaultValue={router.query.priceStart}
-                        />
-                        <span>
-                          <strong>-</strong>
-                        </span>
-                        <input
-                          type="text"
-                          aria-label="highest price"
-                          className="form-control"
-                          style={{ width: '48%' }}
-                          placeholder="價格上限"
-                          name="priceEnd"
-                          defaultValue={router.query.priceEnd}
-                        />
+                    <div className="form-check d-flex align-items-center justify-content-center mb-2">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        id="searchPrice"
+                        name="searchPrice"
+                      />
+                      <label
+                        className="form-check-label mx-auto"
+                        htmlFor="searchPrice"
+                      >
+                        <strong style={{ fontSize: '16px' }}>自訂區間</strong>
+                      </label>
+                      <div className="d-flex">
+                        <GoDash />
+                        <GoDash />
+                        <GoDash />
                       </div>
                     </div>
+                    <div className="d-flex align-items-center justify-content-between mx-auto">
+                      <input
+                        type="text"
+                        aria-label="lowest price"
+                        className="form-control"
+                        style={{ width: '48%' }}
+                        placeholder="價格下限"
+                        name="priceStart"
+                        defaultValue={router.query.priceStart}
+                      />
+                      <span>
+                        <strong>-</strong>
+                      </span>
+                      <input
+                        type="text"
+                        aria-label="highest price"
+                        className="form-control"
+                        style={{ width: '48%' }}
+                        placeholder="價格上限"
+                        name="priceEnd"
+                        defaultValue={router.query.priceEnd}
+                      />
+                    </div>
                   </div>
-                </form>
-              </div>
-              {/* Price End */}
+                </div>
+                {/* Price End */}
 
-              {/* new & old Start */}
-              <div className="d-flex">
-                <h3 className="mb-2" style={{ color: '#8e2626' }}>
-                  <strong>商品狀態篩選</strong>
-                </h3>
-              </div>
-              <div className="bg-light p-3 mb-4">
-                <form>
+                {/* new & old Start */}
+                <div className="d-flex">
+                  <h3 className="mb-2" style={{ color: '#8e2626' }}>
+                    <strong>商品狀態篩選</strong>
+                  </h3>
+                </div>
+                <div className="bg-light p-3 mb-4">
                   <div className="form-check d-flex align-items-center justify-content-between mb-3">
                     <input
                       className="form-check-input"
                       type="radio"
-                      name="flexRadioDefault2"
+                      name="searchProdStatus"
                       id="all"
                     />
                     <label className="form-check-label mx-auto" htmlFor="all">
@@ -416,7 +498,7 @@ export default function Shop() {
                       className="form-check-input"
                       type="radio"
                       id="searchProdStatusA"
-                      name="flexRadioDefault2"
+                      name="searchProdStatus"
                       defaultValue={router.query.searchProdStatusA}
                     />
                     <label
@@ -437,7 +519,7 @@ export default function Shop() {
                       className="form-check-input"
                       type="radio"
                       id="searchProdStatusB"
-                      name="flexRadioDefault2"
+                      name="searchProdStatus"
                       defaultValue={router.query.searchProdStatusB}
                     />
                     <label
@@ -453,22 +535,20 @@ export default function Shop() {
                       295
                     </span>
                   </div>
-                </form>
-              </div>
-              {/* new & old  End */}
-              {/* created_at Start */}
-              <div className="d-flex">
-                <h3 className="mb-2" style={{ color: '#8e2626' }}>
-                  <strong>上架時間篩選</strong>
-                </h3>
-              </div>
-              <div className="bg-light p-3 mb-30">
-                <form>
+                </div>
+                {/* new & old  End */}
+                {/* created_at Start */}
+                <div className="d-flex">
+                  <h3 className="mb-2" style={{ color: '#8e2626' }}>
+                    <strong>上架時間篩選</strong>
+                  </h3>
+                </div>
+                <div className="bg-light p-3 mb-30">
                   <div className="form-check d-flex align-items-center justify-content-between mb-3">
                     <input
                       className="form-check-input"
                       type="radio"
-                      name="flexRadioDefault3"
+                      name="searchDate"
                       id="date-all"
                     />
                     <label className="custom-control-label" htmlFor="date-all">
@@ -486,7 +566,7 @@ export default function Shop() {
                       className="form-check-input"
                       type="radio"
                       id="searchDateA"
-                      name="flexRadioDefault3"
+                      name="searchDate"
                       defaultValue={router.query.searchDateA}
                     />
                     <label
@@ -509,7 +589,7 @@ export default function Shop() {
                       className="form-check-input"
                       type="radio"
                       id="searchDateB"
-                      name="flexRadioDefault3"
+                      name="searchDate"
                       defaultValue={router.query.searchDateB}
                     />
                     <label
@@ -532,7 +612,7 @@ export default function Shop() {
                       className="form-check-input"
                       type="radio"
                       id="searchDateC"
-                      name="flexRadioDefault3"
+                      name="searchDate"
                       defaultValue={router.query.searchDateC}
                     />
                     <label
@@ -555,7 +635,7 @@ export default function Shop() {
                       className="form-check-input"
                       type="radio"
                       id="searchDateD"
-                      name="flexRadioDefault3"
+                      name="searchDate"
                       defaultValue={router.query.searchDateD}
                     />
                     <label
@@ -578,7 +658,7 @@ export default function Shop() {
                       className="form-check-input"
                       type="radio"
                       id="searchDateE"
-                      name="flexRadioDefault3"
+                      name="searchDate"
                       defaultValue={router.query.searchDateE}
                     />
                     <label
@@ -601,7 +681,7 @@ export default function Shop() {
                       className="form-check-input"
                       type="radio"
                       id="searchDateF"
-                      name="flexRadioDefault3"
+                      name="searchDate"
                       defaultValue={router.query.searchDateF}
                     />
                     <label
@@ -618,68 +698,62 @@ export default function Shop() {
                     </span>
                   </div>
                   <div className="custom-control">
-                    <div className="row">
-                      <div className="col-12">
-                        <div className="form-check d-flex align-items-center justify-content-center mb-3">
-                          <input
-                            className="form-check-input"
-                            type="radio"
-                            id="searchPrice"
-                            name="flexRadioDefault3"
-                          />
-                          <label
-                            className="form-check-label mx-auto"
-                            htmlFor="searchPrice"
-                          >
-                            <strong style={{ fontSize: '16px' }}>
-                              自訂區間
-                            </strong>
-                          </label>
-                          <div className="d-flex">
-                            <GoDash />
-                            <GoDash />
-                            <GoDash />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-12 d-flex align-items-center justify-content-between">
-                        <DatePicker
-                          className="form-control"
-                          selected={startDate}
-                          onChange={(date) => setStartDate(date)}
-                          style={{ width: '50%' }}
-                          name="searchDateStart"
-                          defaultValue={router.query.searchDateStart}
-                        />
-                        <div className="">
-                          <strong> - </strong>
-                        </div>
-                        <DatePicker
-                          className="form-control"
-                          selected={endDate}
-                          onChange={(date) => setStartDate(date)}
-                          style={{ width: '50%' }}
-                          name="searchDateEnd"
-                          defaultValue={router.query.searchDateEnd}
-                        />
+                    <div className="d-flex align-items-center justify-content-between mb-2">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        id="searchPrice"
+                        name="searchDate"
+                      />
+                      <label
+                        className="form-check-label mx-auto"
+                        htmlFor="searchPrice"
+                      >
+                        <strong style={{ fontSize: '16px' }}>自訂區間</strong>
+                      </label>
+                      <div className="d-flex">
+                        <GoDash />
+                        <GoDash />
+                        <GoDash />
                       </div>
                     </div>
+                    <div className="d-flex align-items-center justify-content-between">
+                      <DatePicker
+                        className="form-control"
+                        selected={startDate}
+                        onChange={(date) => setStartDate(date)}
+                        style={{ width: '50%' }}
+                        name="searchDateStart"
+                        defaultValue={router.query.searchDateStart}
+                      />
+                      <div className="">
+                        <strong> - </strong>
+                      </div>
+                      <DatePicker
+                        className="form-control"
+                        selected={endDate}
+                        onChange={(date) => setStartDate(date)}
+                        style={{ width: '50%' }}
+                        name="searchDateEnd"
+                        defaultValue={router.query.searchDateEnd}
+                      />
+                    </div>
                   </div>
-                </form>
-              </div>
-              {/* created_at End */}
-              <div className="text-center">
-                <button
-                  className={`btn mt-3 ${style.searchBtn}`}
-                  type="submit"
-                  style={{
-                    backgroundColor: '#e96d3f',
-                    color: 'white',
-                  }}
-                >
-                  <strong>開始搜尋</strong>
-                </button>
-              </div>
+                </div>
+                {/* created_at End */}
+                <div className="text-center">
+                  <button
+                    className={`btn mt-3 ${style.searchBtn}`}
+                    type="submit"
+                    style={{
+                      backgroundColor: '#e96d3f',
+                      color: 'white',
+                    }}
+                  >
+                    <strong>開始搜尋</strong>
+                  </button>
+                </div>
+              </form>
             </div>
             {/* Shop Sidebar End */}
 
@@ -690,7 +764,7 @@ export default function Shop() {
                   return (
                     <div key={i} className="col-lg-4 col-md-12 col-sm-12 pb-1">
                       <Link
-                        href=""
+                        href={`/shop/detail?pid=${v.id}`}
                         style={{ textDecoration: 'none', color: 'black' }}
                       >
                         <div
@@ -715,7 +789,6 @@ export default function Shop() {
                                 style={{ height: '266px', objectFit: 'cover' }}
                               />
                             </div>
-
                             <div className={style.productAction}>
                               <Link href="" className="">
                                 <BsFillCartFill className={style.iconAInner} />

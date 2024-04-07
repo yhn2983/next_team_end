@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
+import { PROD_LIST } from '@/configs/config-r'
 // page
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
@@ -12,13 +14,58 @@ import Modal from 'react-bootstrap/Modal'
 // react icons-----
 import { BsFillCartFill } from 'react-icons/bs'
 import { AiOutlineHeart } from 'react-icons/ai'
+import { IoSearch } from 'react-icons/io5'
 import { FaMinus, FaPlus } from 'react-icons/fa6'
 import { ImHammer2 } from 'react-icons/im'
 import { TbArrowsExchange2 } from 'react-icons/tb'
 // hook------
 
 export default function Detail() {
+  // Router-----
+  const router = useRouter()
+  const { pid } = router.query
+
   const [show, setShow] = useState(false)
+
+  // Products-----
+  const [data, setData] = useState({
+    success: false,
+    rows: [],
+    rowsRandom: [],
+    cate: [],
+  })
+
+  useEffect(() => {
+    fetch(`${PROD_LIST}${location.search}`)
+      .then((r) => r.json())
+      .then((dataObj) => {
+        setData(dataObj)
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error)
+      })
+  }, [router, pid])
+
+  // const [product, setProduct] = useState({
+  //   id: '',
+  //   s: '',
+  //   m: '',
+  //   mc: '',
+  //   seller_id: '',
+  //   product_photos: [],
+  //   product_name: '',
+  //   product_price: '',
+  //   product_qty: '',
+  //   product_status: '',
+  //   product_intro: '',
+  //   created_at: '',
+  //   edited_at: '',
+  //   status: '',
+  //   sellerName: '',
+  //   sellerPic: '',
+  // })
+
+  const qs = { ...router.query }
 
   return (
     <>
@@ -41,7 +88,7 @@ export default function Detail() {
                 <Link
                   className="breadcrumb-item"
                   style={{ textDecoration: 'none' }}
-                  href="/shop/product-search"
+                  href="/shop"
                 >
                   <span>探索商品</span>
                 </Link>
@@ -53,418 +100,319 @@ export default function Detail() {
         {/* Breadcrumb End */}
 
         {/* Shop Detail Start */}
-        <div
-          className="container-fluid pb-5 mt-4"
-          style={{ padding: '0 100px' }}
-        >
-          <div className="row px-xl-5">
-            <div className="col-lg-5 mb-30">
-              <Carousel fade>
-                <Carousel.Item>
-                  <Image
-                    src="/pot.jpg"
-                    alt=""
-                    width={1000}
-                    height={600}
-                    style={{ objectFit: 'cover', opacity: '0.9' }}
-                  />
-                </Carousel.Item>
-              </Carousel>
-            </div>
-            <div className="col-lg-7 h-auto">
-              <div
-                className="h-100 bg-light py-5"
-                style={{ padding: '0 100px' }}
-              >
-                <h2 style={{ fontWeight: '900' }}>
-                  <strong style={{ color: '#8e2626' }}>商品名稱</strong>
-                </h2>
-                <p className="mb-4 ms-2 mt-3" style={{ fontSize: '20px' }}>
-                  <strong style={{ color: '#8e2626' }}>賣家：</strong>
-                </p>
-                <div className="d-flex">
-                  <p className="mb-4 ms-2" style={{ fontSize: '20px' }}>
-                    <strong style={{ color: '#8e2626' }}>商品價格：</strong>
-                  </p>
-                  <p
-                    className="mb-4"
-                    style={{
-                      fontSize: '20px',
-                      marginLeft: '420px',
-                    }}
-                  >
-                    <strong style={{ color: '#8e2626' }}>商品數量：</strong>
-                  </p>
-                </div>
-                <div className="d-flex">
-                  <p className="mb-4 ms-2" style={{ fontSize: '20px' }}>
-                    <strong style={{ color: '#8e2626' }}>商品主分類：</strong>
-                  </p>
-                  <p
-                    className="mb-4"
-                    style={{
-                      fontSize: '20px',
-                      marginLeft: '400px',
-                    }}
-                  >
-                    <strong style={{ color: '#8e2626' }}>商品子分類：</strong>
-                  </p>
-                </div>
-                <div className="d-flex">
-                  <p className="mb-4 ms-2" style={{ fontSize: '20px' }}>
-                    <strong style={{ color: '#8e2626' }}>商品狀態：</strong>
-                  </p>
-                  <p
-                    className="mb-4"
-                    style={{
-                      fontSize: '20px',
-                      marginLeft: '420px',
-                    }}
-                  >
-                    <strong style={{ color: '#8e2626' }}>上下架狀態：</strong>
-                  </p>
-                </div>
-                <div className="d-flex">
-                  <p className="mb-4 ms-2" style={{ fontSize: '20px' }}>
-                    <strong style={{ color: '#8e2626' }}>商品上架時間：</strong>
-                  </p>
-                  <p
-                    className="mb-4"
-                    style={{
-                      fontSize: '20px',
-                      marginLeft: '380px',
-                    }}
-                  >
-                    <strong style={{ color: '#8e2626' }}>商品更新時間：</strong>
-                  </p>
-                </div>
-                <hr />
-                <div className="d-flex align-items-center mb-4 pt-2 ms-2 mt-5">
-                  <div
-                    className="input-group quantity mr-3"
-                    style={{ width: '130px' }}
-                  >
-                    <div className="input-group-btn">
-                      <button
-                        className={`btn btn-minus ${style.btnHover}`}
-                        style={{ backgroundColor: '#8e2626' }}
-                      >
-                        <FaMinus style={{ color: 'white' }} />
-                      </button>
+        <div className="container-fluid pb-5 mt-4">
+          {data.rows.map((v, i) => {
+            if (+pid === +v.id) {
+              return (
+                <>
+                  <div className="row px-xl-5">
+                    <div className="col-lg-5 mb-30">
+                      <Carousel fade style={{ height: '552px' }}>
+                        <Carousel.Item>
+                          <Image
+                            src={
+                              v.product_photos.includes(',')
+                                ? `/${v.product_photos.split(',')[0]}`
+                                : `/${v.product_photos}`
+                            }
+                            alt=""
+                            width={600}
+                            height={552}
+                            style={{
+                              width: '100%',
+                              objectFit: 'cover',
+                              opacity: '0.9',
+                            }}
+                          />
+                        </Carousel.Item>
+                      </Carousel>
                     </div>
-                    <input
-                      type="text"
-                      className="form-control bg-light border-1 text-center"
-                      value="1"
-                    />
-                    <div className="input-group-btn">
-                      <button
-                        className={`btn btn-plus ${style.btnHover}`}
-                        style={{ backgroundColor: '#8e2626' }}
-                      >
-                        <FaPlus style={{ color: 'white' }} />
-                      </button>
+                    <div className="col-lg-7 h-auto">
+                      <div className="h-100 bg-light py-4 px-4">
+                        <h2 style={{ fontWeight: '900' }}>
+                          <strong style={{ color: '#8e2626' }}>
+                            商品名稱：{v.product_name}
+                          </strong>
+                        </h2>
+                        <div className="row">
+                          <div className="col-lg-12">
+                            <p
+                              className="mb-4 mt-3"
+                              style={{ fontSize: '20px' }}
+                            >
+                              <strong style={{ color: '#8e2626' }}>
+                                賣家：{v.seller_id}
+                              </strong>
+                            </p>
+                          </div>
+                          <div className="col-lg-6">
+                            <p className="mb-4" style={{ fontSize: '20px' }}>
+                              <strong style={{ color: '#8e2626' }}>
+                                商品價格：{v.product_price}
+                              </strong>
+                            </p>
+                          </div>
+                          <div className="col-lg-6">
+                            <p
+                              className="mb-4"
+                              style={{
+                                fontSize: '20px',
+                              }}
+                            >
+                              <strong style={{ color: '#8e2626' }}>
+                                商品數量：{v.product_qty}
+                              </strong>
+                            </p>
+                          </div>
+                          <div className="col-lg-6">
+                            <p className="mb-4" style={{ fontSize: '20px' }}>
+                              <strong style={{ color: '#8e2626' }}>
+                                商品主分類：{v.m}
+                              </strong>
+                            </p>
+                          </div>
+                          <div className="col-lg-6">
+                            <p
+                              className="mb-4"
+                              style={{
+                                fontSize: '20px',
+                              }}
+                            >
+                              <strong style={{ color: '#8e2626' }}>
+                                商品子分類：{v.s}
+                              </strong>
+                            </p>
+                          </div>
+                          <div className="col-lg-6">
+                            <p className="mb-4" style={{ fontSize: '20px' }}>
+                              <strong style={{ color: '#8e2626' }}>
+                                商品狀態：{v.product_status}
+                              </strong>
+                            </p>
+                          </div>
+                          <div className="col-lg-6">
+                            <p className="mb-4" style={{ fontSize: '20px' }}>
+                              <strong style={{ color: '#8e2626' }}>
+                                商品上架時間：{v.created_at}
+                              </strong>
+                            </p>
+                          </div>
+                          <div className="col-lg-6">
+                            <p
+                              className="mb-4"
+                              style={{
+                                fontSize: '20px',
+                              }}
+                            >
+                              <strong style={{ color: '#8e2626' }}>
+                                上下架狀態：{v.status}
+                              </strong>
+                            </p>
+                          </div>
+                          <div className="col-lg-6">
+                            <p
+                              className="mb-4"
+                              style={{
+                                fontSize: '20px',
+                              }}
+                            >
+                              <strong style={{ color: '#8e2626' }}>
+                                商品更新時間：{v.created_at}
+                              </strong>
+                            </p>
+                          </div>
+                        </div>
+                        <hr />
+                        <div className="row mb-4 pt-2 mt-5">
+                          <div className="col-lg-12 d-flex">
+                            <div
+                              className="input-group quantity mr-3"
+                              style={{ width: '130px' }}
+                            >
+                              <div className="input-group-btn">
+                                <button
+                                  className={`btn btn-minus ${style.btnHover}`}
+                                  style={{ backgroundColor: '#8e2626' }}
+                                >
+                                  <FaMinus style={{ color: 'white' }} />
+                                </button>
+                              </div>
+                              <input
+                                type="text"
+                                className="form-control bg-light border-1 text-center"
+                                value="1"
+                              />
+                              <div className="input-group-btn">
+                                <button
+                                  className={`btn btn-plus ${style.btnHover}`}
+                                  style={{ backgroundColor: '#8e2626' }}
+                                >
+                                  <FaPlus style={{ color: 'white' }} />
+                                </button>
+                              </div>
+                            </div>
+                            <button
+                              className={`btn px-3 ms-4 ${style.btnHover}`}
+                              style={{ backgroundColor: '#e96d3f' }}
+                            >
+                              <BsFillCartFill
+                                className=""
+                                style={{ color: 'white', fontSize: '20px' }}
+                              />{' '}
+                              <span style={{ color: 'white' }}>加入購物車</span>
+                            </button>
+                          </div>
+                        </div>
+                        <div className="row d-flex">
+                          <div className="col-lg-12">
+                            <button
+                              className={`btn px-3 ${style.btnHover}`}
+                              style={{
+                                backgroundColor: '#195a98',
+                                color: 'white',
+                              }}
+                            >
+                              <ImHammer2 style={{ fontSize: '20px' }} /> 議價
+                            </button>
+                            <button
+                              className={`btn px-3 ms-4 ${style.btnHover}`}
+                              style={{
+                                backgroundColor: '#0f5808',
+                                color: 'white',
+                              }}
+                              onClick={() => setShow(true)}
+                            >
+                              <TbArrowsExchange2 style={{ fontSize: '20px' }} />{' '}
+                              以物易物
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <button
-                    className={`btn px-3 ms-4 ${style.btnHover}`}
-                    style={{ backgroundColor: '#e96d3f' }}
-                  >
-                    <BsFillCartFill
-                      className=""
-                      style={{ color: 'white', fontSize: '20px' }}
-                    />{' '}
-                    <span style={{ color: 'white' }}>加入購物車</span>
-                  </button>
-                </div>
-                <div className="d-flex">
-                  <button
-                    className={`btn px-3 ms-2 ${style.btnHover}`}
-                    style={{ backgroundColor: '#195a98', color: 'white' }}
-                  >
-                    <ImHammer2 style={{ fontSize: '20px' }} /> 議價
-                  </button>
-                  <button
-                    className={`btn px-3 ms-4 ${style.btnHover}`}
-                    style={{ backgroundColor: '#0f5808', color: 'white' }}
-                    onClick={() => setShow(true)}
-                  >
-                    <TbArrowsExchange2 style={{ fontSize: '20px' }} /> 以物易物
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="row px-xl-5 mt-5">
-            <div className="col">
-              <div className="bg-light p-30">
-                <div className="nav nav-tabs mb-4">
-                  <Link
-                    className="nav-item nav-link text-dark active"
-                    data-toggle="tab"
-                    href="#tab-pane-1"
-                  >
-                    <strong style={{ fontSize: '20px' }}>商品描述</strong>
-                  </Link>
-                </div>
-                <div className="tab-content">
-                  <div className="tab-pane fade show active" id="tab-pane-1">
-                    <p className="px-4 pb-4" style={{ fontSize: '18px' }}>
-                      Eos no lorem eirmod diam diam, eos elitr et gubergren diam
-                      sea. Consetetur vero aliquyam invidunt duo dolores et duo
-                      sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod
-                      consetetur invidunt sed sed et, lorem duo et eos elitr,
-                      sadipscing kasd ipsum rebum diam. Dolore diam stet rebum
-                      sed tempor kasd eirmod. Takimata kasd ipsum accusam
-                      sadipscing, eos dolores sit no ut diam consetetur duo
-                      justo est, sit sanctus diam tempor aliquyam eirmod nonumy
-                      rebum dolor accusam, ipsum kasd eos consetetur at sit
-                      rebum, diam kasd invidunt tempor lorem, ipsum lorem elitr
-                      sanctus eirmod takimata dolor ea invidunt.
-                    </p>
+                  <div className="row px-xl-5 mt-5">
+                    <div className="col">
+                      <div className="bg-light p-30">
+                        <div className="nav nav-tabs mb-4">
+                          <Link
+                            className="nav-item nav-link text-dark active"
+                            data-toggle="tab"
+                            href="#tab-pane-1"
+                          >
+                            <strong style={{ fontSize: '20px' }}>
+                              商品描述
+                            </strong>
+                          </Link>
+                        </div>
+                        <div className="tab-content">
+                          <div
+                            className="tab-pane fade show active"
+                            id="tab-pane-1"
+                          >
+                            <p
+                              className="px-4 pb-4"
+                              style={{ fontSize: '18px' }}
+                            >
+                              {v.product_intro}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                </>
+              )
+            }
+          })}
         </div>
         {/* Shop Detail End */}
         <hr className="mx-5" />
         {/* Products Start */}
-        <div
-          className="container-fluid py-5"
-          style={{ padding: '0 80px 0 130px' }}
-        >
+        <div className="container-fluid py-5 px-5">
           <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4">
             <span className="pr-3" style={{ color: '#8e2626' }}>
               <strong>您可能也有興趣...</strong>
             </span>
           </h2>
           <div className="row px-xl-5">
-            <div className="col-lg-3 col-md-6">
-              <div className="">
-                <div
-                  className={`product-item bg-light ${style.productItem}`}
-                  style={{ marginBottom: '60px' }}
-                >
-                  <div className="overflow-hidden">
-                    <div style={{ overflow: 'hidden' }}>
-                      <Image
-                        className={`img-fluid w-100 ${style.imgAct}`}
-                        src="/pot.jpg"
-                        alt=""
-                        width={261}
-                        height={180}
-                      />
-                    </div>
-                    <div className={style.productAction}>
-                      <Link href="" className="">
-                        <BsFillCartFill className={style.iconAInner} />
-                      </Link>
-                      <Link href="" className="">
-                        <AiOutlineHeart className={style.iconBInner} />
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="text-center py-4 d-flex justify-content-between align-items-center px-3">
-                    <div className="memberInfor">
-                      <Image
-                        src="/logo.png"
-                        alt=""
-                        width={60}
-                        height={60}
-                      ></Image>
-                      <div className="userId mt-2">Nickname</div>
-                    </div>
-                    <div className="mt-3">
-                      <Link
-                        className="h6 text-decoration-none text-truncate"
-                        href=""
-                        style={{ fontSize: '20px' }}
+            {data.rowsRandom.slice(0, 4).map((v, i) => {
+              return (
+                <div key={i} className="col-lg-3 col-md-6 col-sm-12 pb-1">
+                  <Link
+                    href={`/shop/detail?pid=${v.id}`}
+                    style={{ textDecoration: 'none', color: 'black' }}
+                  >
+                    <div
+                      className={`product-item bg-light mb-5 mx-auto ${style.productItem}`}
+                      style={{ marginBottom: '60px' }}
+                    >
+                      <div className="overflow-hidden ">
+                        <div
+                          className="position-relative"
+                          style={{ overflow: 'hidden' }}
+                        >
+                          <Image
+                            className={`img-fluid w-100 ${style.imgAct}`}
+                            src={
+                              v.product_photos.includes(',')
+                                ? `/${v.product_photos.split(',')[0]}`
+                                : `/${v.product_photos}`
+                            }
+                            alt=""
+                            width={266}
+                            height={266}
+                            style={{ height: '266px', objectFit: 'cover' }}
+                          />
+                        </div>
+                        <div className={style.productAction}>
+                          <Link href="" className="">
+                            <BsFillCartFill className={style.iconAInner} />
+                          </Link>
+                          <Link href="" className="">
+                            <AiOutlineHeart className={style.iconBInner} />
+                          </Link>
+                          <Link href="" className="">
+                            <IoSearch className={style.iconCInner} />
+                          </Link>
+                        </div>
+                      </div>
+                      <div
+                        className="text-center py-3 px-2"
+                        style={{ height: '160px' }}
                       >
-                        <strong>商品名稱</strong>
-                      </Link>
-                      <div className="d-flex align-items-center justify-content-center mt-3">
-                        <h5 className="" style={{ fontSize: '18px' }}>
-                          $價格
-                        </h5>
+                        <div
+                          className="text-wrap text-truncate"
+                          style={{ height: '70%' }}
+                          href=""
+                        >
+                          <h5>
+                            <strong className="">{v.product_name}</strong>
+                          </h5>
+                        </div>
+                        <div className="d-flex justify-content-center ">
+                          <div
+                            className=""
+                            style={{
+                              fontSize: '18px',
+                              color:
+                                v.product_status == '1' ? 'green' : '#e96d3f',
+                            }}
+                          >
+                            <strong>
+                              {v.product_status == '1' ? '二手' : '全新'}
+                            </strong>
+                          </div>
+                          &nbsp;
+                          <div className="" style={{ fontSize: '18px' }}>
+                            <strong>${v.product_price}</strong>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div className="">
-                      <span>全新or二手</span>
-                    </div>
-                  </div>
+                  </Link>
                 </div>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-6">
-              <div className="">
-                <div
-                  className={`product-item bg-light ${style.productItem}`}
-                  style={{ marginBottom: '60px' }}
-                >
-                  <div className="overflow-hidden">
-                    <div style={{ overflow: 'hidden' }}>
-                      <Image
-                        className={`img-fluid w-100 ${style.imgAct}`}
-                        src="/pot.jpg"
-                        alt=""
-                        width={261}
-                        height={180}
-                      />
-                    </div>
-                    <div className={style.productAction}>
-                      <Link href="" className="">
-                        <BsFillCartFill className={style.iconAInner} />
-                      </Link>
-                      <Link href="" className="">
-                        <AiOutlineHeart className={style.iconBInner} />
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="text-center py-4 d-flex justify-content-between align-items-center px-3">
-                    <div className="memberInfor">
-                      <Image
-                        src="/logo.png"
-                        alt=""
-                        width={60}
-                        height={60}
-                      ></Image>
-                      <div className="userId mt-2">Nickname</div>
-                    </div>
-                    <div className="mt-3">
-                      <Link
-                        className="h6 text-decoration-none text-truncate"
-                        href=""
-                        style={{ fontSize: '20px' }}
-                      >
-                        <strong>商品名稱</strong>
-                      </Link>
-                      <div className="d-flex align-items-center justify-content-center mt-3">
-                        <h5 className="" style={{ fontSize: '18px' }}>
-                          $價格
-                        </h5>
-                      </div>
-                    </div>
-                    <div className="">
-                      <span>全新or二手</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-6">
-              <div className="">
-                <div
-                  className={`product-item bg-light ${style.productItem}`}
-                  style={{ marginBottom: '60px' }}
-                >
-                  <div className="overflow-hidden">
-                    <div style={{ overflow: 'hidden' }}>
-                      <Image
-                        className={`img-fluid w-100 ${style.imgAct}`}
-                        src="/pot.jpg"
-                        alt=""
-                        width={261}
-                        height={180}
-                      />
-                    </div>
-                    <div className={style.productAction}>
-                      <Link href="" className="">
-                        <BsFillCartFill className={style.iconAInner} />
-                      </Link>
-                      <Link href="" className="">
-                        <AiOutlineHeart className={style.iconBInner} />
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="text-center py-4 d-flex justify-content-between align-items-center px-3">
-                    <div className="memberInfor">
-                      <Image
-                        src="/logo.png"
-                        alt=""
-                        width={60}
-                        height={60}
-                      ></Image>
-                      <div className="userId mt-2">Nickname</div>
-                    </div>
-                    <div className="mt-3">
-                      <Link
-                        className="h6 text-decoration-none text-truncate"
-                        href=""
-                        style={{ fontSize: '20px' }}
-                      >
-                        <strong>商品名稱</strong>
-                      </Link>
-                      <div className="d-flex align-items-center justify-content-center mt-3">
-                        <h5 className="" style={{ fontSize: '18px' }}>
-                          $價格
-                        </h5>
-                      </div>
-                    </div>
-                    <div className="">
-                      <span>全新or二手</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-6">
-              <div className="">
-                <div
-                  className={`product-item bg-light ${style.productItem}`}
-                  style={{ marginBottom: '60px' }}
-                >
-                  <div className="overflow-hidden">
-                    <div style={{ overflow: 'hidden' }}>
-                      <Image
-                        className={`img-fluid w-100 ${style.imgAct}`}
-                        src="/pot.jpg"
-                        alt=""
-                        width={261}
-                        height={180}
-                      />
-                    </div>
-                    <div className={style.productAction}>
-                      <Link href="" className="">
-                        <BsFillCartFill className={style.iconAInner} />
-                      </Link>
-                      <Link href="" className="">
-                        <AiOutlineHeart className={style.iconBInner} />
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="text-center py-4 d-flex justify-content-between align-items-center px-3">
-                    <div className="memberInfor">
-                      <Image
-                        src="/logo.png"
-                        alt=""
-                        width={60}
-                        height={60}
-                      ></Image>
-                      <div className="userId mt-2">Nickname</div>
-                    </div>
-                    <div className="mt-3">
-                      <Link
-                        className="h6 text-decoration-none text-truncate"
-                        href=""
-                        style={{ fontSize: '20px' }}
-                      >
-                        <strong>商品名稱</strong>
-                      </Link>
-                      <div className="d-flex align-items-center justify-content-center mt-3">
-                        <h5 className="" style={{ fontSize: '18px' }}>
-                          $價格
-                        </h5>
-                      </div>
-                    </div>
-                    <div className="">
-                      <span>全新or二手</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              )
+            })}
           </div>
         </div>
         {/* Products End */}

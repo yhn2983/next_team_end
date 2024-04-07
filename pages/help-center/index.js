@@ -73,11 +73,11 @@ export default function HelpCenter() {
         {/* Breadcrumb End */}
         {/* Help Center start */}
         <div
-          className="container-fluid mt-4"
-          style={{ padding: '0 110px', marginBottom: '150px' }}
+          className="container-fluid mt-4 px-lg-5"
+          style={{ marginBottom: '150px' }}
         >
           <div className="row px-xl-5">
-            <div className="col-lg-3 col-md-6">
+            <div className="col-lg-3 col-md-6 col-xs-12">
               <Link className="text-decoration-none" href="/help-center/deal">
                 <div
                   className={`card border-seconary border-4 ${style.card}`}
@@ -88,7 +88,7 @@ export default function HelpCenter() {
                     className="card-img-top"
                     alt=""
                     width={300}
-                    height={450}
+                    height={350}
                   />
                   <div className="card-body mx-auto border-top">
                     <h5 className="card-title" style={{ color: '#8e2626' }}>
@@ -98,17 +98,15 @@ export default function HelpCenter() {
                 </div>
               </Link>
             </div>
-            <div className="col-lg-3">
+            <div className="col-lg-3 col-md-6 col-xs-12">
               <Link className="text-decoration-none" href="/help-center/esg">
-                <div
-                  className={`card border-seconary border-4 ms-5 ${style.card}`}
-                >
+                <div className={`card border-seconary border-4 ${style.card}`}>
                   <Image
                     src="/esg.png"
                     className="card-img-top"
                     alt=""
                     width={300}
-                    height={450}
+                    height={350}
                   />
                   <div className="card-body mx-auto border-top">
                     <h5 className="card-title" style={{ color: '#8e2626' }}>
@@ -118,20 +116,18 @@ export default function HelpCenter() {
                 </div>
               </Link>
             </div>
-            <div className="col-lg-3">
+            <div className="col-lg-3 col-md-6 col-xs-12">
               <Link
                 className="text-decoration-none"
                 href="/help-center/ad-partner"
               >
-                <div
-                  className={`card border-seconary border-4 ms-5 ${style.card}`}
-                >
+                <div className={`card border-seconary border-4 ${style.card}`}>
                   <Image
                     src="/parner.png"
                     className="card-img-top"
                     alt=""
                     width={300}
-                    height={450}
+                    height={350}
                   />
                   <div className="card-body mx-auto border-top">
                     <h5 className="card-title" style={{ color: '#8e2626' }}>
@@ -141,20 +137,18 @@ export default function HelpCenter() {
                 </div>
               </Link>
             </div>
-            <div className="col-lg-3">
+            <div className="col-lg-3 col-md-6 col-xs-12">
               <Link
                 className="text-decoration-none"
                 href="/help-center/using-rule"
               >
-                <div
-                  className={`card border-seconary border-4 ms-5 ${style.card}`}
-                >
+                <div className={`card border-seconary border-4 ${style.card}`}>
                   <Image
                     src="/use.png"
                     className="card-img-top"
                     alt=""
                     width={300}
-                    height={450}
+                    height={350}
                   />
                   <div className="card-body mx-auto border-top">
                     <h5 className="card-title" style={{ color: '#8e2626' }}>
@@ -164,7 +158,7 @@ export default function HelpCenter() {
                 </div>
               </Link>
             </div>
-            <div className="col-lg-3">
+            <div className="col-lg-3 col-md-6 col-xs-12">
               <Link
                 className="text-decoration-none"
                 href="/help-center/privacy-rule"
@@ -175,7 +169,7 @@ export default function HelpCenter() {
                     className="card-img-top"
                     alt=""
                     width={300}
-                    height={450}
+                    height={350}
                   />
                   <div className="card-body mx-auto border-top">
                     <h5 className="card-title" style={{ color: '#8e2626' }}>
@@ -185,20 +179,18 @@ export default function HelpCenter() {
                 </div>
               </Link>
             </div>
-            <div className="col-lg-3">
+            <div className="col-lg-3 col-md-6 col-xs-12">
               <Link
                 className="text-decoration-none"
                 href="/help-center/language-setting"
               >
-                <div
-                  className={`card border-seconary border-4 ms-5 ${style.card}`}
-                >
+                <div className={`card border-seconary border-4 ${style.card}`}>
                   <Image
                     src="/language.png"
                     className="card-img-top"
                     alt=""
                     width={300}
-                    height={450}
+                    height={350}
                   />
                   <div className="card-body mx-auto border-top">
                     <h5 className="card-title" style={{ color: '#8e2626' }}>
@@ -208,17 +200,15 @@ export default function HelpCenter() {
                 </div>
               </Link>
             </div>
-            <div className="col-lg-3">
+            <div className="col-lg-3 col-md-6 col-xs-12">
               <Link className="text-decoration-none" href="/help-center/faqs">
-                <div
-                  className={`card border-seconary border-4 ms-5 ${style.card}`}
-                >
+                <div className={`card border-seconary border-4 ${style.card}`}>
                   <Image
                     src="/password.png"
                     className="card-img-top"
                     alt=""
                     width={300}
-                    height={450}
+                    height={350}
                   />
                   <div className="card-body mx-auto border-top">
                     <h5 className="card-title" style={{ color: '#8e2626' }}>
@@ -228,20 +218,18 @@ export default function HelpCenter() {
                 </div>
               </Link>
             </div>
-            <div className="col-lg-3">
+            <div className="col-lg-3 col-md-6 col-xs-12">
               <Link
                 className="text-decoration-none"
                 href="/help-center/join-deal"
               >
-                <div
-                  className={`card border-seconary border-4 ms-5 ${style.card}`}
-                >
+                <div className={`card border-seconary border-4 ${style.card}`}>
                   <Image
                     src="/join.png"
                     className="card-img-top"
                     alt=""
                     width={300}
-                    height={450}
+                    height={350}
                   />
                   <div className="card-body mx-auto border-top">
                     <h5 className="card-title" style={{ color: '#8e2626' }}>

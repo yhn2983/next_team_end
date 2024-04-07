@@ -1,5 +1,5 @@
 .banner {
-  background: linear-gradient(115deg, rgba(197, 106, 15, 0.915) 75%, transparent 50%) center center / 100% 100%,
+  background: linear-gradient(115deg, #c56a0f98 68%, transparent 50%) center center / 100% 100%,
     url("/helpCenter.png") right center / auto 100%;
   border-top: 3px solid #4a4a4a;
   border-bottom: 3px solid #4a4a4a;
