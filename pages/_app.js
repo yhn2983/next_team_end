@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import '@/styles/globals.scss'
-import DefaultLayout from '@/components/layout/default-layout'
-import { AuthContextProvider } from '@/context/auth-context'
+import DefaultLayout from '@/components/common/default-layout'
 
 export default function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -9,14 +8,5 @@ export default function MyApp({ Component, pageProps }) {
     import('bootstrap/dist/js/bootstrap')
   }, [])
 
-  // 使用預設排版檔案
-  // 對應`components/layout/default-layout/index.js`
-  const getLayout =
-    Component.getLayout || ((page) => <DefaultLayout>{page}</DefaultLayout>)
-
-  return (
-    <AuthContextProvider>
-      {getLayout(<Component {...pageProps} />)}
-    </AuthContextProvider>
-  )
+  return <Component {...pageProps} />
 }

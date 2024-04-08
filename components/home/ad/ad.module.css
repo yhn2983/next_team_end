@@ -1,0 +1,72 @@
+.vender{
+  border-radius: 20px;
+  border: 2px dashed rgb(243, 81, 81);
+  background-color: white;
+  
+}
+
+.venderImg{
+    width: 60%;
+    height: 60%;
+    margin: auto;
+    object-fit: cover;
+    border-radius: 50%;
+  } 
+
+.family{
+  border-radius: 20px;
+  border: 2px dashed lightsalmon;
+  background-color: white;
+}
+
+.familyImg{
+    width: 60%;
+    height: 60%;
+    margin: auto;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+.vender:hover,.family:hover{
+  box-shadow: 0 0 15px gray;
+}
+
+.moreBtn{
+  background-color: #e96d3f;
+  color: white;
+  box-shadow: 0 0 10px gray;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 20px;
+}
+
+.moreBtn:hover{
+  background-color: #8e2626;
+}
+
+.iconMove{
+  -webkit-animation: iconMove 0.3s infinite alternate;
+  animation: iconMove 0.3s infinite alternate;
+}
+
+@-webkit-keyframes iconMove {
+  0% {
+    transform: translateX(-1px);
+  }
+  
+  100% {
+    transform: translateX(1px);
+  }
+  }
+  
+  @keyframes iconMove {
+  0% {
+    transform: translateX(-1px);
+  }
+  
+  100% {
+    transform: translateX(1px);
+  }
+  }

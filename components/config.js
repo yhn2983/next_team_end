@@ -26,6 +26,7 @@ export const PASSWORD_OTP_POST = `${API_SERVER}/api/reset-password/otp`
 
 // 重設密碼, POST
 export const PASSWORD_RESET_POST = `${API_SERVER}/api/reset-password/reset`
+<<<<<<< HEAD
 
 // google登入, POST
 export const GOOGLE_LOGIN_POST = `${API_SERVER}/api/google-login`
@@ -35,3 +36,5 @@ export const GOOGLE_CLIENT_ID =
   '551378095808-5p8n98gos67borcmq2t3itt46ul5dkoe.apps.googleusercontent.com'
 
 //
+=======
+>>>>>>> 1cad9932b41270b0fb60e0e04be42fc9dccbacc2

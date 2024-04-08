@@ -1,0 +1,86 @@
+.productOffer {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 30px gray;
+}
+
+.offerImg {
+  position: absolute;
+  transition: .5s;
+  object-fit: cover;
+  width: 100%;
+}
+
+.productOffer:hover .offerImg {
+  transform: scale(1.1) rotate(-2deg);
+}
+
+.offerText, .offerTextB {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.offerText h4 {
+  margin-left: 40%;
+  text-shadow: 0 0 10px rgba(128, 128, 128, 0.701);
+}
+
+.offerText h3{
+  font-weight: 900;
+  margin-left: 40%;
+  text-shadow: 0 0 10px rgba(128, 128, 128, 0.701);
+}
+
+.offerTextB h4 {
+  margin-right: 40%;
+  text-shadow: 0 0 10px rgba(128, 128, 128, 0.701);
+}
+
+.offerTextB h3{
+  font-weight: 900;
+  margin-right: 40%;
+  text-shadow: 0 0 10px rgba(128, 128, 128, 0.701);
+}
+
+.productOffer:hover .offerText {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(103, 102, 102, 0.416);
+  z-index: 1;
+}
+
+.productOffer:hover .offerTextB {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(103, 102, 102, 0.416);
+  z-index: 1;
+}
+
+.moreBtn:hover{
+  background-color: #e96d3f !important;
+}
+
+
+
