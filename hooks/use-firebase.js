@@ -38,7 +38,48 @@ const initApp = (callback) => {
     })
 
   // Listening for auth state changes.
-  onAuthStateChanged(auth, (user) => {
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log('user', user)
+      // callback the user data
+      callback(user.providerData[0])
+    }
+  })
+
+  // Return the unsubscribe function
+  return unsubscribe
+}
+
+/* 
+原本長這樣 因為加了回傳unsubscribe所以改成上面那樣，
+loginGoogleRedirect將用戶重定向到 Google 的登入頁面，
+這個過程中，你的應用程式實際上已經被重新載入了，
+所以你不需要手動取消 Firebase 的認證狀態變化的監聽器，
+因為當頁面重新載入時，所有的 JavaScript 狀態（包括監聽器）都會被清除。
+
+const initApp = (callback) => {
+  const auth = getAuth()
+
+  // Result from Redirect auth flow.
+  getRedirectResult(auth)
+    .then((result) => {
+      if (result) {
+        // This gives you a Google Access Token. You can use it to access Google APIs.
+        const credential = GoogleAuthProvider.credentialFromResult(result)
+        const token = credential.accessToken
+
+        // The signed-in user info.
+        const user = result.user
+        console.log(token)
+        console.log(user)
+      }
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+
+  // Listening for auth state changes.
+    onAuthStateChanged(auth, (user) => {
     if (user) {
       console.log('user', user)
       // callback the user data
@@ -46,6 +87,7 @@ const initApp = (callback) => {
     }
   })
 }
+*/
 
 // TODO: 目前不需要從firebase登出，firebase登出並不會登出google
 const logoutFirebase = () => {

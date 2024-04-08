@@ -1,28 +1,28 @@
 import React from 'react'
 import useFirebase from '@/hooks/use-firebase'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { useAuth } from '@/context/auth-context'
 import { GOOGLE_LOGIN_POST } from '@/components/config'
-import { API_SERVER } from '@/components/config'
 import toast, { Toaster } from 'react-hot-toast'
 import GoogleLogo from '@/components/icons/google-logo'
-import LogoutButton from '@/components/member/logout-button'
 import style from '@/styles/lee-form.module.scss'
 
 export default function GoogleLoginRedirect() {
-  const { auth, login, logout, checkAuth, parseJwt, setAuth, initUserData } =
-    useAuth()
+  const { auth, checkAuth, parseJwt, setAuth, initUserData } = useAuth()
 
-  const { logoutFirebase, loginGoogleRedirect, initApp } = useFirebase()
-
+  const { loginGoogleRedirect, initApp, loginGoogle } = useFirebase()
   const isMounted = useRef(true)
 
   // 這裡要設定initApp，讓這個頁面能監聽firebase的google登入狀態
   useEffect(() => {
-    initApp(callbackGoogleLoginRedirect)
+    // Store the unsubscribe function
+    const unsubscribe = initApp(callbackGoogleLoginRedirect)
 
     return () => {
       isMounted.current = false
+
+      // Call the unsubscribe function when the component unmounts
+      unsubscribe()
     }
   }, [])
 
@@ -132,16 +132,14 @@ export default function GoogleLoginRedirect() {
       <h3>Google Login</h3>
       <p>會員狀態:{auth.isAuth ? '已登入' : '未登入'}</p>
       <button
-        onClick={() => loginGoogleRedirect()}
+        onClick={() => loginGoogle()}
         className={`${style.googleLoginButton} mb-3`}
       >
         <GoogleLogo /> Google登入
       </button>
       <br />
       <button onClick={handleCheckAuth}>向伺服器檢查登入狀態</button>
-      <hr />
-      <LogoutButton /> {/* 使用 LogoutButton 組件 */}
-      {/* 土司訊息視窗用 */}
+      <hr /> {/* 土司訊息視窗用 */}
       <Toaster />
     </>
   )
