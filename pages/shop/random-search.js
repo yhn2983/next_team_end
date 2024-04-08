@@ -131,50 +131,50 @@ export default function RandomShop() {
                         height={500}
                       />
                     </div>
-                    <Link
-                      href=""
-                      style={{ textDecoration: 'none', color: 'black' }}
+                    <div
+                      className={`flex-column ${style.slideBack} ${
+                        isBack ? style.slideBackB : style.slideBack
+                      }`}
                     >
-                      <div
-                        className={`flex-column ${style.slideBack} ${
-                          isBack ? style.slideBackB : style.slideBack
-                        }`}
-                      >
-                        <div className="overflow-hidden">
-                          <div
-                            className="position-relative"
-                            style={{ overflow: 'hidden' }}
-                          >
-                            <Image
-                              className={`img-fluid w-100 ${
-                                isBack ? style.imgAct : ''
-                              }`}
-                              src={
-                                v.product_photos.includes(',')
-                                  ? `/${v.product_photos.split(',')[0]}`
-                                  : `/${v.product_photos}`
-                              }
-                              alt=""
-                              width={266}
-                              height={266}
-                              style={{
-                                height: '266px',
-                                objectFit: 'cover',
-                              }}
-                            />
-                          </div>
-                          <div className={style.productAction}>
-                            <Link href="" className="">
-                              <BsFillCartFill className={style.iconAInner} />
-                            </Link>
-                            <Link href="" className="">
-                              <AiOutlineHeart className={style.iconBInner} />
-                            </Link>
-                            <Link href="" className="">
-                              <IoSearch className={style.iconCInner} />
-                            </Link>
-                          </div>
+                      <div className="overflow-hidden">
+                        <div
+                          className="position-relative"
+                          style={{ overflow: 'hidden' }}
+                        >
+                          <Image
+                            className={`img-fluid w-100 ${
+                              isBack ? style.imgAct : ''
+                            }`}
+                            src={
+                              v.product_photos.includes(',')
+                                ? `/${v.product_photos.split(',')[0]}`
+                                : `/${v.product_photos}`
+                            }
+                            alt=""
+                            width={266}
+                            height={266}
+                            style={{
+                              height: '266px',
+                              objectFit: 'cover',
+                            }}
+                          />
                         </div>
+                        <div className={style.productAction}>
+                          <button className="btn">
+                            <BsFillCartFill className={style.iconAInner} />
+                          </button>
+                          <button className="btn">
+                            <AiOutlineHeart className={style.iconBInner} />
+                          </button>
+                          <button className="btn">
+                            <IoSearch className={style.iconCInner} />
+                          </button>
+                        </div>
+                      </div>
+                      <Link
+                        href={`/shop/detail?pid=${v.id}`}
+                        style={{ textDecoration: 'none', color: 'black' }}
+                      >
                         <div
                           className="text-center py-3 px-2"
                           style={{ height: '160px' }}
@@ -207,8 +207,8 @@ export default function RandomShop() {
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </Link>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               )

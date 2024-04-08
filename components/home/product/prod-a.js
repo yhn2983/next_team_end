@@ -61,44 +61,44 @@ export default function ProdA() {
           {data.rowsRandom.slice(0, 8).map((v, i) => {
             return (
               <div key={i} className="col-lg-3 col-md-4 col-sm-6 pb-1">
-                <Link
-                  href=""
-                  style={{ textDecoration: 'none', color: 'black' }}
+                <div
+                  className={`product-item bg-light mb-5 mx-auto ${style.productItem}`}
+                  style={{ marginBottom: '60px' }}
                 >
-                  <div
-                    className={`product-item bg-light mb-5 mx-auto ${style.productItem}`}
-                    style={{ marginBottom: '60px' }}
-                  >
-                    <div className="overflow-hidden ">
-                      <div
-                        className="position-relative"
-                        style={{ overflow: 'hidden' }}
-                      >
-                        <Image
-                          className={`img-fluid w-100 ${style.imgAct}`}
-                          src={
-                            v.product_photos.includes(',')
-                              ? `/${v.product_photos.split(',')[0]}`
-                              : `/${v.product_photos}`
-                          }
-                          alt=""
-                          width={266}
-                          height={266}
-                          style={{ height: '266px', objectFit: 'cover' }}
-                        />
-                      </div>
+                  <div className="overflow-hidden ">
+                    <div
+                      className="position-relative"
+                      style={{ overflow: 'hidden', height: '266px' }}
+                    >
+                      <Image
+                        className={`img-fluid w-100 ${style.imgAct}`}
+                        src={
+                          v.product_photos.includes(',')
+                            ? `/${v.product_photos.split(',')[0]}`
+                            : `/${v.product_photos}`
+                        }
+                        alt=""
+                        width={266}
+                        height={266}
+                        style={{ height: '266px', objectFit: 'cover' }}
+                      />
                       <div className={style.productAction}>
-                        <Link href="" className="">
+                        <button className="btn">
                           <BsFillCartFill className={style.iconAInner} />
-                        </Link>
-                        <Link href="" className="">
+                        </button>
+                        <button className="btn">
                           <AiOutlineHeart className={style.iconBInner} />
-                        </Link>
-                        <Link href="" className="">
+                        </button>
+                        <button className="btn">
                           <IoSearch className={style.iconCInner} />
-                        </Link>
+                        </button>
                       </div>
                     </div>
+                  </div>
+                  <Link
+                    href={`/shop/detail?pid=${v.id}`}
+                    style={{ textDecoration: 'none', color: 'black' }}
+                  >
                     <div
                       className="text-center py-3 px-2"
                       style={{ height: '160px' }}
@@ -131,8 +131,8 @@ export default function ProdA() {
                         </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </div>
               </div>
             )
           })}

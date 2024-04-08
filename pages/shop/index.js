@@ -10,6 +10,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
 import style from './prodSearch.module.css'
+import toast, { Toaster } from 'react-hot-toast'
 // react bootstrap
 // react icons-----
 import { BsFillCartFill } from 'react-icons/bs'
@@ -27,6 +28,7 @@ import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
 import { MarkdownFill } from 'react-bootstrap-icons'
 // hook------
+import { useCart } from '@/hooks/use-cart'
 //import { useAuth } from '@/context/auth-context'
 
 export default function Shop() {
@@ -183,6 +185,24 @@ export default function Shop() {
     queryParams.append('searchDateEnd', searchDateEnd)
 
     router.push(`/shop?${queryParams}`)
+  }
+
+  // cart
+  const { addItem } = useCart()
+  const notify = (productName) => {
+    const msgBox = (
+      <div>
+        <p>{productName + ' 已成功加入購物車'}</p>
+        <button
+          onClick={() => {
+            router.push('/shop/cart')
+          }}
+        >
+          加入購物車
+        </button>
+      </div>
+    )
+    toast.success(msgBox)
   }
 
   const qs = { ...router.query }
@@ -763,44 +783,53 @@ export default function Shop() {
                 {data.rows.map((v, i) => {
                   return (
                     <div key={i} className="col-lg-4 col-md-12 col-sm-12 pb-1">
-                      <Link
-                        href={`/shop/detail?pid=${v.id}`}
-                        style={{ textDecoration: 'none', color: 'black' }}
+                      <div
+                        className={`product-item bg-light mb-5 mx-auto ${style.productItem}`}
+                        style={{ marginBottom: '60px' }}
                       >
-                        <div
-                          className={`product-item bg-light mb-5 mx-auto ${style.productItem}`}
-                          style={{ marginBottom: '60px' }}
-                        >
-                          <div className="overflow-hidden ">
-                            <div
-                              className="position-relative"
-                              style={{ overflow: 'hidden' }}
-                            >
-                              <Image
-                                className={`img-fluid w-100 ${style.imgAct}`}
-                                src={
-                                  v.product_photos.includes(',')
-                                    ? `/${v.product_photos.split(',')[0]}`
-                                    : `/${v.product_photos}`
-                                }
-                                alt=""
-                                width={266}
-                                height={266}
-                                style={{ height: '266px', objectFit: 'cover' }}
-                              />
-                            </div>
+                        <div className="overflow-hidden ">
+                          <div
+                            className="position-relative"
+                            style={{ overflow: 'hidden', height: '266px' }}
+                          >
+                            <Image
+                              className={`img-fluid w-100 ${style.imgAct}`}
+                              src={
+                                v.product_photos.includes(',')
+                                  ? `/${v.product_photos.split(',')[0]}`
+                                  : `/${v.product_photos}`
+                              }
+                              alt=""
+                              width={266}
+                              height={266}
+                              style={{ height: '266px', objectFit: 'cover' }}
+                            />
                             <div className={style.productAction}>
-                              <Link href="" className="">
+                              <button
+                                className="btn"
+                                onClick={() => {
+                                  addItem(v)
+                                  notify(v.product_name)
+                                }}
+                              >
                                 <BsFillCartFill className={style.iconAInner} />
-                              </Link>
-                              <Link href="" className="">
+                              </button>
+                              <button className="btn" onClick={() => {}}>
                                 <AiOutlineHeart className={style.iconBInner} />
-                              </Link>
-                              <Link href="" className="">
-                                <IoSearch className={style.iconCInner} />
-                              </Link>
+                              </button>
+                              <button className="btn" onClick={() => {}}>
+                                <IoSearch
+                                  className={style.iconCInner}
+                                  onClick={() => {}}
+                                />
+                              </button>
                             </div>
                           </div>
+                        </div>
+                        <Link
+                          href={`/shop/detail?pid=${v.id}`}
+                          style={{ textDecoration: 'none', color: 'black' }}
+                        >
                           <div
                             className="text-center py-3 px-2"
                             style={{ height: '160px' }}
@@ -835,8 +864,8 @@ export default function Shop() {
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </Link>
+                        </Link>
+                      </div>
                     </div>
                   )
                 })}
@@ -905,6 +934,7 @@ export default function Shop() {
               </div>
             </div>
             {/* Shop Product End */}
+            <Toaster />
           </div>
         </div>
         {/* Shop End */}
