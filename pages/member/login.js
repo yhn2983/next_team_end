@@ -1,13 +1,13 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/context/auth-context'
-// import { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import styles from '@/styles/lee-form.module.scss'
 import Link from 'next/link'
 import GoogleLoginRedirect from '@/components/member/google-login-redirect'
 
 export default function LoginPage() {
-  // const router = useRouter()
+  const router = useRouter()
   const { auth, login, checkAuth } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -24,24 +24,29 @@ export default function LoginPage() {
     const checkLoginStatus = async () => {
       if (!hasChecked) {
         const isAuth = await checkAuth()
-        // if (isAuth) {
-        //   setTimeout(() => {
-        //     router.push('/member/profile')
-        //   }, 1000)
-        // }
+        if (isAuth) {
+          // setTimeout(() => {
+          //   router.push('/member/profile')
+          // }, 1000)
+        }
         setHasChecked(true)
       }
     }
 
     checkLoginStatus()
-  }, [hasChecked])
+  }, [router, hasChecked])
 
-  // // 練習怎麼撈出登入的會員資料
-  // useEffect(() => {
-  //   if (auth.userData) {
-  //     console.log(auth.userData.id, auth.userData.email, auth.userData.nickname)
-  //   }
-  // }, [auth])
+  // 練習怎麼撈出登入的會員資料
+  useEffect(() => {
+    if (auth.userData) {
+      console.log(
+        auth.userData.id,
+        auth.userData.email,
+        auth.userData.nickname,
+        auth.userData.google_uid
+      )
+    }
+  }, [auth])
 
   // 表單送出的事件處理函式
   const onSubmit = async (e) => {

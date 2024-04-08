@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import styles from '@/styles/lee-form.module.scss'
 import { PASSWORD_OTP_POST } from '@/components/config'
-// import { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('')
-  // const router = useRouter()
+  const router = useRouter()
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -25,7 +25,7 @@ export default function ForgotPasswordPage() {
         console.log(data)
       }
       // 如果接收到資料，則跳轉到重設密碼頁面
-      // router.push('/member/resetpassword')
+      router.push('/member/resetpassword') // 新增這一行
     }
 
     postOtp() // 呼叫 postOtp 函數

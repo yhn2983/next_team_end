@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react'
 import styles from '@/styles/lee-form.module.scss'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-// import { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { useAuth } from '@/context/auth-context'
 import { JWT_UPDATE_PASSWORD_PUT } from '@/components/config'
 
 export default function ChangePasswordPage() {
   const MySwal = withReactContent(Swal)
   const { auth, checkAuth } = useAuth()
-  // const router = useRouter()
+  const router = useRouter()
 
   const [passwords, setPasswords] = useState({
     oldPassword: '',
@@ -102,7 +102,7 @@ export default function ChangePasswordPage() {
         icon: 'success',
       })
 
-      // router.push('/member/profile')
+      router.push('/member/profile')
     } else {
       setError({ oldPassword: data.message })
     }
