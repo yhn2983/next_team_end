@@ -7,6 +7,7 @@ import { API_SERVER } from '@/components/config'
 import toast, { Toaster } from 'react-hot-toast'
 import GoogleLogo from '@/components/icons/google-logo'
 import LogoutButton from '@/components/member/logout-button'
+import style from '@/styles/lee-form.module.scss'
 
 export default function GoogleLoginRedirect() {
   const { auth, login, logout, checkAuth, parseJwt, setAuth, initUserData } =
@@ -128,9 +129,12 @@ export default function GoogleLoginRedirect() {
 
   return (
     <>
-      <h1>Google Login重定向測試頁</h1>
+      <h3>Google Login</h3>
       <p>會員狀態:{auth.isAuth ? '已登入' : '未登入'}</p>
-      <button onClick={() => loginGoogleRedirect()}>
+      <button
+        onClick={() => loginGoogleRedirect()}
+        className={`${style.googleLoginButton} mb-3`}
+      >
         <GoogleLogo /> Google登入
       </button>
       <br />

@@ -175,8 +175,11 @@ export default function LoginPage() {
                 <strong>登入</strong>
               </button>
             </div>
-            <div className="mt-2 mb-2">你也可以</div>
           </form>
+          <div className="mt-3">
+            <strong>你也可以</strong>
+          </div>
+          <hr />
           <GoogleLoginRedirect />
         </div>
       </div>

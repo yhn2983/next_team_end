@@ -195,3 +195,15 @@
     }
   }
 }
+
+.googleLoginButton{
+    padding: 3px 8px 2px 3px;
+    background: rgb(142, 204, 255) !important;
+    color: $light;
+    border: none ;
+  border-radius: 0.3rem;
+    &:hover {
+      background: $dark !important;
+      color: $light;
+    }
+}
