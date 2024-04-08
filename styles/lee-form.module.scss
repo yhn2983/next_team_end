@@ -181,3 +181,17 @@
     }
   }
 }
+
+.logoutButton{
+  button{
+    padding: 7px 13px;
+    background: $primary;
+    color: $light;
+    border: none ;
+  border-radius: 0.3rem;
+    &:hover {
+      background: $dark;
+      color: $light;
+    }
+  }
+}

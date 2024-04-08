@@ -38,6 +38,7 @@ export default function Profile() {
     address: '',
     carbon_points_got: 0,
     carbon_points_have: 0,
+    level_name: 'level_0',
     level_desc: '等待任務中',
   })
   const [file, setFile] = useState(null)
@@ -295,10 +296,18 @@ export default function Profile() {
                       <p className="mb-0">會員等級</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">{user.level_desc}</p>
+                      <p className="text-muted mb-0">{user.level_name}</p>
                     </div>
                   </div>
                   <hr />
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <p className="mb-0">等級描述</p>
+                    </div>
+                    <div className="col-sm-9">
+                      <p className="text-muted mb-0">{user.level_desc}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

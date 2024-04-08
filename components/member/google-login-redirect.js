@@ -6,6 +6,7 @@ import { GOOGLE_LOGIN_POST } from '@/components/config'
 import { API_SERVER } from '@/components/config'
 import toast, { Toaster } from 'react-hot-toast'
 import GoogleLogo from '@/components/icons/google-logo'
+import LogoutButton from '@/components/member/logout-button'
 
 export default function GoogleLoginRedirect() {
   const { auth, login, logout, checkAuth, parseJwt, setAuth, initUserData } =
@@ -102,6 +103,7 @@ export default function GoogleLoginRedirect() {
     }
   }
 
+  /*
   // 處理登出
   const handleLogout = async () => {
     // firebase logout(注意，這並不會登出google帳號，是登出firebase的帳號)
@@ -122,6 +124,7 @@ export default function GoogleLoginRedirect() {
       toast.error(`登出失敗`)
     }
   }
+  */
 
   return (
     <>
@@ -131,10 +134,9 @@ export default function GoogleLoginRedirect() {
         <GoogleLogo /> Google登入
       </button>
       <br />
-      <button onClick={handleLogout}>登出</button>
-      <br />
       <button onClick={handleCheckAuth}>向伺服器檢查登入狀態</button>
       <hr />
+      <LogoutButton /> {/* 使用 LogoutButton 組件 */}
       {/* 土司訊息視窗用 */}
       <Toaster />
     </>
