@@ -167,4 +167,17 @@
   background-color: #8e2626 !important;
 }
 
+.conneBtn{
+  box-shadow: 0 0 10px gray;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  padding: 2px 3px;
+  font-size: 18px;
+}
+
+.conneBtn:hover{
+  background-color: #8e2626!important;
+}
+
 

@@ -192,13 +192,17 @@ export default function Shop() {
   const notify = (productName) => {
     const msgBox = (
       <div>
-        <p>{productName + ' 已成功加入購物車'}</p>
+        <p>
+          <strong>{productName + ' 已成功加入購物車'}</strong>
+        </p>
         <button
+          className={`btn mx-auto ${style.conneBtn}`}
+          style={{ backgroundColor: '#e96d3f', color: 'white' }}
           onClick={() => {
             router.push('/shop/cart')
           }}
         >
-          加入購物車
+          連至 購物車
         </button>
       </div>
     )
@@ -818,10 +822,7 @@ export default function Shop() {
                                 <AiOutlineHeart className={style.iconBInner} />
                               </button>
                               <button className="btn" onClick={() => {}}>
-                                <IoSearch
-                                  className={style.iconCInner}
-                                  onClick={() => {}}
-                                />
+                                <IoSearch className={style.iconCInner} />
                               </button>
                             </div>
                           </div>

@@ -338,32 +338,27 @@ export default function Detail() {
             {data.rowsRandom.slice(0, 4).map((v, i) => {
               return (
                 <div key={i} className="col-lg-3 col-md-6 col-sm-12 pb-1">
-                  <Link
-                    href={`/shop/detail?pid=${v.id}`}
-                    style={{ textDecoration: 'none', color: 'black' }}
+                  <div
+                    className={`product-item bg-light mb-5 mx-auto ${style.productItem}`}
+                    style={{ marginBottom: '60px' }}
                   >
-                    <div
-                      className={`product-item bg-light mb-5 mx-auto ${style.productItem}`}
-                      style={{ marginBottom: '60px' }}
-                    >
-                      <div className="overflow-hidden ">
-                        <div
-                          className="position-relative"
-                          style={{ overflow: 'hidden' }}
-                        >
-                          <Image
-                            className={`img-fluid w-100 ${style.imgAct}`}
-                            src={
-                              v.product_photos.includes(',')
-                                ? `/${v.product_photos.split(',')[0]}`
-                                : `/${v.product_photos}`
-                            }
-                            alt=""
-                            width={266}
-                            height={266}
-                            style={{ height: '266px', objectFit: 'cover' }}
-                          />
-                        </div>
+                    <div className="overflow-hidden ">
+                      <div
+                        className="position-relative"
+                        style={{ overflow: 'hidden' }}
+                      >
+                        <Image
+                          className={`img-fluid w-100 ${style.imgAct}`}
+                          src={
+                            v.product_photos.includes(',')
+                              ? `/${v.product_photos.split(',')[0]}`
+                              : `/${v.product_photos}`
+                          }
+                          alt=""
+                          width={266}
+                          height={266}
+                          style={{ height: '266px', objectFit: 'cover' }}
+                        />
                         <div className={style.productAction}>
                           <Link href="" className="">
                             <BsFillCartFill className={style.iconAInner} />
@@ -376,6 +371,11 @@ export default function Detail() {
                           </Link>
                         </div>
                       </div>
+                    </div>
+                    <Link
+                      href={`/shop/detail?pid=${v.id}`}
+                      style={{ textDecoration: 'none', color: 'black' }}
+                    >
                       <div
                         className="text-center py-3 px-2"
                         style={{ height: '160px' }}
@@ -408,8 +408,8 @@ export default function Detail() {
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </Link>
+                    </Link>
+                  </div>
                 </div>
               )
             })}

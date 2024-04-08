@@ -27,13 +27,12 @@ import { GiArchiveRegister } from 'react-icons/gi'
 import { FaCircleUser, FaTreeCity, FaBars } from 'react-icons/fa6'
 import { RiCoupon3Fill, RiLogoutBoxRFill } from 'react-icons/ri'
 // hook------
+import { useCart } from '@/hooks/use-cart'
 //import { useAuth } from '@/context/auth-context'
-//import { useCart } from '@/hooks/use-cart'
-//import Cart from '@/components/cart/cart'
 
 export default function CustomNavbar({ pageName = '' }) {
+  const { totalItems } = useCart()
   //const { auth, logout } = useAuth()
-  //const { totalItems, totalPrice } = useCart()
 
   // ---Hover status---
   const [isMessageHovered, setIsMessageHovered] = useState(false)
@@ -512,7 +511,7 @@ export default function CustomNavbar({ pageName = '' }) {
                           style={{ color: 'white', fontSize: '20px' }}
                         />
                         <span className="badge text-light border border-light rounded-circle mt-3">
-                          0
+                          {totalItems}
                         </span>
                       </Nav.Link>
                     </div>

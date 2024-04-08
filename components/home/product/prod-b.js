@@ -6,6 +6,7 @@ import { PROD_LIST } from '@/configs/config-r'
 import { shuffle } from 'lodash'
 // style-----
 import style from './prodB.module.css'
+import toast, { Toaster } from 'react-hot-toast'
 // react bootstrap
 // react icons-----
 import { AiOutlineSmallDash, AiOutlineHeart } from 'react-icons/ai'
@@ -13,6 +14,7 @@ import { BsFillCartFill } from 'react-icons/bs'
 import { RiGameLine } from 'react-icons/ri'
 import { IoSearch } from 'react-icons/io5'
 // hook------
+import { useCart } from '@/hooks/use-cart'
 
 export default function ProdB() {
   // Router-----
@@ -51,6 +53,28 @@ export default function ProdB() {
 
   const handleClick = () => {
     setIsBack(!isBack)
+  }
+
+  // cart
+  const { addItem } = useCart()
+  const addNotify = (productName) => {
+    const msgBox = (
+      <div>
+        <p>
+          <strong>{productName + ' 已成功加入購物車'}</strong>
+        </p>
+        <button
+          className={`btn mx-auto ${style.conneBtn}`}
+          style={{ backgroundColor: '#e96d3f', color: 'white' }}
+          onClick={() => {
+            router.push('/shop/cart')
+          }}
+        >
+          連至 購物車
+        </button>
+      </div>
+    )
+    toast.success(msgBox)
   }
 
   const qs = { ...router.query }
@@ -139,13 +163,25 @@ export default function ProdB() {
                       </div>
                       <div className={style.productAction}>
                         <button className="btn">
-                          <BsFillCartFill className={style.iconAInner} />
+                          <BsFillCartFill
+                            className={style.iconAInner}
+                            onClick={() => {
+                              addItem(v)
+                              addNotify(v.product_name)
+                            }}
+                          />
                         </button>
                         <button className="btn">
-                          <AiOutlineHeart className={style.iconBInner} />
+                          <AiOutlineHeart
+                            className={style.iconBInner}
+                            onClick={() => {}}
+                          />
                         </button>
                         <button className="btn">
-                          <IoSearch className={style.iconCInner} />
+                          <IoSearch
+                            className={style.iconCInner}
+                            onClick={() => {}}
+                          />
                         </button>
                       </div>
                     </div>
@@ -193,6 +229,7 @@ export default function ProdB() {
           })}
         </div>
       </div>
+      <Toaster />
       {/* Products End */}
     </>
   )
