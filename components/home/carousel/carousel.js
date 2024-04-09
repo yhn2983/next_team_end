@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { PROD_LIST } from '@/configs/config-r'
+import { useRouter } from 'next/router'
 // style-----
 import style from './carousel.module.css'
 // react bootstrap
@@ -23,6 +25,28 @@ export default function CarouselS1({ pageName = '' }) {
     if (type === 'smallOne') setIsHoveredSmallOne(false)
     if (type === 'smallTwo') setIsHoveredSmallTwo(false)
   }
+
+  const [data, setData] = useState({
+    success: false,
+    cate: [],
+    searchMain: '',
+  })
+
+  useEffect(() => {
+    fetch(`${PROD_LIST}${location.search}`)
+      .then((r) => r.json())
+      .then((dataObj) => {
+        setData(dataObj)
+        console.log(dataObj)
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error)
+      })
+  }, [])
+
+  // Router-----
+  const router = useRouter()
+  const qs = { ...router.query }
 
   return (
     <>
@@ -178,7 +202,10 @@ export default function CarouselS1({ pageName = '' }) {
                 >
                   <strong>爸爸辛苦了！</strong>
                 </h5>
-                <Link href="/shop" style={{ marginLeft: '50px' }}>
+                <Link
+                  href={`/shop?searchMain=男裝服飾`}
+                  style={{ marginLeft: '50px' }}
+                >
                   <button type="button" className={style.moreBtn} href="">
                     <strong>開始購物</strong>
                   </button>
