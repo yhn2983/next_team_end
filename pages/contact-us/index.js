@@ -9,10 +9,26 @@ import style from './contactUs.module.css'
 // react bootstrap
 // react icons-----
 import { FaRegFaceSmileWink } from 'react-icons/fa6'
+// loading bar & loading icon
+import Loader from '@/components/common/loading/loader'
+import LoadingBar from 'react-top-loading-bar'
 // hook------
 
 export default function ContactUs() {
-  return (
+  // Loading bar-----
+  const [isLoading, setIsLoading] = useState(true)
+  const [progress, setProgress] = useState(0)
+  useEffect(() => {
+    if (isLoading) {
+      setProgress(60)
+      setTimeout(() => {
+        setIsLoading(false)
+        setProgress(100)
+      }, 50)
+    }
+  }, [isLoading])
+
+  const display = (
     <>
       <DefaultLayout pageName="contactUs">
         <Head>
@@ -130,6 +146,13 @@ export default function ContactUs() {
           </div>
         </div>
       </DefaultLayout>
+    </>
+  )
+
+  return (
+    <>
+      <LoadingBar progress={progress} />
+      {isLoading ? <Loader /> : display}
     </>
   )
 }

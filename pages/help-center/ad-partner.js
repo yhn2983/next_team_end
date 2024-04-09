@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -8,10 +8,26 @@ import DefaultLayout from '@/components/common/default-layout'
 import style from './helpCenter.module.css'
 // react bootstrap
 // react icons-----
+// loading bar & loading icon
+import Loader from '@/components/common/loading/loader'
+import LoadingBar from 'react-top-loading-bar'
 // hook------
 
 export default function AdPartner() {
-  return (
+  // Loading bar-----
+  const [isLoading, setIsLoading] = useState(true)
+  const [progress, setProgress] = useState(0)
+  useEffect(() => {
+    if (isLoading) {
+      setProgress(60)
+      setTimeout(() => {
+        setIsLoading(false)
+        setProgress(100)
+      }, 50)
+    }
+  }, [isLoading])
+
+  const display = (
     <>
       <DefaultLayout pageName="adPartner">
         <Head>
@@ -147,6 +163,13 @@ export default function AdPartner() {
         </div>
         {/* Ad-partner end */}
       </DefaultLayout>
+    </>
+  )
+
+  return (
+    <>
+      <LoadingBar progress={progress} />
+      {isLoading ? <Loader /> : display}
     </>
   )
 }

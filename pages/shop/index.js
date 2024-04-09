@@ -25,7 +25,6 @@ import { GoDash } from 'react-icons/go'
 // loading bar & loading icon
 import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
-import { MarkdownFill } from 'react-bootstrap-icons'
 // hook------
 import { useCart } from '@/hooks/use-cart'
 //import { useAuth } from '@/context/auth-context'
@@ -35,18 +34,7 @@ export default function Shop() {
   const router = useRouter()
   // Auth-----
   // const { auth, getAuthHeader } = useAuth()
-  // Loading bar-----
-  const [isLoading, setIsLoading] = useState(true)
-  const [progress, setProgress] = useState(0)
-  useEffect(() => {
-    if (isLoading) {
-      setProgress(60)
-      setTimeout(() => {
-        setIsLoading(false)
-        setProgress(100)
-      }, 100)
-    }
-  }, [isLoading])
+
   // Products-----
   const [data, setData] = useState({
     success: false,
@@ -375,7 +363,20 @@ export default function Shop() {
 
   const qs = { ...router.query }
 
-  return (
+  // Loading bar-----
+  const [isLoading, setIsLoading] = useState(true)
+  const [progress, setProgress] = useState(0)
+  useEffect(() => {
+    if (isLoading) {
+      setProgress(60)
+      setTimeout(() => {
+        setIsLoading(false)
+        setProgress(100)
+      }, 50)
+    }
+  }, [isLoading])
+
+  const display = (
     <>
       <DefaultLayout pageName="productSearch">
         <Head>
@@ -1121,6 +1122,13 @@ export default function Shop() {
         </div>
         {/* Shop End */}
       </DefaultLayout>
+    </>
+  )
+
+  return (
+    <>
+      <LoadingBar progress={progress} />
+      {isLoading ? <Loader /> : display}
     </>
   )
 }

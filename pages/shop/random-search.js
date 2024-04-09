@@ -16,6 +16,9 @@ import toast, { Toaster } from 'react-hot-toast'
 import { BsFillCartFill } from 'react-icons/bs'
 import { AiOutlineHeart } from 'react-icons/ai'
 import { IoSearch } from 'react-icons/io5'
+// loading bar & loading icon
+import Loader from '@/components/common/loading/loader'
+import LoadingBar from 'react-top-loading-bar'
 // hook------
 import { useCart } from '@/hooks/use-cart'
 
@@ -79,10 +82,21 @@ export default function RandomShop() {
     )
     toast.success(msgBox)
   }
-
   const qs = { ...router.query }
 
-  return (
+  // Loading bar-----
+  const [isLoading, setIsLoading] = useState(true)
+  const [progress, setProgress] = useState(0)
+  useEffect(() => {
+    if (isLoading) {
+      setProgress(60)
+      setTimeout(() => {
+        setIsLoading(false)
+        setProgress(100)
+      }, 50)
+    }
+  }, [isLoading])
+  const display = (
     <>
       <DefaultLayout pageName="randomSearch">
         <Head>
@@ -248,6 +262,13 @@ export default function RandomShop() {
         </div>
         {/* Shop End */}
       </DefaultLayout>
+    </>
+  )
+
+  return (
+    <>
+      <LoadingBar progress={progress} />
+      {isLoading ? <Loader /> : display}
     </>
   )
 }
