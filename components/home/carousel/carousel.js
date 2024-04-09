@@ -127,7 +127,7 @@ export default function CarouselS1({ pageName = '' }) {
                   <p className={style.txt2}>
                     <strong>女裝折扣 蓄勢待發</strong>
                   </p>
-                  <Link href="/shop">
+                  <Link href={`/shop?searchMain=女裝服飾`}>
                     <button type="button" className="btn btn-outline-dark">
                       了解更多
                     </button>
