@@ -6,6 +6,7 @@ import LoginPage from '@/components/member/login-modal' // 引入 LoginPage 組�
 import { useState, useEffect, use } from 'react'
 import { useAuth } from '@/context/auth-context'
 import Spinner from 'react-bootstrap/Spinner'
+import RegisterModal from './register-modal'
 
 function BasicExample() {
   const [showLogin, setShowLogin] = useState(false) // 新增狀態變數來控制 LoginPage 的顯示和隱藏
@@ -44,6 +45,14 @@ function BasicExample() {
     }
   }, [auth.isAuth]) // 監聽 auth.isAuth 的變化
 
+  const [showRegister, setShowRegister] = useState(false) // 新增狀態變數來控制 RegisterModal 的顯示和隱藏
+
+  // 關閉註冊視窗
+  const handleRegisterClose = () => setShowRegister(false)
+
+  // 點擊註冊按鈕
+  const handleRegisterClick = () => setShowRegister(true)
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -52,8 +61,11 @@ function BasicExample() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <LogoutButton>登出</LogoutButton>
-            <Nav.Link href="#link" onClick={handleLoginClick}>
+            <Nav.Link href="#login" onClick={handleLoginClick}>
               {auth.isAuth ? auth.userData.nickname : '登入'}
+            </Nav.Link>
+            <Nav.Link href="#register" onClick={handleRegisterClick}>
+              註冊
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
@@ -65,6 +77,7 @@ function BasicExample() {
         onHide={handleLoginClose}
         onSubmit={handleLoginSubmit}
       />
+      <RegisterModal show={showRegister} onHide={handleRegisterClose} />
     </Navbar>
   )
 }
