@@ -129,8 +129,6 @@ export default function GoogleLoginRedirect() {
 
   return (
     <>
-      <h3>Google Login</h3>
-      <p>會員狀態:{auth.isAuth ? '已登入' : '未登入'}</p>
       <button
         onClick={() => loginGoogle()}
         className={`${style.googleLoginButton} mb-3`}
@@ -139,7 +137,7 @@ export default function GoogleLoginRedirect() {
       </button>
       <br />
       <button onClick={handleCheckAuth}>向伺服器檢查登入狀態</button>
-      <hr /> {/* 土司訊息視窗用 */}
+      <p>會員狀態:{auth.isAuth ? '已登入' : '未登入'}</p>
       <Toaster />
     </>
   )

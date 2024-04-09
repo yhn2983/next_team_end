@@ -105,48 +105,43 @@ export default function LoginPage({ show, onHide }) {
 
   return (
     <>
-      <Head>
-        <title>歡迎登入</title>
-      </Head>
-
-      <Modal show={show} onHide={onHide} className={style.myloginform}>
-        {' '}
+      <Modal show={show} onHide={onHide} className={`${style.myLoginModal}`}>
         {/* 使用從 props 中取得的 show 和 onHide */}
-        <Modal.Header closeButton>
-          <Modal.Title>歡迎登入</Modal.Title>
+        <Modal.Header closeButton className={`${style.btnclose}`}>
+          <h2>歡迎登入</h2>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className={`${style.body}`}>
           <Form onSubmit={onSubmit}>
             <Form.Group className="mb-3">
-              <Form.Label>Email:</Form.Label>
+              <Form.Label className={`${style.attr}`}>Email:</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="輸入信箱"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <Form.Text className="text-muted">{error.email}</Form.Text>
+              <Form.Text className={`${style.error}`}>{error.email}</Form.Text>
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>密碼:</Form.Label>
+              <Form.Label className={`${style.attr}`}>密碼:</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="輸入密碼"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <Form.Text className="text-muted">{error.password}</Form.Text>
+              <Form.Text className={`${style.error}`}>
+                {error.password}
+              </Form.Text>
             </Form.Group>
-
-            <Button variant="primary" type="submit">
-              登入
-            </Button>
+            <button type="submit" className={`btn ${style.loginbtn}`}>
+              <strong>登入</strong>
+            </button>
           </Form>
-        </Modal.Body>
-        <Modal.Footer>
+          <div className="mt-3 mb-3">或者你也可以使用</div>
           <GoogleLoginRedirect />
-        </Modal.Footer>
+        </Modal.Body>
       </Modal>
     </>
   )
