@@ -1,4 +1,4 @@
-import { Modal, Button } from 'react-bootstrap'
+import { Modal, Button, Form } from 'react-bootstrap'
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import styles from '@/styles/lee-form.module.scss'
@@ -147,122 +147,110 @@ export default function RegisterModal({ show, onHide }) {
         <Modal.Header closeButton className={`${style.btnclose}`}>
           <h2>會員註冊</h2>
         </Modal.Header>
-        <Modal.Body>
-          <form name="form1" onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label className="form-label ms-2" htmlFor="email">
-                Email
-              </label>
-              <input
-                className="form-control rounded"
+        <Modal.Body className={`${style.body}`}>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label>Email:</Form.Label>
+              <Form.Control
                 type="text"
-                name="email"
-                id="email"
                 placeholder="輸入信箱"
                 value={user.email}
                 onChange={handleFieldChange}
+                name="email"
               />
-              <div className="error">{error.email}</div>
-            </div>
-            <div className="mb-4">
-              <label className="form-label ms-2" htmlFor="password">
-                密碼
-              </label>
-              <input
-                className="form-control rounded"
+              <Form.Text className={`${style.error}`}>{error.email}</Form.Text>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>密碼:</Form.Label>
+              <Form.Control
                 type="password"
-                name="password"
-                id="password"
                 placeholder="輸入密碼"
                 value={user.password}
                 onChange={handleFieldChange}
+                name="password"
               />
-              <div className="error">{error.password}</div>
-            </div>
-            <div className="mb-4">
-              <label className="form-label ms-2" htmlFor="name">
-                姓名
-              </label>
-              <input
-                className="form-control rounded"
+              <Form.Text className={`${style.error}`}>
+                {error.password}
+              </Form.Text>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>姓名:</Form.Label>
+              <Form.Control
                 type="text"
-                name="name"
-                id="name"
                 placeholder="輸入姓名"
                 value={user.name}
                 onChange={handleFieldChange}
+                name="name"
               />
-              <div className="error">{error.name}</div>
-            </div>
-            <div className="mb-4">
-              <label className="form-label ms-2" htmlFor="nickname">
-                暱稱
-              </label>
-              <input
-                className="form-control rounded"
+              <Form.Text className={`${style.error}`}>{error.name}</Form.Text>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>暱稱:</Form.Label>
+              <Form.Control
                 type="text"
-                name="nickname"
-                id="nickname"
                 placeholder="輸入暱稱"
                 value={user.nickname}
                 onChange={handleFieldChange}
+                name="nickname"
               />
-              <div className="error">{error.nickname}</div>
-            </div>
-            <div className="mb-4">
-              <label className="form-label ms-2" htmlFor="mobile">
-                手機號碼
-              </label>
-              <input
-                className="form-control rounded"
+              <Form.Text className={`${style.error}`}>
+                {error.nickname}
+              </Form.Text>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>手機號碼:</Form.Label>
+              <Form.Control
                 type="text"
-                name="mobile"
-                id="mobile"
                 placeholder="輸入手機號碼"
                 value={user.mobile}
                 onChange={handleFieldChange}
+                name="mobile"
               />
-              <div className="error">{error.mobile}</div>
-            </div>
-            <div className="mb-4">
-              <label className="form-label ms-2" htmlFor="birthday">
-                生日
-              </label>
-              <input
-                className="form-control rounded"
+              <Form.Text className={`${style.error}`}>{error.mobile}</Form.Text>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>生日:</Form.Label>
+              <Form.Control
                 type="date"
-                name="birthday"
-                id="birthday"
                 value={user.birthday}
                 onChange={handleFieldChange}
+                name="birthday"
               />
-              <div className="error">{error.birthday}</div>
-            </div>
-            <div className="mb-1">
-              <label className="form-label ms-2" htmlFor="address">
-                地址
-              </label>
-              <input
-                className="form-control rounded"
+              <Form.Text className={`${style.error}`}>
+                {error.birthday}
+              </Form.Text>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>地址:</Form.Label>
+              <Form.Control
                 type="text"
-                name="address"
-                id="address"
                 placeholder="輸入地址"
                 value={user.address}
                 onChange={handleFieldChange}
+                name="address"
               />
-              <div className="error">{error.address}</div>
-            </div>
-            <div className="mb-3 mt-3">
-              <input
+              <Form.Text className={`${style.error}`}>
+                {error.address}
+              </Form.Text>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Check
                 type="checkbox"
-                name="agree"
+                label="我同意會員註冊條款"
                 checked={user.agree}
                 onChange={handleFieldChange}
-              />{' '}
-              我同意會員註冊條款
-              <div className="error">{error.agree}</div>
-            </div>
+                name="agree"
+              />
+              <Form.Text className={`${style.error}`}>{error.agree}</Form.Text>
+            </Form.Group>
+
             <button type="submit" className={`btn ${style.resbtn}`}>
               <strong>註冊</strong>
             </button>
@@ -285,7 +273,7 @@ export default function RegisterModal({ show, onHide }) {
             >
               一鍵輸入
             </button>
-          </form>
+          </Form>
         </Modal.Body>
       </Modal>
     </>

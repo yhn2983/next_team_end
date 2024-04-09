@@ -136,9 +136,9 @@ export default function GoogleLoginRedirect() {
         <GoogleLogo /> Google登入
       </button>
       <br />
-      <button onClick={handleCheckAuth}>向伺服器檢查登入狀態</button>
+      {/* <button onClick={handleCheckAuth}>向伺服器檢查登入狀態</button>
       <p>會員狀態:{auth.isAuth ? '已登入' : '未登入'}</p>
-      <Toaster />
+      <Toaster /> */}
     </>
   )
 }

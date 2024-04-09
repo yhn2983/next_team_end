@@ -67,7 +67,7 @@
     .body{
       position: relative;
       top: -5px;
-      padding: 0px 26px 15px 23px;
+      padding: 0px 26px 2px 23px;
     }
 
     .attr{
@@ -166,6 +166,10 @@
   background-color: $form-bg;
   border: 2px solid $dark;
   border-radius: $border-radius-sm;
+  .body{
+    position: relative;
+    top: -15px;
+  }
   
   h2 {
     position: relative;
@@ -189,6 +193,14 @@
   padding-top: 13px;
   position: relative;
   top:-20px
+  }
+
+  .error{
+    color: red;
+    font-size: 16px;
+    height: 10px;
+    position: relative;
+    top:6px;
   }
 }
 
