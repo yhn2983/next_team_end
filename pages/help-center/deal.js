@@ -78,7 +78,7 @@ export default function Deal() {
         </div>
         {/* Breadcrumb End */}
         {/* DEAL content start */}
-        <div className="container-fluid px-lg-5">
+        <div className="container-fluid px-lg-5 mb-5">
           <div className="row px-lg-5">
             <div className="col-lg-12 px-lg-5 d-flex flex-column  justify-content-center text-center">
               <h2 style={{ color: '#8e2626' }}>
@@ -107,7 +107,7 @@ export default function Deal() {
                 </strong>
               </h5>
             </div>
-            <div className="col-lg-12 px-lg-5 text-center">
+            <div className="col-lg-12 px-lg-5 text-center mt-4">
               <Image
                 src="/logo9.png"
                 alt=""

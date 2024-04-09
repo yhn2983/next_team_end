@@ -8,7 +8,6 @@ import DefaultLayout from '@/components/common/default-layout'
 import style from './helpCenter.module.css'
 // react bootstrap
 // react icons-----
-import { FaMagnifyingGlass } from 'react-icons/fa6'
 // hook------
 
 export default function AdPartner() {
@@ -20,35 +19,12 @@ export default function AdPartner() {
         </Head>
         {/* Banner start */}
         <div className={style.banner}>
-          <div className={style.area1}>
-            <div className="">
-              <h2
-                className="ps-3"
-                style={{ marginTop: '85px', color: 'white' }}
-              >
-                <strong>需要什麼協助？</strong>
-              </h2>
-            </div>
-            <div
-              className="input-group mb-3 ms-3"
-              style={{ width: '25%', height: '40px' }}
-            >
-              <input
-                type="text"
-                className="form-control border border-2 border-secondary"
-                placeholder="搜尋"
-                aria-label="搜尋"
-                aria-describedby="button-addon2"
-              />
-              <button
-                className="btn btn-search border border-2 border-secondary"
-                type="button"
-                id="button-addon2"
-                style={{ backgroundColor: '#8e2626' }}
-              >
-                <FaMagnifyingGlass style={{ color: 'white' }} />
-              </button>
-            </div>
+          <div
+            className={`text-center d-flex align-items-center justify-content-center ${style.area1}`}
+          >
+            <h1 className="" style={{ color: 'white', fontSize: '50px' }}>
+              <strong>DEAL HELP CENTER</strong>
+            </h1>
           </div>
         </div>
         {/* Banner end */}
@@ -77,6 +53,99 @@ export default function AdPartner() {
           </div>
         </div>
         {/* Breadcrumb End */}
+        {/* Ad-partner content start */}
+        <div className="container-fluid px-lg-5 mb-5">
+          <div className="row px-lg-5">
+            <div className="col-lg-12 px-lg-5 d-flex flex-column  justify-content-center text-center">
+              <h2 style={{ color: '#8e2626' }}>
+                <strong>成為DEAL的合作夥伴</strong>
+              </h2>
+              <h5 className="mt-3">
+                <strong>快來成為DEAL的廣告合作夥伴吧！</strong>
+              </h5>
+              <h5 className="mt-3">
+                <strong>
+                  除了DEAL 2ND HAND
+                  SHOP的服務外，我們也致力於與他人的合作，希望透過互惠的過程，找到更多美好的可能性。
+                </strong>
+              </h5>
+              <h5 className="mt-3">
+                <strong>
+                  看看廣告合作夥伴1號：全方面綜合運動健康中心！想保持好身材嗎？來這裡就對了！
+                </strong>
+              </h5>
+              <h5 className="mt-3">
+                <strong>
+                  看看廣告合作夥伴2號：想玩桌遊哪需要現場排隊！快來線上預約，不怕風吹雨打、不須出門就能盡享遊樂。
+                </strong>
+              </h5>
+              <h5 className="mt-3">
+                <strong>
+                  看看廣告合作夥伴3號：給浪浪一個溫暖的家！他們是可愛又淘氣的小傢伙們，您的愛心可以給他們全世界！
+                </strong>
+              </h5>
+              <h5 className="mt-3">
+                <strong>
+                  看看廣告合作夥伴4號：還沒有認識DEAL嗎？快來試試DEAL 2ND HAND
+                  SHOP的功能吧！
+                </strong>
+              </h5>
+            </div>
+            <div className="col-lg-12 px-lg-5 text-center mt-4">
+              <div className="row d-flex px-lg-5">
+                <div className="col-lg-6 col-md-6 col-xs-12 d-flex align-items-center justify-content-center pb-2">
+                  <Link href="/help-center/ad-partner">
+                    <Image
+                      className={`${style.adbox}`}
+                      src="/n1.png"
+                      alt=""
+                      width={350}
+                      height={350}
+                      style={{ borderRadius: '30px' }}
+                    />
+                  </Link>
+                </div>
+                <div className="d-flex align-items-center justify-content-center col-lg-6 col-md-6 col-xs-12 pb-2">
+                  <Link href="/help-center/ad-partner">
+                    <Image
+                      className={`${style.adbox}`}
+                      src="/n2.png"
+                      alt=""
+                      width={350}
+                      height={350}
+                      style={{ borderRadius: '30px' }}
+                    />
+                  </Link>
+                </div>
+                <div className="d-flex align-items-center justify-content-center col-lg-6 col-md-6 col-xs-12 mt-lg-3 pb-2">
+                  <Link href="/help-center/ad-partner">
+                    <Image
+                      className={style.adbox}
+                      src="/n3.png"
+                      alt=""
+                      width={350}
+                      height={350}
+                      style={{ borderRadius: '30px' }}
+                    />
+                  </Link>
+                </div>
+                <div className="d-flex align-items-center justify-content-center col-lg-6 col-md-6 col-xs-12 mt-lg-3 pb-2">
+                  <Link href="/help-center/ad-partner">
+                    <Image
+                      className={`${style.adbox}`}
+                      src="/n4.png"
+                      alt=""
+                      width={350}
+                      height={350}
+                      style={{ borderRadius: '30px' }}
+                    />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Ad-partner end */}
       </DefaultLayout>
     </>
   )
