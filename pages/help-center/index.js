@@ -77,7 +77,7 @@ export default function HelpCenter() {
           style={{ marginBottom: '150px' }}
         >
           <div className="row px-xl-5">
-            <div className="col-lg-3 col-md-6 col-xs-12">
+            <div className="col-lg-3 col-md-6 col-xs-12 px-lg-5">
               <Link className="text-decoration-none" href="/help-center/deal">
                 <div
                   className={`card border-seconary border-4 ${style.card}`}
@@ -98,7 +98,7 @@ export default function HelpCenter() {
                 </div>
               </Link>
             </div>
-            <div className="col-lg-3 col-md-6 col-xs-12">
+            <div className="col-lg-3 col-md-6 col-xs-12 px-lg-5">
               <Link className="text-decoration-none" href="/help-center/esg">
                 <div className={`card border-seconary border-4 ${style.card}`}>
                   <Image
@@ -116,7 +116,7 @@ export default function HelpCenter() {
                 </div>
               </Link>
             </div>
-            <div className="col-lg-3 col-md-6 col-xs-12">
+            <div className="col-lg-3 col-md-6 col-xs-12 px-lg-5">
               <Link
                 className="text-decoration-none"
                 href="/help-center/ad-partner"
@@ -137,7 +137,7 @@ export default function HelpCenter() {
                 </div>
               </Link>
             </div>
-            <div className="col-lg-3 col-md-6 col-xs-12">
+            <div className="col-lg-3 col-md-6 col-xs-12 px-lg-5">
               <Link
                 className="text-decoration-none"
                 href="/help-center/using-rule"
@@ -158,7 +158,7 @@ export default function HelpCenter() {
                 </div>
               </Link>
             </div>
-            <div className="col-lg-3 col-md-6 col-xs-12">
+            <div className="col-lg-3 col-md-6 col-xs-12 px-lg-5">
               <Link
                 className="text-decoration-none"
                 href="/help-center/privacy-rule"
@@ -179,7 +179,7 @@ export default function HelpCenter() {
                 </div>
               </Link>
             </div>
-            <div className="col-lg-3 col-md-6 col-xs-12">
+            <div className="col-lg-3 col-md-6 col-xs-12 px-lg-5">
               <Link
                 className="text-decoration-none"
                 href="/help-center/language-setting"
@@ -200,7 +200,7 @@ export default function HelpCenter() {
                 </div>
               </Link>
             </div>
-            <div className="col-lg-3 col-md-6 col-xs-12">
+            <div className="col-lg-3 col-md-6 col-xs-12 px-lg-5">
               <Link className="text-decoration-none" href="/help-center/faqs">
                 <div className={`card border-seconary border-4 ${style.card}`}>
                   <Image
@@ -218,7 +218,7 @@ export default function HelpCenter() {
                 </div>
               </Link>
             </div>
-            <div className="col-lg-3 col-md-6 col-xs-12">
+            <div className="col-lg-3 col-md-6 col-xs-12 px-lg-5">
               <Link
                 className="text-decoration-none"
                 href="/help-center/join-deal"
