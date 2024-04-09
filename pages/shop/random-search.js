@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
-import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { PROD_LIST } from '@/configs/config-r'
 import { shuffle } from 'lodash'
@@ -11,12 +10,14 @@ import { shuffle } from 'lodash'
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
 import style from './randomSearch.module.css'
+import toast, { Toaster } from 'react-hot-toast'
 // react bootstrap
 // react icons-----
 import { BsFillCartFill } from 'react-icons/bs'
 import { AiOutlineHeart } from 'react-icons/ai'
 import { IoSearch } from 'react-icons/io5'
 // hook------
+import { useCart } from '@/hooks/use-cart'
 
 export default function RandomShop() {
   // Router-----
@@ -55,6 +56,28 @@ export default function RandomShop() {
 
   const handleClick = () => {
     setIsBack(!isBack)
+  }
+
+  // cart
+  const { addItem } = useCart()
+  const notify = (productName) => {
+    const msgBox = (
+      <div>
+        <p>
+          <strong>{productName + ' 已成功加入購物車'}</strong>
+        </p>
+        <button
+          className={`btn mx-auto ${style.conneBtn}`}
+          style={{ backgroundColor: '#e96d3f', color: 'white' }}
+          onClick={() => {
+            router.push('/shop/cart')
+          }}
+        >
+          連至 購物車
+        </button>
+      </div>
+    )
+    toast.success(msgBox)
   }
 
   const qs = { ...router.query }
@@ -161,7 +184,13 @@ export default function RandomShop() {
                         </div>
                         <div className={style.productAction}>
                           <button className="btn">
-                            <BsFillCartFill className={style.iconAInner} />
+                            <BsFillCartFill
+                              className={style.iconAInner}
+                              onClick={() => {
+                                addItem(v)
+                                notify(v.product_name)
+                              }}
+                            />
                           </button>
                           <button className="btn">
                             <AiOutlineHeart className={style.iconBInner} />
@@ -215,6 +244,7 @@ export default function RandomShop() {
             })}
             {/* Shop Product End */}
           </div>
+          <Toaster />
         </div>
         {/* Shop End */}
       </DefaultLayout>

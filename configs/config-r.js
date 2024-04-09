@@ -3,6 +3,11 @@ export const API_SERVER = 'http://localhost:3001'
 export const API_CATEGORIES = `${API_SERVER}/cate2`
 
 export const PROD_LIST = `${API_SERVER}/products/api`
+
+export const CART_ADD = `${API_SERVER}/products/add`
+
+export const TOGGLE_LIKE = `${API_SERVER}/like-toggle`
+
 // export const PROD_ADD_POST = `${API_SERVER}/products/add` // POST
 
 // // PROD_ITEM_DELETE: `${PROD_ITEM_DELETE}/17`
