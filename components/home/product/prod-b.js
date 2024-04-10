@@ -28,6 +28,7 @@ export default function ProdB() {
     rows: [],
     rowsRandom: [],
     cate: [],
+    searchSub: '',
   })
 
   useEffect(() => {
@@ -192,12 +193,9 @@ export default function ProdB() {
                             onClick={() => {}}
                           />
                         </button>
-                        <button className="btn">
-                          <IoSearch
-                            className={style.iconCInner}
-                            onClick={() => {}}
-                          />
-                        </button>
+                        <Link href={`/shop?searchSub=${v.s}`} className="btn">
+                          <IoSearch className={style.iconCInner} />
+                        </Link>
                       </div>
                     </div>
                     <Link

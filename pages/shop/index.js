@@ -1032,9 +1032,12 @@ export default function Shop() {
                               <button className="btn" onClick={() => {}}>
                                 <AiOutlineHeart className={style.iconBInner} />
                               </button>
-                              <button className="btn" onClick={() => {}}>
+                              <Link
+                                href={`/shop?searchSub=${v.s}`}
+                                className="btn"
+                              >
                                 <IoSearch className={style.iconCInner} />
-                              </button>
+                              </Link>
                             </div>
                           </div>
                         </div>

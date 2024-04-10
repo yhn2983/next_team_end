@@ -34,6 +34,7 @@ export default function RandomShop() {
     rows: [],
     rowsRandom: [],
     cate: [],
+    searchSub: '',
   })
 
   useEffect(() => {
@@ -209,9 +210,9 @@ export default function RandomShop() {
                           <button className="btn">
                             <AiOutlineHeart className={style.iconBInner} />
                           </button>
-                          <button className="btn">
+                          <Link href={`/shop?searchSub=${v.s}`} className="btn">
                             <IoSearch className={style.iconCInner} />
-                          </button>
+                          </Link>
                         </div>
                       </div>
                       <Link
