@@ -361,6 +361,17 @@ export default function Shop() {
     toast.success(msgBox)
   }
 
+  const notifyNoAdd = (productName) => {
+    const msgBox2 = (
+      <div>
+        <span>
+          <strong>{productName + ' 已下架，不可加入購物車'}</strong>
+        </span>
+      </div>
+    )
+    toast.error(msgBox2)
+  }
+
   const qs = { ...router.query }
 
   // Loading bar-----
@@ -994,8 +1005,12 @@ export default function Shop() {
                               <button
                                 className="btn"
                                 onClick={() => {
-                                  addItem(v)
-                                  notify(v.product_name)
+                                  if (v.status == '1') {
+                                    addItem(v)
+                                    notify(v.product_name)
+                                  } else {
+                                    notifyNoAdd(v.product_name)
+                                  }
                                 }}
                               >
                                 <BsFillCartFill className={style.iconAInner} />

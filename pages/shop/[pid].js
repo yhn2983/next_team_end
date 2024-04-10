@@ -108,6 +108,17 @@ export default function Detail() {
     toast.success(msgBox)
   }
 
+  const notifyNoAdd = (productName) => {
+    const msgBox2 = (
+      <div>
+        <span>
+          <strong>{productName + ' 已下架，不可加入購物車'}</strong>
+        </span>
+      </div>
+    )
+    toast.error(msgBox2)
+  }
+
   // Loading bar-----
   const [isLoading, setIsLoading] = useState(true)
   const [progress, setProgress] = useState(0)
@@ -287,7 +298,7 @@ export default function Detail() {
                       <strong style={{ color: '#8e2626' }}>
                         上下架狀態：
                         <span style={{ color: 'black' }}>
-                          {product.data.status}
+                          {product.data.status == '1' ? '上架中' : '已下架'}
                         </span>
                       </strong>
                     </p>
@@ -302,7 +313,7 @@ export default function Detail() {
                       <strong style={{ color: '#8e2626' }}>
                         商品更新時間：
                         <span style={{ color: 'black' }}>
-                          {product.data.created_at == '1' ? '上架中' : '已下架'}
+                          {product.data.created_at}
                         </span>
                       </strong>
                     </p>
@@ -341,8 +352,12 @@ export default function Detail() {
                       className={`btn px-3 ms-4 ${style.btnHover}`}
                       style={{ backgroundColor: '#e96d3f' }}
                       onClick={() => {
-                        addItem(product.data)
-                        notify(product.data.product_name)
+                        if (product.data.status == '1') {
+                          addItem(product.data)
+                          notify(product.data.product_name)
+                        } else {
+                          notifyNoAdd(product.data.product_name)
+                        }
                       }}
                     >
                       <BsFillCartFill
@@ -441,8 +456,12 @@ export default function Detail() {
                           <button
                             className="btn"
                             onClick={() => {
-                              addItem(product.data)
-                              notify(product.data.product_name)
+                              if (v.status == '1') {
+                                addItem(v)
+                                notify(v.product_name)
+                              } else {
+                                notifyNoAdd(v.product_name)
+                              }
                             }}
                           >
                             <BsFillCartFill className={style.iconAInner} />
