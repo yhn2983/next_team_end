@@ -57,7 +57,7 @@ export default function ProdB() {
 
   // cart
   const { addItem } = useCart()
-  const addNotify = (productName) => {
+  const notify = (productName) => {
     const msgBox = (
       <div>
         <p>
@@ -75,6 +75,17 @@ export default function ProdB() {
       </div>
     )
     toast.success(msgBox)
+  }
+
+  const notifyNoAdd = (productName) => {
+    const msgBox2 = (
+      <div>
+        <span>
+          <strong>{productName + ' 已下架，不可加入購物車'}</strong>
+        </span>
+      </div>
+    )
+    toast.error(msgBox2)
   }
 
   const qs = { ...router.query }
@@ -162,14 +173,18 @@ export default function ProdB() {
                         />
                       </div>
                       <div className={style.productAction}>
-                        <button className="btn">
-                          <BsFillCartFill
-                            className={style.iconAInner}
-                            onClick={() => {
+                        <button
+                          className="btn"
+                          onClick={() => {
+                            if (v.status == '1') {
                               addItem(v)
-                              addNotify(v.product_name)
-                            }}
-                          />
+                              notify(v.product_name)
+                            } else {
+                              notifyNoAdd(v.product_name)
+                            }
+                          }}
+                        >
+                          <BsFillCartFill className={style.iconAInner} />
                         </button>
                         <button className="btn">
                           <AiOutlineHeart
