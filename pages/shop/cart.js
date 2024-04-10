@@ -149,7 +149,7 @@ export default function Cart() {
                       <>
                         <tr key={v.id}>
                           <td>
-                            <Link href={`/shop/detail?pid=${v.id}`}>
+                            <Link href={`/shop/${v.id}`}>
                               <Image
                                 src={
                                   v.product_photos.includes(',')
@@ -168,7 +168,7 @@ export default function Cart() {
                             style={{ fontSize: '20px', maxWidth: '120px' }}
                           >
                             <Link
-                              href={`/shop/detail?pid=${v.id}`}
+                              href={`/shop/${v.id}`}
                               style={{ textDecoration: 'none', color: 'black' }}
                             >
                               {v.product_name}
