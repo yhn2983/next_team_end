@@ -36,7 +36,7 @@ export default function ProdA() {
       .catch((error) => {
         console.error('Error fetching data:', error)
       })
-  }, [router])
+  }, [router.query])
 
   // cart
   const { addItem } = useCart()
@@ -132,7 +132,7 @@ export default function ProdA() {
                     </div>
                   </div>
                   <Link
-                    href={`/shop/detail?pid=${v.id}`}
+                    href={`/shop/${v.id}`}
                     style={{ textDecoration: 'none', color: 'black' }}
                   >
                     <div
@@ -163,7 +163,7 @@ export default function ProdA() {
                         </div>
                         &nbsp;
                         <div className="" style={{ fontSize: '18px' }}>
-                          <strong>${v.product_price}</strong>
+                          <strong>${v.product_price.toLocaleString()}</strong>
                         </div>
                       </div>
                     </div>

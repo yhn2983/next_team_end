@@ -246,7 +246,9 @@ export default function RandomShop() {
                             </div>
                             &nbsp;
                             <div className="" style={{ fontSize: '18px' }}>
-                              <strong>${v.product_price}</strong>
+                              <strong>
+                                ${v.product_price.toLocaleString()}
+                              </strong>
                             </div>
                           </div>
                         </div>

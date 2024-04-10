@@ -74,7 +74,7 @@ export default function Shop() {
       .catch((error) => {
         console.error('Error fetching data:', error)
       })
-  }, [router])
+  }, [router.query])
 
   // Pages
   const startPage = Math.max(1, data.page - 2)
@@ -1010,7 +1010,7 @@ export default function Shop() {
                           </div>
                         </div>
                         <Link
-                          href={`/shop/detail?pid=${v.id}`}
+                          href={`/shop/${v.id}`}
                           style={{ textDecoration: 'none', color: 'black' }}
                         >
                           <div
@@ -1043,7 +1043,9 @@ export default function Shop() {
                               </div>
                               &nbsp;
                               <div className="" style={{ fontSize: '18px' }}>
-                                <strong>${v.product_price}</strong>
+                                <strong>
+                                  ${v.product_price.toLocaleString()}
+                                </strong>
                               </div>
                             </div>
                           </div>
@@ -1074,9 +1076,6 @@ export default function Shop() {
                         { length: endPage - startPage + 1 },
                         (v, i) => {
                           const p = startPage + i
-                          {
-                            /* if (p < 1 || p > data.totalPages) return null */
-                          }
                           const active = p === data.page ? 'active' : ''
                           const usp = new URLSearchParams({ ...qs, page: p })
                           return (

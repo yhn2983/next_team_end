@@ -27,7 +27,7 @@ export default function Activity() {
     }
   }, [isLoading])
 
-  return (
+  const display = (
     <>
       <DefaultLayout pageName="activity">
         <Head>
@@ -90,6 +90,13 @@ export default function Activity() {
         </div>
         {/* Activity end */}
       </DefaultLayout>
+    </>
+  )
+
+  return (
+    <>
+      <LoadingBar progress={progress} />
+      {isLoading ? <Loader /> : display}
     </>
   )
 }

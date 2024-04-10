@@ -39,7 +39,7 @@ export default function ProdB() {
       .catch((error) => {
         console.error('Error fetching data:', error)
       })
-  }, [router])
+  }, [router.query])
 
   const [isBack, setIsBack] = useState(false)
   const [randomRows, setRandomRows] = useState([])
@@ -186,7 +186,7 @@ export default function ProdB() {
                       </div>
                     </div>
                     <Link
-                      href={`/shop/detail?pid=${v.id}`}
+                      href={`/shop/${v.id}`}
                       style={{ textDecoration: 'none', color: 'black' }}
                     >
                       <div
@@ -217,7 +217,7 @@ export default function ProdB() {
                           </div>
                           &nbsp;
                           <div className="" style={{ fontSize: '18px' }}>
-                            <strong>${v.product_price}</strong>
+                            <strong>${v.product_price.toLocaleString()}</strong>
                           </div>
                         </div>
                       </div>
