@@ -91,8 +91,8 @@ export default function JoinDeal() {
                 </thead>
                 <tbody>
                   <tr>
-                    <th className="text-center">1</th>
-                    <td className="text-center">
+                    <th className="text-center align-middle">1</th>
+                    <td className="text-center align-middle">
                       <strong>線上客服</strong>
                     </td>
                     <td>
@@ -106,8 +106,8 @@ export default function JoinDeal() {
                     </td>
                   </tr>
                   <tr>
-                    <th className="text-center">2</th>
-                    <td className="text-center">
+                    <th className="text-center align-middle">2</th>
+                    <td className="text-center align-middle">
                       <strong>人資專員</strong>
                     </td>
                     <td>
@@ -118,8 +118,8 @@ export default function JoinDeal() {
                     </td>
                   </tr>
                   <tr>
-                    <th className="text-center">3</th>
-                    <td className="text-center">
+                    <th className="text-center align-middle">3</th>
+                    <td className="text-center align-middle">
                       <strong>儲備幹部</strong>
                     </td>
                     <td>
