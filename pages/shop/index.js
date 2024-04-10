@@ -63,6 +63,20 @@ export default function Shop() {
     searchDate: '',
     searchDateStart: '',
     searchDateEnd: '',
+    totalCount: 0,
+    priceRangeA: 0,
+    priceRangeB: 0,
+    priceRangeC: 0,
+    priceRangeD: 0,
+    priceRangeE: 0,
+    prodStatusA: 0,
+    prodStatusB: 0,
+    dateRangeA: 0,
+    dateRangeB: 0,
+    dateRangeC: 0,
+    dateRangeD: 0,
+    dateRangeE: 0,
+    dateRangeF: 0,
   })
 
   useEffect(() => {
@@ -506,9 +520,9 @@ export default function Shop() {
                     </label>
                     <span
                       className="badge border font-weight-normal"
-                      style={{ color: 'black', fontSize: '14px' }}
+                      style={{ color: 'gray', fontSize: '14px' }}
                     >
-                      1000
+                      {data.totalCount}
                     </span>
                   </div>
                   <div className="form-check d-flex align-items-center justify-content-between mb-3">
@@ -528,9 +542,9 @@ export default function Shop() {
                     </label>
                     <span
                       className="badge border font-weight-normal"
-                      style={{ color: 'black', fontSize: '14px' }}
+                      style={{ color: 'gray', fontSize: '14px' }}
                     >
-                      150
+                      {data.priceRangeA}
                     </span>
                   </div>
                   <div className="form-check d-flex align-items-center justify-content-between mb-3">
@@ -550,9 +564,9 @@ export default function Shop() {
                     </label>
                     <span
                       className="badge border font-weight-normal"
-                      style={{ color: 'black', fontSize: '14px' }}
+                      style={{ color: 'gray', fontSize: '14px' }}
                     >
-                      295
+                      {data.priceRangeB}
                     </span>
                   </div>
                   <div className="form-check d-flex align-items-center justify-content-between mb-3">
@@ -574,9 +588,9 @@ export default function Shop() {
                     </label>
                     <span
                       className="badge border font-weight-normal"
-                      style={{ color: 'black', fontSize: '14px' }}
+                      style={{ color: 'gray', fontSize: '14px' }}
                     >
-                      246
+                      {data.priceRangeC}
                     </span>
                   </div>
                   <div className="form-check d-flex align-items-center justify-content-between mb-3">
@@ -598,9 +612,9 @@ export default function Shop() {
                     </label>
                     <span
                       className="badge border font-weight-normal"
-                      style={{ color: 'black', fontSize: '14px' }}
+                      style={{ color: 'gray', fontSize: '14px' }}
                     >
-                      145
+                      {data.priceRangeD}
                     </span>
                   </div>
                   <div className="form-check d-flex align-items-center justify-content-between mb-3">
@@ -620,9 +634,9 @@ export default function Shop() {
                     </label>
                     <span
                       className="badge border font-weight-normal"
-                      style={{ color: 'black', fontSize: '14px' }}
+                      style={{ color: 'gray', fontSize: '14px' }}
                     >
-                      168
+                      {data.priceRangeE}
                     </span>
                   </div>
                   <div className="custom-control">
@@ -695,9 +709,9 @@ export default function Shop() {
                     </label>
                     <span
                       className="badge border font-weight-normal"
-                      style={{ color: 'black', fontSize: '14px' }}
+                      style={{ color: 'gray', fontSize: '14px' }}
                     >
-                      1000
+                      {data.totalCount}
                     </span>
                   </div>
                   <div className="form-check d-flex align-items-center justify-content-between mb-3">
@@ -717,9 +731,9 @@ export default function Shop() {
                     </label>
                     <span
                       className="badge border font-weight-normal"
-                      style={{ color: 'black', fontSize: '14px' }}
+                      style={{ color: 'gray', fontSize: '14px' }}
                     >
-                      150
+                      {data.prodStatusA}
                     </span>
                   </div>
                   <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between">
@@ -739,9 +753,9 @@ export default function Shop() {
                     </label>
                     <span
                       className="badge border font-weight-normal"
-                      style={{ color: 'black', fontSize: '14px' }}
+                      style={{ color: 'gray', fontSize: '14px' }}
                     >
-                      295
+                      {data.prodStatusB}
                     </span>
                   </div>
                 </div>
@@ -765,9 +779,9 @@ export default function Shop() {
                     </label>
                     <span
                       className="badge border font-weight-normal"
-                      style={{ color: 'black', fontSize: '14px' }}
+                      style={{ color: 'gray', fontSize: '14px' }}
                     >
-                      1000
+                      {data.dateRangeA}
                     </span>
                   </div>
                   <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
@@ -789,9 +803,9 @@ export default function Shop() {
                     </label>
                     <span
                       className="badge border font-weight-normal"
-                      style={{ color: 'black', fontSize: '14px' }}
+                      style={{ color: 'gray', fontSize: '14px' }}
                     >
-                      150
+                      {data.dateRangeA}
                     </span>
                   </div>
                   <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
@@ -813,9 +827,9 @@ export default function Shop() {
                     </label>
                     <span
                       className="badge border font-weight-normal"
-                      style={{ color: 'black', fontSize: '14px' }}
+                      style={{ color: 'gray', fontSize: '14px' }}
                     >
-                      295
+                      {data.dateRangeB}
                     </span>
                   </div>
                   <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
@@ -837,9 +851,9 @@ export default function Shop() {
                     </label>
                     <span
                       className="badge border font-weight-normal"
-                      style={{ color: 'black', fontSize: '14px' }}
+                      style={{ color: 'gray', fontSize: '14px' }}
                     >
-                      246
+                      {data.dateRangeC}
                     </span>
                   </div>
                   <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
@@ -861,9 +875,9 @@ export default function Shop() {
                     </label>
                     <span
                       className="badge border font-weight-normal"
-                      style={{ color: 'black', fontSize: '14px' }}
+                      style={{ color: 'gray', fontSize: '14px' }}
                     >
-                      145
+                      {data.dateRangeD}
                     </span>
                   </div>
                   <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
@@ -885,9 +899,9 @@ export default function Shop() {
                     </label>
                     <span
                       className="badge border font-weight-normal"
-                      style={{ color: 'black', fontSize: '14px' }}
+                      style={{ color: 'gray', fontSize: '14px' }}
                     >
-                      145
+                      {data.dateRangeE}
                     </span>
                   </div>
                   <div className="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
@@ -907,9 +921,9 @@ export default function Shop() {
                     </label>
                     <span
                       className="badge border font-weight-normal"
-                      style={{ color: 'black', fontSize: '14px' }}
+                      style={{ color: 'gray', fontSize: '14px' }}
                     >
-                      145
+                      {data.dateRangeF}
                     </span>
                   </div>
                   <div className="custom-control">
