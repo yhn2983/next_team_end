@@ -52,7 +52,7 @@ export default function GoogleLoginRedirect() {
       console.log(jwtUser)
 
       const response = await fetch(
-        `http://localhost:3001/api/users/${jwtUser.id}`,
+        `http://localhost:3003/api/users/${jwtUser.id}`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -129,8 +129,6 @@ export default function GoogleLoginRedirect() {
 
   return (
     <>
-      <h3>Google Login</h3>
-      <p>會員狀態:{auth.isAuth ? '已登入' : '未登入'}</p>
       <button
         onClick={() => loginGoogle()}
         className={`${style.googleLoginButton} mb-3`}
@@ -138,9 +136,9 @@ export default function GoogleLoginRedirect() {
         <GoogleLogo /> Google登入
       </button>
       <br />
-      <button onClick={handleCheckAuth}>向伺服器檢查登入狀態</button>
-      <hr /> {/* 土司訊息視窗用 */}
-      <Toaster />
+      {/* <button onClick={handleCheckAuth}>向伺服器檢查登入狀態</button>
+      <p>會員狀態:{auth.isAuth ? '已登入' : '未登入'}</p>
+      <Toaster /> */}
     </>
   )
 }

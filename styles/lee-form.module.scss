@@ -49,6 +49,54 @@
   }
 }
 
+.myLoginModal{
+  h2 {
+    position: relative;
+    top: 12px;
+    padding-top: 10px;
+    color: $dark;
+    padding-left: 5px;
+  }
+
+  .btnclose{
+    padding-top: 13px;
+    position: relative;
+    top:-20px
+    }
+
+    .body{
+      position: relative;
+      top: -5px;
+      padding: 0px 26px 2px 23px;
+    }
+
+    .attr{
+      font-weight: 500;
+      font-size: 16px;
+
+    }
+
+    .loginbtn{
+      margin-top: 6px;
+      background: $primary;
+      color: $light;
+  
+      &:hover {
+        background: $dark;
+        color: $light;
+      }
+    }
+
+    .error {
+      color: red !important;
+      font-size: 16px;
+      height: 12px;
+      position: relative;
+      top:10px;
+      margin-left: 5px;
+    }
+}
+
 .profilesStyle{
 
   a {
@@ -110,6 +158,49 @@
       background: $dark;
       color: $light;
     }
+  }
+}
+
+.registerModal{
+  width: 500px;
+  background-color: $form-bg;
+  border: 2px solid $dark;
+  border-radius: $border-radius-sm;
+  .body{
+    position: relative;
+    top: -15px;
+  }
+  
+  h2 {
+    position: relative;
+    top: 12px;
+    padding-top: 10px;
+    color: $dark;
+    padding-left: 8px;
+  }
+
+  .resbtn {
+    background: $primary;
+    color: $light;
+
+    &:hover {
+      background: $dark;
+      color: $light;
+    }
+  }
+
+  .btnclose{
+  padding-top: 13px;
+  position: relative;
+  top:-20px
+  }
+
+  .error{
+    color: red;
+    font-size: 16px;
+    height: 10px;
+    position: relative;
+    top:6px;
   }
 }
 

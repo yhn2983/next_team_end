@@ -28,10 +28,15 @@ export default function LogoutButton() {
   }
 
   return (
-    <div className={`${style.logoutButton}`}>
-      <button onClick={handleLogout}>
-        <strong>登出</strong>
-      </button>
-    </div>
+    <a
+      href="#logout"
+      onClick={(e) => {
+        e.preventDefault() // 防止頁面跳轉
+        handleLogout()
+      }}
+      style={{ textDecoration: 'none', color: 'inherit' }} // 移除所有樣式
+    >
+      登出
+    </a>
   )
 }
