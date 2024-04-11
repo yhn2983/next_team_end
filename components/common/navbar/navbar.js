@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 import { PROD_LIST } from '@/configs/config-r'
 import { useRouter } from 'next/router'
 // style-----
 import style from './navbar.module.css'
-import cartstyle from '@/components/cart/cart.module.css'
 // react bootstrap
 import Dropdown from 'react-bootstrap/Dropdown'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
-import Modal from 'react-bootstrap/Modal'
 import { Navbar, Nav } from 'react-bootstrap'
 // react icons-----
 import { TbMessage } from 'react-icons/tb'
@@ -29,13 +27,12 @@ import { RiCoupon3Fill, RiLogoutBoxRFill } from 'react-icons/ri'
 import LoginPage from '@/components/member/login-modal'
 import RegisterModal from '@/components/member/register-modal'
 import LogoutButton from '@/components/member/logout-button'
-import Spinner from 'react-bootstrap/Spinner'
 // hook------
 import { useAuth } from '@/context/auth-context'
 import { useCart } from '@/hooks/use-cart'
 
 export default function CustomNavbar({ pageName = '' }) {
-  const { totalItems} = useCart()
+  const { totalItems } = useCart()
 
   // 會員的資料跟登入狀態
   const { checkAuth, auth } = useAuth()
@@ -71,6 +68,14 @@ export default function CustomNavbar({ pageName = '' }) {
   // 點擊註冊按鈕
   const handleRegisterClick = () => setShowRegister(true)
 
+  // 如果已經登入，則關閉模態框
+  useEffect(() => {
+    if (auth.isAuth) {
+      setShowLogin(false)
+      checkAuth()
+    }
+  }, [auth.isAuth])
+
   // ---Hover status---
   const [isMessageHovered, setIsMessageHovered] = useState(false)
   const [isLanHovered, setIsLanHovered] = useState(false)
@@ -80,12 +85,10 @@ export default function CustomNavbar({ pageName = '' }) {
 
   const handleMouseEnter = (type) => {
     if (type === 'message') setIsMessageHovered(true)
-    // if (type === 'user') setIsUserHovered(true)
     if (type === 'language') setIsLanHovered(true)
   }
   const handleMouseLeave = (type) => {
     if (type === 'message') setIsMessageHovered(false)
-    // if (type === 'user') setIsUserHovered(false)
     if (type === 'language') setIsLanHovered(false)
   }
 
@@ -108,13 +111,6 @@ export default function CustomNavbar({ pageName = '' }) {
         console.error('Error fetching data:', error)
       })
   }, [])
-  // 如果已經登入，則關閉模態框
-  useEffect(() => {
-    if (auth.isAuth) {
-      setShowLogin(false)
-      checkAuth()
-    }
-  }, [auth.isAuth])
 
   // Router-----
   const router = useRouter()
@@ -179,7 +175,7 @@ export default function CustomNavbar({ pageName = '' }) {
                     <div className="textBox d-flex align-items-center justify-content-between border-bottom border-2">
                       <div className="boxLeft d-flex">
                         <div className="mt-3 position-relative">
-                          <Image
+                          <img
                             className="border border-1 rounded-circle"
                             src="/logo-sm.png"
                             alt=""
@@ -334,7 +330,7 @@ export default function CustomNavbar({ pageName = '' }) {
         <div className="row align-items-center px-xl-5 d-none d-lg-flex">
           <div className="col-lg-4">
             <Link href="/" className="text-decoration-none">
-              <Image
+              <img
                 className={`${style.logo}`}
                 src="/logo9.png"
                 alt=""
@@ -474,7 +470,7 @@ export default function CustomNavbar({ pageName = '' }) {
                 href="/"
                 className="text-decoration-none d-block d-lg-none"
               >
-                <Image
+                <img
                   className="logo rounded-circle"
                   src="/logo-sm.png"
                   alt=""
@@ -542,7 +538,7 @@ export default function CustomNavbar({ pageName = '' }) {
                   </Nav>
                   <Nav className="navbar-nav ml-auto py-0 d-none d-lg-block">
                     <div className="d-flex">
-                      <Nav.Link href="" className="btn px-0">
+                      <Nav.Link href="/shop/like" className="btn px-0">
                         <FaHeart
                           className="me-1"
                           style={{ color: 'white', fontSize: '20px' }}
@@ -560,7 +556,7 @@ export default function CustomNavbar({ pageName = '' }) {
                           style={{ color: 'white', fontSize: '20px' }}
                         />
                         <span className="badge text-light border border-light rounded-circle mt-3">
-                          0
+                          {totalItems}
                         </span>
                       </Nav.Link>
                     </div>
