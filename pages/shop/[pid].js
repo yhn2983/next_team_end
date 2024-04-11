@@ -359,7 +359,7 @@ export default function Detail() {
                       <div className="input-group-btn">
                         <button
                           className={`btn btn-minus ${style.btnHover}`}
-                          style={{ backgroundColor: '#8e2626' }}
+                          style={{ backgroundColor: '#8e2626', border: 'none' }}
                           onClick={() => {
                             const nextQty = product.data.product_qty - 1
                             if (nextQty === 0) {
@@ -374,6 +374,7 @@ export default function Detail() {
                       </div>
                       <input
                         type="text"
+                        style={{ borderRadius: '5px' }}
                         className="form-control bg-light border-1 text-center"
                         value={product.data.product_qty}
                         defaultValue="1"
@@ -381,7 +382,7 @@ export default function Detail() {
                       <div className="input-group-btn">
                         <button
                           className={`btn btn-plus ${style.btnHover}`}
-                          style={{ backgroundColor: '#8e2626' }}
+                          style={{ backgroundColor: '#8e2626', border: 'none' }}
                           onClick={() => {
                             incrementItemById(product.data.id)
                           }}
@@ -392,7 +393,7 @@ export default function Detail() {
                     </div>
                     <button
                       className={`btn px-3 ms-4 ${style.btnHover}`}
-                      style={{ backgroundColor: '#e96d3f' }}
+                      style={{ backgroundColor: '#e96d3f', border: 'none' }}
                       onClick={() => {
                         if (product.data.status == '1') {
                           addItem(product.data)
@@ -417,6 +418,7 @@ export default function Detail() {
                       style={{
                         backgroundColor: '#195a98',
                         color: 'white',
+                        border: 'none',
                       }}
                     >
                       <ImHammer2 style={{ fontSize: '20px' }} /> 議價
@@ -426,6 +428,7 @@ export default function Detail() {
                       style={{
                         backgroundColor: '#0f5808',
                         color: 'white',
+                        border: 'none',
                       }}
                       onClick={() => setShow(true)}
                     >
