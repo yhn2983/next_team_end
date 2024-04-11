@@ -37,6 +37,7 @@ export default function Detail() {
     rows: [],
     rowsRandom: [],
     searchSub: '',
+    barterProds: [],
   })
 
   useEffect(() => {
@@ -540,28 +541,35 @@ export default function Detail() {
           </Modal.Header>
           <Modal.Body>
             <div className="row">
-              <div className="col-6">
+              <div className="col-lg-6 col-sm-12">
                 <h5 className="ms-3">
-                  <strong>member1的商品</strong>
+                  <strong>{product.data.sellerName}的商品</strong>
                 </h5>
                 <div
                   className={`border border-2 border-secondary rounded overflow-auto ${style.barterRight}`}
                 >
-                  <div className="row mt-2 px-4">
-                    <div className="col-lg-4 col-md-6 col-sm-12 mb-3">
+                  <div className="row mt-3 px-4">
+                    <div className="col-lg-4 col-sm-12 mb-3">
                       <div
                         className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
                       >
-                        <div className="barterProdPic d-flex justify-content-center">
+                        <div className="d-flex justify-content-center">
                           <Image
                             className={style.prodPic}
-                            src="/beauty.png"
-                            alt=""
-                            width={50}
-                            height={50}
+                            src={
+                              product.data.product_photos.includes(',')
+                                ? `/${
+                                    product.data.product_photos.split(',')[0]
+                                  }`
+                                : `/${product.data.product_photos}`
+                            }
+                            alt={product.data.product_name}
+                            width={150}
+                            height={120}
+                            title={product.data.product_name}
                           />
                         </div>
-                        <div className="boxName d-flex justify-content-center">
+                        <div className="d-flex justify-content-center px-2">
                           <div className="form-check">
                             <input
                               className="form-check-input"
@@ -571,52 +579,102 @@ export default function Detail() {
                             />
                           </div>
                           <div className="text-truncate">
-                            <strong>產品名稱</strong>
+                            {product.data.product_name}
                           </div>
                         </div>
                       </div>
                     </div>
+                    {data.rows.map((v, i) => {
+                      if (product.data.sellerName == v.sellerName) {
+                        return (
+                          <>
+                            <div className="col-lg-4 col-sm-12 mb-3">
+                              <div
+                                className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
+                              >
+                                <div className="d-flex justify-content-center">
+                                  <Image
+                                    className={style.prodPic}
+                                    src={
+                                      v.product_photos.includes(',')
+                                        ? `/${v.product_photos.split(',')[0]}`
+                                        : `/${v.product_photos}`
+                                    }
+                                    alt={v.product_name}
+                                    width={150}
+                                    height={120}
+                                    title={v.product_name}
+                                  />
+                                </div>
+                                <div className="d-flex justify-content-center px-2">
+                                  <div className="form-check">
+                                    <input
+                                      className="form-check-input"
+                                      type="checkbox"
+                                      value=""
+                                      id="flexCheckDefault"
+                                    />
+                                  </div>
+                                  <div className="text-truncate">
+                                    {v.product_name}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </>
+                        )
+                      }
+                    })}
                   </div>
                 </div>
               </div>
-              <div className="col-6">
-                <div className="barterTitleRight">
+              <div className="col-lg-6 col-sm-12">
+                <div className="text">
                   <h5 className="ms-3">
-                    <strong>您的商品</strong>
+                    <strong>您的商品集</strong>
                   </h5>
                 </div>
                 <div
                   className={`border border-2 border-secondary rounded overflow-auto ${style.barterRight}`}
                 >
-                  <div className="row mt-2 px-4">
-                    <div className="col-lg-4 col-md-6 col-sm-12 mb-3">
-                      <div
-                        className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
-                      >
-                        <div className="barterProdPic d-flex justify-content-center">
-                          <Image
-                            className={style.prodPic}
-                            src="/beauty.png"
-                            alt=""
-                            width={50}
-                            height={50}
-                          />
-                        </div>
-                        <div className="boxName d-flex justify-content-center">
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              value=""
-                              id="flexCheckDefault"
-                            />
+                  <div className="row mt-3 px-4">
+                    {data.barterProds.map((v3, i3) => (
+                      <>
+                        <div className="col-lg-4 col-sm-12 mb-3">
+                          <div
+                            className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
+                          >
+                            <div className="barterProdPic d-flex justify-content-center">
+                              <Image
+                                className={style.prodPic}
+                                src={
+                                  v3.product_photos.includes(',')
+                                    ? `/${v3.product_photos.split(',')[0]}`
+                                    : `/${v3.product_photos}`
+                                }
+                                alt={v3.product_name}
+                                width={150}
+                                height={120}
+                                title={v3.product_name}
+                              />
+                            </div>
+                            <div className="d-flex justify-content-center px-2 pt-1">
+                              <div className="form-check">
+                                <input
+                                  className="form-check-input"
+                                  type="checkbox"
+                                  value=""
+                                  id="flexCheckDefault"
+                                />
+                              </div>
+                              <div className="text-truncate">
+                                {v3.product_name}
+                              </div>
+                            </div>
                           </div>
-                          <div className="text-truncate">
-                            <strong>產品名稱</strong>
-                          </div>
                         </div>
-                      </div>
-                    </div>
+                      </>
+                    ))}
                   </div>
                 </div>
               </div>

@@ -125,16 +125,16 @@
 
 .barterLeft,
 .barterRight {
-  height: 90%;
+  height:400px;
 }
 
 .prod {
-  width: 90%;
+  width: 131px;
+  height: 150px;
 }
 
 .prodPic {
   width: 100%;
-  height: 80%;
 }
 
 .barterBtn {
