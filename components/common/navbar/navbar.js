@@ -32,32 +32,13 @@ import LogoutButton from '@/components/member/logout-button'
 import Spinner from 'react-bootstrap/Spinner'
 // hook------
 import { useAuth } from '@/context/auth-context'
-//import { useCart } from '@/hooks/use-cart'
-//import Cart from '@/components/cart/cart'
+import { useCart } from '@/hooks/use-cart'
 
 export default function CustomNavbar({ pageName = '' }) {
+  const { totalItems} = useCart()
+
   // 會員的資料跟登入狀態
   const { checkAuth, auth } = useAuth()
-  //const { totalItems, totalPrice } = useCart()
-
-  // ---Hover status---
-  const [isMessageHovered, setIsMessageHovered] = useState(false)
-  // const [isUserHovered, setIsUserHovered] = useState(false)
-  const [isLanHovered, setIsLanHovered] = useState(false)
-  const [showLogin, setShowLogin] = useState(false)
-  const [showRegister, setShowRegister] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleMouseEnter = (type) => {
-    if (type === 'message') setIsMessageHovered(true)
-    // if (type === 'user') setIsUserHovered(true)
-    if (type === 'language') setIsLanHovered(true)
-  }
-  const handleMouseLeave = (type) => {
-    if (type === 'message') setIsMessageHovered(false)
-    // if (type === 'user') setIsUserHovered(false)
-    if (type === 'language') setIsLanHovered(false)
-  }
 
   // ---Modal---
   // 關閉登入視窗
@@ -89,6 +70,24 @@ export default function CustomNavbar({ pageName = '' }) {
   const handleRegisterClose = () => setShowRegister(false)
   // 點擊註冊按鈕
   const handleRegisterClick = () => setShowRegister(true)
+
+  // ---Hover status---
+  const [isMessageHovered, setIsMessageHovered] = useState(false)
+  const [isLanHovered, setIsLanHovered] = useState(false)
+  const [showLogin, setShowLogin] = useState(false)
+  const [showRegister, setShowRegister] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleMouseEnter = (type) => {
+    if (type === 'message') setIsMessageHovered(true)
+    // if (type === 'user') setIsUserHovered(true)
+    if (type === 'language') setIsLanHovered(true)
+  }
+  const handleMouseLeave = (type) => {
+    if (type === 'message') setIsMessageHovered(false)
+    // if (type === 'user') setIsUserHovered(false)
+    if (type === 'language') setIsLanHovered(false)
+  }
 
   // Product & Category
   const [data, setData] = useState({

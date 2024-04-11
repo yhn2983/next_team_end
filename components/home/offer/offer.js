@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 // style-----
 import style from './offer.module.css'
 // react bootstrapd
@@ -30,7 +30,7 @@ export default function Offer() {
               className={`rounded me-lg-3 mb-3 ${style.productOffer}`}
               style={{ height: '400px' }}
             >
-              <Image
+              <img
                 className={`img-fluid ${style.offerImg}`}
                 src="/offer1.png"
                 alt=""
@@ -63,7 +63,7 @@ export default function Offer() {
               className={`mb-30 ms-lg-2 rounded ${style.productOffer}`}
               style={{ height: '400px' }}
             >
-              <Image
+              <img
                 className={`img-fluid ${style.offerImg}`}
                 src="/offer2.png"
                 alt=""

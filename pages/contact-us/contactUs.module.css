@@ -8,9 +8,14 @@
   font-weight: 900;
 }
 
-.titleArea{
-  content: "";
-  width: 73%;
-  border-top: 3px dashed #8e2626;
-  margin-top: 20px;
+.sendBtn{
+  box-shadow: 0 0 10px gray;
+  text-decoration: none;
+  border: none;
+  padding: 5px 10px;
+  font-size: 20px;
+}
+
+.sendBtn:hover{
+  background-color: #8e2626 !important;
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 // style-----
 import style from './ad.module.css'
 // react bootstrap
@@ -55,7 +55,7 @@ export default function Ad() {
               <h4 className="mt-3 mx-auto">
                 <strong>歡迎廠商攤販進駐</strong>
               </h4>
-              <Image
+              <img
                 className={style.venderImg}
                 src="/vendor.png"
                 alt=""
@@ -71,7 +71,7 @@ export default function Ad() {
               <h4 className="mt-3 mx-auto">
                 <strong>誠邀父母小孩一起共享盛事</strong>
               </h4>
-              <Image
+              <img
                 className={style.familyImg}
                 src="/family.png"
                 alt=""

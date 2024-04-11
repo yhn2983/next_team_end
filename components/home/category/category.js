@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 import { PROD_LIST } from '@/configs/config-r'
 import { useRouter } from 'next/router'
 // style-----
@@ -104,7 +104,7 @@ export default function Category() {
                         {itemPhoto.map((v2, i2) => {
                           if (i2 == i)
                             return (
-                              <Image
+                              <img
                                 key={i}
                                 className={`img-fluid w-100 h-100 rounded ${style.item}`}
                                 src={`/${v2}`}

@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 // page
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
@@ -15,10 +15,26 @@ import {
   FaAnglesUp,
   FaCartPlus,
 } from 'react-icons/fa6'
+// loading bar & loading icon
+import Loader from '@/components/common/loading/loader'
+import LoadingBar from 'react-top-loading-bar'
 // hook------
 
 export default function Like() {
-  return (
+  // Loading bar-----
+  const [isLoading, setIsLoading] = useState(true)
+  const [progress, setProgress] = useState(0)
+  useEffect(() => {
+    if (isLoading) {
+      setProgress(60)
+      setTimeout(() => {
+        setIsLoading(false)
+        setProgress(100)
+      }, 300)
+    }
+  }, [isLoading])
+
+  const display = (
     <>
       <DefaultLayout>
         <Head>
@@ -79,7 +95,7 @@ export default function Like() {
                     <td>
                       <button className="btn btn-sm">
                         <FaCartPlus
-                          className="mb-1"
+                          className={`mb-1 ${style.trashBtn}`}
                           style={{ fontSize: '25px', color: '#8e2626' }}
                         />
                       </button>
@@ -93,13 +109,13 @@ export default function Like() {
                       </Link>
                     </td>
                     <td>
-                      <Link href="">
-                        <Image src="/pot.jpg" alt="" width={150} height={150} />
+                      <Link href={`/shop`}>
+                        <img src="/pot.jpg" alt="" width={150} height={150} />
                       </Link>
                     </td>
                     <td className="align-middle" style={{ fontSize: '20px' }}>
                       <Link
-                        href=""
+                        href={`/shop`}
                         style={{ textDecoration: 'none', color: 'black' }}
                       >
                         鍋子
@@ -115,7 +131,7 @@ export default function Like() {
                       >
                         <div className="input-group-btn">
                           <button
-                            className="btn btn-sm btn-minus"
+                            className={`btn btn-sm btn-minus ${style.btnHover}`}
                             style={{
                               backgroundColor: '#8e2626',
                               color: 'white',
@@ -131,7 +147,7 @@ export default function Like() {
                         />
                         <div className="input-group-btn">
                           <button
-                            className="btn btn-sm btn-plus"
+                            className={`btn btn-sm btn-plus ${style.btnHover}`}
                             style={{
                               backgroundColor: '#8e2626',
                               color: 'white',
@@ -149,7 +165,7 @@ export default function Like() {
                     <td className="align-middle">
                       <button className="btn btn-sm">
                         <FaTrashCan
-                          className="mb-1"
+                          className={`mb-1 ${style.trashBtn}`}
                           style={{ fontSize: '20px', color: '#8e2626' }}
                         />
                       </button>
@@ -162,6 +178,13 @@ export default function Like() {
         </div>
         {/* Like End */}
       </DefaultLayout>
+    </>
+  )
+
+  return (
+    <>
+      <LoadingBar progress={progress} />
+      {isLoading ? <Loader /> : display}
     </>
   )
 }

@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
-import DatePicker from 'react-datepicker'
+// import Image from 'next/image'
 import 'react-datepicker/dist/react-datepicker.css'
 import { PROD_LIST } from '@/configs/config-r'
 import { shuffle } from 'lodash'
@@ -11,12 +10,17 @@ import { shuffle } from 'lodash'
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
 import style from './randomSearch.module.css'
+import toast, { Toaster } from 'react-hot-toast'
 // react bootstrap
 // react icons-----
 import { BsFillCartFill } from 'react-icons/bs'
 import { AiOutlineHeart } from 'react-icons/ai'
 import { IoSearch } from 'react-icons/io5'
+// loading bar & loading icon
+import Loader from '@/components/common/loading/loader'
+import LoadingBar from 'react-top-loading-bar'
 // hook------
+import { useCart } from '@/hooks/use-cart'
 
 export default function RandomShop() {
   // Router-----
@@ -30,6 +34,7 @@ export default function RandomShop() {
     rows: [],
     rowsRandom: [],
     cate: [],
+    searchSub: '',
   })
 
   useEffect(() => {
@@ -57,9 +62,42 @@ export default function RandomShop() {
     setIsBack(!isBack)
   }
 
+  // cart
+  const { addItem } = useCart()
+  const notify = (productName) => {
+    const msgBox = (
+      <div>
+        <p>
+          <strong>{productName + ' 已成功加入購物車'}</strong>
+        </p>
+        <button
+          className={`btn mx-auto ${style.conneBtn}`}
+          style={{ backgroundColor: '#e96d3f', color: 'white' }}
+          onClick={() => {
+            router.push('/shop/cart')
+          }}
+        >
+          連至 購物車
+        </button>
+      </div>
+    )
+    toast.success(msgBox)
+  }
   const qs = { ...router.query }
 
-  return (
+  // Loading bar-----
+  const [isLoading, setIsLoading] = useState(true)
+  const [progress, setProgress] = useState(0)
+  useEffect(() => {
+    if (isLoading) {
+      setProgress(60)
+      setTimeout(() => {
+        setIsLoading(false)
+        setProgress(100)
+      }, 300)
+    }
+  }, [isLoading])
+  const display = (
     <>
       <DefaultLayout pageName="randomSearch">
         <Head>
@@ -114,7 +152,7 @@ export default function RandomShop() {
           <div className="row px-xl-5 mt-4">
             {randomRows.map((v, i) => {
               return (
-                <div key={i} className="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <div key={i} className="col-lg-3 col-md-6 col-sm-12 pb-1">
                   <div
                     className={`mb-5 ${style.card}`}
                     style={{ marginBottom: '60px' }}
@@ -123,7 +161,7 @@ export default function RandomShop() {
                       className={isBack ? style.slideB : style.slide}
                       style={{ overflow: 'hidden' }}
                     >
-                      <Image
+                      <img
                         className={style.slideImg}
                         src="/openit.png"
                         alt=""
@@ -131,50 +169,56 @@ export default function RandomShop() {
                         height={500}
                       />
                     </div>
-                    <Link
-                      href=""
-                      style={{ textDecoration: 'none', color: 'black' }}
+                    <div
+                      className={`flex-column ${style.slideBack} ${
+                        isBack ? style.slideBackB : style.slideBack
+                      }`}
                     >
-                      <div
-                        className={`flex-column ${style.slideBack} ${
-                          isBack ? style.slideBackB : style.slideBack
-                        }`}
-                      >
-                        <div className="overflow-hidden">
-                          <div
-                            className="position-relative"
-                            style={{ overflow: 'hidden' }}
-                          >
-                            <Image
-                              className={`img-fluid w-100 ${
-                                isBack ? style.imgAct : ''
-                              }`}
-                              src={
-                                v.product_photos.includes(',')
-                                  ? `/${v.product_photos.split(',')[0]}`
-                                  : `/${v.product_photos}`
-                              }
-                              alt=""
-                              width={266}
-                              height={266}
-                              style={{
-                                height: '266px',
-                                objectFit: 'cover',
+                      <div className="overflow-hidden">
+                        <div
+                          className="position-relative"
+                          style={{ overflow: 'hidden' }}
+                        >
+                          <img
+                            className={`img-fluid w-100 ${
+                              isBack ? style.imgAct : ''
+                            }`}
+                            src={
+                              v.product_photos.includes(',')
+                                ? `/${v.product_photos.split(',')[0]}`
+                                : `/${v.product_photos}`
+                            }
+                            alt=""
+                            width={266}
+                            height={266}
+                            style={{
+                              height: '266px',
+                              objectFit: 'cover',
+                            }}
+                          />
+                        </div>
+                        <div className={style.productAction}>
+                          <button className="btn">
+                            <BsFillCartFill
+                              className={style.iconAInner}
+                              onClick={() => {
+                                addItem(v)
+                                notify(v.product_name)
                               }}
                             />
-                          </div>
-                          <div className={style.productAction}>
-                            <Link href="" className="">
-                              <BsFillCartFill className={style.iconAInner} />
-                            </Link>
-                            <Link href="" className="">
-                              <AiOutlineHeart className={style.iconBInner} />
-                            </Link>
-                            <Link href="" className="">
-                              <IoSearch className={style.iconCInner} />
-                            </Link>
-                          </div>
+                          </button>
+                          <button className="btn">
+                            <AiOutlineHeart className={style.iconBInner} />
+                          </button>
+                          <Link href={`/shop?searchSub=${v.s}`} className="btn">
+                            <IoSearch className={style.iconCInner} />
+                          </Link>
                         </div>
+                      </div>
+                      <Link
+                        href={`/shop/detail?pid=${v.id}`}
+                        style={{ textDecoration: 'none', color: 'black' }}
+                      >
                         <div
                           className="text-center py-3 px-2"
                           style={{ height: '160px' }}
@@ -203,21 +247,31 @@ export default function RandomShop() {
                             </div>
                             &nbsp;
                             <div className="" style={{ fontSize: '18px' }}>
-                              <strong>${v.product_price}</strong>
+                              <strong>
+                                ${v.product_price.toLocaleString()}
+                              </strong>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </Link>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               )
             })}
             {/* Shop Product End */}
           </div>
+          <Toaster />
         </div>
         {/* Shop End */}
       </DefaultLayout>
+    </>
+  )
+
+  return (
+    <>
+      <LoadingBar progress={progress} />
+      {isLoading ? <Loader /> : display}
     </>
   )
 }
