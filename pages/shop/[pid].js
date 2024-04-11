@@ -540,44 +540,14 @@ export default function Detail() {
           <Modal.Body>
             <div className="row">
               <div className="col-6">
-                <div className="barterTitleLeft">
-                  <h5 className="ms-3">
-                    <strong>member1的商品</strong>
-                  </h5>
-                </div>
+                <h5 className="ms-3">
+                  <strong>member1的商品</strong>
+                </h5>
                 <div
-                  className={`border border-2 border-secondary rounded overflow-auto ${style.barterLeft}`}
+                  className={`border border-2 border-secondary rounded overflow-auto ${style.barterRight}`}
                 >
                   <div className="row mt-2 px-4">
-                    <div className="col-md-4 col-sm-12">
-                      <div
-                        className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
-                      >
-                        <div className="barterProdPic d-flex justify-content-center">
-                          <Image
-                            className={style.prodPic}
-                            src="/beauty.png"
-                            alt=""
-                            width={50}
-                            height={50}
-                          />
-                        </div>
-                        <div className="boxName d-flex justify-content-center">
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              value=""
-                              id="flexCheckDefault"
-                            />
-                          </div>
-                          <div className="text-truncate">
-                            <strong>產品名稱</strong>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-md-4 col-sm-12">
+                    <div className="col-lg-4 col-md-6 col-sm-12 mb-3">
                       <div
                         className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
                       >
@@ -618,35 +588,7 @@ export default function Detail() {
                   className={`border border-2 border-secondary rounded overflow-auto ${style.barterRight}`}
                 >
                   <div className="row mt-2 px-4">
-                    <div className="col-md-4 col-sm-12">
-                      <div
-                        className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
-                      >
-                        <div className="barterProdPic d-flex justify-content-center">
-                          <Image
-                            className={style.prodPic}
-                            src="/beauty.png"
-                            alt=""
-                            width={50}
-                            height={50}
-                          />
-                        </div>
-                        <div className="boxName d-flex justify-content-center">
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              value=""
-                              id="flexCheckDefault"
-                            />
-                          </div>
-                          <div className="text-truncate">
-                            <strong>產品名稱</strong>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-md-4 col-sm-12">
+                    <div className="col-lg-4 col-md-6 col-sm-12 mb-3">
                       <div
                         className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
                       >
@@ -680,7 +622,7 @@ export default function Detail() {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <button type="button" className={`btn ${style.barterBtn}`}>
+            <button type="submit" className={`btn ${style.barterBtn}`}>
               送出申請
             </button>
           </Modal.Footer>
