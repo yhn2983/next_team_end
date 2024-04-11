@@ -11,7 +11,7 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <AuthContextProvider>
       <CartProvider>
-      (<Component {...pageProps} />)
+        <Component {...pageProps} />
       </CartProvider>
     </AuthContextProvider>
   )
