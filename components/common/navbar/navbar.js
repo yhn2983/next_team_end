@@ -26,34 +26,69 @@ import { IoLogIn, IoLanguage } from 'react-icons/io5'
 import { GiArchiveRegister } from 'react-icons/gi'
 import { FaCircleUser, FaTreeCity, FaBars } from 'react-icons/fa6'
 import { RiCoupon3Fill, RiLogoutBoxRFill } from 'react-icons/ri'
+import LoginPage from '@/components/member/login-modal'
+import RegisterModal from '@/components/member/register-modal'
+import LogoutButton from '@/components/member/logout-button'
+import Spinner from 'react-bootstrap/Spinner'
 // hook------
-//import { useAuth } from '@/context/auth-context'
+import { useAuth } from '@/context/auth-context'
 //import { useCart } from '@/hooks/use-cart'
 //import Cart from '@/components/cart/cart'
 
 export default function CustomNavbar({ pageName = '' }) {
-  //const { auth, logout } = useAuth()
+  // 會員的資料跟登入狀態
+  const { checkAuth, auth } = useAuth()
   //const { totalItems, totalPrice } = useCart()
 
   // ---Hover status---
   const [isMessageHovered, setIsMessageHovered] = useState(false)
-  const [isUserHovered, setIsUserHovered] = useState(false)
+  // const [isUserHovered, setIsUserHovered] = useState(false)
   const [isLanHovered, setIsLanHovered] = useState(false)
+  const [showLogin, setShowLogin] = useState(false)
+  const [showRegister, setShowRegister] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+
   const handleMouseEnter = (type) => {
     if (type === 'message') setIsMessageHovered(true)
-    if (type === 'user') setIsUserHovered(true)
+    // if (type === 'user') setIsUserHovered(true)
     if (type === 'language') setIsLanHovered(true)
   }
   const handleMouseLeave = (type) => {
     if (type === 'message') setIsMessageHovered(false)
-    if (type === 'user') setIsUserHovered(false)
+    // if (type === 'user') setIsUserHovered(false)
     if (type === 'language') setIsLanHovered(false)
   }
 
   // ---Modal---
-  const [show, setShow] = useState(false)
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  // 關閉登入視窗
+  const handleLoginClose = () => {
+    if (!isLoading) {
+      setShowLogin(false)
+    }
+  }
+  // 點擊登入按鈕
+  const handleLoginClick = () => {
+    if (!auth.isAuth) {
+      // 如果用戶未登入，則顯示登入表單
+      setShowLogin(true)
+    }
+  }
+  // 登入表單提交
+  const handleLoginSubmit = async () => {
+    // 開始檢查認證狀態
+    setIsLoading(true)
+    await checkAuth()
+    // 結束檢查認證狀態
+    setIsLoading(false)
+    if (auth.isAuth) {
+      // 如果已經登入，則關閉模態框
+      setShowLogin(false)
+    }
+  }
+  // 關閉註冊視窗
+  const handleRegisterClose = () => setShowRegister(false)
+  // 點擊註冊按鈕
+  const handleRegisterClick = () => setShowRegister(true)
 
   // Product & Category
   const [data, setData] = useState({
@@ -74,6 +109,13 @@ export default function CustomNavbar({ pageName = '' }) {
         console.error('Error fetching data:', error)
       })
   }, [])
+  // 如果已經登入，則關閉模態框
+  useEffect(() => {
+    if (auth.isAuth) {
+      setShowLogin(false)
+      checkAuth()
+    }
+  }, [auth.isAuth])
 
   // Router-----
   const router = useRouter()
@@ -170,7 +212,7 @@ export default function CustomNavbar({ pageName = '' }) {
                   onMouseEnter={() => handleMouseEnter('user')}
                   onMouseLeave={() => handleMouseLeave('user')}
                   style={{
-                    backgroundColor: isUserHovered ? '#d6d4d4' : '#F5F5F5',
+                    backgroundColor: auth.isAuth ? '#d6d4d4' : '#F5F5F5',
                     border: 'none',
                     color: '#8e2626',
                   }}
@@ -178,10 +220,10 @@ export default function CustomNavbar({ pageName = '' }) {
                   <FaUser style={{ color: '#8e2626' }} />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  {isUserHovered ? (
+                  {auth.isAuth ? (
                     <>
                       <Dropdown.Item
-                        href="#/action-1"
+                        href="./member/profile"
                         style={{ fontSize: '20px' }}
                       >
                         <FaCircleUser
@@ -226,25 +268,32 @@ export default function CustomNavbar({ pageName = '' }) {
                         style={{ fontSize: '20px' }}
                       >
                         <RiLogoutBoxRFill className={(style.fs20, style.mr2)} />
-                        &nbsp;<strong>登出</strong>
+                        &nbsp;
+                        <strong>
+                          <LogoutButton />
+                        </strong>
                       </Dropdown.Item>
                     </>
                   ) : (
                     <>
                       <Dropdown.Item
-                        href="#/action-1"
+                        href="#login"
                         style={{ fontSize: '20px' }}
-                        onClick={handleShow}
+                        onClick={handleLoginClick}
                       >
                         <IoLogIn
                           className={style.mr2}
                           style={{ fontSize: '25px' }}
                         />
-                        &nbsp;<strong>登入</strong>
+                        &nbsp;
+                        <strong>
+                          {auth.isAuth ? auth.userData.nickname : '登入'}
+                        </strong>
                       </Dropdown.Item>
                       <Dropdown.Item
-                        href="#/action-2"
+                        href="#register"
                         style={{ fontSize: '20px' }}
+                        onClick={handleRegisterClick}
                       >
                         <GiArchiveRegister
                           className={style.mr2}
@@ -525,21 +574,15 @@ export default function CustomNavbar({ pageName = '' }) {
       </div>
       {/* Navbar End */}
       {/* Login Modal start */}
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <LoginPage
+        show={showLogin}
+        onHide={handleLoginClose}
+        onSubmit={handleLoginSubmit}
+      />
       {/* Login Modal end */}
+      {/* RegisterModal start */}
+      <RegisterModal show={showRegister} onHide={handleRegisterClose} />
+      {/* RegisterModal end */}
     </>
   )
 }
