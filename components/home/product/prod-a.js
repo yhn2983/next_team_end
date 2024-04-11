@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 import { PROD_LIST } from '@/configs/config-r'
 // style-----
 import style from './prodA.module.css'
@@ -106,7 +106,7 @@ export default function ProdA() {
                       className="position-relative"
                       style={{ overflow: 'hidden', height: '266px' }}
                     >
-                      <Image
+                      <img
                         className={`img-fluid w-100 ${style.imgAct}`}
                         src={
                           v.product_photos.includes(',')

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 // page-----
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
@@ -111,7 +111,7 @@ export default function AdPartner() {
               <div className="row d-flex px-lg-5">
                 <div className="col-lg-6 col-md-6 col-xs-12 d-flex align-items-center justify-content-center pb-2">
                   <Link href="/help-center/ad-partner">
-                    <Image
+                    <img
                       className={`${style.adbox}`}
                       src="/n1.png"
                       alt=""
@@ -123,7 +123,7 @@ export default function AdPartner() {
                 </div>
                 <div className="d-flex align-items-center justify-content-center col-lg-6 col-md-6 col-xs-12 pb-2">
                   <Link href="/help-center/ad-partner">
-                    <Image
+                    <img
                       className={`${style.adbox}`}
                       src="/n2.png"
                       alt=""
@@ -135,7 +135,7 @@ export default function AdPartner() {
                 </div>
                 <div className="d-flex align-items-center justify-content-center col-lg-6 col-md-6 col-xs-12 mt-lg-3 pb-2">
                   <Link href="/help-center/ad-partner">
-                    <Image
+                    <img
                       className={style.adbox}
                       src="/n3.png"
                       alt=""
@@ -147,7 +147,7 @@ export default function AdPartner() {
                 </div>
                 <div className="d-flex align-items-center justify-content-center col-lg-6 col-md-6 col-xs-12 mt-lg-3 pb-2">
                   <Link href="/help-center/ad-partner">
-                    <Image
+                    <img
                       className={`${style.adbox}`}
                       src="/n4.png"
                       alt=""

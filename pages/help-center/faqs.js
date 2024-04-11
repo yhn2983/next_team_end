@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 // page-----
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
@@ -23,7 +23,7 @@ export default function FAQs() {
       setTimeout(() => {
         setIsLoading(false)
         setProgress(100)
-      }, 50)
+      }, 300)
     }
   }, [isLoading])
 

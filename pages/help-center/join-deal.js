@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 // page-----
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
@@ -156,14 +156,14 @@ export default function JoinDeal() {
               </table>
             </div>
             <div className="col-lg-12 px-lg-5 text-center mt-4">
-              <Image
+              <img
                 src="/ad.png"
                 alt=""
                 width={300}
                 height={300}
                 style={{ objectFit: 'cover', borderRadius: '50%' }}
               />
-              <Image
+              <img
                 src="/join.png"
                 alt=""
                 width={300}

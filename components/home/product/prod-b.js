@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 import { PROD_LIST } from '@/configs/config-r'
 import { shuffle } from 'lodash'
 // style-----
@@ -136,7 +136,7 @@ export default function ProdB() {
                     className={isBack ? style.slideB : style.slide}
                     style={{ overflow: 'hidden' }}
                   >
-                    <Image
+                    <img
                       className={style.slideImg}
                       src="/openit.png"
                       alt=""
@@ -155,7 +155,7 @@ export default function ProdB() {
                         className="position-relative"
                         style={{ overflow: 'hidden' }}
                       >
-                        <Image
+                        <img
                           className={`img-fluid w-100 ${
                             isBack ? style.imgAct : ''
                           }`}

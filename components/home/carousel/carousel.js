@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 import { PROD_LIST } from '@/configs/config-r'
 import { useRouter } from 'next/router'
 // style-----
@@ -72,7 +72,7 @@ export default function CarouselS1({ pageName = '' }) {
                 onMouseLeave={() => handleMouseLeave('big')}
               >
                 <div className={style.adArea}>
-                  <Image
+                  <img
                     text="First slide"
                     src="/ad1.png"
                     alt=""
@@ -109,7 +109,7 @@ export default function CarouselS1({ pageName = '' }) {
                 onMouseLeave={() => handleMouseLeave('big')}
               >
                 <div className={style.adArea}>
-                  <Image
+                  <img
                     text="Second slide"
                     src="/woman2.jpg"
                     alt=""
@@ -144,7 +144,7 @@ export default function CarouselS1({ pageName = '' }) {
                 onMouseLeave={() => handleMouseLeave('big')}
               >
                 <div className={style.adArea}>
-                  <Image
+                  <img
                     text="Third slide"
                     src="/globalday.jpg"
                     alt=""
@@ -178,7 +178,7 @@ export default function CarouselS1({ pageName = '' }) {
               onMouseEnter={() => handleMouseEnter('smallOne')}
               onMouseLeave={() => handleMouseLeave('smallOne')}
             >
-              <Image
+              <img
                 src="/father.png"
                 alt=""
                 width={380}
@@ -223,7 +223,7 @@ export default function CarouselS1({ pageName = '' }) {
               onMouseEnter={() => handleMouseEnter('smallTwo')}
               onMouseLeave={() => handleMouseLeave('smallTwo')}
             >
-              <Image
+              <img
                 src="/cool.png"
                 alt=""
                 width={380}

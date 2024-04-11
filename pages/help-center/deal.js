@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 // page-----
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
@@ -23,7 +23,7 @@ export default function Deal() {
       setTimeout(() => {
         setIsLoading(false)
         setProgress(100)
-      }, 50)
+      }, 300)
     }
   }, [isLoading])
 
@@ -100,7 +100,7 @@ export default function Deal() {
               </h5>
             </div>
             <div className="col-lg-12 px-lg-5 text-center mt-4">
-              <Image
+              <img
                 src="/logo9.png"
                 alt=""
                 width={300}

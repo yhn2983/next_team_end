@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 // page-----
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
@@ -102,7 +102,7 @@ export default function ESG() {
               </h5>
             </div>
             <div className="col-lg-12 px-lg-5 text-center mt-4">
-              <Image
+              <img
                 src="/esg.png"
                 alt=""
                 width={300}

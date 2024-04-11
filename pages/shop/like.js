@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 // page
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
@@ -30,7 +30,7 @@ export default function Like() {
       setTimeout(() => {
         setIsLoading(false)
         setProgress(100)
-      }, 50)
+      }, 300)
     }
   }, [isLoading])
 
@@ -110,7 +110,7 @@ export default function Like() {
                     </td>
                     <td>
                       <Link href={`/shop`}>
-                        <Image src="/pot.jpg" alt="" width={150} height={150} />
+                        <img src="/pot.jpg" alt="" width={150} height={150} />
                       </Link>
                     </td>
                     <td className="align-middle" style={{ fontSize: '20px' }}>

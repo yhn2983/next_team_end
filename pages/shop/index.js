@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 import { PROD_LIST } from '@/configs/config-r'
 import 'react-datepicker/dist/react-datepicker.css'
 // page
@@ -397,7 +397,7 @@ export default function Shop() {
       setTimeout(() => {
         setIsLoading(false)
         setProgress(100)
-      }, 50)
+      }, 300)
     }
   }, [isLoading])
 
@@ -1003,7 +1003,7 @@ export default function Shop() {
                             className="position-relative"
                             style={{ overflow: 'hidden', height: '266px' }}
                           >
-                            <Image
+                            <img
                               className={`img-fluid w-100 ${style.imgAct}`}
                               src={
                                 v.product_photos.includes(',')

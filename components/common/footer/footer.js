@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 // style-----
 import style from './footer.module.css'
 // react bootstrap
@@ -53,7 +53,7 @@ export default function Footer() {
             <div className="row d-flex">
               <div className="col-lg-6 col-md-6 col-xs-12 d-flex align-items-center justify-content-center pb-2">
                 <Link href="/help-center/ad-partner">
-                  <Image
+                  <img
                     className={`${style.adbox}`}
                     src="/n1.png"
                     alt=""
@@ -65,7 +65,7 @@ export default function Footer() {
               </div>
               <div className="d-flex align-items-center justify-content-center col-lg-6 col-md-6 col-xs-12 pb-2">
                 <Link href="/help-center/ad-partner">
-                  <Image
+                  <img
                     className={`${style.adbox}`}
                     src="/n2.png"
                     alt=""
@@ -77,7 +77,7 @@ export default function Footer() {
               </div>
               <div className="d-flex align-items-center justify-content-center col-lg-6 col-md-6 col-xs-12 mt-lg-3 pb-2">
                 <Link href="/help-center/ad-partner">
-                  <Image
+                  <img
                     className={style.adbox}
                     src="/n3.png"
                     alt=""
@@ -89,7 +89,7 @@ export default function Footer() {
               </div>
               <div className="d-flex align-items-center justify-content-center col-lg-6 col-md-6 col-xs-12 mt-lg-3 pb-2">
                 <Link href="/help-center/ad-partner">
-                  <Image
+                  <img
                     className={`${style.adbox}`}
                     src="/n4.png"
                     alt=""
@@ -366,7 +366,7 @@ export default function Footer() {
           style={{ borderColor: 'rgba(256, 256, 256, .1)' }}
         >
           <div className="col-lg-2 col-md-12 col-sm-12 pb-2 text-center">
-            <Image
+            <img
               className="rounded-circle"
               src="/logo9.png"
               alt=""
@@ -455,7 +455,7 @@ export default function Footer() {
       {/* ad start */}
       <div className={style.adArea} style={{ display: isClose ? 'none' : '' }}>
         <Link href="/help-center/join-deal">
-          <Image
+          <img
             className="rounded-circle shadow-lg"
             src="/ad.png"
             alt=""

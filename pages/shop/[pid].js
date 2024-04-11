@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 import { PROD_LIST } from '@/configs/config-r'
 // page
 import DefaultLayout from '@/components/common/default-layout'
@@ -130,7 +130,7 @@ export default function Detail() {
       setTimeout(() => {
         setIsLoading(false)
         setProgress(100)
-      }, 50)
+      }, 300)
     }
   }, [isLoading])
 
@@ -175,7 +175,7 @@ export default function Detail() {
                   productPhotos.split(',').map((fileName, index) => {
                     return (
                       <Carousel.Item key={index}>
-                        <Image
+                        <img
                           src={`/${fileName}`}
                           alt=""
                           width={600}
@@ -191,7 +191,7 @@ export default function Detail() {
                   })
                 ) : (
                   <Carousel.Item>
-                    <Image
+                    <img
                       src={`/${productPhotos}`}
                       alt=""
                       width={600}
@@ -442,7 +442,7 @@ export default function Detail() {
                         className="position-relative"
                         style={{ overflow: 'hidden', height: '266px' }}
                       >
-                        <Image
+                        <img
                           className={`img-fluid w-100 ${style.imgAct}`}
                           src={
                             v.product_photos.includes(',')
@@ -554,7 +554,7 @@ export default function Detail() {
                         className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
                       >
                         <div className="d-flex justify-content-center">
-                          <Image
+                          <img
                             className={style.prodPic}
                             src={
                               product.data.product_photos.includes(',')
@@ -593,7 +593,7 @@ export default function Detail() {
                                 className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
                               >
                                 <div className="d-flex justify-content-center">
-                                  <Image
+                                  <img
                                     className={style.prodPic}
                                     src={
                                       v.product_photos.includes(',')
@@ -645,7 +645,7 @@ export default function Detail() {
                             className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
                           >
                             <div className="barterProdPic d-flex justify-content-center">
-                              <Image
+                              <img
                                 className={style.prodPic}
                                 src={
                                   v3.product_photos.includes(',')

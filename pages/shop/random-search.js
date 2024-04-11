@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 import 'react-datepicker/dist/react-datepicker.css'
 import { PROD_LIST } from '@/configs/config-r'
 import { shuffle } from 'lodash'
@@ -94,7 +94,7 @@ export default function RandomShop() {
       setTimeout(() => {
         setIsLoading(false)
         setProgress(100)
-      }, 50)
+      }, 300)
     }
   }, [isLoading])
   const display = (
@@ -152,7 +152,7 @@ export default function RandomShop() {
           <div className="row px-xl-5 mt-4">
             {randomRows.map((v, i) => {
               return (
-                <div key={i} className="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <div key={i} className="col-lg-3 col-md-6 col-sm-12 pb-1">
                   <div
                     className={`mb-5 ${style.card}`}
                     style={{ marginBottom: '60px' }}
@@ -161,7 +161,7 @@ export default function RandomShop() {
                       className={isBack ? style.slideB : style.slide}
                       style={{ overflow: 'hidden' }}
                     >
-                      <Image
+                      <img
                         className={style.slideImg}
                         src="/openit.png"
                         alt=""
@@ -179,7 +179,7 @@ export default function RandomShop() {
                           className="position-relative"
                           style={{ overflow: 'hidden' }}
                         >
-                          <Image
+                          <img
                             className={`img-fluid w-100 ${
                               isBack ? style.imgAct : ''
                             }`}

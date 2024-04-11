@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 import { PROD_LIST } from '@/configs/config-r'
 import { useRouter } from 'next/router'
 // style-----
 import style from './navbar.module.css'
-import cartstyle from '@/components/cart/cart.module.css'
 // react bootstrap
 import Dropdown from 'react-bootstrap/Dropdown'
 import Form from 'react-bootstrap/Form'
@@ -137,7 +136,7 @@ export default function CustomNavbar({ pageName = '' }) {
                     <div className="textBox d-flex align-items-center justify-content-between border-bottom border-2">
                       <div className="boxLeft d-flex">
                         <div className="mt-3 position-relative">
-                          <Image
+                          <img
                             className="border border-1 rounded-circle"
                             src="/logo-sm.png"
                             alt=""
@@ -285,7 +284,7 @@ export default function CustomNavbar({ pageName = '' }) {
         <div className="row align-items-center px-xl-5 d-none d-lg-flex">
           <div className="col-lg-4">
             <Link href="/" className="text-decoration-none">
-              <Image
+              <img
                 className={`${style.logo}`}
                 src="/logo9.png"
                 alt=""
@@ -425,7 +424,7 @@ export default function CustomNavbar({ pageName = '' }) {
                 href="/"
                 className="text-decoration-none d-block d-lg-none"
               >
-                <Image
+                <img
                   className="logo rounded-circle"
                   src="/logo-sm.png"
                   alt=""

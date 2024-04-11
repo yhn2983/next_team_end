@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 // page
 import Footer from '@/components/common/footer/footer'
 // style-----
@@ -68,7 +68,7 @@ export default function Cart() {
       setTimeout(() => {
         setIsLoading(false)
         setProgress(100)
-      }, 50)
+      }, 300)
     }
   }, [isLoading])
 
@@ -150,7 +150,7 @@ export default function Cart() {
                         <tr key={v.id}>
                           <td>
                             <Link href={`/shop/${v.id}`}>
-                              <Image
+                              <img
                                 src={
                                   v.product_photos.includes(',')
                                     ? `/${v.product_photos.split(',')[0]}`

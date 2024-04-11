@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 // page
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
@@ -74,7 +74,7 @@ export default function HelpCenter() {
                 className={`card border-seconary border-4 ${style.card}`}
                 style={{ marginBottom: '80px' }}
               >
-                <Image
+                <img
                   src="/deal3.png"
                   className="card-img-top"
                   alt=""
@@ -92,7 +92,7 @@ export default function HelpCenter() {
           <div className="col-lg-3 col-md-6 col-xs-12 px-lg-4">
             <Link className="text-decoration-none" href="/help-center/esg">
               <div className={`card border-seconary border-4 ${style.card}`}>
-                <Image
+                <img
                   src="/esg.png"
                   className="card-img-top"
                   alt=""
@@ -113,7 +113,7 @@ export default function HelpCenter() {
               href="/help-center/ad-partner"
             >
               <div className={`card border-seconary border-4 ${style.card}`}>
-                <Image
+                <img
                   src="/parner.png"
                   className="card-img-top"
                   alt=""
@@ -134,7 +134,7 @@ export default function HelpCenter() {
               href="/help-center/using-rule"
             >
               <div className={`card border-seconary border-4 ${style.card}`}>
-                <Image
+                <img
                   src="/use.png"
                   className="card-img-top"
                   alt=""
@@ -155,7 +155,7 @@ export default function HelpCenter() {
               href="/help-center/privacy-rule"
             >
               <div className={`card border-seconary border-4 ${style.card}`}>
-                <Image
+                <img
                   src="/privacy.png"
                   className="card-img-top"
                   alt=""
@@ -176,7 +176,7 @@ export default function HelpCenter() {
               href="/help-center/language-setting"
             >
               <div className={`card border-seconary border-4 ${style.card}`}>
-                <Image
+                <img
                   src="/language.png"
                   className="card-img-top"
                   alt=""
@@ -194,7 +194,7 @@ export default function HelpCenter() {
           <div className="col-lg-3 col-md-6 col-xs-12 px-lg-4">
             <Link className="text-decoration-none" href="/help-center/faqs">
               <div className={`card border-seconary border-4 ${style.card}`}>
-                <Image
+                <img
                   src="/password.png"
                   className="card-img-top"
                   alt=""
@@ -215,7 +215,7 @@ export default function HelpCenter() {
               href="/help-center/join-deal"
             >
               <div className={`card border-seconary border-4 ${style.card}`}>
-                <Image
+                <img
                   src="/join.png"
                   className="card-img-top"
                   alt=""

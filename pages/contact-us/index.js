@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 // pages-----
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
@@ -137,7 +137,7 @@ export default function ContactUs() {
                     </div>
                   </div>
                   <div class="col-lg-5 mb-3 mt-3">
-                    <Image src="/logo9.png" alt="" width={500} height={500} />
+                    <img src="/logo9.png" alt="" width={500} height={500} />
                   </div>
                 </div>
               </div>
