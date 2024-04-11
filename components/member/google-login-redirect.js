@@ -52,7 +52,7 @@ export default function GoogleLoginRedirect() {
       console.log(jwtUser)
 
       const response = await fetch(
-        `http://localhost:3001/api/users/${jwtUser.id}`,
+        `http://localhost:3003/api/users/${jwtUser.id}`,
         {
           headers: {
             'Content-Type': 'application/json',

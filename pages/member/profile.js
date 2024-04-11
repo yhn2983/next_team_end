@@ -125,7 +125,7 @@ export default function Profile() {
                   <Image
                     src={
                       file
-                        ? `http://localhost:3001/avatar/${file}?timestamp=${new Date().getTime()}`
+                        ? `http://localhost:3003/avatar/${file}?timestamp=${new Date().getTime()}`
                         : '/default.png'
                     }
                     alt="avatar"

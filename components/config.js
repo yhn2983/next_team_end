@@ -1,4 +1,4 @@
-export const API_SERVER = 'http://localhost:3001'
+export const API_SERVER = 'http://localhost:3003'
 
 // *** JWT ***
 export const JWT_LOGIN_POST = `${API_SERVER}/api/auth/login` // 登入, POST
