@@ -9,6 +9,9 @@ import DefaultLayout from '@/components/common/default-layout'
 // style-----
 import style from './detail.module.css'
 import toast, { Toaster } from 'react-hot-toast'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 // react bootstrap
 import Carousel from 'react-bootstrap/Carousel'
 import Modal from 'react-bootstrap/Modal'
@@ -89,6 +92,31 @@ export default function Detail() {
   const productPhotos = product.data.product_photos
 
   // cart
+  const { items, incrementItemById, decrementItemById, removeItemById } =
+    useCart()
+
+  const notifyAndRemove = (productName, id) => {
+    MySwal.fire({
+      title: '請確定是否刪除此項商品？',
+      text: '請選擇下方功能鍵，確認是否刪除',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#8e2626',
+      cancelButtonText: '取消',
+      confirmButtonText: '是的，請刪除！',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        MySwal.fire({
+          title: '您的通知：',
+          text: productName + ' 已從購物車中被刪除',
+          icon: 'success',
+        })
+        removeItemById(id)
+      }
+    })
+  }
+
   const { addItem } = useCart()
   const notify = (productName) => {
     const msgBox = (
@@ -332,6 +360,14 @@ export default function Detail() {
                         <button
                           className={`btn btn-minus ${style.btnHover}`}
                           style={{ backgroundColor: '#8e2626' }}
+                          onClick={() => {
+                            const nextQty = product.data.product_qty - 1
+                            if (nextQty === 0) {
+                              return
+                            } else {
+                              decrementItemById(product.data.id)
+                            }
+                          }}
                         >
                           <FaMinus style={{ color: 'white' }} />
                         </button>
@@ -339,12 +375,16 @@ export default function Detail() {
                       <input
                         type="text"
                         className="form-control bg-light border-1 text-center"
-                        value="1"
+                        value={product.data.product_qty}
+                        defaultValue="1"
                       />
                       <div className="input-group-btn">
                         <button
                           className={`btn btn-plus ${style.btnHover}`}
                           style={{ backgroundColor: '#8e2626' }}
+                          onClick={() => {
+                            incrementItemById(product.data.id)
+                          }}
                         >
                           <FaPlus style={{ color: 'white' }} />
                         </button>
