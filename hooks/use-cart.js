@@ -8,7 +8,7 @@ export function CartProvider({ children }) {
   // increment of qty
   const increment = (items, id) => {
     return items.map((v, i) => {
-      if (v.id === id) return { ...v, product_qty: v.product_qty + 1 }
+      if (v.id === id) return { ...v, p_qty: v.p_qty + 1 }
       else return v
     })
   }
@@ -16,7 +16,7 @@ export function CartProvider({ children }) {
   // decrement of qty
   const decrement = (items, id) => {
     return items.map((v, i) => {
-      if (v.id === id) return { ...v, product_qty: v.product_qty - 1 }
+      if (v.id === id) return { ...v, p_qty: v.p_qty - 1 }
       else return v
     })
   }
@@ -36,7 +36,7 @@ export function CartProvider({ children }) {
     if (foundIndex > -1) {
       return increment(items, item.id)
     } else {
-      const newItem = { ...item, product_qty: 1 }
+      const newItem = { ...item, p_qty: 1 }
       return [...items, newItem]
     }
   }
@@ -65,7 +65,7 @@ export function CartProvider({ children }) {
   const calcTotalItems = () => {
     let total = 0
     for (let i = 0; i < items.length; i++) {
-      total += items[i].product_qty
+      total += items[i].p_qty
     }
     return total
   }
@@ -74,7 +74,7 @@ export function CartProvider({ children }) {
   const calcTotalPrice = () => {
     let total = 0
     for (let i = 0; i < items.length; i++) {
-      total += items[i].product_qty * items[i].product_price
+      total += items[i].p_qty * items[i].p_price
     }
     return total
   }
@@ -89,15 +89,9 @@ export function CartProvider({ children }) {
     return total
   }
 
-  const totalItems = items.reduce((acc, v) => acc + v.product_qty, 0)
-  const totalPrice = items.reduce(
-    (acc, v) => acc + v.product_qty * v.product_price,
-    0
-  )
-  const totalCP = items.reduce((acc, v) => {
-    const roundedValue = Math.round(v.mc * 0.01 * 100) / 100
-    return Math.round((acc + roundedValue) * 100) / 100
-  }, 0)
+  const totalItems = items.reduce((acc, v) => acc + v.p_qty, 0)
+  const totalPrice = items.reduce((acc, v) => acc + v.p_qty * v.p_price, 0)
+  const totalCP = items.reduce((acc, v) => acc + v.available_cp, 0)
 
   return (
     <CartContext.Provider

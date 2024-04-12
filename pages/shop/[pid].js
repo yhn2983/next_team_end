@@ -92,30 +92,7 @@ export default function Detail() {
   const productPhotos = product.data.product_photos
 
   // cart
-  const { items, incrementItemById, decrementItemById, removeItemById } =
-    useCart()
-
-  const notifyAndRemove = (productName, id) => {
-    MySwal.fire({
-      title: '請確定是否刪除此項商品？',
-      text: '請選擇下方功能鍵，確認是否刪除',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#8e2626',
-      cancelButtonText: '取消',
-      confirmButtonText: '是的，請刪除！',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        MySwal.fire({
-          title: '您的通知：',
-          text: productName + ' 已從購物車中被刪除',
-          icon: 'success',
-        })
-        removeItemById(id)
-      }
-    })
-  }
+  const { incrementItemById, decrementItemById } = useCart()
 
   const { addItem } = useCart()
   const notify = (productName) => {
@@ -164,7 +141,7 @@ export default function Detail() {
 
   const display = (
     <>
-      <DefaultLayout>
+      <DefaultLayout pageName="productSearch">
         <Head>
           <title>商品詳細內容 | DEAL-2ND HAND SHOP</title>
         </Head>

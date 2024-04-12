@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-// import Image from 'next/image'
+import { PROD_LIST, CART_ITEM_DELETE } from '@/configs/config-r'
 // page
 import Footer from '@/components/common/footer/footer'
 // style-----
@@ -26,9 +27,12 @@ import LoadingBar from 'react-top-loading-bar'
 import { useCart } from '@/hooks/use-cart'
 
 export default function Cart() {
+  // Router-----
+  const router = useRouter()
+  const qs = { ...router.query }
+
   // import functions from cart hook
   const {
-    items,
     incrementItemById,
     decrementItemById,
     removeItemById,
@@ -36,7 +40,7 @@ export default function Cart() {
     totalCP,
   } = useCart()
 
-  // set sweetAlert2
+  // set sweetAlert2 for delete
   const notifyAndRemove = (productName, id) => {
     MySwal.fire({
       title: '請確定是否刪除此項商品？',
@@ -57,6 +61,57 @@ export default function Cart() {
         removeItemById(id)
       }
     })
+  }
+
+  const [data, setData] = useState({
+    cartProd: [],
+  })
+
+  useEffect(() => {
+    fetch(`${PROD_LIST}${location.search}`)
+      .then((r) => r.json())
+      .then((dataObj) => {
+        setData(dataObj)
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error)
+      })
+  }, [router.query])
+
+  const deleteItem = (productName, pid) => {
+    const notifyAndRemove = () => {
+      MySwal.fire({
+        title: '請確定是否刪除此項商品？',
+        text: '請選擇下方功能鍵，確認是否刪除',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#8e2626',
+        cancelButtonText: '取消',
+        confirmButtonText: '是的，請刪除！',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          MySwal.fire({
+            title: '您的通知：',
+            text: productName + ' 已從購物車中被刪除',
+            icon: 'success',
+          })
+          removeItemById(pid)
+          fetch(`${CART_ITEM_DELETE}/${pid}`, {
+            method: 'DELETE',
+          })
+            .then((r) => r.json())
+            .then((result) => {
+              console.log(result)
+              router.push(location.search)
+            })
+            .catch((error) => {
+              console.error('Error deleting item:', error)
+            })
+        }
+      })
+    }
+    notifyAndRemove()
   }
 
   // Loading bar-----
@@ -144,7 +199,7 @@ export default function Cart() {
                   </tr>
                 </thead>
                 <tbody className="align-middle text-center">
-                  {items.map((v, i) => {
+                  {data.cartProd.map((v, i) => {
                     return (
                       <>
                         <tr key={v.id}>
@@ -152,9 +207,9 @@ export default function Cart() {
                             <Link href={`/shop/${v.id}`}>
                               <img
                                 src={
-                                  v.product_photos.includes(',')
-                                    ? `/${v.product_photos.split(',')[0]}`
-                                    : `/${v.product_photos}`
+                                  v.p_photos.includes(',')
+                                    ? `/${v.p_photos.split(',')[0]}`
+                                    : `/${v.p_photos}`
                                 }
                                 alt=""
                                 width={150}
@@ -171,14 +226,14 @@ export default function Cart() {
                               href={`/shop/${v.id}`}
                               style={{ textDecoration: 'none', color: 'black' }}
                             >
-                              {v.product_name}
+                              {v.p_name}
                             </Link>
                           </td>
                           <td
                             className="align-middle"
                             style={{ fontSize: '20px' }}
                           >
-                            ${v.product_price}
+                            ${v.p_price}
                           </td>
                           <td className="align-middle">
                             <div
@@ -193,9 +248,9 @@ export default function Cart() {
                                     color: 'white',
                                   }}
                                   onClick={() => {
-                                    const nextQty = v.product_qty - 1
+                                    const nextQty = v.p_qty - 1
                                     if (nextQty === 0) {
-                                      notifyAndRemove(v.product_name, v.id)
+                                      notifyAndRemove(v.p_name, v.id)
                                     } else {
                                       decrementItemById(v.id)
                                     }
@@ -207,7 +262,7 @@ export default function Cart() {
                               <input
                                 type="text"
                                 className="form-control form-control-sm border-0 text-center"
-                                value={v.product_qty}
+                                value={v.p_qty}
                                 defaultValue="1"
                               />
                               <div className="input-group-btn">
@@ -230,19 +285,23 @@ export default function Cart() {
                             className="align-middle"
                             style={{ fontSize: '20px' }}
                           >
-                            ${v.product_qty * v.product_price}
+                            ${v.p_qty * v.p_price}
                           </td>
-                          <td style={{ fontSize: '20px' }}>{v.mc * 0.01}</td>
+                          <td style={{ fontSize: '20px' }}>{v.available_cp}</td>
                           <td className="align-middle">
                             <button
                               className="btn btn-sm"
                               onClick={() => {
-                                notifyAndRemove(v.product_name, v.id)
+                                deleteItem(v.p_name, v.id)
                               }}
+                              style={{ border: 'none' }}
                             >
                               <FaTrashCan
                                 className={`mb-1 ${style.trashBtn}`}
-                                style={{ fontSize: '20px', color: '#8e2626' }}
+                                style={{
+                                  fontSize: '20px',
+                                  color: '#8e2626',
+                                }}
                               />
                             </button>
                           </td>

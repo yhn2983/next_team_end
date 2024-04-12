@@ -4,14 +4,12 @@ export const API_CATEGORIES = `${API_SERVER}/cate2`
 
 export const PROD_LIST = `${API_SERVER}/products/api`
 
-export const CART_ADD = `${API_SERVER}/products/add`
-
-export const TOGGLE_LIKE = `${API_SERVER}/like-toggle`
-
-// export const PROD_ADD_POST = `${API_SERVER}/products/add` // POST
+export const CART_ADD = `${API_SERVER}/products/api`
 
 // // PROD_ITEM_DELETE: `${PROD_ITEM_DELETE}/17`
-// export const PROD_ITEM_DELETE = `${API_SERVER}/products` // DELETE
+export const CART_ITEM_DELETE = `${API_SERVER}/products/api`
+
+export const TOGGLE_LIKE = `${API_SERVER}/like-toggle`
 
 // // 取得通訊錄單筆資料 主鍵為 sid,  `${PROD_ITEM}/${sid}`
 // export const PROD_ITEM = `${API_SERVER}/products` // GET
