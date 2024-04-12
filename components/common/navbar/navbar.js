@@ -369,7 +369,9 @@ export default function CustomNavbar({ pageName = '' }) {
             {pageName === 'randomSearch' ? (
               <>
                 <div className="">
-                  <h5>已經有想要的商品？</h5>
+                  <h5>
+                    <strong>已經有想要的商品？</strong>
+                  </h5>
                   <span>
                     前往這裡&nbsp;
                     <FaHandPointRight style={{ color: '#8e2626' }} />
