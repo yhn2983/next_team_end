@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 // import Image from 'next/image'
-import { PROD_LIST } from '@/configs/config-r'
+import { PROD_LIST, CART_ADD } from '@/configs/config-r'
 // style-----
 import style from './prodA.module.css'
 import toast, { Toaster } from 'react-hot-toast'
@@ -17,6 +17,7 @@ import { useCart } from '@/hooks/use-cart'
 export default function ProdA() {
   // Router-----
   const router = useRouter()
+  const qs = { ...router.query }
   // Products-----
   const [data, setData] = useState({
     success: false,
@@ -72,7 +73,21 @@ export default function ProdA() {
     toast.error(msgBox2)
   }
 
-  const qs = { ...router.query }
+  const cartClick = async (productData) => {
+    const r = await fetch(`${CART_ADD}/${productData.product_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(productData),
+    })
+    const result = await r.json()
+    console.log(result)
+    if (result.success) {
+      notify(productData.p_name)
+    }
+  }
+
   return (
     <>
       {/* Products Start */}
@@ -125,7 +140,17 @@ export default function ProdA() {
                             onClick={() => {
                               if (v.status == '1') {
                                 addItem(v)
-                                notify(v.product_name)
+                                const productData = {
+                                  product_id: v.id,
+                                  p_photos: v.product_photos,
+                                  p_name: v.product_name,
+                                  p_price: v.product_price,
+                                  p_qty: 1,
+                                  total_price: v.product_price,
+                                  available_cp: v.mc ? v.mc : v.sc,
+                                }
+                                console.log(productData)
+                                cartClick(productData)
                               } else {
                                 notifyNoAdd(v.product_name)
                               }

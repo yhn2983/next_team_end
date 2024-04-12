@@ -1,9 +1,9 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 // import Image from 'next/image'
-import { PROD_LIST, CART_ADD, CART_ITEM_DELETE } from '@/configs/config-r'
+import { PROD_LIST, CART_ADD } from '@/configs/config-r'
 import 'react-datepicker/dist/react-datepicker.css'
 // page
 import DefaultLayout from '@/components/common/default-layout'

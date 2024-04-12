@@ -1,9 +1,53 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { PROD_LIST, CART_ITEM_UPDATE_PUT } from '@/configs/config-r'
 
 const CartContext = createContext(null)
 
 export function CartProvider({ children }) {
-  const [items, setItems] = useState([])
+  //Router
+  const router = useRouter()
+
+  // cart products
+  const [items, setItems] = useState({ cartProd: [] })
+
+  useEffect(() => {
+    const fetchCartData = async () => {
+      try {
+        const r = await fetch(`${PROD_LIST}${location.search}`)
+        if (r.ok) {
+          const dataObj = await r.json()
+          setItems(dataObj)
+          console.log(dataObj)
+        } else {
+          console.error('Fail to fetch')
+        }
+      } catch (e) {
+        console.error('Error', e)
+      }
+    }
+    fetchCartData()
+  }, [router.query])
+
+  const updateCartItem = async (id, updatedData) => {
+    try {
+      const r = await fetch(`${CART_ITEM_UPDATE_PUT}/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedData),
+      })
+      if (r.ok) {
+        const updatedItems = await r.json()
+        setItems(updatedItems)
+      } else {
+        console.error('Fail to update')
+      }
+    } catch (error) {
+      console.error('Error')
+    }
+  }
 
   // increment of qty
   const increment = (items, id) => {
@@ -43,55 +87,37 @@ export function CartProvider({ children }) {
 
   // function of add prod into cart
   const addItem = (item) => {
-    setItems(add(items, item))
+    setItems(add(items.cartProd, item))
   }
 
   // function of qty increment
   const incrementItemById = (id) => {
-    setItems(increment(items, id))
+    const updatedItem = items.cartProd.find((item) => item.id === id)
+    if (updatedItem) {
+      const updatedQty = updatedItem.p_qty + 1
+      updateCartItem(id, { ...updatedItem, p_qty: updatedQty })
+    }
   }
 
-  // function of qty decrement
   const decrementItemById = (id) => {
-    setItems(decrement(items, id))
+    const updatedItem = items.cartProd.find((item) => item.id === id)
+    if (updatedItem && updatedItem.p_qty > 1) {
+      const updatedQty = updatedItem.p_qty - 1
+      updateCartItem(id, { ...updatedItem, p_qty: updatedQty })
+    }
   }
 
   // function of prod removment
   const removeItemById = (id) => {
-    setItems(remove(items, id))
+    setItems(remove(items.cartProd, id))
   }
 
-  // function of counting total qty
-  const calcTotalItems = () => {
-    let total = 0
-    for (let i = 0; i < items.length; i++) {
-      total += items[i].p_qty
-    }
-    return total
-  }
-
-  // function of counting total price
-  const calcTotalPrice = () => {
-    let total = 0
-    for (let i = 0; i < items.length; i++) {
-      total += items[i].p_qty * items[i].p_price
-    }
-    return total
-  }
-
-  // function of counting total price
-  const calcTotalCP = () => {
-    let total = 0.0
-    for (let i = 0; i < items.length; i++) {
-      const roundedValue = parseFloat((items[i].mc * 0.01).toFixed(2))
-      total += roundedValue
-    }
-    return total
-  }
-
-  const totalItems = items.reduce((acc, v) => acc + v.p_qty, 0)
-  const totalPrice = items.reduce((acc, v) => acc + v.p_qty * v.p_price, 0)
-  const totalCP = items.reduce((acc, v) => acc + v.available_cp, 0)
+  const totalItems = items.cartProd.reduce((acc, v) => acc + v.p_qty, 0)
+  const totalPrice = items.cartProd.reduce(
+    (acc, v) => acc + v.p_qty * v.p_price,
+    0
+  )
+  const totalCP = items.cartProd.reduce((acc, v) => acc + v.available_cp, 0)
 
   return (
     <CartContext.Provider
@@ -101,8 +127,6 @@ export function CartProvider({ children }) {
         decrementItemById,
         removeItemById,
         addItem,
-        calcTotalPrice,
-        calcTotalCP,
         totalItems,
         totalPrice,
         totalCP,

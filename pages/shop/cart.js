@@ -29,54 +29,16 @@ import { useCart } from '@/hooks/use-cart'
 export default function Cart() {
   // Router-----
   const router = useRouter()
-  const qs = { ...router.query }
 
   // import functions from cart hook
   const {
+    items,
     incrementItemById,
     decrementItemById,
     removeItemById,
     totalPrice,
     totalCP,
   } = useCart()
-
-  // set sweetAlert2 for delete
-  const notifyAndRemove = (productName, id) => {
-    MySwal.fire({
-      title: '請確定是否刪除此項商品？',
-      text: '請選擇下方功能鍵，確認是否刪除',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#8e2626',
-      cancelButtonText: '取消',
-      confirmButtonText: '是的，請刪除！',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        MySwal.fire({
-          title: '您的通知：',
-          text: productName + ' 已從購物車中被刪除',
-          icon: 'success',
-        })
-        removeItemById(id)
-      }
-    })
-  }
-
-  const [data, setData] = useState({
-    cartProd: [],
-  })
-
-  useEffect(() => {
-    fetch(`${PROD_LIST}${location.search}`)
-      .then((r) => r.json())
-      .then((dataObj) => {
-        setData(dataObj)
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error)
-      })
-  }, [router.query])
 
   const deleteItem = (productName, pid) => {
     const notifyAndRemove = () => {
@@ -199,7 +161,7 @@ export default function Cart() {
                   </tr>
                 </thead>
                 <tbody className="align-middle text-center">
-                  {data.cartProd.map((v, i) => {
+                  {items.cartProd.map((v, i) => {
                     return (
                       <>
                         <tr key={v.id}>
@@ -250,7 +212,7 @@ export default function Cart() {
                                   onClick={() => {
                                     const nextQty = v.p_qty - 1
                                     if (nextQty === 0) {
-                                      notifyAndRemove(v.p_name, v.id)
+                                      deleteItem(v.p_name, v.id)
                                     } else {
                                       decrementItemById(v.id)
                                     }
@@ -263,7 +225,6 @@ export default function Cart() {
                                 type="text"
                                 className="form-control form-control-sm border-0 text-center"
                                 value={v.p_qty}
-                                defaultValue="1"
                               />
                               <div className="input-group-btn">
                                 <button

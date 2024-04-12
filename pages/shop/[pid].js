@@ -3,15 +3,12 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 // import Image from 'next/image'
-import { PROD_LIST } from '@/configs/config-r'
+import { PROD_LIST, CART_ADD } from '@/configs/config-r'
 // page
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
 import style from './detail.module.css'
 import toast, { Toaster } from 'react-hot-toast'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-const MySwal = withReactContent(Swal)
 // react bootstrap
 import Carousel from 'react-bootstrap/Carousel'
 import Modal from 'react-bootstrap/Modal'
@@ -82,6 +79,7 @@ export default function Detail() {
         .then((r) => r.json())
         .then((dataObj) => {
           setProduct(dataObj)
+          console.log(dataObj)
         })
         .catch((error) => {
           console.error('Error fetching data:', error)
@@ -124,6 +122,21 @@ export default function Detail() {
       </div>
     )
     toast.error(msgBox2)
+  }
+
+  const cartClick = async (productData) => {
+    const r = await fetch(`${CART_ADD}/${productData.product_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(productData),
+    })
+    const result = await r.json()
+    console.log(result)
+    if (result.success) {
+      notify(productData.p_name)
+    }
   }
 
   // Loading bar-----
@@ -374,7 +387,19 @@ export default function Detail() {
                       onClick={() => {
                         if (product.data.status == '1') {
                           addItem(product.data)
-                          notify(product.data.product_name)
+                          const productData = {
+                            product_id: product.data.id,
+                            p_photos: product.data.product_photos,
+                            p_name: product.data.product_name,
+                            p_price: product.data.product_price,
+                            p_qty: 1,
+                            total_price: product.data.product_price,
+                            available_cp: product.data.mc
+                              ? product.data.mc
+                              : product.data.sc,
+                          }
+                          console.log(productData)
+                          cartClick(productData)
                         } else {
                           notifyNoAdd(product.data.product_name)
                         }
@@ -480,7 +505,17 @@ export default function Detail() {
                             onClick={() => {
                               if (v.status == '1') {
                                 addItem(v)
-                                notify(v.product_name)
+                                const productData = {
+                                  product_id: v.id,
+                                  p_photos: v.product_photos,
+                                  p_name: v.product_name,
+                                  p_price: v.product_price,
+                                  p_qty: 1,
+                                  total_price: v.product_price,
+                                  available_cp: v.mc ? v.mc : v.sc,
+                                }
+                                console.log(productData)
+                                cartClick(productData)
                               } else {
                                 notifyNoAdd(v.product_name)
                               }

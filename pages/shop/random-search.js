@@ -4,7 +4,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 // import Image from 'next/image'
 import 'react-datepicker/dist/react-datepicker.css'
-import { PROD_LIST } from '@/configs/config-r'
+import { PROD_LIST, CART_ADD } from '@/configs/config-r'
 import { shuffle } from 'lodash'
 // page
 import DefaultLayout from '@/components/common/default-layout'
@@ -25,6 +25,7 @@ import { useCart } from '@/hooks/use-cart'
 export default function RandomShop() {
   // Router-----
   const router = useRouter()
+  const qs = { ...router.query }
 
   // Products-----
   const [data, setData] = useState({
@@ -83,7 +84,32 @@ export default function RandomShop() {
     )
     toast.success(msgBox)
   }
-  const qs = { ...router.query }
+
+  const notifyNoAdd = (productName) => {
+    const msgBox2 = (
+      <div>
+        <span>
+          <strong>{productName + ' 已下架，不可加入購物車'}</strong>
+        </span>
+      </div>
+    )
+    toast.error(msgBox2)
+  }
+
+  const cartClick = async (productData) => {
+    const r = await fetch(`${CART_ADD}/${productData.product_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(productData),
+    })
+    const result = await r.json()
+    console.log(result)
+    if (result.success) {
+      notify(productData.p_name)
+    }
+  }
 
   // Loading bar-----
   const [isLoading, setIsLoading] = useState(true)
@@ -202,8 +228,22 @@ export default function RandomShop() {
                             <BsFillCartFill
                               className={style.iconAInner}
                               onClick={() => {
-                                addItem(v)
-                                notify(v.product_name)
+                                if (v.status == '1') {
+                                  addItem(v)
+                                  const productData = {
+                                    product_id: v.id,
+                                    p_photos: v.product_photos,
+                                    p_name: v.product_name,
+                                    p_price: v.product_price,
+                                    p_qty: 1,
+                                    total_price: v.product_price,
+                                    available_cp: v.mc ? v.mc : v.sc,
+                                  }
+                                  console.log(productData)
+                                  cartClick(productData)
+                                } else {
+                                  notifyNoAdd(v.product_name)
+                                }
                               }}
                             />
                           </button>
