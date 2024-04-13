@@ -1,18 +1,34 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 // page-----
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
 import style from './helpCenter.module.css'
 // react bootstrap
 // react icons-----
-import { FaMagnifyingGlass } from 'react-icons/fa6'
+// loading bar & loading icon
+import Loader from '@/components/common/loading/loader'
+import LoadingBar from 'react-top-loading-bar'
+import FaqAccordion from '@/components/faq-accordion'
 // hook------
 
 export default function FAQs() {
-  return (
+  // Loading bar-----
+  const [isLoading, setIsLoading] = useState(true)
+  const [progress, setProgress] = useState(0)
+  useEffect(() => {
+    if (isLoading) {
+      setProgress(60)
+      setTimeout(() => {
+        setIsLoading(false)
+        setProgress(100)
+      }, 300)
+    }
+  }, [isLoading])
+
+  const display = (
     <>
       <DefaultLayout pageName="faqs">
         <Head>
@@ -20,35 +36,12 @@ export default function FAQs() {
         </Head>
         {/* Banner start */}
         <div className={style.banner}>
-          <div className={style.area1}>
-            <div className="">
-              <h2
-                className="ps-3"
-                style={{ marginTop: '85px', color: 'white' }}
-              >
-                <strong>需要什麼協助？</strong>
-              </h2>
-            </div>
-            <div
-              className="input-group mb-3 ms-3"
-              style={{ width: '25%', height: '40px' }}
-            >
-              <input
-                type="text"
-                className="form-control border border-2 border-secondary"
-                placeholder="搜尋"
-                aria-label="搜尋"
-                aria-describedby="button-addon2"
-              />
-              <button
-                className="btn btn-search border border-2 border-secondary"
-                type="button"
-                id="button-addon2"
-                style={{ backgroundColor: '#8e2626' }}
-              >
-                <FaMagnifyingGlass style={{ color: 'white' }} />
-              </button>
-            </div>
+          <div
+            className={`text-center d-flex align-items-center justify-content-center ${style.area1}`}
+          >
+            <h1 className="" style={{ color: 'white', fontSize: '50px' }}>
+              <strong>DEAL HELP CENTER</strong>
+            </h1>
           </div>
         </div>
         {/* Banner end */}
@@ -73,11 +66,19 @@ export default function FAQs() {
                 </Link>
                 <span className="breadcrumb-item active">常見問題</span>
               </nav>
+              <FaqAccordion />
             </div>
           </div>
         </div>
         {/* Breadcrumb End */}
       </DefaultLayout>
+    </>
+  )
+
+  return (
+    <>
+      <LoadingBar progress={progress} />
+      {isLoading ? <Loader /> : display}
     </>
   )
 }
