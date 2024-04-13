@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { PROD_LIST, CART_ITEM_UPDATE_PUT } from '@/configs/config-r'
+import { PROD_LIST } from '@/configs/config-r'
 
 const CartContext = createContext(null)
 
@@ -29,26 +29,6 @@ export function CartProvider({ children }) {
     fetchCartData()
   }, [router.query])
 
-  const updateCartItem = async (id, updatedData) => {
-    try {
-      const r = await fetch(`${CART_ITEM_UPDATE_PUT}/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedData),
-      })
-      if (r.ok) {
-        const updatedItems = await r.json()
-        setItems(updatedItems)
-      } else {
-        console.error('Fail to update')
-      }
-    } catch (error) {
-      console.error('Error')
-    }
-  }
-
   // increment of qty
   const increment = (items, id) => {
     return items.map((v, i) => {
@@ -73,51 +53,81 @@ export function CartProvider({ children }) {
   }
 
   // add into cart
-  const add = (items, item) => {
-    const foundIndex = items.findIndex((v, i) => {
-      return v.id === item.id
-    })
+  const add = (cartProd, item) => {
+    const foundIndex = cartProd.findIndex((v) => v.id === item.id)
     if (foundIndex > -1) {
-      return increment(items, item.id)
+      const updatedItems = cartProd.map((v) => {
+        if (v.id === item.id) {
+          return { ...v, p_qty: v.p_qty + 1 }
+        }
+        return v
+      })
+      return updatedItems
     } else {
       const newItem = { ...item, p_qty: 1 }
-      return [...items, newItem]
+      return [...cartProd, newItem]
     }
   }
 
   // function of add prod into cart
   const addItem = (item) => {
-    setItems(add(items.cartProd, item))
+    setItems((prevItems) => {
+      const updatedCartProd = add(prevItems.cartProd, item)
+      return { ...prevItems, cartProd: updatedCartProd }
+    })
   }
 
   // function of qty increment
   const incrementItemById = (id) => {
-    const updatedItem = items.cartProd.find((item) => item.id === id)
-    if (updatedItem) {
-      const updatedQty = updatedItem.p_qty + 1
-      updateCartItem(id, { ...updatedItem, p_qty: updatedQty })
-    }
+    const updatedCartProd = increment(items.cartProd, id)
+    setItems({ ...items, cartProd: updatedCartProd })
   }
 
   const decrementItemById = (id) => {
-    const updatedItem = items.cartProd.find((item) => item.id === id)
-    if (updatedItem && updatedItem.p_qty > 1) {
-      const updatedQty = updatedItem.p_qty - 1
-      updateCartItem(id, { ...updatedItem, p_qty: updatedQty })
-    }
+    const updatedCartProd = decrement(items.cartProd, id)
+    setItems({ ...items, cartProd: updatedCartProd })
   }
 
   // function of prod removment
   const removeItemById = (id) => {
-    setItems(remove(items.cartProd, id))
+    const updatedCartProd = remove(items.cartProd, id)
+    setItems({ ...items, cartProd: updatedCartProd })
   }
 
-  const totalItems = items.cartProd.reduce((acc, v) => acc + v.p_qty, 0)
-  const totalPrice = items.cartProd.reduce(
-    (acc, v) => acc + v.p_qty * v.p_price,
-    0
-  )
-  const totalCP = items.cartProd.reduce((acc, v) => acc + v.available_cp, 0)
+  const calcTotalItems = () => {
+    let total = 0
+    for (let i = 0; i < items.length; i++) {
+      total += items.cartProd[i].p_qty
+    }
+    return total
+  }
+
+  // 計算總金額
+  const calcTotalPrice = () => {
+    let total = 0
+    for (let i = 0; i < items.cartProd.length; i++) {
+      total += items.cartProd[i].p_qty * items.cartProd[i].p_price
+    }
+    return total
+  }
+
+  const calcTotalCP = () => {
+    let total = 0
+    for (let i = 0; i < items.cartProd.length; i++) {
+      total += items.cartProd[i].p_qty * items.cartProd[i].PROD_LISTprice
+    }
+    return total
+  }
+
+  const totalItems = items.cartProd
+    ? items.cartProd.reduce((acc, v) => acc + v.p_qty, 0)
+    : 0
+  const totalPrice = items.cartProd
+    ? items.cartProd.reduce((acc, v) => acc + v.p_qty * v.p_price, 0)
+    : 0
+  const totalCP = items.cartProd
+    ? items.cartProd.reduce((acc, v) => acc + v.available_cp, 0)
+    : 0
 
   return (
     <CartContext.Provider

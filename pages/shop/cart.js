@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import { PROD_LIST, CART_ITEM_DELETE } from '@/configs/config-r'
+import { CART_ITEM_DELETE, CART_ITEM_UPDATE_PUT } from '@/configs/config-r'
 // page
 import Footer from '@/components/common/footer/footer'
 // style-----
@@ -10,6 +10,7 @@ import style from './cart.module.css'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
+import toast, { Toaster } from 'react-hot-toast'
 // react bootstrap
 // react icons-----
 import {
@@ -30,7 +31,7 @@ export default function Cart() {
   // Router-----
   const router = useRouter()
 
-  // import functions from cart hook
+  // cart
   const {
     items,
     incrementItemById,
@@ -74,6 +75,46 @@ export default function Cart() {
       })
     }
     notifyAndRemove()
+  }
+
+  const prodPlus = (productName) => {
+    const msgBox = (
+      <div>
+        <span>
+          <strong>{productName + ' 數量 + 1'}</strong>
+        </span>
+      </div>
+    )
+    toast.success(msgBox)
+  }
+
+  const prodMinus = (productName) => {
+    const msgBox2 = (
+      <div>
+        <span>
+          <strong>{productName + ' 數量 - 1'}</strong>
+        </span>
+      </div>
+    )
+    toast.success(msgBox2)
+  }
+
+  const updateItem = async (newData) => {
+    const r = await fetch(`${CART_ITEM_UPDATE_PUT}/${newData.product_id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newData),
+    })
+
+    const result = await r.json()
+    console.log(result)
+    if (result.success) {
+      console.log('資料修改成功')
+    } else {
+      console.log('資料沒有修改')
+    }
   }
 
   // Loading bar-----
@@ -195,7 +236,7 @@ export default function Cart() {
                             className="align-middle"
                             style={{ fontSize: '20px' }}
                           >
-                            ${v.p_price}
+                            ${v.p_price.toLocaleString()}
                           </td>
                           <td className="align-middle">
                             <div
@@ -215,6 +256,15 @@ export default function Cart() {
                                       deleteItem(v.p_name, v.id)
                                     } else {
                                       decrementItemById(v.id)
+                                      prodMinus(v.p_name)
+                                      const newData = {
+                                        product_id: v.id,
+                                        p_qty: v.p_qty,
+                                        p_price: v.p_price,
+                                        totalPrice: v.p_qty * v.p_price,
+                                      }
+                                      console.log(newData)
+                                      updateItem(newData)
                                     }
                                   }}
                                 >
@@ -225,6 +275,7 @@ export default function Cart() {
                                 type="text"
                                 className="form-control form-control-sm border-0 text-center"
                                 value={v.p_qty}
+                                readOnly
                               />
                               <div className="input-group-btn">
                                 <button
@@ -235,6 +286,15 @@ export default function Cart() {
                                   }}
                                   onClick={() => {
                                     incrementItemById(v.id)
+                                    prodPlus(v.p_name)
+                                    const newData = {
+                                      product_id: v.id,
+                                      p_qty: v.p_qty,
+                                      p_price: v.p_price,
+                                      totalPrice: v.p_qty * v.p_price,
+                                    }
+                                    console.log(newData)
+                                    updateItem(newData)
                                   }}
                                 >
                                   <FaPlus className="mb-1" />
@@ -246,7 +306,7 @@ export default function Cart() {
                             className="align-middle"
                             style={{ fontSize: '20px' }}
                           >
-                            ${v.p_qty * v.p_price}
+                            ${(v.p_qty * v.p_price).toLocaleString()}
                           </td>
                           <td style={{ fontSize: '20px' }}>{v.available_cp}</td>
                           <td className="align-middle">
@@ -287,7 +347,9 @@ export default function Cart() {
                   </div>
                   <div className="d-flex justify-content-between mb-2">
                     <h5 className="font-weight-medium">總金額</h5>
-                    <h5 className="font-weight-medium">${totalPrice}</h5>
+                    <h5 className="font-weight-medium">
+                      ${totalPrice.toLocaleString()}
+                    </h5>
                   </div>
                   <div className="d-flex justify-content-between mb-2">
                     <h5 className="font-weight-medium">總小碳點</h5>
@@ -300,7 +362,7 @@ export default function Cart() {
                       <strong>總付款金額</strong>
                     </h5>
                     <h5>
-                      <strong>${totalPrice + 60}</strong>
+                      <strong>${(totalPrice + 60).toLocaleString()}</strong>
                     </h5>
                   </div>
                   <button
@@ -317,6 +379,7 @@ export default function Cart() {
             </div>
           </div>
         </div>
+        <Toaster />
         {/* Cart End */}
         {/* Back to Top */}
         <Link href="#top" className="btn">

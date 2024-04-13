@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-// import Image from 'next/image'
 import { PROD_LIST, CART_ADD } from '@/configs/config-r'
 // page
 import DefaultLayout from '@/components/common/default-layout'
@@ -16,7 +15,7 @@ import Modal from 'react-bootstrap/Modal'
 import { BsFillCartFill } from 'react-icons/bs'
 import { AiOutlineHeart } from 'react-icons/ai'
 import { IoSearch } from 'react-icons/io5'
-import { FaMinus, FaPlus } from 'react-icons/fa6'
+import { FaMinus, FaPlus, FaHeartCirclePlus } from 'react-icons/fa6'
 import { ImHammer2 } from 'react-icons/im'
 import { TbArrowsExchange2 } from 'react-icons/tb'
 // loading bar & loading icon
@@ -406,10 +405,20 @@ export default function Detail() {
                       }}
                     >
                       <BsFillCartFill
-                        className=""
+                        className="pb-1"
                         style={{ color: 'white', fontSize: '20px' }}
                       />{' '}
                       <span style={{ color: 'white' }}>加入購物車</span>
+                    </button>
+                    <button
+                      className={`btn px-3 ms-4 ${style.btnHover}`}
+                      style={{ backgroundColor: '#d76767', border: 'none' }}
+                    >
+                      <FaHeartCirclePlus
+                        className="me-1 pb-1"
+                        style={{ color: 'white', fontSize: '20px' }}
+                      />
+                      <span style={{ color: 'white' }}>加入收藏</span>
                     </button>
                   </div>
                 </div>

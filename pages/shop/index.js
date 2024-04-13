@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 // import Image from 'next/image'
-import { PROD_LIST, CART_ADD } from '@/configs/config-r'
+import { PROD_LIST, CART_ADD, TOGGLE_LIKE } from '@/configs/config-r'
 import 'react-datepicker/dist/react-datepicker.css'
 // page
 import DefaultLayout from '@/components/common/default-layout'
@@ -27,6 +27,8 @@ import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
 // hook------
 import { useCart } from '@/hooks/use-cart'
+import { useLike } from '@/hooks/use-like'
+
 //import { useAuth } from '@/context/auth-context'
 
 export default function Shop() {
@@ -360,7 +362,7 @@ export default function Shop() {
     const msgBox = (
       <div>
         <p>
-          <strong>{productName + ' 已成功加入購物車'}</strong>
+          <strong>{productName + ' 已加入購物車'}</strong>
         </p>
         <button
           className={`btn mx-auto ${style.conneBtn}`}
@@ -399,6 +401,73 @@ export default function Shop() {
     console.log(result)
     if (result.success) {
       notify(productData.p_name)
+    }
+  }
+
+  // Like
+  const { addProd, removeProdById } = useLike()
+  const notify2 = (productName) => {
+    const msgBox = (
+      <div>
+        <p>
+          <strong>{productName + ' 已加入收藏'}</strong>
+        </p>
+        <button
+          className={`btn mx-auto ${style.conneBtn}`}
+          style={{ backgroundColor: '#e96d3f', color: 'white' }}
+          onClick={() => {
+            router.push('/shop/like')
+          }}
+        >
+          連至 收藏清單
+        </button>
+      </div>
+    )
+    toast.success(msgBox)
+  }
+
+  const notify3 = (productName) => {
+    const msgBox = (
+      <div>
+        <p>
+          <strong>{productName + ' 已從收藏清單移除'}</strong>
+        </p>
+        <button
+          className={`btn mx-auto ${style.conneBtn}`}
+          style={{ backgroundColor: '#e96d3f', color: 'white' }}
+          onClick={() => {
+            router.push('/shop/like')
+          }}
+        >
+          連至 收藏清單
+        </button>
+      </div>
+    )
+    toast.success(msgBox)
+  }
+
+  const [isClicked, setIsClicked] = useState(false)
+
+  const likeClick = async (productData2) => {
+    const r = await fetch(`${TOGGLE_LIKE}/${productData2.product_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(productData2),
+    })
+    const result = await r.json()
+    console.log(result)
+    if (result.success) {
+      if (isClicked) {
+        setIsClicked(!isClicked)
+        notify2(productData2.p_name)
+        addProd(productData2)
+      } else {
+        setIsClicked(!isClicked)
+        notify3(productData2.p_name)
+        removeProdById(productData2.id)
+      }
     }
   }
 
@@ -1053,8 +1122,30 @@ export default function Shop() {
                               >
                                 <BsFillCartFill className={style.iconAInner} />
                               </button>
-                              <button className="btn" onClick={() => {}}>
-                                <AiOutlineHeart className={style.iconBInner} />
+                              <button
+                                className="btn"
+                                onClick={() => {
+                                  const productData2 = {
+                                    member_id: 1030,
+                                    member_nickname: v.sellerName,
+                                    product_id: v.id,
+                                    p_photos: v.product_photos,
+                                    p_name: v.product_name,
+                                    p_price: v.product_price,
+                                    p_qty: 1,
+                                    total_price: v.product_price,
+                                    available_cp: v.mc ? v.mc : v.sc,
+                                  }
+                                  likeClick(productData2)
+                                }}
+                              >
+                                <AiOutlineHeart
+                                  className={style.iconBInner}
+                                  style={{
+                                    color: isClicked ? '#e96d3f' : '',
+                                    backgroundColor: isClicked ? '#8e2626' : '',
+                                  }}
+                                />
                               </button>
                               <Link
                                 href={`/shop?searchSub=${v.s}`}
