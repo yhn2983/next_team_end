@@ -74,7 +74,7 @@
   border-radius: 50%;
   position: absolute;
   opacity: 1;
-  top: 20%;
+  top: 35%;
   left: 19%;
   transform: translateY(80%);
   transition: transform 0.3s ease;
@@ -86,7 +86,7 @@
   border-radius: 50%;
   position: absolute;
   opacity: 1;
-  top: 20%;
+  top: 35%;
   left: 44%;
   transform: translateY(80%);
   transition: transform 0.5s ease;
@@ -98,7 +98,7 @@
   border-radius: 50%;
   position: absolute;
   opacity: 1;
-  top: 20%;
+  top: 35%;
   left: 69%;
   transform: translateY(80%);
   transition: transform 0.5s ease;
@@ -125,16 +125,16 @@
 
 .barterLeft,
 .barterRight {
-  height: 90%;
+  height:400px;
 }
 
 .prod {
-  width: 90%;
+  width: 131px;
+  height: 150px;
 }
 
 .prodPic {
   width: 100%;
-  height: 80%;
 }
 
 .barterBtn {
@@ -143,5 +143,5 @@
 }
 
 .barterBtn:hover{
-  background-color: #8e2626;
+  background-color: #8e2626 !important;
 }

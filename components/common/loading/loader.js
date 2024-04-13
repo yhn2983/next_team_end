@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './loader.module.css'
-import Image from 'next/image'
+// import Image from 'next/image'
 
 export default function Loader() {
   return (
@@ -10,7 +10,7 @@ export default function Loader() {
         style={{ marginTop: '300px' }}
       >
         <div className="">
-          <Image src="/logo9.png" alt="" width={200} height={200} />
+          <img src="/logo9.png" alt="" width={200} height={200} />
           <span
             className="mt-4"
             style={{ fontSize: '50px', fontWeight: '900' }}

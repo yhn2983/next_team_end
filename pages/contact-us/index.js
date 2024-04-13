@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 // pages-----
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
@@ -9,10 +9,26 @@ import style from './contactUs.module.css'
 // react bootstrap
 // react icons-----
 import { FaRegFaceSmileWink } from 'react-icons/fa6'
+// loading bar & loading icon
+import Loader from '@/components/common/loading/loader'
+import LoadingBar from 'react-top-loading-bar'
 // hook------
 
 export default function ContactUs() {
-  return (
+  // Loading bar-----
+  const [isLoading, setIsLoading] = useState(true)
+  const [progress, setProgress] = useState(0)
+  useEffect(() => {
+    if (isLoading) {
+      setProgress(60)
+      setTimeout(() => {
+        setIsLoading(false)
+        setProgress(100)
+      }, 50)
+    }
+  }, [isLoading])
+
+  const display = (
     <>
       <DefaultLayout pageName="contactUs">
         <Head>
@@ -41,7 +57,7 @@ export default function ContactUs() {
               {/* Breadcrumb End */}
               {/* Contact Start */}
               <div class="container-fluid mt-3 px-5">
-                <div className="d-flex">
+                <div className="d-flex justify-content-center">
                   <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
                     <span class="pr-3" style={{ color: '#8e2626' }}>
                       <strong>
@@ -50,7 +66,6 @@ export default function ContactUs() {
                       </strong>
                     </span>
                   </h2>
-                  <span className={style.titleArea}></span>
                 </div>
                 <div class="row px-xl-5 mt-4">
                   <div class="col-lg-7 mb-5" style={{ paddingLeft: '120px' }}>
@@ -107,7 +122,7 @@ export default function ContactUs() {
                         </div>
                         <div>
                           <button
-                            class="btn py-2 px-4"
+                            class={`btn py-2 px-3 ${style.sendBtn}`}
                             type="submit"
                             id="sendMessageButton"
                             style={{
@@ -122,7 +137,7 @@ export default function ContactUs() {
                     </div>
                   </div>
                   <div class="col-lg-5 mb-3 mt-3">
-                    <Image src="/logo9.png" alt="" width={500} height={500} />
+                    <img src="/logo9.png" alt="" width={500} height={500} />
                   </div>
                 </div>
               </div>
@@ -131,6 +146,13 @@ export default function ContactUs() {
           </div>
         </div>
       </DefaultLayout>
+    </>
+  )
+
+  return (
+    <>
+      <LoadingBar progress={progress} />
+      {isLoading ? <Loader /> : display}
     </>
   )
 }
