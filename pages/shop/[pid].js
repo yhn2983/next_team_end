@@ -23,6 +23,7 @@ import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
 // hook------
 import { useCart } from '@/hooks/use-cart'
+import { useAuth } from '@/context/auth-context'
 
 export default function Detail() {
   // Router-----
@@ -138,6 +139,9 @@ export default function Detail() {
     }
   }
 
+  // member
+  const { checkAuth, auth } = useAuth()
+
   // Loading bar-----
   const [isLoading, setIsLoading] = useState(true)
   const [progress, setProgress] = useState(0)
@@ -232,14 +236,38 @@ export default function Detail() {
                 </h2>
                 <div className="row">
                   <div className="col-lg-12">
-                    <p className="mb-4 mt-3" style={{ fontSize: '20px' }}>
-                      <strong style={{ color: '#8e2626' }}>
-                        賣家：
-                        <span style={{ color: 'black' }}>
-                          {product.data.sellerName}
-                        </span>
-                      </strong>
-                    </p>
+                    {auth.isAuth ? (
+                      <>
+                        <Link
+                          href="/member/profile"
+                          style={{ textDecoration: 'none' }}
+                        >
+                          <p className="mb-4 mt-3" style={{ fontSize: '20px' }}>
+                            <strong style={{ color: '#8e2626' }}>
+                              賣家：
+                              <span style={{ color: 'black' }}>
+                                {product.data.sellerName}{' '}
+                                <small>(點我看介紹)</small>
+                              </span>
+                            </strong>
+                          </p>
+                        </Link>
+                      </>
+                    ) : (
+                      <>
+                        <Link href="/shop" style={{ textDecoration: 'none' }}>
+                          <p className="mb-4 mt-3" style={{ fontSize: '20px' }}>
+                            <strong style={{ color: '#8e2626' }}>
+                              賣家：
+                              <span style={{ color: 'black' }}>
+                                {product.data.sellerName}{' '}
+                                <small>(點我看介紹)</small>
+                              </span>
+                            </strong>
+                          </p>
+                        </Link>
+                      </>
+                    )}
                   </div>
                   <div className="col-lg-6">
                     <p className="mb-4" style={{ fontSize: '20px' }}>
@@ -613,41 +641,6 @@ export default function Detail() {
                   className={`border border-2 border-secondary rounded overflow-auto ${style.barterRight}`}
                 >
                   <div className="row mt-3 px-4">
-                    <div className="col-lg-4 col-sm-12 mb-3">
-                      <div
-                        className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
-                      >
-                        <div className="d-flex justify-content-center">
-                          <img
-                            className={style.prodPic}
-                            src={
-                              product.data.product_photos.includes(',')
-                                ? `/${
-                                    product.data.product_photos.split(',')[0]
-                                  }`
-                                : `/${product.data.product_photos}`
-                            }
-                            alt={product.data.product_name}
-                            width={150}
-                            height={120}
-                            title={product.data.product_name}
-                          />
-                        </div>
-                        <div className="d-flex justify-content-center px-2">
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              value=""
-                              id="flexCheckDefault"
-                            />
-                          </div>
-                          <div className="text-truncate">
-                            {product.data.product_name}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                     {data.rows.map((v, i) => {
                       if (product.data.sellerName == v.sellerName) {
                         return (
