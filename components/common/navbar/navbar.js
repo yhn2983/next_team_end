@@ -30,9 +30,11 @@ import LogoutButton from '@/components/member/logout-button'
 // hook------
 import { useAuth } from '@/context/auth-context'
 import { useCart } from '@/hooks/use-cart'
+import { useLike } from '@/hooks/use-like'
 
-export default function CustomNavbar({ lang, setLang, pageName = '' }) {
+export default function CustomNavbar({ pageName = '' }) {
   const { totalItems } = useCart()
+  const { totalProds } = useLike()
 
   // 會員的資料跟登入狀態
   const { checkAuth, auth } = useAuth()
@@ -314,7 +316,6 @@ export default function CustomNavbar({ lang, setLang, pageName = '' }) {
                     border: 'none',
                     color: '#8e2626',
                   }}
-                  value={lang}
                 >
                   <IoLanguage style={{ color: '#8e2626' }} />
                 </Dropdown.Toggle>
@@ -555,7 +556,7 @@ export default function CustomNavbar({ lang, setLang, pageName = '' }) {
                           style={{ color: 'white', fontSize: '20px' }}
                         />
                         <span className="badge text-light border border-light rounded-circle mt-3">
-                          0
+                          {totalProds}
                         </span>
                       </Nav.Link>
                       <Nav.Link

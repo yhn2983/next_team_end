@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import { PROD_LIST, CART_ADD } from '@/configs/config-r'
+import { PROD_LIST, CART_ADD, TOGGLE_LIKE } from '@/configs/config-r'
 // page
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
@@ -15,7 +15,7 @@ import Modal from 'react-bootstrap/Modal'
 import { BsFillCartFill } from 'react-icons/bs'
 import { AiOutlineHeart } from 'react-icons/ai'
 import { IoSearch } from 'react-icons/io5'
-import { FaMinus, FaPlus, FaHeartCirclePlus } from 'react-icons/fa6'
+import { FaHeartCirclePlus } from 'react-icons/fa6'
 import { ImHammer2 } from 'react-icons/im'
 import { TbArrowsExchange2 } from 'react-icons/tb'
 // loading bar & loading icon
@@ -23,6 +23,7 @@ import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
 // hook------
 import { useCart } from '@/hooks/use-cart'
+import { useLike } from '@/hooks/use-like'
 import { useAuth } from '@/context/auth-context'
 
 export default function Detail() {
@@ -90,8 +91,6 @@ export default function Detail() {
   const productPhotos = product.data.product_photos
 
   // cart
-  const { incrementItemById, decrementItemById } = useCart()
-
   const { addItem } = useCart()
   const notify = (productName) => {
     const msgBox = (
@@ -139,8 +138,93 @@ export default function Detail() {
     }
   }
 
+  // Like
+  const { addProd, removeProdById } = useLike()
+  const notify2 = (productName) => {
+    const msgBox = (
+      <div>
+        <p>
+          <strong>{productName + ' 已加入收藏'}</strong>
+        </p>
+        <button
+          className={`btn mx-auto ${style.conneBtn}`}
+          style={{ backgroundColor: '#e96d3f', color: 'white' }}
+          onClick={() => {
+            router.push('/shop/like')
+          }}
+        >
+          連至 收藏清單
+        </button>
+      </div>
+    )
+    toast.success(msgBox)
+  }
+
+  const notify3 = (productName) => {
+    const msgBox = (
+      <div>
+        <p>
+          <strong>{productName + ' 已從收藏清單移除'}</strong>
+        </p>
+        <button
+          className={`btn mx-auto ${style.conneBtn}`}
+          style={{ backgroundColor: '#e96d3f', color: 'white' }}
+          onClick={() => {
+            router.push('/shop/like')
+          }}
+        >
+          連至 收藏清單
+        </button>
+      </div>
+    )
+    toast.success(msgBox)
+  }
+
+  const [isClicked, setIsClicked] = useState(false)
+
+  const likeClick = async (productData2) => {
+    const r = await fetch(`${TOGGLE_LIKE}/${productData2.product_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(productData2),
+    })
+    const result = await r.json()
+    console.log(result)
+    if (result.success) {
+      setIsClicked(!isClicked)
+      if (!isClicked) {
+        notify2(productData2.p_name)
+        addProd(productData2)
+      } else {
+        notify3(productData2.p_name)
+        removeProdById(productData2.product_id)
+      }
+    }
+  }
+
   // member
   const { checkAuth, auth } = useAuth()
+
+  // barter
+  const [isbarterItemA, setIsBarterItemA] = useState(false)
+  const handleCheckboxA = (e) => {
+    setIsBarterItemA(e.currentTarget.checked)
+  }
+  const [isbarterItemB, setIsBarterItemB] = useState(false)
+  const handleCheckboxB = (e) => {
+    setIsBarterItemB(e.currentTarget.checked)
+  }
+
+  const [itemFormData, setItemFormData] = useState({
+    m1: 0,
+    m2: 1019,
+  })
+
+  const barterSubmit = async (e) => {
+    e.preventDefault()
+  }
 
   // Loading bar-----
   const [isLoading, setIsLoading] = useState(true)
@@ -367,49 +451,10 @@ export default function Detail() {
                   </div>
                 </div>
                 <hr />
-                <div className="row mb-4 pt-2 mt-5">
+                <div className="row mb-4 pt-3 mt-4">
                   <div className="col-lg-12 d-flex">
-                    <div
-                      className="input-group quantity mr-3"
-                      style={{ width: '130px' }}
-                    >
-                      <div className="input-group-btn">
-                        <button
-                          className={`btn btn-minus ${style.btnHover}`}
-                          style={{ backgroundColor: '#8e2626', border: 'none' }}
-                          onClick={() => {
-                            const nextQty = product.data.product_qty - 1
-                            if (nextQty === 0) {
-                              return
-                            } else {
-                              decrementItemById(product.data.id)
-                            }
-                          }}
-                        >
-                          <FaMinus style={{ color: 'white' }} />
-                        </button>
-                      </div>
-                      <input
-                        type="text"
-                        style={{ borderRadius: '5px' }}
-                        className="form-control bg-light border-1 text-center"
-                        value={product.data.product_qty}
-                        defaultValue="1"
-                      />
-                      <div className="input-group-btn">
-                        <button
-                          className={`btn btn-plus ${style.btnHover}`}
-                          style={{ backgroundColor: '#8e2626', border: 'none' }}
-                          onClick={() => {
-                            incrementItemById(product.data.id)
-                          }}
-                        >
-                          <FaPlus style={{ color: 'white' }} />
-                        </button>
-                      </div>
-                    </div>
                     <button
-                      className={`btn px-3 ms-4 ${style.btnHover}`}
+                      className={`btn px-3 ${style.btnHover}`}
                       style={{ backgroundColor: '#e96d3f', border: 'none' }}
                       onClick={() => {
                         if (product.data.status == '1') {
@@ -441,6 +486,21 @@ export default function Detail() {
                     <button
                       className={`btn px-3 ms-4 ${style.btnHover}`}
                       style={{ backgroundColor: '#d76767', border: 'none' }}
+                      onClick={() => {
+                        const productData2 = {
+                          member_id: 1030,
+                          product_id: product.data.id,
+                          p_photos: product.data.product_photos,
+                          p_name: product.data.product_name,
+                          p_price: product.data.product_price,
+                          p_qty: 1,
+                          total_price: product.data.product_price,
+                          available_cp: product.data.mc
+                            ? product.data.mc
+                            : product.data.sc,
+                        }
+                        likeClick(productData2)
+                      }}
                     >
                       <FaHeartCirclePlus
                         className="me-1 pb-1"
@@ -601,7 +661,7 @@ export default function Detail() {
                           </div>
                           &nbsp;
                           <div className="" style={{ fontSize: '18px' }}>
-                            <strong>${v.product_price}</strong>
+                            <strong>${v.product_price.toLocaleString()}</strong>
                           </div>
                         </div>
                       </div>
@@ -633,108 +693,142 @@ export default function Detail() {
           </Modal.Header>
           <Modal.Body>
             <div className="row">
-              <div className="col-lg-6 col-sm-12">
-                <h5 className="ms-3">
-                  <strong>{product.data.sellerName}的商品</strong>
-                </h5>
-                <div
-                  className={`border border-2 border-secondary rounded overflow-auto ${style.barterRight}`}
-                >
-                  <div className="row mt-3 px-4">
-                    {data.rows.map((v, i) => {
-                      if (product.data.sellerName == v.sellerName) {
-                        return (
-                          <>
-                            <div className="col-lg-4 col-sm-12 mb-3">
-                              <div
-                                className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
-                              >
-                                <div className="d-flex justify-content-center">
-                                  <img
-                                    className={style.prodPic}
-                                    src={
-                                      v.product_photos.includes(',')
-                                        ? `/${v.product_photos.split(',')[0]}`
-                                        : `/${v.product_photos}`
-                                    }
-                                    alt={v.product_name}
-                                    width={150}
-                                    height={120}
-                                    title={v.product_name}
-                                  />
-                                </div>
-                                <div className="d-flex justify-content-center px-2">
-                                  <div className="form-check">
-                                    <input
-                                      className="form-check-input"
-                                      type="checkbox"
-                                      value=""
-                                      id="flexCheckDefault"
+              <form role="search" onSubmit={barterSubmit}>
+                <div className="col-lg-6 col-sm-12">
+                  <h5 className="ms-3">
+                    <strong>{product.data.sellerName}的商品</strong>
+                  </h5>
+                  <div
+                    className={`border border-2 border-secondary rounded overflow-auto ${style.barterRight}`}
+                  >
+                    <div className="row mt-3 px-4">
+                      {data.rows.map((v, i) => {
+                        if (product.data.sellerName == v.sellerName) {
+                          return (
+                            <>
+                              <div className="col-lg-4 col-sm-12 mb-3">
+                                <div
+                                  className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
+                                >
+                                  <div className="d-flex justify-content-center">
+                                    <img
+                                      className={style.prodPic}
+                                      src={
+                                        v.product_photos.includes(',')
+                                          ? `/${v.product_photos.split(',')[0]}`
+                                          : `/${v.product_photos}`
+                                      }
+                                      alt={v.product_name}
+                                      width={150}
+                                      height={120}
+                                      title={v.product_name}
                                     />
                                   </div>
-                                  <div className="text-truncate">
-                                    {v.product_name}
+                                  <div className="d-flex justify-content-center px-2">
+                                    <div className="form-check">
+                                      <input
+                                        className="form-check-input"
+                                        type="checkbox"
+                                        name="bartItmeA"
+                                        id="flexCheckDefault"
+                                        checked={isbarterItemA}
+                                        onChange={(e) => {
+                                          if (!isbarterItemA) {
+                                            setIsBarterItemA(
+                                              e.currentTarget.checked
+                                            )
+                                            const formDataA = {
+                                              m1: v.seller_id,
+                                              product_id1: v.id,
+                                              cps_available_m1: v.mc
+                                                ? v.mc
+                                                : v.sc,
+                                            }
+                                            setItemFormData(formDataA)
+                                          }
+                                        }}
+                                      />
+                                    </div>
+                                    <div className="text-truncate">
+                                      {v.product_name}
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          </>
-                        )
-                      }
-                    })}
+                            </>
+                          )
+                        }
+                      })}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="col-lg-6 col-sm-12">
-                <div className="text">
-                  <h5 className="ms-3">
-                    <strong>您的商品集</strong>
-                  </h5>
-                </div>
-                <div
-                  className={`border border-2 border-secondary rounded overflow-auto ${style.barterRight}`}
-                >
-                  <div className="row mt-3 px-4">
-                    {data.barterProds.map((v3, i3) => (
-                      <>
-                        <div className="col-lg-4 col-sm-12 mb-3">
-                          <div
-                            className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
-                          >
-                            <div className="barterProdPic d-flex justify-content-center">
-                              <img
-                                className={style.prodPic}
-                                src={
-                                  v3.product_photos.includes(',')
-                                    ? `/${v3.product_photos.split(',')[0]}`
-                                    : `/${v3.product_photos}`
-                                }
-                                alt={v3.product_name}
-                                width={150}
-                                height={120}
-                                title={v3.product_name}
-                              />
-                            </div>
-                            <div className="d-flex justify-content-center px-2 pt-1">
-                              <div className="form-check">
-                                <input
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  value=""
-                                  id="flexCheckDefault"
+                <div className="col-lg-6 col-sm-12">
+                  <div className="text">
+                    <h5 className="ms-3">
+                      <strong>您的商品集</strong>
+                    </h5>
+                  </div>
+                  <div
+                    className={`border border-2 border-secondary rounded overflow-auto ${style.barterRight}`}
+                  >
+                    <div className="row mt-3 px-4">
+                      {data.barterProds.map((v3, i3) => (
+                        <>
+                          <div className="col-lg-4 col-sm-12 mb-3">
+                            <div
+                              className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
+                            >
+                              <div className="barterProdPic d-flex justify-content-center">
+                                <img
+                                  className={style.prodPic}
+                                  src={
+                                    v3.product_photos.includes(',')
+                                      ? `/${v3.product_photos.split(',')[0]}`
+                                      : `/${v3.product_photos}`
+                                  }
+                                  alt={v3.product_name}
+                                  width={150}
+                                  height={120}
+                                  title={v3.product_name}
                                 />
                               </div>
-                              <div className="text-truncate">
-                                {v3.product_name}
+                              <div className="d-flex justify-content-center px-2 pt-1">
+                                <div className="form-check">
+                                  <input
+                                    className="form-check-input"
+                                    name="bartItemB"
+                                    type="checkbox"
+                                    id="flexCheckDefault"
+                                    checked={isbarterItemB}
+                                    onChange={(e) => {
+                                      if (!isbarterItemB) {
+                                        setIsBarterItemB(
+                                          e.currentTarget.checked
+                                        )
+                                        const formDataB = {
+                                          m2: v3.seller_id,
+                                          product_id2: v3.id,
+                                          cps_available_m2: v3.mc
+                                            ? v3.mc
+                                            : v3.sc,
+                                        }
+                                        setItemFormData(formDataB)
+                                      }
+                                    }}
+                                  />
+                                </div>
+                                <div className="text-truncate">
+                                  {v3.product_name}
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </>
-                    ))}
+                        </>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
+              </form>
             </div>
           </Modal.Body>
           <Modal.Footer>

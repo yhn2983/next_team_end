@@ -4,7 +4,6 @@ import Head from 'next/head'
 import Link from 'next/link'
 // import Image from 'next/image'
 import { PROD_LIST, CART_ADD, TOGGLE_LIKE } from '@/configs/config-r'
-import 'react-datepicker/dist/react-datepicker.css'
 // page
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
@@ -28,7 +27,6 @@ import LoadingBar from 'react-top-loading-bar'
 // hook------
 import { useCart } from '@/hooks/use-cart'
 import { useLike } from '@/hooks/use-like'
-
 //import { useAuth } from '@/context/auth-context'
 
 export default function Shop() {
@@ -459,14 +457,13 @@ export default function Shop() {
     const result = await r.json()
     console.log(result)
     if (result.success) {
-      if (isClicked) {
-        setIsClicked(!isClicked)
+      setIsClicked(!isClicked)
+      if (!isClicked) {
         notify2(productData2.p_name)
         addProd(productData2)
       } else {
-        setIsClicked(!isClicked)
         notify3(productData2.p_name)
-        removeProdById(productData2.id)
+        removeProdById(productData2.product_id)
       }
     }
   }
@@ -1076,7 +1073,10 @@ export default function Shop() {
               <div className="row pb-3 mt-5">
                 {data.rows.map((v, i) => {
                   return (
-                    <div key={i} className="col-lg-4 col-md-12 col-sm-12 pb-1">
+                    <div
+                      key={v.id}
+                      className="col-lg-4 col-md-12 col-sm-12 pb-1"
+                    >
                       <div
                         className={`product-item bg-light mb-5 mx-auto ${style.productItem}`}
                         style={{ marginBottom: '60px' }}
@@ -1127,7 +1127,6 @@ export default function Shop() {
                                 onClick={() => {
                                   const productData2 = {
                                     member_id: 1030,
-                                    member_nickname: v.sellerName,
                                     product_id: v.id,
                                     p_photos: v.product_photos,
                                     p_name: v.product_name,
@@ -1142,8 +1141,9 @@ export default function Shop() {
                                 <AiOutlineHeart
                                   className={style.iconBInner}
                                   style={{
-                                    color: isClicked ? '#e96d3f' : '',
-                                    backgroundColor: isClicked ? '#8e2626' : '',
+                                    color: isClicked && v.id ? '#e96d3f' : '',
+                                    backgroundColor:
+                                      isClicked && v.id ? '#8e2626' : '',
                                   }}
                                 />
                               </button>

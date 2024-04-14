@@ -94,6 +94,10 @@ export function LikeProvider({ children }) {
     setProds({ ...prods, likeProd: updatedLikeProd })
   }
 
+  const totalProds = prods.likeProd
+    ? prods.likeProd.reduce((acc, v) => acc + v.p_qty, 0)
+    : 0
+
   return (
     <LikeContext.Provider
       value={{
@@ -102,6 +106,7 @@ export function LikeProvider({ children }) {
         decrementProdById,
         removeProdById,
         addProd,
+        totalProds,
       }}
     >
       {children}

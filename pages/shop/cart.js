@@ -107,7 +107,7 @@ export default function Cart() {
       },
       body: JSON.stringify(newData),
     })
-
+    console.log(newData)
     const result = await r.json()
     console.log(result)
     if (result.success) {
@@ -259,9 +259,9 @@ export default function Cart() {
                                       prodMinus(v.p_name)
                                       const newData = {
                                         product_id: v.id,
-                                        p_qty: v.p_qty,
+                                        p_qty: v.p_qty - 1,
                                         p_price: v.p_price,
-                                        totalPrice: v.p_qty * v.p_price,
+                                        total_price: (v.p_qty - 1) * v.p_price,
                                       }
                                       console.log(newData)
                                       updateItem(newData)
@@ -289,9 +289,9 @@ export default function Cart() {
                                     prodPlus(v.p_name)
                                     const newData = {
                                       product_id: v.id,
-                                      p_qty: v.p_qty,
+                                      p_qty: v.p_qty + 1,
                                       p_price: v.p_price,
-                                      totalPrice: v.p_qty * v.p_price,
+                                      total_price: (v.p_qty + 1) * v.p_price,
                                     }
                                     console.log(newData)
                                     updateItem(newData)

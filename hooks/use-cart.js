@@ -54,10 +54,12 @@ export function CartProvider({ children }) {
 
   // add into cart
   const add = (cartProd, item) => {
-    const foundIndex = cartProd.findIndex((v) => v.id === item.id)
+    const foundIndex = cartProd.findIndex(
+      (v) => v.product_id === item.product_id
+    )
     if (foundIndex > -1) {
       const updatedItems = cartProd.map((v) => {
-        if (v.id === item.id) {
+        if (v.product_id === item.product_id) {
           return { ...v, p_qty: v.p_qty + 1 }
         }
         return v

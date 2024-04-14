@@ -13,7 +13,7 @@ const MySwal = withReactContent(Swal)
 import toast, { Toaster } from 'react-hot-toast'
 // react bootstrap
 // react icons-----
-import { FaMinus, FaPlus, FaTrashCan, FaCartPlus } from 'react-icons/fa6'
+import { FaTrashCan, FaCartPlus } from 'react-icons/fa6'
 // loading bar & loading icon
 import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
@@ -74,8 +74,7 @@ export default function Like() {
   }
 
   // Like
-  const { prods, incrementProdById, decrementProdById, removeProdById } =
-    useLike()
+  const { prods, removeProdById } = useLike()
 
   const deleteItem = (productName, pid) => {
     const notifyAndRemove = () => {
@@ -113,28 +112,6 @@ export default function Like() {
     notifyAndRemove()
   }
 
-  const prodPlus = (productName) => {
-    const msgBox = (
-      <div>
-        <span>
-          <strong>{productName + ' 數量 + 1'}</strong>
-        </span>
-      </div>
-    )
-    toast.success(msgBox)
-  }
-
-  const prodMinus = (productName) => {
-    const msgBox2 = (
-      <div>
-        <span>
-          <strong>{productName + ' 數量 - 1'}</strong>
-        </span>
-      </div>
-    )
-    toast.success(msgBox2)
-  }
-
   // Loading bar-----
   const [isLoading, setIsLoading] = useState(true)
   const [progress, setProgress] = useState(0)
@@ -169,7 +146,7 @@ export default function Like() {
                 </Link>
                 <Link
                   className="breadcrumb-item text-dark"
-                  href="/shop/product-search"
+                  href="/shop"
                   style={{ textDecoration: 'none', fontSize: '20px' }}
                 >
                   <span>探索商品</span>
@@ -197,8 +174,6 @@ export default function Like() {
                     <th>商品</th>
                     <th>商品名稱</th>
                     <th>價格</th>
-                    <th>數量</th>
-                    <th>金額</th>
                     <th>可獲得小碳點</th>
                     <th>移除</th>
                   </tr>
@@ -207,7 +182,7 @@ export default function Like() {
                   {prods.likeProd.map((v, i) => {
                     return (
                       <>
-                        <tr>
+                        <tr key={v.product_id}>
                           <td>
                             <button
                               style={{ border: 'none' }}
@@ -216,20 +191,18 @@ export default function Like() {
                                 if (v.status == '1') {
                                   addItem(v)
                                   const productData = {
-                                    product_id: prods.likeProd.product_id,
-                                    p_photos: prods.likeProd.p_photos,
-                                    p_name: prods.likeProd.p_name,
-                                    p_price: prods.likeProd.p_price,
+                                    product_id: v.product_id,
+                                    p_photos: v.p_photos,
+                                    p_name: v.p_name,
+                                    p_price: v.p_price,
                                     p_qty: 1,
-                                    total_price: prods.likeProd.p_price,
-                                    available_cp: prods.likeProd.mc
-                                      ? prods.likeProd.mc
-                                      : prods.likeProd.sc,
+                                    total_price: v.p_price,
+                                    available_cp: v.mc ? v.mc : v.sc,
                                   }
                                   console.log(productData)
                                   cartClick(productData)
                                 } else {
-                                  notifyNoAdd(v.pt_name)
+                                  notifyNoAdd(v.p_name)
                                 }
                               }}
                             >
@@ -240,109 +213,43 @@ export default function Like() {
                             </button>
                           </td>
                           <td>
-                            <Link href={`/shop`}>
+                            <Link href={`/shop/${v.product_id}`}>
                               <img
                                 src={
-                                  prods.likeProd.p_photos.includes(',')
-                                    ? `/${
-                                        prods.likeProd.p_photos.split(',')[0]
-                                      }`
-                                    : `/${prods.likeProd.p_photos}`
+                                  v.p_photos.includes(',')
+                                    ? `/${v.p_photos.split(',')[0]}`
+                                    : `/${v.p_photos}`
                                 }
                                 alt=""
                                 width={150}
                                 height={150}
+                                style={{ objectFit: 'cover' }}
                               />
                             </Link>
                           </td>
                           <td
-                            className="align-middle"
-                            style={{ fontSize: '20px' }}
+                            className="align-middle text-wrap"
+                            style={{ fontSize: '20px', width: '500px' }}
                           >
                             <Link
-                              href={`/shop`}
+                              href={`/shop/${v.product_id}`}
                               style={{ textDecoration: 'none', color: 'black' }}
                             >
-                              {prods.likeProd.p_name}
+                              {v.p_name}
                             </Link>
                           </td>
                           <td
                             className="align-middle"
                             style={{ fontSize: '20px' }}
                           >
-                            ${prods.likeProd.p_price.toLocaleString()}
+                            ${v.p_price.toLocaleString()}
                           </td>
-                          <td className="align-middle">
-                            <div
-                              className="input-group quantity mx-auto"
-                              style={{ width: '100px' }}
-                            >
-                              <div className="input-group-btn">
-                                <button
-                                  className={`btn btn-sm btn-minus ${style.btnHover}`}
-                                  style={{
-                                    backgroundColor: '#8e2626',
-                                    color: 'white',
-                                  }}
-                                  onClick={() => {
-                                    const nextQty = prods.likeProd.p_qty - 1
-                                    if (nextQty === 0) {
-                                      deleteItem(
-                                        prods.likeProd.p_name,
-                                        prods.likeProd.product_id
-                                      )
-                                    } else {
-                                      decrementProdById(
-                                        prods.likeProd.product_id
-                                      )
-                                      prodMinus(prods.likeProd.p_name)
-                                    }
-                                  }}
-                                >
-                                  <FaMinus className="mb-1" />
-                                </button>
-                              </div>
-                              <input
-                                type="text"
-                                className="form-control form-control-sm border-0 text-center"
-                                value="1"
-                              />
-                              <div className="input-group-btn">
-                                <button
-                                  className={`btn btn-sm btn-plus ${style.btnHover}`}
-                                  style={{
-                                    backgroundColor: '#8e2626',
-                                    color: 'white',
-                                  }}
-                                  onClick={() => {
-                                    incrementProdById(prods.likeProd.product_id)
-                                    prodPlus(prods.likeProd.p_name)
-                                  }}
-                                >
-                                  <FaPlus className="mb-1" />
-                                </button>
-                              </div>
-                            </div>
-                          </td>
-                          <td
-                            className="align-middle"
-                            style={{ fontSize: '20px' }}
-                          >
-                            $
-                            {(
-                              prods.likeProd.p_price * v.p_qty
-                            ).toLocaleString()}
-                          </td>
-                          <td style={{ fontSize: '20px' }}>
-                            {v.mc ? v.mc : v.sc}
-                          </td>
+                          <td style={{ fontSize: '20px' }}>{v.available_cp}</td>
                           <td className="align-middle">
                             <button
+                              style={{ border: 'none' }}
                               className="btn btn-sm"
-                              onClick={deleteItem(
-                                prods.likeProd.p_name,
-                                prods.likeProd.product_id
-                              )}
+                              onClick={() => deleteItem(v.p_name, v.product_id)}
                             >
                               <FaTrashCan
                                 className={`mb-1 ${style.trashBtn}`}

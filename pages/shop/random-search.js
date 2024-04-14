@@ -4,7 +4,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 // import Image from 'next/image'
 import 'react-datepicker/dist/react-datepicker.css'
-import { PROD_LIST, CART_ADD } from '@/configs/config-r'
+import { PROD_LIST, CART_ADD, TOGGLE_LIKE } from '@/configs/config-r'
 import { shuffle } from 'lodash'
 // page
 import DefaultLayout from '@/components/common/default-layout'
@@ -21,11 +21,11 @@ import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
 // hook------
 import { useCart } from '@/hooks/use-cart'
+import { useLike } from '@/hooks/use-like'
 
 export default function RandomShop() {
   // Router-----
   const router = useRouter()
-  const qs = { ...router.query }
 
   // Products-----
   const [data, setData] = useState({
@@ -108,6 +108,72 @@ export default function RandomShop() {
     console.log(result)
     if (result.success) {
       notify(productData.p_name)
+    }
+  }
+
+  // Like
+  const { addProd, removeProdById } = useLike()
+  const notify2 = (productName) => {
+    const msgBox = (
+      <div>
+        <p>
+          <strong>{productName + ' 已加入收藏'}</strong>
+        </p>
+        <button
+          className={`btn mx-auto ${style.conneBtn}`}
+          style={{ backgroundColor: '#e96d3f', color: 'white' }}
+          onClick={() => {
+            router.push('/shop/like')
+          }}
+        >
+          連至 收藏清單
+        </button>
+      </div>
+    )
+    toast.success(msgBox)
+  }
+
+  const notify3 = (productName) => {
+    const msgBox = (
+      <div>
+        <p>
+          <strong>{productName + ' 已從收藏清單移除'}</strong>
+        </p>
+        <button
+          className={`btn mx-auto ${style.conneBtn}`}
+          style={{ backgroundColor: '#e96d3f', color: 'white' }}
+          onClick={() => {
+            router.push('/shop/like')
+          }}
+        >
+          連至 收藏清單
+        </button>
+      </div>
+    )
+    toast.success(msgBox)
+  }
+
+  const [isClicked, setIsClicked] = useState(false)
+
+  const likeClick = async (productData2) => {
+    const r = await fetch(`${TOGGLE_LIKE}/${productData2.product_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(productData2),
+    })
+    const result = await r.json()
+    console.log(result)
+    if (result.success) {
+      setIsClicked(!isClicked)
+      if (!isClicked) {
+        notify2(productData2.p_name)
+        addProd(productData2)
+      } else {
+        notify3(productData2.p_name)
+        removeProdById(productData2.product_id)
+      }
     }
   }
 
@@ -247,8 +313,30 @@ export default function RandomShop() {
                               }}
                             />
                           </button>
-                          <button className="btn">
-                            <AiOutlineHeart className={style.iconBInner} />
+                          <button
+                            className="btn"
+                            onClick={() => {
+                              const productData2 = {
+                                member_id: 1030,
+                                product_id: v.id,
+                                p_photos: v.product_photos,
+                                p_name: v.product_name,
+                                p_price: v.product_price,
+                                p_qty: 1,
+                                total_price: v.product_price,
+                                available_cp: v.mc ? v.mc : v.sc,
+                              }
+                              likeClick(productData2)
+                            }}
+                          >
+                            <AiOutlineHeart
+                              className={style.iconBInner}
+                              style={{
+                                color: isClicked && v.id ? '#e96d3f' : '',
+                                backgroundColor:
+                                  isClicked && v.id ? '#8e2626' : '',
+                              }}
+                            />
                           </button>
                           <Link href={`/shop?searchSub=${v.s}`} className="btn">
                             <IoSearch className={style.iconCInner} />
