@@ -31,7 +31,7 @@ import LogoutButton from '@/components/member/logout-button'
 import { useAuth } from '@/context/auth-context'
 import { useCart } from '@/hooks/use-cart'
 
-export default function CustomNavbar({ pageName = '' }) {
+export default function CustomNavbar({ lang, setLang, pageName = '' }) {
   const { totalItems } = useCart()
 
   // 會員的資料跟登入狀態
@@ -117,7 +117,6 @@ export default function CustomNavbar({ pageName = '' }) {
 
   // Router-----
   const router = useRouter()
-  const qs = { ...router.query }
 
   // top search input
   const onSearch = (e) => {
@@ -315,6 +314,7 @@ export default function CustomNavbar({ pageName = '' }) {
                     border: 'none',
                     color: '#8e2626',
                   }}
+                  value={lang}
                 >
                   <IoLanguage style={{ color: '#8e2626' }} />
                 </Dropdown.Toggle>
@@ -324,6 +324,12 @@ export default function CustomNavbar({ pageName = '' }) {
                   </Dropdown.Item>
                   <Dropdown.Item href="#/action-2" style={{ fontSize: '20px' }}>
                     &nbsp;<strong>．English</strong>
+                  </Dropdown.Item>
+                  <Dropdown.Item href="#/action-3" style={{ fontSize: '20px' }}>
+                    &nbsp;<strong>．Français</strong>
+                  </Dropdown.Item>
+                  <Dropdown.Item href="#/action-4" style={{ fontSize: '20px' }}>
+                    &nbsp;<strong>．日本語</strong>
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>

@@ -442,10 +442,10 @@ export default function Footer() {
                 className="form-select form-select-sm shadow-xl form-control"
                 aria-label=".form-select-sm example"
               >
-                <option selected>繁體中文(台灣)</option>
-                <option value="1">English</option>
-                <option value="2">Japanese</option>
-                <option value="3">Korean</option>
+                <option value="cn">繁體中文</option>
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+                <option value="jp">Japanese</option>
               </select>
             </div>
           </div>
