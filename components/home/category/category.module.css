@@ -1,0 +1,43 @@
+.sectionTitle {
+  content: "";
+  width:20%;
+  border-top: 3px dashed #8e2626;
+  margin-top: 20px;
+}
+
+.categoryArea {
+  background-color: white;
+  border: 4px solid #8e2626;
+}
+
+.line {
+  width: 45px;
+  height: auto;
+}
+
+.item {
+  box-shadow: 0 0 10px rgb(120, 119, 119);
+  overflow: hidden;
+  transform:scale(1,1);
+  transition: all 0.5s ease-out;
+  border-radius: 1px;
+}
+
+.txt:hover .item {
+  transform:scale(1.2,1.2);
+  border-radius: 1px;
+}
+
+.txt{
+  background-color: #FFFFFF;
+}
+
+.txt:hover {
+background-color: #e96d3f;
+color: #FFFFFF;
+border-radius: 1px;
+}
+
+.txt:hover .textBody{
+  color: #8e2626;
+}

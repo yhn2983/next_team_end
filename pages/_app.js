@@ -1,13 +1,23 @@
 import { useEffect } from 'react'
 import '@/styles/globals.scss'
+<<<<<<< HEAD
 import '@/styles/product.scss'
 import DefaultLayout from '@/components/common/default-layout'
+=======
+import { AuthContextProvider } from '@/context/auth-context'
+import { CartProvider } from '@/hooks/use-cart'
+>>>>>>> 153f21d6bdf566621c2acb5ffc3d78abecc18829
 
 export default function MyApp({ Component, pageProps }) {
   useEffect(() => {
-    // 要document物件出現後才能導入 bootstrap的js函式庫
     import('bootstrap/dist/js/bootstrap')
   }, [])
 
-  return <Component {...pageProps} />
+  return (
+    <AuthContextProvider>
+      <CartProvider>
+        <Component {...pageProps} />
+      </CartProvider>
+    </AuthContextProvider>
+  )
 }
