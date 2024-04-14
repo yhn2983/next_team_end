@@ -1,11 +1,7 @@
 import Head from 'next/head'
-<<<<<<< HEAD
-import Link from 'next/link'
-// import styles from '@/styles/home.module.css'
-=======
 import { useEffect, useState } from 'react'
 // parts of pages
->>>>>>> 153f21d6bdf566621c2acb5ffc3d78abecc18829
+
 import DefaultLayout from '@/components/common/default-layout'
 import CarouselS1 from '@/components/home/carousel/carousel'
 import Category from '@/components/home/category/category'

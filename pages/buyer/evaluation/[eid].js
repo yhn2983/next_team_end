@@ -1,10 +1,11 @@
 import React from 'react'
-import styles from '@/styles/evalute.module.css'
+import Styles from '@/styles/evalute.module.css'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { EVALUATION } from '@/configs/configs-buyer'
 import { EVALUATION_GET } from '@/configs/configs-buyer'
 import { useRouter } from 'next/router'
+import DefaultLayout from '@/components/common/default-layout'
 
 export default function Evaluation() {
   const router = useRouter()
@@ -93,120 +94,120 @@ export default function Evaluation() {
   return (
     <>
       {/* Contact Start */}
-
-      <div className="container-fluid">
-        <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4">
-          <span className="bg-secondary pr-3">評價訂單{eid}</span>
-        </h2>
-        <div className="row px-xl-5">
-          <div className="col-lg-7 mb-5">
-            <div className="contact-form bg-light p-30">
-              <div id="success" />
-              <form
-                name="sentMessage"
-                id="contactForm"
-                noValidate="novalidate"
-                onSubmit={onSubmit}
-              >
-                <div className="control-group">
-                  <div className="row product-line align-items-center">
-                    <div className="col-6">
-                      <Image
-                        src={`/${product.product_photos}`}
-                        className="img-fluid sec1-img"
-                        alt=""
-                        width={30}
-                        height={30}
-                      />
-                      <span>{product.product_name}</span>
+      <DefaultLayout>
+        <div className={`container-fluid ${Styles.evalution}`}>
+          <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4">
+            <span className="bg-secondary pr-3">評價訂單{eid}</span>
+          </h2>
+          <div className="row px-xl-5">
+            <div className="col-lg-7 mb-5">
+              <div className="contact-form bg-light p-30">
+                <div id="success" />
+                <form
+                  name="sentMessage"
+                  id="contactForm"
+                  noValidate="novalidate"
+                  onSubmit={onSubmit}
+                >
+                  <div className="control-group">
+                    <div className="row product-line align-items-center">
+                      <div className="col-6">
+                        <Image
+                          src={`/${product.product_photos}`}
+                          className="img-fluid sec1-img"
+                          alt=""
+                          width={30}
+                          height={30}
+                        />
+                        <span>{product.product_name}</span>
+                      </div>
+                      {/* <div className="col-3">$690</div> */}
+                      <div className="col-3">{product.seller_name}</div>
                     </div>
-                    {/* <div className="col-3">$690</div> */}
-                    <div className="col-3">{product.seller_name}</div>
-                  </div>
-                  <div>
-                    {/* 
+                    <div>
+                      {/* 
           這裡使用簡易建立5個陣列1...N的語法，可以參考:
           https://github.com/orgs/mfee-react/discussions/50 
         */}
-                    {Array(5)
-                      .fill(1)
-                      .map((v, i) => {
-                        // 每個星星按鈕的分數，相當於索引值+1
-                        const score = i + 1
+                      {Array(5)
+                        .fill(1)
+                        .map((v, i) => {
+                          // 每個星星按鈕的分數，相當於索引值+1
+                          const score = i + 1
 
-                        return (
-                          <button
-                            key={i}
-                            className={styles['star-btn']}
-                            onMouseEnter={() => {
-                              // 滑鼠游標移入時設定分數
-                              setHoverRating(score)
-                            }}
-                            // onMouseLeave={() => {
-                            //   // 滑鼠游標移出時設定分數
-                            //   setHoverRating(0)
-                            // }}
-                            onClick={(e) => {
-                              e.preventDefault()
-                              handleRatingClick(score)
-                            }}
-                          >
-                            <span
-                              // 判斷星星是否要點亮。
-                              // 如果這個星星的分數(score)小於等於目前的評分(rating)，或小於目前的滑鼠游標懸停(hover)評分，則套用亮起樣式
-                              className={
-                                score <= rating || score <= hoverRating
-                                  ? styles['on']
-                                  : styles['off']
-                              }
+                          return (
+                            <button
+                              key={i}
+                              className={Styles['star-btn']}
+                              onMouseEnter={() => {
+                                // 滑鼠游標移入時設定分數
+                                setHoverRating(score)
+                              }}
+                              // onMouseLeave={() => {
+                              //   // 滑鼠游標移出時設定分數
+                              //   setHoverRating(0)
+                              // }}
+                              onClick={(e) => {
+                                e.preventDefault()
+                                handleRatingClick(score)
+                              }}
                             >
-                              &#9733;
-                            </span>
-                          </button>
-                        )
-                      })}
-                  </div>
-                  <input value={rating} hidden />
-                  目前評了 {rating} 分
-                  <div>
-                    <div className="mb-3">
-                      <label htmlFor="comments">評論</label>
-                      <textarea
-                        className="form-control"
-                        name="comments"
-                        id="comments"
-                        cols="30"
-                        rows="3"
-                        value={formData.comments}
-                        onChange={(e) => {
-                          const newFormData = {
-                            ...formData,
-                            comments: e.target.value,
-                          }
-                          setFormData(newFormData)
-                        }}
-                      ></textarea>
+                              <span
+                                // 判斷星星是否要點亮。
+                                // 如果這個星星的分數(score)小於等於目前的評分(rating)，或小於目前的滑鼠游標懸停(hover)評分，則套用亮起樣式
+                                className={
+                                  score <= rating || score <= hoverRating
+                                    ? Styles['on']
+                                    : Styles['off']
+                                }
+                              >
+                                &#9733;
+                              </span>
+                            </button>
+                          )
+                        })}
                     </div>
-                    <button
-                      className="btn btn-primary py-2 px-4"
-                      type="submit"
-                      id="sendMessageButton"
-                    >
-                      送出評論
-                    </button>
-                    <button
-                      className="btn btn-primary py-2 px-4"
-                      type="button"
-                      id="sendMessageButton"
-                    >
-                      回上一頁
-                    </button>
+                    <input value={rating} hidden />
+                    目前評了 {rating} 分
+                    <div>
+                      <div className="mb-3">
+                        <label htmlFor="comments">評論</label>
+                        <textarea
+                          className="form-control"
+                          name="comments"
+                          id="comments"
+                          cols="30"
+                          rows="3"
+                          value={formData.comments}
+                          onChange={(e) => {
+                            const newFormData = {
+                              ...formData,
+                              comments: e.target.value,
+                            }
+                            setFormData(newFormData)
+                          }}
+                        ></textarea>
+                      </div>
+                      <button
+                        className={`btn btn-outline-danger py-2 px-4 ${Styles.btn}`}
+                        type="submit"
+                        id="sendMessageButton"
+                      >
+                        送出評論
+                      </button>
+                      <button
+                        className={`btn  py-2 px-4 ${Styles.btn}`}
+                        type="button"
+                        id="sendMessageButton"
+                      >
+                        回上一頁
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
-          </div>
-          {/* <div className="col-lg-5 mb-5">
+            {/* <div className="col-lg-5 mb-5">
             <div className="bg-light p-30 mb-30">
               <div id="map" style={{ width: '80%', height: 300 }} />
             </div>
@@ -225,8 +226,9 @@ export default function Evaluation() {
               </p>
             </div>
           </div> */}
+          </div>
         </div>
-      </div>
+      </DefaultLayout>
     </>
   )
 }

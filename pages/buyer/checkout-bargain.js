@@ -4,11 +4,12 @@ import { useRouter } from 'next/router'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import { BARGAIN_CHECKOUT } from '@/configs/configs-buyer'
+import { useAuth } from '@/context/auth-context'
 
 export default function Checkout() {
   const { id } = router.query
   const [show, setShow] = useState(false)
-
+  const { checkAuth, auth } = useAuth()
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
@@ -69,7 +70,11 @@ export default function Checkout() {
       console.log(newSellerId) // 输出新的 seller_id
     }
   }, [productData]) // 在 productData 更新时触发 useEffect
-
+  useEffect(() => {
+    if (auth.isAuth) {
+      setFormData({ ...formData, buyer_id: auth.data.id })
+    }
+  }, [auth])
   const formSubmit = async (e) => {
     e.preventDefault()
 

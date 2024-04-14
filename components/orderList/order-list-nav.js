@@ -12,13 +12,13 @@ export default function OrderListNav() {
 <input type="checkbox" name="check" id="checkBtn" /> */}
         <ul>
           <li>
-            <Link href="/order-list">全部訂單</Link>
+            <Link href="/buyer/order-list">全部訂單</Link>
           </li>
           <li>
-            <Link href="/order-list-unfinished">未完成</Link>
+            <Link href="/buyer/order-list-unfinished">未完成</Link>
           </li>
           <li>
-            <Link href="/order-list-finished">已完成</Link>
+            <Link href="//buyer/order-list-finished">已完成</Link>
           </li>
           <li>
             <a href="#">Contact</a>

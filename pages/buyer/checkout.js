@@ -4,14 +4,19 @@ import { useRouter } from 'next/router'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import { BARGAIN } from '@/configs/configs-buyer'
+import { useAuth } from '@/context/auth-context'
+import Head from 'next/head'
+import DefaultLayout from '@/components/common/default-layout'
+import Styles from '@/styles/buyer.module.css'
 
 export default function Checkout() {
   const [show, setShow] = useState(false)
-  const memberData = localStorage.getItem('')
+
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
-  const authStorageKey = 'shin-auth'
+
   const router = useRouter()
+  const { checkAuth, auth } = useAuth()
 
   // 取得商品資料表
   const [productData, setProductData] = useState({
@@ -85,7 +90,7 @@ export default function Checkout() {
 
   const [formData, setFormData] = useState({
     name: '',
-    class: '',
+    class: '1',
     shipment: '',
     payment_way: '',
     total_price: '0',
@@ -125,6 +130,12 @@ export default function Checkout() {
     }
   }, [productData]) // 在 productData 更新时触发 useEffect
 
+  useEffect(() => {
+    if (auth.isAuth) {
+      setFormData({ ...formData, buyer_id: auth.data.id })
+      setBargainData({ ...bargainData, buyer_id: auth.data.id })
+    }
+  }, [auth])
   const formSubmit = async (e) => {
     e.preventDefault()
 
@@ -146,16 +157,6 @@ export default function Checkout() {
     }
   }
 
-  useEffect(() => {
-    const str = localStorage.getItem(authStorageKey)
-    if (str) {
-      try {
-        const localState = JSON.parse(str)
-        setFormData({ ...formData, buyer_id: localState.id })
-        setBargainData({ ...bargainData, buyer_id: localState.id })
-      } catch (ex) {}
-    }
-  }, [])
   /*
   const fieldChanged = (e) => {
     const newFormData = { ...formData, [e.target.name]: e.target.value }
@@ -166,118 +167,127 @@ export default function Checkout() {
   console.log(formData)
   return (
     <>
-      {/* Checkout Start */}
-      <form name="form1" onSubmit={formSubmit}>
-        <div className="container-fluid">
-          <div className="row px-xl-5">
-            <div className="col-lg-8">
-              <h5 className="section-title position-relative text-uppercase mb-3">
-                <span className="bg-secondary pr-3">訂單資料</span>
-              </h5>
-              <div className="bg-light p-30 mb-5">
-                <div className="row">
-                  <div className="col-md-6 form-group">
-                    <label htmlFor="name">姓名</label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="取件姓名"
-                      name="name"
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          name: e.target.value,
-                        })
-                      }
-                      value={formData.name}
-                    />
-                  </div>
-                  <div className="col-md-6 form-group">
-                    <label htmlFor="class">類型</label>
-                    <select
-                      className="custom-select"
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          class: e.target.value,
-                        })
-                      }
-                      value={formData.class}
-                    >
-                      <option value="0">訂單分類</option>
-                      <option value="1">一般訂單</option>
-                      <option value="2">議價訂單</option>
-                    </select>
-                  </div>
-                  <div className="col-md-6 form-group">
-                    <label htmlFor="shipment">寄送方式</label>
-                    <select
-                      className="custom-select"
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          shipment: e.target.value,
-                        })
-                      }
-                      value={formData.shipment}
-                    >
-                      <option value="0"></option>
-                      <option value="超商店到店">超商店到店</option>
-                      <option value="物流寄送">物流寄送</option>
-                    </select>
-                  </div>
+      <DefaultLayout>
+        {/* Checkout Start */}
+        <Head>訂單結帳</Head>
+        <div className={`${Styles.checkout}`}>
+          <form name="form1" onSubmit={formSubmit}>
+            <div className={`container-fluid `}>
+              <div className="row px-xl-5">
+                <div className="col-lg-8">
+                  <h5
+                    className={`section-title position-relative text-uppercase mb-3`}
+                  >
+                    <span className="bg-secondary pr-3">訂單資料</span>
+                  </h5>
+                  <div className="bg-light p-30 mb-5">
+                    <div className="row">
+                      <div className="col-md-6 form-group">
+                        <label htmlFor="name">姓名</label>
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder="取件姓名"
+                          name="name"
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              name: e.target.value,
+                            })
+                          }
+                          value={formData.name}
+                        />
+                      </div>
+                      <div className="col-md-6 form-group">
+                        <label htmlFor="class">類型</label>
+                        <div>
+                          <select
+                            className="custom-select"
+                            onChange={(e) =>
+                              setFormData({
+                                ...formData,
+                                class: e.target.value,
+                              })
+                            }
+                            value={formData.class}
+                          >
+                            <option value="1">一般訂單</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div className="col-md-6 form-group">
+                        <label htmlFor="total_amount">數量</label>
+                        <input
+                          className="form-control"
+                          type="number"
+                          min="1"
+                          placeholder="請選擇數量"
+                          name="total_amount"
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              total_amount: e.target.value,
+                            })
+                          }
+                          value={formData.total_amount}
+                        />
+                      </div>
+                      <div className="col-md-6 form-group">
+                        <label htmlFor="shipment">寄送方式</label>
+                        <div>
+                          <select
+                            className="custom-select"
+                            onChange={(e) =>
+                              setFormData({
+                                ...formData,
+                                shipment: e.target.value,
+                              })
+                            }
+                            value={formData.shipment}
+                          >
+                            <option value="0"></option>
+                            <option value="超商店到店">超商店到店</option>
+                            <option value="物流寄送">物流寄送</option>
+                          </select>
+                        </div>
+                      </div>
 
-                  <div className="col-md-6 form-group">
-                    <label htmlFor="total_amount">數量</label>
-                    <input
-                      className="form-control"
-                      type="number"
-                      min="1"
-                      placeholder="請選擇數量"
-                      name="total_amount"
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          total_amount: e.target.value,
-                        })
-                      }
-                      value={formData.total_amount}
-                    />
-                  </div>
-                  <div className="col-md-6 form-group">
-                    <label htmlFor="address">地址</label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="請輸入地址"
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          address: e.target.value,
-                        })
-                      }
-                      value={formData.address}
-                    />
-                  </div>
-                  <div className="col-md-6 form-group">
-                    <label htmlFor="discount_coupon">優惠卷</label>
-                    <select
-                      className="custom-select"
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          discount_coupon: e.target.value,
-                        })
-                      }
-                      value={formData.discount_coupon}
-                    >
-                      <option value="0">選擇優惠卷</option>
-                      <option value="1">運費半價</option>
-                      <option value="2">免運</option>
-                    </select>
-                  </div>
+                      <div className="col-md-6 form-group">
+                        <label htmlFor="address">地址</label>
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder="請輸入地址"
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              address: e.target.value,
+                            })
+                          }
+                          value={formData.address}
+                        />
+                      </div>
+                      <div className="col-md-6 form-group">
+                        <label htmlFor="discount_coupon">優惠卷</label>
+                        <div>
+                          <select
+                            className="custom-select"
+                            onChange={(e) =>
+                              setFormData({
+                                ...formData,
+                                discount_coupon: e.target.value,
+                              })
+                            }
+                            value={formData.discount_coupon}
+                          >
+                            <option value="0">選擇優惠卷</option>
+                            <option value="1">運費半價</option>
+                            <option value="2">免運</option>
+                          </select>
+                        </div>
+                      </div>
 
-                  {/* <div className="col-md-12 form-group">
+                      {/* <div className="col-md-12 form-group">
                   <div className="custom-control custom-checkbox">
                     <input
                       type="checkbox"
@@ -292,7 +302,7 @@ export default function Checkout() {
                     </label>
                   </div>
                 </div> */}
-                  {/* <div className="col-md-12">
+                      {/* <div className="col-md-12">
                   <div className="custom-control custom-checkbox">
                     <input
                       type="checkbox"
@@ -309,130 +319,135 @@ export default function Checkout() {
                     </label>
                   </div>
                 </div> */}
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4">
-              <h5 className="section-title position-relative text-uppercase mb-3">
-                <span className="bg-secondary pr-3">Order Total</span>
-              </h5>
-              <div className="bg-light p-30 mb-5">
-                <div className="border-bottom">
-                  <h6 className="mb-3">Products</h6>
-                  {productData.rows &&
-                    productData.rows.map((v) => {
-                      return (
-                        <div
-                          className="d-flex justify-content-between"
-                          key={v.id}
-                        >
-                          <p>{v.product_name}</p>
-                          <input
-                            value={v.product_price}
-                            readonly
-                            name={`${v.product_price}`}
-                          />{' '}
-                        </div>
-                      )
-                    })}
-                  <div className="d-flex justify-content-between">
-                    <p>Product Name 2</p>
-                    <p>$150</p>
-                  </div>
-                  <div className="d-flex justify-content-between">
-                    <p>Product Name 3</p>
-                    <p>$150</p>
-                  </div>{' '}
-                </div>{' '}
-                <div className="pt-2">
-                  <div className="d-flex justify-content-between mt-2">
-                    <h5>Total</h5>
-                    <h5>$160</h5>
+                    </div>
                   </div>
                 </div>
-                <div className="d-flex justify-content-between mt-2">
-                  <p></p>
-                  <Button variant="primary" onClick={handleShow}>
-                    提出議價
-                  </Button>
-                </div>
-              </div>
-              <div className="mb-5">
-                <h5 className="section-title position-relative text-uppercase mb-3">
-                  <span className="bg-secondary pr-3">Payment</span>
-                </h5>
-                <div className="bg-light p-30">
-                  <div className="col-md form-group">
-                    <label htmlFor="payment_way">付款方式</label>
-                    <select
-                      className="custom-select"
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          payment_way: e.target.value,
-                        })
-                      }
-                      value={formData.payment_way}
-                    >
-                      <option value="0"></option>
-                      <option value="1">信用卡</option>
-                      <option value="2">貨到付款</option>
-                    </select>
-                  </div>
-
-                  <button
-                    className="btn btn-block btn-primary font-weight-bold py-3"
-                    type="submit"
+                <div className="col-lg-4">
+                  <h5
+                    className={`section-title position-relative text-uppercase mb-3`}
                   >
-                    送出訂單
-                  </button>
+                    <span className="bg-secondary pr-3">Order Total</span>
+                  </h5>
+                  <div className="bg-light p-30 mb-5">
+                    <div className="border-bottom">
+                      <h6 className="mb-3">Products</h6>
+                      {productData.rows &&
+                        productData.rows.map((v) => {
+                          return (
+                            <div
+                              className="d-flex justify-content-between"
+                              key={v.id}
+                            >
+                              <p>{v.product_name}</p>
+                              <input
+                                value={v.product_price}
+                                readonly
+                                name={`${v.product_price}`}
+                              />{' '}
+                            </div>
+                          )
+                        })}
+                      <div className="d-flex justify-content-between">
+                        <p>Product Name 2</p>
+                        <p>$150</p>
+                      </div>
+                      <div className="d-flex justify-content-between">
+                        <p>Product Name 3</p>
+                        <p>$150</p>
+                      </div>{' '}
+                    </div>{' '}
+                    <div className="pt-2">
+                      <div className="d-flex justify-content-between mt-2">
+                        <h5>Total</h5>
+                        <h5>$160</h5>
+                      </div>
+                    </div>
+                    <div className="d-flex justify-content-between mt-2">
+                      <p></p>
+                      <Button variant="primary" onClick={handleShow}>
+                        提出議價
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="mb-5">
+                    <h5
+                      className={`section-title position-relative text-uppercase mb-3`}
+                    >
+                      <span className="bg-secondary pr-3">Payment</span>
+                    </h5>
+                    <div className="bg-light p-30">
+                      <div className="col-md form-group">
+                        <label htmlFor="payment_way">付款方式</label>
+                        <select
+                          className="custom-select"
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              payment_way: e.target.value,
+                            })
+                          }
+                          value={formData.payment_way}
+                        >
+                          <option value="0"></option>
+                          <option value="1">信用卡</option>
+                          <option value="2">貨到付款</option>
+                        </select>
+                      </div>
+                      <div className="d-flex justify-content-between mt-2">
+                        <p></p>
+                        <Button className="primary" type="submit">
+                          送出訂單
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </form>
-
-      <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>想要議價</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form name="form2" onSubmit={SubmitBargain}>
-            <div className="mb-3">
-              <label htmlFor="price" className="form-label">
-                期望價格:
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="exampleInputPassword1"
-                onChange={(e) => {
-                  setBargainData({
-                    ...bargainData,
-                    after_bargin_price: e.target.value,
-                  })
-                }}
-                value={bargainData.after_bargin_price}
-              />
-            </div>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                取消
-              </Button>
-              <Button variant="primary" type="submit">
-                提出議價
-              </Button>
-            </Modal.Footer>
           </form>
-        </Modal.Body>
-      </Modal>
-      {/* Checkout End */}
+        </div>
+
+        <Modal
+          show={show}
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>想要議價</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form name="form2" onSubmit={SubmitBargain}>
+              <div className="mb-3">
+                <label htmlFor="price" className="form-label">
+                  期望價格:
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="exampleInputPassword1"
+                  onChange={(e) => {
+                    setBargainData({
+                      ...bargainData,
+                      after_bargin_price: e.target.value,
+                    })
+                  }}
+                  value={bargainData.after_bargin_price}
+                />
+              </div>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  取消
+                </Button>
+                <Button variant="primary" type="submit">
+                  提出議價
+                </Button>
+              </Modal.Footer>
+            </form>
+          </Modal.Body>
+        </Modal>
+        {/* Checkout End */}
+      </DefaultLayout>
     </>
   )
 }
