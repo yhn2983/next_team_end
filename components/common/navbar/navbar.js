@@ -218,7 +218,7 @@ export default function CustomNavbar({ pageName = '' }) {
                   {auth.isAuth ? (
                     <>
                       <Dropdown.Item
-                        href="./member/profile"
+                        href="/member/profile"
                         style={{ fontSize: '20px' }}
                       >
                         <FaCircleUser

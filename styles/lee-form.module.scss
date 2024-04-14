@@ -1,4 +1,6 @@
 @import './variables.scss';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 
 .error{
   color: red;
@@ -297,4 +299,132 @@
       background: $dark !important;
       color: $light;
     }
+}
+
+.chat__footer{
+  padding: 10px;
+  background-color: #f9f5eb;
+  height: 10vh;
+  .form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .message {
+    width: 80%;
+    height: 100%;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    outline: none;
+    padding: 15px;
+  }
+
+  .sendBtn {
+    width: 110px;
+    background-color:$primary;
+    padding: 8px;
+    border: none;
+    outline: none;
+    border-radius: 0.2rem;
+    color: #eae3d2;
+    cursor: pointer;
+    &:hover {
+      background-color: $dark;
+    }
+  }
+}
+
+.chat__mainHeader {
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #f9f5eb;
+  .leaveChat__btn {
+    padding: 9px;
+    width: 130px;
+    border: none;
+    outline: none;
+    border-radius: 0.2rem;
+    background-color: rgb(126, 186, 234);
+    cursor: pointer;
+    color: #eae3d2;
+    &:hover {
+      background-color: $dark;
+    }
+  }
+}
+
+.message__container > * {
+  margin-bottom: 10px;
+}
+
+.message__container{
+  height: 80vh;
+}
+
+.message__chats {
+  > p {
+    font-size: 13px;
+  }
+
+  .sender__name {
+    text-align: right;
+  }
+
+  .message__sender {
+    background-color: rgb(194, 243, 194);
+    max-width: 300px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: auto;
+    font-size: 15px;
+  }
+}
+
+.message__recipient {
+  background-color: #f5ccc2;
+  width: 300px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.message__status {
+  position: fixed;
+  bottom: 50px;
+  font-size: 13px;
+  font-style: italic;
+}
+
+.chat__sidebar {
+  height: 100%;
+  background-color: #f9f5eb;
+  flex: 0.15;
+  padding: 10px;
+  border-right: 1px solid #fdfdfd;
+  .chat__header {
+    margin: 30px 0 20px 0;
+  }
+  .chat__users > * {
+    margin-bottom: 10px;
+    color: #607eaa;
+    font-size: 14px;
+  }
+}
+
+.chat {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.chat__main {
+  height: 100%;
+  flex: 0.85;
 }
