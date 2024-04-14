@@ -1,0 +1,55 @@
+
+
+
+
+/* star 星星 */
+.rating {
+  display: inline-block;
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+.rating input {
+  display: none;
+}
+.rating label {
+  float: right;
+  padding: 0;
+  margin: 0;
+  font-size: 40px;
+  color: #ccc;
+  cursor: pointer;
+}
+.rating label:hover,
+.rating label:hover ~ label {
+  color: #ffd700;
+}
+.rating input:checked ~ label,
+.rating:not(:checked) > label:hover ~ label {
+  color: #ffd700;
+}
+.rating input:checked ~ label:hover,
+.rating input:checked ~ label:hover ~ label,
+.rating label:hover ~ input:checked {
+  color: #ffd700;
+}
+
+
+/* 老師的星星 */
+.on {
+  color: gold;
+}
+
+.off {
+  color: gray;
+}
+
+.good-style{
+  color:red;
+}
+
+.star-btn{
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
