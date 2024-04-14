@@ -47,17 +47,6 @@ export default function Like() {
     toast.success(msgBox)
   }
 
-  const notifyNoAdd = (productName) => {
-    const msgBox2 = (
-      <div>
-        <span>
-          <strong>{productName + ' 已下架，不可加入購物車'}</strong>
-        </span>
-      </div>
-    )
-    toast.error(msgBox2)
-  }
-
   const cartClick = async (productData) => {
     const r = await fetch(`${CART_ADD}/${productData.product_id}`, {
       method: 'POST',
@@ -70,6 +59,18 @@ export default function Like() {
     console.log(result)
     if (result.success) {
       notify(productData.p_name)
+      removeProdById(productData.product_id)
+      fetch(`${TOGGLE_LIKE}/${productData.product_id}`, {
+        method: 'DELETE',
+      })
+        .then((r) => r.json())
+        .then((result) => {
+          console.log(result)
+          router.push(location.search)
+        })
+        .catch((error) => {
+          console.error('Error deleting item:', error)
+        })
     }
   }
 
@@ -188,22 +189,18 @@ export default function Like() {
                               style={{ border: 'none' }}
                               className="btn btn-sm"
                               onClick={() => {
-                                if (v.status == '1') {
-                                  addItem(v)
-                                  const productData = {
-                                    product_id: v.product_id,
-                                    p_photos: v.p_photos,
-                                    p_name: v.p_name,
-                                    p_price: v.p_price,
-                                    p_qty: 1,
-                                    total_price: v.p_price,
-                                    available_cp: v.mc ? v.mc : v.sc,
-                                  }
-                                  console.log(productData)
-                                  cartClick(productData)
-                                } else {
-                                  notifyNoAdd(v.p_name)
+                                addItem(v)
+                                const productData = {
+                                  product_id: v.product_id,
+                                  p_photos: v.p_photos,
+                                  p_name: v.p_name,
+                                  p_price: v.p_price,
+                                  p_qty: 1,
+                                  total_price: v.p_price,
+                                  available_cp: v.available_cp,
                                 }
+                                console.log(productData)
+                                cartClick(productData)
                               }}
                             >
                               <FaCartPlus
