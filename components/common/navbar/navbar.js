@@ -528,23 +528,23 @@ export default function CustomNavbar({ pageName = '' }) {
                       </strong>
                     </Nav.Link>
                     <Nav.Link
-                      href="#"
-                      className={`nav-item nav-link me-3 ${
-                        pageName === 'coupon' ? 'active' : ''
-                      }`}
-                    >
-                      <strong>
-                        <span style={{ fontSize: '19px' }}>領取優惠券</span>
-                      </strong>
-                    </Nav.Link>
-                    <Nav.Link
                       href="/contact-us"
-                      className={`nav-item nav-link ${
+                      className={`nav-item nav-link me-3 ${
                         pageName === 'contactUs' ? 'active' : ''
                       }`}
                     >
                       <strong>
                         <span style={{ fontSize: '19px' }}>聯絡我們</span>
+                      </strong>
+                    </Nav.Link>
+                    <Nav.Link
+                      href="#"
+                      className={`nav-item nav-link ${
+                        pageName === 'coupon' ? 'active' : ''
+                      }`}
+                    >
+                      <strong>
+                        <span style={{ fontSize: '19px' }}>領取優惠券</span>
                       </strong>
                     </Nav.Link>
                   </Nav>
