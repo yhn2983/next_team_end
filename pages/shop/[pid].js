@@ -42,7 +42,8 @@ export default function Detail() {
   })
 
   useEffect(() => {
-    fetch(`${PROD_LIST}${location.search}`)
+    const member_id = auth.userData.id
+    fetch(`${PROD_LIST}${location.search}?member_id=${member_id}`)
       .then((r) => r.json())
       .then((dataObj) => {
         setData(dataObj)
@@ -50,7 +51,7 @@ export default function Detail() {
       .catch((error) => {
         console.error('Error fetching data:', error)
       })
-  }, [router.query])
+  }, [router.query, router.isReady])
 
   const [product, setProduct] = useState({
     data: {
@@ -186,13 +187,17 @@ export default function Detail() {
   const [isClicked, setIsClicked] = useState(false)
 
   const likeClick = async (productData2) => {
-    const r = await fetch(`${TOGGLE_LIKE}/${productData2.product_id}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(productData2),
-    })
+    const member_id = auth.userData.id
+    const r = await fetch(
+      `${TOGGLE_LIKE}/${productData2.product_id}?member_id=${member_id}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(productData2),
+      }
+    )
     const result = await r.json()
     console.log(result)
     if (result.success) {
@@ -463,6 +468,7 @@ export default function Detail() {
                         if (product.data.status == '1') {
                           addItem(product.data)
                           const productData = {
+                            member_id: auth.userData.id,
                             product_id: product.data.id,
                             p_photos: product.data.product_photos,
                             p_name: product.data.product_name,
@@ -491,7 +497,7 @@ export default function Detail() {
                       style={{ backgroundColor: '#d76767', border: 'none' }}
                       onClick={() => {
                         const productData2 = {
-                          member_id: 1030,
+                          member_id: auth.userData.id,
                           product_id: product.data.id,
                           p_photos: product.data.product_photos,
                           p_name: product.data.product_name,
@@ -606,6 +612,7 @@ export default function Detail() {
                               if (v.status == '1') {
                                 addItem(v)
                                 const productData = {
+                                  member_id: auth.userData.id,
                                   product_id: v.id,
                                   p_photos: v.product_photos,
                                   p_name: v.product_name,
@@ -627,7 +634,7 @@ export default function Detail() {
                             className="btn"
                             onClick={() => {
                               const productData2 = {
-                                member_id: 1030,
+                                member_id: auth.userData.id,
                                 product_id: v.id,
                                 p_photos: v.product_photos,
                                 p_name: v.product_name,

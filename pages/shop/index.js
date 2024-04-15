@@ -27,14 +27,14 @@ import LoadingBar from 'react-top-loading-bar'
 // hook------
 import { useCart } from '@/hooks/use-cart'
 import { useLike } from '@/hooks/use-like'
-//import { useAuth } from '@/context/auth-context'
+import { useAuth } from '@/context/auth-context'
 
 export default function Shop() {
+  // Member
+  const { checkAuth, auth } = useAuth()
   // Router-----
   const router = useRouter()
   const qs = { ...router.query }
-  // Auth-----
-  // const { auth, getAuthHeader } = useAuth()
 
   // Products-----
   const [data, setData] = useState({
@@ -447,13 +447,17 @@ export default function Shop() {
   const [isClicked, setIsClicked] = useState(false)
 
   const likeClick = async (productData2) => {
-    const r = await fetch(`${TOGGLE_LIKE}/${productData2.product_id}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(productData2),
-    })
+    const member_id = auth.userData.id
+    const r = await fetch(
+      `${TOGGLE_LIKE}/${productData2.product_id}?member_id=${member_id}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(productData2),
+      }
+    )
     const result = await r.json()
     console.log(result)
     if (result.success) {
@@ -1105,6 +1109,7 @@ export default function Shop() {
                                   if (v.status == '1') {
                                     addItem(v)
                                     const productData = {
+                                      member_id: auth.userData.id,
                                       product_id: v.id,
                                       p_photos: v.product_photos,
                                       p_name: v.product_name,
@@ -1126,7 +1131,7 @@ export default function Shop() {
                                 className="btn"
                                 onClick={() => {
                                   const productData2 = {
-                                    member_id: 1030,
+                                    member_id: auth.userData.id,
                                     product_id: v.id,
                                     p_photos: v.product_photos,
                                     p_name: v.product_name,

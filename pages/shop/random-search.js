@@ -22,6 +22,7 @@ import LoadingBar from 'react-top-loading-bar'
 // hook------
 import { useCart } from '@/hooks/use-cart'
 import { useLike } from '@/hooks/use-like'
+import { useAuth } from '@/context/auth-context'
 
 export default function RandomShop() {
   // Router-----
@@ -156,13 +157,17 @@ export default function RandomShop() {
   const [isClicked, setIsClicked] = useState(false)
 
   const likeClick = async (productData2) => {
-    const r = await fetch(`${TOGGLE_LIKE}/${productData2.product_id}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(productData2),
-    })
+    const member_id = auth.userData.id
+    const r = await fetch(
+      `${TOGGLE_LIKE}/${productData2.product_id}?member_id=${member_id}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(productData2),
+      }
+    )
     const result = await r.json()
     console.log(result)
     if (result.success) {
@@ -176,6 +181,9 @@ export default function RandomShop() {
       }
     }
   }
+
+  // Member
+  const { checkAuth, auth } = useAuth()
 
   // Loading bar-----
   const [isLoading, setIsLoading] = useState(true)
@@ -297,6 +305,7 @@ export default function RandomShop() {
                                 if (v.status == '1') {
                                   addItem(v)
                                   const productData = {
+                                    member_id: auth.userData.id,
                                     product_id: v.id,
                                     p_photos: v.product_photos,
                                     p_name: v.product_name,
@@ -317,7 +326,7 @@ export default function RandomShop() {
                             className="btn"
                             onClick={() => {
                               const productData2 = {
-                                member_id: 1030,
+                                member_id: auth.userData.id,
                                 product_id: v.id,
                                 p_photos: v.product_photos,
                                 p_name: v.product_name,
@@ -344,7 +353,7 @@ export default function RandomShop() {
                         </div>
                       </div>
                       <Link
-                        href={`/shop/detail?pid=${v.id}`}
+                        href={`/shop/${v.id}`}
                         style={{ textDecoration: 'none', color: 'black' }}
                       >
                         <div

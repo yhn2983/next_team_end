@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { PROD_LIST } from '@/configs/config-r'
+import { useAuth } from '@/context/auth-context'
 
 const LikeContext = createContext(null)
 
@@ -8,13 +9,19 @@ export function LikeProvider({ children }) {
   //Router
   const router = useRouter()
 
+  // Member
+  const { checkAuth, auth } = useAuth()
+
   // Like products
   const [prods, setProds] = useState({ likeProd: [] })
 
   useEffect(() => {
     const fetchLikeData = async () => {
       try {
-        const r = await fetch(`${PROD_LIST}${location.search}`)
+        const member_id = auth.userData.id
+        const r = await fetch(
+          `${PROD_LIST}${location.search}?member_id=${member_id}`
+        )
         if (r.ok) {
           const dataObj = await r.json()
           setProds(dataObj)
@@ -27,7 +34,7 @@ export function LikeProvider({ children }) {
       }
     }
     fetchLikeData()
-  }, [router.query])
+  }, [router.query, router.isReady, auth])
 
   // increment of qty
   const increment2 = (prods, id) => {

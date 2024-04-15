@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { PROD_LIST } from '@/configs/config-r'
+import { useAuth } from '@/context/auth-context'
 
 const CartContext = createContext(null)
 
@@ -8,13 +9,19 @@ export function CartProvider({ children }) {
   //Router
   const router = useRouter()
 
+  // Member
+  const { checkAuth, auth } = useAuth()
+
   // cart products
   const [items, setItems] = useState({ cartProd: [] })
 
   useEffect(() => {
     const fetchCartData = async () => {
       try {
-        const r = await fetch(`${PROD_LIST}${location.search}`)
+        const member_id = auth.userData.id
+        const r = await fetch(
+          `${PROD_LIST}${location.search}?member_id=${member_id}`
+        )
         if (r.ok) {
           const dataObj = await r.json()
           setItems(dataObj)
@@ -27,7 +34,7 @@ export function CartProvider({ children }) {
       }
     }
     fetchCartData()
-  }, [router.query])
+  }, [router.query, router.isReady, auth])
 
   // increment of qty
   const increment = (items, id) => {

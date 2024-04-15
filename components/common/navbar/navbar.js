@@ -548,31 +548,63 @@ export default function CustomNavbar({ pageName = '' }) {
                       </strong>
                     </Nav.Link>
                   </Nav>
-                  <Nav className="navbar-nav ml-auto py-0 d-none d-lg-block">
-                    <div className="d-flex">
-                      <Nav.Link href="/shop/like" className="btn px-0">
-                        <FaHeart
-                          className="me-1"
-                          style={{ color: 'white', fontSize: '20px' }}
-                        />
-                        <span className="badge text-light border border-light rounded-circle mt-3">
-                          {totalProds}
-                        </span>
-                      </Nav.Link>
-                      <Nav.Link
-                        href="/shop/cart"
-                        className="btn px-0 ml-3 ms-3"
-                      >
-                        <FaShoppingCart
-                          className="me-1"
-                          style={{ color: 'white', fontSize: '20px' }}
-                        />
-                        <span className="badge text-light border border-light rounded-circle mt-3">
-                          {totalItems}
-                        </span>
-                      </Nav.Link>
-                    </div>
-                  </Nav>
+                  {auth.isAuth ? (
+                    <>
+                      <Nav className="navbar-nav ml-auto py-0 d-none d-lg-block">
+                        <div className="d-flex">
+                          <Nav.Link href="/shop/like" className="btn px-0">
+                            <FaHeart
+                              className="me-1"
+                              style={{ color: 'white', fontSize: '20px' }}
+                            />
+                            <span className="badge text-light border border-light rounded-circle mt-3">
+                              {totalProds}
+                            </span>
+                          </Nav.Link>
+                          <Nav.Link
+                            href={`/shop/cart`}
+                            className="btn px-0 ml-3 ms-3"
+                          >
+                            <FaShoppingCart
+                              className="me-1"
+                              style={{ color: 'white', fontSize: '20px' }}
+                            />
+                            <span className="badge text-light border border-light rounded-circle mt-3">
+                              {totalItems}
+                            </span>
+                          </Nav.Link>
+                        </div>
+                      </Nav>
+                    </>
+                  ) : (
+                    <>
+                      <Nav className="navbar-nav ml-auto py-0 d-none d-lg-block">
+                        <div className="d-flex">
+                          <Nav.Link href="/shop/like" className="btn px-0">
+                            <FaHeart
+                              className="me-1"
+                              style={{ color: 'white', fontSize: '20px' }}
+                            />
+                            <span className="badge text-light border border-light rounded-circle mt-3">
+                              0
+                            </span>
+                          </Nav.Link>
+                          <Nav.Link
+                            href={`/shop/cart`}
+                            className="btn px-0 ml-3 ms-3"
+                          >
+                            <FaShoppingCart
+                              className="me-1"
+                              style={{ color: 'white', fontSize: '20px' }}
+                            />
+                            <span className="badge text-light border border-light rounded-circle mt-3">
+                              0
+                            </span>
+                          </Nav.Link>
+                        </div>
+                      </Nav>
+                    </>
+                  )}
                 </div>
               </Navbar.Collapse>
             </Navbar>

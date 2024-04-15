@@ -16,11 +16,11 @@ import { IoSearch } from 'react-icons/io5'
 // hook------
 import { useCart } from '@/hooks/use-cart'
 import { useLike } from '@/hooks/use-like'
+import { useAuth } from '@/context/auth-context'
 
 export default function ProdB() {
   // Router-----
   const router = useRouter()
-  const qs = { ...router.query }
 
   // Products-----
   const [data, setData] = useState({
@@ -151,13 +151,17 @@ export default function ProdB() {
   const [isClicked, setIsClicked] = useState(false)
 
   const likeClick = async (productData2) => {
-    const r = await fetch(`${TOGGLE_LIKE}/${productData2.product_id}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(productData2),
-    })
+    const member_id = auth.userData.id
+    const r = await fetch(
+      `${TOGGLE_LIKE}/${productData2.product_id}?member_id=${member_id}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(productData2),
+      }
+    )
     const result = await r.json()
     console.log(result)
     if (result.success) {
@@ -171,6 +175,9 @@ export default function ProdB() {
       }
     }
   }
+
+  // Member
+  const { checkAuth, auth } = useAuth()
 
   return (
     <>
@@ -261,6 +268,7 @@ export default function ProdB() {
                             if (v.status == '1') {
                               addItem(v)
                               const productData = {
+                                member_id: auth.userData.id,
                                 product_id: v.id,
                                 p_photos: v.product_photos,
                                 p_name: v.product_name,
@@ -282,7 +290,7 @@ export default function ProdB() {
                           className="btn"
                           onClick={() => {
                             const productData2 = {
-                              member_id: 1030,
+                              member_id: auth.userData.id,
                               product_id: v.id,
                               p_photos: v.product_photos,
                               p_name: v.product_name,
