@@ -132,10 +132,12 @@ export default function Checkout() {
 
   useEffect(() => {
     if (auth.isAuth) {
-      setFormData({ ...formData, buyer_id: auth.data.id })
-      setBargainData({ ...bargainData, buyer_id: auth.data.id })
+      setFormData({ ...formData, buyer_id: auth.userData.id })
+      setBargainData({ ...bargainData, buyer_id: auth.userData.id })
     }
   }, [auth])
+  console.log({ auth })
+  console.log({ formData })
   const formSubmit = async (e) => {
     e.preventDefault()
 
@@ -195,7 +197,7 @@ export default function Checkout() {
                               name: e.target.value,
                             })
                           }
-                          value={formData.name}
+                          value={auth.userData.nickname}
                         />
                       </div>
                       <div className="col-md-6 form-group">

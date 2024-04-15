@@ -72,10 +72,11 @@ export default function CheckoutBargain() {
   }, [productData]) // 在 productData 更新时触发 useEffect
   useEffect(() => {
     if (auth.isAuth) {
-      setFormData({ ...formData, buyer_id: auth.data.id })
+      setFormData({ ...formData, buyer_id: auth.userData.id })
     }
   }, [auth])
-  console.log(productData)
+
+  console.log(auth)
   const formSubmit = async (e) => {
     e.preventDefault()
 
@@ -132,7 +133,7 @@ export default function CheckoutBargain() {
                               name: e.target.value,
                             })
                           }
-                          value={formData.name}
+                          value={auth.userData.nickname}
                         />
                       </div>
                       <div className="col-md-6 form-group">
