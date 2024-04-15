@@ -167,7 +167,7 @@ export default function Category() {
                           if (i3 == i) {
                             return (
                               <>
-                                <small className={style.textBody}>
+                                <small className={`ms-1 ${style.textBody}`}>
                                   {v3} 件商品
                                 </small>
                               </>
