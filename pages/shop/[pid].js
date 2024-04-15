@@ -57,6 +57,7 @@ export default function Detail() {
       id: 0,
       product_photos: '',
       product_name: '',
+      seller_id: 0,
       sellerName: '',
       product_price: 0,
       product_qty: 0,
@@ -72,6 +73,8 @@ export default function Detail() {
   useEffect(() => {
     fetchProductData()
   }, [router.query.pid])
+
+  console.log(product.data.seller_id)
 
   const fetchProductData = () => {
     const { pid } = router.query
@@ -620,8 +623,30 @@ export default function Detail() {
                           >
                             <BsFillCartFill className={style.iconAInner} />
                           </button>
-                          <button className="btn">
-                            <AiOutlineHeart className={style.iconBInner} />
+                          <button
+                            className="btn"
+                            onClick={() => {
+                              const productData2 = {
+                                member_id: 1030,
+                                product_id: v.id,
+                                p_photos: v.product_photos,
+                                p_name: v.product_name,
+                                p_price: v.product_price,
+                                p_qty: 1,
+                                total_price: v.product_price,
+                                available_cp: v.mc ? v.mc : v.sc,
+                              }
+                              likeClick(productData2)
+                            }}
+                          >
+                            <AiOutlineHeart
+                              className={style.iconBInner}
+                              style={{
+                                color: isClicked && v.id ? '#e96d3f' : '',
+                                backgroundColor:
+                                  isClicked && v.id ? '#8e2626' : '',
+                              }}
+                            />
                           </button>
                           <Link href={`/shop?searchSub=${v.s}`} className="btn">
                             <IoSearch className={style.iconCInner} />
@@ -702,63 +727,55 @@ export default function Detail() {
                     className={`border border-2 border-secondary rounded overflow-auto ${style.barterRight}`}
                   >
                     <div className="row mt-3 px-2">
-                      {data.rows.map((v, i) => {
-                        if (product.data.sellerName == v.sellerName) {
-                          return (
-                            <>
-                              <div className="col-lg-4 col-sm-12 mb-3">
-                                <div
-                                  className={`d-flex flex-column border border-1 border-secondary mx-auto ${style.prod}`}
-                                >
-                                  <div className="d-flex justify-content-center">
-                                    <img
-                                      className={style.prodPic}
-                                      src={
-                                        v.product_photos.includes(',')
-                                          ? `/${v.product_photos.split(',')[0]}`
-                                          : `/${v.product_photos}`
-                                      }
-                                      alt={v.product_name}
-                                      width={150}
-                                      height={120}
-                                      title={v.product_name}
-                                    />
-                                  </div>
-                                  <div className="d-flex justify-content-center px-2">
-                                    <div className="form-check">
-                                      <input
-                                        className="form-check-input"
-                                        type="checkbox"
-                                        name="bartItmeA"
-                                        id="flexCheckDefault"
-                                        checked={isbarterItemA}
-                                        onChange={(e) => {
-                                          if (!isbarterItemA) {
-                                            setIsBarterItemA(
-                                              e.currentTarget.checked
-                                            )
-                                            const formDataA = {
-                                              m1: v.seller_id,
-                                              product_id1: v.id,
-                                              cps_available_m1: v.mc
-                                                ? v.mc
-                                                : v.sc,
-                                            }
-                                            setItemFormData(formDataA)
-                                          }
-                                        }}
-                                      />
-                                    </div>
-                                    <div className="text-truncate">
-                                      {v.product_name}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </>
-                          )
-                        }
-                      })}
+                      <div className="col-lg-4 col-sm-12 mb-3">
+                        <div
+                          className={`d-flex flex-column border border-1 border-secondary mx-auto ${style.prod}`}
+                        >
+                          <div className="d-flex justify-content-center">
+                            <img
+                              className={style.prodPic}
+                              src={
+                                product.data.product_photos?.includes(',')
+                                  ? `/${
+                                      product.data.product_photos.split(',')[0]
+                                    }`
+                                  : `/${product.data.product_photos}`
+                              }
+                              alt={product.data.product_name}
+                              width={150}
+                              height={120}
+                              title={product.data.product_name}
+                            />
+                          </div>
+                          <div className="d-flex justify-content-center px-2">
+                            <div className="form-check">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                name="bartItmeA"
+                                id="flexCheckDefault"
+                                checked={isbarterItemA}
+                                onChange={(e) => {
+                                  if (!isbarterItemA) {
+                                    setIsBarterItemA(e.currentTarget.checked)
+                                    const formDataA = {
+                                      m1: product.data.seller_id,
+                                      product_id1: product.data.id,
+                                      cps_available_m1: product.data.mc
+                                        ? product.data.mc
+                                        : product.data.sc,
+                                    }
+                                    setItemFormData(formDataA)
+                                  }
+                                }}
+                              />
+                            </div>
+                            <div className="text-truncate">
+                              {product.data.product_name}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
