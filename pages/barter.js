@@ -73,27 +73,134 @@ export default function Barter() {
         <div className="container-fluid mt-3 px-5">
           <div className="row px-xl-5">
             <div className="col-lg-12 table-responsive mb-5">
-              <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingOne">
+              <div className="accordion" id="accordionExample">
+                <div className="accordion-item">
+                  <h2 className="accordion-header" id="headingOne">
                     <button
-                      class="accordion-button"
+                      className="accordion-button"
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseOne"
                       aria-expanded="true"
                       aria-controls="collapseOne"
                     >
-                      <strong>以物易物訂單邀請</strong>
+                      <strong>您提出的以物易物訂單邀請：待審核</strong>
                     </button>
                   </h2>
                   <div
                     id="collapseOne"
-                    class="accordion-collapse collapse show"
+                    className="accordion-collapse collapse show"
                     aria-labelledby="headingOne"
                     data-bs-parent="#accordionExample"
                   >
-                    <div class="accordion-body text-center">
+                    <div className="accordion-body text-center">
+                      <table className="table table-light table-borderless table-hover">
+                        <thead className="text-center table-dark">
+                          <tr className="fw-5" style={{ fontSize: '20px' }}>
+                            <th>您的商品</th>
+                            <th>商品名稱</th>
+                            <th className="text-nowrap">可獲得小碳點</th>
+                          </tr>
+                        </thead>
+                        <tbody className="align-middle text-center">
+                          <tr>
+                            <td>
+                              <Link href={`/shop/$`}>
+                                <img
+                                  src=""
+                                  alt=""
+                                  width={150}
+                                  height={150}
+                                  style={{ objectFit: 'cover' }}
+                                />
+                              </Link>
+                            </td>
+                            <td
+                              className="align-middle text-wrap"
+                              style={{ fontSize: '20px', width: '500px' }}
+                            >
+                              <Link
+                                href={`/shop/`}
+                                style={{
+                                  textDecoration: 'none',
+                                  color: 'black',
+                                }}
+                              ></Link>
+                            </td>
+                            <td
+                              className="align-middle"
+                              style={{ fontSize: '20px' }}
+                            ></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <table className="table table-light table-borderless table-hover">
+                        <thead className="text-center table-dark">
+                          <tr className="fw-5" style={{ fontSize: '20px' }}>
+                            <th>的商品</th>
+                            <th>商品名稱</th>
+                            <th className="text-nowrap">可獲得小碳點</th>
+                          </tr>
+                        </thead>
+                        <tbody className="align-middle text-center">
+                          <tr>
+                            <td>
+                              <Link href={`/shop/$`}>
+                                <img
+                                  src=""
+                                  alt=""
+                                  width={150}
+                                  height={150}
+                                  style={{ objectFit: 'cover' }}
+                                />
+                              </Link>
+                            </td>
+                            <td
+                              className="align-middle text-wrap"
+                              style={{ fontSize: '20px', width: '500px' }}
+                            >
+                              <Link
+                                href={`/shop/`}
+                                style={{
+                                  textDecoration: 'none',
+                                  color: 'black',
+                                }}
+                              ></Link>
+                            </td>
+                            <td
+                              className="align-middle"
+                              style={{ fontSize: '20px' }}
+                            ></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-12 table-responsive mb-5">
+              <div className="accordion" id="accordionExample">
+                <div className="accordion-item">
+                  <h2 className="accordion-header" id="headingOne">
+                    <button
+                      className="accordion-button"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseOne"
+                      aria-expanded="true"
+                      aria-controls="collapseOne"
+                    >
+                      <strong>您收到的以物易物訂單邀請：待回覆</strong>
+                    </button>
+                  </h2>
+                  <div
+                    id="collapseOne"
+                    className="accordion-collapse collapse show"
+                    aria-labelledby="headingOne"
+                    data-bs-parent="#accordionExample"
+                  >
+                    <div className="accordion-body text-center">
                       <table className="table table-light table-borderless table-hover">
                         <thead className="text-center table-dark">
                           <tr className="fw-5" style={{ fontSize: '20px' }}>

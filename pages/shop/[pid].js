@@ -216,14 +216,19 @@ export default function Detail() {
   const { checkAuth, auth } = useAuth()
 
   // barter
-  const [isbarterItemA, setIsBarterItemA] = useState(false)
-  const handleCheckboxA = (e) => {
-    setIsBarterItemA(e.currentTarget.checked)
-  }
-  const [isbarterItemB, setIsBarterItemB] = useState(false)
-  const handleCheckboxB = (e) => {
-    setIsBarterItemB(e.currentTarget.checked)
-  }
+  const [isbarterItemA, setIsBarterItemA] = useState(null)
+  useEffect(() => {
+    if (isbarterItemA == null) {
+      setIsBarterItemA(null)
+    }
+  }, [isbarterItemA])
+
+  const [isbarterItemB, setIsBarterItemB] = useState(null)
+  useEffect(() => {
+    if (isbarterItemB == null) {
+      setIsBarterItemB(null)
+    }
+  }, [isbarterItemB])
 
   const [itemFormData, setItemFormData] = useState({
     m1: 0,
@@ -763,17 +768,17 @@ export default function Detail() {
                                 id="flexCheckDefault"
                                 checked={isbarterItemA}
                                 onChange={(e) => {
-                                  if (!isbarterItemA) {
-                                    setIsBarterItemA(e.currentTarget.checked)
-                                    const formDataA = {
-                                      m1: product.data.seller_id,
-                                      product_id1: product.data.id,
-                                      cps_available_m1: product.data.mc
-                                        ? product.data.mc
-                                        : product.data.sc,
-                                    }
-                                    setItemFormData(formDataA)
+                                  if (e.currentTarget.id == product.data.id) {
+                                    setIsBarterItemA(isbarterItemA)
                                   }
+                                  const formDataA = {
+                                    m1: product.data.seller_id,
+                                    product_id1: product.data.id,
+                                    cps_available_m1: product.data.mc
+                                      ? product.data.mc
+                                      : product.data.sc,
+                                  }
+                                  setItemFormData(formDataA)
                                 }}
                               />
                             </div>
@@ -825,19 +830,15 @@ export default function Detail() {
                                     id="flexCheckDefault"
                                     checked={isbarterItemB}
                                     onChange={(e) => {
-                                      if (!isbarterItemB) {
-                                        setIsBarterItemB(
-                                          e.currentTarget.checked
-                                        )
-                                        const formDataB = {
-                                          m2: v3.seller_id,
-                                          product_id2: v3.id,
-                                          cps_available_m2: v3.mc
-                                            ? v3.mc
-                                            : v3.sc,
-                                        }
-                                        setItemFormData(formDataB)
+                                      if (e.currentTarget.id == v3.id) {
+                                        setIsBarterItemB(isbarterItemB)
                                       }
+                                      const formDataB = {
+                                        m2: v3.seller_id,
+                                        product_id2: v3.id,
+                                        cps_available_m2: v3.mc ? v3.mc : v3.sc,
+                                      }
+                                      setItemFormData(formDataB)
                                     }}
                                   />
                                 </div>
