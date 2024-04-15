@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
-// import Image from 'next/image'
+// page-----
+import RegisterModal from '@/components/member/register-modal'
 // style-----
 import style from './footer.module.css'
 // react bootstrap
@@ -21,8 +22,17 @@ import {
 } from 'react-icons/fa6'
 import { IoCloseCircle } from 'react-icons/io5'
 // hook------
+import { useAuth } from '@/context/auth-context'
 
 export default function Footer() {
+  // 會員的資料跟登入狀態
+  const { checkAuth, auth } = useAuth()
+  const [showRegister, setShowRegister] = useState(false)
+  // 點擊註冊按鈕
+  const handleRegisterClick = () => setShowRegister(true)
+  // 關閉註冊視窗
+  const handleRegisterClose = () => setShowRegister(false)
+
   // ---BackToTop---
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -313,6 +323,8 @@ export default function Footer() {
                       height: '43px',
                       color: 'white',
                     }}
+                    onClick={handleRegisterClick}
+                    href="#register"
                   >
                     <span style={{ fontSize: '18px' }}>註冊</span>
                   </button>
@@ -452,6 +464,9 @@ export default function Footer() {
         </div>
       </div>
       {/* Footer End */}
+      {/* RegisterModal start */}
+      <RegisterModal show={showRegister} onHide={handleRegisterClose} />
+      {/* RegisterModal end */}
       {/* ad start */}
       <div className={style.adArea} style={{ display: isClose ? 'none' : '' }}>
         <Link href="/help-center/join-deal">
