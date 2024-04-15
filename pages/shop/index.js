@@ -21,6 +21,7 @@ import {
 } from 'react-icons/fa'
 import { IoSearch } from 'react-icons/io5'
 import { GoDash } from 'react-icons/go'
+import { GoSortAsc, GoSortDesc } from 'react-icons/go'
 // loading bar & loading icon
 import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
@@ -31,7 +32,7 @@ import { useAuth } from '@/context/auth-context'
 
 export default function Shop() {
   // Member
-  const { checkAuth, auth } = useAuth()
+  const { auth } = useAuth()
   // Router-----
   const router = useRouter()
   const qs = { ...router.query }
@@ -78,6 +79,10 @@ export default function Shop() {
     dateRangeD: 0,
     dateRangeE: 0,
     dateRangeF: 0,
+    priceA: '',
+    priceB: '',
+    dateA: '',
+    dateB: '',
   })
 
   useEffect(() => {
@@ -94,6 +99,39 @@ export default function Shop() {
   // Pages
   const startPage = Math.max(1, data.page - 2)
   const endPage = Math.min(data.totalPages, startPage + 4)
+
+  // sort
+  const [sortPrice, setSortPrice] = useState(false)
+
+  useEffect(() => {
+    if (sortPrice) {
+      let priceA = 'priceSortASC'
+      router.push(`/shop?priceA=${priceA}`)
+    } else {
+      let priceB = 'priceSortDESC'
+      router.push(`/shop?priceB=${priceB}`)
+    }
+  }, [sortPrice])
+
+  const handleSortPrice = (e) => {
+    setSortPrice(!sortPrice)
+  }
+
+  const [sortDate, setSortDate] = useState(false)
+
+  useEffect(() => {
+    if (sortDate) {
+      let dateA = 'dateSortASC'
+      router.push(`/shop?dateA=${dateA}`)
+    } else {
+      let dateB = 'dateSortDESC'
+      router.push(`/shop?dateB=${dateB}`)
+    }
+  }, [sortDate])
+
+  const handleSortDate = (e) => {
+    setSortDate(!sortDate)
+  }
 
   // category
   const [mainSelect, setMainSelect] = useState(null)
@@ -1074,7 +1112,35 @@ export default function Shop() {
 
             {/* Shop Product Start*/}
             <div className="col-lg-9 col-md-8">
-              <div className="row pb-3 mt-5">
+              {/* sorting start */}
+              <div className="row px-lg-4">
+                <div className="col-12 text-end">
+                  <button
+                    className="btn me-3"
+                    style={{ backgroundColor: '#e68b6a', border: 'none' }}
+                    name="price"
+                    onClick={handleSortPrice}
+                  >
+                    <strong>
+                      價格排序 {!sortPrice ? `(由高到低)` : `(由低到高)`}{' '}
+                      {!sortPrice ? <GoSortDesc /> : <GoSortAsc />}
+                    </strong>
+                  </button>
+                  <button
+                    className="btn"
+                    style={{ backgroundColor: '#e29f19', border: 'none' }}
+                    name="date"
+                    onClick={handleSortDate}
+                  >
+                    <strong>
+                      上架日期排序 {!sortDate ? `(由遠到近)` : `(由近到遠)`}{' '}
+                      {!sortDate ? <GoSortDesc /> : <GoSortAsc />}
+                    </strong>
+                  </button>
+                </div>
+              </div>
+              {/* sorting end */}
+              <div className="row pb-3 mt-4">
                 {data.rows.map((v, i) => {
                   return (
                     <div
