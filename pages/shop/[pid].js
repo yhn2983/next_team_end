@@ -692,23 +692,23 @@ export default function Detail() {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div className="row">
-              <form role="search" onSubmit={barterSubmit}>
-                <div className="col-lg-6 col-sm-12">
+            <form role="search" onSubmit={barterSubmit}>
+              <div className="row">
+                <div className="col-lg-6 col-md-6 col-sm-12">
                   <h5 className="ms-3">
                     <strong>{product.data.sellerName}的商品</strong>
                   </h5>
                   <div
                     className={`border border-2 border-secondary rounded overflow-auto ${style.barterRight}`}
                   >
-                    <div className="row mt-3 px-4">
+                    <div className="row mt-3 px-2">
                       {data.rows.map((v, i) => {
                         if (product.data.sellerName == v.sellerName) {
                           return (
                             <>
                               <div className="col-lg-4 col-sm-12 mb-3">
                                 <div
-                                  className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
+                                  className={`d-flex flex-column border border-1 border-secondary mx-auto ${style.prod}`}
                                 >
                                   <div className="d-flex justify-content-center">
                                     <img
@@ -762,7 +762,7 @@ export default function Detail() {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-6 col-sm-12">
+                <div className="col-lg-6 col-md-6 col-sm-12">
                   <div className="text">
                     <h5 className="ms-3">
                       <strong>您的商品集</strong>
@@ -771,12 +771,12 @@ export default function Detail() {
                   <div
                     className={`border border-2 border-secondary rounded overflow-auto ${style.barterRight}`}
                   >
-                    <div className="row mt-3 px-4">
+                    <div className="row mt-3 px-2">
                       {data.barterProds.map((v3, i3) => (
                         <>
                           <div className="col-lg-4 col-sm-12 mb-3">
                             <div
-                              className={`d-flex flex-column border border-1 border-secondary ${style.prod}`}
+                              className={`d-flex flex-column border border-1 border-secondary mx-auto ${style.prod}`}
                             >
                               <div className="barterProdPic d-flex justify-content-center">
                                 <img
@@ -828,8 +828,8 @@ export default function Detail() {
                     </div>
                   </div>
                 </div>
-              </form>
-            </div>
+              </div>
+            </form>
           </Modal.Body>
           <Modal.Footer>
             <button type="submit" className={`btn ${style.barterBtn}`}>
