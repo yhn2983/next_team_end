@@ -34,4 +34,8 @@ export const GOOGLE_LOGIN_POST = `${API_SERVER}/api/google-login`
 export const GOOGLE_CLIENT_ID =
   '551378095808-5p8n98gos67borcmq2t3itt46ul5dkoe.apps.googleusercontent.com'
 
-//
+// 取得單筆資料, GET
+export const GET_ONE_USER = `${API_SERVER}/api/users/`
+
+// 聊天室傳訊息按鈕建立房間關聯 POST
+export const CREATE_ROOM_POST = `${API_SERVER}/api/chat/rooms`

@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import style from '@/styles/lee-form.module.scss'
+import { useSocket } from '@/context/socket-context'
 
-const ChatFooter = ({ socket, userName }) => {
+const ChatFooter = ({ userName }) => {
+  const { socket } = useSocket()
   const [message, setMessage] = useState('')
 
   const handleTyping = () => socket.emit('typing', `${userName} 正在输入`) // 使用userName來判斷

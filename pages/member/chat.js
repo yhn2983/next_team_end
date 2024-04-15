@@ -1,16 +1,15 @@
-import ChatPageCom from '@/components/chat-app/ChatPageCom'
-import socketIO from 'socket.io-client'
-const socket = socketIO.connect('http://localhost:3003')
+// pages/chat.js
 import { useEffect, useState } from 'react'
-// parts of pages
 import DefaultLayout from '@/components/common/default-layout'
-// loading bar & loading icon
 import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
+import ChatPageCom from '@/components/chat-app/ChatPageCom'
+import { useSocket } from '@/context/socket-context'
 
 export default function Chat() {
   const [isLoading, setIsLoading] = useState(true)
   const [progress, setProgress] = useState(0)
+  const socket = useSocket()
 
   useEffect(() => {
     if (isLoading) {
@@ -23,11 +22,9 @@ export default function Chat() {
   }, [isLoading])
 
   const display = (
-    <>
-      <DefaultLayout pageName="home">
-        <ChatPageCom socket={socket} />
-      </DefaultLayout>
-    </>
+    <DefaultLayout pageName="home">
+      <ChatPageCom socket={socket} />
+    </DefaultLayout>
   )
 
   return (

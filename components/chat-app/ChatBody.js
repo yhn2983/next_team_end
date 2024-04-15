@@ -1,17 +1,13 @@
 import React from 'react'
 // import { useRouter } from 'next/router'
 import style from '@/styles/lee-form.module.scss'
-import socketIO from 'socket.io-client'
 import { useEffect } from 'react'
+import { useSocket } from '@/context/socket-context'
+import { CREATE_ROOM_POST } from '@/components/config'
 
-const ChatBody = ({
-  messages,
-  lastMessageRef,
-  typingStatus,
-  userName,
-  socket,
-}) => {
+const ChatBody = ({ messages, lastMessageRef, typingStatus, userName }) => {
   // const router = useRouter()
+  const { socket } = useSocket()
 
   useEffect(() => {
     return () => {

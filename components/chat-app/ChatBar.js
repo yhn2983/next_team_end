@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import style from '@/styles/lee-form.module.scss'
+import { useSocket } from '@/context/socket-context'
 
-const ChatBar = ({ socket }) => {
+const ChatBar = () => {
+  const { socket } = useSocket()
   const [users, setUsers] = useState([])
   useEffect(() => {
     socket.on('newUserResponse', (data) => setUsers(data))
