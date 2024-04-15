@@ -213,7 +213,7 @@ export default function Like() {
                             <Link href={`/shop/${v.product_id}`}>
                               <img
                                 src={
-                                  v.p_photos.includes(',')
+                                  v.p_photos?.includes(',')
                                     ? `/${v.p_photos.split(',')[0]}`
                                     : `/${v.p_photos}`
                                 }
@@ -239,7 +239,7 @@ export default function Like() {
                             className="align-middle"
                             style={{ fontSize: '20px' }}
                           >
-                            ${v.p_price.toLocaleString()}
+                            ${v.p_price?.toLocaleString()}
                           </td>
                           <td style={{ fontSize: '20px' }}>{v.available_cp}</td>
                           <td className="align-middle">

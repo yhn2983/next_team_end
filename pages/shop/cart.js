@@ -210,7 +210,7 @@ export default function Cart() {
                             <Link href={`/shop/${v.id}`}>
                               <img
                                 src={
-                                  v.p_photos.includes(',')
+                                  v.p_photos?.includes(',')
                                     ? `/${v.p_photos.split(',')[0]}`
                                     : `/${v.p_photos}`
                                 }
@@ -236,7 +236,7 @@ export default function Cart() {
                             className="align-middle"
                             style={{ fontSize: '20px' }}
                           >
-                            ${v.p_price.toLocaleString()}
+                            ${v.p_price?.toLocaleString()}
                           </td>
                           <td className="align-middle">
                             <div
