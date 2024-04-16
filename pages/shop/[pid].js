@@ -2,13 +2,21 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import { PROD_LIST, CART_ADD, TOGGLE_LIKE } from '@/configs/config-r'
+import {
+  PROD_LIST,
+  CART_ADD,
+  TOGGLE_LIKE,
+  BARTER_ADD,
+} from '@/configs/config-r'
 // page
 import DefaultLayout from '@/components/common/default-layout'
 import LoginPage from '@/components/member/login-modal'
 // style-----
 import style from './detail.module.css'
 import toast, { Toaster } from 'react-hot-toast'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const BarterSwal = withReactContent(Swal)
 // react bootstrap
 import Carousel from 'react-bootstrap/Carousel'
 import Modal from 'react-bootstrap/Modal'
@@ -272,27 +280,84 @@ export default function Detail() {
   const [showLogin, setShowLogin] = useState(false)
 
   // barter
-  const [isbarterItemA, setIsBarterItemA] = useState(null)
-  useEffect(() => {
-    if (isbarterItemA == null) {
-      setIsBarterItemA(null)
-    }
-  }, [isbarterItemA])
-
-  const [isbarterItemB, setIsBarterItemB] = useState(null)
-  useEffect(() => {
-    if (isbarterItemB == null) {
-      setIsBarterItemB(null)
-    }
-  }, [isbarterItemB])
-
+  const [isbarterItemA, setIsBarterItemA] = useState(false)
+  const [isbarterItemB, setIsBarterItemB] = useState(false)
   const [itemFormData, setItemFormData] = useState({
-    m1: 0,
-    m2: 1019,
+    p1_id: 0,
+    p2_id: 0,
+    photos1: '',
+    photos2: '',
+    m1_id: 0,
+    m2_id: 0,
+    cp1: 0,
+    cp2: 0,
   })
+
+  const notifyBarter = () => {
+    Swal.fire({
+      title: '請選擇欲交換商品',
+      icon: 'warning',
+      confirmButtonText: '確定',
+    })
+  }
+
+  const notifyBarterDone = () => {
+    BarterSwal.fire({
+      title: '您已成功送出申請',
+      text: '請待對方回覆您的申請',
+      icon: 'success',
+      confirmButtonText: '關閉',
+      confirmButtonColor: '#3085d6',
+    })
+  }
+
+  const handleSelectItemA = (product) => {
+    setIsBarterItemA((prev) => !prev)
+    setItemFormData((prevData) => ({
+      ...prevData,
+      p1_id: product.id,
+      photo1: product.product_photos,
+      m1_id: product.seller_id,
+      cp1: product.mc ? product.mc : product.sc,
+    }))
+  }
+
+  const handleSelectItemB = (product) => {
+    setIsBarterItemB((prev) => !prev)
+    setItemFormData((prevData) => ({
+      ...prevData,
+      p2_id: product.id,
+      photo2: product.product_photos,
+      m2_id: product.seller_id,
+      cp2: product.mc ? product.mc : product.sc,
+    }))
+  }
 
   const barterSubmit = async (e) => {
     e.preventDefault()
+    console.log('Form submitted!')
+
+    if (isbarterItemA && isbarterItemB) {
+      try {
+        const r = await fetch(`${BARTER_ADD}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(itemFormData),
+        })
+        const result = await r.json()
+        console.log(result)
+        if (result.success) {
+          notifyBarterDone()
+          setShow(false)
+        }
+      } catch (e) {
+        console.error('Error submitting barter:', e)
+      }
+    } else {
+      notifyBarter()
+    }
   }
 
   // Loading bar-----
@@ -605,7 +670,13 @@ export default function Detail() {
                         color: 'white',
                         border: 'none',
                       }}
-                      onClick={() => setShow(true)}
+                      onClick={() => {
+                        if (auth.isAuth) {
+                          setShow(true)
+                        } else {
+                          notifyNeedAuth()
+                        }
+                      }}
                     >
                       <TbArrowsExchange2 style={{ fontSize: '20px' }} />{' '}
                       以物易物
@@ -787,17 +858,17 @@ export default function Detail() {
           dialogClassName="modal-90w"
           aria-labelledby="example-custom-modal-styling-title"
         >
-          <Modal.Header closeButton>
-            <Modal.Title
-              id="example-custom-modal-styling-title"
-              className="px-3"
-              style={{ color: '#8e2626' }}
-            >
-              <strong style={{ fontSize: '30px' }}>提出以物易物申請</strong>
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <form role="search" onSubmit={barterSubmit}>
+          <form onSubmit={barterSubmit}>
+            <Modal.Header closeButton>
+              <Modal.Title
+                id="example-custom-modal-styling-title"
+                className="px-3"
+                style={{ color: '#8e2626' }}
+              >
+                <strong style={{ fontSize: '30px' }}>提出以物易物申請</strong>
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
               <div className="row">
                 <div className="col-lg-6 col-md-6 col-sm-12">
                   <h5 className="ms-3">
@@ -835,18 +906,8 @@ export default function Detail() {
                                 name="bartItmeA"
                                 id="flexCheckDefault"
                                 checked={isbarterItemA}
-                                onChange={(e) => {
-                                  if (e.currentTarget.id == product.data.id) {
-                                    setIsBarterItemA(isbarterItemA)
-                                  }
-                                  const formDataA = {
-                                    m1: product.data.seller_id,
-                                    product_id1: product.data.id,
-                                    cps_available_m1: product.data.mc
-                                      ? product.data.mc
-                                      : product.data.sc,
-                                  }
-                                  setItemFormData(formDataA)
+                                onChange={() => {
+                                  handleSelectItemA(product.data)
                                 }}
                               />
                             </div>
@@ -871,7 +932,7 @@ export default function Detail() {
                     <div className="row mt-3 px-2">
                       {data.barterProds.map((v3, i3) => (
                         <>
-                          <div className="col-lg-4 col-sm-12 mb-3">
+                          <div key={v3.id} className="col-lg-4 col-sm-12 mb-3">
                             <div
                               className={`d-flex flex-column border border-1 border-secondary mx-auto ${style.prod}`}
                             >
@@ -896,17 +957,15 @@ export default function Detail() {
                                     name="bartItemB"
                                     type="checkbox"
                                     id="flexCheckDefault"
-                                    checked={isbarterItemB}
+                                    checked={
+                                      isbarterItemB &&
+                                      itemFormData.p2_id == v3.id
+                                    }
                                     onChange={(e) => {
-                                      if (e.currentTarget.id == v3.id) {
-                                        setIsBarterItemB(isbarterItemB)
+                                      const isChecked = e.target.checked
+                                      if (isChecked) {
+                                        handleSelectItemB(v3)
                                       }
-                                      const formDataB = {
-                                        m2: v3.seller_id,
-                                        product_id2: v3.id,
-                                        cps_available_m2: v3.mc ? v3.mc : v3.sc,
-                                      }
-                                      setItemFormData(formDataB)
                                     }}
                                   />
                                 </div>
@@ -922,13 +981,13 @@ export default function Detail() {
                   </div>
                 </div>
               </div>
-            </form>
-          </Modal.Body>
-          <Modal.Footer>
-            <button type="submit" className={`btn ${style.barterBtn}`}>
-              送出申請
-            </button>
-          </Modal.Footer>
+            </Modal.Body>
+            <Modal.Footer>
+              <button type="submit" className={`btn ${style.barterBtn}`}>
+                送出申請
+              </button>
+            </Modal.Footer>
+          </form>
         </Modal>
         {/* Barter Modal end */}
       </DefaultLayout>

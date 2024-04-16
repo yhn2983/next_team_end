@@ -15,6 +15,8 @@ export const CART_ITEM_UPDATE_PUT = `${API_SERVER}/products/cart`
 // // 加入或移除 喜愛清單 "/like-toggle-jwt/:pid"
 export const TOGGLE_LIKE = `${API_SERVER}/products/like-toggle`
 
+export const BARTER_ADD = `${API_SERVER}/products/barter`
+
 // // 取得通訊錄單筆資料 主鍵為 sid,  `${PROD_ITEM}/${sid}`
 // export const PROD_ITEM = `${API_SERVER}/products` // GET
 
