@@ -17,7 +17,7 @@ export default function StoreInfo() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(true)
   const [progress, setProgress] = useState(0)
-  const { connectionState, setConnectionState } = useSocket()
+  const { connectionState, setConnectionState, socket } = useSocket()
 
   useEffect(() => {
     if (isLoading) {
@@ -80,11 +80,14 @@ export default function StoreInfo() {
     const result = await response.json()
 
     if (result.status === 'success') {
-      setConnectionState({
+      const connectionState = {
         userId: auth.userData.id,
         otherUserId: otherUser.id,
         roomId: result.data.id,
-      })
+      }
+      setConnectionState(connectionState)
+      localStorage.setItem('connectionState', JSON.stringify(connectionState))
+      socket.emit('newUser', { connectionState, SocketID: socket.id })
       router.push('/member/chat')
     } else {
       console.error(result.message)

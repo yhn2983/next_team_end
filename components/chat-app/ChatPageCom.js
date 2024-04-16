@@ -21,15 +21,15 @@ const ChatPageCom = () => {
   console.log(socket)
 
   // 當用戶的資料或 socket 變更時，運行這個 useEffect
-  useEffect(() => {
-    // 如果用戶已經登入，則將他們的 ID 和暱稱傳送到伺服器
-    if (auth.userData) {
-      socket.emit('newUser', {
-        id: auth.userData.id,
-        nickname: auth.userData.nickname,
-      })
-    }
-  }, [auth.userData, socket])
+  // useEffect(() => {
+  //   // 如果用戶已經登入，則將他們的 ID 和暱稱傳送到伺服器
+  //   if (auth.userData) {
+  //     socket.emit('newUser', {
+  //       id: auth.userData.id,
+  //       nickname: auth.userData.nickname,
+  //     })
+  //   }
+  // }, [auth.userData, socket])
 
   // 當 socket 變更時，運行這個 useEffect
   useEffect(() => {
