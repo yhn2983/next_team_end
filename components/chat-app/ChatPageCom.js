@@ -8,6 +8,10 @@ import { useSocket } from '@/context/socket-context'
 import { GET_CHAT_HISTORY } from '@/components/config'
 
 const ChatPageCom = () => {
+  const [chatData, setChatData] = useState({
+    rawMessages: [],
+    connectionState: JSON.parse(localStorage.getItem('connectionState')),
+  })
   // 設定訊息的狀態，初始值為空陣列
   const [messages, setMessages] = useState([])
   // 設定輸入狀態的狀態，初始值為空字串
@@ -45,11 +49,18 @@ const ChatPageCom = () => {
       })
       const result = await response.json()
       console.log(result.data)
+      setChatData((prevChatData) => ({
+        ...prevChatData,
+        rawMessages: result.data,
+      }))
     }
 
-    fetchMessages()
-    // ...其他的程式碼...
-  }, []) // 注意這裡的依賴陣列是空的，這表示這個 useEffect 只會在組件掛載時運行
+    // 如果 rawMessages 為空，則獲取歷史訊息
+    if (chatData.rawMessages.length === 0) {
+      fetchMessages()
+    }
+    console.log(chatData)
+  }, [chatData.rawMessages]) // 注意這裡的依賴陣列是空的，這表示這個 useEffect 只會在組件掛載時運行
 
   // 當 socket 變更時，運行這個 useEffect
   useEffect(() => {
@@ -57,6 +68,21 @@ const ChatPageCom = () => {
     const messageResponseHandler = (data) => {
       // 將接收到的訊息添加到訊息的狀態中
       setMessages((prevMessages) => [...prevMessages, data])
+
+      // 將接收到的訊息格式化為與 chatData.rawMessages 中的訊息相同的格式
+      const formattedMessage = {
+        id: data.id,
+        room_id: data.connectionState.roomId,
+        sender_id: data.connectionState.userId,
+        content: data.text,
+        created_at: new Date(),
+      }
+
+      // 將格式化後的訊息添加到 chatData.rawMessages 中
+      setChatData((prevChatData) => ({
+        ...prevChatData,
+        rawMessages: [...prevChatData.rawMessages, formattedMessage],
+      }))
     }
 
     // 當接收到訊息回應時，調用處理訊息回應的函數
@@ -96,6 +122,7 @@ const ChatPageCom = () => {
       <ChatBar socket={socket} />
       <div className={`${style.chat__main}`}>
         <ChatBody
+          chatData={chatData}
           messages={messages}
           typingStatus={typingStatus}
           lastMessageRef={lastMessageRef}
@@ -103,6 +130,8 @@ const ChatPageCom = () => {
           socket={socket} // 將socket作為prop傳遞給ChatBody
         />
         <ChatFooter
+          chatData={chatData}
+          setChatData={setChatData}
           socket={socket}
           userName={auth.userData ? auth.userData.nickname : ''}
         />

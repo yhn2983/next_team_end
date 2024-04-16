@@ -1,12 +1,10 @@
 import React from 'react'
-// import { useRouter } from 'next/router'
 import style from '@/styles/lee-form.module.scss'
 import { useEffect } from 'react'
 import { useSocket } from '@/context/socket-context'
 import { useRouter } from 'next/router'
 
-const ChatBody = ({ messages, lastMessageRef, typingStatus, userName }) => {
-  // const router = useRouter()
+const ChatBody = ({ chatData, lastMessageRef, typingStatus }) => {
   const { socket } = useSocket()
   const router = useRouter()
 
@@ -37,19 +35,19 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus, userName }) => {
       </header>
 
       <div className={`${style.message__container}`}>
-        {messages.map((message) =>
-          message.name === userName ? (
+        {chatData.rawMessages.map((message) =>
+          message.sender_id === chatData.connectionState.userId ? (
             <div className={`${style.message__chats}`} key={message.id}>
               <p className={`${style.sender__name}`}>你</p>
               <div className={`${style.message__sender}`}>
-                <p>{message.text}</p>
+                <p>{message.content}</p>
               </div>
             </div>
           ) : (
             <div className={`${style.message__chats}`} key={message.id}>
-              <p>{message.name}</p>
+              <p>{chatData.connectionState.otherUserNickname}</p>
               <div className={`${style.message__recipient}`}>
-                <p>{message.text}</p>
+                <p>{message.content}</p>
               </div>
             </div>
           )

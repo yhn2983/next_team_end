@@ -3,7 +3,7 @@ import style from '@/styles/lee-form.module.scss'
 import { useSocket } from '@/context/socket-context'
 import { CREATE_MESSAGE_POST } from '@/components/config'
 
-const ChatFooter = ({ userName }) => {
+const ChatFooter = ({ userName, chatData, setChatData }) => {
   const { socket, connectionState } = useSocket()
   const [message, setMessage] = useState('')
 
@@ -23,6 +23,19 @@ const ChatFooter = ({ userName }) => {
         connectionState,
       }
       socket.emit('message', newMessage)
+
+      // const newChatData = {
+      //   id: `${socket.id}${Math.random()}`,
+      //   room_id: connectionState.roomId,
+      //   sender_id: connectionState.userId,
+      //   content: message,
+      //   created_at: new Date(),
+      // }
+      // // 將新的訊息添加到 chatData.rawMessages 中
+      // setChatData((prevChatData) => ({
+      //   ...prevChatData,
+      //   rawMessages: [...prevChatData.rawMessages, newChatData],
+      // }))
 
       // 發api存入資料庫
       const response = await fetch(CREATE_MESSAGE_POST, {
