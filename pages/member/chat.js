@@ -1,6 +1,6 @@
 // pages/chat.js
 import { useEffect, useState } from 'react'
-import DefaultLayout from '@/components/common/default-layout'
+// import DefaultLayout from '@/components/common/default-layout'
 import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
 import ChatPageCom from '@/components/chat-app/ChatPageCom'
@@ -22,9 +22,9 @@ export default function Chat() {
   }, [isLoading])
 
   const display = (
-    <DefaultLayout pageName="home">
-      <ChatPageCom socket={socket} />
-    </DefaultLayout>
+    // <DefaultLayout pageName="home">
+    <ChatPageCom socket={socket} />
+    // </DefaultLayout>
   )
 
   return (

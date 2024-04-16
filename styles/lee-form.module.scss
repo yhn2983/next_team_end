@@ -407,6 +407,8 @@
 
 .message__container{
   height: 80vh;
+  overflow: auto;
+  display: block;
 }
 
 .message__chats {

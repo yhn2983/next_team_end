@@ -4,10 +4,12 @@ import style from '@/styles/lee-form.module.scss'
 import { useEffect } from 'react'
 import { useSocket } from '@/context/socket-context'
 import { CREATE_ROOM_POST } from '@/components/config'
+import { useRouter } from 'next/router'
 
 const ChatBody = ({ messages, lastMessageRef, typingStatus, userName }) => {
   // const router = useRouter()
   const { socket } = useSocket()
+  const router = useRouter()
 
   useEffect(() => {
     return () => {
@@ -15,10 +17,15 @@ const ChatBody = ({ messages, lastMessageRef, typingStatus, userName }) => {
     }
   }, [socket])
 
-  const handleLeaveChat = () => {
-    // localStorage.removeItem('userName')
+  const handleLeaveChat = async () => {
+    const connectionState = JSON.parse(localStorage.getItem('connectionState'))
+    const otherUserId = connectionState?.otherUserId
+
+    console.log(otherUserId) // 這裡將輸出 otherUserId
+
     socket.disconnect()
-    // router.push('/')
+    await router.push(`/member/store/${otherUserId}`)
+    localStorage.removeItem('connectionState')
   }
 
   return (
