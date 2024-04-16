@@ -75,6 +75,7 @@ export default function StoreInfo() {
         user1_id: auth.userData.id,
         user2_id: otherUser.id,
       }),
+      credentials: 'include',
     })
 
     const result = await response.json()
@@ -82,7 +83,9 @@ export default function StoreInfo() {
     if (result.status === 'success') {
       const connectionState = {
         userId: auth.userData.id,
+        userNickname: auth.userData.nickname,
         otherUserId: otherUser.id,
+        otherUserNickname: otherUser.nickname,
         roomId: result.data.id,
       }
       setConnectionState(connectionState)

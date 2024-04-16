@@ -5,6 +5,7 @@ import ChatFooter from './ChatFooter'
 import style from '@/styles/lee-form.module.scss'
 import { useAuth } from '@/context/auth-context'
 import { useSocket } from '@/context/socket-context'
+import { GET_CHAT_HISTORY } from '@/components/config'
 
 const ChatPageCom = () => {
   // 設定訊息的狀態，初始值為空陣列
@@ -30,6 +31,25 @@ const ChatPageCom = () => {
   //     })
   //   }
   // }, [auth.userData, socket])
+  const connectionState = JSON.parse(localStorage.getItem('connectionState'))
+  useEffect(() => {
+    // 獲取歷史訊息
+    const fetchMessages = async () => {
+      const response = await fetch(GET_CHAT_HISTORY, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ roomId: connectionState.roomId }), // 替換為你的房間編號
+        credentials: 'include',
+      })
+      const result = await response.json()
+      console.log(result.data)
+    }
+
+    fetchMessages()
+    // ...其他的程式碼...
+  }, []) // 注意這裡的依賴陣列是空的，這表示這個 useEffect 只會在組件掛載時運行
 
   // 當 socket 變更時，運行這個 useEffect
   useEffect(() => {

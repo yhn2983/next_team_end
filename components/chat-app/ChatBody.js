@@ -3,7 +3,6 @@ import React from 'react'
 import style from '@/styles/lee-form.module.scss'
 import { useEffect } from 'react'
 import { useSocket } from '@/context/socket-context'
-import { CREATE_ROOM_POST } from '@/components/config'
 import { useRouter } from 'next/router'
 
 const ChatBody = ({ messages, lastMessageRef, typingStatus, userName }) => {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import style from '@/styles/lee-form.module.scss'
 import { useSocket } from '@/context/socket-context'
+import { CREATE_MESSAGE_POST } from '@/components/config'
 
 const ChatFooter = ({ userName }) => {
   const { socket, connectionState } = useSocket()
@@ -8,19 +9,32 @@ const ChatFooter = ({ userName }) => {
 
   const handleTyping = () => socket.emit('typing', `${userName} 正在输入`) // 使用userName來判斷
 
-  const handleSendMessage = (e) => {
+  const handleSendMessage = async (e) => {
     e.preventDefault()
     if (message.trim() && userName) {
       const connectionState = JSON.parse(
         localStorage.getItem('connectionState')
       )
-      socket.emit('message', {
+      const newMessage = {
         text: message,
         name: userName, // 使用userName來判斷
         id: `${socket.id}${Math.random()}`,
         socketID: socket.id,
         connectionState,
+      }
+      socket.emit('message', newMessage)
+
+      // 發api存入資料庫
+      const response = await fetch(CREATE_MESSAGE_POST, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newMessage),
+        credentials: 'include',
       })
+      const result = await response.json()
+      console.log(result)
     }
     setMessage('')
   }

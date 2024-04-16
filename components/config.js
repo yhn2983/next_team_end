@@ -39,3 +39,9 @@ export const GET_ONE_USER = `${API_SERVER}/api/users/`
 
 // 聊天室傳訊息按鈕建立房間關聯 POST
 export const CREATE_ROOM_POST = `${API_SERVER}/api/chat/rooms`
+
+// 把聊天紀錄寫進資料庫
+export const CREATE_MESSAGE_POST = `${API_SERVER}/api/chat/postmessage`
+
+// 獲取聊天紀錄
+export const GET_CHAT_HISTORY = `${API_SERVER}/api/chat/getmessages`
