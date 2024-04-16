@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { PROD_LIST, CART_ADD, TOGGLE_LIKE } from '@/configs/config-r'
 // page
 import DefaultLayout from '@/components/common/default-layout'
+import LoginPage from '@/components/member/login-modal'
 // style-----
 import style from './detail.module.css'
 import toast, { Toaster } from 'react-hot-toast'
@@ -127,6 +128,24 @@ export default function Detail() {
     toast.error(msgBox2)
   }
 
+  const notifyNeedAuth = () => {
+    const msgBox3 = (
+      <div>
+        <p>
+          <strong>{'請先登入才可以使用此功能！'}</strong>
+        </p>
+        <button
+          className={`btn mx-auto ${style.conneBtn}`}
+          style={{ backgroundColor: '#e96d3f', color: 'white' }}
+          onClick={handleLoginClick}
+        >
+          點我登入
+        </button>
+      </div>
+    )
+    toast(msgBox3)
+  }
+
   const cartClick = async (productData) => {
     const r = await fetch(`${CART_ADD}/${productData.product_id}`, {
       method: 'POST',
@@ -214,6 +233,43 @@ export default function Detail() {
 
   // member
   const { checkAuth, auth } = useAuth()
+
+  // ---Modal---
+  // 關閉登入視窗
+  const handleLoginClose = () => {
+    if (!isLoading) {
+      setShowLogin(false)
+    }
+  }
+  // 點擊登入按鈕
+  const handleLoginClick = () => {
+    if (!auth.isAuth) {
+      // 如果用戶未登入，則顯示登入表單
+      setShowLogin(true)
+    }
+  }
+  // 登入表單提交
+  const handleLoginSubmit = async () => {
+    // 開始檢查認證狀態
+    setIsLoading(true)
+    await checkAuth()
+    // 結束檢查認證狀態
+    setIsLoading(false)
+    if (auth.isAuth) {
+      // 如果已經登入，則關閉模態框
+      setShowLogin(false)
+    }
+  }
+
+  // 如果已經登入，則關閉模態框
+  useEffect(() => {
+    if (auth.isAuth) {
+      setShowLogin(false)
+      checkAuth()
+    }
+  }, [auth.isAuth])
+
+  const [showLogin, setShowLogin] = useState(false)
 
   // barter
   const [isbarterItemA, setIsBarterItemA] = useState(null)
@@ -470,7 +526,7 @@ export default function Detail() {
                       className={`btn px-3 ${style.btnHover}`}
                       style={{ backgroundColor: '#e96d3f', border: 'none' }}
                       onClick={() => {
-                        if (product.data.status == '1') {
+                        if (auth.isAuth && product.data.status == '1') {
                           addItem(product.data)
                           const productData = {
                             member_id: auth.userData.id,
@@ -486,6 +542,8 @@ export default function Detail() {
                           }
                           console.log(productData)
                           cartClick(productData)
+                        } else if (!auth.isAuth && product.data.status == '1') {
+                          notifyNeedAuth()
                         } else {
                           notifyNoAdd(product.data.product_name)
                         }
@@ -501,19 +559,23 @@ export default function Detail() {
                       className={`btn px-3 ms-4 ${style.btnHover}`}
                       style={{ backgroundColor: '#d76767', border: 'none' }}
                       onClick={() => {
-                        const productData2 = {
-                          member_id: auth.userData.id,
-                          product_id: product.data.id,
-                          p_photos: product.data.product_photos,
-                          p_name: product.data.product_name,
-                          p_price: product.data.product_price,
-                          p_qty: 1,
-                          total_price: product.data.product_price,
-                          available_cp: product.data.mc
-                            ? product.data.mc
-                            : product.data.sc,
+                        if (auth.isAuth) {
+                          const productData2 = {
+                            member_id: auth.userData.id,
+                            product_id: product.data.id,
+                            p_photos: product.data.product_photos,
+                            p_name: product.data.product_name,
+                            p_price: product.data.product_price,
+                            p_qty: 1,
+                            total_price: product.data.product_price,
+                            available_cp: product.data.mc
+                              ? product.data.mc
+                              : product.data.sc,
+                          }
+                          likeClick(productData2)
+                        } else {
+                          notifyNeedAuth()
                         }
-                        likeClick(productData2)
                       }}
                     >
                       <FaHeartCirclePlus
@@ -614,7 +676,7 @@ export default function Detail() {
                           <button
                             className="btn"
                             onClick={() => {
-                              if (v.status == '1') {
+                              if (auth.isAuth && v.status == '1') {
                                 addItem(v)
                                 const productData = {
                                   member_id: auth.userData.id,
@@ -628,6 +690,8 @@ export default function Detail() {
                                 }
                                 console.log(productData)
                                 cartClick(productData)
+                              } else if (!auth.isAuth && v.status == '1') {
+                                notifyNeedAuth()
                               } else {
                                 notifyNoAdd(v.product_name)
                               }
@@ -638,17 +702,21 @@ export default function Detail() {
                           <button
                             className="btn"
                             onClick={() => {
-                              const productData2 = {
-                                member_id: auth.userData.id,
-                                product_id: v.id,
-                                p_photos: v.product_photos,
-                                p_name: v.product_name,
-                                p_price: v.product_price,
-                                p_qty: 1,
-                                total_price: v.product_price,
-                                available_cp: v.mc ? v.mc : v.sc,
+                              if (auth.isAuth && v.status == '1') {
+                                const productData2 = {
+                                  member_id: auth.userData.id,
+                                  product_id: v.id,
+                                  p_photos: v.product_photos,
+                                  p_name: v.product_name,
+                                  p_price: v.product_price,
+                                  p_qty: 1,
+                                  total_price: v.product_price,
+                                  available_cp: v.mc ? v.mc : v.sc,
+                                }
+                                likeClick(productData2)
+                              } else {
+                                notifyNeedAuth()
                               }
-                              likeClick(productData2)
                             }}
                           >
                             <AiOutlineHeart
@@ -864,6 +932,13 @@ export default function Detail() {
         </Modal>
         {/* Barter Modal end */}
       </DefaultLayout>
+      {/* Login Modal start */}
+      <LoginPage
+        show={showLogin}
+        onHide={handleLoginClose}
+        onSubmit={handleLoginSubmit}
+      />
+      {/* Login Modal end */}
     </>
   )
 
