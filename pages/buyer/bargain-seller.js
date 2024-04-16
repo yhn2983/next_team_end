@@ -54,9 +54,15 @@ export default function BargainSeller() {
                   <td>{v.buyer_id}</td>
                   <td>{v.after_bargin_price}</td>
                   <td>
-                    <Button href={`/buyer/bargain-seller-check/${v.id}`}>
-                      回覆
-                    </Button>
+                    {!v.ans_num ? (
+                      <Button href={`/buyer/bargain-seller-check/${v.id}`}>
+                        回覆
+                      </Button>
+                    ) : v.ans_num == 1 ? (
+                      '同意'
+                    ) : (
+                      '不同意'
+                    )}
                   </td>
                 </tr>
               ))}

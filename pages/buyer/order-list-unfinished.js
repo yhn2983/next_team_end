@@ -32,6 +32,23 @@ export default function OrderList() {
         setData(dataObj)
       })
   }, [router.query])
+  useEffect(() => {
+    const fetchOrderData = async () => {
+      try {
+        const response = await fetch(`${BUYER_ORDER}${location.search}`, {
+          headers: {
+            ...auth(),
+          },
+        })
+        const dataObj = await response.json()
+        setData(dataObj)
+      } catch (error) {
+        console.error('Error fetching order data:', error)
+      }
+    }
+
+    fetchOrderData()
+  }, [])
 
   // ----修改
   const [formData, setFormData] = useState({
@@ -78,7 +95,7 @@ export default function OrderList() {
                 <div>...loading</div>
               ) : (
                 <>
-                  <h4 className="mb-3">我的訂單</h4>
+                  <h4 className="mb-3">已送達的訂單</h4>
                   {data.rows
                     .filter((v) => {
                       return v.complete_status == 1
@@ -122,10 +139,10 @@ export default function OrderList() {
                                   <div className="row g-3 align-items-center justify-content-end">
                                     <div className="col-auto">
                                       <Button
-                                        href={`/buyer/evaluation/${v.id}`}
+                                        href={`/buyer/order-detail/${v.id}`}
                                         variant="outline-warning"
                                       >
-                                        評論
+                                        訂單明細
                                       </Button>
                                     </div>
                                     <div className="col-auto  w-auto ">

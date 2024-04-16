@@ -81,7 +81,7 @@ export default function Checkout() {
     console.log(result)
     if (result) {
       alert('資料新增成功')
-      router.push('/')
+      router.push('/buyer/bargain-buyer-req')
     } else {
       alert('資料沒有新增')
     }

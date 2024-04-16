@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import Styles from '@/styles/buyer.module.css'
+
 import Button from 'react-bootstrap/Button'
 import { FaAlignJustify } from 'react-icons/fa'
 import { BUYER_ORDER } from '@/configs/configs-buyer'
@@ -10,10 +10,11 @@ import { useState, useEffect } from 'react'
 import OrderListNav from '@/components/orderList/order-list-nav'
 import { BUYER_ORDER_FIN } from '@/configs/configs-buyer'
 import DefaultLayout from '@/components/common/default-layout'
+import Styles from '@/styles/buyer.module.css'
 
 export default function OrderList() {
   const router = useRouter()
-
+  // const { auth, getAuthHeader } = useAuth()
   const { checkAuth, auth } = useAuth()
   const [data, setData] = useState({
     success: false,
@@ -31,22 +32,58 @@ export default function OrderList() {
         setData(dataObj)
       })
   }, [router.query])
+  useEffect(() => {
+    const fetchOrderData = async () => {
+      try {
+        const response = await fetch(`${BUYER_ORDER}${location.search}`, {
+          headers: {
+            ...auth(),
+          },
+        })
+        const dataObj = await response.json()
+        setData(dataObj)
+      } catch (error) {
+        console.error('Error fetching order data:', error)
+      }
+    }
 
-  // useEffect(() => {
-  //   if (!id) return // 如果沒有 sid 的值, 就不用發 AJAX
-  //   fetch(`${AB_ITEM}/${sid}`)
-  //     .then((r) => r.json())
-  //     .then((result) => {
-  //       console.log(result)
-  //       if (result.success) {
-  //         setFormData({ ...result.data })
-  //       } else {
-  //         router.push('/address-book')
-  //       }
-  //     })
-  // }, [id, router])
+    fetchOrderData()
+  }, [])
 
-  //-------
+  // ----修改
+  const [formData, setFormData] = useState({
+    id: 0, // 資料的 primary key
+    complete_status: '',
+  })
+
+  const onFinish = async (e) => {
+    const newFormData = {
+      ...formData,
+      complete_status: 2,
+      id: e,
+    }
+    setFormData(newFormData)
+
+    const r = await fetch(`${BUYER_ORDER_FIN}/${e}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newFormData),
+    })
+
+    const result = await r.json()
+
+    console.log(result)
+    if (result.success) {
+      alert('資料修改成功')
+      console.log(document.referrer)
+      router.back()
+    } else {
+      alert('資料沒有修改')
+    }
+  }
+
   return (
     <>
       <DefaultLayout>
@@ -58,10 +95,10 @@ export default function OrderList() {
                 <div>...loading</div>
               ) : (
                 <>
-                  <h4 className="mb-3">已完成訂單</h4>
+                  <h4 className="mb-3">等待賣家寄出</h4>
                   {data.rows
                     .filter((v) => {
-                      return v.complete_status == 2
+                      return v.complete_status == 1 && v.shipment_status == 1
                     })
                     .map((v, i) => {
                       return (
@@ -89,24 +126,23 @@ export default function OrderList() {
                                     /
                                     <span>
                                       {v.complete_status === 2
-                                        ? '訂單已完成'
+                                        ? '已完成'
                                         : '進行中'}
+                                    </span>
+                                    /
+                                    <span>
+                                      {v.shipment_status === 2
+                                        ? '已寄出'
+                                        : '未寄出'}
                                     </span>
                                   </p>
                                   <div className="row g-3 align-items-center justify-content-end">
-                                    <div className="col-auto">
+                                    <div className="col-auto w-auto ">
                                       <Button
-                                        href={`/address-book/edit/${v.sid}`}
-                                      >
-                                        Link
-                                      </Button>
-                                    </div>
-                                    <div className="col-auto">
-                                      <Button
-                                        href={`/buyer/evaluation/${v.id}`}
+                                        href={`/buyer/order-detail/${v.id}`}
                                         variant="outline-warning"
                                       >
-                                        評論
+                                        訂單明細
                                       </Button>
                                     </div>
                                   </div>
@@ -124,6 +160,45 @@ export default function OrderList() {
                     })}
                 </>
               )}
+              <div className="card mb-3 border-0 cart-card">
+                <div className="row g-0">
+                  <div className="col-md-3">
+                    <img
+                      src="./images/cart-1.jpeg"
+                      className="img-fluid rounded-start"
+                      alt="..."
+                    />
+                  </div>
+                  <div className="col-md-9">
+                    <div className="card-body">
+                      <h5 className="card-title card-text d-flex justify-content-between align-items-center">
+                        Nike Air Force 1 PLT.AF.ORM <span>$4,000.00</span>
+                      </h5>
+                      <p className="card-text">
+                        Pale Ivory/Light Orewood Brown/白/Summit White
+                      </p>
+
+                      <div className="row g-3 align-items-center justify-content-end">
+                        <div className="col-auto">
+                          <Button href="#" variant="outline-warning">
+                            Link
+                          </Button>
+                        </div>
+                        <div className="col-auto  w-auto ">
+                          <Button href="#" variant="outline-warning">
+                            Link
+                          </Button>
+                        </div>
+                      </div>
+
+                      <div className="iconbar">
+                        <i className="bi bi-suit-heart"></i>
+                        <i className="bi bi-trash3"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <hr />
             </div>
             <div className="col-sm-4">

@@ -5,9 +5,17 @@ import { useEffect, useState } from 'react'
 import { BARGAIN_get } from '@/configs/configs-buyer'
 // import { BARGAIN_RESPNSE } from '@/configs/configs-buyer'
 import { useRouter } from 'next/router'
+import DefaultLayout from '@/components/common/default-layout'
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
 
 export default function GetBargain() {
   const router = useRouter()
+  //Modal
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+  //---
   const { id } = router.query
   const [data, setData] = useState(null)
   const [bargainData, setbargainData] = useState('')
@@ -29,7 +37,7 @@ export default function GetBargain() {
     console.log(result)
     if (result) {
       alert('資料新增成功')
-      router.push('/address-book')
+      router.push('/buyer/bargain-seller')
     } else {
       alert('資料沒有新增')
     }
@@ -55,50 +63,80 @@ export default function GetBargain() {
         })
     }
   }, [id, router.query])
-
+  console.log(data)
   return (
     <>
-      <div>
-        {data &&
-          data.rows.map((v, i) => {
-            return (
-              <div key={i}>
-                <p>ID: {v.id}</p>
-                <p>Buyer ID: {v.buyer_id}</p>
-                <p>After Bargain Price: {v.after_bargin_price}</p>
-                <p>Product ID: {v.product_id}</p>
-              </div>
-            )
-          })}
-        <form onSubmit={formSubmit}>
-          <button
-            className="btn btn-block btn-primary font-weight-bold py-3"
-            type=""
-            onClick={(e) => {
-              e.preventDefault()
-              setbargainData({ id: id, ans_num: '2', ans: '同意' })
-            }}
-          >
-            同意
-          </button>
-          <button
-            className="btn btn-block btn-primary font-weight-bold py-3"
-            type=""
-            onClick={(e) => {
-              e.preventDefault()
-              setbargainData({ id: id, ans_num: '1', ans: '不同意' })
-            }}
-          >
-            拒絕
-          </button>
-          <button
-            className="btn btn-block btn-primary font-weight-bold py-3"
-            type="submit"
-          >
-            送出回復
-          </button>
-        </form>
-      </div>
+      <DefaultLayout>
+        <div>
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">編號</th>
+                <th scope="col">買家</th>
+                <th scope="col">期望價格</th>
+                <th scope="col">商品</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data &&
+                data.rows.map((v, i) => {
+                  return (
+                    <tr key={i}>
+                      <td> {v.id}</td>
+                      <td> {v.buyer_id}</td>
+                      <td> {v.after_bargin_price}</td>
+                      <td>{v.product_name}</td>
+                    </tr>
+                  )
+                })}
+            </tbody>
+          </table>
+
+          <form onSubmit={formSubmit}>
+            <button
+              className="btn btn-block btn-primary font-weight-bold py-3"
+              type=""
+              onClick={(e) => {
+                e.preventDefault()
+                setbargainData({ id: id, ans_num: '1', ans: '同意' })
+                handleShow(e)
+              }}
+            >
+              同意
+            </button>
+            <button
+              className="btn btn-block btn-primary font-weight-bold py-3"
+              type=""
+              onClick={(e) => {
+                e.preventDefault()
+                setbargainData({ id: id, ans_num: '2', ans: '不同意' })
+                handleShow(e)
+              }}
+            >
+              拒絕
+            </button>
+          </form>
+        </div>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>對於編號{bargainData.id}的議價要求</Modal.Title>
+          </Modal.Header>
+          <form onSubmit={formSubmit}>
+            <Modal.Body>{bargainData.ans}</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                返回
+              </Button>
+              <button
+                className="btn btn-block btn-primary font-weight-bold py-3"
+                type="submit"
+              >
+                送出回覆
+              </button>
+            </Modal.Footer>
+          </form>
+        </Modal>
+      </DefaultLayout>
     </>
   )
 }

@@ -43,6 +43,7 @@ export default function CheckoutBargain() {
     product_price: [],
     seller_id: '', // 初始化为空字符串
     item_qty: '',
+    buyer_id: '1',
   })
   // 使用 useEffect 在数据加载后设置 formData
   useEffect(() => {
@@ -133,7 +134,7 @@ export default function CheckoutBargain() {
                               name: e.target.value,
                             })
                           }
-                          value={auth.userData.nickname}
+                          value={auth ? auth.userData.nickname : formData.name}
                         />
                       </div>
                       <div className="col-md-6 form-group">

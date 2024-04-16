@@ -24,6 +24,8 @@ export const BARGAIN = `${API_SERVER}/bargain`
 export const BARGAIN_get = `${API_SERVER}/bargain/get`
 // export const BARGAIN_RESPNSE = `${API_SERVER}/bargain/:id/respond`
 export const BARGAIN_SELLER = `${API_SERVER}/bargain/seller`
+export const BARGAIN_BUYER = `${API_SERVER}/bargain/buyer`
+export const BARGAIN_BUYER_DELETE = `${API_SERVER}/bargain/buyer`
 export const BARGAIN_CHECKOUT = `${API_SERVER}/bargain/checkout`
 // *** JWT ***
 export const JWT_LOGIN_POST = `${API_SERVER}/login-jwt` // 登入, POST

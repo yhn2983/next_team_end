@@ -15,13 +15,16 @@ export default function OrderListNav() {
             <Link href="/buyer/order-list">全部訂單</Link>
           </li>
           <li>
-            <Link href="/buyer/order-list-unfinished">未完成</Link>
+            <Link href="/buyer/order-list-unsend">待出貨</Link>
           </li>
           <li>
-            <Link href="//buyer/order-list-finished">已完成</Link>
+            <Link href="/buyer/order-list-unfinished">待收貨</Link>
           </li>
           <li>
-            <a href="#">Contact</a>
+            <Link href="/buyer/order-list-finished">已完成</Link>
+          </li>
+          <li>
+            <a href="/buyer/bargain-buyer-req">我的議價要求</a>
           </li>
         </ul>
       </nav>
