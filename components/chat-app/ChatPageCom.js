@@ -23,6 +23,8 @@ const ChatPageCom = () => {
   // 從 Socket Context 中取得 socket 實例
   const { socket } = useSocket()
 
+  const [fetching, setFetching] = useState(false)
+
   console.log(socket)
 
   // 當用戶的資料或 socket 變更時，運行這個 useEffect
@@ -39,6 +41,8 @@ const ChatPageCom = () => {
   useEffect(() => {
     // 獲取歷史訊息
     const fetchMessages = async () => {
+      // 在請求開始時設定 fetching 為 true
+      setFetching(true)
       const response = await fetch(GET_CHAT_HISTORY, {
         method: 'POST',
         headers: {
@@ -53,6 +57,8 @@ const ChatPageCom = () => {
         ...prevChatData,
         rawMessages: result.data,
       }))
+      // 在請求結束時設定 fetching 為 false
+      setFetching(false)
     }
 
     // 如果 rawMessages 為空，則獲取歷史訊息
@@ -60,7 +66,13 @@ const ChatPageCom = () => {
       fetchMessages()
     }
     console.log(chatData)
-  }, [chatData.rawMessages]) // 注意這裡的依賴陣列是空的，這表示這個 useEffect 只會在組件掛載時運行
+  }, [])
+
+  // 當 chatData.rawMessages 改變時，運行這個 useEffect
+  useEffect(() => {
+    // 將視窗滾動到最後一條訊息
+    lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [chatData.rawMessages]) // 只在 chatData.rawMessages 改變時重新運行
 
   // 當 socket 變更時，運行這個 useEffect
   useEffect(() => {
