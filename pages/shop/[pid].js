@@ -84,8 +84,6 @@ export default function Detail() {
     fetchProductData()
   }, [router.query.pid])
 
-  console.log(product.data.seller_id)
-
   const fetchProductData = () => {
     const { pid } = router.query
     if (pid) {

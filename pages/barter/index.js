@@ -2,14 +2,23 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import { PROD_LIST } from '@/configs/config-r'
+import {
+  PROD_LIST,
+  BARTER_UPDATE_PUT,
+  BARTER_UPDATE_PUT2,
+  ORDER_BARTER_ADD,
+} from '@/configs/config-r'
 // page
 import DefaultLayout from '@/components/common/default-layout'
 import LoginPage from '@/components/member/login-modal'
 // style-----
 import style from '@/pages/shop/cart.module.css'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const AgreeSwal = withReactContent(Swal)
 // react bootstrap
 // react icons-----
+import { TbExclamationMark } from 'react-icons/tb'
 // loading bar & loading icon
 import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
@@ -75,6 +84,106 @@ export default function Barter() {
       })
   }, [router.query, router.isReady, auth.isAuth, auth.userData])
 
+  const notifyAgree = (m2_nickname) => {
+    AgreeSwal.fire({
+      title: `您已同意${m2_nickname}申請的以物易物訂單`,
+      text: '請到訂單列表查看',
+      icon: 'success',
+      confirmButtonText: '關閉',
+      confirmButtonColor: '#3085d6',
+    })
+  }
+
+  const notifyDecline = (m2_nickname) => {
+    AgreeSwal.fire({
+      title: `您已婉拒${m2_nickname}申請的以物易物訂單`,
+      icon: 'info',
+      confirmButtonText: '關閉',
+      confirmButtonColor: '#3085d6',
+    })
+  }
+
+  // barter
+  const agreeBtnClick = async (newFormData) => {
+    try {
+      const r = await fetch(`${BARTER_UPDATE_PUT}/${newFormData.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newFormData),
+      })
+      if (!r.ok) {
+        throw new Error('Error')
+      }
+      const result = await r.json()
+      console.log(result)
+      if (result.success) {
+        await addBarterOrder(newFormData)
+      } else {
+        console.log('資料未修改')
+      }
+    } catch (error) {
+      console.error('資料有誤：', error)
+    }
+  }
+
+  // id: v2.id,
+  // p1_id: v2.p1_id,
+  // p2_id: v2.p2_id,
+  // m1_id: v2.m1_id,
+  // m2_id: v2.m2_id,
+  // m1_nickname: v2.m1_nickname,
+  // m2_nickname: v2.m2_nickname,
+  // cp1: v2.cp1,
+  // cp2: v2.cp2,
+  // status_reply: 2,
+  // status_approve: 2,
+  // approve: 2,
+
+  const addBarterOrder = async (newFormData) => {
+    try {
+      const r = await fetch(ORDER_BARTER_ADD, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newFormData),
+      })
+
+      if (!r.ok) {
+        throw new Error('Error')
+      }
+      const result = await r.json()
+      console.log(result)
+      if (result.success) {
+        console.log('訂單已新增')
+      } else {
+        console.log('訂單未新增')
+      }
+    } catch (error) {
+      console.error('發生錯誤：', error)
+    }
+  }
+
+  const declineBtnClick = async (newFormData) => {
+    const r = await fetch(`${BARTER_UPDATE_PUT2}/${newFormData.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newFormData),
+    })
+    console.log(newFormData)
+    const result = await r.json()
+    console.log(result)
+    if (result.success) {
+      notifyDecline(newFormData.m2_nickname)
+    } else {
+      console.log('資料沒有修改')
+    }
+  }
+
   // Loading bar-----
   const [isLoading, setIsLoading] = useState(true)
   const [progress, setProgress] = useState(0)
@@ -94,7 +203,7 @@ export default function Barter() {
         <>
           <DefaultLayout>
             <Head>
-              <title>以物易物清單 | DEAL-2ND HAND SHOP</title>
+              <title>以物易物申請&邀請清單 | DEAL-2ND HAND SHOP</title>
             </Head>
             {/* Breadcrumb Start */}
             <div className={`container-fluid ${style.breadcrumbArea}`}>
@@ -119,7 +228,7 @@ export default function Barter() {
                       className="breadcrumb-item active"
                       style={{ fontSize: '20px' }}
                     >
-                      以物易物清單
+                      以物易物申請&邀請清單
                     </span>
                   </nav>
                 </div>
@@ -130,6 +239,45 @@ export default function Barter() {
             <div className="container-fluid mt-3 px-5">
               <div className="row px-xl-5">
                 {data.barter.map((v, i) => {
+                  const statusText =
+                    v.status_approve == 1 ? (
+                      <span>
+                        <TbExclamationMark
+                          className="mb-1"
+                          style={{ color: 'red', fontSize: '20px' }}
+                        />
+                        {v.created_at}
+                        {v.id} 您提出的以物易物邀請： 未審核--進行中
+                      </span>
+                    ) : (
+                      <span>
+                        {v.created_at}
+                        {v.id} 您提出的以物易物邀請：已審核--已結束
+                      </span>
+                    )
+                  const result = () => {
+                    if (v.approve == 1) {
+                      return (
+                        <h4 className="mb-3" style={{ color: '#e96d3f' }}>
+                          <strong>對方婉拒您的申請！</strong>
+                        </h4>
+                      )
+                    } else if (v.approve == 2) {
+                      return (
+                        <>
+                          <h4 className="" style={{ color: '#8e2626' }}>
+                            <strong>
+                              對方已同意您的申請！您的申請已轉至
+                              <Link href={`/barter/${v.id}`}>訂單頁面</Link>
+                            </strong>
+                          </h4>
+                          <h5>
+                            <strong>請至訂單頁面新增您的運送店到店資訊</strong>
+                          </h5>
+                        </>
+                      )
+                    }
+                  }
                   // 提出邀請 : m2-m1
                   if (v.m2_id == auth.userData.id) {
                     return (
@@ -149,12 +297,7 @@ export default function Barter() {
                                   aria-expanded="true"
                                   aria-controls="collapseOne"
                                 >
-                                  <strong>
-                                    您提出的以物易物邀請：
-                                    {v.status_approve == 1
-                                      ? '未核准'
-                                      : '已核准'}
-                                  </strong>
+                                  <strong>{statusText}</strong>
                                 </button>
                               </h2>
                               <div
@@ -164,6 +307,7 @@ export default function Barter() {
                                 data-bs-parent="#accordionExample"
                               >
                                 <div className="accordion-body text-center">
+                                  {result()}
                                   <table className="table table-light table-borderless table-hover">
                                     <thead className="text-center table-dark">
                                       <tr
@@ -286,6 +430,45 @@ export default function Barter() {
                   }
                 })}
                 {data.barter.map((v2, i2) => {
+                  const statusText2 =
+                    v2.status_reply == 1 ? (
+                      <span>
+                        <TbExclamationMark
+                          className="mb-1"
+                          style={{ color: 'red', fontSize: '20px' }}
+                        />
+                        {v2.created_at}
+                        {v2.id} 您收到的以物易物邀請：待回覆--進行中
+                      </span>
+                    ) : (
+                      <span>
+                        {v2.created_at}
+                        {v2.id} 您收到的以物易物邀請：已回覆--已結束
+                      </span>
+                    )
+                  const result = () => {
+                    if (v2.approve == 1) {
+                      return (
+                        <h4 className="mb-3" style={{ color: '#e96d3f' }}>
+                          <strong>您已婉拒對方的申請！</strong>
+                        </h4>
+                      )
+                    } else if (v2.approve == 2) {
+                      return (
+                        <>
+                          <h4 style={{ color: '#8e2626' }}>
+                            <strong>
+                              您已同意對方的申請！以物易物申請已轉至
+                              <Link href={`/barter/${v2.id}`}>訂單頁面</Link>
+                            </strong>
+                          </h4>
+                          <h5>
+                            <strong>請至訂單頁面新增您的運送店到店資訊</strong>
+                          </h5>
+                        </>
+                      )
+                    }
+                  }
                   // 收到邀請 : m1-m2
                   if (auth.userData.id == v2.m1_id) {
                     return (
@@ -302,10 +485,7 @@ export default function Barter() {
                                   aria-expanded="true"
                                   aria-controls="collapseOne"
                                 >
-                                  <strong>
-                                    您收到的以物易物邀請：
-                                    {v2.status_reply == 1 ? '待回覆' : '已回覆'}
-                                  </strong>
+                                  <strong>{statusText2}</strong>
                                 </button>
                               </h2>
                               <div
@@ -315,6 +495,7 @@ export default function Barter() {
                                 data-bs-parent="#accordionExample"
                               >
                                 <div className="accordion-body text-center">
+                                  {result()}
                                   <table className="table table-light table-borderless table-hover">
                                     <thead className="text-center table-dark">
                                       <tr
@@ -431,24 +612,57 @@ export default function Barter() {
                                       </tr>
                                     </tbody>
                                   </table>
-                                  <button
-                                    className={`btn me-4 ${style.btnHover}`}
-                                    style={{
-                                      backgroundColor: '#e96d3f',
-                                      color: 'white',
-                                    }}
-                                  >
-                                    同意
-                                  </button>
-                                  <button
-                                    className={`btn ${style.btnHover}`}
-                                    style={{
-                                      backgroundColor: '#8e2626',
-                                      color: 'white',
-                                    }}
-                                  >
-                                    婉拒
-                                  </button>
+                                  {!v2.approve ? (
+                                    <>
+                                      <button
+                                        className={`btn me-4 ${style.btnHover}`}
+                                        style={{
+                                          backgroundColor: '#e96d3f',
+                                          color: 'white',
+                                        }}
+                                        onClick={() => {
+                                          const newFormData = {
+                                            id: v2.id,
+                                            p1_id: v2.p1_id,
+                                            p2_id: v2.p2_id,
+                                            m1_id: v2.m1_id,
+                                            m2_id: v2.m2_id,
+                                            m1_nickname: v2.m1_nickname,
+                                            m2_nickname: v2.m2_nickname,
+                                            cp1: v2.cp1,
+                                            cp2: v2.cp2,
+                                            status_reply: 2,
+                                            status_approve: 2,
+                                            approve: 2,
+                                          }
+                                          agreeBtnClick(newFormData)
+                                        }}
+                                      >
+                                        同意
+                                      </button>
+                                      <button
+                                        className={`btn ${style.btnHover}`}
+                                        style={{
+                                          backgroundColor: '#8e2626',
+                                          color: 'white',
+                                        }}
+                                        onClick={() => {
+                                          const newFormData = {
+                                            id: v2.id,
+                                            m2_nickname: v2.m2_nickname,
+                                            status_reply: 2,
+                                            status_approve: 2,
+                                            approve: 1,
+                                          }
+                                          declineBtnClick(newFormData)
+                                        }}
+                                      >
+                                        婉拒
+                                      </button>
+                                    </>
+                                  ) : (
+                                    <></>
+                                  )}
                                 </div>
                               </div>
                             </div>
@@ -467,7 +681,7 @@ export default function Barter() {
         <>
           <DefaultLayout>
             <Head>
-              <title>以物易物清單 | DEAL-2ND HAND SHOP</title>
+              <title>以物易物申請&邀請清單 | DEAL-2ND HAND SHOP</title>
             </Head>
             <div className="row mt-5">
               <div className="col-12 text-center">

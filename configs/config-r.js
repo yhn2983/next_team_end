@@ -17,6 +17,16 @@ export const TOGGLE_LIKE = `${API_SERVER}/products/like-toggle`
 
 export const BARTER_ADD = `${API_SERVER}/products/barter`
 
+export const BARTER_UPDATE_PUT = `${API_SERVER}/products/barter`
+
+export const BARTER_UPDATE_PUT2 = `${API_SERVER}/products/barter2`
+
+export const ORDER_BARTER_ADD = `${API_SERVER}/products/order-barter`
+
+export const ORDER_BARTER_LIST = `${API_SERVER}/products/order-barter`
+
+export const ORDER_BARTER_UPDATE_PUT = `${API_SERVER}/products/order-barter`
+
 // // 取得通訊錄單筆資料 主鍵為 sid,  `${PROD_ITEM}/${sid}`
 // export const PROD_ITEM = `${API_SERVER}/products` // GET
 
