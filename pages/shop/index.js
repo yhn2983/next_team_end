@@ -100,35 +100,20 @@ export default function Shop() {
 
   // sort
   const [sortPrice, setSortPrice] = useState(false)
-
-  useEffect(() => {
-    if (sortPrice) {
-      let priceA = 'priceSortASC'
-      router.push(`/shop?priceA=${priceA}`)
-    } else {
-      let priceB = 'priceSortDESC'
-      router.push(`/shop?priceB=${priceB}`)
-    }
-  }, [sortPrice])
-
-  const handleSortPrice = (e) => {
-    setSortPrice(!sortPrice)
-  }
-
   const [sortDate, setSortDate] = useState(false)
 
-  useEffect(() => {
-    if (sortDate) {
-      let dateA = 'dateSortASC'
-      router.push(`/shop?dateA=${dateA}`)
-    } else {
-      let dateB = 'dateSortDESC'
-      router.push(`/shop?dateB=${dateB}`)
-    }
-  }, [sortDate])
+  const handleSortPrice = () => {
+    const newSortPrice = !sortPrice
+    setSortPrice(newSortPrice)
+    const priceOrder = newSortPrice ? 'priceSortASC' : 'priceSortDESC'
+    router.push(`/shop?priceOrder=${priceOrder}`)
+  }
 
-  const handleSortDate = (e) => {
-    setSortDate(!sortDate)
+  const handleSortDate = () => {
+    const newSortDate = !sortDate
+    setSortDate(newSortDate)
+    const dateOrder = newSortDate ? 'dateSortASC' : 'dateSortDESC'
+    router.push(`/shop?dateOrder=${dateOrder}`)
   }
 
   // category
