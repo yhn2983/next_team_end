@@ -72,7 +72,7 @@ export default function ProdA() {
         </span>
       </div>
     )
-    toast(msgBox2)
+    toast.error(msgBox2)
   }
 
   const notifyNeedAuth = () => {

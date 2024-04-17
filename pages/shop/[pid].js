@@ -351,6 +351,8 @@ export default function Detail() {
         if (result.success) {
           notifyBarterDone()
           setShow(false)
+          setIsBarterItemA(false)
+          setIsBarterItemB(false)
         }
       } catch (e) {
         console.error('Error submitting barter:', e)

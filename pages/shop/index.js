@@ -21,8 +21,7 @@ import {
   FaAngleRight,
 } from 'react-icons/fa'
 import { IoSearch } from 'react-icons/io5'
-import { GoDash } from 'react-icons/go'
-import { GoSortAsc, GoSortDesc } from 'react-icons/go'
+import { GoSortAsc, GoSortDesc, GoDash, GoTriangleDown } from 'react-icons/go'
 // loading bar & loading icon
 import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
@@ -612,9 +611,12 @@ export default function Shop() {
             <div className="col-lg-3 col-md-4 mt-5">
               <form role="search" onSubmit={onmultiSearch}>
                 {/* main-category start */}
-                <div className="d-flex">
+                <div className="d-flex justify-content-center">
                   <h3 className="mb-2" style={{ color: '#8e2626' }}>
-                    <strong>商品分類篩選</strong>
+                    <strong>
+                      <GoTriangleDown />
+                      商品分類篩選
+                    </strong>
                   </h3>
                 </div>
                 <div className="mb-4 bg-light px-3 py-3">
@@ -646,9 +648,12 @@ export default function Shop() {
                 </div>
                 {/* main-category end */}
                 {/* sub-category start */}
-                <div className="d-flex">
+                <div className="d-flex justify-content-center">
                   <h3 className="mb-2" style={{ color: '#8e2626' }}>
-                    <strong>商品子分類篩選</strong>
+                    <strong>
+                      <GoTriangleDown />
+                      商品子分類篩選
+                    </strong>
                   </h3>
                 </div>
                 <div className="mb-4 bg-light px-3 py-3">
@@ -681,9 +686,12 @@ export default function Shop() {
                 </div>
                 {/* sub-category end */}
                 {/* Price Start */}
-                <div className="d-flex">
+                <div className="d-flex justify-content-center">
                   <h3 className="mb-2" style={{ color: '#8e2626' }}>
-                    <strong>價格篩選</strong>
+                    <strong>
+                      <GoTriangleDown />
+                      價格篩選
+                    </strong>
                   </h3>
                 </div>
                 <div className="bg-light p-3 mb-4">
@@ -870,9 +878,12 @@ export default function Shop() {
                 {/* Price End */}
 
                 {/* new & old Start */}
-                <div className="d-flex">
+                <div className="d-flex justify-content-center">
                   <h3 className="mb-2" style={{ color: '#8e2626' }}>
-                    <strong>商品狀態篩選</strong>
+                    <strong>
+                      <GoTriangleDown />
+                      商品狀態篩選
+                    </strong>
                   </h3>
                 </div>
                 <div className="bg-light p-3 mb-4">
@@ -940,9 +951,12 @@ export default function Shop() {
                 </div>
                 {/* new & old  End */}
                 {/* created_at Start */}
-                <div className="d-flex">
+                <div className="d-flex justify-content-center">
                   <h3 className="mb-2" style={{ color: '#8e2626' }}>
-                    <strong>上架時間篩選</strong>
+                    <strong>
+                      <GoTriangleDown />
+                      上架時間篩選
+                    </strong>
                   </h3>
                 </div>
                 <div className="bg-light p-3 mb-30">
