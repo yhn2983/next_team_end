@@ -28,7 +28,7 @@ const ChatBody = ({ chatData, lastMessageRef, typingStatus }) => {
   return (
     <>
       <header className={`${style.chat__mainHeader}`}>
-        <p>開始聊天</p>
+        <h5 style={{ color: 'white' }}>開始聊天</h5>
         <button className={`${style.leaveChat__btn}`} onClick={handleLeaveChat}>
           離開聊天
         </button>

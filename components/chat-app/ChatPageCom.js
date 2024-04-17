@@ -73,7 +73,6 @@ const ChatPageCom = () => {
     // 將視窗滾動到最後一條訊息
     lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [chatData.rawMessages]) // 只在 chatData.rawMessages 改變時重新運行
-
   // 當 socket 變更時，運行這個 useEffect
   useEffect(() => {
     // 定義一個處理訊息回應的函數
@@ -131,7 +130,7 @@ const ChatPageCom = () => {
 
   return (
     <div className={`${style.chat}`}>
-      <ChatBar socket={socket} />
+      {/* <ChatBar socket={socket} /> */}
       <div className={`${style.chat__main}`}>
         <ChatBody
           chatData={chatData}

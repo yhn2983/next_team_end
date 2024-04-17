@@ -385,7 +385,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 20px;
-  background-color: #f9f5eb;
+  background-color: $dark;
   .leaveChat__btn {
     padding: 9px;
     width: 130px;
@@ -402,6 +402,7 @@
 }
 
 .message__container > * {
+  margin: 0 10px;
   margin-bottom: 10px;
 }
 
@@ -409,6 +410,7 @@
   height: 80vh;
   overflow: auto;
   display: block;
+  background-color:rgb(202, 234, 255);
 }
 
 .message__chats {
@@ -469,6 +471,8 @@
 }
 
 .chat__main {
+  margin: 0 auto;
   height: 100%;
-  flex: 0.85;
+  flex: 0.9;
+  border: 2px solid #b0b0b0;
 }
