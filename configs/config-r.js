@@ -27,6 +27,8 @@ export const ORDER_BARTER_LIST = `${API_SERVER}/products/order-barter`
 
 export const ORDER_BARTER_UPDATE_PUT = `${API_SERVER}/products/order-barter`
 
+export const ORDER_ADD = `${API_SERVER}/products/order`
+
 // // 取得通訊錄單筆資料 主鍵為 sid,  `${PROD_ITEM}/${sid}`
 // export const PROD_ITEM = `${API_SERVER}/products` // GET
 

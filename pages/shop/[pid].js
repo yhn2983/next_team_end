@@ -773,7 +773,7 @@ export default function Detail() {
                           <button
                             className="btn"
                             onClick={() => {
-                              if (auth.isAuth && v.status == '1') {
+                              if (auth.isAuth) {
                                 const productData2 = {
                                   member_id: auth.userData.id,
                                   product_id: v.id,
