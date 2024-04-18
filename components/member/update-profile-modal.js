@@ -159,62 +159,60 @@ export default function UpdateProfileModal({
       <Head>
         <title>修改資料</title>
       </Head>
-      <div className="container d-flex justify-content-center">
-        <div className={`${styles.updateModal} p-3`}>
-          <form name="form1" onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <h3 className="text-center">修改資料</h3>
-            </div>
-            <div className="mb-4">
-              <label className="form-label ms-2" htmlFor="name">
-                姓名
-              </label>
+      <div className={`${styles.updateModal} p-3`}>
+        <form name="form1" onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <h3 className="text-center">修改資料</h3>
+          </div>
+          <div className="mb-4">
+            <label className="form-label ms-2" htmlFor="name">
+              姓名
+            </label>
+            <input
+              className="form-control rounded"
+              type="text"
+              name="name"
+              id="name"
+              value={user.name}
+              onChange={handleFieldChange}
+            />
+            <div className="error">{error.name}</div>
+          </div>
+          <div className="mb-4">
+            <label className="form-label ms-2" htmlFor="mobile">
+              手機號碼
+            </label>
+            <div className="input-group">
               <input
                 className="form-control rounded"
                 type="text"
-                name="name"
-                id="name"
-                value={user.name}
+                name="mobile"
+                id="mobile"
+                value={user.mobile}
                 onChange={handleFieldChange}
+                aria-describedby="basic-addon1"
               />
-              <div className="error">{error.name}</div>
             </div>
-            <div className="mb-4">
-              <label className="form-label ms-2" htmlFor="mobile">
-                手機號碼
-              </label>
-              <div className="input-group">
-                <input
-                  className="form-control rounded"
-                  type="text"
-                  name="mobile"
-                  id="mobile"
-                  value={user.mobile}
-                  onChange={handleFieldChange}
-                  aria-describedby="basic-addon1"
-                />
-              </div>
-              <div className="error">{error.mobile}</div>
-            </div>
-            <div className="mb-1">
-              <label className="form-label ms-2" htmlFor="address">
-                地址
-              </label>
-              <input
-                className="form-control rounded"
-                type="text"
-                name="address"
-                id="address"
-                value={user.address}
-                onChange={handleFieldChange}
-              />
-              <div className="error">{error.address}</div>
-            </div>
-            <button type="submit" className="btn mt-3">
-              <strong>確認修改</strong>
-            </button>
-          </form>
-        </div>
+            <div className="error">{error.mobile}</div>
+          </div>
+          <div className="mb-1">
+            <label className="form-label ms-2" htmlFor="address">
+              地址
+            </label>
+            <input
+              className="form-control rounded"
+              type="text"
+              name="address"
+              id="address"
+              value={user.address}
+              onChange={handleFieldChange}
+            />
+            <div className="error">{error.address}</div>
+          </div>
+          <button type="submit" className="btn mt-3">
+            <strong>確認修改</strong>
+          </button>
+        </form>
       </div>
 
       <style jsx>{`
