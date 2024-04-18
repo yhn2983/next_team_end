@@ -19,6 +19,9 @@ const AgreeSwal = withReactContent(Swal)
 // react bootstrap
 // react icons-----
 import { TbExclamationMark } from 'react-icons/tb'
+import { FaRegCircle } from 'react-icons/fa'
+import { GrSend } from 'react-icons/gr'
+import { RiMailSendFill } from 'react-icons/ri'
 // loading bar & loading icon
 import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
@@ -168,6 +171,7 @@ export default function BarterInvite() {
     console.log(result)
     if (result.success) {
       notifyDecline(newFormData.m2_nickname)
+      router.push('/member/shop')
     } else {
       console.log('資料沒有修改')
     }
@@ -225,450 +229,506 @@ export default function BarterInvite() {
             </div>
             {/* Breadcrumb End */}
             {/* Barter Start */}
-            <div className="container-fluid mt-3 px-5">
+            <div className="container-fluid mt-3 px-5 mb-5">
               <div className="row px-xl-5">
-                {data.barter.map((v, i) => {
-                  const statusText =
-                    v.status_approve == 1 ? (
-                      <span>
-                        <TbExclamationMark
-                          className="mb-1"
-                          style={{ color: 'red', fontSize: '20px' }}
-                        />
-                        {v.created_at}
-                        {v.id} 您提出的以物易物邀請：未審核
-                      </span>
-                    ) : (
-                      <span>
-                        {v.created_at}
-                        {v.id} 您提出的以物易物邀請：已審核
-                      </span>
-                    )
-                  const result = () => {
-                    if (v.approve == 1) {
-                      return (
-                        <h4 className="mb-3" style={{ color: '#e96d3f' }}>
-                          <strong>對方婉拒您的申請！</strong>
-                        </h4>
+                <div className="col-lg-6 col-md-12">
+                  <div className="d-flex justify-content-center px-4 mt-3">
+                    <h4 style={{ color: '#8e2626' }}>
+                      <strong>
+                        <GrSend className="mb-1 me-2" />
+                        您提出的以物易物邀請
+                      </strong>
+                    </h4>
+                  </div>
+                  {data.barter.map((v, i) => {
+                    const statusText =
+                      v.status_approve == 1 ? (
+                        <span>
+                          <TbExclamationMark
+                            className="mb-1 me-1"
+                            style={{ color: 'red', fontSize: '20px' }}
+                          />
+                          {v.created_at}
+                          {v.id} ：未審核
+                        </span>
+                      ) : (
+                        <span>
+                          <FaRegCircle
+                            className="mb-1 me-2"
+                            style={{ color: 'green', fontSize: '16px' }}
+                          />
+                          {v.created_at}
+                          {v.id} ：已審核
+                        </span>
                       )
-                    } else if (v.approve == 2) {
+                    const result = () => {
+                      if (v.approve == 1) {
+                        return (
+                          <h4 className="mb-3" style={{ color: '#e96d3f' }}>
+                            <strong>對方婉拒您的申請！</strong>
+                          </h4>
+                        )
+                      } else if (v.approve == 2) {
+                        return (
+                          <>
+                            <h4 className="" style={{ color: '#8e2626' }}>
+                              <strong>
+                                對方已同意您的申請！您的申請已轉至
+                                <Link href={`/member/barter/${v.id}`}>
+                                  訂單詳情頁面
+                                </Link>
+                              </strong>
+                            </h4>
+                            <h5>
+                              <strong>
+                                請至訂單詳情頁面新增您的運送店到店資訊
+                              </strong>
+                            </h5>
+                          </>
+                        )
+                      }
+                    }
+                    // 提出邀請 : m2-m1
+                    if (v.m2_id == auth.userData.id) {
                       return (
                         <>
-                          <h4 className="" style={{ color: '#8e2626' }}>
-                            <strong>
-                              對方已同意您的申請！您的申請已轉至
-                              <Link href={`/member/barter/${v.id}`}>
-                                訂單詳情頁面
-                              </Link>
-                            </strong>
-                          </h4>
-                          <h5>
-                            <strong>
-                              請至訂單詳情頁面新增您的運送店到店資訊
-                            </strong>
-                          </h5>
-                        </>
-                      )
-                    }
-                  }
-                  // 提出邀請 : m2-m1
-                  if (v.m2_id == auth.userData.id) {
-                    return (
-                      <>
-                        <div
-                          key={i}
-                          className="col-lg-12 table-responsive mb-5"
-                        >
-                          <div className="accordion" id="accordionExample">
-                            <div className="accordion-item">
-                              <h2 className="accordion-header" id="headingOne">
-                                <button
-                                  className="accordion-button"
-                                  type="button"
-                                  data-bs-toggle="collapse"
-                                  data-bs-target="#collapseOne"
-                                  aria-expanded="true"
-                                  aria-controls="collapseOne"
-                                >
-                                  <strong>{statusText}</strong>
-                                </button>
-                              </h2>
+                          <div
+                            key={i}
+                            className="col-lg-12 table-responsive mb-2"
+                          >
+                            <div className="accordion" id="accordionExample">
                               <div
-                                id="collapseOne"
-                                className="accordion-collapse collapse show"
-                                aria-labelledby="headingOne"
-                                data-bs-parent="#accordionExample"
+                                className="accordion-item"
+                                style={{
+                                  overflow: 'hidden',
+                                }}
                               >
-                                <div className="accordion-body text-center">
-                                  {result()}
-                                  <table className="table table-light table-borderless table-hover">
-                                    <thead className="text-center table-dark">
-                                      <tr
-                                        className="fw-5 text-nowrap"
-                                        style={{ fontSize: '20px' }}
-                                      >
-                                        <th>您的商品</th>
-                                        <th>商品名稱</th>
-                                        <th className="text-nowrap">
-                                          可獲得小碳點
-                                        </th>
-                                      </tr>
-                                    </thead>
-                                    <tbody className="align-middle text-center">
-                                      <tr>
-                                        <td>
-                                          <Link href={`/shop/${v.p2_id}`}>
-                                            <img
-                                              src={
-                                                v.photo2.includes(',')
-                                                  ? `/${v.photo2.split(',')[0]}`
-                                                  : `/${v.photo2}`
-                                              }
-                                              alt=""
-                                              width={150}
-                                              height={150}
-                                              style={{ objectFit: 'cover' }}
-                                            />
-                                          </Link>
-                                        </td>
-                                        <td
-                                          className="align-middle text-wrap"
-                                          style={{
-                                            fontSize: '20px',
-                                            width: '500px',
-                                          }}
-                                        >
-                                          <Link
-                                            href={`/shop/${v.p2_id}`}
-                                            style={{
-                                              textDecoration: 'none',
-                                              color: 'black',
-                                            }}
-                                          >
-                                            {v.p2_name}
-                                          </Link>
-                                        </td>
-                                        <td
-                                          className="align-middle"
+                                <h2
+                                  className="accordion-header"
+                                  id="headingOne"
+                                  style={{
+                                    overflow: 'hidden',
+                                  }}
+                                >
+                                  <button
+                                    style={{ backgroundColor: '#f35b14ab' }}
+                                    className="accordion-button"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target={`#collapseOne${v.id}`}
+                                    aria-expanded="true"
+                                    aria-controls="collapseOne"
+                                  >
+                                    <strong>{statusText}</strong>
+                                  </button>
+                                </h2>
+                                <div
+                                  id={`collapseOne${v.id}`}
+                                  className="accordion-collapse collapse"
+                                  aria-labelledby="headingOne"
+                                  data-bs-parent="#accordionExample"
+                                >
+                                  <div className="accordion-body text-center">
+                                    {result()}
+                                    <table className="table table-light table-borderless table-hover">
+                                      <thead className="text-center table-dark">
+                                        <tr
+                                          className="fw-5 text-nowrap"
                                           style={{ fontSize: '20px' }}
                                         >
-                                          {v.cp2}
-                                        </td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                  <table className="table table-light table-borderless table-hover">
-                                    <thead className="text-center table-dark">
-                                      <tr
-                                        className="fw-5 text-nowrap"
-                                        style={{ fontSize: '20px' }}
-                                      >
-                                        <th>{v.m1_nickname}的商品</th>
-                                        <th>商品名稱</th>
-                                        <th className="text-nowrap">
-                                          可獲得小碳點
-                                        </th>
-                                      </tr>
-                                    </thead>
-                                    <tbody className="align-middle text-center">
-                                      <tr>
-                                        <td>
-                                          <Link href={`/shop/${v.p1_id}`}>
-                                            <img
-                                              src={
-                                                v.photo1.includes(',')
-                                                  ? `/${v.photo1.split(',')[0]}`
-                                                  : `/${v.photo1}`
-                                              }
-                                              alt=""
-                                              width={150}
-                                              height={150}
-                                              style={{ objectFit: 'cover' }}
-                                            />
-                                          </Link>
-                                        </td>
-                                        <td
-                                          className="align-middle text-wrap"
-                                          style={{
-                                            fontSize: '20px',
-                                            width: '500px',
-                                          }}
-                                        >
-                                          <Link
-                                            href={`/shop/${v.p1_id}`}
+                                          <th>您的商品</th>
+                                          <th>商品名稱</th>
+                                          <th className="text-nowrap">
+                                            可獲得小碳點
+                                          </th>
+                                        </tr>
+                                      </thead>
+                                      <tbody className="align-middle text-center">
+                                        <tr>
+                                          <td>
+                                            <Link href={`/shop/${v.p2_id}`}>
+                                              <img
+                                                src={
+                                                  v.photo2.includes(',')
+                                                    ? `/${
+                                                        v.photo2.split(',')[0]
+                                                      }`
+                                                    : `/${v.photo2}`
+                                                }
+                                                alt=""
+                                                width={150}
+                                                height={150}
+                                                style={{ objectFit: 'cover' }}
+                                              />
+                                            </Link>
+                                          </td>
+                                          <td
+                                            className="align-middle text-wrap"
                                             style={{
-                                              textDecoration: 'none',
-                                              color: 'black',
+                                              fontSize: '20px',
+                                              width: '500px',
                                             }}
                                           >
-                                            {v.p1_name}
-                                          </Link>
-                                        </td>
-                                        <td
-                                          className="align-middle"
+                                            <Link
+                                              href={`/shop/${v.p2_id}`}
+                                              style={{
+                                                textDecoration: 'none',
+                                                color: 'black',
+                                              }}
+                                            >
+                                              {v.p2_name}
+                                            </Link>
+                                          </td>
+                                          <td
+                                            className="align-middle"
+                                            style={{ fontSize: '20px' }}
+                                          >
+                                            {v.cp2}
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                    <table className="table table-light table-borderless table-hover">
+                                      <thead className="text-center table-dark">
+                                        <tr
+                                          className="fw-5 text-nowrap"
                                           style={{ fontSize: '20px' }}
                                         >
-                                          {v.cp1}
-                                        </td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
+                                          <th>{v.m1_nickname}的商品</th>
+                                          <th>商品名稱</th>
+                                          <th className="text-nowrap">
+                                            可獲得小碳點
+                                          </th>
+                                        </tr>
+                                      </thead>
+                                      <tbody className="align-middle text-center">
+                                        <tr>
+                                          <td>
+                                            <Link href={`/shop/${v.p1_id}`}>
+                                              <img
+                                                src={
+                                                  v.photo1.includes(',')
+                                                    ? `/${
+                                                        v.photo1.split(',')[0]
+                                                      }`
+                                                    : `/${v.photo1}`
+                                                }
+                                                alt=""
+                                                width={150}
+                                                height={150}
+                                                style={{ objectFit: 'cover' }}
+                                              />
+                                            </Link>
+                                          </td>
+                                          <td
+                                            className="align-middle text-wrap"
+                                            style={{
+                                              fontSize: '20px',
+                                              width: '500px',
+                                            }}
+                                          >
+                                            <Link
+                                              href={`/shop/${v.p1_id}`}
+                                              style={{
+                                                textDecoration: 'none',
+                                                color: 'black',
+                                              }}
+                                            >
+                                              {v.p1_name}
+                                            </Link>
+                                          </td>
+                                          <td
+                                            className="align-middle"
+                                            style={{ fontSize: '20px' }}
+                                          >
+                                            {v.cp1}
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </>
-                    )
-                  }
-                })}
-                {data.barter.map((v2, i2) => {
-                  const statusText2 =
-                    v2.status_reply == 1 ? (
-                      <span>
-                        <TbExclamationMark
-                          className="mb-1"
-                          style={{ color: 'red', fontSize: '20px' }}
-                        />
-                        {v2.created_at}
-                        {v2.id} 您收到的以物易物邀請：待回覆
-                      </span>
-                    ) : (
-                      <span>
-                        {v2.created_at}
-                        {v2.id} 您收到的以物易物邀請：已回覆
-                      </span>
-                    )
-                  const result = () => {
-                    if (v2.approve == 1) {
-                      return (
-                        <h4 className="mb-3" style={{ color: '#e96d3f' }}>
-                          <strong>您已婉拒對方的申請！</strong>
-                        </h4>
-                      )
-                    } else if (v2.approve == 2) {
-                      return (
-                        <>
-                          <h4 style={{ color: '#8e2626' }}>
-                            <strong>
-                              您已同意對方的申請！以物易物申請已轉至
-                              <Link href={`/member/barter/${v2.id}`}>
-                                訂單詳情頁面
-                              </Link>
-                            </strong>
-                          </h4>
-                          <h5>
-                            <strong>
-                              請至訂單詳情頁面新增您的運送店到店資訊
-                            </strong>
-                          </h5>
                         </>
                       )
                     }
-                  }
-                  // 收到邀請 : m1-m2
-                  if (auth.userData.id == v2.m1_id) {
-                    return (
-                      <>
-                        <div className="col-lg-12 table-responsive mb-5">
-                          <div className="accordion" id="accordionExample">
-                            <div className="accordion-item">
-                              <h2 className="accordion-header" id="headingOne">
-                                <button
-                                  className="accordion-button"
-                                  type="button"
-                                  data-bs-toggle="collapse"
-                                  data-bs-target="#collapseOne"
-                                  aria-expanded="true"
-                                  aria-controls="collapseOne"
-                                >
-                                  <strong>{statusText2}</strong>
-                                </button>
-                              </h2>
+                  })}
+                </div>
+                <div className="col-lg-6 col-md-12">
+                  <div className="d-flex justify-content-center px-4 mt-3">
+                    <h4 style={{ color: '#e96d3f' }}>
+                      <strong>
+                        <RiMailSendFill className="mb-1 me-2" />
+                        您收到的以物易物邀請
+                      </strong>
+                    </h4>
+                  </div>
+                  {data.barter.map((v2, i2) => {
+                    const statusText2 =
+                      v2.status_reply == 1 ? (
+                        <span>
+                          <TbExclamationMark
+                            className="mb-1 me-1"
+                            style={{ color: 'red', fontSize: '20px' }}
+                          />
+                          {v2.created_at}
+                          {v2.id} ：待回覆
+                        </span>
+                      ) : (
+                        <span>
+                          <FaRegCircle
+                            className="mb-1 me-2"
+                            style={{ color: 'green', fontSize: '16px' }}
+                          />
+                          {v2.created_at}
+                          {v2.id} ：已回覆
+                        </span>
+                      )
+                    const result = () => {
+                      if (v2.approve == 1) {
+                        return (
+                          <h4 className="mb-3" style={{ color: '#e96d3f' }}>
+                            <strong>您已婉拒對方的申請！</strong>
+                          </h4>
+                        )
+                      } else if (v2.approve == 2) {
+                        return (
+                          <>
+                            <h4 style={{ color: '#8e2626' }}>
+                              <strong>
+                                您已同意對方的申請！以物易物申請已轉至
+                                <Link href={`/member/barter/${v2.id}`}>
+                                  訂單詳情頁面
+                                </Link>
+                              </strong>
+                            </h4>
+                            <h5>
+                              <strong>
+                                請至訂單詳情頁面新增您的運送店到店資訊
+                              </strong>
+                            </h5>
+                          </>
+                        )
+                      }
+                    }
+                    // 收到邀請 : m1-m2
+                    if (auth.userData.id == v2.m1_id) {
+                      return (
+                        <>
+                          <div className="col-lg-12 table-responsive mb-2">
+                            <div className="accordion" id="accordionExample">
                               <div
-                                id="collapseOne"
-                                className="accordion-collapse collapse show"
-                                aria-labelledby="headingOne"
-                                data-bs-parent="#accordionExample"
+                                className="accordion-item"
+                                style={{
+                                  overflow: 'hidden',
+                                }}
                               >
-                                <div className="accordion-body text-center">
-                                  {result()}
-                                  <table className="table table-light table-borderless table-hover">
-                                    <thead className="text-center table-dark">
-                                      <tr
-                                        className="fw-5 text-nowrap"
-                                        style={{ fontSize: '20px' }}
-                                      >
-                                        <th>您的商品</th>
-                                        <th>商品名稱</th>
-                                        <th className="text-nowrap">
-                                          可獲得小碳點
-                                        </th>
-                                      </tr>
-                                    </thead>
-                                    <tbody className="align-middle text-center">
-                                      <tr>
-                                        <td>
-                                          <Link href={`/shop/${v2.p1_id}`}>
-                                            <img
-                                              src={
-                                                v2.photo1.includes(',')
-                                                  ? `/${
-                                                      v2.photo1.split(',')[0]
-                                                    }`
-                                                  : `/${v2.photo1}`
-                                              }
-                                              alt=""
-                                              width={150}
-                                              height={150}
-                                              style={{ objectFit: 'cover' }}
-                                            />
-                                          </Link>
-                                        </td>
-                                        <td
-                                          className="align-middle text-wrap"
-                                          style={{
-                                            fontSize: '20px',
-                                            width: '500px',
-                                          }}
-                                        >
-                                          <Link
-                                            href={`/shop/${v2.p1_id}`}
-                                            style={{
-                                              textDecoration: 'none',
-                                              color: 'black',
-                                            }}
-                                          >
-                                            {v2.p1_name}
-                                          </Link>
-                                        </td>
-                                        <td
-                                          className="align-middle"
+                                <h2
+                                  className="accordion-header"
+                                  id="headingOne"
+                                  style={{
+                                    overflow: 'hidden',
+                                  }}
+                                >
+                                  <button
+                                    style={{ backgroundColor: '#d13d3dce' }}
+                                    className="accordion-button"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target={`#collapseOne${v2.id}`}
+                                    aria-expanded="true"
+                                    aria-controls="collapseOne"
+                                  >
+                                    <strong>{statusText2}</strong>
+                                  </button>
+                                </h2>
+                                <div
+                                  id={`collapseOne${v2.id}`}
+                                  className="accordion-collapse collapse"
+                                  aria-labelledby="headingOne"
+                                  data-bs-parent="#accordionExample"
+                                >
+                                  <div className="accordion-body text-center">
+                                    {result()}
+                                    <table className="table table-light table-borderless table-hover">
+                                      <thead className="text-center table-dark">
+                                        <tr
+                                          className="fw-5 text-nowrap"
                                           style={{ fontSize: '20px' }}
                                         >
-                                          {v2.cp1}
-                                        </td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                  <table className="table table-light table-borderless table-hover">
-                                    <thead className="text-center table-dark">
-                                      <tr
-                                        className="fw-5 text-nowrap"
-                                        style={{ fontSize: '20px' }}
-                                      >
-                                        <th>{v2.m2_nickname}的商品</th>
-                                        <th>商品名稱</th>
-                                        <th className="text-nowrap">
-                                          可獲得小碳點
-                                        </th>
-                                      </tr>
-                                    </thead>
-                                    <tbody className="align-middle text-center">
-                                      <tr>
-                                        <td>
-                                          <Link href={`/shop/${v2.p2_id}`}>
-                                            <img
-                                              src={
-                                                v2.photo2.includes(',')
-                                                  ? `/${
-                                                      v2.photo2.split(',')[0]
-                                                    }`
-                                                  : `/${v2.photo2}`
-                                              }
-                                              alt=""
-                                              width={150}
-                                              height={150}
-                                              style={{ objectFit: 'cover' }}
-                                            />
-                                          </Link>
-                                        </td>
-                                        <td
-                                          className="align-middle text-wrap"
-                                          style={{
-                                            fontSize: '20px',
-                                            width: '500px',
-                                          }}
-                                        >
-                                          <Link
-                                            href={`/shop/${v2.p2_id}`}
+                                          <th>您的商品</th>
+                                          <th>商品名稱</th>
+                                          <th className="text-nowrap">
+                                            可獲得小碳點
+                                          </th>
+                                        </tr>
+                                      </thead>
+                                      <tbody className="align-middle text-center">
+                                        <tr>
+                                          <td>
+                                            <Link href={`/shop/${v2.p1_id}`}>
+                                              <img
+                                                src={
+                                                  v2.photo1.includes(',')
+                                                    ? `/${
+                                                        v2.photo1.split(',')[0]
+                                                      }`
+                                                    : `/${v2.photo1}`
+                                                }
+                                                alt=""
+                                                width={150}
+                                                height={150}
+                                                style={{ objectFit: 'cover' }}
+                                              />
+                                            </Link>
+                                          </td>
+                                          <td
+                                            className="align-middle text-wrap"
                                             style={{
-                                              textDecoration: 'none',
-                                              color: 'black',
+                                              fontSize: '20px',
+                                              width: '500px',
                                             }}
                                           >
-                                            {v2.p2_name}
-                                          </Link>
-                                        </td>
-                                        <td
-                                          className="align-middle"
+                                            <Link
+                                              href={`/shop/${v2.p1_id}`}
+                                              style={{
+                                                textDecoration: 'none',
+                                                color: 'black',
+                                              }}
+                                            >
+                                              {v2.p1_name}
+                                            </Link>
+                                          </td>
+                                          <td
+                                            className="align-middle"
+                                            style={{ fontSize: '20px' }}
+                                          >
+                                            {v2.cp1}
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                    <table className="table table-light table-borderless table-hover">
+                                      <thead className="text-center table-dark">
+                                        <tr
+                                          className="fw-5 text-nowrap"
                                           style={{ fontSize: '20px' }}
                                         >
-                                          {v2.cp2}
-                                        </td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                  {!v2.approve ? (
-                                    <>
-                                      <button
-                                        className={`btn me-4 ${style.btnHover}`}
-                                        style={{
-                                          backgroundColor: '#e96d3f',
-                                          color: 'white',
-                                        }}
-                                        onClick={() => {
-                                          const newFormData = {
-                                            id: v2.id,
-                                            p1_id: v2.p1_id,
-                                            p2_id: v2.p2_id,
-                                            m1_id: v2.m1_id,
-                                            m2_id: v2.m2_id,
-                                            m1_nickname: v2.m1_nickname,
-                                            m2_nickname: v2.m2_nickname,
-                                            cp1: v2.cp1,
-                                            cp2: v2.cp2,
-                                            status_reply: 2,
-                                            status_approve: 2,
-                                            approve: 2,
-                                          }
-                                          agreeBtnClick(newFormData)
-                                        }}
-                                      >
-                                        同意
-                                      </button>
-                                      <button
-                                        className={`btn ${style.btnHover}`}
-                                        style={{
-                                          backgroundColor: '#8e2626',
-                                          color: 'white',
-                                        }}
-                                        onClick={() => {
-                                          const newFormData = {
-                                            id: v2.id,
-                                            m2_nickname: v2.m2_nickname,
-                                            status_reply: 2,
-                                            status_approve: 2,
-                                            approve: 1,
-                                          }
-                                          declineBtnClick(newFormData)
-                                        }}
-                                      >
-                                        婉拒
-                                      </button>
-                                    </>
-                                  ) : (
-                                    <></>
-                                  )}
+                                          <th>{v2.m2_nickname}的商品</th>
+                                          <th>商品名稱</th>
+                                          <th className="text-nowrap">
+                                            可獲得小碳點
+                                          </th>
+                                        </tr>
+                                      </thead>
+                                      <tbody className="align-middle text-center">
+                                        <tr>
+                                          <td>
+                                            <Link href={`/shop/${v2.p2_id}`}>
+                                              <img
+                                                src={
+                                                  v2.photo2.includes(',')
+                                                    ? `/${
+                                                        v2.photo2.split(',')[0]
+                                                      }`
+                                                    : `/${v2.photo2}`
+                                                }
+                                                alt=""
+                                                width={150}
+                                                height={150}
+                                                style={{ objectFit: 'cover' }}
+                                              />
+                                            </Link>
+                                          </td>
+                                          <td
+                                            className="align-middle text-wrap"
+                                            style={{
+                                              fontSize: '20px',
+                                              width: '500px',
+                                            }}
+                                          >
+                                            <Link
+                                              href={`/shop/${v2.p2_id}`}
+                                              style={{
+                                                textDecoration: 'none',
+                                                color: 'black',
+                                              }}
+                                            >
+                                              {v2.p2_name}
+                                            </Link>
+                                          </td>
+                                          <td
+                                            className="align-middle"
+                                            style={{ fontSize: '20px' }}
+                                          >
+                                            {v2.cp2}
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                    {!v2.approve ? (
+                                      <>
+                                        <button
+                                          className={`btn me-4 ${style.btnHover}`}
+                                          style={{
+                                            backgroundColor: '#e96d3f',
+                                            color: 'white',
+                                          }}
+                                          onClick={() => {
+                                            const newFormData = {
+                                              id: v2.id,
+                                              p1_id: v2.p1_id,
+                                              p2_id: v2.p2_id,
+                                              m1_id: v2.m1_id,
+                                              m2_id: v2.m2_id,
+                                              m1_nickname: v2.m1_nickname,
+                                              m2_nickname: v2.m2_nickname,
+                                              cp1: v2.cp1,
+                                              cp2: v2.cp2,
+                                              status_reply: 2,
+                                              status_approve: 2,
+                                              approve: 2,
+                                            }
+                                            agreeBtnClick(newFormData)
+                                          }}
+                                        >
+                                          同意
+                                        </button>
+                                        <button
+                                          className={`btn ${style.btnHover}`}
+                                          style={{
+                                            backgroundColor: '#8e2626',
+                                            color: 'white',
+                                          }}
+                                          onClick={() => {
+                                            const newFormData = {
+                                              id: v2.id,
+                                              m2_nickname: v2.m2_nickname,
+                                              status_reply: 2,
+                                              status_approve: 2,
+                                              approve: 1,
+                                            }
+                                            declineBtnClick(newFormData)
+                                          }}
+                                        >
+                                          婉拒
+                                        </button>
+                                      </>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </>
-                    )
-                  }
-                })}
+                        </>
+                      )
+                    }
+                  })}
+                </div>
               </div>
             </div>
             {/* Barter End */}
