@@ -409,36 +409,41 @@ export default function Detail() {
         <div className="container-fluid pb-5 mt-4">
           <div className="row px-xl-5">
             <div className="col-lg-5 mb-30">
-              <Carousel fade style={{ height: '552px' }}>
+              <Carousel fade style={{ height: '600px' }}>
                 {productPhotos.includes(',') ? (
                   productPhotos.split(',').map((fileName, index) => {
                     return (
-                      <Carousel.Item key={index}>
+                      <Carousel.Item
+                        key={index}
+                        style={{ borderRadius: '5px' }}
+                      >
                         <img
                           src={`/${fileName}`}
                           alt=""
                           width={600}
-                          height={552}
+                          height={595}
                           style={{
                             width: '100%',
                             objectFit: 'cover',
                             opacity: '0.9',
+                            borderRadius: '5px',
                           }}
                         />
                       </Carousel.Item>
                     )
                   })
                 ) : (
-                  <Carousel.Item>
+                  <Carousel.Item style={{ borderRadius: '5px' }}>
                     <img
                       src={`/${productPhotos}`}
                       alt=""
                       width={600}
-                      height={552}
+                      height={595}
                       style={{
                         width: '100%',
                         objectFit: 'cover',
                         opacity: '0.9',
+                        borderRadius: '5px',
                       }}
                     />
                   </Carousel.Item>
@@ -446,7 +451,10 @@ export default function Detail() {
               </Carousel>
             </div>
             <div className="col-lg-7 h-auto">
-              <div className="h-100 bg-light py-4 px-4">
+              <div
+                className="h-100 bg-light py-4 px-4"
+                style={{ borderRadius: '5px' }}
+              >
                 <h2 style={{ fontWeight: '900' }}>
                   <strong style={{ color: '#8e2626' }}>
                     {product.data.product_name}

@@ -10,6 +10,7 @@
 .productItem{
   transition: .5s;
   border: 3px solid #e96d3f; 
+  border-radius: 5px;
   position: relative;
   width: 90%;
 }
