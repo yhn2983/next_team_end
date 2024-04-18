@@ -130,19 +130,6 @@ export default function BarterInvite() {
     }
   }
 
-  // id: v2.id,
-  // p1_id: v2.p1_id,
-  // p2_id: v2.p2_id,
-  // m1_id: v2.m1_id,
-  // m2_id: v2.m2_id,
-  // m1_nickname: v2.m1_nickname,
-  // m2_nickname: v2.m2_nickname,
-  // cp1: v2.cp1,
-  // cp2: v2.cp2,
-  // status_reply: 2,
-  // status_approve: 2,
-  // approve: 2,
-
   const addBarterOrder = async (newFormData) => {
     try {
       const r = await fetch(ORDER_BARTER_ADD, {

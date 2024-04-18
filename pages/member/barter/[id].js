@@ -2,17 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import { ORDER_BARTER_LIST, ORDER_BARTER_UPDATE_PUT } from '@/configs/config-r'
+import { ORDER_BARTER_LIST } from '@/configs/config-r'
 // page
 import Footer from '@/components/common/footer/footer'
 import DefaultLayout from '@/components/common/default-layout'
 import LoginPage from '@/components/member/login-modal'
 // style-----
 import style from '@/pages/shop/cart.module.css'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-const MySwal = withReactContent(Swal)
-import toast, { Toaster } from 'react-hot-toast'
 // react bootstrap
 // react icons-----
 import { FaPersonBreastfeeding, FaSeedling, FaAnglesUp } from 'react-icons/fa6'

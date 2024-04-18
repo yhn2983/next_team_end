@@ -29,10 +29,4 @@ export const ORDER_BARTER_UPDATE_PUT = `${API_SERVER}/products/order-barter`
 
 export const ORDER_ADD = `${API_SERVER}/products/order`
 
-// // 取得通訊錄單筆資料 主鍵為 sid,  `${PROD_ITEM}/${sid}`
-// export const PROD_ITEM = `${API_SERVER}/products` // GET
-
-// // *** JWT ***
-// export const JWT_LOGIN_POST = `${API_SERVER}/login-jwt` // 登入, POST
-
-// export const JWT_TOGGLE_LIKE = `${API_SERVER}/like-toggle-jwt` // GET
+export const SEND_EMAIL = `${API_SERVER}/products/sendEmail`

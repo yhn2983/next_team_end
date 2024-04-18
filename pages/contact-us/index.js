@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
+import { SEND_EMAIL } from '@/configs/config-r'
 // import Image from 'next/image'
 // pages-----
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
 import style from './contactUs.module.css'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 // react bootstrap
 // react icons-----
 import { FaRegFaceSmileWink } from 'react-icons/fa6'
@@ -15,6 +19,47 @@ import LoadingBar from 'react-top-loading-bar'
 // hook------
 
 export default function ContactUs() {
+  // send mail
+  const notifySuccess = () => {
+    MySwal.fire({
+      title: `您的訊息已送出`,
+      text: '請稍待3-5個工作天，我們會盡快回覆您',
+      icon: 'success',
+      confirmButtonText: '關閉',
+      confirmButtonColor: '#3085d6',
+    })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const formData = {
+      name: e.target.name.value,
+      email: e.target.email.value,
+      subjuect: e.target.subjuect.value,
+      message: e.target.message.value,
+    }
+
+    try {
+      const r = await fetch(`${SEND_EMAIL}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (r.success) {
+        notifySuccess()
+        e.target.reset()
+      } else {
+        alert('郵件發送失敗')
+      }
+    } catch (e) {
+      console.error('Error', e)
+    }
+  }
+
   // Loading bar-----
   const [isLoading, setIsLoading] = useState(true)
   const [progress, setProgress] = useState(0)
@@ -74,13 +119,13 @@ export default function ContactUs() {
                       <form
                         name="sentMessage"
                         id="contactForm"
-                        novalidate="novalidate"
+                        onSubmit={handleSubmit}
                       >
                         <div class="control-group mb-4">
                           <input
                             type="text"
                             class="form-control"
-                            id="name"
+                            name="name"
                             placeholder="您的姓名"
                             required="required"
                             data-validation-required-message="Please enter your name"
@@ -91,7 +136,7 @@ export default function ContactUs() {
                           <input
                             type="email"
                             class="form-control"
-                            id="email"
+                            name="email"
                             placeholder="您的信箱"
                             required="required"
                             data-validation-required-message="Please enter your email"
@@ -102,7 +147,7 @@ export default function ContactUs() {
                           <input
                             type="text"
                             class="form-control"
-                            id="subject"
+                            name="subject"
                             placeholder="訊息主旨"
                             required="required"
                             data-validation-required-message="Please enter a subject"
@@ -113,7 +158,7 @@ export default function ContactUs() {
                           <textarea
                             class="form-control"
                             rows="8"
-                            id="message"
+                            name="message"
                             placeholder="您的訊息"
                             required="required"
                             data-validation-required-message="Please enter your message"
