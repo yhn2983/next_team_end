@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import { CART_ITEM_DELETE, CART_ITEM_UPDATE_PUT } from '@/configs/config-r'
+import {
+  CART_ITEM_DELETE,
+  CART_ITEM_UPDATE_PUT,
+  ORDER_ADD,
+} from '@/configs/config-r'
 // page
 import Footer from '@/components/common/footer/footer'
 import DefaultLayout from '@/components/common/default-layout'
@@ -157,6 +161,25 @@ export default function Cart() {
       checkAuth()
     }
   }, [auth.isAuth])
+
+  // checkout
+  const chckoutClick = async (productData) => {
+    const r = await fetch(`${ORDER_ADD}`, {
+      method: 'POST',
+      eaders: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(productData),
+    })
+    const result = await r.json()
+    console.log(result)
+    if (result.success) {
+      console.log('即將轉向結帳網頁')
+      // router.push('/')
+    } else {
+      console.log('error')
+    }
+  }
 
   // Loading bar-----
   const [isLoading, setIsLoading] = useState(true)
@@ -426,6 +449,7 @@ export default function Cart() {
                           backgroundColor: '#e96d3f',
                           color: 'white',
                         }}
+                        onClick={() => {}}
                       >
                         <strong style={{ fontSize: '20px' }}>去結帳</strong>
                       </button>

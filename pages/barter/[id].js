@@ -21,6 +21,7 @@ import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
 // hook------
 import { useAuth } from '@/context/auth-context'
+import { useShip711StoreOpener } from '@/hooks/use-ship-711-store'
 
 export default function BarterCheckout() {
   // Router-----
@@ -73,6 +74,10 @@ export default function BarterCheckout() {
       shipment_fee_m2: 0,
       amount_m1: 0,
       amount_m2: 0,
+      address711_m1: '',
+      address711_m2: '',
+      name711_m1: '',
+      name711_m2: '',
       p1_id: 0,
       p2_id: 0,
       qty_m1: 0,
@@ -83,8 +88,12 @@ export default function BarterCheckout() {
       p2_name: '',
       p1_photos: '',
       p2_photos: '',
+      m1_nickname: '',
+      m2_nickname: '',
       m1_name: '',
       m2_name: '',
+      m1_mobile: '',
+      m2_mobile: '',
     },
   })
 
@@ -106,6 +115,12 @@ export default function BarterCheckout() {
         })
     }
   }
+
+  // 7-11
+  const { store711, openWindow, closeWindow } = useShip711StoreOpener(
+    'http://localhost:3001/shipment/711',
+    { autoCloseMins: 3 } // x分鐘沒完成選擇會自動關閉，預設5分鐘。
+  )
 
   // Loading bar-----
   const [isLoading, setIsLoading] = useState(true)
@@ -182,7 +197,7 @@ export default function BarterCheckout() {
                 {barter.data.m2_id == auth.userData.id ? (
                   <>
                     <div className="col-lg-8 table-responsive mb-5">
-                      <table className="table table-light table-borderless table-hover">
+                      <table className="table table-light table-borderless table-hover mb-5">
                         <thead className="text-center table-dark">
                           <tr
                             className="fw-5 text-nowrap"
@@ -259,7 +274,7 @@ export default function BarterCheckout() {
                             className="fw-5 text-nowrap"
                             style={{ fontSize: '20px' }}
                           >
-                            <th>{barter.data.m1_name}的商品</th>
+                            <th>{barter.data.m1_nickname}的商品</th>
                             <th>商品名稱</th>
                             <th>數量</th>
                             <th className="text-wrap">可獲得小碳點</th>
@@ -334,25 +349,43 @@ export default function BarterCheckout() {
                       <div className="bg-light p-30 mb-5">
                         <div className="border-bottom px-4 pt-4 pb-3">
                           <div className="d-flex justify-content-between mb-2">
-                            <h5 className="font-weight-medium">運費</h5>
-                            <h5 className="font-weight-medium">$60</h5>
+                            <h5 className="font-weight-medium">
+                              <strong>7-11 運送商店選擇</strong>
+                            </h5>
+                            <button
+                              className={`btn ${style.checkBtn}`}
+                              style={{
+                                backgroundColor: '#16b628',
+                                color: 'white',
+                              }}
+                              onClick={() => {
+                                openWindow()
+                              }}
+                            >
+                              <strong style={{ fontSize: '18px' }}>
+                                選擇門市
+                              </strong>
+                            </button>
                           </div>
-                          <div className="d-flex justify-content-between mb-2">
-                            <h5 className="font-weight-medium">總金額</h5>
-                          </div>
-                          <div className="d-flex justify-content-between mb-2">
-                            <h5 className="font-weight-medium">總小碳點</h5>
+                          <div className="mb-2">
+                            門市名稱 :{' '}
+                            <input
+                              className=" form-control"
+                              type="text"
+                              value={store711.storename}
+                              disabled
+                            />
+                            <br />
+                            門市地址 :{' '}
+                            <input
+                              className="mb-2 form-control"
+                              type="text"
+                              value={store711.storeaddress}
+                              disabled
+                            />
                           </div>
                         </div>
-                        <div className="p-4">
-                          <div className="d-flex justify-content-between mt-2">
-                            <h5>
-                              <strong>總付款金額</strong>
-                            </h5>
-                            <h5>
-                              <strong></strong>
-                            </h5>
-                          </div>
+                        <div className="p-4 d-flex justify-content-center">
                           <button
                             className={`btn btn-block font-weight-bold d-flex ${style.checkBtn}`}
                             style={{
@@ -360,7 +393,7 @@ export default function BarterCheckout() {
                               color: 'white',
                             }}
                           >
-                            <strong style={{ fontSize: '20px' }}>
+                            <strong style={{ fontSize: '18px' }}>
                               確認送出
                             </strong>
                           </button>
@@ -451,7 +484,7 @@ export default function BarterCheckout() {
                             className="fw-5 text-nowrap"
                             style={{ fontSize: '20px' }}
                           >
-                            <th>{barter.data.m2_name}的商品</th>
+                            <th>{barter.data.m2_nickname}的商品</th>
                             <th>商品名稱</th>
                             <th>數量</th>
                             <th className="text-wrap">可獲得小碳點</th>
@@ -523,25 +556,43 @@ export default function BarterCheckout() {
                       <div className="bg-light p-30 mb-5">
                         <div className="border-bottom px-4 pt-4 pb-3">
                           <div className="d-flex justify-content-between mb-2">
-                            <h5 className="font-weight-medium">運費</h5>
-                            <h5 className="font-weight-medium">$60</h5>
+                            <h5 className="font-weight-medium">
+                              <strong>7-11 運送商店選擇</strong>
+                            </h5>
+                            <button
+                              className={`btn ${style.checkBtn}`}
+                              style={{
+                                backgroundColor: '#16b628',
+                                color: 'white',
+                              }}
+                              onClick={() => {
+                                openWindow()
+                              }}
+                            >
+                              <strong style={{ fontSize: '18px' }}>
+                                選擇門市
+                              </strong>
+                            </button>
                           </div>
-                          <div className="d-flex justify-content-between mb-2">
-                            <h5 className="font-weight-medium">總金額</h5>
-                          </div>
-                          <div className="d-flex justify-content-between mb-2">
-                            <h5 className="font-weight-medium">總小碳點</h5>
+                          <div className="mb-2">
+                            門市名稱 :{' '}
+                            <input
+                              className=" form-control"
+                              type="text"
+                              value={store711.storename}
+                              disabled
+                            />
+                            <br />
+                            門市地址 :{' '}
+                            <input
+                              className="mb-2 form-control"
+                              type="text"
+                              value={store711.storeaddress}
+                              disabled
+                            />
                           </div>
                         </div>
-                        <div className="p-4">
-                          <div className="d-flex justify-content-between mt-2">
-                            <h5>
-                              <strong>總付款金額</strong>
-                            </h5>
-                            <h5>
-                              <strong></strong>
-                            </h5>
-                          </div>
+                        <div className="p-4 d-flex justify-content-center">
                           <button
                             className={`btn btn-block font-weight-bold d-flex ${style.checkBtn}`}
                             style={{
@@ -549,7 +600,7 @@ export default function BarterCheckout() {
                               color: 'white',
                             }}
                           >
-                            <strong style={{ fontSize: '20px' }}>
+                            <strong style={{ fontSize: '18px' }}>
                               確認送出
                             </strong>
                           </button>

@@ -25,7 +25,7 @@ import LoadingBar from 'react-top-loading-bar'
 // hook------
 import { useAuth } from '@/context/auth-context'
 
-export default function Barter() {
+export default function BarterInvite() {
   // Router-----
   const router = useRouter()
 
@@ -247,12 +247,12 @@ export default function Barter() {
                           style={{ color: 'red', fontSize: '20px' }}
                         />
                         {v.created_at}
-                        {v.id} 您提出的以物易物邀請： 未審核--進行中
+                        {v.id} 您提出的以物易物邀請：未審核
                       </span>
                     ) : (
                       <span>
                         {v.created_at}
-                        {v.id} 您提出的以物易物邀請：已審核--已結束
+                        {v.id} 您提出的以物易物邀請：已審核
                       </span>
                     )
                   const result = () => {
@@ -268,11 +268,13 @@ export default function Barter() {
                           <h4 className="" style={{ color: '#8e2626' }}>
                             <strong>
                               對方已同意您的申請！您的申請已轉至
-                              <Link href={`/barter/${v.id}`}>訂單頁面</Link>
+                              <Link href={`/barter/${v.id}`}>訂單詳情頁面</Link>
                             </strong>
                           </h4>
                           <h5>
-                            <strong>請至訂單頁面新增您的運送店到店資訊</strong>
+                            <strong>
+                              請至訂單詳情頁面新增您的運送店到店資訊
+                            </strong>
                           </h5>
                         </>
                       )
@@ -438,12 +440,12 @@ export default function Barter() {
                           style={{ color: 'red', fontSize: '20px' }}
                         />
                         {v2.created_at}
-                        {v2.id} 您收到的以物易物邀請：待回覆--進行中
+                        {v2.id} 您收到的以物易物邀請：待回覆
                       </span>
                     ) : (
                       <span>
                         {v2.created_at}
-                        {v2.id} 您收到的以物易物邀請：已回覆--已結束
+                        {v2.id} 您收到的以物易物邀請：已回覆
                       </span>
                     )
                   const result = () => {
@@ -459,11 +461,15 @@ export default function Barter() {
                           <h4 style={{ color: '#8e2626' }}>
                             <strong>
                               您已同意對方的申請！以物易物申請已轉至
-                              <Link href={`/barter/${v2.id}`}>訂單頁面</Link>
+                              <Link href={`/barter/${v2.id}`}>
+                                訂單詳情頁面
+                              </Link>
                             </strong>
                           </h4>
                           <h5>
-                            <strong>請至訂單頁面新增您的運送店到店資訊</strong>
+                            <strong>
+                              請至訂單詳情頁面新增您的運送店到店資訊
+                            </strong>
                           </h5>
                         </>
                       )

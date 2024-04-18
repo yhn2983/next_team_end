@@ -105,6 +105,7 @@ export default function Shop() {
   const handleSortPrice = () => {
     const newSortPrice = !sortPrice
     setSortPrice(newSortPrice)
+    setSortDate(false)
     const priceOrder = newSortPrice ? 'priceSortASC' : 'priceSortDESC'
     router.push(`/shop?priceOrder=${priceOrder}`)
   }
@@ -112,6 +113,7 @@ export default function Shop() {
   const handleSortDate = () => {
     const newSortDate = !sortDate
     setSortDate(newSortDate)
+    setSortPrice(false)
     const dateOrder = newSortDate ? 'dateSortASC' : 'dateSortDESC'
     router.push(`/shop?dateOrder=${dateOrder}`)
   }
