@@ -533,7 +533,7 @@ export default function BarterInvite() {
                                   }}
                                 >
                                   <button
-                                    style={{ backgroundColor: '#d13d3dce' }}
+                                    style={{ backgroundColor: '#e96262d0' }}
                                     className="accordion-button"
                                     type="button"
                                     data-bs-toggle="collapse"
