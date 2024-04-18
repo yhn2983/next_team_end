@@ -11,6 +11,7 @@ import style from './helpCenter.module.css'
 // loading bar & loading icon
 import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
+import FaqAccordion from '@/components/faq-accordion'
 // hook------
 
 export default function FAQs() {
@@ -65,6 +66,7 @@ export default function FAQs() {
                 </Link>
                 <span className="breadcrumb-item active">常見問題</span>
               </nav>
+              <FaqAccordion />
             </div>
           </div>
         </div>

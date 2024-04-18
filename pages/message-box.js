@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Modal from 'react-modal'
 import Image from 'next/image'
-import ChatMessage from '@/components/message-box-chat'
 import styles from '@/styles/lee-form.module.scss'
 
 // ...
