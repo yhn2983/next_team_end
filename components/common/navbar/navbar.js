@@ -80,16 +80,19 @@ export default function CustomNavbar({ pageName = '' }) {
   const [isMessageHovered, setIsMessageHovered] = useState(false)
   const [isLanHovered, setIsLanHovered] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
+  const [isUserHovered, setUsUserHovered] = useState(false)
   const [showRegister, setShowRegister] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
   const handleMouseEnter = (type) => {
     if (type === 'message') setIsMessageHovered(true)
     if (type === 'language') setIsLanHovered(true)
+    if (type === 'user') setUsUserHovered(true)
   }
   const handleMouseLeave = (type) => {
     if (type === 'message') setIsMessageHovered(false)
     if (type === 'language') setIsLanHovered(false)
+    if (type === 'user') setUsUserHovered(false)
   }
 
   // Product & Category
@@ -207,7 +210,7 @@ export default function CustomNavbar({ pageName = '' }) {
                   onMouseEnter={() => handleMouseEnter('user')}
                   onMouseLeave={() => handleMouseLeave('user')}
                   style={{
-                    backgroundColor: auth.isAuth ? '#d6d4d4' : '#F5F5F5',
+                    backgroundColor: isUserHovered ? '#d6d4d4' : '#F5F5F5',
                     border: 'none',
                     color: '#8e2626',
                   }}
