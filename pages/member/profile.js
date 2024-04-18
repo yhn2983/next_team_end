@@ -9,11 +9,13 @@ import { useAuth } from '@/context/auth-context'
 import { useRouter } from 'next/router'
 import GoogleFillModal from '@/components/member/google-fill-modal'
 import DefaultLayout from '@/components/common/default-layout'
+import UpdateProfileModal from '@/components/member/update-profile-modal'
 
 export default function Profile() {
   const { checkAuth } = useAuth()
   const router = useRouter()
   const [isLoading, setISLoading] = useState(true)
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false) // new state variable for controlling the modal
 
   // 如果使用者沒有登入，將他們重定向到登入頁面
   useEffect(() => {
@@ -165,10 +167,13 @@ export default function Profile() {
                     </div>
                   </div> */}
                     <div className="d-flex justify-content-center mb-2">
-                      <button type="button" className="btn">
+                      <button type="button" className={`${styles.probtn} btn`}>
                         追蹤
                       </button>
-                      <button type="button" className="btn ms-1">
+                      <button
+                        type="button"
+                        className={`${styles.probtn} btn ms-2`}
+                      >
                         傳訊息
                       </button>
                     </div>
@@ -179,34 +184,46 @@ export default function Profile() {
                 >
                   <div className="card-body p-0 text-center">
                     <ul className="list-group list-group-flush rounded-3">
-                      <Link href="/member/update-profile">
-                        <li
-                          className={`list-group-item p-3 ${styles.listGroupItem}`}
+                      {/* <Link href="/member/update-profile"> */}
+                      <li className={`list-group-item ${styles.listGroupItem}`}>
+                        <button
+                          onClick={() => setIsUpdateModalOpen(true)}
+                          className={`${styles.libtn}`}
                         >
                           修改個人檔案
-                        </li>
-                      </Link>
-                      <Link href="/member/changepassword">
-                        <li
-                          className={`list-group-item p-3 ${styles.listGroupItem}`}
+                        </button>
+                      </li>
+                      {/* </Link> */}
+                      <UpdateProfileModal
+                        isOpen={isUpdateModalOpen}
+                        onRequestClose={() => setIsUpdateModalOpen(false)}
+                        userData={user}
+                        onUpdated={fetchUserData} // 將 fetchUserData 函數傳遞給 onUpdated prop
+                      />
+                      <li className={`list-group-item ${styles.listGroupItem}`}>
+                        <button
+                          // onClick={() => setIsUpdateModalOpen(true)}
+                          className={`${styles.libtn}`}
                         >
                           更改密碼
-                        </li>
-                      </Link>
-                      <Link href="/your-target-url">
-                        <li
-                          className={`list-group-item p-3 ${styles.listGroupItem}`}
+                        </button>
+                      </li>
+                      <li className={`list-group-item ${styles.listGroupItem}`}>
+                        <button
+                          // onClick={() => setIsUpdateModalOpen(true)}
+                          className={`${styles.libtn}`}
                         >
                           我的賣場
-                        </li>
-                      </Link>
-                      <Link href="/your-target-url">
-                        <li
-                          className={`list-group-item p-3 ${styles.listGroupItem}`}
+                        </button>
+                      </li>
+                      <li className={`list-group-item ${styles.listGroupItem}`}>
+                        <button
+                          // onClick={() => setIsUpdateModalOpen(true)}
+                          className={`${styles.libtn}`}
                         >
                           我的訂單
-                        </li>
-                      </Link>
+                        </button>
+                      </li>
                     </ul>
                   </div>
                 </div>

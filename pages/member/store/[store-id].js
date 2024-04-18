@@ -18,6 +18,8 @@ export default function StoreInfo() {
   const [isLoading, setIsLoading] = useState(true)
   const [progress, setProgress] = useState(0)
   const { connectionState, setConnectionState, socket } = useSocket()
+  // 使用 useState 建立 storeId 的狀態
+  const [storeId, setStoreId] = useState(null)
 
   useEffect(() => {
     if (isLoading) {
@@ -40,6 +42,7 @@ export default function StoreInfo() {
   const fetchUserData = async () => {
     setIsLoading(true)
     const storeId = router.query['store-id']
+    setStoreId(storeId) // 更新 storeId 的狀態
     const response = await fetch(`${GET_ONE_USER}/other/${storeId}`, {
       method: 'GET',
       credentials: 'include',
@@ -134,16 +137,22 @@ export default function StoreInfo() {
                     </div>
                   </div>
                   <div className="d-flex justify-content-center mb-2">
-                    <button type="button" className="btn">
-                      追蹤
-                    </button>
-                    <button
-                      type="button"
-                      className="btn ms-1"
-                      onClick={handleSendMessage}
-                    >
-                      傳訊息
-                    </button>
+                    {auth.userData.id !== +storeId ? (
+                      <>
+                        <button type="button" className="btn">
+                          追蹤
+                        </button>
+                        <button
+                          type="button"
+                          className="btn ms-1"
+                          onClick={handleSendMessage}
+                        >
+                          傳訊息
+                        </button>
+                      </>
+                    ) : (
+                      <p>這樣我自己的賣場</p>
+                    )}
                   </div>
                 </div>
               </div>

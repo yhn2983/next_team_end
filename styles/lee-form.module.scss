@@ -11,6 +11,8 @@
 }
 
 .listGroupItem {
+  height: 57px;
+  padding: 0 !important;
   cursor: pointer !important;
   border: none !important;
   border-bottom: 1px solid #dee2e6 !important;
@@ -109,11 +111,35 @@
 
 
   background-color:	#F0F0F0; 
-  button{
+  .probtn{
     height: 40px;
     border: 1px solid $secondary;
     border-radius: 0.3rem;
     background-color: $primary;
+    color: #ffffff;
+    font-weight: 600;
+    &:hover{
+      background-color: $dark;
+      color: #ffffff !important;
+    }
+  }
+
+  .libtn{
+    height: 100%;
+    width: 100%;
+    border: none;
+    background-color: #FFF;
+    
+  &:hover {
+    background-color: #c7def5; // 你可以根據需要更改這個值
+  }
+  }
+
+  .photobtn{
+    height: 40px;
+    border: 1px solid $secondary;
+    border-radius: 0.3rem;
+    background: rgb(126, 186, 234) !important;
     color: #ffffff;
     font-weight: 600;
     &:hover{
@@ -245,6 +271,31 @@
     height: 10px;
     position: relative;
     top:6px;
+  }
+}
+
+.updateModal{
+  width: 460px;
+  background-color: $form-bg;
+  // border: 2px solid $dark;
+  border-radius: $border-radius-sm;
+  
+  h3 {
+    font-weight: 600;
+    border-bottom: 1px solid #dee2e6;
+    padding-top: 6px;
+    padding-bottom: 20px;
+    color: $dark;
+  }
+
+  button {
+    background: $primary;
+    color: $light;
+
+    &:hover {
+      background: $dark;
+      color: $light;
+    }
   }
 }
 
