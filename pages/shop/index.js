@@ -598,13 +598,19 @@ export default function Shop() {
             <div className="col-lg-3 col-md-4 mt-5">
               <form role="search" onSubmit={onmultiSearch}>
                 {/* main-category start */}
-                <div className="d-flex justify-content-center">
-                  <h3 className="mb-2" style={{ color: '#8e2626' }}>
+                <div
+                  className="d-flex justify-content-center"
+                  style={{
+                    backgroundColor: '#8e2626',
+                    borderRadius: '5px 5px 0 0',
+                  }}
+                >
+                  <h4 className="pt-2" style={{ color: 'white' }}>
                     <strong>
                       <GoTriangleDown />
                       商品分類篩選
                     </strong>
-                  </h3>
+                  </h4>
                 </div>
                 <div className="mb-4 bg-light px-3 py-3">
                   <select
@@ -635,13 +641,19 @@ export default function Shop() {
                 </div>
                 {/* main-category end */}
                 {/* sub-category start */}
-                <div className="d-flex justify-content-center">
-                  <h3 className="mb-2" style={{ color: '#8e2626' }}>
+                <div
+                  className="d-flex justify-content-center"
+                  style={{
+                    backgroundColor: '#8e2626',
+                    borderRadius: '5px 5px 0 0',
+                  }}
+                >
+                  <h4 className="pt-2" style={{ color: 'white' }}>
                     <strong>
                       <GoTriangleDown />
                       商品子分類篩選
                     </strong>
-                  </h3>
+                  </h4>
                 </div>
                 <div className="mb-4 bg-light px-3 py-3">
                   <select
@@ -673,13 +685,19 @@ export default function Shop() {
                 </div>
                 {/* sub-category end */}
                 {/* Price Start */}
-                <div className="d-flex justify-content-center">
-                  <h3 className="mb-2" style={{ color: '#8e2626' }}>
+                <div
+                  className="d-flex justify-content-center"
+                  style={{
+                    backgroundColor: '#8e2626',
+                    borderRadius: '5px 5px 0 0',
+                  }}
+                >
+                  <h4 className="pt-2" style={{ color: 'white' }}>
                     <strong>
                       <GoTriangleDown />
                       價格篩選
                     </strong>
-                  </h3>
+                  </h4>
                 </div>
                 <div className="bg-light p-3 mb-4">
                   <div className="form-check d-flex align-items-center justify-content-between mb-3">
@@ -863,15 +881,20 @@ export default function Shop() {
                   </div>
                 </div>
                 {/* Price End */}
-
                 {/* new & old Start */}
-                <div className="d-flex justify-content-center">
-                  <h3 className="mb-2" style={{ color: '#8e2626' }}>
+                <div
+                  className="d-flex justify-content-center"
+                  style={{
+                    backgroundColor: '#8e2626',
+                    borderRadius: '5px 5px 0 0',
+                  }}
+                >
+                  <h4 className="pt-2" style={{ color: 'white' }}>
                     <strong>
                       <GoTriangleDown />
                       商品狀態篩選
                     </strong>
-                  </h3>
+                  </h4>
                 </div>
                 <div className="bg-light p-3 mb-4">
                   <div className="form-check d-flex align-items-center justify-content-between mb-3">
@@ -938,13 +961,19 @@ export default function Shop() {
                 </div>
                 {/* new & old  End */}
                 {/* created_at Start */}
-                <div className="d-flex justify-content-center">
-                  <h3 className="mb-2" style={{ color: '#8e2626' }}>
+                <div
+                  className="d-flex justify-content-center"
+                  style={{
+                    backgroundColor: '#8e2626',
+                    borderRadius: '5px 5px 0 0',
+                  }}
+                >
+                  <h4 className="pt-2" style={{ color: 'white' }}>
                     <strong>
                       <GoTriangleDown />
                       上架時間篩選
                     </strong>
-                  </h3>
+                  </h4>
                 </div>
                 <div className="bg-light p-3 mb-30">
                   <div className="form-check d-flex align-items-center justify-content-between mb-3">
@@ -1172,9 +1201,9 @@ export default function Shop() {
             <div className="col-lg-9 col-md-8">
               {/* sorting start */}
               <div className="row px-lg-4">
-                <div className="col-12 text-end">
+                <div className="col-12 mt-4 text-lg-end text-center">
                   <button
-                    className="btn me-3"
+                    className="btn me-lg-3 me-md-3"
                     style={{ backgroundColor: '#e68b6a', border: 'none' }}
                     name="price"
                     onClick={handleSortPrice}

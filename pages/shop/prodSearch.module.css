@@ -8,38 +8,6 @@
   font-weight: 900;
 }
 
-.titleArea{
-  content: "";
-  width: 55%;
-  border-top: 3px dashed #8e2626;
-  margin-top: 16px;
-  margin-left: 20px;
-}
-
-.titleAreaB{
-  content: "";
-  width: 48%;
-  border-top: 3px dashed #8e2626;
-  margin-top: 16px;
-  margin-left: 20px;
-}
-
-.titleAreaC{
-  content: "";
-  width: 68%;
-  border-top: 3px dashed #8e2626;
-  margin-top: 16px;
-  margin-left: 20px;
-}
-
-.titleAreaD{
-  content: "";
-  width: 55%;
-  border-top: 3px dashed #8e2626;
-  margin-top: 16px;
-  margin-left: 20px;
-}
-
 .productItem{
   transition: .5s;
   border: 3px solid #e96d3f; 
