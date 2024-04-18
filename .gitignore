@@ -1,7 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 .vscode
-
+/public
+context/auth-context.js
+components/icons
+components/configs/index.js
 
 
 # dependencies
