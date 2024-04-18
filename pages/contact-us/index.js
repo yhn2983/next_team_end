@@ -120,7 +120,7 @@ export default function ContactUs() {
                           ></textarea>
                           <p class="help-block text-danger"></p>
                         </div>
-                        <div>
+                        <div className="d-flex justify-content-center">
                           <button
                             class={`btn py-2 px-3 ${style.sendBtn}`}
                             type="submit"
@@ -130,7 +130,7 @@ export default function ContactUs() {
                               color: 'white',
                             }}
                           >
-                            <span style={{ fontSize: '20px' }}>送出訊息</span>
+                            <span style={{ fontSize: '18px' }}>送出訊息</span>
                           </button>
                         </div>
                       </form>
