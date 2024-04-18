@@ -435,7 +435,7 @@ export default function Cart() {
                       </div>
                     </div>
                     <div className="p-4">
-                      <div className="d-flex justify-content-between mt-2">
+                      <div className="d-flex justify-content-between mt-2 mb-3">
                         <h5>
                           <strong>總付款金額</strong>
                         </h5>
@@ -443,16 +443,18 @@ export default function Cart() {
                           <strong>${(totalPrice + 60).toLocaleString()}</strong>
                         </h5>
                       </div>
-                      <button
-                        className={`btn btn-block font-weight-bold d-flex ${style.checkBtn}`}
-                        style={{
-                          backgroundColor: '#e96d3f',
-                          color: 'white',
-                        }}
-                        onClick={() => {}}
-                      >
-                        <strong style={{ fontSize: '20px' }}>去結帳</strong>
-                      </button>
+                      <div className="d-flex justify-content-center">
+                        <button
+                          className={`btn btn-block font-weight-bold d-flex ${style.checkBtn}`}
+                          style={{
+                            backgroundColor: '#e96d3f',
+                            color: 'white',
+                          }}
+                          onClick={() => {}}
+                        >
+                          <strong style={{ fontSize: '20px' }}>去結帳</strong>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
