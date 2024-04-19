@@ -96,67 +96,74 @@ export default function OrderList() {
 
   return (
     <>
-      <DefaultLayout>
+      <DefaultLayout pageName="bargain-buyer">
         <div className={`${Styles.orderList}`}>
-          <OrderListNav />
+          <OrderListNav pageName="bargain-buyer" />
           {!bargainData.rows ? (
             <div>...loading</div>
           ) : (
-            <Table striped bordered hover size="sm">
-              <thead>
-                <tr>
-                  <th>id</th>
-                  <th>商品</th>
-                  <th>買家</th>
-                  <th>期望價格</th>
+            <>
+              <h4 className="mb-3"> 我的議價請求</h4>
+              <Table striped bordered hover size="sm">
+                <thead>
+                  <tr className="table-dark">
+                    <th>id</th>
+                    <th>商品</th>
+                    <th>買家</th>
+                    <th>期望價格</th>
 
-                  <th>回覆答案</th>
-                  <th>button</th>
-                  <th>取消該筆議價</th>
-                </tr>
-              </thead>
-              <tbody>
-                {bargainData.rows.map((v, i) => (
-                  <tr key={i}>
-                    <td>{v.id}</td>
-                    <td>{v.product_name}</td>
-                    <td>{v.nickname}</td>
-
-                    <td>
-                      {v.ans_num
-                        ? v.ans_num == 1
-                          ? '同意'
-                          : '不同意'
-                        : '尚未回應'}
-                    </td>
-                    <td>{v.after_bargin_price}</td>
-                    <td>
-                      {v.ans_num ? (
-                        <>
-                          <Button href={`/buyer/checkout-bargain/${v.id}`}>
-                            結帳
-                          </Button>
-                        </>
-                      ) : (
-                        '等待賣家回復...'
-                      )}
-                    </td>
-                    <td>
-                      {' '}
-                      <Button
-                        href="#"
-                        onClick={(e) => {
-                          e.preventDefault() // 不跳頁
-                          deleteItem(v.id)
-                        }}
-                      >
-                        刪除
-                      </Button>
-                    </td>
+                    <th>回覆答案</th>
+                    <th>結帳</th>
+                    <th>取消該筆議價</th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
+                </thead>
+                <tbody>
+                  {bargainData.rows.map((v, i) => (
+                    <tr key={i}>
+                      <td>{v.id}</td>
+                      <td>{v.product_name}</td>
+                      <td>{v.nickname}</td>
+
+                      <td>
+                        {v.ans_num
+                          ? v.ans_num == 1
+                            ? '同意'
+                            : '不同意'
+                          : '尚未回應'}
+                      </td>
+                      <td>{v.after_bargin_price}</td>
+                      <td>
+                        {v.ans_num ? (
+                          <>
+                            <Button
+                              href={`/buyer/checkout-bargain/${v.id}`}
+                              className={`${Styles.bargainBtn}`}
+                            >
+                              結帳
+                            </Button>
+                          </>
+                        ) : (
+                          '等待賣家回復...'
+                        )}
+                      </td>
+                      <td>
+                        {' '}
+                        <Button
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault() // 不跳頁
+                            deleteItem(v.id)
+                          }}
+                          className={`${Styles.bargainNotBtn}`}
+                        >
+                          刪除
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </>
           )}
         </div>
       </DefaultLayout>

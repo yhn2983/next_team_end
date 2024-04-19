@@ -13,6 +13,7 @@ export const CHECK_OUT_ADD = `${API_SERVER}/checkout/add`
 //取得products資料表
 export const PRODUCTS_API = `${API_SERVER}/checkout/product-api`
 export const PRODUCTS_GET_API = `${API_SERVER}/checkout/product-api2`
+export const PRODUCTS_API_SHOP = `${API_SERVER}/checkout/product-api-shop`
 //取得buyer-orders
 export const BUYER_ORDER = `${API_SERVER}/buyer-order/api`
 export const BUYER_ORDER_FIN = `${API_SERVER}/buyer-order/edit`

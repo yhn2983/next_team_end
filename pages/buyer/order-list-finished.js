@@ -21,16 +21,25 @@ export default function OrderList() {
     totalPages: 0,
     rows: [],
   })
-
   useEffect(() => {
-    fetch(`${BUYER_ORDER}${location.search}`, {
+    fetch(`${BUYER_ORDER}?${auth.userData.id}`, {
       headers: { 'Content-Type': 'application/json' },
     })
       .then((r) => r.json())
       .then((dataObj) => {
         setData(dataObj)
       })
-  }, [router.query])
+  }, [router.query, auth])
+
+  // useEffect(() => {
+  //   fetch(`${BUYER_ORDER}${location.search}`, {
+  //     headers: { 'Content-Type': 'application/json' },
+  //   })
+  //     .then((r) => r.json())
+  //     .then((dataObj) => {
+  //       setData(dataObj)
+  //     })
+  // }, [router.query])
 
   // useEffect(() => {
   //   if (!id) return // 如果沒有 sid 的值, 就不用發 AJAX
@@ -49,9 +58,9 @@ export default function OrderList() {
   //-------
   return (
     <>
-      <DefaultLayout>
+      <DefaultLayout pageName="od-fi">
         <div className={`${Styles.orderList}`}>
-          <OrderListNav />
+          <OrderListNav pageName="od-fi" />
           <div className="row mt-5 mx-5">
             <div className="col-sm-8 cart-area">
               {!data.rows ? (
@@ -70,7 +79,9 @@ export default function OrderList() {
                             <div className="row g-0">
                               <div className="col-md-3">
                                 <img
-                                  src="./images/cart-1.jpeg"
+                                  src={`/${
+                                    v.product_photos.match(/[^,]+\.jpg/)[0]
+                                  }`}
                                   className="img-fluid rounded-start"
                                   alt="..."
                                 />
@@ -95,16 +106,17 @@ export default function OrderList() {
                                   </p>
                                   <div className="row g-3 align-items-center justify-content-end">
                                     <div className="col-auto">
-                                      <Button
+                                      {/* <Button
                                         href={`/address-book/edit/${v.sid}`}
                                       >
                                         Link
-                                      </Button>
+                                      </Button> */}
                                     </div>
                                     <div className="col-auto">
                                       <Button
                                         href={`/buyer/evaluation/${v.id}`}
                                         variant="outline-warning"
+                                        className={`${Styles.btn}`}
                                       >
                                         評論
                                       </Button>
@@ -130,7 +142,7 @@ export default function OrderList() {
               <h4 className="mb-3">小炭點</h4>
 
               <p className="card-text d-flex justify-content-between align-items-center">
-                目前點數 <span>0</span>
+                目前點數 <span>{data.rows[0].buyer_point}</span>
               </p>
               <hr />
               {/* <p className="card-text d-flex justify-content-between align-items-center">

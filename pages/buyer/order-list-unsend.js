@@ -22,33 +22,42 @@ export default function OrderList() {
     totalPages: 0,
     rows: [],
   })
-
   useEffect(() => {
-    fetch(`${BUYER_ORDER}${location.search}`, {
+    fetch(`${BUYER_ORDER}?${auth.userData.id}`, {
       headers: { 'Content-Type': 'application/json' },
     })
       .then((r) => r.json())
       .then((dataObj) => {
         setData(dataObj)
       })
-  }, [router.query])
-  useEffect(() => {
-    const fetchOrderData = async () => {
-      try {
-        const response = await fetch(`${BUYER_ORDER}${location.search}`, {
-          headers: {
-            ...auth(),
-          },
-        })
-        const dataObj = await response.json()
-        setData(dataObj)
-      } catch (error) {
-        console.error('Error fetching order data:', error)
-      }
-    }
+  }, [router.query, auth])
 
-    fetchOrderData()
-  }, [])
+  // useEffect(() => {
+  //   fetch(`${BUYER_ORDER}${location.search}`, {
+  //     headers: { 'Content-Type': 'application/json' },
+  //   })
+  //     .then((r) => r.json())
+  //     .then((dataObj) => {
+  //       setData(dataObj)
+  //     })
+  // }, [router.query])
+  // useEffect(() => {
+  //   const fetchOrderData = async () => {
+  //     try {
+  //       const response = await fetch(`${BUYER_ORDER}${location.search}`, {
+  //         headers: {
+  //           ...auth(),
+  //         },
+  //       })
+  //       const dataObj = await response.json()
+  //       setData(dataObj)
+  //     } catch (error) {
+  //       console.error('Error fetching order data:', error)
+  //     }
+  //   }
+
+  //   fetchOrderData()
+  // }, [])
 
   // ----修改
   const [formData, setFormData] = useState({
@@ -86,9 +95,9 @@ export default function OrderList() {
 
   return (
     <>
-      <DefaultLayout>
+      <DefaultLayout pageName="od-unsend">
         <div className={`${Styles.orderList}`}>
-          <OrderListNav />
+          <OrderListNav pageName="od-unsend" />
           <div className="row mt-5 mx-5">
             <div className="col-sm-8 cart-area">
               {!data.rows ? (
@@ -107,7 +116,9 @@ export default function OrderList() {
                             <div className="row g-0">
                               <div className="col-md-3">
                                 <img
-                                  src="./images/cart-1.jpeg"
+                                  src={`/${
+                                    v.product_photos.match(/[^,]+\.jpg/)[0]
+                                  }`}
                                   className="img-fluid rounded-start"
                                   alt="..."
                                 />
@@ -116,7 +127,7 @@ export default function OrderList() {
                                 <div className="card-body">
                                   <h5 className="card-title card-text d-flex justify-content-between align-items-center">
                                     {v.product_name}{' '}
-                                    <span>{v.total_price}</span>
+                                    <span>${v.total_price}</span>
                                   </h5>
                                   <p className="card-text">{v.seller_name}</p>
                                   <p className="card-text">
@@ -138,12 +149,10 @@ export default function OrderList() {
                                   </p>
                                   <div className="row g-3 align-items-center justify-content-end">
                                     <div className="col-auto w-auto ">
-                                      <Button
-                                        href={`/buyer/order-detail/${v.id}`}
-                                        variant="outline-warning"
-                                      >
-                                        訂單明細
-                                      </Button>
+                                      <h5 style={{ color: '#EBC1EB' }}>
+                                        {' '}
+                                        等候賣家出貨...
+                                      </h5>
                                     </div>
                                   </div>
 
@@ -205,7 +214,7 @@ export default function OrderList() {
               <h4 className="mb-3">小炭點</h4>
 
               <p className="card-text d-flex justify-content-between align-items-center">
-                目前點數 <span>0</span>
+                目前點數 <span>{data.rows[0].buyer_point}</span>
               </p>
               <hr />
               {/* <p className="card-text d-flex justify-content-between align-items-center">

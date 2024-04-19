@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { CHECK_OUT_ADD, PRODUCTS_API } from '@/configs/configs-buyer'
+import {
+  CHECK_OUT_ADD,
+  PRODUCTS_API,
+  PRODUCTS_API_SHOP,
+} from '@/configs/configs-buyer'
 import { useRouter } from 'next/router'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
@@ -39,33 +43,6 @@ export default function Checkout() {
     buyer_id: '1', // 初始化为空字符串
   })
 
-  // 使用 useEffect 在数据加载后设置 formData
-  useEffect(() => {
-    // 检查 productData 是否存在且包含 rows 属性
-    if (productData && productData.rows) {
-      // 从 productData 中提取数据并设置到 formData
-      const newProductId = []
-      const newProductPrice = []
-      let newSellerId = ''
-
-      productData.rows.forEach((v) => {
-        newProductId.push(v.id)
-        newProductPrice.push(v.product_price)
-        newSellerId = v.seller_id
-      })
-
-      // 更新 formData
-      setFormData({
-        ...formData, // 保留 formData 中其他属性
-        product_id: newProductId,
-        product_price: newProductPrice,
-        seller_id: newSellerId,
-      })
-      setBargainData({ ...bargainData, seller_id: newSellerId })
-      console.log(newSellerId) // 输出新的 seller_id
-    }
-  }, [productData]) // 在 productData 更新时触发 useEffect
-
   const SubmitBargain = async (e) => {
     e.preventDefault()
 
@@ -91,7 +68,7 @@ export default function Checkout() {
   const [formData, setFormData] = useState({
     name: '',
     class: '1',
-    shipment: '',
+    shipment_fee: '60',
     payment_way: '',
     total_price: '0',
     total_amount: '0',
@@ -103,6 +80,9 @@ export default function Checkout() {
     buyer_id: '1',
     item_qty: '',
   })
+
+  //設一個狀態儲存totalPrice
+  const [totalPrice, setTotalPrice] = useState(0)
   // 使用 useEffect 在数据加载后设置 formData
   useEffect(() => {
     // 检查 productData 是否存在且包含 rows 属性
@@ -111,24 +91,29 @@ export default function Checkout() {
       const newProductId = []
       const newProductPrice = []
       let newSellerId = ''
-
+      let totalPrice = 0
       productData.rows.forEach((v) => {
         newProductId.push(v.id)
         newProductPrice.push(v.product_price)
         newSellerId = v.seller_id
+        totalPrice = totalPrice + v.product_price
       })
-      /*
+
       // 更新 formData
       setFormData({
         ...formData, // 保留 formData 中其他属性
         product_id: newProductId,
         product_price: newProductPrice,
         seller_id: newSellerId,
+        total_price: totalPrice,
       })
-*/
+      setBargainData({ ...bargainData, seller_id: newSellerId })
+      setTotalPrice(totalPrice)
       console.log(newSellerId) // 输出新的 seller_id
     }
   }, [productData]) // 在 productData 更新时触发 useEffect
+  // 使用 useEffect 在数据加载后设置 formData
+  console.log(totalPrice)
 
   useEffect(() => {
     if (auth.isAuth) {
@@ -138,6 +123,33 @@ export default function Checkout() {
   }, [auth])
   console.log({ auth })
   console.log({ formData })
+  //取得購物車的資料
+
+  useEffect(() => {
+    const fetchOrderData = async () => {
+      try {
+        const params = new URLSearchParams({ id: auth.userData.id })
+        const response = await fetch(`${PRODUCTS_API_SHOP}?${params}`, {
+          headers: { 'Content-Type': 'application/json' },
+        })
+        const dataObj = await response.json()
+        setProductData(dataObj)
+      } catch (error) {
+        console.error('Error fetching order data:', error)
+      }
+    }
+
+    fetchOrderData()
+  }, [router.query, auth])
+  //計算運費+商品的總價
+  useEffect(() => {
+    setFormData({
+      ...formData,
+      total_price: totalPrice + +formData.shipment_fee,
+    })
+  }, [formData.shipment_fee])
+  console.log(formData.total_price)
+
   const formSubmit = async (e) => {
     e.preventDefault()
 
@@ -274,12 +286,22 @@ export default function Checkout() {
                         <div>
                           <select
                             className="custom-select"
-                            onChange={(e) =>
+                            onChange={(e) => {
                               setFormData({
                                 ...formData,
                                 discount_coupon: e.target.value,
+                                shipment_fee:
+                                  e.target.value == 1
+                                    ? '30'
+                                    : e.target.value == 2
+                                    ? '0'
+                                    : '60',
                               })
-                            }
+                              // setFormData({
+                              //   ...formData,
+                              //   total_price: totalPrice + formData.shipment_fee,
+                              // })
+                            }}
                             value={formData.discount_coupon}
                           >
                             <option value="0">選擇優惠卷</option>
@@ -328,11 +350,11 @@ export default function Checkout() {
                   <h5
                     className={`section-title position-relative text-uppercase mb-3`}
                   >
-                    <span className="bg-secondary pr-3">Order Total</span>
+                    <span className="bg-secondary pr-3">商品價格</span>
                   </h5>
                   <div className="bg-light p-30 mb-5">
                     <div className="border-bottom">
-                      <h6 className="mb-3">Products</h6>
+                      <h6 className="mb-3">購買商品</h6>
                       {productData.rows &&
                         productData.rows.map((v) => {
                           return (
@@ -349,24 +371,24 @@ export default function Checkout() {
                             </div>
                           )
                         })}
-                      <div className="d-flex justify-content-between">
+                      {/* <div className="d-flex justify-content-between">
                         <p>Product Name 2</p>
                         <p>$150</p>
-                      </div>
+                      </div> */}
                       <div className="d-flex justify-content-between">
-                        <p>Product Name 3</p>
-                        <p>$150</p>
+                        <p>運費</p>
+                        <p>{formData.shipment_fee}</p>
                       </div>{' '}
                     </div>{' '}
                     <div className="pt-2">
                       <div className="d-flex justify-content-between mt-2">
                         <h5>Total</h5>
-                        <h5>$160</h5>
+                        <h5>{totalPrice + +formData.shipment_fee}</h5>
                       </div>
                     </div>
                     <div className="d-flex justify-content-between mt-2">
                       <p></p>
-                      <Button variant="primary" onClick={handleShow}>
+                      <Button variant="danger" onClick={handleShow}>
                         提出議價
                       </Button>
                     </div>
@@ -375,7 +397,7 @@ export default function Checkout() {
                     <h5
                       className={`section-title position-relative text-uppercase mb-3`}
                     >
-                      <span className="bg-secondary pr-3">Payment</span>
+                      <span className="bg-secondary pr-3">結帳</span>
                     </h5>
                     <div className="bg-light p-30">
                       <div className="col-md form-group">
@@ -397,7 +419,11 @@ export default function Checkout() {
                       </div>
                       <div className="d-flex justify-content-between mt-2">
                         <p></p>
-                        <Button className="primary" type="submit">
+                        <Button
+                          className="primary"
+                          type="submit"
+                          variant="danger"
+                        >
                           送出訂單
                         </Button>
                       </div>
@@ -438,10 +464,14 @@ export default function Checkout() {
                 />
               </div>
               <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="outline-secondary" onClick={handleClose}>
                   取消
                 </Button>
-                <Button variant="primary" type="submit">
+                <Button
+                  variant="warning"
+                  type="submit"
+                  className={`${Styles.checkoutBtn}`}
+                >
                   提出議價
                 </Button>
               </Modal.Footer>

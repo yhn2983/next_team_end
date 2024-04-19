@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '@/styles/evalute.module.css'
+import Styles from '@/styles/buyer.module.css'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { BARGAIN_get } from '@/configs/configs-buyer'
@@ -68,13 +68,14 @@ export default function GetBargain() {
     <>
       <DefaultLayout>
         <div>
-          <table className="table">
+          <table className={`table  ${Styles.bargain}`}>
             <thead>
-              <tr>
+              <tr className="table-dark">
                 <th scope="col">編號</th>
                 <th scope="col">買家</th>
                 <th scope="col">期望價格</th>
                 <th scope="col">商品</th>
+                <th scope="col">回覆</th>
               </tr>
             </thead>
             <tbody>
@@ -84,38 +85,46 @@ export default function GetBargain() {
                     <tr key={i}>
                       <td> {v.id}</td>
                       <td> {v.buyer_id}</td>
-                      <td> {v.after_bargin_price}</td>
+                      <td> ${v.after_bargin_price}</td>
                       <td>{v.product_name}</td>
+                      <td>
+                        {' '}
+                        <button
+                          className={`btn btn-block  font-weight-bold py-3 `}
+                          type=""
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setbargainData({
+                              id: id,
+                              ans_num: '1',
+                              ans: '同意',
+                            })
+                            handleShow(e)
+                          }}
+                        >
+                          同意
+                        </button>
+                        <button
+                          className={`btn btn-block ${Styles.bargainNotBtn} font-weight-bold py-3`}
+                          type=""
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setbargainData({
+                              id: id,
+                              ans_num: '2',
+                              ans: '不同意',
+                            })
+                            handleShow(e)
+                          }}
+                        >
+                          拒絕
+                        </button>{' '}
+                      </td>
                     </tr>
                   )
                 })}
             </tbody>
           </table>
-
-          <form onSubmit={formSubmit}>
-            <button
-              className="btn btn-block btn-primary font-weight-bold py-3"
-              type=""
-              onClick={(e) => {
-                e.preventDefault()
-                setbargainData({ id: id, ans_num: '1', ans: '同意' })
-                handleShow(e)
-              }}
-            >
-              同意
-            </button>
-            <button
-              className="btn btn-block btn-primary font-weight-bold py-3"
-              type=""
-              onClick={(e) => {
-                e.preventDefault()
-                setbargainData({ id: id, ans_num: '2', ans: '不同意' })
-                handleShow(e)
-              }}
-            >
-              拒絕
-            </button>
-          </form>
         </div>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
@@ -124,14 +133,18 @@ export default function GetBargain() {
           <form onSubmit={formSubmit}>
             <Modal.Body>{bargainData.ans}</Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                返回
+              <Button
+                variant="secondary"
+                onClick={handleClose}
+                className={`py-3 ${Styles.bargainNotBtn}`}
+              >
+                取消
               </Button>
               <button
-                className="btn btn-block btn-primary font-weight-bold py-3"
+                className={`btn btn-block  ${Styles.bargainBtn} font-weight-bold py-3`}
                 type="submit"
               >
-                送出回覆
+                送出
               </button>
             </Modal.Footer>
           </form>
