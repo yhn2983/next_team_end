@@ -25,6 +25,7 @@ export default function ForgotPasswordPage() {
 
   const onSubmit = (e) => {
     e.preventDefault()
+    toast.success('密碼重設請求已發送到您的電子郵件，請查收')
 
     // 在這裡處理密碼重設的請求
     const postOtp = async () => {
@@ -36,12 +37,11 @@ export default function ForgotPasswordPage() {
         body: JSON.stringify({ email }),
       })
 
+      router.push('/member/resetpassword') // 跳轉到重設密碼頁面
       if (res.ok) {
         const data = await res.json()
         console.log(data)
-        toast.success('密碼重設請求已發送到您的電子郵件，請查收')
         // 如果接收到資料，則跳轉到重設密碼頁面
-        router.push('/member/resetpassword')
       }
     }
 

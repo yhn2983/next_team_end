@@ -121,7 +121,9 @@ export default function LoginPage({ show, onHide }) {
       <Modal show={show} onHide={onHide} className={`${style.myLoginModal}`}>
         {/* 使用從 props 中取得的 show 和 onHide */}
         <Modal.Header closeButton className={`${style.btnclose}`}>
-          <h2>歡迎登入</h2>
+          <h3>
+            <strong>歡迎登入</strong>
+          </h3>
         </Modal.Header>
         <Modal.Body className={`${style.body}`}>
           <Form onSubmit={onSubmit}>
