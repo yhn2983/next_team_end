@@ -11,6 +11,7 @@ import { useRouter } from 'next/router'
 import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
 import { useSocket } from '@/context/socket-context'
+import toast, { Toaster } from 'react-hot-toast'
 
 export default function StoreInfo() {
   const { auth, checkAuth } = useAuth()
@@ -69,6 +70,10 @@ export default function StoreInfo() {
 
   // 傳訊息
   const handleSendMessage = async () => {
+    if (!auth.userData || auth.userData.id === 0) {
+      toast.error('請先登入')
+      return
+    }
     const response = await fetch(CREATE_ROOM_POST, {
       method: 'POST',
       headers: {
@@ -102,82 +107,98 @@ export default function StoreInfo() {
   console.log(connectionState)
 
   const display = (
-    <DefaultLayout>
-      <section className={`${styles.storeInfo}`}>
-        <div className="container py-5">
-          <div className="row">
-            <div className="col-lg-4">
-              <div className={`card ${styles.card} mb-4`}>
-                <div className="card-body text-center">
-                  <Image
-                    src={
-                      file
-                        ? `http://localhost:3003/avatar/${file}?timestamp=${new Date().getTime()}`
-                        : '/default.png'
-                    }
-                    alt="avatar"
-                    width={175}
-                    height={185}
-                    className="rounded-circle mt-2 secondary"
-                  />
-                  <h5 className="my-4">{otherUser.nickname}</h5>
-                  <div className="content text-center m-4">
-                    <div className="ratings">
-                      <span className="product-rating">4.6</span>
-                      <span>/5</span>
-                      <div className="stars">
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                      </div>
-                      <div className="rating-text">
-                        <span>46 個評分 &amp; 15 個評論</span>
+    <>
+      <DefaultLayout>
+        <section className={`${styles.storeInfo}`}>
+          <div className="container py-5">
+            <div className="row">
+              <div className="col-lg-4">
+                <div className={`card ${styles.card} mb-4`}>
+                  <div className="card-body text-center">
+                    <Image
+                      src={
+                        file
+                          ? `http://localhost:3003/avatar/${file}?timestamp=${new Date().getTime()}`
+                          : '/default.png'
+                      }
+                      alt="avatar"
+                      width={175}
+                      height={185}
+                      className="rounded-circle mt-2 secondary"
+                    />
+                    <h5 className="my-4">{otherUser.nickname}</h5>
+                    <div className="content text-center m-4">
+                      <div className="ratings">
+                        <span className="product-rating">4.6</span>
+                        <span>/5</span>
+                        <div className="stars">
+                          <i className="fa fa-star" />
+                          <i className="fa fa-star" />
+                          <i className="fa fa-star" />
+                          <i className="fa fa-star" />
+                        </div>
+                        <div className="rating-text">
+                          <span>46 個評分 &amp; 15 個評論</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="d-flex justify-content-center mb-2">
-                    {auth.userData.id !== +storeId ? (
-                      <>
-                        <button type="button" className="btn">
-                          追蹤
-                        </button>
-                        <button
-                          type="button"
-                          className="btn ms-1"
-                          onClick={handleSendMessage}
-                        >
-                          傳訊息
-                        </button>
-                      </>
-                    ) : (
-                      <p>這樣我自己的賣場</p>
-                    )}
+                    <div className="d-flex justify-content-center mb-2">
+                      {auth.userData && auth.userData.id !== +storeId ? (
+                        <>
+                          <button type="button" className="btn">
+                            追蹤
+                          </button>
+                          <button
+                            type="button"
+                            className="btn ms-1"
+                            onClick={handleSendMessage}
+                          >
+                            傳訊息
+                          </button>
+                        </>
+                      ) : auth.userData ? (
+                        <p>這樣我自己的賣場</p>
+                      ) : (
+                        <>
+                          <button type="button" className="btn">
+                            追蹤
+                          </button>
+                          <button
+                            type="button"
+                            className="btn ms-1"
+                            onClick={handleSendMessage}
+                          >
+                            傳訊息
+                          </button>
+                        </>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="col-lg-8">
-              <div className={`card ${styles.card}`}>
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col">
-                      <p className={`${styles.title}`}>賣場介紹</p>
+              <div className="col-lg-8">
+                <div className={`card ${styles.card}`}>
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="col">
+                        <p className={`${styles.title}`}>賣場介紹</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-    </DefaultLayout>
+        </section>
+      </DefaultLayout>
+    </>
   )
 
   return (
     <>
       <LoadingBar progress={progress} />
       {isLoading ? <Loader /> : display}
+      <Toaster />
     </>
   )
 }
