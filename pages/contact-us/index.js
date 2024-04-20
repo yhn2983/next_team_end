@@ -175,7 +175,9 @@ export default function ContactUs() {
                               color: 'white',
                             }}
                           >
-                            <span style={{ fontSize: '18px' }}>送出訊息</span>
+                            <span style={{ fontSize: '18px' }}>
+                              <strong>送出訊息</strong>
+                            </span>
                           </button>
                         </div>
                       </form>
