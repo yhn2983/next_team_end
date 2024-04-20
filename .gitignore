@@ -2,10 +2,7 @@
 
 .vscode
 
-/public
-context/auth-context.js
-components/icons
-components/configs/index.js
+
 
 # dependencies
 /node_modules

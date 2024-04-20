@@ -16,6 +16,26 @@ export default function Category() {
     success: false,
     cate: [],
     searchMain: '',
+    totalFree: 0,
+    totalComputer: 0,
+    totalPhone: 0,
+    totalMan: 0,
+    totalWoman: 0,
+    totalBeauty: 0,
+    totalBrand: 0,
+    totalGame: 0,
+    totalEarphone: 0,
+    totalCamera: 0,
+    totalHome: 0,
+    totalEletri: 0,
+    totalBaby: 0,
+    totalHealth: 0,
+    totalSport: 0,
+    totalDrink: 0,
+    totalPet: 0,
+    totalTicket: 0,
+    totalCar: 0,
+    totalOther: 0,
   })
 
   const itemPhoto = [
@@ -39,6 +59,29 @@ export default function Category() {
     'ticket.png',
     'car.png',
     'other.png',
+  ]
+
+  const itemCount = [
+    data.totalFree,
+    data.totalComputer,
+    data.totalPhone,
+    data.totalMan,
+    data.totalWoman,
+    data.totalBeauty,
+    data.totalBrand,
+    data.totalGame,
+    data.totalEarphone,
+    data.totalCamera,
+    data.totalHome,
+    data.totalEletri,
+    data.totalBaby,
+    data.totalHealth,
+    data.totalSport,
+    data.totalDrink,
+    data.totalPet,
+    data.totalTicket,
+    data.totalCar,
+    data.totalOther,
   ]
 
   useEffect(() => {
@@ -120,7 +163,17 @@ export default function Category() {
                         <h5>
                           <strong>{v.category_name}</strong>
                         </h5>
-                        <small className={style.textBody}>100 Products</small>
+                        {itemCount.map((v3, i3) => {
+                          if (i3 == i) {
+                            return (
+                              <>
+                                <small className={`ms-1 ${style.textBody}`}>
+                                  {v3} 件商品
+                                </small>
+                              </>
+                            )
+                          }
+                        })}
                       </div>
                     </div>
                   </Link>

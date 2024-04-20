@@ -27,6 +27,7 @@
 
 .slide {
   border: 3px solid #8e2626;
+  border-radius: 5px;
   position: relative;
   position: absolute;
   top: 0;
@@ -36,6 +37,7 @@
 
 .slideB {
   border: 3px solid #8e2626;
+  border-radius: 5px;
   position: relative;
   position: absolute;
   top: 0;
@@ -49,6 +51,7 @@
   display: flex;
   justify-content: center;
   border: 3px solid #e96d3f;
+  border-radius: 5px;
   transform: rotateY(180deg);
   transition: transform 0.5s;
   height: 100%;
@@ -58,6 +61,7 @@
 
 .slideBackB {
   border: 3px solid #e96d3f;
+  border-radius: 5px;
   transform: rotateY(0deg);
   transition: transform 0.5s;
   height: 100%;

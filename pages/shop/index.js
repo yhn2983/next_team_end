@@ -1,12 +1,12 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 // import Image from 'next/image'
-import { PROD_LIST } from '@/configs/config-r'
-import 'react-datepicker/dist/react-datepicker.css'
+import { PROD_LIST, CART_ADD, TOGGLE_LIKE } from '@/configs/config-r'
 // page
 import DefaultLayout from '@/components/common/default-layout'
+import LoginPage from '@/components/member/login-modal'
 // style-----
 import style from './prodSearch.module.css'
 import toast, { Toaster } from 'react-hot-toast'
@@ -21,19 +21,19 @@ import {
   FaAngleRight,
 } from 'react-icons/fa'
 import { IoSearch } from 'react-icons/io5'
-import { GoDash } from 'react-icons/go'
+import { GoSortAsc, GoSortDesc, GoDash, GoTriangleDown } from 'react-icons/go'
 // loading bar & loading icon
 import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
 // hook------
 import { useCart } from '@/hooks/use-cart'
-//import { useAuth } from '@/context/auth-context'
+import { useLike } from '@/hooks/use-like'
+import { useAuth } from '@/context/auth-context'
 
 export default function Shop() {
   // Router-----
   const router = useRouter()
-  // Auth-----
-  // const { auth, getAuthHeader } = useAuth()
+  const qs = { ...router.query }
 
   // Products-----
   const [data, setData] = useState({
@@ -77,6 +77,10 @@ export default function Shop() {
     dateRangeD: 0,
     dateRangeE: 0,
     dateRangeF: 0,
+    priceA: '',
+    priceB: '',
+    dateA: '',
+    dateB: '',
   })
 
   useEffect(() => {
@@ -93,6 +97,26 @@ export default function Shop() {
   // Pages
   const startPage = Math.max(1, data.page - 2)
   const endPage = Math.min(data.totalPages, startPage + 4)
+
+  // sort
+  const [sortPrice, setSortPrice] = useState(false)
+  const [sortDate, setSortDate] = useState(false)
+
+  const handleSortPrice = () => {
+    const newSortPrice = !sortPrice
+    setSortPrice(newSortPrice)
+    setSortDate(false)
+    const priceOrder = newSortPrice ? 'priceSortASC' : 'priceSortDESC'
+    router.push(`/shop?priceOrder=${priceOrder}`)
+  }
+
+  const handleSortDate = () => {
+    const newSortDate = !sortDate
+    setSortDate(newSortDate)
+    setSortPrice(false)
+    const dateOrder = newSortDate ? 'dateSortASC' : 'dateSortDESC'
+    router.push(`/shop?dateOrder=${dateOrder}`)
+  }
 
   // category
   const [mainSelect, setMainSelect] = useState(null)
@@ -359,7 +383,7 @@ export default function Shop() {
     const msgBox = (
       <div>
         <p>
-          <strong>{productName + ' 已成功加入購物車'}</strong>
+          <strong>{productName + ' 已加入購物車'}</strong>
         </p>
         <button
           className={`btn mx-auto ${style.conneBtn}`}
@@ -386,7 +410,148 @@ export default function Shop() {
     toast.error(msgBox2)
   }
 
-  const qs = { ...router.query }
+  const notifyNeedAuth = () => {
+    const msgBox3 = (
+      <div>
+        <p>
+          <strong>{'請先登入才可以使用此功能！'}</strong>
+        </p>
+        <button
+          className={`btn mx-auto ${style.conneBtn}`}
+          style={{ backgroundColor: '#e96d3f', color: 'white' }}
+          onClick={handleLoginClick}
+        >
+          點我登入
+        </button>
+      </div>
+    )
+    toast(msgBox3)
+  }
+
+  const cartClick = async (productData) => {
+    const r = await fetch(`${CART_ADD}/${productData.product_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(productData),
+    })
+    const result = await r.json()
+    console.log(result)
+    if (result.success) {
+      notify(productData.p_name)
+    }
+  }
+
+  // Like
+  const { addProd, removeProdById } = useLike()
+  const notify2 = (productName) => {
+    const msgBox = (
+      <div>
+        <p>
+          <strong>{productName + ' 已加入收藏'}</strong>
+        </p>
+        <button
+          className={`btn mx-auto ${style.conneBtn}`}
+          style={{ backgroundColor: '#e96d3f', color: 'white' }}
+          onClick={() => {
+            router.push('/shop/like')
+          }}
+        >
+          連至 收藏清單
+        </button>
+      </div>
+    )
+    toast.success(msgBox)
+  }
+
+  const notify3 = (productName) => {
+    const msgBox = (
+      <div>
+        <p>
+          <strong>{productName + ' 已從收藏清單移除'}</strong>
+        </p>
+        <button
+          className={`btn mx-auto ${style.conneBtn}`}
+          style={{ backgroundColor: '#e96d3f', color: 'white' }}
+          onClick={() => {
+            router.push('/shop/like')
+          }}
+        >
+          連至 收藏清單
+        </button>
+      </div>
+    )
+    toast.success(msgBox)
+  }
+
+  const [isClicked, setIsClicked] = useState(false)
+
+  const likeClick = async (productData2) => {
+    const member_id = auth.userData.id
+    const r = await fetch(
+      `${TOGGLE_LIKE}/${productData2.product_id}?member_id=${member_id}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(productData2),
+      }
+    )
+    const result = await r.json()
+    console.log(result)
+    if (result.success) {
+      setIsClicked(!isClicked)
+      if (!isClicked) {
+        notify2(productData2.p_name)
+        addProd(productData2)
+      } else {
+        notify3(productData2.p_name)
+        removeProdById(productData2.product_id)
+      }
+    }
+  }
+
+  // member
+  const { checkAuth, auth } = useAuth()
+
+  // ---Modal---
+  // 關閉登入視窗
+  const handleLoginClose = () => {
+    if (!isLoading) {
+      setShowLogin(false)
+    }
+  }
+  // 點擊登入按鈕
+  const handleLoginClick = () => {
+    if (!auth.isAuth) {
+      // 如果用戶未登入，則顯示登入表單
+      setShowLogin(true)
+    }
+  }
+  // 登入表單提交
+  const handleLoginSubmit = async () => {
+    // 開始檢查認證狀態
+    setIsLoading(true)
+    await checkAuth()
+    // 結束檢查認證狀態
+    setIsLoading(false)
+    if (auth.isAuth) {
+      // 如果已經登入，則關閉模態框
+      setShowLogin(false)
+    }
+  }
+
+  // 如果已經登入，則關閉模態框
+  useEffect(() => {
+    if (auth.isAuth) {
+      setShowLogin(false)
+      checkAuth()
+    }
+  }, [auth.isAuth])
+
+  const [showLogin, setShowLogin] = useState(false)
 
   // Loading bar-----
   const [isLoading, setIsLoading] = useState(true)
@@ -433,10 +598,19 @@ export default function Shop() {
             <div className="col-lg-3 col-md-4 mt-5">
               <form role="search" onSubmit={onmultiSearch}>
                 {/* main-category start */}
-                <div className="d-flex">
-                  <h3 className="mb-2" style={{ color: '#8e2626' }}>
-                    <strong>商品分類篩選</strong>
-                  </h3>
+                <div
+                  className="d-flex justify-content-center"
+                  style={{
+                    backgroundColor: '#8e2626',
+                    borderRadius: '5px 5px 0 0',
+                  }}
+                >
+                  <h4 className="pt-2" style={{ color: 'white' }}>
+                    <strong>
+                      <GoTriangleDown />
+                      商品分類篩選
+                    </strong>
+                  </h4>
                 </div>
                 <div className="mb-4 bg-light px-3 py-3">
                   <select
@@ -467,10 +641,19 @@ export default function Shop() {
                 </div>
                 {/* main-category end */}
                 {/* sub-category start */}
-                <div className="d-flex">
-                  <h3 className="mb-2" style={{ color: '#8e2626' }}>
-                    <strong>商品子分類篩選</strong>
-                  </h3>
+                <div
+                  className="d-flex justify-content-center"
+                  style={{
+                    backgroundColor: '#8e2626',
+                    borderRadius: '5px 5px 0 0',
+                  }}
+                >
+                  <h4 className="pt-2" style={{ color: 'white' }}>
+                    <strong>
+                      <GoTriangleDown />
+                      商品子分類篩選
+                    </strong>
+                  </h4>
                 </div>
                 <div className="mb-4 bg-light px-3 py-3">
                   <select
@@ -502,10 +685,19 @@ export default function Shop() {
                 </div>
                 {/* sub-category end */}
                 {/* Price Start */}
-                <div className="d-flex">
-                  <h3 className="mb-2" style={{ color: '#8e2626' }}>
-                    <strong>價格篩選</strong>
-                  </h3>
+                <div
+                  className="d-flex justify-content-center"
+                  style={{
+                    backgroundColor: '#8e2626',
+                    borderRadius: '5px 5px 0 0',
+                  }}
+                >
+                  <h4 className="pt-2" style={{ color: 'white' }}>
+                    <strong>
+                      <GoTriangleDown />
+                      價格篩選
+                    </strong>
+                  </h4>
                 </div>
                 <div className="bg-light p-3 mb-4">
                   <div className="form-check d-flex align-items-center justify-content-between mb-3">
@@ -689,12 +881,20 @@ export default function Shop() {
                   </div>
                 </div>
                 {/* Price End */}
-
                 {/* new & old Start */}
-                <div className="d-flex">
-                  <h3 className="mb-2" style={{ color: '#8e2626' }}>
-                    <strong>商品狀態篩選</strong>
-                  </h3>
+                <div
+                  className="d-flex justify-content-center"
+                  style={{
+                    backgroundColor: '#8e2626',
+                    borderRadius: '5px 5px 0 0',
+                  }}
+                >
+                  <h4 className="pt-2" style={{ color: 'white' }}>
+                    <strong>
+                      <GoTriangleDown />
+                      商品狀態篩選
+                    </strong>
+                  </h4>
                 </div>
                 <div className="bg-light p-3 mb-4">
                   <div className="form-check d-flex align-items-center justify-content-between mb-3">
@@ -761,10 +961,19 @@ export default function Shop() {
                 </div>
                 {/* new & old  End */}
                 {/* created_at Start */}
-                <div className="d-flex">
-                  <h3 className="mb-2" style={{ color: '#8e2626' }}>
-                    <strong>上架時間篩選</strong>
-                  </h3>
+                <div
+                  className="d-flex justify-content-center"
+                  style={{
+                    backgroundColor: '#8e2626',
+                    borderRadius: '5px 5px 0 0',
+                  }}
+                >
+                  <h4 className="pt-2" style={{ color: 'white' }}>
+                    <strong>
+                      <GoTriangleDown />
+                      上架時間篩選
+                    </strong>
+                  </h4>
                 </div>
                 <div className="bg-light p-3 mb-30">
                   <div className="form-check d-flex align-items-center justify-content-between mb-3">
@@ -990,10 +1199,41 @@ export default function Shop() {
 
             {/* Shop Product Start*/}
             <div className="col-lg-9 col-md-8">
-              <div className="row pb-3 mt-5">
+              {/* sorting start */}
+              <div className="row px-lg-4">
+                <div className="col-12 mt-4 text-lg-end text-center">
+                  <button
+                    className="btn me-lg-3 me-md-3"
+                    style={{ backgroundColor: '#e68b6a', border: 'none' }}
+                    name="price"
+                    onClick={handleSortPrice}
+                  >
+                    <strong>
+                      價格排序 {!sortPrice ? `(由高到低)` : `(由低到高)`}{' '}
+                      {!sortPrice ? <GoSortDesc /> : <GoSortAsc />}
+                    </strong>
+                  </button>
+                  <button
+                    className="btn"
+                    style={{ backgroundColor: '#e29f19', border: 'none' }}
+                    name="date"
+                    onClick={handleSortDate}
+                  >
+                    <strong>
+                      上架日期排序 {!sortDate ? `(由遠到近)` : `(由近到遠)`}{' '}
+                      {!sortDate ? <GoSortDesc /> : <GoSortAsc />}
+                    </strong>
+                  </button>
+                </div>
+              </div>
+              {/* sorting end */}
+              <div className="row pb-3 mt-4">
                 {data.rows.map((v, i) => {
                   return (
-                    <div key={i} className="col-lg-4 col-md-12 col-sm-12 pb-1">
+                    <div
+                      key={v.id}
+                      className="col-lg-4 col-md-12 col-sm-12 pb-1"
+                    >
                       <div
                         className={`product-item bg-light mb-5 mx-auto ${style.productItem}`}
                         style={{ marginBottom: '60px' }}
@@ -1019,9 +1259,22 @@ export default function Shop() {
                               <button
                                 className="btn"
                                 onClick={() => {
-                                  if (v.status == '1') {
+                                  if (auth.isAuth && v.status == '1') {
                                     addItem(v)
-                                    notify(v.product_name)
+                                    const productData = {
+                                      member_id: auth.userData.id,
+                                      product_id: v.id,
+                                      p_photos: v.product_photos,
+                                      p_name: v.product_name,
+                                      p_price: v.product_price,
+                                      p_qty: 1,
+                                      total_price: v.product_price,
+                                      available_cp: v.mc ? v.mc : v.sc,
+                                    }
+                                    console.log(productData)
+                                    cartClick(productData)
+                                  } else if (!auth.isAuth && v.status == '1') {
+                                    notifyNeedAuth()
                                   } else {
                                     notifyNoAdd(v.product_name)
                                   }
@@ -1029,8 +1282,34 @@ export default function Shop() {
                               >
                                 <BsFillCartFill className={style.iconAInner} />
                               </button>
-                              <button className="btn" onClick={() => {}}>
-                                <AiOutlineHeart className={style.iconBInner} />
+                              <button
+                                className="btn"
+                                onClick={() => {
+                                  if (auth.isAuth) {
+                                    const productData2 = {
+                                      member_id: auth.userData.id,
+                                      product_id: v.id,
+                                      p_photos: v.product_photos,
+                                      p_name: v.product_name,
+                                      p_price: v.product_price,
+                                      p_qty: 1,
+                                      total_price: v.product_price,
+                                      available_cp: v.mc ? v.mc : v.sc,
+                                    }
+                                    likeClick(productData2)
+                                  } else {
+                                    notifyNeedAuth()
+                                  }
+                                }}
+                              >
+                                <AiOutlineHeart
+                                  className={style.iconBInner}
+                                  style={{
+                                    color: isClicked && v.id ? '#e96d3f' : '',
+                                    backgroundColor:
+                                      isClicked && v.id ? '#8e2626' : '',
+                                  }}
+                                />
                               </button>
                               <Link
                                 href={`/shop?searchSub=${v.s}`}
@@ -1153,6 +1432,13 @@ export default function Shop() {
         </div>
         {/* Shop End */}
       </DefaultLayout>
+      {/* Login Modal start */}
+      <LoginPage
+        show={showLogin}
+        onHide={handleLoginClose}
+        onSubmit={handleLoginSubmit}
+      />
+      {/* Login Modal end */}
     </>
   )
 

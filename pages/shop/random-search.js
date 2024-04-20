@@ -4,10 +4,11 @@ import Head from 'next/head'
 import Link from 'next/link'
 // import Image from 'next/image'
 import 'react-datepicker/dist/react-datepicker.css'
-import { PROD_LIST } from '@/configs/config-r'
+import { PROD_LIST, CART_ADD, TOGGLE_LIKE } from '@/configs/config-r'
 import { shuffle } from 'lodash'
 // page
 import DefaultLayout from '@/components/common/default-layout'
+import LoginPage from '@/components/member/login-modal'
 // style-----
 import style from './randomSearch.module.css'
 import toast, { Toaster } from 'react-hot-toast'
@@ -21,6 +22,8 @@ import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
 // hook------
 import { useCart } from '@/hooks/use-cart'
+import { useLike } from '@/hooks/use-like'
+import { useAuth } from '@/context/auth-context'
 
 export default function RandomShop() {
   // Router-----
@@ -83,7 +86,160 @@ export default function RandomShop() {
     )
     toast.success(msgBox)
   }
-  const qs = { ...router.query }
+
+  const notifyNoAdd = (productName) => {
+    const msgBox2 = (
+      <div>
+        <span>
+          <strong>{productName + ' 已下架，不可加入購物車'}</strong>
+        </span>
+      </div>
+    )
+    toast.error(msgBox2)
+  }
+
+  const notifyNeedAuth = () => {
+    const msgBox3 = (
+      <div>
+        <p>
+          <strong>{'請先登入才可以使用此功能！'}</strong>
+        </p>
+        <button
+          className={`btn mx-auto ${style.conneBtn}`}
+          style={{ backgroundColor: '#e96d3f', color: 'white' }}
+          onClick={handleLoginClick}
+        >
+          點我登入
+        </button>
+      </div>
+    )
+    toast(msgBox3)
+  }
+
+  const cartClick = async (productData) => {
+    const r = await fetch(`${CART_ADD}/${productData.product_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(productData),
+    })
+    const result = await r.json()
+    console.log(result)
+    if (result.success) {
+      notify(productData.p_name)
+    }
+  }
+
+  // Like
+  const { addProd, removeProdById } = useLike()
+  const notify2 = (productName) => {
+    const msgBox = (
+      <div>
+        <p>
+          <strong>{productName + ' 已加入收藏'}</strong>
+        </p>
+        <button
+          className={`btn mx-auto ${style.conneBtn}`}
+          style={{ backgroundColor: '#e96d3f', color: 'white' }}
+          onClick={() => {
+            router.push('/shop/like')
+          }}
+        >
+          連至 收藏清單
+        </button>
+      </div>
+    )
+    toast.success(msgBox)
+  }
+
+  const notify3 = (productName) => {
+    const msgBox = (
+      <div>
+        <p>
+          <strong>{productName + ' 已從收藏清單移除'}</strong>
+        </p>
+        <button
+          className={`btn mx-auto ${style.conneBtn}`}
+          style={{ backgroundColor: '#e96d3f', color: 'white' }}
+          onClick={() => {
+            router.push('/shop/like')
+          }}
+        >
+          連至 收藏清單
+        </button>
+      </div>
+    )
+    toast.success(msgBox)
+  }
+
+  const [isClicked, setIsClicked] = useState(false)
+
+  const likeClick = async (productData2) => {
+    const member_id = auth.userData.id
+    const r = await fetch(
+      `${TOGGLE_LIKE}/${productData2.product_id}?member_id=${member_id}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(productData2),
+      }
+    )
+    const result = await r.json()
+    console.log(result)
+    if (result.success) {
+      setIsClicked(!isClicked)
+      if (!isClicked) {
+        notify2(productData2.p_name)
+        addProd(productData2)
+      } else {
+        notify3(productData2.p_name)
+        removeProdById(productData2.product_id)
+      }
+    }
+  }
+
+  // Member
+  const { checkAuth, auth } = useAuth()
+
+  // ---Modal---
+  // 關閉登入視窗
+  const handleLoginClose = () => {
+    if (!isLoading) {
+      setShowLogin(false)
+    }
+  }
+  // 點擊登入按鈕
+  const handleLoginClick = () => {
+    if (!auth.isAuth) {
+      // 如果用戶未登入，則顯示登入表單
+      setShowLogin(true)
+    }
+  }
+  // 登入表單提交
+  const handleLoginSubmit = async () => {
+    // 開始檢查認證狀態
+    setIsLoading(true)
+    await checkAuth()
+    // 結束檢查認證狀態
+    setIsLoading(false)
+    if (auth.isAuth) {
+      // 如果已經登入，則關閉模態框
+      setShowLogin(false)
+    }
+  }
+
+  // 如果已經登入，則關閉模態框
+  useEffect(() => {
+    if (auth.isAuth) {
+      setShowLogin(false)
+      checkAuth()
+    }
+  }, [auth.isAuth])
+
+  const [showLogin, setShowLogin] = useState(false)
 
   // Loading bar-----
   const [isLoading, setIsLoading] = useState(true)
@@ -198,17 +354,60 @@ export default function RandomShop() {
                           />
                         </div>
                         <div className={style.productAction}>
-                          <button className="btn">
-                            <BsFillCartFill
-                              className={style.iconAInner}
-                              onClick={() => {
+                          <button
+                            className="btn"
+                            onClick={() => {
+                              if (auth.isAuth && v.status == '1') {
                                 addItem(v)
-                                notify(v.product_name)
+                                const productData = {
+                                  member_id: auth.userData.id,
+                                  product_id: v.id,
+                                  p_photos: v.product_photos,
+                                  p_name: v.product_name,
+                                  p_price: v.product_price,
+                                  p_qty: 1,
+                                  total_price: v.product_price,
+                                  available_cp: v.mc ? v.mc : v.sc,
+                                }
+                                console.log(productData)
+                                cartClick(productData)
+                              } else if (!auth.isAuth && v.status == '1') {
+                                notifyNeedAuth()
+                              } else {
+                                notifyNoAdd(v.product_name)
+                              }
+                            }}
+                          >
+                            <BsFillCartFill className={style.iconAInner} />
+                          </button>
+                          <button
+                            className="btn"
+                            onClick={() => {
+                              if (auth.isAuth) {
+                                const productData2 = {
+                                  member_id: auth.userData.id,
+                                  product_id: v.id,
+                                  p_photos: v.product_photos,
+                                  p_name: v.product_name,
+                                  p_price: v.product_price,
+                                  p_qty: 1,
+                                  total_price: v.product_price,
+                                  available_cp: v.mc ? v.mc : v.sc,
+                                }
+                                likeClick(productData2)
+                              } else {
+                                notifyNeedAuth()
+                              }
+                            }}
+                          >
+                            <AiOutlineHeart
+                              className={style.iconBInner}
+                              style={{
+                                color: isClicked && v.id ? '#e96d3f' : '',
+                                backgroundColor:
+                                  isClicked && v.id ? '#8e2626' : '',
                               }}
                             />
-                          </button>
-                          <button className="btn">
-                            <AiOutlineHeart className={style.iconBInner} />
                           </button>
                           <Link href={`/shop?searchSub=${v.s}`} className="btn">
                             <IoSearch className={style.iconCInner} />
@@ -216,7 +415,7 @@ export default function RandomShop() {
                         </div>
                       </div>
                       <Link
-                        href={`/shop/detail?pid=${v.id}`}
+                        href={`/shop/${v.id}`}
                         style={{ textDecoration: 'none', color: 'black' }}
                       >
                         <div
@@ -265,6 +464,13 @@ export default function RandomShop() {
         </div>
         {/* Shop End */}
       </DefaultLayout>
+      {/* Login Modal start */}
+      <LoginPage
+        show={showLogin}
+        onHide={handleLoginClose}
+        onSubmit={handleLoginSubmit}
+      />
+      {/* Login Modal end */}
     </>
   )
 
