@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 // page-----
 import RegisterModal from '@/components/member/register-modal'
@@ -22,11 +22,9 @@ import {
 } from 'react-icons/fa6'
 import { IoCloseCircle } from 'react-icons/io5'
 // hook------
-import { useAuth } from '@/context/auth-context'
 
 export default function Footer() {
   // 會員的資料跟登入狀態
-  const { checkAuth, auth } = useAuth()
   const [showRegister, setShowRegister] = useState(false)
   // 點擊註冊按鈕
   const handleRegisterClick = () => setShowRegister(true)
@@ -37,10 +35,21 @@ export default function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
-
+  // Ad closeBtn
   const [isClose, setIsClose] = useState(false)
+
+  useEffect(() => {
+    const storedIsClose = localStorage.getItem('isClose')
+    if (storedIsClose) {
+      setIsClose(true)
+    }
+  }, [])
+
   const handleCloseBtn = () => {
-    if (!isClose) setIsClose(true)
+    if (!isClose) {
+      setIsClose(true)
+      localStorage.setItem('isClose', 'true')
+    }
   }
 
   return (
