@@ -171,7 +171,7 @@ export default function BarterInvite() {
     console.log(result)
     if (result.success) {
       notifyDecline(newFormData.m2_nickname)
-      router.push('/member/shop')
+      router.push('/member/barter')
     } else {
       console.log('資料沒有修改')
     }

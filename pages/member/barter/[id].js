@@ -2,13 +2,20 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import { ORDER_BARTER_LIST } from '@/configs/config-r'
+import {
+  ORDER_BARTER_LIST,
+  ORDER_BARTER_711_PUT,
+  ORDER_BARTER_711_PUT2,
+} from '@/configs/config-r'
 // page
 import Footer from '@/components/common/footer/footer'
 import DefaultLayout from '@/components/common/default-layout'
 import LoginPage from '@/components/member/login-modal'
 // style-----
 import style from '@/pages/shop/cart.module.css'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 // react bootstrap
 // react icons-----
 import { FaPersonBreastfeeding, FaSeedling, FaAnglesUp } from 'react-icons/fa6'
@@ -117,6 +124,73 @@ export default function BarterCheckout() {
     'http://localhost:3001/shipment/711',
     { autoCloseMins: 3 } // x分鐘沒完成選擇會自動關閉，預設5分鐘。
   )
+
+  const notifySuccess = () => {
+    MySwal.fire({
+      title: `您已添加運送7-11門市資訊`,
+      icon: 'success',
+      confirmButtonText: '關閉',
+      confirmButtonColor: '#3085d6',
+    })
+  }
+  const notifyNoAdd = () => {
+    MySwal.fire({
+      title: `您未選擇運送7-11門市資訊`,
+      icon: 'error',
+      confirmButtonText: '關閉',
+      confirmButtonColor: '#3085d6',
+    })
+  }
+
+  const save711DataClickA = async (newFormData) => {
+    try {
+      const r = await fetch(`${ORDER_BARTER_711_PUT}/${newFormData.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newFormData),
+      })
+      if (!r.ok) {
+        throw new Error('Error')
+      }
+      const result = await r.json()
+      console.log(result)
+      if (result.success) {
+        notifySuccess()
+        router.push(`/member/barter/${newFormData.id}`)
+      } else {
+        console.log('資料沒有改變')
+      }
+    } catch (e) {
+      console.error('發生錯誤：', e)
+    }
+  }
+
+  const save711DataClickB = async (newFormData) => {
+    try {
+      const r = await fetch(`${ORDER_BARTER_711_PUT2}/${newFormData.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newFormData),
+      })
+      if (!r.ok) {
+        throw new Error('Error')
+      }
+      const result = await r.json()
+      console.log(result)
+      if (result.success) {
+        notifySuccess()
+        router.push(`/member/barter/${newFormData.id}`)
+      } else {
+        console.log('資料沒有改變')
+      }
+    } catch (e) {
+      console.error('發生錯誤：', e)
+    }
+  }
 
   // Loading bar-----
   const [isLoading, setIsLoading] = useState(true)
@@ -337,11 +411,6 @@ export default function BarterCheckout() {
                       </table>
                     </div>
                     <div className="col-lg-4">
-                      <div className="d-flex mb-3 justify-content-center">
-                        <h3 style={{ color: '#8e2626' }}>
-                          <strong>– 超商店到店 –</strong>
-                        </h3>
-                      </div>
                       {barter.data.name711_m1 && barter.data.name711_m2 ? (
                         <>
                           {/* 已經選好超商時 */}
@@ -458,6 +527,21 @@ export default function BarterCheckout() {
                                 style={{
                                   backgroundColor: '#e96d3f',
                                   color: 'white',
+                                }}
+                                onClick={() => {
+                                  const newFormData = {
+                                    id: barter.data.id,
+                                    address711_m2: store711.storeaddress,
+                                    name711_m2: store711.storename,
+                                  }
+                                  if (
+                                    store711.storename &&
+                                    store711.storeaddress
+                                  ) {
+                                    save711DataClickA(newFormData)
+                                  } else {
+                                    notifyNoAdd()
+                                  }
                                 }}
                               >
                                 <strong style={{ fontSize: '18px' }}>
@@ -617,11 +701,6 @@ export default function BarterCheckout() {
                       </table>
                     </div>
                     <div className="col-lg-4">
-                      <div className="d-flex mb-3 justify-content-center">
-                        <h3 style={{ color: '#8e2626' }}>
-                          <strong>– 超商店到店 –</strong>
-                        </h3>
-                      </div>
                       {barter.data.name711_m1 && barter.data.name711_m2 ? (
                         <>
                           {/* 已經選好超商時 */}
@@ -738,6 +817,21 @@ export default function BarterCheckout() {
                                 style={{
                                   backgroundColor: '#e96d3f',
                                   color: 'white',
+                                }}
+                                onClick={() => {
+                                  const newFormData = {
+                                    id: barter.data.id,
+                                    address711_m1: store711.storeaddress,
+                                    name711_m1: store711.storename,
+                                  }
+                                  if (
+                                    store711.storename &&
+                                    store711.storeaddress
+                                  ) {
+                                    save711DataClickB(newFormData)
+                                  } else {
+                                    notifyNoAdd()
+                                  }
                                 }}
                               >
                                 <strong style={{ fontSize: '18px' }}>

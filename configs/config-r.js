@@ -29,4 +29,8 @@ export const ORDER_BARTER_UPDATE_PUT = `${API_SERVER}/products/order-barter`
 
 export const ORDER_ADD = `${API_SERVER}/products/order`
 
+export const ORDER_BARTER_711_PUT = `${API_SERVER}/products/barter711A`
+
+export const ORDER_BARTER_711_PUT2 = `${API_SERVER}/products/barter711B`
+
 export const SEND_EMAIL = `${API_SERVER}/products/sendEmail`
