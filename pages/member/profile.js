@@ -117,6 +117,10 @@ export default function Profile() {
     return <div>正在努力加載資訊中...</div>
   }
 
+  const changepassword = () => {
+    router.push('/member/changepassword')
+  }
+
   return (
     <>
       <DefaultLayout>
@@ -146,37 +150,12 @@ export default function Profile() {
                     />
                     <button
                       type="button"
-                      className={`mb-4 ${styles.photobtn}`}
+                      className={`mb- ${styles.photobtn}`}
                       onClick={handleClick}
                     >
                       上傳大頭貼照
                     </button>
-                    {/* <div className="content text-center m-4">
-                    <div className="ratings">
-                      <span className="product-rating">4.6</span>
-                      <span>/5</span>
-                      <div className="stars">
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                      </div>
-                      <div className="rating-text">
-                        <span>46 個評分 &amp; 15 個評論</span>
-                      </div>
-                    </div>
-                  </div> */}
-                    <div className="d-flex justify-content-center mb-2">
-                      <button type="button" className={`${styles.probtn} btn`}>
-                        追蹤
-                      </button>
-                      <button
-                        type="button"
-                        className={`${styles.probtn} btn ms-2`}
-                      >
-                        傳訊息
-                      </button>
-                    </div>
+                    <div className="d-flex justify-content-center mb-2"></div>
                   </div>
                 </div>
                 <div
@@ -202,7 +181,7 @@ export default function Profile() {
                       />
                       <li className={`list-group-item ${styles.listGroupItem}`}>
                         <button
-                          // onClick={() => setIsUpdateModalOpen(true)}
+                          onClick={changepassword}
                           className={`${styles.libtn}`}
                         >
                           更改密碼
@@ -222,6 +201,14 @@ export default function Profile() {
                           className={`${styles.libtn}`}
                         >
                           我的訂單
+                        </button>
+                      </li>
+                      <li className={`list-group-item ${styles.listGroupItem}`}>
+                        <button
+                          // onClick={() => setIsUpdateModalOpen(true)}
+                          className={`${styles.libtn}`}
+                        >
+                          待定
                         </button>
                       </li>
                     </ul>

@@ -5,6 +5,7 @@ import withReactContent from 'sweetalert2-react-content'
 import { useRouter } from 'next/router'
 import { useAuth } from '@/context/auth-context'
 import { JWT_UPDATE_PASSWORD_PUT } from '@/components/config'
+import DefaultLayout from '@/components/common/default-layout'
 
 export default function ChangePasswordPage() {
   const MySwal = withReactContent(Swal)
@@ -98,75 +99,86 @@ export default function ChangePasswordPage() {
     if (data.status === 'success') {
       MySwal.fire({
         title: '成功',
-        text: '你的密碼已經成功更新',
+        text: '你的密碼已經成功更新，請重新登入',
         icon: 'success',
       })
 
-      router.push('/member/profile')
+      router.push('/')
     } else {
       setError({ oldPassword: data.message })
+      MySwal.fire({
+        title: '失敗',
+        text: '更改密碼失敗',
+        icon: 'error',
+      })
     }
   }
 
   return (
-    <div className="container d-flex justify-content-center">
-      <div className={`p-3 round ${styles.myloginform}`}>
-        <form name="form1" onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <h2 className="text-center">更改密碼</h2>
+    <>
+      <DefaultLayout>
+        <div className="container d-flex justify-content-center mt-5 mb-3">
+          <div className={`p-3 round ${styles.myloginform}`}>
+            <form name="form1" onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <h2 className="text-center">
+                  <strong>更改密碼</strong>
+                </h2>
+              </div>
+              <div className="mb-3">
+                <label className="form-label ms-2" htmlFor="oldPassword">
+                  <strong>舊密碼:</strong>
+                </label>
+                <input
+                  className="form-control rounded"
+                  type="password"
+                  name="oldPassword"
+                  id="oldPassword"
+                  placeholder="輸入舊密碼"
+                  value={passwords.oldPassword}
+                  onChange={handleFieldChange}
+                />
+                <div className={styles.error}>{error.oldPassword}</div>
+              </div>
+              <div className="mb-3">
+                <label className="form-label ms-2" htmlFor="newPassword">
+                  <strong>新密碼:</strong>
+                </label>
+                <input
+                  className="form-control rounded"
+                  type="password"
+                  name="newPassword"
+                  id="newPassword"
+                  placeholder="輸入新密碼"
+                  value={passwords.newPassword}
+                  onChange={handleFieldChange}
+                />
+                <div className={styles.error}>{error.newPassword}</div>
+              </div>
+              <div className="mb-3">
+                <label className="form-label ms-2" htmlFor="confirmPassword">
+                  <strong>確認新密碼:</strong>
+                </label>
+                <input
+                  className="form-control rounded"
+                  type="password"
+                  name="confirmPassword"
+                  id="confirmPassword"
+                  placeholder="再次輸入新密碼"
+                  value={passwords.confirmPassword}
+                  onChange={handleFieldChange}
+                />
+                <div className={styles.error}>{error.confirmPassword}</div>
+              </div>
+              <div className="login-with-line">
+                <button type="submit" className="btn">
+                  <strong>更改密碼</strong>
+                </button>
+              </div>
+            </form>
           </div>
-          <div className="mb-3">
-            <label className="form-label ms-2" htmlFor="oldPassword">
-              <strong>舊密碼:</strong>
-            </label>
-            <input
-              className="form-control rounded"
-              type="password"
-              name="oldPassword"
-              id="oldPassword"
-              placeholder="輸入舊密碼"
-              value={passwords.oldPassword}
-              onChange={handleFieldChange}
-            />
-            <div className={styles.error}>{error.oldPassword}</div>
-          </div>
-          <div className="mb-3">
-            <label className="form-label ms-2" htmlFor="newPassword">
-              <strong>新密碼:</strong>
-            </label>
-            <input
-              className="form-control rounded"
-              type="password"
-              name="newPassword"
-              id="newPassword"
-              placeholder="輸入新密碼"
-              value={passwords.newPassword}
-              onChange={handleFieldChange}
-            />
-            <div className={styles.error}>{error.newPassword}</div>
-          </div>
-          <div className="mb-3">
-            <label className="form-label ms-2" htmlFor="confirmPassword">
-              <strong>確認新密碼:</strong>
-            </label>
-            <input
-              className="form-control rounded"
-              type="password"
-              name="confirmPassword"
-              id="confirmPassword"
-              placeholder="再次輸入新密碼"
-              value={passwords.confirmPassword}
-              onChange={handleFieldChange}
-            />
-            <div className={styles.error}>{error.confirmPassword}</div>
-          </div>
-          <div className="login-with-line">
-            <button type="submit" className="btn">
-              <strong>更改密碼</strong>
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+        </div>
+      </DefaultLayout>{' '}
+    </>
   )
 }
