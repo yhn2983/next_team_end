@@ -80,6 +80,7 @@ export default function CustomNavbar({ pageName = '' }) {
 
   // ---Hover status---
   const [isMessageHovered, setIsMessageHovered] = useState(false)
+  const [isUserHovered, setIsUserHovered] = useState(false)
   const [isLanHovered, setIsLanHovered] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
   const [showRegister, setShowRegister] = useState(false)
@@ -87,13 +88,13 @@ export default function CustomNavbar({ pageName = '' }) {
 
   const handleMouseEnter = (type) => {
     if (type === 'message') setIsMessageHovered(true)
+    if (type === 'user') setIsUserHovered(true)
     if (type === 'language') setIsLanHovered(true)
-    if (type === 'user') setUsUserHovered(true)
   }
   const handleMouseLeave = (type) => {
     if (type === 'message') setIsMessageHovered(false)
+    if (type === 'user') setIsUserHovered(false)
     if (type === 'language') setIsLanHovered(false)
-    if (type === 'user') setUsUserHovered(false)
   }
 
   // Product & Category
