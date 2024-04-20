@@ -462,38 +462,20 @@ export default function Detail() {
                 </h2>
                 <div className="row">
                   <div className="col-lg-12">
-                    {auth.isAuth ? (
-                      <>
-                        <Link
-                          href="/member/profile"
-                          style={{ textDecoration: 'none' }}
-                        >
-                          <p className="mb-4 mt-3" style={{ fontSize: '20px' }}>
-                            <strong style={{ color: '#8e2626' }}>
-                              賣家：
-                              <span style={{ color: 'black' }}>
-                                {product.data.sellerName}{' '}
-                                <small>(點我看介紹)</small>
-                              </span>
-                            </strong>
-                          </p>
-                        </Link>
-                      </>
-                    ) : (
-                      <>
-                        <Link href="/shop" style={{ textDecoration: 'none' }}>
-                          <p className="mb-4 mt-3" style={{ fontSize: '20px' }}>
-                            <strong style={{ color: '#8e2626' }}>
-                              賣家：
-                              <span style={{ color: 'black' }}>
-                                {product.data.sellerName}{' '}
-                                <small>(點我看介紹)</small>
-                              </span>
-                            </strong>
-                          </p>
-                        </Link>
-                      </>
-                    )}
+                    <Link
+                      href={`/member/store/${product.data.seller_id}`}
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <p className="mb-4 mt-3" style={{ fontSize: '20px' }}>
+                        <strong style={{ color: '#8e2626' }}>
+                          賣家：
+                          <span style={{ color: 'black' }}>
+                            {product.data.sellerName}{' '}
+                            <small>(點我看介紹)</small>
+                          </span>
+                        </strong>
+                      </p>
+                    </Link>
                   </div>
                   <div className="col-lg-6">
                     <p className="mb-4" style={{ fontSize: '20px' }}>
