@@ -444,16 +444,20 @@ export default function Cart() {
                         </h5>
                       </div>
                       <div className="d-flex justify-content-center">
-                        <button
-                          className={`btn btn-block font-weight-bold d-flex ${style.checkBtn}`}
-                          style={{
-                            backgroundColor: '#e96d3f',
-                            color: 'white',
-                          }}
-                          onClick={() => {}}
+                        <Link
+                          href="/buyer/checkout"
+                          style={{ textDecoration: 'none' }}
                         >
-                          <strong style={{ fontSize: '20px' }}>去結帳</strong>
-                        </button>
+                          <button
+                            className={`btn btn-block font-weight-bold d-flex ${style.checkBtn}`}
+                            style={{
+                              backgroundColor: '#e96d3f',
+                              color: 'white',
+                            }}
+                          >
+                            <strong style={{ fontSize: '20px' }}>去結帳</strong>
+                          </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
