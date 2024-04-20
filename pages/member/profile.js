@@ -8,11 +8,14 @@ import { UPLOAD_AVATAR_ONE_POST } from '@/components/config'
 import { useAuth } from '@/context/auth-context'
 import { useRouter } from 'next/router'
 import GoogleFillModal from '@/components/member/google-fill-modal'
+import DefaultLayout from '@/components/common/default-layout'
+import UpdateProfileModal from '@/components/member/update-profile-modal'
 
 export default function Profile() {
   const { checkAuth } = useAuth()
   const router = useRouter()
   const [isLoading, setISLoading] = useState(true)
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false) // new state variable for controlling the modal
 
   // 如果使用者沒有登入，將他們重定向到登入頁面
   useEffect(() => {
@@ -116,38 +119,39 @@ export default function Profile() {
 
   return (
     <>
-      <section className={`${styles.profilesStyle}`}>
-        <div className="container py-5">
-          <div className="row">
-            <div className="col-lg-4">
-              <div className={`card mb-4 ${styles.card}`}>
-                <div className="card-body text-center">
-                  <Image
-                    src={
-                      file
-                        ? `http://localhost:3003/avatar/${file}?timestamp=${new Date().getTime()}`
-                        : '/default.png'
-                    }
-                    alt="avatar"
-                    width={175}
-                    height={185}
-                    className="rounded-circle mt-2 secondary"
-                  />
-                  <h5 className="my-4">{user.nickname}</h5>
-                  <input
-                    type="file"
-                    ref={inputRef}
-                    onChange={handleFileChange}
-                    style={{ display: 'none' }} // 隱藏 input 元件
-                  />
-                  <button
-                    type="button"
-                    className={`mb-4 ${styles.photobtn}`}
-                    onClick={handleClick}
-                  >
-                    上傳大頭貼照
-                  </button>
-                  {/* <div className="content text-center m-4">
+      <DefaultLayout>
+        <section className={`${styles.profilesStyle}`}>
+          <div className="container py-5">
+            <div className="row">
+              <div className="col-lg-4">
+                <div className={`card mb-4 ${styles.card}`}>
+                  <div className="card-body text-center">
+                    <Image
+                      src={
+                        file
+                          ? `http://localhost:3003/avatar/${file}?timestamp=${new Date().getTime()}`
+                          : '/default.png'
+                      }
+                      alt="avatar"
+                      width={175}
+                      height={185}
+                      className="rounded-circle mt-2 secondary"
+                    />
+                    <h5 className="my-4">{user.nickname}</h5>
+                    <input
+                      type="file"
+                      ref={inputRef}
+                      onChange={handleFileChange}
+                      style={{ display: 'none' }} // 隱藏 input 元件
+                    />
+                    <button
+                      type="button"
+                      className={`mb-4 ${styles.photobtn}`}
+                      onClick={handleClick}
+                    >
+                      上傳大頭貼照
+                    </button>
+                    {/* <div className="content text-center m-4">
                     <div className="ratings">
                       <span className="product-rating">4.6</span>
                       <span>/5</span>
@@ -162,166 +166,184 @@ export default function Profile() {
                       </div>
                     </div>
                   </div> */}
-                  <div className="d-flex justify-content-center mb-2">
-                    <button type="button" className="btn">
-                      追蹤
-                    </button>
-                    <button type="button" className="btn ms-1">
-                      傳訊息
-                    </button>
+                    <div className="d-flex justify-content-center mb-2">
+                      <button type="button" className={`${styles.probtn} btn`}>
+                        追蹤
+                      </button>
+                      <button
+                        type="button"
+                        className={`${styles.probtn} btn ms-2`}
+                      >
+                        傳訊息
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className={`card mb-lg-0r text-center mb-4 ${styles.card}`}
+                >
+                  <div className="card-body p-0 text-center">
+                    <ul className="list-group list-group-flush rounded-3">
+                      {/* <Link href="/member/update-profile"> */}
+                      <li className={`list-group-item ${styles.listGroupItem}`}>
+                        <button
+                          onClick={() => setIsUpdateModalOpen(true)}
+                          className={`${styles.libtn}`}
+                        >
+                          修改個人檔案
+                        </button>
+                      </li>
+                      {/* </Link> */}
+                      <UpdateProfileModal
+                        isOpen={isUpdateModalOpen}
+                        onRequestClose={() => setIsUpdateModalOpen(false)}
+                        userData={user}
+                        onUpdated={fetchUserData} // 將 fetchUserData 函數傳遞給 onUpdated prop
+                      />
+                      <li className={`list-group-item ${styles.listGroupItem}`}>
+                        <button
+                          // onClick={() => setIsUpdateModalOpen(true)}
+                          className={`${styles.libtn}`}
+                        >
+                          更改密碼
+                        </button>
+                      </li>
+                      <li className={`list-group-item ${styles.listGroupItem}`}>
+                        <button
+                          // onClick={() => setIsUpdateModalOpen(true)}
+                          className={`${styles.libtn}`}
+                        >
+                          我的賣場
+                        </button>
+                      </li>
+                      <li className={`list-group-item ${styles.listGroupItem}`}>
+                        <button
+                          // onClick={() => setIsUpdateModalOpen(true)}
+                          className={`${styles.libtn}`}
+                        >
+                          我的訂單
+                        </button>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
-              <div className={`card mb-lg-0r text-center mb-4 ${styles.card}`}>
-                <div className="card-body p-0 text-center">
-                  <ul className="list-group list-group-flush rounded-3">
-                    <Link href="/member/update-profile">
-                      <li
-                        className={`list-group-item p-3 ${styles.listGroupItem}`}
-                      >
-                        修改個人檔案
-                      </li>
-                    </Link>
-                    <Link href="/member/changepassword">
-                      <li
-                        className={`list-group-item p-3 ${styles.listGroupItem}`}
-                      >
-                        更改密碼
-                      </li>
-                    </Link>
-                    <Link href="/your-target-url">
-                      <li
-                        className={`list-group-item p-3 ${styles.listGroupItem}`}
-                      >
-                        我的賣場
-                      </li>
-                    </Link>
-                    <Link href="/your-target-url">
-                      <li
-                        className={`list-group-item p-3 ${styles.listGroupItem}`}
-                      >
-                        我的訂單
-                      </li>
-                    </Link>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-8">
-              <div className={`card ${styles.card}`}>
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col">
-                      <p className={`${styles.title}`}>我的個人檔案</p>
+              <div className="col-lg-8">
+                <div className={`card ${styles.card}`}>
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="col">
+                        <p className={`${styles.title}`}>我的個人檔案</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">真實姓名</p>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">真實姓名</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{user.name}</p>
+                      </div>
                     </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">{user.name}</p>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">暱稱</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{user.nickname}</p>
+                      </div>
                     </div>
-                  </div>
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">暱稱</p>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">Email</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{user.email}</p>
+                      </div>
                     </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">{user.nickname}</p>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">手機</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{user.mobile}</p>
+                      </div>
                     </div>
-                  </div>
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">Email</p>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">生日</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{user.birthday}</p>
+                      </div>
                     </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">{user.email}</p>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">地址</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{user.address}</p>
+                      </div>
                     </div>
-                  </div>
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">手機</p>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">累積小碳點</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">
+                          {user.carbon_points_got}
+                        </p>
+                      </div>
                     </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">{user.mobile}</p>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">持有小碳點</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">
+                          {user.carbon_points_have}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">生日</p>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">會員等級</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{user.level_name}</p>
+                      </div>
                     </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">{user.birthday}</p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">地址</p>
-                    </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">{user.address}</p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">累積小碳點</p>
-                    </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">
-                        {user.carbon_points_got}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">持有小碳點</p>
-                    </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">
-                        {user.carbon_points_have}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">會員等級</p>
-                    </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">{user.level_name}</p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p className="mb-0">等級描述</p>
-                    </div>
-                    <div className="col-sm-9">
-                      <p className="text-muted mb-0">{user.level_desc}</p>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <p className="mb-0">等級描述</p>
+                      </div>
+                      <div className="col-sm-9">
+                        <p className="text-muted mb-0">{user.level_desc}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-      <GoogleFillModal
-        isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(false)}
-        userData={user}
-        onSubmitted={() => {
-          setIsModalOpen(false)
-        }}
-      />
+        </section>
+        <GoogleFillModal
+          isOpen={isModalOpen}
+          onRequestClose={() => setIsModalOpen(false)}
+          userData={user}
+          onSubmitted={() => {
+            setIsModalOpen(false)
+          }}
+        />
+      </DefaultLayout>
     </>
   )
 }
