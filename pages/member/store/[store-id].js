@@ -114,7 +114,7 @@ export default function StoreInfo() {
           <div className="container py-5">
             <div className="row">
               <div className="col-lg-4">
-                <div className={`card ${styles.card} mb-4`}>
+                <div className={`card ${styles.infoCard} mb-4`}>
                   <div className="card-body text-center">
                     <Image
                       src={
@@ -158,7 +158,7 @@ export default function StoreInfo() {
                           </button>
                         </>
                       ) : auth.userData ? (
-                        <p>這樣我自己的賣場</p>
+                        <p>這個是我自己的賣場</p>
                       ) : (
                         <>
                           <button type="button" className="btn">
@@ -174,15 +174,18 @@ export default function StoreInfo() {
                         </>
                       )}
                     </div>
+                    <div className="d-flex justify-content-center mt-4">
+                      <p className={`${styles.title}`}>賣場介紹</p>
+                    </div>
                   </div>
                 </div>
               </div>
               <div className="col-lg-8">
-                <div className={`card ${styles.card}`}>
+                <div className={`card ${styles.productsCard}`}>
                   <div className="card-body">
                     <div className="row">
                       <div className="col">
-                        <p className={`${styles.title}`}>賣場介紹</p>
+                        <p className={`${styles.title}`}>賣場商品</p>
                       </div>
                     </div>
                     <StoreProducts storeId={storeId} />

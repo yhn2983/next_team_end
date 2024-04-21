@@ -168,7 +168,6 @@
 }
 
 .storeInfo{
-  width: 95%;
   margin: 0 auto;
   background-color: #FFF !important;
   a {
@@ -192,8 +191,8 @@
     }
   }
 
-  .card{
-    height: 100%;
+  .infoCard{
+    height: 1100px;
     border: 1px solid $dark;
     box-shadow: 8px 8px 0 0 rgb(255, 220, 220);
     transition: all 0.3s ease;
@@ -206,9 +205,28 @@
       color: $dark;
       text-align: center;
     }
-  } 
+  }
+   
+  .productsCard{
+    min-height: 1100px;
+    border: 1px solid $dark;
+    box-shadow: 8px 8px 0 0 rgb(255, 220, 220);
+    transition: all 0.3s ease;
+    &:hover {
+      transform: translateY(-5px);
+    }
+    .title{
+      font-size: 2rem;
+      font-weight: 600;
+      color: $dark;
+      text-align: center;
+    }
+  
+  }
 }
+.storeProductsStyle{
 
+}
 
 .registerForm{
   width: 500px;

@@ -22,10 +22,13 @@ export default function StoreProducts({ storeId }) {
   }, [])
 
   return (
-    <div className={`${style.storeProducts} container`}>
+    <div className={`${style.storeProductsStyle} container`}>
       <div className="row gy-3 mx-auto">
         {products.map((product) => (
-          <div className="col-12 col-sm-6 col-md-4 mx-auto" key={product.id}>
+          <div
+            className={`col-12 col-sm-6 col-md-4 ${style.storeProductsStyle}`}
+            key={product.id}
+          >
             <StoreProductsCard storeId={storeId} product={product} />
           </div>
         ))}
