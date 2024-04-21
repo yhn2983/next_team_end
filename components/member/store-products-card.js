@@ -6,7 +6,7 @@ export default function StoreProductsCard({ storeId, product }) {
     <Card
       style={{
         width: '210px',
-        height: '300px',
+        height: '275px',
         margin: '0px auto',
       }}
     >
@@ -17,11 +17,11 @@ export default function StoreProductsCard({ storeId, product }) {
             ? `/${product.product_photos.split(',')[0]}`
             : `/${product.product_photos}`
         }
-        style={{ height: '65%' }}
+        style={{ height: '63%' }}
       />
       <Card.Body
         style={{
-          padding: '8px',
+          padding: '6px',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',

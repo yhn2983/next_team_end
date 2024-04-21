@@ -23,7 +23,7 @@ export default function StoreProducts({ storeId }) {
 
   return (
     <div className={`${style.storeProductsStyle} container`}>
-      <div className="row gy-3 mx-auto">
+      <div className="row gy-3">
         {products.map((product) => (
           <div
             className={`col-12 col-sm-6 col-md-4 ${style.storeProductsStyle}`}
