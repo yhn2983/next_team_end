@@ -95,8 +95,10 @@ export default function BarterCheckout() {
       m2_nickname: '',
       m1_name: '',
       m2_name: '',
-      m1_mobile: '',
-      m2_mobile: '',
+      s_name_m1: '',
+      s_name_m2: '',
+      s_phone_m1: '',
+      s_phone_m2: '',
     },
   })
 
@@ -116,6 +118,49 @@ export default function BarterCheckout() {
         .catch((error) => {
           console.error('Error fetching data:', error)
         })
+    }
+  }
+
+  const [name, setName] = useState('')
+  const handleInput = (e) => {
+    setName(e.currentTarget.value)
+  }
+
+  const [phone, setPhone] = useState('')
+  const handleInput2 = (e) => {
+    setPhone(e.currentTarget.value)
+  }
+
+  const [errorMsg, setErrorMsg] = useState({
+    name: '',
+    phone: '',
+  })
+
+  const [isPass, setIsPass] = useState(false)
+
+  const validateName = (name) => {
+    return name.toString().length >= 2
+  }
+  const validatePhone = (phone) => {
+    return /^09\d{2}-?\d{3}-?\d{3}$/.test(phone)
+  }
+
+  const nameBlur = () => {
+    if (!validateName(name)) {
+      setErrorMsg({ ...errorMsg, name: '請輸入正確的姓名' })
+      return false
+    } else {
+      setErrorMsg({ ...errorMsg, name: '' })
+      return true
+    }
+  }
+  const phoneBlur = () => {
+    if (!validatePhone(phone)) {
+      setErrorMsg({ ...errorMsg, phone: '請輸入正確的手機號碼' })
+      return false
+    } else {
+      setErrorMsg({ ...errorMsg, phone: '' })
+      return true
     }
   }
 
@@ -152,50 +197,62 @@ export default function BarterCheckout() {
   }
 
   const save711DataClickA = async (newFormData) => {
-    try {
-      const r = await fetch(`${ORDER_BARTER_711_PUT}/${newFormData.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newFormData),
-      })
-      if (!r.ok) {
-        throw new Error('Error')
+    newFormData.preventDefalut()
+
+    const tmpIsPass = nameBlur() && phoneBlur()
+    setIsPass(tmpIsPass)
+    if (tmpIsPass) {
+      try {
+        const r = await fetch(`${ORDER_BARTER_711_PUT}/${newFormData.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newFormData),
+        })
+        if (!r.ok) {
+          throw new Error('Error')
+        }
+        const result = await r.json()
+        console.log(result)
+        if (result.success) {
+          notifySuccess()
+        } else {
+          console.log('資料沒有改變')
+        }
+      } catch (e) {
+        console.error('發生錯誤：', e)
       }
-      const result = await r.json()
-      console.log(result)
-      if (result.success) {
-        notifySuccess()
-      } else {
-        console.log('資料沒有改變')
-      }
-    } catch (e) {
-      console.error('發生錯誤：', e)
     }
   }
 
   const save711DataClickB = async (newFormData) => {
-    try {
-      const r = await fetch(`${ORDER_BARTER_711_PUT2}/${newFormData.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newFormData),
-      })
-      if (!r.ok) {
-        throw new Error('Error')
+    newFormData.preventDefalut()
+
+    const tmpIsPass = nameBlur() && phoneBlur()
+    setIsPass(tmpIsPass)
+    if (tmpIsPass) {
+      try {
+        const r = await fetch(`${ORDER_BARTER_711_PUT2}/${newFormData.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newFormData),
+        })
+        if (!r.ok) {
+          throw new Error('Error')
+        }
+        const result = await r.json()
+        console.log(result)
+        if (result.success) {
+          notifySuccess()
+        } else {
+          console.log('資料沒有改變')
+        }
+      } catch (e) {
+        console.error('發生錯誤：', e)
       }
-      const result = await r.json()
-      console.log(result)
-      if (result.success) {
-        notifySuccess()
-      } else {
-        console.log('資料沒有改變')
-      }
-    } catch (e) {
-      console.error('發生錯誤：', e)
     }
   }
 
@@ -456,6 +513,20 @@ export default function BarterCheckout() {
                                 <p>
                                   <strong>您的選定門市資訊</strong>
                                 </p>
+                                收件人 :{' '}
+                                <input
+                                  className="mb-2 form-control"
+                                  type="text"
+                                  value={barter.data.s_name_m2}
+                                  disabled
+                                />
+                                手機號碼 :{' '}
+                                <input
+                                  className="mb-2 form-control"
+                                  type="text"
+                                  value={barter.data.s_phone_m2}
+                                  disabled
+                                />
                                 門市名稱 :{' '}
                                 <input
                                   className=" form-control"
@@ -482,14 +553,14 @@ export default function BarterCheckout() {
                                 <input
                                   className="mb-2 form-control"
                                   type="text"
-                                  value={barter.data.m1_name}
+                                  value={barter.data.s_name_m1}
                                   disabled
                                 />
                                 手機號碼 :{' '}
                                 <input
                                   className="mb-2 form-control"
                                   type="text"
-                                  value={barter.data.m1_mobile}
+                                  value={barter.data.s_phone_m1}
                                   disabled
                                 />
                                 門市名稱 :{' '}
@@ -526,6 +597,20 @@ export default function BarterCheckout() {
                                     <p>
                                       <strong>您的選定門市資訊</strong>
                                     </p>
+                                    收件人 :{' '}
+                                    <input
+                                      className="mb-2 form-control"
+                                      type="text"
+                                      value={barter.data.s_name_m2}
+                                      disabled
+                                    />
+                                    手機號碼 :{' '}
+                                    <input
+                                      className="mb-2 form-control"
+                                      type="text"
+                                      value={barter.data.s_phone_m2}
+                                      disabled
+                                    />
                                     門市名稱 :{' '}
                                     <input
                                       className=" form-control"
@@ -560,6 +645,22 @@ export default function BarterCheckout() {
                                 <>
                                   <div className="bg-light p-30 mb-5">
                                     <div className="border-bottom px-4 pt-4 pb-3">
+                                      收件人 :{' '}
+                                      <input
+                                        className="mb-2 form-control"
+                                        type="text"
+                                        name="name"
+                                        value={name}
+                                        onChange={handleInput}
+                                      />
+                                      手機號碼 :{' '}
+                                      <input
+                                        className="mb-2 form-control"
+                                        type="text"
+                                        name="phone"
+                                        value={phone}
+                                        onChange={handleInput2}
+                                      />
                                       <div className="d-flex justify-content-between mb-2">
                                         <h5 className="font-weight-medium">
                                           <strong>7-11 運送商店選擇</strong>
@@ -607,6 +708,8 @@ export default function BarterCheckout() {
                                         onClick={() => {
                                           const newFormData = {
                                             id: barter.data.id,
+                                            s_name_m2: name,
+                                            s_phone_m2: phone,
                                             address711_m2:
                                               store711.storeaddress,
                                             name711_m2: store711.storename,
@@ -636,14 +739,14 @@ export default function BarterCheckout() {
                                       <input
                                         className="mb-2 form-control"
                                         type="text"
-                                        value={barter.data.m1_name}
+                                        value={barter.data.s_name_m1}
                                         disabled
                                       />
                                       手機號碼 :{' '}
                                       <input
                                         className="mb-2 form-control"
                                         type="text"
-                                        value={barter.data.m1_mobile}
+                                        value={barter.data.s_phone_m1}
                                         disabled
                                       />
                                       門市名稱 :{' '}
@@ -688,6 +791,22 @@ export default function BarterCheckout() {
                                         </button>
                                       </div>
                                       <div className="mb-2">
+                                        收件人 :{' '}
+                                        <input
+                                          className="mb-2 form-control"
+                                          type="text"
+                                          name="name"
+                                          value={name}
+                                          onChange={handleInput}
+                                        />
+                                        手機號碼 :{' '}
+                                        <input
+                                          className="mb-2 form-control"
+                                          type="text"
+                                          name="phone"
+                                          value={phone}
+                                          onChange={handleInput2}
+                                        />
                                         門市名稱 :{' '}
                                         <input
                                           className=" form-control"
@@ -715,6 +834,8 @@ export default function BarterCheckout() {
                                         onClick={() => {
                                           const newFormData = {
                                             id: barter.data.id,
+                                            s_name_m2: name,
+                                            s_phone_m2: phone,
                                             address711_m2:
                                               store711.storeaddress,
                                             name711_m2: store711.storename,
@@ -904,6 +1025,20 @@ export default function BarterCheckout() {
                                 <p>
                                   <strong>您的選定門市資訊</strong>
                                 </p>
+                                收件人 :{' '}
+                                <input
+                                  className="mb-2 form-control"
+                                  type="text"
+                                  value={barter.data.s_name_m1}
+                                  disabled
+                                />
+                                手機號碼 :{' '}
+                                <input
+                                  className="mb-2 form-control"
+                                  type="text"
+                                  value={barter.data.s_phone_m1}
+                                  disabled
+                                />
                                 門市名稱 :{' '}
                                 <input
                                   className=" form-control"
@@ -930,14 +1065,14 @@ export default function BarterCheckout() {
                                 <input
                                   className="mb-2 form-control"
                                   type="text"
-                                  value={barter.data.m2_name}
+                                  value={barter.data.s_name_m2}
                                   disabled
                                 />
                                 手機號碼 :{' '}
                                 <input
                                   className="mb-2 form-control"
                                   type="text"
-                                  value={barter.data.m2_mobile}
+                                  value={barter.data.s_phone_m2}
                                   disabled
                                 />
                                 門市名稱 :{' '}
@@ -974,6 +1109,20 @@ export default function BarterCheckout() {
                                     <p>
                                       <strong>您的選定門市資訊</strong>
                                     </p>
+                                    收件人 :{' '}
+                                    <input
+                                      className="mb-2 form-control"
+                                      type="text"
+                                      value={barter.data.s_name_m1}
+                                      disabled
+                                    />
+                                    手機號碼 :{' '}
+                                    <input
+                                      className="mb-2 form-control"
+                                      type="text"
+                                      value={barter.data.s_phone_m1}
+                                      disabled
+                                    />
                                     門市名稱 :{' '}
                                     <input
                                       className=" form-control"
@@ -1008,6 +1157,22 @@ export default function BarterCheckout() {
                                 <>
                                   <div className="bg-light p-30 mb-5">
                                     <div className="border-bottom px-4 pt-4 pb-3">
+                                      收件人 :{' '}
+                                      <input
+                                        className="mb-2 form-control"
+                                        type="text"
+                                        name="name"
+                                        value={name}
+                                        onChange={handleInput}
+                                      />
+                                      手機號碼 :{' '}
+                                      <input
+                                        className="mb-2 form-control"
+                                        type="text"
+                                        name="phone"
+                                        value={phone}
+                                        onChange={handleInput2}
+                                      />
                                       <div className="d-flex justify-content-between mb-2">
                                         <h5 className="font-weight-medium">
                                           <strong>7-11 運送商店選擇</strong>
@@ -1055,6 +1220,8 @@ export default function BarterCheckout() {
                                         onClick={() => {
                                           const newFormData = {
                                             id: barter.data.id,
+                                            s_name_m1: name,
+                                            s_phone_m1: phone,
                                             address711_m1:
                                               store711.storeaddress,
                                             name711_m1: store711.storename,
@@ -1084,14 +1251,14 @@ export default function BarterCheckout() {
                                       <input
                                         className="mb-2 form-control"
                                         type="text"
-                                        value={barter.data.m2_name}
+                                        value={barter.data.s_name_m2}
                                         disabled
                                       />
                                       手機號碼 :{' '}
                                       <input
                                         className="mb-2 form-control"
                                         type="text"
-                                        value={barter.data.m2_mobile}
+                                        value={barter.data.s_phone_m2}
                                         disabled
                                       />
                                       門市名稱 :{' '}
@@ -1116,6 +1283,22 @@ export default function BarterCheckout() {
                                   {/* m1/m2都還沒有選擇 */}
                                   <div className="bg-light p-30 mb-5">
                                     <div className="border-bottom px-4 pt-4 pb-3">
+                                      收件人 :{' '}
+                                      <input
+                                        className="mb-2 form-control"
+                                        type="text"
+                                        name="name"
+                                        value={name}
+                                        onChange={handleInput}
+                                      />
+                                      手機號碼 :{' '}
+                                      <input
+                                        className="mb-2 form-control"
+                                        type="text"
+                                        name="phone"
+                                        value={phone}
+                                        onChange={handleInput2}
+                                      />
                                       <div className="d-flex justify-content-between mb-2">
                                         <h5 className="font-weight-medium">
                                           <strong>7-11 運送商店選擇</strong>
@@ -1163,6 +1346,8 @@ export default function BarterCheckout() {
                                         onClick={() => {
                                           const newFormData = {
                                             id: barter.data.id,
+                                            s_name_m1: name,
+                                            s_phone_m1: phone,
                                             address711_m1:
                                               store711.storeaddress,
                                             name711_m1: store711.storename,
