@@ -27,7 +27,14 @@ export default function StoreProductsCard({ storeId, product }) {
           justifyContent: 'space-between',
         }}
       >
-        <Card.Text style={{ marginBottom: '2px', fontSize: '14px' }}>
+        <Card.Text
+          style={{
+            marginBottom: '2px',
+            fontSize: '14px',
+            height: '65px',
+            overflow: 'hidden',
+          }}
+        >
           {product.product_name}
         </Card.Text>
         <Card.Text
@@ -35,10 +42,13 @@ export default function StoreProductsCard({ storeId, product }) {
             fontSize: '16px',
             display: 'flex',
             justifyContent: 'space-between',
+            height: '20px',
           }}
         >
           <span>{product.product_price}</span>
-          <span style={{ color: 'red' }}>
+          <span
+            style={{ color: product.product_status == '1' ? 'red' : 'lime' }}
+          >
             {product.product_status == '1' ? '二手' : '全新'}
           </span>
         </Card.Text>
