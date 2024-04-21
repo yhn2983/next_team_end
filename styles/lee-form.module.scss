@@ -168,14 +168,16 @@
 }
 
 .storeInfo{
-
+  width: 95%;
+  margin: 0 auto;
+  background-color: #FFF !important;
   a {
     text-decoration: none !important;
     margin: 0;
     padding: 0;
   }
 
-
+  
   background-color:	#F0F0F0; 
   button{
     height: 40px;
@@ -191,7 +193,7 @@
   }
 
   .card{
-    height: 80vh;
+    height: 100%;
     border: 1px solid $dark;
     box-shadow: 8px 8px 0 0 rgb(255, 220, 220);
     transition: all 0.3s ease;
@@ -202,7 +204,6 @@
       font-size: 2rem;
       font-weight: 600;
       color: $dark;
-      margin: 2px 0px 2px 0px;
       text-align: center;
     }
   } 
@@ -526,6 +527,13 @@
 .chat__main {
   margin: 0 auto;
   height: 100%;
-  flex:1;
+  flex: 1;
   border: 2px solid #b0b0b0;
+}
+
+.storeProducts{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
 }

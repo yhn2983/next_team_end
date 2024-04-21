@@ -12,6 +12,7 @@ import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
 import { useSocket } from '@/context/socket-context'
 import toast, { Toaster } from 'react-hot-toast'
+import StoreProducts from '@/components/member/StoreProducts'
 
 export default function StoreInfo() {
   const { auth, checkAuth } = useAuth()
@@ -184,6 +185,7 @@ export default function StoreInfo() {
                         <p className={`${styles.title}`}>賣場介紹</p>
                       </div>
                     </div>
+                    <StoreProducts storeId={storeId} />
                   </div>
                 </div>
               </div>
