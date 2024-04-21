@@ -25,7 +25,6 @@ import LoadingBar from 'react-top-loading-bar'
 // hook------
 import { useAuth } from '@/context/auth-context'
 import { useShip711StoreOpener } from '@/hooks/use-ship-711-store'
-import { result } from 'lodash'
 
 export default function BarterCheckout() {
   // Router-----
@@ -168,7 +167,6 @@ export default function BarterCheckout() {
       console.log(result)
       if (result.success) {
         notifySuccess()
-        router.push(`/member/barter/${newFormData.id}`)
       } else {
         console.log('資料沒有改變')
       }
@@ -193,7 +191,6 @@ export default function BarterCheckout() {
       console.log(result)
       if (result.success) {
         notifySuccess()
-        router.push(`/member/barter/${newFormData.id}`)
       } else {
         console.log('資料沒有改變')
       }

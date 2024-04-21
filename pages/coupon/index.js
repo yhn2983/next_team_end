@@ -87,6 +87,10 @@ export default function Coupon() {
       icon: 'success',
       confirmButtonText: '關閉',
       confirmButtonColor: '#3085d6',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.reload()
+      }
     })
   }
 
@@ -102,8 +106,6 @@ export default function Coupon() {
     console.log(result)
     if (result.success) {
       notifySuccess(formData.c_name)
-      router.push('/coupon')
-      window.location.reload()
     } else {
       console.log('error')
     }
