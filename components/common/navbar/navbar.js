@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-// import Image from 'next/image'
 import { PROD_LIST } from '@/configs/config-r'
 import { useRouter } from 'next/router'
+// page -----
+import LoginPage from '@/components/member/login-modal'
+import RegisterModal from '@/components/member/register-modal'
+import LogoutButton from '@/components/member/logout-button'
 // style-----
 import style from './navbar.module.css'
 // react bootstrap
@@ -24,9 +27,6 @@ import { IoLogIn, IoLanguage } from 'react-icons/io5'
 import { GiArchiveRegister } from 'react-icons/gi'
 import { FaCircleUser, FaTreeCity, FaBars } from 'react-icons/fa6'
 import { RiCoupon3Fill, RiLogoutBoxRFill } from 'react-icons/ri'
-import LoginPage from '@/components/member/login-modal'
-import RegisterModal from '@/components/member/register-modal'
-import LogoutButton from '@/components/member/logout-button'
 // hook------
 import { useAuth } from '@/context/auth-context'
 import { useCart } from '@/hooks/use-cart'
@@ -538,7 +538,7 @@ export default function CustomNavbar({ pageName = '' }) {
                       </strong>
                     </Nav.Link>
                     <Nav.Link
-                      href="#"
+                      href="/coupon"
                       className={`nav-item nav-link ${
                         pageName === 'coupon' ? 'active' : ''
                       }`}
