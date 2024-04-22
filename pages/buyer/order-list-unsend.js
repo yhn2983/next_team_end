@@ -100,7 +100,9 @@ export default function OrderList() {
           <OrderListNav pageName="od-unsend" />
           <div className="row mt-5 mx-5">
             <div className="col-sm-8 cart-area">
-              {!data.rows ? (
+              {!auth ? (
+                alert('請先登入')
+              ) : !data.rows ? (
                 <div>...loading</div>
               ) : (
                 <>
@@ -214,7 +216,7 @@ export default function OrderList() {
               <h4 className="mb-3">小炭點</h4>
 
               <p className="card-text d-flex justify-content-between align-items-center">
-                目前點數 <span>{data.rows[0].buyer_point}</span>
+                目前點數 <span></span>
               </p>
               <hr />
               {/* <p className="card-text d-flex justify-content-between align-items-center">

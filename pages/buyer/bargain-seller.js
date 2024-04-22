@@ -6,10 +6,11 @@ import { useRouter } from 'next/router'
 import Button from 'react-bootstrap/Button'
 import DefaultLayout from '@/components/common/default-layout'
 import Styles from '@/styles/buyer.module.css'
+import { useAuth } from '@/context/auth-context'
 
 export default function BargainSeller() {
   const router = useRouter()
-
+  const { checkAuth, auth } = useAuth()
   //--議價資料
   const [bargainData, setBargainData] = useState([])
 
@@ -34,7 +35,9 @@ export default function BargainSeller() {
   return (
     <>
       <DefaultLayout>
-        {!bargainData.rows ? (
+        {!auth ? (
+          alert('請先登入')
+        ) : !bargainData.rows ? (
           <div>...loading</div>
         ) : (
           <div>

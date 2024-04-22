@@ -43,7 +43,7 @@ export default function OrderList() {
   const [bargainData, setBargainData] = useState([])
 
   useEffect(() => {
-    fetch(`${BARGAIN_BUYER}`, {
+    fetch(`${BARGAIN_BUYER}?${auth.userData.id}`, {
       headers: { 'Content-Type': 'application/json' },
     })
       .then((r) => r.json())
@@ -99,7 +99,9 @@ export default function OrderList() {
       <DefaultLayout pageName="bargain-buyer">
         <div className={`${Styles.orderList}`}>
           <OrderListNav pageName="bargain-buyer" />
-          {!bargainData.rows ? (
+          {!auth ? (
+            alert('請先登入')
+          ) : !bargainData.rows ? (
             <div>...loading</div>
           ) : (
             <>

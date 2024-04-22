@@ -54,7 +54,9 @@ export default function OrderList() {
           <OrderListNav pageName="od" />
           <div className="row mt-5 mx-5">
             <div className="col-sm-8 cart-area">
-              {!data.rows ? (
+              {!auth ? (
+                alert('請先登入')
+              ) : !data.rows ? (
                 <div>...loading</div>
               ) : (
                 <>
