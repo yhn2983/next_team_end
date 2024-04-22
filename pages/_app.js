@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 import '@/styles/globals.scss'
+import '@/styles/product.scss'
+
 import { AuthContextProvider } from '@/context/auth-context'
 import { CartProvider } from '@/hooks/use-cart'
 import { LikeProvider } from '@/hooks/use-like'
