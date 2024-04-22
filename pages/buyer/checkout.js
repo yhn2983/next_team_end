@@ -42,6 +42,8 @@ export default function Checkout() {
     product_id: '5',
     after_bargin_price: '',
     buyer_id: '1', // 初始化为空字符串
+    p_qty: '',
+    available_cp: '',
   })
 
   const SubmitBargain = async (e) => {
@@ -71,7 +73,7 @@ export default function Checkout() {
     class: '1',
     shipment_fee: '60',
     payment_way: '',
-    total_price: '0',
+    total_price: [],
     total_amount: '0',
     address: '',
     discount_coupon: '0',
@@ -80,10 +82,12 @@ export default function Checkout() {
     seller_id: '', // 初始化为空字符串
     buyer_id: '1',
     item_qty: '',
+    carbon_points_available: [],
   })
 
   //設一個狀態儲存totalPrice
-  const [totalPrice, setTotalPrice] = useState(0)
+  const [totalPrice, setTotalPrice] = useState([])
+  const [totalPriceAdd, setTotalPriceAdd] = useState(0)
   // 使用 useEffect 在数据加载后设置 formData
 
   useEffect(() => {
@@ -96,11 +100,13 @@ export default function Checkout() {
 
       let newSellerId = []
       let totalPrice = []
+      let totalPriceAndShip = []
       let totalAmount = []
-      let newCp = []
+
       let totalPriceAdd = 0
       let shipmentFee = []
       let discountCoupon = []
+      let carbonPointsAvailable = []
       console.log(productData.rows)
       productData.rows.forEach((v) => {
         newProductId.push(v.product_id)
@@ -108,14 +114,17 @@ export default function Checkout() {
         newSellerId.push(v.seller_id)
         // totalPrice = totalPrice + v.product_price
         totalPrice.push(v.total_price)
+        totalPriceAndShip.push(v.total_price + 60)
         totalAmount.push(v.p_qty)
-        newCp.push(v.available_cp)
+
         shipmentFee.push(60)
         discountCoupon.push(0)
+        carbonPointsAvailable.push(v.available_cp)
       })
       for (let i = 0; i < totalPrice.length; i++) {
         totalPriceAdd = totalPriceAdd + totalPrice[i]
       }
+      setTotalPriceAdd(totalPriceAdd)
       // 更新 formData
       console.log(totalAmount)
       console.log(shipmentFee)
@@ -124,15 +133,17 @@ export default function Checkout() {
         product_id: newProductId,
         product_price: newProductPrice,
         seller_id: newSellerId,
-        total_price: totalPrice,
+        total_price: totalPriceAndShip,
         total_amount: totalAmount,
+        item_qty: totalAmount,
         shipment_fee: shipmentFee,
         discount_coupon: discountCoupon,
+        carbon_points_available: carbonPointsAvailable,
       })
       // setBargainData({ ...bargainData, seller_id: newSellerId })
 
-      setTotalPrice(totalPriceAdd)
-      console.log(newSellerId) // 输出新的 seller_id
+      setTotalPrice(totalPrice)
+      console.log(totalPrice) // 输出新的 seller_id
     }
   }, [productData]) // 在 productData 更新时触发 useEffect
   // 使用 useEffect 在数据加载后设置 formData
@@ -168,9 +179,12 @@ export default function Checkout() {
   useEffect(() => {
     setFormData({
       ...formData,
-      total_price: totalPrice + +formData.shipment_fee,
+      total_price: totalPrice.map((v, i) => {
+        return +v + +formData.shipment_fee[i]
+      }),
     })
   }, [formData.shipment_fee])
+  console.log(totalPrice)
   console.log(formData.total_price)
 
   const formSubmit = async (e) => {
@@ -428,6 +442,8 @@ export default function Checkout() {
                                             ...bargainData,
                                             product_id: v.product_id,
                                             seller_id: v.seller_id,
+                                            p_qty: v.p_qty,
+                                            available_cp: v.available_cp,
                                           })
                                           handleShow()
                                         }}
@@ -458,7 +474,13 @@ export default function Checkout() {
                     <div className="pt-2">
                       <div className="d-flex justify-content-between mt-2">
                         <h5>Total</h5>
-                        <h5>{totalPrice + +formData.shipment_fee}</h5>
+                        <h5>
+                          {formData.total_price &&
+                            formData.total_price.reduce(
+                              (acc, curr) => acc + curr,
+                              0
+                            )}
+                        </h5>
                       </div>
                     </div>
                     <div className="d-flex justify-content-between mt-2">

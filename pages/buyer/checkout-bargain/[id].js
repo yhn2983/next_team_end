@@ -32,21 +32,23 @@ export default function CheckoutBargain() {
 
   const [formData, setFormData] = useState({
     name: '',
-    class: '2',
+    class: '1',
     shipment_fee: '60',
     payment_way: '',
-    total_price: '0',
+    total_price: [],
     total_amount: '0',
     address: '',
-    discount_coupon: '',
+    discount_coupon: '0',
     product_id: [],
     product_price: [],
     seller_id: '', // 初始化为空字符串
-    item_qty: '',
     buyer_id: '1',
+    item_qty: '',
+    carbon_points_available: [],
   })
   //設一個狀態儲存totalPrice
-  const [totalPrice, setTotalPrice] = useState(0)
+  const [totalPrice, setTotalPrice] = useState([])
+  const [totalPriceAdd, setTotalPriceAdd] = useState(0)
   // 使用 useEffect 在数据加载后设置 formData
   useEffect(() => {
     // 检查 productData 是否存在且包含 rows 属性
@@ -54,14 +56,30 @@ export default function CheckoutBargain() {
       // 从 productData 中提取数据并设置到 formData
       const newProductId = []
       const newProductPrice = []
-      let newSellerId = ''
-      let totalPrice = 0
+      const newProductData = []
+
+      let newSellerId = []
+      let totalPrice = []
+      let totalPriceAndShip = []
+      let totalAmount = []
+
+      let totalPriceAdd = 0
+      let shipmentFee = []
+      let discountCoupon = []
+      let carbonPointsAvailable = []
 
       productData.rows.forEach((v) => {
         newProductId.push(v.id)
         newProductPrice.push(v.after_bargin_price)
-        newSellerId = v.seller_id
-        totalPrice = totalPrice + v.product_price
+        newSellerId.push(v.seller_id)
+        // totalPrice = totalPrice + v.product_price
+        totalPrice.push(v.after_bargin_price)
+        totalPriceAndShip.push(v.after_bargin_price + 60)
+        totalAmount.push(v.p_qty)
+
+        shipmentFee.push(60)
+        discountCoupon.push(0)
+        carbonPointsAvailable.push(v.available_cp)
       })
 
       // 更新 formData
@@ -70,6 +88,12 @@ export default function CheckoutBargain() {
         product_id: newProductId,
         product_price: newProductPrice,
         seller_id: newSellerId,
+        total_price: totalPriceAndShip,
+        total_amount: totalAmount,
+        item_qty: totalAmount,
+        shipment_fee: shipmentFee,
+        discount_coupon: discountCoupon,
+        carbon_points_available: carbonPointsAvailable,
       })
       setTotalPrice(totalPrice)
       console.log(newSellerId) // 输出新的 seller_id
@@ -86,7 +110,9 @@ export default function CheckoutBargain() {
   useEffect(() => {
     setFormData({
       ...formData,
-      total_price: totalPrice + +formData.shipment_fee,
+      total_price: totalPrice.map((v, i) => {
+        return +v + +formData.shipment_fee[i]
+      }),
     })
   }, [formData.shipment_fee])
   const formSubmit = async (e) => {
@@ -217,31 +243,6 @@ export default function CheckoutBargain() {
                           value={formData.address}
                         />
                       </div>
-                      <div className="col-md-6 form-group">
-                        <label htmlFor="discount_coupon">優惠卷</label>
-                        <div>
-                          <select
-                            className="custom-select"
-                            onChange={(e) =>
-                              setFormData({
-                                ...formData,
-                                discount_coupon: e.target.value,
-                                shipment_fee:
-                                  e.target.value == 1
-                                    ? '30'
-                                    : e.target.value == 2
-                                    ? '0'
-                                    : '60',
-                              })
-                            }
-                            value={formData.discount_coupon}
-                          >
-                            <option selected="">選擇優惠卷</option>
-                            <option value="1">運費半價</option>
-                            <option value="2">免運</option>
-                          </select>
-                        </div>
-                      </div>
 
                       {/* <div className="col-md-12 form-group">
                   <div className="custom-control custom-checkbox">
@@ -284,35 +285,110 @@ export default function CheckoutBargain() {
                   </h5>
                   <div className="bg-light p-30 mb-5">
                     <div className="border-bottom">
-                      {productData.rows &&
-                        productData.rows.map((v) => {
-                          return (
-                            <div
-                              className="d-flex justify-content-between"
-                              key={v.id}
-                            >
-                              <p>{v.product_name}</p>
-                              <p>{v.after_bargin_price}</p>
-                              {/* <input
-                            value={v.product_price}
-                            readonly
-                            name={`${v.product_price}`}
-                          />{' '} */}
-                            </div>
-                          )
-                        })}
+                      <h6 className="mb-3">購買商品</h6>{' '}
+                      <div className="d-flex justify-content-between">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">First</th>
+                              <th scope="col">Last</th>
+                              <th scope="col">Handle</th>
+                              <th scope="col">Handle</th>
+                            </tr>{' '}
+                          </thead>
+                          <tbody>
+                            {productData.rows &&
+                              productData.rows.map((v, i) => {
+                                return (
+                                  <tr key={v.id}>
+                                    <td>{v.product_name}</td>
+                                    <td>
+                                      {' '}
+                                      <div className="col-md-6 form-group">
+                                        <label htmlFor="discount_coupon">
+                                          優惠卷
+                                        </label>
+                                        <div>
+                                          <select
+                                            className="custom-select"
+                                            onChange={(e) => {
+                                              setFormData({
+                                                ...formData,
+                                                discount_coupon:
+                                                  formData.discount_coupon.map(
+                                                    (value, index) =>
+                                                      index === i
+                                                        ? e.target.value
+                                                        : value
+                                                  ),
+                                                shipment_fee:
+                                                  formData.shipment_fee.map(
+                                                    (value, index) =>
+                                                      index === i
+                                                        ? e.target.value === '1'
+                                                          ? '30'
+                                                          : e.target.value ===
+                                                            '2'
+                                                          ? '0'
+                                                          : '60'
+                                                        : value
+                                                  ),
+                                              })
+                                              // setFormData({
+                                              //   ...formData,
+                                              //   total_price: totalPrice + formData.shipment_fee,
+                                              // })
+                                            }}
+                                            value={formData.discount_coupon[i]}
+                                          >
+                                            <option value="0">
+                                              選擇優惠卷
+                                            </option>
+                                            <option value="1">運費半價</option>
+                                            <option value="2">免運</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                    </td>
+                                    <td>${v.product_price}</td>
+                                    <td>{v.p_qty}</td>
+                                    <td>${v.after_bargin_price}</td>
+
+                                    {/* <input
+                                value={v.p_price}
+                                readonly
+                                name={`${v.product_price}`}
+                              />{' '} */}
+                                  </tr>
+                                )
+                              })}
+                          </tbody>
+                        </table>
+                      </div>
+                      {/* <div className="d-flex justify-content-between">
+                        <p>Product Name 2</p>
+                        <p>$150</p>
+                      </div> */}
                       <div className="d-flex justify-content-between">
                         <p>運費</p>
                         <p>{formData.shipment_fee}</p>
                       </div>{' '}
                     </div>{' '}
-                  </div>
-                  <div className="pt-2">
-                    <div className="d-flex justify-content-between mt-2">
-                      <h5>Total</h5>
-                      <h5>{totalPrice + +formData.shipment_fee}</h5>
+                    <div className="pt-2">
+                      <div className="d-flex justify-content-between mt-2">
+                        <h5>Total</h5>
+                        <h5>
+                          {formData.total_price &&
+                            formData.total_price.reduce(
+                              (acc, curr) => acc + curr,
+                              0
+                            )}
+                        </h5>
+                      </div>
                     </div>
                   </div>
+
                   {/* <div className="d-flex justify-content-between mt-2">
                   <p></p>
                   <Button variant="primary" onClick={handleShow}>
