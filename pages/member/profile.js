@@ -121,6 +121,11 @@ export default function Profile() {
     router.push('/member/changepassword')
   }
 
+  const handleClickStore = () => {
+    const storeId = user.id
+    router.push(`/member/store/${storeId}`)
+  }
+
   return (
     <>
       <DefaultLayout>
@@ -150,12 +155,18 @@ export default function Profile() {
                     />
                     <button
                       type="button"
-                      className={`mb- ${styles.photobtn}`}
+                      className={`mb-3 ${styles.photobtn}`}
                       onClick={handleClick}
                     >
                       上傳大頭貼照
                     </button>
-                    <div className="d-flex justify-content-center mb-2"></div>
+                    <button
+                      type="button"
+                      className={`mb-3 ms-3 ${styles.photobtn}`}
+                      onClick={handleClickStore}
+                    >
+                      我的賣場介紹
+                    </button>
                   </div>
                 </div>
                 <div
@@ -208,7 +219,7 @@ export default function Profile() {
                           // onClick={() => setIsUpdateModalOpen(true)}
                           className={`${styles.libtn}`}
                         >
-                          待定
+                          我的以物易物
                         </button>
                       </li>
                     </ul>

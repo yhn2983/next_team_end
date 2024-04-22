@@ -13,6 +13,9 @@ import LoadingBar from 'react-top-loading-bar'
 import { useSocket } from '@/context/socket-context'
 import toast, { Toaster } from 'react-hot-toast'
 import StoreProducts from '@/components/member/StoreProducts'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart as faSolidHeart } from '@fortawesome/free-solid-svg-icons'
+import { faHeart as faRegularHeart } from '@fortawesome/free-regular-svg-icons'
 
 export default function StoreInfo() {
   const { auth, checkAuth } = useAuth()
@@ -22,6 +25,7 @@ export default function StoreInfo() {
   const { connectionState, setConnectionState, socket } = useSocket()
   // 使用 useState 建立 storeId 的狀態
   const [storeId, setStoreId] = useState(null)
+  const [storeLike, setStoreLike] = useState(1)
 
   useEffect(() => {
     if (isLoading) {
@@ -107,6 +111,10 @@ export default function StoreInfo() {
   }
   console.log(connectionState)
 
+  const handleToggleLike = () => {
+    setStoreLike(storeLike === 1 ? 2 : 1)
+  }
+
   const display = (
     <>
       <DefaultLayout>
@@ -146,8 +154,19 @@ export default function StoreInfo() {
                     <div className="d-flex justify-content-center mb-2">
                       {auth.userData && auth.userData.id !== +storeId ? (
                         <>
-                          <button type="button" className="btn">
-                            追蹤
+                          <button
+                            type="button"
+                            className={`btn ${styles.btnLike}`}
+                            onClick={handleToggleLike}
+                          >
+                            <FontAwesomeIcon
+                              className={styles.iconWithMargin}
+                              icon={
+                                storeLike === 1 ? faRegularHeart : faSolidHeart
+                              }
+                              color="red" /* 設定愛心的顏色為紅色 */
+                            />
+                            <span className={styles.textBlack}>追蹤</span>
                           </button>
                           <button
                             type="button"
@@ -161,7 +180,18 @@ export default function StoreInfo() {
                         <p>這個是我自己的賣場</p>
                       ) : (
                         <>
-                          <button type="button" className="btn">
+                          <button
+                            type="button"
+                            className={`btn ${styles.btnLike}`}
+                            onClick={handleToggleLike}
+                          >
+                            <FontAwesomeIcon
+                              className={styles.iconWithMargin}
+                              icon={
+                                storeLike === 1 ? faRegularHeart : faSolidHeart
+                              }
+                              color="red" /* 設定愛心的顏色為紅色 */
+                            />
                             追蹤
                           </button>
                           <button
@@ -177,13 +207,13 @@ export default function StoreInfo() {
                     <div className="mt-4">
                       <p className={`${styles.title} text-center`}>賣場介紹</p>
                       <p className="text-start" style={{ fontSize: '18px' }}>
-                        很高興您來到我的賣場。在這裡，我專注於提供各種高品質的二手商品，從家居用品到電子產品，應有盡有。我深知每一件商品背後都有它的故事，因此我對於每一件商品都進行了細心的挑選和檢查，確保它們的品質和價值。
+                        很高興您來到我的賣場。在這裡，我專注於提供各種高品質的二手商品，主要與鞋類為主。我深知每一件商品背後都有它的故事，因此我對於每一件商品都進行了細心的挑選和檢查，確保它們的品質和價值。
                       </p>
                       <p className="text-start" style={{ fontSize: '18px' }}>
                         您可以放心地在我的賣場尋找您需要的商品，因為我將提供最真實、最準確的商品描述和圖片。此外，我也非常重視客戶的需求和意見，如果您在購物過程中有任何問題或建議，請隨時與我聯繫，我將竭誠為您服務。
                       </p>
                       <p className="text-start" style={{ fontSize: '18px' }}>
-                        感謝您對「舊時光」賣場的支持，我期待能夠與您建立良好的合作關係，讓您在這裡找到您想要的寶藏，共同回味那些美好的舊時光。
+                        感謝您對我的賣場的支持，我期待能夠與您建立良好的合作關係，讓您在這裡找到您想要的寶藏，共同回味那些美好的舊時光。謝謝您的光臨！
                       </p>
                     </div>
                   </div>

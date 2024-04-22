@@ -9,7 +9,7 @@ import DefaultLayout from '@/components/common/default-layout'
 
 export default function ChangePasswordPage() {
   const MySwal = withReactContent(Swal)
-  const { auth, checkAuth } = useAuth()
+  const { auth, checkAuth, logout } = useAuth()
   const router = useRouter()
 
   const [passwords, setPasswords] = useState({
@@ -97,6 +97,8 @@ export default function ChangePasswordPage() {
     const data = await response.json()
 
     if (data.status === 'success') {
+      // 用戶登出
+      logout()
       MySwal.fire({
         title: '成功',
         text: '你的密碼已經成功更新，請重新登入',

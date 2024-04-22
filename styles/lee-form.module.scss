@@ -221,7 +221,22 @@
       color: $dark;
       text-align: center;
     }
-  
+  }
+
+  .iconWithMargin{
+    margin-right: 4px;
+  }
+
+  .btnLike{
+  border: 1px solid $primary;
+  background-color: #ffffff;
+  color: red;
+    &:hover{
+      color: $primary;
+    }
+  }
+  .textBlack{
+    color: rgb(85, 82, 82);
   }
 }
 

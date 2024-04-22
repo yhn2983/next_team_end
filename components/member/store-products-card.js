@@ -12,8 +12,8 @@ export default function StoreProductsCard({ storeId, product }) {
       onClick={handleClick}
       className={styles.cardHoverEffect}
       style={{
-        width: '210px',
-        height: '275px',
+        width: '225px',
+        height: '273px',
         margin: '0px auto',
       }}
     >
