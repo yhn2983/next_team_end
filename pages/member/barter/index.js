@@ -73,6 +73,7 @@ export default function BarterInvite() {
   // Barter
   const [data, setData] = useState({
     barter: [],
+    ob: [],
   })
 
   useEffect(() => {
@@ -177,6 +178,11 @@ export default function BarterInvite() {
     }
   }
 
+  const [btnState, setBtnState] = useState({})
+  const handleDropClick = (btnId) => {
+    setBtnState((prevState) => ({ ...prevState, [btnId]: !prevState[btnId] }))
+  }
+
   // Loading bar-----
   const [isLoading, setIsLoading] = useState(true)
   const [progress, setProgress] = useState(0)
@@ -258,35 +264,65 @@ export default function BarterInvite() {
                             style={{ color: 'green', fontSize: '16px' }}
                           />
                           {v.created_at}
-                          {v.id} ：已審核
+                          {v.id} ：已審核&nbsp;&nbsp;&nbsp;
+                          {data.ob.find(
+                            (v4) =>
+                              v4.id === v.id &&
+                              auth.userData.id === v.m2_id &&
+                              !v4.send_name_m2
+                          ) ? (
+                            <span style={{ color: 'red' }}>
+                              您尚未填寫運送資訊
+                            </span>
+                          ) : null}
                         </span>
                       )
                     const result = () => {
                       if (v.approve == 1) {
                         return (
                           <h4 className="mb-3" style={{ color: '#e96d3f' }}>
-                            <strong>對方婉拒您的申請！</strong>
+                            <strong>對方已婉拒您的申請！</strong>
                           </h4>
                         )
-                      } else if (v.approve == 2) {
-                        return (
-                          <>
-                            <h4 className="" style={{ color: '#8e2626' }}>
-                              <strong>
-                                對方已同意您的申請！您的申請已轉至
-                                <Link href={`/member/barter/${v.id}`}>
-                                  訂單詳情頁面
-                                </Link>
-                              </strong>
-                            </h4>
-                            <h5>
-                              <strong>
-                                請至訂單詳情頁面新增您的運送店到店資訊
-                              </strong>
-                            </h5>
-                          </>
-                        )
+                      } else if (v.approve === 2) {
+                        const matchedData = data.ob.find((v4) => v4.id === v.id)
+                        if (matchedData && auth.userData.id === v.m2_id) {
+                          if (!matchedData.send_name_m2) {
+                            return (
+                              <>
+                                <h4 className="" style={{ color: '#8e2626' }}>
+                                  <strong>
+                                    對方已同意您的申請！您的申請已轉至{' '}
+                                    <Link href={`/member/barter/${v.id}`}>
+                                      訂單詳情頁面
+                                    </Link>
+                                  </strong>
+                                </h4>
+                                <h5>
+                                  <strong>
+                                    請至訂單詳情頁面新增您的運送店到店資訊
+                                  </strong>
+                                </h5>
+                              </>
+                            )
+                          } else if (matchedData.send_name_m2) {
+                            return (
+                              <>
+                                <h4 className="" style={{ color: '#8e2626' }}>
+                                  <strong>
+                                    您已送出運送資訊，詳情請至{' '}
+                                    <Link href={`/member/barter/${v.id}`}>
+                                      訂單詳情頁面
+                                    </Link>{' '}
+                                    查閱
+                                  </strong>
+                                </h4>
+                              </>
+                            )
+                          }
+                        }
                       }
+                      return null
                     }
                     // 提出邀請 : m2-m1
                     if (v.m2_id == auth.userData.id) {
@@ -311,13 +347,18 @@ export default function BarterInvite() {
                                   }}
                                 >
                                   <button
-                                    style={{ backgroundColor: '#f35b14ab' }}
+                                    style={{
+                                      backgroundColor: btnState[v.id]
+                                        ? '#f4a6a2'
+                                        : 'white',
+                                    }}
                                     className="accordion-button"
                                     type="button"
                                     data-bs-toggle="collapse"
                                     data-bs-target={`#collapseOne${v.id}`}
                                     aria-expanded="true"
                                     aria-controls="collapseOne"
+                                    onClick={() => handleDropClick(v.id)}
                                   >
                                     <strong>{statusText}</strong>
                                   </button>
@@ -483,7 +524,17 @@ export default function BarterInvite() {
                             style={{ color: 'green', fontSize: '16px' }}
                           />
                           {v2.created_at}
-                          {v2.id} ：已回覆
+                          {v2.id} ：已回覆&nbsp;&nbsp;&nbsp;
+                          {data.ob.find(
+                            (v4) =>
+                              v4.id === v2.id &&
+                              auth.userData.id === v2.m1_id &&
+                              !v4.send_name_m1
+                          ) ? (
+                            <span style={{ color: 'red' }}>
+                              您尚未填寫運送資訊
+                            </span>
+                          ) : null}
                         </span>
                       )
                     const result = () => {
@@ -494,24 +545,46 @@ export default function BarterInvite() {
                           </h4>
                         )
                       } else if (v2.approve == 2) {
-                        return (
-                          <>
-                            <h4 style={{ color: '#8e2626' }}>
-                              <strong>
-                                您已同意對方的申請！以物易物申請已轉至
-                                <Link href={`/member/barter/${v2.id}`}>
-                                  訂單詳情頁面
-                                </Link>
-                              </strong>
-                            </h4>
-                            <h5>
-                              <strong>
-                                請至訂單詳情頁面新增您的運送店到店資訊
-                              </strong>
-                            </h5>
-                          </>
+                        const matchedData = data.ob.find(
+                          (v4) => v4.id === v2.id
                         )
+                        if (matchedData && auth.userData.id === v2.m1_id) {
+                          if (!matchedData.send_name_m1) {
+                            return (
+                              <>
+                                <h4 className="" style={{ color: '#8e2626' }}>
+                                  <strong>
+                                    對方已同意您的申請！您的申請已轉至{' '}
+                                    <Link href={`/member/barter/${v2.id}`}>
+                                      訂單詳情頁面
+                                    </Link>
+                                  </strong>
+                                </h4>
+                                <h5>
+                                  <strong>
+                                    請至訂單詳情頁面新增您的運送店到店資訊
+                                  </strong>
+                                </h5>
+                              </>
+                            )
+                          } else if (matchedData.send_name_m1) {
+                            return (
+                              <>
+                                <h4 className="" style={{ color: '#8e2626' }}>
+                                  <strong>
+                                    您已送出運送資訊，詳情請至{' '}
+                                    <Link href={`/member/barter/${v2.id}`}>
+                                      訂單詳情頁面
+                                    </Link>{' '}
+                                    查閱
+                                  </strong>
+                                </h4>
+                              </>
+                            )
+                          }
+                        }
                       }
+                      return null
                     }
                     // 收到邀請 : m1-m2
                     if (auth.userData.id == v2.m1_id) {
@@ -533,13 +606,18 @@ export default function BarterInvite() {
                                   }}
                                 >
                                   <button
-                                    style={{ backgroundColor: '#e96262d0' }}
+                                    style={{
+                                      backgroundColor: btnState[v2.id]
+                                        ? '#efbb69'
+                                        : 'white',
+                                    }}
                                     className="accordion-button"
                                     type="button"
                                     data-bs-toggle="collapse"
                                     data-bs-target={`#collapseOne${v2.id}`}
                                     aria-expanded="true"
                                     aria-controls="collapseOne"
+                                    onClick={() => handleDropClick(v2.id)}
                                   >
                                     <strong>{statusText2}</strong>
                                   </button>
