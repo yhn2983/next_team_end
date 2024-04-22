@@ -1,9 +1,16 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
+import styles from '@/styles/lee-form.module.scss'
 
 export default function StoreProductsCard({ storeId, product }) {
+  const handleClick = () => {
+    console.log('導向商品頁面')
+  }
+
   return (
     <Card
+      onClick={handleClick}
+      className={styles.cardHoverEffect}
       style={{
         width: '210px',
         height: '275px',
