@@ -48,3 +48,9 @@ export const GET_CHAT_HISTORY = `${API_SERVER}/api/chat/getmessages`
 
 // 獲得賣場產品資料
 export const GET_STORE_PRODUCTS = `${API_SERVER}/api/users/products`
+
+// 取得該賣場的追蹤狀態
+export const GET_STORE_LIKE = `${API_SERVER}/api/users/getStoreLike`
+
+// 新增或更新賣場的追蹤狀態
+export const POST_STORE_LIKE = `${API_SERVER}/api/users/postStoreLike`

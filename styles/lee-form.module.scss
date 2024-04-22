@@ -228,15 +228,14 @@
   }
 
   .btnLike{
-  border: 1px solid $primary;
-  background-color: #ffffff;
+  background-color: #cbcbcb;
   color: red;
     &:hover{
       color: $primary;
     }
   }
   .textBlack{
-    color: rgb(85, 82, 82);
+    color: rgb(33, 32, 32);
   }
 }
 
