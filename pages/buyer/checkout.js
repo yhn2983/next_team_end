@@ -12,6 +12,7 @@ import { useAuth } from '@/context/auth-context'
 import Head from 'next/head'
 import DefaultLayout from '@/components/common/default-layout'
 import Styles from '@/styles/buyer.module.css'
+import { FaNpm } from 'react-icons/fa'
 
 export default function Checkout() {
   const [show, setShow] = useState(false)
@@ -73,7 +74,7 @@ export default function Checkout() {
     total_price: '0',
     total_amount: '0',
     address: '',
-    discount_coupon: '',
+    discount_coupon: '0',
     product_id: [],
     product_price: [],
     seller_id: '', // 初始化为空字符串
@@ -84,36 +85,58 @@ export default function Checkout() {
   //設一個狀態儲存totalPrice
   const [totalPrice, setTotalPrice] = useState(0)
   // 使用 useEffect 在数据加载后设置 formData
+
   useEffect(() => {
     // 检查 productData 是否存在且包含 rows 属性
     if (productData && productData.rows) {
       // 从 productData 中提取数据并设置到 formData
       const newProductId = []
       const newProductPrice = []
-      let newSellerId = ''
-      let totalPrice = 0
-      productData.rows.forEach((v) => {
-        newProductId.push(v.id)
-        newProductPrice.push(v.product_price)
-        newSellerId = v.seller_id
-        totalPrice = totalPrice + v.product_price
-      })
+      const newProductData = []
 
+      let newSellerId = []
+      let totalPrice = []
+      let totalAmount = []
+      let newCp = []
+      let totalPriceAdd = 0
+      let shipmentFee = []
+      let discountCoupon = []
+      console.log(productData.rows)
+      productData.rows.forEach((v) => {
+        newProductId.push(v.product_id)
+        newProductPrice.push(v.p_price)
+        newSellerId.push(v.seller_id)
+        // totalPrice = totalPrice + v.product_price
+        totalPrice.push(v.total_price)
+        totalAmount.push(v.p_qty)
+        newCp.push(v.available_cp)
+        shipmentFee.push(60)
+        discountCoupon.push(0)
+      })
+      for (let i = 0; i < totalPrice.length; i++) {
+        totalPriceAdd = totalPriceAdd + totalPrice[i]
+      }
       // 更新 formData
+      console.log(totalAmount)
+      console.log(shipmentFee)
       setFormData({
         ...formData, // 保留 formData 中其他属性
         product_id: newProductId,
         product_price: newProductPrice,
         seller_id: newSellerId,
         total_price: totalPrice,
+        total_amount: totalAmount,
+        shipment_fee: shipmentFee,
+        discount_coupon: discountCoupon,
       })
-      setBargainData({ ...bargainData, seller_id: newSellerId })
-      setTotalPrice(totalPrice)
+      // setBargainData({ ...bargainData, seller_id: newSellerId })
+
+      setTotalPrice(totalPriceAdd)
       console.log(newSellerId) // 输出新的 seller_id
     }
   }, [productData]) // 在 productData 更新时触发 useEffect
   // 使用 useEffect 在数据加载后设置 formData
-  console.log(totalPrice)
+  console.log(productData)
 
   useEffect(() => {
     if (auth.isAuth) {
@@ -243,6 +266,7 @@ export default function Checkout() {
                               total_amount: e.target.value,
                             })
                           }
+                          readOnly
                           value={formData.total_amount}
                         />
                       </div>
@@ -280,35 +304,6 @@ export default function Checkout() {
                           }
                           value={formData.address}
                         />
-                      </div>
-                      <div className="col-md-6 form-group">
-                        <label htmlFor="discount_coupon">優惠卷</label>
-                        <div>
-                          <select
-                            className="custom-select"
-                            onChange={(e) => {
-                              setFormData({
-                                ...formData,
-                                discount_coupon: e.target.value,
-                                shipment_fee:
-                                  e.target.value == 1
-                                    ? '30'
-                                    : e.target.value == 2
-                                    ? '0'
-                                    : '60',
-                              })
-                              // setFormData({
-                              //   ...formData,
-                              //   total_price: totalPrice + formData.shipment_fee,
-                              // })
-                            }}
-                            value={formData.discount_coupon}
-                          >
-                            <option value="0">選擇優惠卷</option>
-                            <option value="1">運費半價</option>
-                            <option value="2">免運</option>
-                          </select>
-                        </div>
                       </div>
 
                       {/* <div className="col-md-12 form-group">
@@ -354,23 +349,103 @@ export default function Checkout() {
                   </h5>
                   <div className="bg-light p-30 mb-5">
                     <div className="border-bottom">
-                      <h6 className="mb-3">購買商品</h6>
-                      {productData.rows &&
-                        productData.rows.map((v) => {
-                          return (
-                            <div
-                              className="d-flex justify-content-between"
-                              key={v.id}
-                            >
-                              <p>{v.product_name}</p>
-                              <input
-                                value={v.product_price}
+                      <h6 className="mb-3">購買商品</h6>{' '}
+                      <div className="d-flex justify-content-between">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">First</th>
+                              <th scope="col">Last</th>
+                              <th scope="col">Handle</th>
+                              <th scope="col">Handle</th>
+                              <th scope="col">Handle</th>
+                            </tr>{' '}
+                          </thead>
+                          <tbody>
+                            {productData.rows &&
+                              productData.rows.map((v, i) => {
+                                return (
+                                  <tr key={v.id}>
+                                    <td>{v.p_name}</td>
+                                    <td>
+                                      {' '}
+                                      <div className="col-md-6 form-group">
+                                        <label htmlFor="discount_coupon">
+                                          優惠卷
+                                        </label>
+                                        <div>
+                                          <select
+                                            className="custom-select"
+                                            onChange={(e) => {
+                                              setFormData({
+                                                ...formData,
+                                                discount_coupon:
+                                                  formData.discount_coupon.map(
+                                                    (value, index) =>
+                                                      index === i
+                                                        ? e.target.value
+                                                        : value
+                                                  ),
+                                                shipment_fee:
+                                                  formData.shipment_fee.map(
+                                                    (value, index) =>
+                                                      index === i
+                                                        ? e.target.value === '1'
+                                                          ? '30'
+                                                          : e.target.value ===
+                                                            '2'
+                                                          ? '0'
+                                                          : '60'
+                                                        : value
+                                                  ),
+                                              })
+                                              // setFormData({
+                                              //   ...formData,
+                                              //   total_price: totalPrice + formData.shipment_fee,
+                                              // })
+                                            }}
+                                            value={formData.discount_coupon[i]}
+                                          >
+                                            <option value="0">
+                                              選擇優惠卷
+                                            </option>
+                                            <option value="1">運費半價</option>
+                                            <option value="2">免運</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                    </td>
+                                    <td>${v.p_price}</td>
+                                    <td>{v.p_qty}</td>
+                                    <td>${v.total_price}</td>
+                                    <td>
+                                      <p></p>
+                                      <Button
+                                        variant="danger"
+                                        onClick={() => {
+                                          setBargainData({
+                                            ...bargainData,
+                                            product_id: v.product_id,
+                                            seller_id: v.seller_id,
+                                          })
+                                          handleShow()
+                                        }}
+                                      >
+                                        提出議價
+                                      </Button>
+                                    </td>
+                                    {/* <input
+                                value={v.p_price}
                                 readonly
                                 name={`${v.product_price}`}
-                              />{' '}
-                            </div>
-                          )
-                        })}
+                              />{' '} */}
+                                  </tr>
+                                )
+                              })}
+                          </tbody>
+                        </table>
+                      </div>
                       {/* <div className="d-flex justify-content-between">
                         <p>Product Name 2</p>
                         <p>$150</p>

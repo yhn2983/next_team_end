@@ -129,24 +129,24 @@ export default function OrderList() {
                   })}
                 </>
               )}
-              <div className="card mb-3 border-0 cart-card">
+              {/* <div className="card mb-3 border-0 cart-card">
                 <div className="row g-0">
                   <div className="col-md-3">
                     <img
-                      src="./images/cart-1.jpeg"
+                      src="/cart-1.jpeg"
                       className="img-fluid rounded-start"
                       alt="..."
                     />
                   </div>
                 </div>
-              </div>
+              </div> */}
               <hr />
             </div>
             <div className="col-sm-4">
               <h4 className="mb-3">小炭點</h4>
 
               <p className="card-text d-flex justify-content-between align-items-center">
-                目前點數 <span>{data.rows[0].buyer_point}</span>
+                目前點數 <span></span>
               </p>
               <hr />
               {/* <p className="card-text d-flex justify-content-between align-items-center">
