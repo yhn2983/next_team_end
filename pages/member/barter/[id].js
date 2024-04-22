@@ -95,10 +95,10 @@ export default function BarterCheckout() {
       m2_nickname: '',
       m1_name: '',
       m2_name: '',
-      s_name_m1: '',
-      s_name_m2: '',
-      s_phone_m1: '',
-      s_phone_m2: '',
+      send_name_m1: '',
+      send_name_m2: '',
+      send_phone_m1: '',
+      send_phone_m2: '',
     },
   })
 
@@ -170,13 +170,13 @@ export default function BarterCheckout() {
     { autoCloseMins: 3 } // x分鐘沒完成選擇會自動關閉，預設5分鐘。
   )
 
-  const allSend = barter.data.name711_m1 && barter.data.name711_m2
-  const onlyM2Send = !barter.data.name711_m1 && barter.data.name711_m2
-  const onlyM1Send = barter.data.name711_m1 && !barter.data.name711_m2
+  const allSend = barter.data.send_name_m1 && barter.data.send_name_m2
+  const onlyM2Send = !barter.data.send_name_m1 && barter.data.send_name_m2
+  const onlyM1Send = barter.data.send_name_m1 && !barter.data.send_name_m2
 
   const notifySuccess = () => {
     MySwal.fire({
-      title: `您已添加運送7-11門市資訊`,
+      title: `您已添加此次以物易物訂單運送資訊`,
       icon: 'success',
       confirmButtonText: '關閉',
       confirmButtonColor: '#3085d6',
@@ -197,8 +197,6 @@ export default function BarterCheckout() {
   }
 
   const save711DataClickA = async (newFormData) => {
-    newFormData.preventDefalut()
-
     const tmpIsPass = nameBlur() && phoneBlur()
     setIsPass(tmpIsPass)
     if (tmpIsPass) {
@@ -227,8 +225,6 @@ export default function BarterCheckout() {
   }
 
   const save711DataClickB = async (newFormData) => {
-    newFormData.preventDefalut()
-
     const tmpIsPass = nameBlur() && phoneBlur()
     setIsPass(tmpIsPass)
     if (tmpIsPass) {
@@ -337,6 +333,13 @@ export default function BarterCheckout() {
                       style={{ textDecoration: 'none', fontSize: '20px' }}
                     >
                       <span>會員中心</span>
+                    </Link>
+                    <Link
+                      className="breadcrumb-item text-dark"
+                      href="/member/barter"
+                      style={{ textDecoration: 'none', fontSize: '20px' }}
+                    >
+                      <span>以物易物申請&邀請清單</span>
                     </Link>
                     <span
                       className="breadcrumb-item active"
@@ -506,35 +509,42 @@ export default function BarterCheckout() {
                             <div className="px-4 pt-4 pb-3">
                               <div className="d-flex justify-content-center">
                                 <h5 className="font-weight-medium">
-                                  <strong>7-11 運送商店選定資訊</strong>
+                                  <strong>此筆訂單運送與門市資訊</strong>
                                 </h5>
                               </div>
-                              <div className="mt-2 border-bottom ">
+                              <p
+                                className="text-center"
+                                style={{ color: 'red' }}
+                              >
+                                <strong>
+                                  請盡速寄出商品(如已寄出請忽略提示)
+                                </strong>
+                              </p>
+                              <div className="mt-3 border-bottom ">
                                 <p>
-                                  <strong>您的選定門市資訊</strong>
+                                  <strong>您的運送與門市資訊</strong>
                                 </p>
                                 收件人 :{' '}
                                 <input
-                                  className="mb-2 form-control"
+                                  className="mb-3 form-control"
                                   type="text"
-                                  value={barter.data.s_name_m2}
+                                  value={barter.data.send_name_m2}
                                   disabled
                                 />
                                 手機號碼 :{' '}
                                 <input
-                                  className="mb-2 form-control"
+                                  className="mb-3 form-control"
                                   type="text"
-                                  value={barter.data.s_phone_m2}
+                                  value={barter.data.send_phone_m2}
                                   disabled
                                 />
                                 門市名稱 :{' '}
                                 <input
-                                  className=" form-control"
+                                  className="mb-3 form-control"
                                   type="text"
                                   value={barter.data.name711_m2}
                                   disabled
                                 />
-                                <br />
                                 門市地址 :{' '}
                                 <input
                                   className="mb-3 form-control"
@@ -546,33 +556,26 @@ export default function BarterCheckout() {
                               <div className="mt-3">
                                 <p>
                                   <strong>
-                                    {barter.data.m1_nickname}選定門市資訊
+                                    {barter.data.m1_nickname}的運送與門市資訊
                                   </strong>
                                 </p>
                                 收件人 :{' '}
                                 <input
-                                  className="mb-2 form-control"
+                                  className="mb-3 form-control"
                                   type="text"
-                                  value={barter.data.s_name_m1}
-                                  disabled
-                                />
-                                手機號碼 :{' '}
-                                <input
-                                  className="mb-2 form-control"
-                                  type="text"
-                                  value={barter.data.s_phone_m1}
+                                  value={barter.data.send_name_m1}
                                   disabled
                                 />
                                 門市名稱 :{' '}
                                 <input
-                                  className="mb-2 form-control"
+                                  className="mb-3 form-control"
                                   type="text"
                                   value={barter.data.name711_m1}
                                   disabled
                                 />
                                 門市地址 :{' '}
                                 <input
-                                  className="mb-2 form-control"
+                                  className="mb-3 form-control"
                                   type="text"
                                   value={barter.data.address711_m1}
                                   disabled
@@ -590,35 +593,34 @@ export default function BarterCheckout() {
                                 <div className="px-4 pt-4 pb-3">
                                   <div className="d-flex justify-content-center">
                                     <h5 className="font-weight-medium">
-                                      <strong>7-11 運送商店選定資訊</strong>
+                                      <strong>此筆訂單運送資訊</strong>
                                     </h5>
                                   </div>
-                                  <div className="mt-2 border-bottom ">
-                                    <p>
-                                      <strong>您的選定門市資訊</strong>
-                                    </p>
-                                    收件人 :{' '}
-                                    <input
-                                      className="mb-2 form-control"
-                                      type="text"
-                                      value={barter.data.s_name_m2}
-                                      disabled
-                                    />
-                                    手機號碼 :{' '}
-                                    <input
-                                      className="mb-2 form-control"
-                                      type="text"
-                                      value={barter.data.s_phone_m2}
-                                      disabled
-                                    />
+                                  <p className="mb-2">
+                                    <strong>您的運送與門市資訊</strong>
+                                  </p>
+                                  收件人 :{' '}
+                                  <input
+                                    className="mb-2 form-control"
+                                    type="text"
+                                    value={barter.data.send_name_m2}
+                                    disabled
+                                  />
+                                  手機號碼 :{' '}
+                                  <input
+                                    className="mb-2 form-control"
+                                    type="text"
+                                    value={barter.data.send_phone_m2}
+                                    disabled
+                                  />
+                                  <div className="border-bottom ">
                                     門市名稱 :{' '}
                                     <input
-                                      className=" form-control"
+                                      className="mb-2 form-control"
                                       type="text"
                                       value={barter.data.name711_m2}
                                       disabled
                                     />
-                                    <br />
                                     門市地址 :{' '}
                                     <input
                                       className="mb-3 form-control"
@@ -739,14 +741,7 @@ export default function BarterCheckout() {
                                       <input
                                         className="mb-2 form-control"
                                         type="text"
-                                        value={barter.data.s_name_m1}
-                                        disabled
-                                      />
-                                      手機號碼 :{' '}
-                                      <input
-                                        className="mb-2 form-control"
-                                        type="text"
-                                        value={barter.data.s_phone_m1}
+                                        value={barter.data.send_name_m1}
                                         disabled
                                       />
                                       門市名稱 :{' '}
@@ -771,7 +766,28 @@ export default function BarterCheckout() {
                                   {/* m1和m2都還沒選 */}
                                   <div className="bg-light p-30 mb-5">
                                     <div className="border-bottom px-4 pt-4 pb-3">
-                                      <div className="d-flex justify-content-between mb-2">
+                                      <h5 className="font-weight-medium">
+                                        <strong>
+                                          收件人資料 (請填寫真實姓名與手機)
+                                        </strong>
+                                      </h5>
+                                      收件人 :{' '}
+                                      <input
+                                        className="mb-2 form-control"
+                                        type="text"
+                                        name="name"
+                                        value={name}
+                                        onChange={handleInput}
+                                      />
+                                      手機號碼 :{' '}
+                                      <input
+                                        className="mb-2 form-control"
+                                        type="text"
+                                        name="phone"
+                                        value={phone}
+                                        onChange={handleInput2}
+                                      />
+                                      <div className="d-flex justify-content-between mb-2 mt-2 mt-4">
                                         <h5 className="font-weight-medium">
                                           <strong>7-11 運送商店選擇</strong>
                                         </h5>
@@ -791,22 +807,6 @@ export default function BarterCheckout() {
                                         </button>
                                       </div>
                                       <div className="mb-2">
-                                        收件人 :{' '}
-                                        <input
-                                          className="mb-2 form-control"
-                                          type="text"
-                                          name="name"
-                                          value={name}
-                                          onChange={handleInput}
-                                        />
-                                        手機號碼 :{' '}
-                                        <input
-                                          className="mb-2 form-control"
-                                          type="text"
-                                          name="phone"
-                                          value={phone}
-                                          onChange={handleInput2}
-                                        />
                                         門市名稱 :{' '}
                                         <input
                                           className=" form-control"
@@ -1018,35 +1018,42 @@ export default function BarterCheckout() {
                             <div className="px-4 pt-4 pb-3">
                               <div className="d-flex justify-content-center">
                                 <h5 className="font-weight-medium">
-                                  <strong>7-11 運送商店選定資訊</strong>
+                                  <strong>此筆訂單運送與門市資訊</strong>
                                 </h5>
                               </div>
-                              <div className="mt-2 border-bottom ">
+                              <p
+                                className="text-center"
+                                style={{ color: 'red' }}
+                              >
+                                <strong>
+                                  請盡速寄出商品(如已寄出請忽略提示)
+                                </strong>
+                              </p>
+                              <div className="mt-2 border-bottom">
                                 <p>
-                                  <strong>您的選定門市資訊</strong>
+                                  <strong>您的運送與門市資訊</strong>
                                 </p>
                                 收件人 :{' '}
                                 <input
-                                  className="mb-2 form-control"
+                                  className="mb-3 form-control"
                                   type="text"
-                                  value={barter.data.s_name_m1}
+                                  value={barter.data.send_name_m1}
                                   disabled
                                 />
                                 手機號碼 :{' '}
                                 <input
-                                  className="mb-2 form-control"
+                                  className="mb-3 form-control"
                                   type="text"
-                                  value={barter.data.s_phone_m1}
+                                  value={barter.data.send_phone_m1}
                                   disabled
                                 />
                                 門市名稱 :{' '}
                                 <input
-                                  className=" form-control"
+                                  className="mb-3 form-control"
                                   type="text"
                                   value={barter.data.name711_m1}
                                   disabled
                                 />
-                                <br />
                                 門市地址 :{' '}
                                 <input
                                   className="mb-3 form-control"
@@ -1055,36 +1062,29 @@ export default function BarterCheckout() {
                                   disabled
                                 />
                               </div>
-                              <div className="mt-3">
+                              <div className="mt-4">
                                 <p>
                                   <strong>
-                                    {barter.data.m2_nickname}選定門市資訊
+                                    {barter.data.m2_nickname}的運送與門市資訊
                                   </strong>
                                 </p>
                                 收件人 :{' '}
                                 <input
-                                  className="mb-2 form-control"
+                                  className="mb-3 form-control"
                                   type="text"
-                                  value={barter.data.s_name_m2}
-                                  disabled
-                                />
-                                手機號碼 :{' '}
-                                <input
-                                  className="mb-2 form-control"
-                                  type="text"
-                                  value={barter.data.s_phone_m2}
+                                  value={barter.data.send_name_m2}
                                   disabled
                                 />
                                 門市名稱 :{' '}
                                 <input
-                                  className="mb-2 form-control"
+                                  className="mb-3 form-control"
                                   type="text"
                                   value={barter.data.name711_m2}
                                   disabled
                                 />
                                 門市地址 :{' '}
                                 <input
-                                  className="mb-2 form-control"
+                                  className="mb-3 form-control"
                                   type="text"
                                   value={barter.data.address711_m2}
                                   disabled
@@ -1102,35 +1102,34 @@ export default function BarterCheckout() {
                                 <div className="px-4 pt-4 pb-3">
                                   <div className="d-flex justify-content-center">
                                     <h5 className="font-weight-medium">
-                                      <strong>7-11 運送商店選定資訊</strong>
+                                      <strong>此筆訂單運送資訊</strong>
                                     </h5>
                                   </div>
-                                  <div className="mt-2 border-bottom ">
-                                    <p>
-                                      <strong>您的選定門市資訊</strong>
+                                  <div className="mb-2 border-bottom ">
+                                    <p className="mb-2 mt-3">
+                                      <strong>您的運送與門市資訊</strong>
                                     </p>
                                     收件人 :{' '}
                                     <input
-                                      className="mb-2 form-control"
+                                      className="mb-3 form-control"
                                       type="text"
-                                      value={barter.data.s_name_m1}
+                                      value={barter.data.send_name_m1}
                                       disabled
                                     />
                                     手機號碼 :{' '}
                                     <input
-                                      className="mb-2 form-control"
+                                      className="mb-3 form-control"
                                       type="text"
-                                      value={barter.data.s_phone_m1}
+                                      value={barter.data.send_phone_m1}
                                       disabled
                                     />
                                     門市名稱 :{' '}
                                     <input
-                                      className=" form-control"
+                                      className="mb-3 form-control"
                                       type="text"
                                       value={barter.data.name711_m1}
                                       disabled
                                     />
-                                    <br />
                                     門市地址 :{' '}
                                     <input
                                       className="mb-3 form-control"
@@ -1142,7 +1141,8 @@ export default function BarterCheckout() {
                                   <div className="mt-3">
                                     <p>
                                       <strong>
-                                        {barter.data.m2_nickname}選定門市資訊
+                                        {barter.data.m2_nickname}
+                                        的運送與門市資訊
                                       </strong>
                                     </p>
                                     <p>請待對方填寫門市資訊</p>
@@ -1156,7 +1156,12 @@ export default function BarterCheckout() {
                               {onlyM2Send ? (
                                 <>
                                   <div className="bg-light p-30 mb-5">
-                                    <div className="border-bottom px-4 pt-4 pb-3">
+                                    <div className="px-4 pt-4">
+                                      <h5 className="font-weight-medium">
+                                        <strong>
+                                          收件人資料 (請填寫真實姓名與手機)
+                                        </strong>
+                                      </h5>
                                       收件人 :{' '}
                                       <input
                                         className="mb-2 form-control"
@@ -1173,7 +1178,7 @@ export default function BarterCheckout() {
                                         value={phone}
                                         onChange={handleInput2}
                                       />
-                                      <div className="d-flex justify-content-between mb-2">
+                                      <div className="d-flex justify-content-between mb-2 mt-4">
                                         <h5 className="font-weight-medium">
                                           <strong>7-11 運送商店選擇</strong>
                                         </h5>
@@ -1210,7 +1215,7 @@ export default function BarterCheckout() {
                                         />
                                       </div>
                                     </div>
-                                    <div className="p-4 d-flex justify-content-center">
+                                    <div className="p-4 d-flex justify-content-center border-bottom">
                                       <button
                                         className={`btn btn-block font-weight-bold d-flex ${style.checkBtn}`}
                                         style={{
@@ -1244,33 +1249,27 @@ export default function BarterCheckout() {
                                     <div className="p-4">
                                       <p>
                                         <strong>
-                                          {barter.data.m2_nickname}選定門市資訊
+                                          {barter.data.m2_nickname}
+                                          的運送與門市資訊
                                         </strong>
                                       </p>
                                       收件人 :{' '}
                                       <input
-                                        className="mb-2 form-control"
+                                        className="mb-3 form-control"
                                         type="text"
-                                        value={barter.data.s_name_m2}
-                                        disabled
-                                      />
-                                      手機號碼 :{' '}
-                                      <input
-                                        className="mb-2 form-control"
-                                        type="text"
-                                        value={barter.data.s_phone_m2}
+                                        value={barter.data.send_name_m2}
                                         disabled
                                       />
                                       門市名稱 :{' '}
                                       <input
-                                        className="mb-2 form-control"
+                                        className="mb-3 form-control"
                                         type="text"
                                         value={barter.data.name711_m2}
                                         disabled
                                       />
                                       門市地址 :{' '}
                                       <input
-                                        className="mb-2 form-control"
+                                        className="mb-3 form-control"
                                         type="text"
                                         value={barter.data.address711_m2}
                                         disabled
@@ -1283,6 +1282,11 @@ export default function BarterCheckout() {
                                   {/* m1/m2都還沒有選擇 */}
                                   <div className="bg-light p-30 mb-5">
                                     <div className="border-bottom px-4 pt-4 pb-3">
+                                      <h5 className="font-weight-medium">
+                                        <strong>
+                                          收件人資料 (請填寫真實姓名與手機)
+                                        </strong>
+                                      </h5>
                                       收件人 :{' '}
                                       <input
                                         className="mb-2 form-control"
@@ -1299,7 +1303,7 @@ export default function BarterCheckout() {
                                         value={phone}
                                         onChange={handleInput2}
                                       />
-                                      <div className="d-flex justify-content-between mb-2">
+                                      <div className="d-flex justify-content-between mb-2 mt-4">
                                         <h5 className="font-weight-medium">
                                           <strong>7-11 運送商店選擇</strong>
                                         </h5>
