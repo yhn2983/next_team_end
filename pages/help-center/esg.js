@@ -76,18 +76,10 @@ export default function ESG() {
               <h2 style={{ color: '#8e2626' }}>
                 <strong>DEAL小學堂：認識ESG</strong>
               </h2>
-              <h5 className="mt-3">
+              <h5 className="mt-3 lh-lg">
                 <strong>
                   ESG這個議題其實已經出現相當之久，但近年的企業界越來越獲重視！那麼ESG到底是什麼呢？
-                </strong>
-              </h5>
-              <h5 className="mt-3">
-                <strong>
                   ESG是由環境（Environmental）、社會（Social）和公司治理（Governance）取其英文第一字所組成，指的是企業在環境保護、社會責任和公司治理方面的經營表現。環境保護層面的指標主要包括企業的環境保護措施、資源利用效率、能源碳排、環境風險管理等；社會責任層面的指標主要包括企業對員工的管理與福利、企業與消費者之間的關係以及企業對供應商的處理等；而公司治理層面的指標主要包括企業的治理結構、公司的透明度和責任以及管理實踐等。
-                </strong>
-              </h5>
-              <h5 className="mt-3">
-                <strong>
                   目前市面上有數間ESG評分機構，不同的ESG評分機構評估重點和方法可能略有不同。常見之ESG評分機構如：MSCI
                   ESG指標：是由摩根士丹利資本國際公司（Morgan Stanley Capital
                   International, MSCI）所提供、Sustainalytics

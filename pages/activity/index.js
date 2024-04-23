@@ -61,20 +61,13 @@ export default function Activity() {
               <h5 className="mt-3">
                 <strong>誠摯邀請您一同參與企業親子二手市集活動！</strong>
               </h5>
-              <h5 className="mt-3">
+              <h5 className="mt-3 lh-lg">
                 <strong>
                   歡迎廠商與攤販熱烈登記報名，請於5月7日前提出申請，並提供企業與個人商品相關訊息，完成申請將寄出信件通知，請務必留意信箱來信！
                   若於6月30日前尚未收到來信，歡迎致電於DEAL詢問，感謝您的加入！
-                </strong>
-              </h5>
-              <h5 className="mt-3">
-                <strong>
                   歡迎家長帶上長輩與兒童一同參與同樂，預計活動舉辦日為8月15日13:00-17:00，現場除了為地球敬一份心力的淨灘活動外，還有二手市集可以盡情挖寶！
                   請攜帶環保杯與餐具，現場將提供飲料與點心可享用。
                 </strong>
-              </h5>
-              <h5 className="mt-3">
-                <strong></strong>
               </h5>
             </div>
             <div className="col-lg-12 px-lg-5 text-center mt-4">

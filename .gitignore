@@ -2,17 +2,13 @@
 
 .vscode
 
-/public
-context/auth-context.js
-components/icons
-components/configs/index.js
+
 
 # dependencies
 /node_modules
 /.pnp
 .pnp.js
-/public/imgs
-/public
+
 
 # testing
 /coverage

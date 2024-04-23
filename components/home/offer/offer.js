@@ -53,7 +53,7 @@ export default function Offer() {
                     marginLeft: '40%',
                   }}
                 >
-                  了解更多
+                  <strong>了解更多</strong>
                 </Link>
               </div>
             </div>
@@ -86,7 +86,7 @@ export default function Offer() {
                     marginRight: '40%',
                   }}
                 >
-                  了解更多
+                  <strong>了解更多</strong>
                 </Link>
               </div>
             </div>

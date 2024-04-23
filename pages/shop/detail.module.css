@@ -10,6 +10,7 @@
 .productItem{
   transition: .5s;
   border: 3px solid #e96d3f; 
+  border-radius: 5px;
   position: relative;
   width: 90%;
 }
@@ -120,7 +121,7 @@
 }
 
 .btnHover:hover{
-  box-shadow: 0 0 15px rgb(122, 120, 120);
+  box-shadow: 0 0 10px rgb(122, 120, 120);
 }
 
 .barterLeft,
@@ -129,12 +130,13 @@
 }
 
 .prod {
-  width: 131px;
+  width: 120px;
   height: 150px;
 }
 
 .prodPic {
   width: 100%;
+  object-fit: cover;
 }
 
 .barterBtn {
@@ -144,4 +146,17 @@
 
 .barterBtn:hover{
   background-color: #8e2626 !important;
+}
+
+.conneBtn{
+  box-shadow: 0 0 10px gray;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  padding: 2px 3px;
+  font-size: 18px;
+}
+
+.conneBtn:hover{
+  background-color: #8e2626!important;
 }

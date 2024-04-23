@@ -30,9 +30,11 @@ import LogoutButton from '@/components/member/logout-button'
 // hook------
 import { useAuth } from '@/context/auth-context'
 import { useCart } from '@/hooks/use-cart'
+import { useLike } from '@/hooks/use-like'
 
 export default function CustomNavbar({ pageName = '' }) {
   const { totalItems } = useCart()
+  const { totalProds } = useLike()
 
   // 會員的資料跟登入狀態
   const { checkAuth, auth } = useAuth()
@@ -78,21 +80,21 @@ export default function CustomNavbar({ pageName = '' }) {
 
   // ---Hover status---
   const [isMessageHovered, setIsMessageHovered] = useState(false)
+  const [isUserHovered, setIsUserHovered] = useState(false)
   const [isLanHovered, setIsLanHovered] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
-  const [isUserHovered, setUsUserHovered] = useState(false)
   const [showRegister, setShowRegister] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
   const handleMouseEnter = (type) => {
     if (type === 'message') setIsMessageHovered(true)
+    if (type === 'user') setIsUserHovered(true)
     if (type === 'language') setIsLanHovered(true)
-    if (type === 'user') setUsUserHovered(true)
   }
   const handleMouseLeave = (type) => {
     if (type === 'message') setIsMessageHovered(false)
+    if (type === 'user') setIsUserHovered(false)
     if (type === 'language') setIsLanHovered(false)
-    if (type === 'user') setUsUserHovered(false)
   }
 
   // Product & Category
@@ -117,7 +119,6 @@ export default function CustomNavbar({ pageName = '' }) {
 
   // Router-----
   const router = useRouter()
-  const qs = { ...router.query }
 
   // top search input
   const onSearch = (e) => {
@@ -325,6 +326,12 @@ export default function CustomNavbar({ pageName = '' }) {
                   <Dropdown.Item href="#/action-2" style={{ fontSize: '20px' }}>
                     &nbsp;<strong>．English</strong>
                   </Dropdown.Item>
+                  <Dropdown.Item href="#/action-3" style={{ fontSize: '20px' }}>
+                    &nbsp;<strong>．Français</strong>
+                  </Dropdown.Item>
+                  <Dropdown.Item href="#/action-4" style={{ fontSize: '20px' }}>
+                    &nbsp;<strong>．日本語</strong>
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </div>
@@ -369,7 +376,9 @@ export default function CustomNavbar({ pageName = '' }) {
             {pageName === 'randomSearch' ? (
               <>
                 <div className="">
-                  <h5>已經有想要的商品？</h5>
+                  <h5>
+                    <strong>已經有想要的商品？</strong>
+                  </h5>
                   <span>
                     前往這裡&nbsp;
                     <FaHandPointRight style={{ color: '#8e2626' }} />
@@ -519,18 +528,8 @@ export default function CustomNavbar({ pageName = '' }) {
                       </strong>
                     </Nav.Link>
                     <Nav.Link
-                      href="#"
-                      className={`nav-item nav-link me-3 ${
-                        pageName === 'coupon' ? 'active' : ''
-                      }`}
-                    >
-                      <strong>
-                        <span style={{ fontSize: '19px' }}>領取優惠券</span>
-                      </strong>
-                    </Nav.Link>
-                    <Nav.Link
                       href="/contact-us"
-                      className={`nav-item nav-link ${
+                      className={`nav-item nav-link me-3 ${
                         pageName === 'contactUs' ? 'active' : ''
                       }`}
                     >
@@ -538,32 +537,74 @@ export default function CustomNavbar({ pageName = '' }) {
                         <span style={{ fontSize: '19px' }}>聯絡我們</span>
                       </strong>
                     </Nav.Link>
+                    <Nav.Link
+                      href="#"
+                      className={`nav-item nav-link ${
+                        pageName === 'coupon' ? 'active' : ''
+                      }`}
+                    >
+                      <strong>
+                        <span style={{ fontSize: '19px' }}>領取優惠券</span>
+                      </strong>
+                    </Nav.Link>
                   </Nav>
-                  <Nav className="navbar-nav ml-auto py-0 d-none d-lg-block">
-                    <div className="d-flex">
-                      <Nav.Link href="/shop/like" className="btn px-0">
-                        <FaHeart
-                          className="me-1"
-                          style={{ color: 'white', fontSize: '20px' }}
-                        />
-                        <span className="badge text-light border border-light rounded-circle mt-3">
-                          0
-                        </span>
-                      </Nav.Link>
-                      <Nav.Link
-                        href="/shop/cart"
-                        className="btn px-0 ml-3 ms-3"
-                      >
-                        <FaShoppingCart
-                          className="me-1"
-                          style={{ color: 'white', fontSize: '20px' }}
-                        />
-                        <span className="badge text-light border border-light rounded-circle mt-3">
-                          {totalItems}
-                        </span>
-                      </Nav.Link>
-                    </div>
-                  </Nav>
+                  {auth.isAuth ? (
+                    <>
+                      <Nav className="navbar-nav ml-auto py-0 d-none d-lg-block">
+                        <div className="d-flex">
+                          <Nav.Link href="/shop/like" className="btn px-0">
+                            <FaHeart
+                              className="me-1"
+                              style={{ color: 'white', fontSize: '20px' }}
+                            />
+                            <span className="badge text-light border border-light rounded-circle mt-3">
+                              {totalProds}
+                            </span>
+                          </Nav.Link>
+                          <Nav.Link
+                            href={`/shop/cart`}
+                            className="btn px-0 ml-3 ms-3"
+                          >
+                            <FaShoppingCart
+                              className="me-1"
+                              style={{ color: 'white', fontSize: '20px' }}
+                            />
+                            <span className="badge text-light border border-light rounded-circle mt-3">
+                              {totalItems}
+                            </span>
+                          </Nav.Link>
+                        </div>
+                      </Nav>
+                    </>
+                  ) : (
+                    <>
+                      <Nav className="navbar-nav ml-auto py-0 d-none d-lg-block">
+                        <div className="d-flex">
+                          <Nav.Link href="/shop/like" className="btn px-0">
+                            <FaHeart
+                              className="me-1"
+                              style={{ color: 'white', fontSize: '20px' }}
+                            />
+                            <span className="badge text-light border border-light rounded-circle mt-3">
+                              0
+                            </span>
+                          </Nav.Link>
+                          <Nav.Link
+                            href={`/shop/cart`}
+                            className="btn px-0 ml-3 ms-3"
+                          >
+                            <FaShoppingCart
+                              className="me-1"
+                              style={{ color: 'white', fontSize: '20px' }}
+                            />
+                            <span className="badge text-light border border-light rounded-circle mt-3">
+                              0
+                            </span>
+                          </Nav.Link>
+                        </div>
+                      </Nav>
+                    </>
+                  )}
                 </div>
               </Navbar.Collapse>
             </Navbar>

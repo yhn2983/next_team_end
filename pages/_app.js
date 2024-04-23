@@ -1,7 +1,10 @@
 import { useEffect } from 'react'
 import '@/styles/globals.scss'
+import '@/styles/product.scss'
+
 import { AuthContextProvider } from '@/context/auth-context'
 import { CartProvider } from '@/hooks/use-cart'
+import { LikeProvider } from '@/hooks/use-like'
 import { SocketProvider } from '@/context/socket-context'
 import Modal from 'react-modal'
 
@@ -15,9 +18,11 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <SocketProvider>
       <AuthContextProvider>
-        <CartProvider>
-          <Component {...pageProps} />
-        </CartProvider>
+        <LikeProvider>
+          <CartProvider>
+            <Component {...pageProps} />
+          </CartProvider>
+        </LikeProvider>
       </AuthContextProvider>
     </SocketProvider>
   )
