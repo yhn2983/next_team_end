@@ -18,6 +18,7 @@ import { faHeart as faSolidHeart } from '@fortawesome/free-solid-svg-icons'
 import { faHeart as faRegularHeart } from '@fortawesome/free-regular-svg-icons'
 import { GET_STORE_LIKE } from '@/components/config'
 import { POST_STORE_LIKE } from '@/components/config'
+import RatingStars from '@/components/member/rating-stars'
 
 export default function StoreInfo() {
   const { auth, checkAuth } = useAuth()
@@ -176,6 +177,11 @@ export default function StoreInfo() {
     }
   }
 
+  // 返回個人檔案頁面
+  const backProfile = () => {
+    router.push('/member/profile')
+  }
+
   const display = (
     <>
       <DefaultLayout>
@@ -198,18 +204,9 @@ export default function StoreInfo() {
                     />
                     <h5 className="my-4">{otherUser.nickname}</h5>
                     <div className="content text-center m-4">
-                      <div className="ratings">
-                        <span className="product-rating">4.6</span>
-                        <span>/5</span>
-                        <div className="stars">
-                          <i className="fa fa-star" />
-                          <i className="fa fa-star" />
-                          <i className="fa fa-star" />
-                          <i className="fa fa-star" />
-                        </div>
-                        <div className="rating-text">
-                          <span>46 個評分 &amp; 15 個評論</span>
-                        </div>
+                      <RatingStars rating={4} />
+                      <div className="rating-text mt-3">
+                        <span>46 個評分 &amp; 15 個評論</span>
                       </div>
                     </div>
                     <div className="d-flex justify-content-center mb-2">
@@ -238,7 +235,9 @@ export default function StoreInfo() {
                           </button>
                         </>
                       ) : auth.userData ? (
-                        <p>這個是我自己的賣場</p>
+                        <button className="btn" onClick={backProfile}>
+                          回到個人檔案頁面
+                        </button>
                       ) : (
                         <>
                           <button

@@ -145,7 +145,7 @@
     color: #ffffff;
     font-weight: 600;
     &:hover{
-      background-color: $dark;
+      background-color: $dark !important;
       color: #ffffff !important;
     }
   }

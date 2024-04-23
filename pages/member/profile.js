@@ -10,6 +10,7 @@ import { useRouter } from 'next/router'
 import GoogleFillModal from '@/components/member/google-fill-modal'
 import DefaultLayout from '@/components/common/default-layout'
 import UpdateProfileModal from '@/components/member/update-profile-modal'
+import toast, { Toaster } from 'react-hot-toast'
 
 export default function Profile() {
   const { checkAuth } = useAuth()
@@ -107,6 +108,7 @@ export default function Profile() {
       // 如果上傳成功，則重新獲取使用者資料
       if (result.status) {
         fetchUserData()
+        toast.success('成功更新大頭貼照')
       }
     } catch (err) {
       console.error('Upload failed:', err)
@@ -342,6 +344,7 @@ export default function Profile() {
           }}
         />
       </DefaultLayout>
+      <Toaster />
     </>
   )
 }
