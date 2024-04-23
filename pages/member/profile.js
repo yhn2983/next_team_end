@@ -10,20 +10,29 @@ import { useRouter } from 'next/router'
 import GoogleFillModal from '@/components/member/google-fill-modal'
 import DefaultLayout from '@/components/common/default-layout'
 import UpdateProfileModal from '@/components/member/update-profile-modal'
+import toast, { Toaster } from 'react-hot-toast'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 export default function Profile() {
   const { checkAuth } = useAuth()
   const router = useRouter()
   const [isLoading, setISLoading] = useState(true)
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false) // new state variable for controlling the modal
+  const MySwal = withReactContent(Swal)
 
   // 如果使用者沒有登入，將他們重定向到登入頁面
   useEffect(() => {
     const checkLoginStatus = async () => {
       const isAuth = await checkAuth()
       if (!isAuth) {
-        // 如果使用者沒有登入，將他們重定向到登入頁面
-        router.push('/member/login')
+        // 如果使用者沒有登入，將他們重定向到首頁
+        router.push('/')
+        MySwal.fire({
+          icon: 'error',
+          title: '請先登入，為您跳轉到首頁',
+          showConfirmButton: false,
+        })
       }
       setISLoading(false)
     }
@@ -107,6 +116,7 @@ export default function Profile() {
       // 如果上傳成功，則重新獲取使用者資料
       if (result.status) {
         fetchUserData()
+        toast.success('成功更新大頭貼照')
       }
     } catch (err) {
       console.error('Upload failed:', err)
@@ -117,6 +127,31 @@ export default function Profile() {
     return <div>正在努力加載資訊中...</div>
   }
 
+  // 更改密碼按鈕點擊事件
+  const changepassword = () => {
+    router.push('/member/changepassword')
+  }
+
+  // 我的賣場介紹按鈕點擊事件
+  const handleClickStore = () => {
+    const storeId = user.id
+    router.push(`/member/store/${storeId}`)
+  }
+
+  // 我的訂單按鈕點擊事件
+  const handleMyOrder = () => {
+    router.push('/buyer/order-list')
+  }
+
+  const handleMyBarter = () => {
+    router.push('/member/barter')
+  }
+
+  const handleMyShop = () => {
+    router.push('/Maket/index-maket')
+  }
+
+  //
   return (
     <>
       <DefaultLayout>
@@ -146,37 +181,18 @@ export default function Profile() {
                     />
                     <button
                       type="button"
-                      className={`mb-4 ${styles.photobtn}`}
+                      className={`mb-3 ${styles.photobtn}`}
                       onClick={handleClick}
                     >
                       上傳大頭貼照
                     </button>
-                    {/* <div className="content text-center m-4">
-                    <div className="ratings">
-                      <span className="product-rating">4.6</span>
-                      <span>/5</span>
-                      <div className="stars">
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                      </div>
-                      <div className="rating-text">
-                        <span>46 個評分 &amp; 15 個評論</span>
-                      </div>
-                    </div>
-                  </div> */}
-                    <div className="d-flex justify-content-center mb-2">
-                      <button type="button" className={`${styles.probtn} btn`}>
-                        追蹤
-                      </button>
-                      <button
-                        type="button"
-                        className={`${styles.probtn} btn ms-2`}
-                      >
-                        傳訊息
-                      </button>
-                    </div>
+                    <button
+                      type="button"
+                      className={`mb-3 ms-3 ${styles.photobtn}`}
+                      onClick={handleClickStore}
+                    >
+                      我的賣場介紹
+                    </button>
                   </div>
                 </div>
                 <div
@@ -202,7 +218,7 @@ export default function Profile() {
                       />
                       <li className={`list-group-item ${styles.listGroupItem}`}>
                         <button
-                          // onClick={() => setIsUpdateModalOpen(true)}
+                          onClick={changepassword}
                           className={`${styles.libtn}`}
                         >
                           更改密碼
@@ -210,7 +226,7 @@ export default function Profile() {
                       </li>
                       <li className={`list-group-item ${styles.listGroupItem}`}>
                         <button
-                          // onClick={() => setIsUpdateModalOpen(true)}
+                          onClick={handleMyShop}
                           className={`${styles.libtn}`}
                         >
                           我的賣場
@@ -218,10 +234,18 @@ export default function Profile() {
                       </li>
                       <li className={`list-group-item ${styles.listGroupItem}`}>
                         <button
-                          // onClick={() => setIsUpdateModalOpen(true)}
+                          onClick={handleMyOrder}
                           className={`${styles.libtn}`}
                         >
                           我的訂單
+                        </button>
+                      </li>
+                      <li className={`list-group-item ${styles.listGroupItem}`}>
+                        <button
+                          onClick={handleMyBarter}
+                          className={`${styles.libtn}`}
+                        >
+                          我的以物易物
                         </button>
                       </li>
                     </ul>
@@ -344,6 +368,7 @@ export default function Profile() {
           }}
         />
       </DefaultLayout>
+      <Toaster />
     </>
   )
 }

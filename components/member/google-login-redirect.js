@@ -6,9 +6,12 @@ import { GOOGLE_LOGIN_POST } from '@/components/config'
 import toast, { Toaster } from 'react-hot-toast'
 import GoogleLogo from '@/components/icons/google-logo'
 import style from '@/styles/lee-form.module.scss'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 export default function GoogleLoginRedirect() {
   const { auth, checkAuth, parseJwt, setAuth, initUserData } = useAuth()
+  const MySwal = withReactContent(Swal)
 
   const { loginGoogleRedirect, initApp, loginGoogle } = useFirebase()
   const isMounted = useRef(true)
@@ -80,14 +83,25 @@ export default function GoogleLoginRedirect() {
             userData,
           })
         }
-
-        toast.success('已成功登入')
+        MySwal.fire({
+          title: '成功',
+          text: '登入成功',
+          icon: 'success',
+        })
       } else {
-        toast.error('登入後無法得到會員資料')
+        MySwal.fire({
+          title: '錯誤',
+          text: '登入後無法獲得會員資料',
+          icon: 'error',
+        })
         // 這裡可以讓會員登出，因為這也算登入失敗，有可能會造成資料不統一
       }
     } else {
-      toast.error('登入失敗')
+      MySwal.fire({
+        title: '錯誤',
+        text: '登入失敗',
+        icon: 'error',
+      })
     }
   }
 

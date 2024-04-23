@@ -7,7 +7,9 @@ export default function ForgetPassword() {
         <div className="border-dark border border-3 rounded p-3 w-75">
           <form>
             <div className="mb-3">
-              <h3 className="text-center">忘記密碼</h3>
+              <h3 className="text-center">
+                <strong>忘記密碼</strong>
+              </h3>
             </div>
             <div className="mb-3">
               <div className="user-account">

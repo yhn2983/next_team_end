@@ -115,7 +115,7 @@ export default function UpdateProfileModal({
 
     if (data.status === 'success') {
       MySwal.fire({
-        title: '恭喜',
+        title: '成功',
         text: '你已經成功更新會員資料',
         icon: 'success',
       })
