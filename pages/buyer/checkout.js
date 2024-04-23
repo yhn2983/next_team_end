@@ -202,7 +202,7 @@ export default function Checkout() {
     console.log(result)
     if (result) {
       alert('資料新增成功')
-      router.push('/address-book')
+      router.push('/buyer/order-list')
     } else {
       alert('資料沒有新增')
     }
