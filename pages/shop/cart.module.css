@@ -67,3 +67,12 @@ margin-top: 50px;
 .trashBtn:hover{
   color: #e96d3f !important;
 }
+
+.complete:hover{
+  background-color: #8e2626 !important;
+}
+
+.evaluation:hover{
+  background-color: #387ab9 !important;
+}
+

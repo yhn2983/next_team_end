@@ -6,6 +6,8 @@ import {
   ORDER_BARTER_LIST,
   ORDER_BARTER_711_PUT,
   ORDER_BARTER_711_PUT2,
+  ORDER_COMPLETE_PUT,
+  ORDER_COMPLETE_PUT2,
 } from '@/configs/config-r'
 // page
 import Footer from '@/components/common/footer/footer'
@@ -99,6 +101,8 @@ export default function BarterCheckout() {
       send_name_m2: '',
       send_phone_m1: '',
       send_phone_m2: '',
+      complete_status_m1: 0,
+      complete_status_m2: 0,
     },
   })
 
@@ -249,6 +253,78 @@ export default function BarterCheckout() {
       } catch (e) {
         console.error('發生錯誤：', e)
       }
+    }
+  }
+
+  const confirmComplete = () => {
+    MySwal.fire({
+      title: '請確認是否訂單已完成',
+      text: '是否已經收到商品？',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '完成訂單',
+      cancelButtonText: '取消',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: '您的以物易物訂單已完成！',
+          icon: 'success',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload()
+          }
+        })
+      }
+    })
+  }
+
+  const completeClick = async (formData) => {
+    try {
+      const r = await fetch(`${ORDER_COMPLETE_PUT}/${formData.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+      if (!r.ok) {
+        throw new Error('Error')
+      }
+      const result = await r.json()
+      console.log(result)
+      if (result.success) {
+        confirmComplete()
+      } else {
+        console.log('資料未修改')
+      }
+    } catch (error) {
+      console.error('資料有誤：', error)
+    }
+  }
+
+  const completeClickA = async (formData) => {
+    try {
+      const r = await fetch(`${ORDER_COMPLETE_PUT2}/${formData.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+      if (!r.ok) {
+        throw new Error('Error')
+      }
+      const result = await r.json()
+      console.log(result)
+      if (result.success) {
+        confirmComplete()
+      } else {
+        console.log('資料未修改')
+      }
+    } catch (error) {
+      console.error('資料有誤：', error)
     }
   }
 
@@ -520,7 +596,7 @@ export default function BarterCheckout() {
                                   請盡速寄出商品(如已寄出請忽略提示)
                                 </strong>
                               </p>
-                              <div className="mt-3 border-bottom ">
+                              <div className="mt-3 border-bottom">
                                 <p>
                                   <strong>您的運送與門市資訊</strong>
                                 </p>
@@ -553,7 +629,7 @@ export default function BarterCheckout() {
                                   disabled
                                 />
                               </div>
-                              <div className="mt-3">
+                              <div className="mt-3 border-bottom">
                                 <p>
                                   <strong>
                                     {barter.data.m1_nickname}的運送與門市資訊
@@ -580,6 +656,65 @@ export default function BarterCheckout() {
                                   value={barter.data.address711_m1}
                                   disabled
                                 />
+                              </div>
+                              <div className="mt-3">
+                                {barter.data.complete_status_m2 == 1 ? (
+                                  <>
+                                    <button
+                                      className={`btn ${style.complete}`}
+                                      style={{
+                                        backgroundColor: '#e96d3f',
+                                        color: 'white',
+                                      }}
+                                      onClick={() => {
+                                        const formData = {
+                                          id: barter.data.id,
+                                          complete_status_m2: 2,
+                                        }
+                                        completeClick(formData)
+                                      }}
+                                    >
+                                      <strong>完成訂單</strong>
+                                    </button>
+                                    <button
+                                      className={`btn ms-3`}
+                                      style={{
+                                        backgroundColor: 'lightgray',
+                                        color: 'white',
+                                        cursor: 'not-allowed',
+                                      }}
+                                    >
+                                      <strong>評價</strong>
+                                    </button>
+                                  </>
+                                ) : (
+                                  <>
+                                    <button
+                                      className={`btn`}
+                                      style={{
+                                        backgroundColor: 'lightgray',
+                                        color: 'white',
+                                        cursor: 'not-allowed',
+                                      }}
+                                    >
+                                      <strong>完成訂單</strong>
+                                    </button>
+                                    <Link
+                                      href="/"
+                                      style={{ textDecoration: 'none' }}
+                                    >
+                                      <button
+                                        className={`btn ms-3 ${style.evaluation}`}
+                                        style={{
+                                          backgroundColor: '#1265c4',
+                                          color: 'white',
+                                        }}
+                                      >
+                                        <strong>評價</strong>
+                                      </button>
+                                    </Link>
+                                  </>
+                                )}
                               </div>
                             </div>
                           </div>
@@ -1062,7 +1197,7 @@ export default function BarterCheckout() {
                                   disabled
                                 />
                               </div>
-                              <div className="mt-4">
+                              <div className="mt-4 border-bottom">
                                 <p>
                                   <strong>
                                     {barter.data.m2_nickname}的運送與門市資訊
@@ -1089,6 +1224,65 @@ export default function BarterCheckout() {
                                   value={barter.data.address711_m2}
                                   disabled
                                 />
+                              </div>
+                              <div className="mt-3">
+                                {barter.data.complete_status_m1 == 1 ? (
+                                  <>
+                                    <button
+                                      className={`btn ${style.complete}`}
+                                      style={{
+                                        backgroundColor: '#e96d3f',
+                                        color: 'white',
+                                      }}
+                                      onClick={() => {
+                                        const formData = {
+                                          id: barter.data.id,
+                                          complete_status_m1: 2,
+                                        }
+                                        completeClickA(formData)
+                                      }}
+                                    >
+                                      <strong>完成訂單</strong>
+                                    </button>
+                                    <button
+                                      className={`btn ms-3`}
+                                      style={{
+                                        backgroundColor: 'lightgray',
+                                        color: 'white',
+                                        cursor: 'not-allowed',
+                                      }}
+                                    >
+                                      <strong>評價</strong>
+                                    </button>
+                                  </>
+                                ) : (
+                                  <>
+                                    <button
+                                      className={`btn`}
+                                      style={{
+                                        backgroundColor: 'lightgray',
+                                        color: 'white',
+                                        cursor: 'not-allowed',
+                                      }}
+                                    >
+                                      <strong>完成訂單</strong>
+                                    </button>
+                                    <Link
+                                      href="/"
+                                      style={{ textDecoration: 'none' }}
+                                    >
+                                      <button
+                                        className={`btn ms-3 ${style.evaluation}`}
+                                        style={{
+                                          backgroundColor: '#1265c4',
+                                          color: 'white',
+                                        }}
+                                      >
+                                        <strong>評價</strong>
+                                      </button>
+                                    </Link>
+                                  </>
+                                )}
                               </div>
                             </div>
                           </div>

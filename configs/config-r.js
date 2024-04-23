@@ -33,4 +33,8 @@ export const ORDER_BARTER_711_PUT2 = `${API_SERVER}/products/barter711B`
 
 export const COUPON_RECEIVED_ADD = `${API_SERVER}/products/coupon`
 
+export const ORDER_COMPLETE_PUT = `${API_SERVER}/products/ob-complete`
+
+export const ORDER_COMPLETE_PUT2 = `${API_SERVER}/products/ob-completeA`
+
 export const SEND_EMAIL = `${API_SERVER}/products/sendEmail`
