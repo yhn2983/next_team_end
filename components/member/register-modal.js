@@ -122,13 +122,13 @@ export default function RegisterModal({ show, onHide }) {
     // 這裡作成功或失敗的判斷or跳轉…等等
     if (data.status === 'success') {
       MySwal.fire({
-        title: '恭喜',
-        text: '你已經成功註冊為會員，請登入',
+        title: '成功',
+        text: '你已經成功註冊為會員，現在可以登入了',
         icon: 'success',
+      }).then(() => {
+        onHide() // 關閉模態框
       })
-
-      // // 跳轉到登入頁 用next的router
-      // router.push('/')
+      router.push('/')
     } else {
       MySwal.fire({
         title: '錯誤!',

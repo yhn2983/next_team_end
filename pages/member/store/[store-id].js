@@ -96,21 +96,21 @@ export default function StoreInfo() {
   }
   // 在組件掛載時調用 fetchUserData 函數
   useEffect(() => {
-    if (router.isReady && auth.userData.id !== 0) {
+    if (router.isReady) {
       fetchUserData()
     }
-  }, [router.isReady, auth.userData.id])
+  }, [router.isReady])
 
   useEffect(() => {
     console.log(storeLike)
   }, [storeLike])
 
-  // 在 storeId 更新後調用 fetchStoreLike 函數
+  // 在 storeId 或 auth.userData.id 更新後調用 fetchStoreLike 函數
   useEffect(() => {
-    if (storeId) {
+    if (storeId && auth.userData && auth.userData.id) {
       fetchStoreLike()
     }
-  }, [storeId])
+  }, [storeId, auth.userData])
 
   // 傳訊息
   const handleSendMessage = async () => {
@@ -225,7 +225,9 @@ export default function StoreInfo() {
                       </div>
                     </div>
                     <div className="d-flex justify-content-center mb-2">
-                      {auth.userData && auth.userData.id !== +storeId ? (
+                      {auth.userData &&
+                      auth.userData.id &&
+                      auth.userData.id !== +storeId ? (
                         <>
                           <button
                             type="button"
@@ -249,7 +251,7 @@ export default function StoreInfo() {
                             傳訊息
                           </button>
                         </>
-                      ) : auth.userData ? (
+                      ) : auth.userData && auth.userData.id ? (
                         <button className="btn" onClick={backProfile}>
                           回到個人檔案
                         </button>

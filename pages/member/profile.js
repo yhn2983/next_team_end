@@ -11,20 +11,28 @@ import GoogleFillModal from '@/components/member/google-fill-modal'
 import DefaultLayout from '@/components/common/default-layout'
 import UpdateProfileModal from '@/components/member/update-profile-modal'
 import toast, { Toaster } from 'react-hot-toast'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 export default function Profile() {
   const { checkAuth } = useAuth()
   const router = useRouter()
   const [isLoading, setISLoading] = useState(true)
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false) // new state variable for controlling the modal
+  const MySwal = withReactContent(Swal)
 
   // 如果使用者沒有登入，將他們重定向到登入頁面
   useEffect(() => {
     const checkLoginStatus = async () => {
       const isAuth = await checkAuth()
       if (!isAuth) {
-        // 如果使用者沒有登入，將他們重定向到登入頁面
-        router.push('/member/login')
+        // 如果使用者沒有登入，將他們重定向到首頁
+        router.push('/')
+        MySwal.fire({
+          icon: 'error',
+          title: '請先登入，為您跳轉到首頁',
+          showConfirmButton: false,
+        })
       }
       setISLoading(false)
     }
