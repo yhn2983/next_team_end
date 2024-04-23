@@ -119,15 +119,31 @@ export default function Profile() {
     return <div>正在努力加載資訊中...</div>
   }
 
+  // 更改密碼按鈕點擊事件
   const changepassword = () => {
     router.push('/member/changepassword')
   }
 
+  // 我的賣場介紹按鈕點擊事件
   const handleClickStore = () => {
     const storeId = user.id
     router.push(`/member/store/${storeId}`)
   }
 
+  // 我的訂單按鈕點擊事件
+  const handleMyOrder = () => {
+    router.push('/buyer/order-list')
+  }
+
+  const handleMyBarter = () => {
+    router.push('/member/barter')
+  }
+
+  const handleMyShop = () => {
+    router.push('/Maket/index-maket')
+  }
+
+  //
   return (
     <>
       <DefaultLayout>
@@ -202,7 +218,7 @@ export default function Profile() {
                       </li>
                       <li className={`list-group-item ${styles.listGroupItem}`}>
                         <button
-                          // onClick={() => setIsUpdateModalOpen(true)}
+                          onClick={handleMyShop}
                           className={`${styles.libtn}`}
                         >
                           我的賣場
@@ -210,7 +226,7 @@ export default function Profile() {
                       </li>
                       <li className={`list-group-item ${styles.listGroupItem}`}>
                         <button
-                          // onClick={() => setIsUpdateModalOpen(true)}
+                          onClick={handleMyOrder}
                           className={`${styles.libtn}`}
                         >
                           我的訂單
@@ -218,7 +234,7 @@ export default function Profile() {
                       </li>
                       <li className={`list-group-item ${styles.listGroupItem}`}>
                         <button
-                          // onClick={() => setIsUpdateModalOpen(true)}
+                          onClick={handleMyBarter}
                           className={`${styles.libtn}`}
                         >
                           我的以物易物

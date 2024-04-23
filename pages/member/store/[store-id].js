@@ -44,8 +44,12 @@ export default function StoreInfo() {
     }
   }, [isLoading])
 
+  console.log(storeId)
   // 定義一個異步函數來從後端獲取使用者資料
   const fetchUserData = async () => {
+    if (!auth.userData) {
+      return
+    }
     setIsLoading(true)
     const storeId = router.query['store-id']
     setStoreId(storeId) // 更新 storeId 的狀態
@@ -64,9 +68,10 @@ export default function StoreInfo() {
   }
 
   console.log(otherUser)
-  console.log(auth.userData.id)
-
-  console.log(`${GET_STORE_LIKE}/${auth.userData.id}`)
+  if (auth.userData) {
+    console.log(auth.userData.id)
+    console.log(`${GET_STORE_LIKE}/${auth.userData.id}`)
+  }
   // 定義一個異步函數來從後端獲取追蹤狀態
   const fetchStoreLike = async () => {
     const response = await fetch(`${GET_STORE_LIKE}/${auth.userData.id}`, {
@@ -172,6 +177,11 @@ export default function StoreInfo() {
     if (result.status === 'success') {
       // 更新 storeLike 的狀態
       setStoreLike(newStoreLike)
+      if (newStoreLike === 2) {
+        toast.success('追蹤賣場成功')
+      } else {
+        toast.error('取消追蹤賣場')
+      }
     } else {
       console.error(result.message)
     }
@@ -185,6 +195,11 @@ export default function StoreInfo() {
   const display = (
     <>
       <DefaultLayout>
+        {/* 三個判斷        
+        1.已登入且不是自己的賣場，顯示追蹤和傳訊息按鈕
+        2.已登入且是自己的賣場，顯示回到個人檔案按鈕
+        3.未登入，顯示追蹤和傳訊息按鈕，點擊後顯示請先登入提示
+        */}
         <section className={`${styles.storeInfo}`}>
           <div className="container py-5">
             <div className="row">
@@ -202,9 +217,9 @@ export default function StoreInfo() {
                       height={185}
                       className="rounded-circle mt-2 secondary"
                     />
-                    <h5 className="my-4">{otherUser.nickname}</h5>
-                    <div className="content text-center m-4">
-                      <RatingStars rating={4} />
+                    <h5 className="my-3">{otherUser.nickname}</h5>
+                    <div className="content text-center mb-4">
+                      <RatingStars rating={4.6} />
                       <div className="rating-text mt-3">
                         <span>46 個評分 &amp; 15 個評論</span>
                       </div>
@@ -236,7 +251,7 @@ export default function StoreInfo() {
                         </>
                       ) : auth.userData ? (
                         <button className="btn" onClick={backProfile}>
-                          回到個人檔案頁面
+                          回到個人檔案
                         </button>
                       ) : (
                         <>
