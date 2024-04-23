@@ -30,15 +30,8 @@ export default function ContactUs() {
     })
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    const formData = {
-      name: e.target.name.value,
-      email: e.target.email.value,
-      subjuect: e.target.subjuect.value,
-      message: e.target.message.value,
-    }
+  const handleSubmit = async (formData) => {
+    formData.preventDefault()
 
     try {
       const r = await fetch(`${SEND_EMAIL}`, {
@@ -51,7 +44,7 @@ export default function ContactUs() {
 
       if (r.success) {
         notifySuccess()
-        e.target.reset()
+        formData.target.reset()
       } else {
         alert('郵件發送失敗')
       }
@@ -101,10 +94,10 @@ export default function ContactUs() {
               </div>
               {/* Breadcrumb End */}
               {/* Contact Start */}
-              <div class="container-fluid mt-3 px-5">
+              <div className="container-fluid mt-3 px-5">
                 <div className="d-flex justify-content-center">
-                  <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
-                    <span class="pr-3" style={{ color: '#8e2626' }}>
+                  <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4">
+                    <span className="pr-3" style={{ color: '#8e2626' }}>
                       <strong>
                         聯絡我們：留下您的訊息
                         <FaRegFaceSmileWink className="ms-2 mb-2" />
@@ -112,67 +105,75 @@ export default function ContactUs() {
                     </span>
                   </h2>
                 </div>
-                <div class="row px-xl-5 mt-4">
-                  <div class="col-lg-7 mb-5" style={{ paddingLeft: '120px' }}>
-                    <div class="contact-form bg-light p-5 ">
+                <div className="row px-xl-5 mt-4">
+                  <div
+                    className="col-lg-7 mb-5"
+                    style={{ paddingLeft: '120px' }}
+                  >
+                    <div className="contact-form bg-light p-5 ">
                       <div id="success"></div>
-                      <form
-                        name="sentMessage"
-                        id="contactForm"
-                        onSubmit={handleSubmit}
-                      >
-                        <div class="control-group mb-4">
+                      <form name="sentMessage" id="contactForm">
+                        <div className="control-group mb-4">
                           <input
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             name="name"
                             placeholder="您的姓名"
                             required="required"
                             data-validation-required-message="Please enter your name"
                           />
-                          <p class="help-block text-danger"></p>
+                          <p className="help-block text-danger"></p>
                         </div>
-                        <div class="control-group mb-4">
+                        <div className="control-group mb-4">
                           <input
                             type="email"
-                            class="form-control"
+                            className="form-control"
                             name="email"
                             placeholder="您的信箱"
                             required="required"
                             data-validation-required-message="Please enter your email"
                           />
-                          <p class="help-block text-danger"></p>
+                          <p className="help-block text-danger"></p>
                         </div>
-                        <div class="control-group mb-4">
+                        <div className="control-group mb-4">
                           <input
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             name="subject"
                             placeholder="訊息主旨"
                             required="required"
                             data-validation-required-message="Please enter a subject"
                           />
-                          <p class="help-block text-danger"></p>
+                          <p className="help-block text-danger"></p>
                         </div>
-                        <div class="control-group mb-4">
+                        <div className="control-group mb-4">
                           <textarea
-                            class="form-control"
+                            className="form-control"
                             rows="8"
                             name="message"
                             placeholder="您的訊息"
                             required="required"
                             data-validation-required-message="Please enter your message"
                           ></textarea>
-                          <p class="help-block text-danger"></p>
+                          <p className="help-block text-danger"></p>
                         </div>
                         <div className="d-flex justify-content-center">
                           <button
-                            class={`btn py-2 px-3 ${style.sendBtn}`}
+                            className={`btn py-2 px-3 ${style.sendBtn}`}
                             type="submit"
                             id="sendMessageButton"
                             style={{
                               backgroundColor: '#e96d3f',
                               color: 'white',
+                            }}
+                            onClick={(e) => {
+                              const formData = {
+                                name: e.target.name.value,
+                                email: e.target.email.value,
+                                subjuect: e.target.subjuect.value,
+                                message: e.target.message.value,
+                              }
+                              handleSubmit(formData)
                             }}
                           >
                             <span style={{ fontSize: '18px' }}>
@@ -183,7 +184,7 @@ export default function ContactUs() {
                       </form>
                     </div>
                   </div>
-                  <div class="col-lg-5 mb-3 mt-3">
+                  <div className="col-lg-5 mb-3 mt-3">
                     <img src="/logo9.png" alt="" width={500} height={500} />
                   </div>
                 </div>
