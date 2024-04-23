@@ -1,10 +1,12 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
 import styles from '@/styles/lee-form.module.scss'
+import { useRouter } from 'next/router'
 
 export default function StoreProductsCard({ storeId, product }) {
+  const router = useRouter()
   const handleClick = () => {
-    console.log('導向商品頁面')
+    router.push(`/shop/${product.id}`)
   }
 
   return (
