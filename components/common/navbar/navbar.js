@@ -253,7 +253,7 @@ export default function CustomNavbar({ pageName = '' }) {
                         &nbsp;<strong>小碳點紀錄</strong>
                       </Dropdown.Item>
                       <Dropdown.Item
-                        href="#/action-4"
+                        href="/coupon/list"
                         style={{ fontSize: '20px' }}
                       >
                         <RiCoupon3Fill
@@ -544,7 +544,7 @@ export default function CustomNavbar({ pageName = '' }) {
                       }`}
                     >
                       <strong>
-                        <span style={{ fontSize: '19px' }}>領取優惠券</span>
+                        <span style={{ fontSize: '19px' }}>優惠券專區</span>
                       </strong>
                     </Nav.Link>
                   </Nav>

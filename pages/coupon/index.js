@@ -128,7 +128,7 @@ export default function Coupon() {
     <>
       <DefaultLayout pageName="coupon">
         <Head>
-          <title>領取優惠券 | DEAL-2ND HAND SHOP</title>
+          <title>優惠券專區 | DEAL-2ND HAND SHOP</title>
         </Head>
         <div className="container-fluid mt-4">
           {/*  Breadcrumb Start */}
@@ -143,7 +143,7 @@ export default function Coupon() {
                   >
                     <span>首頁</span>
                   </Link>
-                  <span className="breadcrumb-item active">領取優惠券</span>
+                  <span className="breadcrumb-item active">優惠券專區</span>
                 </nav>
               </div>
             </div>
