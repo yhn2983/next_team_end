@@ -262,10 +262,7 @@ export default function CustomNavbar({ pageName = '' }) {
                         />
                         &nbsp;<strong>優惠券紀錄</strong>
                       </Dropdown.Item>
-                      <Dropdown.Item
-                        href="#/action-5"
-                        style={{ fontSize: '20px' }}
-                      >
+                      <Dropdown.Item style={{ fontSize: '20px' }}>
                         <RiLogoutBoxRFill className={(style.fs20, style.mr2)} />
                         &nbsp;
                         <strong>
