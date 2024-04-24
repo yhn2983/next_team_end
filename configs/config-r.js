@@ -37,4 +37,8 @@ export const ORDER_COMPLETE_PUT = `${API_SERVER}/products/ob-complete`
 
 export const ORDER_COMPLETE_PUT2 = `${API_SERVER}/products/ob-completeA`
 
+export const LINE_PAY_ADD = `${API_SERVER}/line-pay/create-order`
+
+export const LINE_PAY_CONFIRM = `${API_SERVER}/line-pay/confirm`
+
 export const SEND_EMAIL = `${API_SERVER}/products/sendEmail`

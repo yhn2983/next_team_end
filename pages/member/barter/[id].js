@@ -781,7 +781,7 @@ export default function BarterCheckout() {
                               {onlyM1Send ? (
                                 <>
                                   <div className="bg-light p-30 mb-5">
-                                    <div className="border-bottom px-4 pt-4 pb-3">
+                                    <div className="px-4 pt-4 pb-3">
                                       收件人 :{' '}
                                       <input
                                         className="mb-2 form-control"
@@ -798,7 +798,7 @@ export default function BarterCheckout() {
                                         value={phone}
                                         onChange={handleInput2}
                                       />
-                                      <div className="d-flex justify-content-between mb-2">
+                                      <div className="d-flex justify-content-between mt-4 mb-2">
                                         <h5 className="font-weight-medium">
                                           <strong>7-11 運送商店選擇</strong>
                                         </h5>
@@ -835,7 +835,7 @@ export default function BarterCheckout() {
                                         />
                                       </div>
                                     </div>
-                                    <div className="p-4 d-flex justify-content-center">
+                                    <div className="p-4 d-flex justify-content-center border-bottom">
                                       <button
                                         className={`btn btn-block font-weight-bold d-flex ${style.checkBtn}`}
                                         style={{
