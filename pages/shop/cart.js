@@ -162,25 +162,6 @@ export default function Cart() {
     }
   }, [auth.isAuth])
 
-  // checkout
-  const chckoutClick = async (productData) => {
-    const r = await fetch(`${ORDER_ADD}`, {
-      method: 'POST',
-      eaders: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(productData),
-    })
-    const result = await r.json()
-    console.log(result)
-    if (result.success) {
-      console.log('即將轉向結帳網頁')
-      // router.push('/')
-    } else {
-      console.log('error')
-    }
-  }
-
   // Loading bar-----
   const [isLoading, setIsLoading] = useState(true)
   const [progress, setProgress] = useState(0)

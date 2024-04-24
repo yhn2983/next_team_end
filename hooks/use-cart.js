@@ -123,7 +123,7 @@ export function CartProvider({ children }) {
   const calcTotalCP = () => {
     let total = 0
     for (let i = 0; i < items.cartProd.length; i++) {
-      total += items.cartProd[i].p_qty * items.cartProd[i].PROD_LISTprice
+      total += items.cartProd[i].p_qty * items.cartProd[i].price
     }
     return total
   }
