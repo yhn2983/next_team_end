@@ -20,7 +20,7 @@ import LoadingBar from 'react-top-loading-bar'
 // hook------
 import { useAuth } from '@/context/auth-context'
 
-export default function Coupon() {
+export default function CouponList() {
   // Router-----
   const router = useRouter()
 
@@ -66,7 +66,7 @@ export default function Coupon() {
   })
 
   useEffect(() => {
-    const member_id = auth.userData.id
+    const member_id = auth.userData.id ? auth.userData.id : null
     fetch(`${PROD_LIST}${location.search}?member_id=${member_id}`)
       .then((r) => r.json())
       .then((dataObj) => {
@@ -76,19 +76,6 @@ export default function Coupon() {
         console.error('Error fetching data:', e)
       })
   }, [router.query.member_id, auth.isAuth, auth.userData])
-
-  const notifySuccess = (coupon_name) => {
-    MySwal.fire({
-      title: `您已領取${coupon_name}`,
-      icon: 'success',
-      confirmButtonText: '關閉',
-      confirmButtonColor: '#3085d6',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        window.location.reload()
-      }
-    })
-  }
 
   // Loading bar-----
   const [isLoading, setIsLoading] = useState(true)
