@@ -198,7 +198,7 @@ export default function Footer() {
                         className="me-2"
                         style={{ fontSize: '15px' }}
                       />
-                      領取優惠券
+                      優惠券專區
                     </span>
                   </Link>
                   <Link
