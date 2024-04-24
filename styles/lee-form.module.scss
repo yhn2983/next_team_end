@@ -54,7 +54,7 @@
 }
 
 .myLoginModal{
-  h2 {
+  h3 {
     position: relative;
     top: 12px;
     padding-top: 10px;
@@ -90,6 +90,8 @@
         color: $light;
       }
     }
+
+    p{font-size: 19px;}
 
     .error {
       color: red !important;
@@ -143,7 +145,7 @@
     color: #ffffff;
     font-weight: 600;
     &:hover{
-      background-color: $dark;
+      background-color: $dark !important;
       color: #ffffff !important;
     }
   }
@@ -166,14 +168,15 @@
 }
 
 .storeInfo{
-
+  margin: 0 auto;
+  background-color: #FFF !important;
   a {
     text-decoration: none !important;
     margin: 0;
     padding: 0;
   }
 
-
+  
   background-color:	#F0F0F0; 
   button{
     height: 40px;
@@ -188,8 +191,8 @@
     }
   }
 
-  .card{
-    height: 80vh;
+  .infoCard{
+    min-height: 960px;
     border: 1px solid $dark;
     box-shadow: 8px 8px 0 0 rgb(255, 220, 220);
     transition: all 0.3s ease;
@@ -200,10 +203,40 @@
       font-size: 2rem;
       font-weight: 600;
       color: $dark;
-      margin: 14px 0px 30px 0px;
       text-align: center;
     }
-  } 
+  }
+   
+  .productsCard{
+    min-height: 960px;
+    border: 1px solid $dark;
+    box-shadow: 8px 8px 0 0 rgb(255, 220, 220);
+    transition: all 0.3s ease;
+    &:hover {
+      transform: translateY(-5px);
+    }
+    .title{
+      font-size: 2rem;
+      font-weight: 600;
+      color: $dark;
+      text-align: center;
+    }
+  }
+
+  .iconWithMargin{
+    margin-right: 4px;
+  }
+
+  .btnLike{
+  background-color: #cbcbcb;
+  color: red;
+    &:hover{
+      color: $primary;
+    }
+  }
+  .textBlack{
+    color: rgb(33, 32, 32);
+  }
 }
 
 
@@ -232,16 +265,16 @@
 }
 
 .registerModal{
-  width: 500px;
-  background-color: $form-bg;
-  border: 2px solid $dark;
-  border-radius: $border-radius-sm;
+  // width: 500px;
+  // background-color: $form-bg;
+  // border: 2px solid $dark;
+  // border-radius: $border-radius-sm;
   .body{
     position: relative;
     top: -15px;
   }
   
-  h2 {
+  h3 {
     position: relative;
     top: 12px;
     padding-top: 10px;
@@ -524,6 +557,23 @@
 .chat__main {
   margin: 0 auto;
   height: 100%;
-  flex: 0.9;
+  flex: 1;
   border: 2px solid #b0b0b0;
+}
+
+.storeProducts{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.cardHoverEffect {
+  transition: 0.3s;
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 255, 0.2), 0 10px 25px 0 rgba(24, 178, 255, 0.25);
+  }
 }

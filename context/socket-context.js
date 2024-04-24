@@ -20,6 +20,12 @@ export function SocketProvider({ children }) {
   useEffect(() => {
     // 創建一個新的 socket.io 連接
     const newSocket = socketIO.connect('http://localhost:3003')
+
+    // 當連接被建立的時候，打印出 socket 的 id
+    newSocket.on('connect', () => {
+      console.log('New socket ID:', newSocket.id)
+    })
+
     // 將 connectionState 賦值給新的 socket.io 連接
     newSocket.connectionState = connectionState
     // 將新的 socket.io 連接設定為 socket 的狀態

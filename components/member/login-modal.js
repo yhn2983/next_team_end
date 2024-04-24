@@ -5,6 +5,9 @@ import { useRouter } from 'next/router'
 import style from '@/styles/lee-form.module.scss'
 import GoogleLoginRedirect from '@/components/member/google-login-redirect'
 import { Modal, Button, Form } from 'react-bootstrap'
+import Link from 'next/link'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 export default function LoginPage({ show, onHide }) {
   const router = useRouter()
@@ -12,6 +15,8 @@ export default function LoginPage({ show, onHide }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [hasChecked, setHasChecked] = useState(false)
+  // 跳出對話框
+  const MySwal = withReactContent(Swal)
 
   // 記錄錯誤訊息用的狀態
   const [error, setError] = useState({
@@ -96,10 +101,18 @@ export default function LoginPage({ show, onHide }) {
 
     const result = await login(email, password)
     if (result) {
-      alert('登入成功')
+      MySwal.fire({
+        title: '成功',
+        text: '登入成功',
+        icon: 'success',
+      })
       // router.push('/member/profile')
     } else {
-      alert('登入失敗')
+      MySwal.fire({
+        title: '錯誤',
+        text: '登入失敗',
+        icon: 'error',
+      })
     }
   }
 
@@ -108,7 +121,9 @@ export default function LoginPage({ show, onHide }) {
       <Modal show={show} onHide={onHide} className={`${style.myLoginModal}`}>
         {/* 使用從 props 中取得的 show 和 onHide */}
         <Modal.Header closeButton className={`${style.btnclose}`}>
-          <h2>歡迎登入</h2>
+          <h3>
+            <strong>歡迎登入</strong>
+          </h3>
         </Modal.Header>
         <Modal.Body className={`${style.body}`}>
           <Form onSubmit={onSubmit}>
@@ -138,6 +153,14 @@ export default function LoginPage({ show, onHide }) {
             <button type="submit" className={`btn ${style.loginbtn}`}>
               <strong>登入</strong>
             </button>
+            <Link
+              href="/member/forgetpassword"
+              className="text-decoration-none"
+            >
+              <p className="ms-1 mt-4">
+                <strong>忘記密碼？</strong>
+              </p>
+            </Link>
           </Form>
           <div className="mt-3 mb-3">或者你也可以使用</div>
           <GoogleLoginRedirect />

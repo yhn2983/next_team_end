@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 // parts of pages
+
 import DefaultLayout from '@/components/common/default-layout'
 import CarouselS1 from '@/components/home/carousel/carousel'
 import Category from '@/components/home/category/category'
