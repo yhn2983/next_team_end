@@ -191,7 +191,7 @@ export default function Coupon() {
                           className={`btn ${style.pickBtn}`}
                           href=""
                         >
-                          <strong>隨機探索</strong>
+                          <strong>點擊前往</strong>
                         </button>
                       </Link>
                     </span>
