@@ -28,5 +28,10 @@ export const BARGAIN_SELLER = `${API_SERVER}/bargain/seller`
 export const BARGAIN_BUYER = `${API_SERVER}/bargain/buyer`
 export const BARGAIN_BUYER_DELETE = `${API_SERVER}/bargain/buyer`
 export const BARGAIN_CHECKOUT = `${API_SERVER}/bargain/checkout`
+
+//以物易物evaluation
+export const EVALUATION_BARTER = `${API_SERVER}/evaluation/get-barter`
+export const EVALUATION_BARTER_EDIT = `${API_SERVER}/evaluation/barter`
+
 // *** JWT ***
 export const JWT_LOGIN_POST = `${API_SERVER}/login-jwt` // 登入, POST
