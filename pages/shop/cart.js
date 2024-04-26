@@ -2,11 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import {
-  CART_ITEM_DELETE,
-  CART_ITEM_UPDATE_PUT,
-  ORDER_ADD,
-} from '@/configs/config-r'
+import { CART_ITEM_DELETE, CART_ITEM_UPDATE_PUT } from '@/configs/config-r'
 // page
 import Footer from '@/components/common/footer/footer'
 import DefaultLayout from '@/components/common/default-layout'
