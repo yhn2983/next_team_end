@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 // page-----
 import RegisterModal from '@/components/member/register-modal'
@@ -22,11 +22,9 @@ import {
 } from 'react-icons/fa6'
 import { IoCloseCircle } from 'react-icons/io5'
 // hook------
-import { useAuth } from '@/context/auth-context'
 
 export default function Footer() {
   // 會員的資料跟登入狀態
-  const { checkAuth, auth } = useAuth()
   const [showRegister, setShowRegister] = useState(false)
   // 點擊註冊按鈕
   const handleRegisterClick = () => setShowRegister(true)
@@ -34,21 +32,61 @@ export default function Footer() {
   const handleRegisterClose = () => setShowRegister(false)
 
   // ---BackToTop---
+  const [isBtnVisible, setIsBtnVisible] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY
+
+      if (scrollY >= 300) {
+        setIsBtnVisible(true)
+      } else {
+        setIsBtnVisible(false)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
+  // Ad closeBtn
   const [isClose, setIsClose] = useState(false)
+
+  useEffect(() => {
+    const storedIsClose = localStorage.getItem('isClose')
+    if (storedIsClose) {
+      setIsClose(true)
+    }
+  }, [])
+
   const handleCloseBtn = () => {
-    if (!isClose) setIsClose(true)
+    if (!isClose) {
+      setIsClose(true)
+      localStorage.setItem('isClose', 'true')
+    }
   }
 
   return (
     <>
       {/* Back to Top */}
-      <button className="btn" onClick={scrollToTop}>
-        <FaAnglesUp className={style.backToTop} style={{ fontSize: '40px' }} />
-      </button>
+      {isBtnVisible ? (
+        <>
+          <button className="btn" onClick={scrollToTop}>
+            <FaAnglesUp
+              className={style.backToTop}
+              style={{ fontSize: '40px' }}
+            />
+          </button>
+        </>
+      ) : (
+        <></>
+      )}
       {/* Footer Start */}
       <div className={`container-fluid px-5 pt-5 ${style.footerArea}`}>
         <div className="row pt-2">
@@ -160,7 +198,7 @@ export default function Footer() {
                         className="me-2"
                         style={{ fontSize: '15px' }}
                       />
-                      領取優惠券
+                      優惠券專區
                     </span>
                   </Link>
                   <Link

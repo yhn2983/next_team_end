@@ -6,6 +6,8 @@ import {
   ORDER_BARTER_LIST,
   ORDER_BARTER_711_PUT,
   ORDER_BARTER_711_PUT2,
+  ORDER_COMPLETE_PUT,
+  ORDER_COMPLETE_PUT2,
 } from '@/configs/config-r'
 // page
 import Footer from '@/components/common/footer/footer'
@@ -95,8 +97,12 @@ export default function BarterCheckout() {
       m2_nickname: '',
       m1_name: '',
       m2_name: '',
-      m1_mobile: '',
-      m2_mobile: '',
+      send_name_m1: '',
+      send_name_m2: '',
+      send_phone_m1: '',
+      send_phone_m2: '',
+      complete_status_m1: 0,
+      complete_status_m2: 0,
     },
   })
 
@@ -119,20 +125,72 @@ export default function BarterCheckout() {
     }
   }
 
+  const [name, setName] = useState('')
+  const handleInput = (e) => {
+    setName(e.currentTarget.value)
+  }
+
+  const [phone, setPhone] = useState('')
+  const handleInput2 = (e) => {
+    setPhone(e.currentTarget.value)
+  }
+
+  const [errorMsg, setErrorMsg] = useState({
+    name: '',
+    phone: '',
+  })
+
+  const [isPass, setIsPass] = useState(false)
+
+  const validateName = (name) => {
+    return name.toString().length >= 2
+  }
+  const validatePhone = (phone) => {
+    return /^09\d{2}-?\d{3}-?\d{3}$/.test(phone)
+  }
+
+  const nameBlur = () => {
+    if (!validateName(name)) {
+      setErrorMsg({ ...errorMsg, name: '請輸入正確的姓名' })
+      return false
+    } else {
+      setErrorMsg({ ...errorMsg, name: '' })
+      return true
+    }
+  }
+  const phoneBlur = () => {
+    if (!validatePhone(phone)) {
+      setErrorMsg({ ...errorMsg, phone: '請輸入正確的手機號碼' })
+      return false
+    } else {
+      setErrorMsg({ ...errorMsg, phone: '' })
+      return true
+    }
+  }
+
   // 7-11
   const { store711, openWindow, closeWindow } = useShip711StoreOpener(
     'http://localhost:3001/shipment/711',
     { autoCloseMins: 3 } // x分鐘沒完成選擇會自動關閉，預設5分鐘。
   )
 
+  const allSend = barter.data.send_name_m1 && barter.data.send_name_m2
+  const onlyM2Send = !barter.data.send_name_m1 && barter.data.send_name_m2
+  const onlyM1Send = barter.data.send_name_m1 && !barter.data.send_name_m2
+
   const notifySuccess = () => {
     MySwal.fire({
-      title: `您已添加運送7-11門市資訊`,
+      title: `您已添加此次以物易物訂單運送資訊`,
       icon: 'success',
       confirmButtonText: '關閉',
       confirmButtonColor: '#3085d6',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.reload()
+      }
     })
   }
+
   const notifyNoAdd = () => {
     MySwal.fire({
       title: `您未選擇運送7-11門市資訊`,
@@ -143,38 +201,93 @@ export default function BarterCheckout() {
   }
 
   const save711DataClickA = async (newFormData) => {
-    try {
-      const r = await fetch(`${ORDER_BARTER_711_PUT}/${newFormData.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newFormData),
-      })
-      if (!r.ok) {
-        throw new Error('Error')
+    const tmpIsPass = nameBlur() && phoneBlur()
+    setIsPass(tmpIsPass)
+    if (tmpIsPass) {
+      try {
+        const r = await fetch(`${ORDER_BARTER_711_PUT}/${newFormData.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newFormData),
+        })
+        if (!r.ok) {
+          throw new Error('Error')
+        }
+        const result = await r.json()
+        console.log(result)
+        if (result.success) {
+          notifySuccess()
+        } else {
+          console.log('資料沒有改變')
+        }
+      } catch (e) {
+        console.error('發生錯誤：', e)
       }
-      const result = await r.json()
-      console.log(result)
-      if (result.success) {
-        notifySuccess()
-        router.push(`/member/barter/${newFormData.id}`)
-      } else {
-        console.log('資料沒有改變')
-      }
-    } catch (e) {
-      console.error('發生錯誤：', e)
     }
   }
 
   const save711DataClickB = async (newFormData) => {
+    const tmpIsPass = nameBlur() && phoneBlur()
+    setIsPass(tmpIsPass)
+    if (tmpIsPass) {
+      try {
+        const r = await fetch(`${ORDER_BARTER_711_PUT2}/${newFormData.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newFormData),
+        })
+        if (!r.ok) {
+          throw new Error('Error')
+        }
+        const result = await r.json()
+        console.log(result)
+        if (result.success) {
+          notifySuccess()
+        } else {
+          console.log('資料沒有改變')
+        }
+      } catch (e) {
+        console.error('發生錯誤：', e)
+      }
+    }
+  }
+
+  const confirmComplete = () => {
+    MySwal.fire({
+      title: '請確認是否訂單已完成',
+      text: '是否已經收到商品？',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '完成訂單',
+      cancelButtonText: '取消',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: '您的以物易物訂單已完成！',
+          icon: 'success',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload()
+          }
+        })
+      }
+    })
+  }
+
+  const completeClick = async (formData) => {
     try {
-      const r = await fetch(`${ORDER_BARTER_711_PUT2}/${newFormData.id}`, {
+      const r = await fetch(`${ORDER_COMPLETE_PUT}/${formData.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newFormData),
+        body: JSON.stringify(formData),
       })
       if (!r.ok) {
         throw new Error('Error')
@@ -182,14 +295,61 @@ export default function BarterCheckout() {
       const result = await r.json()
       console.log(result)
       if (result.success) {
-        notifySuccess()
-        router.push(`/member/barter/${newFormData.id}`)
+        confirmComplete()
       } else {
-        console.log('資料沒有改變')
+        console.log('資料未修改')
       }
-    } catch (e) {
-      console.error('發生錯誤：', e)
+    } catch (error) {
+      console.error('資料有誤：', error)
     }
+  }
+
+  const completeClickA = async (formData) => {
+    try {
+      const r = await fetch(`${ORDER_COMPLETE_PUT2}/${formData.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+      if (!r.ok) {
+        throw new Error('Error')
+      }
+      const result = await r.json()
+      console.log(result)
+      if (result.success) {
+        confirmComplete()
+      } else {
+        console.log('資料未修改')
+      }
+    } catch (error) {
+      console.error('資料有誤：', error)
+    }
+  }
+
+  // ---BackToTop---
+  const [isBtnVisible, setIsBtnVisible] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY
+
+      if (scrollY >= 300) {
+        setIsBtnVisible(true)
+      } else {
+        setIsBtnVisible(false)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   // Loading bar-----
@@ -249,6 +409,13 @@ export default function BarterCheckout() {
                       style={{ textDecoration: 'none', fontSize: '20px' }}
                     >
                       <span>會員中心</span>
+                    </Link>
+                    <Link
+                      className="breadcrumb-item text-dark"
+                      href="/member/barter"
+                      style={{ textDecoration: 'none', fontSize: '20px' }}
+                    >
+                      <span>以物易物申請&邀請清單</span>
                     </Link>
                     <span
                       className="breadcrumb-item active"
@@ -411,28 +578,49 @@ export default function BarterCheckout() {
                       </table>
                     </div>
                     <div className="col-lg-4">
-                      {barter.data.name711_m1 && barter.data.name711_m2 ? (
+                      {allSend ? (
                         <>
-                          {/* 已經選好超商時 */}
+                          {/* m2/m1已經選好超商時 */}
                           <div className="bg-light p-30 mb-5">
                             <div className="px-4 pt-4 pb-3">
                               <div className="d-flex justify-content-center">
                                 <h5 className="font-weight-medium">
-                                  <strong>7-11 運送商店選定資訊</strong>
+                                  <strong>此筆訂單運送與門市資訊</strong>
                                 </h5>
                               </div>
-                              <div className="mt-2 border-bottom ">
+                              <p
+                                className="text-center"
+                                style={{ color: 'red' }}
+                              >
+                                <strong>
+                                  請盡速寄出商品(如已寄出請忽略提示)
+                                </strong>
+                              </p>
+                              <div className="mt-3 border-bottom">
                                 <p>
-                                  <strong>您的選定門市資訊</strong>
+                                  <strong>您的運送與門市資訊</strong>
                                 </p>
+                                收件人 :{' '}
+                                <input
+                                  className="mb-3 form-control"
+                                  type="text"
+                                  value={barter.data.send_name_m2}
+                                  disabled
+                                />
+                                手機號碼 :{' '}
+                                <input
+                                  className="mb-3 form-control"
+                                  type="text"
+                                  value={barter.data.send_phone_m2}
+                                  disabled
+                                />
                                 門市名稱 :{' '}
                                 <input
-                                  className=" form-control"
+                                  className="mb-3 form-control"
                                   type="text"
                                   value={barter.data.name711_m2}
                                   disabled
                                 />
-                                <br />
                                 門市地址 :{' '}
                                 <input
                                   className="mb-3 form-control"
@@ -441,115 +629,372 @@ export default function BarterCheckout() {
                                   disabled
                                 />
                               </div>
-                              <div className="mt-3">
+                              <div className="mt-3 border-bottom">
                                 <p>
                                   <strong>
-                                    {barter.data.m1_name}選定門市資訊
+                                    {barter.data.m1_nickname}的運送與門市資訊
                                   </strong>
                                 </p>
                                 收件人 :{' '}
                                 <input
-                                  className="mb-2 form-control"
+                                  className="mb-3 form-control"
                                   type="text"
-                                  value={barter.data.m1_name}
-                                  disabled
-                                />
-                                手機號碼 :{' '}
-                                <input
-                                  className="mb-2 form-control"
-                                  type="text"
-                                  value={barter.data.m1_mobile}
+                                  value={barter.data.send_name_m1}
                                   disabled
                                 />
                                 門市名稱 :{' '}
                                 <input
-                                  className="mb-2 form-control"
+                                  className="mb-3 form-control"
                                   type="text"
                                   value={barter.data.name711_m1}
                                   disabled
                                 />
                                 門市地址 :{' '}
                                 <input
-                                  className="mb-2 form-control"
+                                  className="mb-3 form-control"
                                   type="text"
                                   value={barter.data.address711_m1}
                                   disabled
                                 />
+                              </div>
+                              <div className="mt-3">
+                                {barter.data.complete_status_m2 == 1 ? (
+                                  <>
+                                    <button
+                                      className={`btn ${style.complete}`}
+                                      style={{
+                                        backgroundColor: '#e96d3f',
+                                        color: 'white',
+                                      }}
+                                      onClick={() => {
+                                        const formData = {
+                                          id: barter.data.id,
+                                          complete_status_m2: 2,
+                                        }
+                                        completeClick(formData)
+                                      }}
+                                    >
+                                      <strong>完成訂單</strong>
+                                    </button>
+                                    <button
+                                      className={`btn ms-3`}
+                                      style={{
+                                        backgroundColor: 'lightgray',
+                                        color: 'white',
+                                        cursor: 'not-allowed',
+                                      }}
+                                    >
+                                      <strong>評價</strong>
+                                    </button>
+                                  </>
+                                ) : (
+                                  <>
+                                    <button
+                                      className={`btn`}
+                                      style={{
+                                        backgroundColor: 'lightgray',
+                                        color: 'white',
+                                        cursor: 'not-allowed',
+                                      }}
+                                    >
+                                      <strong>完成訂單</strong>
+                                    </button>
+                                    <Link
+                                      href="/"
+                                      style={{ textDecoration: 'none' }}
+                                    >
+                                      <button
+                                        className={`btn ms-3 ${style.evaluation}`}
+                                        style={{
+                                          backgroundColor: '#1265c4',
+                                          color: 'white',
+                                        }}
+                                      >
+                                        <strong>評價</strong>
+                                      </button>
+                                    </Link>
+                                  </>
+                                )}
                               </div>
                             </div>
                           </div>
                         </>
                       ) : (
                         <>
-                          {/* 還沒有選超商時 */}
-                          <div className="bg-light p-30 mb-5">
-                            <div className="border-bottom px-4 pt-4 pb-3">
-                              <div className="d-flex justify-content-between mb-2">
-                                <h5 className="font-weight-medium">
-                                  <strong>7-11 運送商店選擇</strong>
-                                </h5>
-                                <button
-                                  className={`btn ${style.checkBtn}`}
-                                  style={{
-                                    backgroundColor: '#16b628',
-                                    color: 'white',
-                                  }}
-                                  onClick={() => {
-                                    openWindow()
-                                  }}
-                                >
-                                  <strong style={{ fontSize: '18px' }}>
-                                    選擇門市
-                                  </strong>
-                                </button>
+                          {/* m2選了但m1還沒有選超商時 */}
+                          {onlyM2Send ? (
+                            <>
+                              <div className="bg-light p-30 mb-5">
+                                <div className="px-4 pt-4 pb-3">
+                                  <div className="d-flex justify-content-center">
+                                    <h5 className="font-weight-medium">
+                                      <strong>此筆訂單運送資訊</strong>
+                                    </h5>
+                                  </div>
+                                  <p className="mb-2">
+                                    <strong>您的運送與門市資訊</strong>
+                                  </p>
+                                  收件人 :{' '}
+                                  <input
+                                    className="mb-2 form-control"
+                                    type="text"
+                                    value={barter.data.send_name_m2}
+                                    disabled
+                                  />
+                                  手機號碼 :{' '}
+                                  <input
+                                    className="mb-2 form-control"
+                                    type="text"
+                                    value={barter.data.send_phone_m2}
+                                    disabled
+                                  />
+                                  <div className="border-bottom ">
+                                    門市名稱 :{' '}
+                                    <input
+                                      className="mb-2 form-control"
+                                      type="text"
+                                      value={barter.data.name711_m2}
+                                      disabled
+                                    />
+                                    門市地址 :{' '}
+                                    <input
+                                      className="mb-3 form-control"
+                                      type="text"
+                                      value={barter.data.address711_m2}
+                                      disabled
+                                    />
+                                  </div>
+                                  <div className="mt-3">
+                                    <p>
+                                      <strong>
+                                        {barter.data.m1_nickname}選定門市資訊
+                                      </strong>
+                                    </p>
+                                    <p>請待對方填寫門市資訊</p>
+                                  </div>
+                                </div>
                               </div>
-                              <div className="mb-2">
-                                門市名稱 :{' '}
-                                <input
-                                  className=" form-control"
-                                  type="text"
-                                  value={store711.storename}
-                                  disabled
-                                />
-                                <br />
-                                門市地址 :{' '}
-                                <input
-                                  className="mb-2 form-control"
-                                  type="text"
-                                  value={store711.storeaddress}
-                                  disabled
-                                />
-                              </div>
-                            </div>
-                            <div className="p-4 d-flex justify-content-center">
-                              <button
-                                className={`btn btn-block font-weight-bold d-flex ${style.checkBtn}`}
-                                style={{
-                                  backgroundColor: '#e96d3f',
-                                  color: 'white',
-                                }}
-                                onClick={() => {
-                                  const newFormData = {
-                                    id: barter.data.id,
-                                    address711_m2: store711.storeaddress,
-                                    name711_m2: store711.storename,
-                                  }
-                                  if (
-                                    store711.storename &&
-                                    store711.storeaddress
-                                  ) {
-                                    save711DataClickA(newFormData)
-                                  } else {
-                                    notifyNoAdd()
-                                  }
-                                }}
-                              >
-                                <strong style={{ fontSize: '18px' }}>
-                                  確認送出
-                                </strong>
-                              </button>
-                            </div>
-                          </div>
+                            </>
+                          ) : (
+                            <>
+                              {/* m1選了但是m2還沒有選 */}
+                              {onlyM1Send ? (
+                                <>
+                                  <div className="bg-light p-30 mb-5">
+                                    <div className="px-4 pt-4 pb-3">
+                                      收件人 :{' '}
+                                      <input
+                                        className="mb-2 form-control"
+                                        type="text"
+                                        name="name"
+                                        value={name}
+                                        onChange={handleInput}
+                                      />
+                                      手機號碼 :{' '}
+                                      <input
+                                        className="mb-2 form-control"
+                                        type="text"
+                                        name="phone"
+                                        value={phone}
+                                        onChange={handleInput2}
+                                      />
+                                      <div className="d-flex justify-content-between mt-4 mb-2">
+                                        <h5 className="font-weight-medium">
+                                          <strong>7-11 運送商店選擇</strong>
+                                        </h5>
+                                        <button
+                                          className={`btn ${style.checkBtn}`}
+                                          style={{
+                                            backgroundColor: '#16b628',
+                                            color: 'white',
+                                          }}
+                                          onClick={() => {
+                                            openWindow()
+                                          }}
+                                        >
+                                          <strong style={{ fontSize: '18px' }}>
+                                            選擇門市
+                                          </strong>
+                                        </button>
+                                      </div>
+                                      <div className="mb-2">
+                                        門市名稱 :{' '}
+                                        <input
+                                          className=" form-control"
+                                          type="text"
+                                          value={store711.storename}
+                                          disabled
+                                        />
+                                        <br />
+                                        門市地址 :{' '}
+                                        <input
+                                          className="mb-2 form-control"
+                                          type="text"
+                                          value={store711.storeaddress}
+                                          disabled
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="p-4 d-flex justify-content-center border-bottom">
+                                      <button
+                                        className={`btn btn-block font-weight-bold d-flex ${style.checkBtn}`}
+                                        style={{
+                                          backgroundColor: '#e96d3f',
+                                          color: 'white',
+                                        }}
+                                        onClick={() => {
+                                          const newFormData = {
+                                            id: barter.data.id,
+                                            s_name_m2: name,
+                                            s_phone_m2: phone,
+                                            address711_m2:
+                                              store711.storeaddress,
+                                            name711_m2: store711.storename,
+                                          }
+                                          if (
+                                            store711.storename &&
+                                            store711.storeaddress
+                                          ) {
+                                            save711DataClickA(newFormData)
+                                          } else {
+                                            notifyNoAdd()
+                                          }
+                                        }}
+                                      >
+                                        <strong style={{ fontSize: '18px' }}>
+                                          確認送出
+                                        </strong>
+                                      </button>
+                                    </div>
+                                    <div className="p-4">
+                                      <p>
+                                        <strong>
+                                          {barter.data.m1_nickname}選定門市資訊
+                                        </strong>
+                                      </p>
+                                      收件人 :{' '}
+                                      <input
+                                        className="mb-2 form-control"
+                                        type="text"
+                                        value={barter.data.send_name_m1}
+                                        disabled
+                                      />
+                                      門市名稱 :{' '}
+                                      <input
+                                        className="mb-2 form-control"
+                                        type="text"
+                                        value={barter.data.name711_m1}
+                                        disabled
+                                      />
+                                      門市地址 :{' '}
+                                      <input
+                                        className="mb-2 form-control"
+                                        type="text"
+                                        value={barter.data.address711_m1}
+                                        disabled
+                                      />
+                                    </div>
+                                  </div>
+                                </>
+                              ) : (
+                                <>
+                                  {/* m1和m2都還沒選 */}
+                                  <div className="bg-light p-30 mb-5">
+                                    <div className="border-bottom px-4 pt-4 pb-3">
+                                      <h5 className="font-weight-medium">
+                                        <strong>
+                                          收件人資料 (請填寫真實姓名與手機)
+                                        </strong>
+                                      </h5>
+                                      收件人 :{' '}
+                                      <input
+                                        className="mb-2 form-control"
+                                        type="text"
+                                        name="name"
+                                        value={name}
+                                        onChange={handleInput}
+                                      />
+                                      手機號碼 :{' '}
+                                      <input
+                                        className="mb-2 form-control"
+                                        type="text"
+                                        name="phone"
+                                        value={phone}
+                                        onChange={handleInput2}
+                                      />
+                                      <div className="d-flex justify-content-between mb-2 mt-2 mt-4">
+                                        <h5 className="font-weight-medium">
+                                          <strong>7-11 運送商店選擇</strong>
+                                        </h5>
+                                        <button
+                                          className={`btn ${style.checkBtn}`}
+                                          style={{
+                                            backgroundColor: '#16b628',
+                                            color: 'white',
+                                          }}
+                                          onClick={() => {
+                                            openWindow()
+                                          }}
+                                        >
+                                          <strong style={{ fontSize: '18px' }}>
+                                            選擇門市
+                                          </strong>
+                                        </button>
+                                      </div>
+                                      <div className="mb-2">
+                                        門市名稱 :{' '}
+                                        <input
+                                          className=" form-control"
+                                          type="text"
+                                          value={store711.storename}
+                                          disabled
+                                        />
+                                        <br />
+                                        門市地址 :{' '}
+                                        <input
+                                          className="mb-2 form-control"
+                                          type="text"
+                                          value={store711.storeaddress}
+                                          disabled
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="p-4 d-flex justify-content-center">
+                                      <button
+                                        className={`btn btn-block font-weight-bold d-flex ${style.checkBtn}`}
+                                        style={{
+                                          backgroundColor: '#e96d3f',
+                                          color: 'white',
+                                        }}
+                                        onClick={() => {
+                                          const newFormData = {
+                                            id: barter.data.id,
+                                            s_name_m2: name,
+                                            s_phone_m2: phone,
+                                            address711_m2:
+                                              store711.storeaddress,
+                                            name711_m2: store711.storename,
+                                          }
+                                          if (
+                                            store711.storename &&
+                                            store711.storeaddress
+                                          ) {
+                                            save711DataClickA(newFormData)
+                                          } else {
+                                            notifyNoAdd()
+                                          }
+                                        }}
+                                      >
+                                        <strong style={{ fontSize: '18px' }}>
+                                          確認送出
+                                        </strong>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </>
+                              )}
+                            </>
+                          )}
                         </>
                       )}
                     </div>
@@ -701,28 +1146,49 @@ export default function BarterCheckout() {
                       </table>
                     </div>
                     <div className="col-lg-4">
-                      {barter.data.name711_m1 && barter.data.name711_m2 ? (
+                      {allSend ? (
                         <>
-                          {/* 已經選好超商時 */}
+                          {/* m1/m2已經選好超商時 */}
                           <div className="bg-light p-30 mb-5">
                             <div className="px-4 pt-4 pb-3">
                               <div className="d-flex justify-content-center">
                                 <h5 className="font-weight-medium">
-                                  <strong>7-11 運送商店選定資訊</strong>
+                                  <strong>此筆訂單運送與門市資訊</strong>
                                 </h5>
                               </div>
-                              <div className="mt-2 border-bottom ">
+                              <p
+                                className="text-center"
+                                style={{ color: 'red' }}
+                              >
+                                <strong>
+                                  請盡速寄出商品(如已寄出請忽略提示)
+                                </strong>
+                              </p>
+                              <div className="mt-2 border-bottom">
                                 <p>
-                                  <strong>您的選定門市資訊</strong>
+                                  <strong>您的運送與門市資訊</strong>
                                 </p>
+                                收件人 :{' '}
+                                <input
+                                  className="mb-3 form-control"
+                                  type="text"
+                                  value={barter.data.send_name_m1}
+                                  disabled
+                                />
+                                手機號碼 :{' '}
+                                <input
+                                  className="mb-3 form-control"
+                                  type="text"
+                                  value={barter.data.send_phone_m1}
+                                  disabled
+                                />
                                 門市名稱 :{' '}
                                 <input
-                                  className=" form-control"
+                                  className="mb-3 form-control"
                                   type="text"
                                   value={barter.data.name711_m1}
                                   disabled
                                 />
-                                <br />
                                 門市地址 :{' '}
                                 <input
                                   className="mb-3 form-control"
@@ -731,115 +1197,379 @@ export default function BarterCheckout() {
                                   disabled
                                 />
                               </div>
-                              <div className="mt-3">
+                              <div className="mt-4 border-bottom">
                                 <p>
                                   <strong>
-                                    {barter.data.m2_name}選定門市資訊
+                                    {barter.data.m2_nickname}的運送與門市資訊
                                   </strong>
                                 </p>
                                 收件人 :{' '}
                                 <input
-                                  className="mb-2 form-control"
+                                  className="mb-3 form-control"
                                   type="text"
-                                  value={barter.data.m2_name}
-                                  disabled
-                                />
-                                手機號碼 :{' '}
-                                <input
-                                  className="mb-2 form-control"
-                                  type="text"
-                                  value={barter.data.m2_mobile}
+                                  value={barter.data.send_name_m2}
                                   disabled
                                 />
                                 門市名稱 :{' '}
                                 <input
-                                  className="mb-2 form-control"
+                                  className="mb-3 form-control"
                                   type="text"
                                   value={barter.data.name711_m2}
                                   disabled
                                 />
                                 門市地址 :{' '}
                                 <input
-                                  className="mb-2 form-control"
+                                  className="mb-3 form-control"
                                   type="text"
                                   value={barter.data.address711_m2}
                                   disabled
                                 />
+                              </div>
+                              <div className="mt-3">
+                                {barter.data.complete_status_m1 == 1 ? (
+                                  <>
+                                    <button
+                                      className={`btn ${style.complete}`}
+                                      style={{
+                                        backgroundColor: '#e96d3f',
+                                        color: 'white',
+                                      }}
+                                      onClick={() => {
+                                        const formData = {
+                                          id: barter.data.id,
+                                          complete_status_m1: 2,
+                                        }
+                                        completeClickA(formData)
+                                      }}
+                                    >
+                                      <strong>完成訂單</strong>
+                                    </button>
+                                    <button
+                                      className={`btn ms-3`}
+                                      style={{
+                                        backgroundColor: 'lightgray',
+                                        color: 'white',
+                                        cursor: 'not-allowed',
+                                      }}
+                                    >
+                                      <strong>評價</strong>
+                                    </button>
+                                  </>
+                                ) : (
+                                  <>
+                                    <button
+                                      className={`btn`}
+                                      style={{
+                                        backgroundColor: 'lightgray',
+                                        color: 'white',
+                                        cursor: 'not-allowed',
+                                      }}
+                                    >
+                                      <strong>完成訂單</strong>
+                                    </button>
+                                    <Link
+                                      href="/"
+                                      style={{ textDecoration: 'none' }}
+                                    >
+                                      <button
+                                        className={`btn ms-3 ${style.evaluation}`}
+                                        style={{
+                                          backgroundColor: '#1265c4',
+                                          color: 'white',
+                                        }}
+                                      >
+                                        <strong>評價</strong>
+                                      </button>
+                                    </Link>
+                                  </>
+                                )}
                               </div>
                             </div>
                           </div>
                         </>
                       ) : (
                         <>
-                          {/* 還沒有選超商時 */}
-                          <div className="bg-light p-30 mb-5">
-                            <div className="border-bottom px-4 pt-4 pb-3">
-                              <div className="d-flex justify-content-between mb-2">
-                                <h5 className="font-weight-medium">
-                                  <strong>7-11 運送商店選擇</strong>
-                                </h5>
-                                <button
-                                  className={`btn ${style.checkBtn}`}
-                                  style={{
-                                    backgroundColor: '#16b628',
-                                    color: 'white',
-                                  }}
-                                  onClick={() => {
-                                    openWindow()
-                                  }}
-                                >
-                                  <strong style={{ fontSize: '18px' }}>
-                                    選擇門市
-                                  </strong>
-                                </button>
+                          {/* m1選了但m2還沒有選超商時 */}
+                          {onlyM1Send ? (
+                            <>
+                              <div className="bg-light p-30 mb-5">
+                                <div className="px-4 pt-4 pb-3">
+                                  <div className="d-flex justify-content-center">
+                                    <h5 className="font-weight-medium">
+                                      <strong>此筆訂單運送資訊</strong>
+                                    </h5>
+                                  </div>
+                                  <div className="mb-2 border-bottom ">
+                                    <p className="mb-2 mt-3">
+                                      <strong>您的運送與門市資訊</strong>
+                                    </p>
+                                    收件人 :{' '}
+                                    <input
+                                      className="mb-3 form-control"
+                                      type="text"
+                                      value={barter.data.send_name_m1}
+                                      disabled
+                                    />
+                                    手機號碼 :{' '}
+                                    <input
+                                      className="mb-3 form-control"
+                                      type="text"
+                                      value={barter.data.send_phone_m1}
+                                      disabled
+                                    />
+                                    門市名稱 :{' '}
+                                    <input
+                                      className="mb-3 form-control"
+                                      type="text"
+                                      value={barter.data.name711_m1}
+                                      disabled
+                                    />
+                                    門市地址 :{' '}
+                                    <input
+                                      className="mb-3 form-control"
+                                      type="text"
+                                      value={barter.data.address711_m1}
+                                      disabled
+                                    />
+                                  </div>
+                                  <div className="mt-3">
+                                    <p>
+                                      <strong>
+                                        {barter.data.m2_nickname}
+                                        的運送與門市資訊
+                                      </strong>
+                                    </p>
+                                    <p>請待對方填寫門市資訊</p>
+                                  </div>
+                                </div>
                               </div>
-                              <div className="mb-2">
-                                門市名稱 :{' '}
-                                <input
-                                  className=" form-control"
-                                  type="text"
-                                  value={store711.storename}
-                                  disabled
-                                />
-                                <br />
-                                門市地址 :{' '}
-                                <input
-                                  className="mb-2 form-control"
-                                  type="text"
-                                  value={store711.storeaddress}
-                                  disabled
-                                />
-                              </div>
-                            </div>
-                            <div className="p-4 d-flex justify-content-center">
-                              <button
-                                className={`btn btn-block font-weight-bold d-flex ${style.checkBtn}`}
-                                style={{
-                                  backgroundColor: '#e96d3f',
-                                  color: 'white',
-                                }}
-                                onClick={() => {
-                                  const newFormData = {
-                                    id: barter.data.id,
-                                    address711_m1: store711.storeaddress,
-                                    name711_m1: store711.storename,
-                                  }
-                                  if (
-                                    store711.storename &&
-                                    store711.storeaddress
-                                  ) {
-                                    save711DataClickB(newFormData)
-                                  } else {
-                                    notifyNoAdd()
-                                  }
-                                }}
-                              >
-                                <strong style={{ fontSize: '18px' }}>
-                                  確認送出
-                                </strong>
-                              </button>
-                            </div>
-                          </div>
+                            </>
+                          ) : (
+                            <>
+                              {/* m2選了但m1還沒有選超商時 */}
+                              {onlyM2Send ? (
+                                <>
+                                  <div className="bg-light p-30 mb-5">
+                                    <div className="px-4 pt-4">
+                                      <h5 className="font-weight-medium">
+                                        <strong>
+                                          收件人資料 (請填寫真實姓名與手機)
+                                        </strong>
+                                      </h5>
+                                      收件人 :{' '}
+                                      <input
+                                        className="mb-2 form-control"
+                                        type="text"
+                                        name="name"
+                                        value={name}
+                                        onChange={handleInput}
+                                      />
+                                      手機號碼 :{' '}
+                                      <input
+                                        className="mb-2 form-control"
+                                        type="text"
+                                        name="phone"
+                                        value={phone}
+                                        onChange={handleInput2}
+                                      />
+                                      <div className="d-flex justify-content-between mb-2 mt-4">
+                                        <h5 className="font-weight-medium">
+                                          <strong>7-11 運送商店選擇</strong>
+                                        </h5>
+                                        <button
+                                          className={`btn ${style.checkBtn}`}
+                                          style={{
+                                            backgroundColor: '#16b628',
+                                            color: 'white',
+                                          }}
+                                          onClick={() => {
+                                            openWindow()
+                                          }}
+                                        >
+                                          <strong style={{ fontSize: '18px' }}>
+                                            選擇門市
+                                          </strong>
+                                        </button>
+                                      </div>
+                                      <div className="mb-2">
+                                        門市名稱 :{' '}
+                                        <input
+                                          className=" form-control"
+                                          type="text"
+                                          value={store711.storename}
+                                          disabled
+                                        />
+                                        <br />
+                                        門市地址 :{' '}
+                                        <input
+                                          className="mb-2 form-control"
+                                          type="text"
+                                          value={store711.storeaddress}
+                                          disabled
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="p-4 d-flex justify-content-center border-bottom">
+                                      <button
+                                        className={`btn btn-block font-weight-bold d-flex ${style.checkBtn}`}
+                                        style={{
+                                          backgroundColor: '#e96d3f',
+                                          color: 'white',
+                                        }}
+                                        onClick={() => {
+                                          const newFormData = {
+                                            id: barter.data.id,
+                                            s_name_m1: name,
+                                            s_phone_m1: phone,
+                                            address711_m1:
+                                              store711.storeaddress,
+                                            name711_m1: store711.storename,
+                                          }
+                                          if (
+                                            store711.storename &&
+                                            store711.storeaddress
+                                          ) {
+                                            save711DataClickB(newFormData)
+                                          } else {
+                                            notifyNoAdd()
+                                          }
+                                        }}
+                                      >
+                                        <strong style={{ fontSize: '18px' }}>
+                                          確認送出
+                                        </strong>
+                                      </button>
+                                    </div>
+                                    <div className="p-4">
+                                      <p>
+                                        <strong>
+                                          {barter.data.m2_nickname}
+                                          的運送與門市資訊
+                                        </strong>
+                                      </p>
+                                      收件人 :{' '}
+                                      <input
+                                        className="mb-3 form-control"
+                                        type="text"
+                                        value={barter.data.send_name_m2}
+                                        disabled
+                                      />
+                                      門市名稱 :{' '}
+                                      <input
+                                        className="mb-3 form-control"
+                                        type="text"
+                                        value={barter.data.name711_m2}
+                                        disabled
+                                      />
+                                      門市地址 :{' '}
+                                      <input
+                                        className="mb-3 form-control"
+                                        type="text"
+                                        value={barter.data.address711_m2}
+                                        disabled
+                                      />
+                                    </div>
+                                  </div>
+                                </>
+                              ) : (
+                                <>
+                                  {/* m1/m2都還沒有選擇 */}
+                                  <div className="bg-light p-30 mb-5">
+                                    <div className="border-bottom px-4 pt-4 pb-3">
+                                      <h5 className="font-weight-medium">
+                                        <strong>
+                                          收件人資料 (請填寫真實姓名與手機)
+                                        </strong>
+                                      </h5>
+                                      收件人 :{' '}
+                                      <input
+                                        className="mb-2 form-control"
+                                        type="text"
+                                        name="name"
+                                        value={name}
+                                        onChange={handleInput}
+                                      />
+                                      手機號碼 :{' '}
+                                      <input
+                                        className="mb-2 form-control"
+                                        type="text"
+                                        name="phone"
+                                        value={phone}
+                                        onChange={handleInput2}
+                                      />
+                                      <div className="d-flex justify-content-between mb-2 mt-4">
+                                        <h5 className="font-weight-medium">
+                                          <strong>7-11 運送商店選擇</strong>
+                                        </h5>
+                                        <button
+                                          className={`btn ${style.checkBtn}`}
+                                          style={{
+                                            backgroundColor: '#16b628',
+                                            color: 'white',
+                                          }}
+                                          onClick={() => {
+                                            openWindow()
+                                          }}
+                                        >
+                                          <strong style={{ fontSize: '18px' }}>
+                                            選擇門市
+                                          </strong>
+                                        </button>
+                                      </div>
+                                      <div className="mb-2">
+                                        門市名稱 :{' '}
+                                        <input
+                                          className=" form-control"
+                                          type="text"
+                                          value={store711.storename}
+                                          disabled
+                                        />
+                                        <br />
+                                        門市地址 :{' '}
+                                        <input
+                                          className="mb-2 form-control"
+                                          type="text"
+                                          value={store711.storeaddress}
+                                          disabled
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="p-4 d-flex justify-content-center">
+                                      <button
+                                        className={`btn btn-block font-weight-bold d-flex ${style.checkBtn}`}
+                                        style={{
+                                          backgroundColor: '#e96d3f',
+                                          color: 'white',
+                                        }}
+                                        onClick={() => {
+                                          const newFormData = {
+                                            id: barter.data.id,
+                                            s_name_m1: name,
+                                            s_phone_m1: phone,
+                                            address711_m1:
+                                              store711.storeaddress,
+                                            name711_m1: store711.storename,
+                                          }
+                                          if (
+                                            store711.storename &&
+                                            store711.storeaddress
+                                          ) {
+                                            save711DataClickB(newFormData)
+                                          } else {
+                                            notifyNoAdd()
+                                          }
+                                        }}
+                                      >
+                                        <strong style={{ fontSize: '18px' }}>
+                                          確認送出
+                                        </strong>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </>
+                              )}
+                            </>
+                          )}
                         </>
                       )}
                     </div>
@@ -851,12 +1581,18 @@ export default function BarterCheckout() {
             </div>
             {/* barter order checkout End */}
             {/* Back to Top */}
-            <Link href="#top" className="btn">
-              <FaAnglesUp
-                className={style.backToTop}
-                style={{ fontSize: '40px' }}
-              />
-            </Link>
+            {isBtnVisible ? (
+              <>
+                <button className="btn" onClick={scrollToTop}>
+                  <FaAnglesUp
+                    className={style.backToTop}
+                    style={{ fontSize: '40px' }}
+                  />
+                </button>
+              </>
+            ) : (
+              <></>
+            )}
           </div>
           {/* Footer */}
           <Footer />

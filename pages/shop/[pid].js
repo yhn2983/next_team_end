@@ -209,7 +209,7 @@ export default function Detail() {
     toast.success(msgBox)
   }
 
-  const [isClicked, setIsClicked] = useState(false)
+  const [isClicked, setIsClicked] = useState([])
 
   const likeClick = async (productData2) => {
     const member_id = auth.userData.id
@@ -226,11 +226,12 @@ export default function Detail() {
     const result = await r.json()
     console.log(result)
     if (result.success) {
-      setIsClicked(!isClicked)
-      if (!isClicked) {
+      if (!isClicked.includes(productData2.product_id)) {
+        setIsClicked([...isClicked, productData2.product_id])
         notify2(productData2.p_name)
         addProd(productData2)
       } else {
+        setIsClicked(isClicked.filter((pid) => pid != productData2.product_id))
         notify3(productData2.p_name)
         removeProdById(productData2.product_id)
       }
@@ -783,9 +784,12 @@ export default function Detail() {
                             <AiOutlineHeart
                               className={style.iconBInner}
                               style={{
-                                color: isClicked && v.id ? '#e96d3f' : '',
-                                backgroundColor:
-                                  isClicked && v.id ? '#8e2626' : '',
+                                color: isClicked.includes(v.id)
+                                  ? '#e96d3f'
+                                  : '',
+                                backgroundColor: isClicked.includes(v.id)
+                                  ? '#8e2626'
+                                  : '',
                               }}
                             />
                           </button>

@@ -25,12 +25,20 @@ export const ORDER_BARTER_ADD = `${API_SERVER}/products/order-barter`
 
 export const ORDER_BARTER_LIST = `${API_SERVER}/products/order-barter`
 
-export const ORDER_BARTER_UPDATE_PUT = `${API_SERVER}/products/order-barter`
-
 export const ORDER_ADD = `${API_SERVER}/products/order`
 
 export const ORDER_BARTER_711_PUT = `${API_SERVER}/products/barter711A`
 
 export const ORDER_BARTER_711_PUT2 = `${API_SERVER}/products/barter711B`
+
+export const COUPON_RECEIVED_ADD = `${API_SERVER}/products/coupon`
+
+export const ORDER_COMPLETE_PUT = `${API_SERVER}/products/ob-complete`
+
+export const ORDER_COMPLETE_PUT2 = `${API_SERVER}/products/ob-completeA`
+
+export const LINE_PAY_ADD = `${API_SERVER}/line-pay/create-order`
+
+export const LINE_PAY_CONFIRM = `${API_SERVER}/line-pay/confirm`
 
 export const SEND_EMAIL = `${API_SERVER}/products/sendEmail`
