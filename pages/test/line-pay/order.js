@@ -48,9 +48,10 @@ export default function Order() {
       console.log(result) //訂單物件格式(line-pay專用)
 
       if (result.status === 'success') {
-        setOrder(result.data.order)
+        const orderId = result.data.order.orderId
+        setOrder(orderId)
         toast.success('已成功建立訂單')
-        goLinePay(result.data.order.orderId)
+        goLinePay(orderId)
       } else {
         console.log('訂單建立失敗')
       }
@@ -80,21 +81,22 @@ export default function Order() {
   }
 
   // 確認交易，處理伺服器通知line pay已確認付款，為必要流程
-  const handleConfirm = async (formData) => {
+  const handleConfirm = async (transactionId) => {
     const r = await fetch(
-      `${LINE_PAY_CONFIRM}?transactionId=${formData.transactionId}`,
-      {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      }
+      `${LINE_PAY_CONFIRM}?transactionId=${transactionId}`
+      //,
+      // {
+      //   method: 'GET',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(transactionId),
+      // }
     )
 
     const result = await r.json()
     console.log(result)
-    if (result.success) {
+    if (result.status === 'success') {
       toast.success('付款成功')
     } else {
       toast.error('付款失敗')
