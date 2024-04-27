@@ -18,7 +18,9 @@ import { faHeart as faSolidHeart } from '@fortawesome/free-solid-svg-icons'
 import { faHeart as faRegularHeart } from '@fortawesome/free-regular-svg-icons'
 import { GET_STORE_LIKE } from '@/components/config'
 import { POST_STORE_LIKE } from '@/components/config'
+import { GET_STORE_LIKE_LIST } from '@/components/config'
 import RatingStars from '@/components/member/rating-stars'
+import StoreFollowModal from '@/components/member/store-follow-modal'
 
 export default function StoreInfo() {
   const { auth, checkAuth } = useAuth()
@@ -33,6 +35,12 @@ export default function StoreInfo() {
     photo: 'default.png',
   })
   const [file, setFile] = useState(null)
+  // 追蹤賣場的 Modal
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+  // 追蹤狀態陣列，該使用者追蹤的所有賣場
+  const [storeLikeData, setStoreLikeData] = useState([])
 
   useEffect(() => {
     if (isLoading) {
@@ -94,6 +102,28 @@ export default function StoreInfo() {
       }
     }
   }
+
+  const fetchStoreData = async () => {
+    const response = await fetch(GET_STORE_LIKE_LIST, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user_id: auth.userData.id,
+      }),
+    })
+
+    const result = await response.json()
+    console.log(result)
+
+    if (result.status === 'success') {
+      setStoreLikeData(result.data)
+    } else {
+      console.error(result.message)
+    }
+  }
+
   // 在組件掛載時調用 fetchUserData 函數
   useEffect(() => {
     if (router.isReady) {
@@ -111,6 +141,12 @@ export default function StoreInfo() {
       fetchStoreLike()
     }
   }, [storeId, auth.userData])
+
+  useEffect(() => {
+    if (auth.userData && auth.userData.id) {
+      fetchStoreData()
+    }
+  }, [auth.userData])
 
   // 傳訊息
   const handleSendMessage = async () => {
@@ -220,9 +256,9 @@ export default function StoreInfo() {
                     <h5 className="my-3">{otherUser.nickname}</h5>
                     <div className="content text-center mb-4">
                       <RatingStars rating={4.6} />
-                      <div className="rating-text mt-3">
+                      {/* <div className="rating-text mt-3">
                         <span>46 個評分 &amp; 15 個評論</span>
-                      </div>
+                      </div> */}
                     </div>
                     <div className="d-flex justify-content-center mb-2">
                       {auth.userData &&
@@ -252,9 +288,16 @@ export default function StoreInfo() {
                           </button>
                         </>
                       ) : auth.userData && auth.userData.id ? (
-                        <button className="btn" onClick={backProfile}>
-                          回到個人檔案
-                        </button>
+                        <div className="d-flex">
+                          <StoreFollowModal
+                            show={show}
+                            handleClose={handleClose}
+                            storeLikeData={storeLikeData}
+                          />
+                          <button className="btn  ms-3" onClick={backProfile}>
+                            回到個人檔案
+                          </button>
+                        </div>
                       ) : (
                         <>
                           <button
