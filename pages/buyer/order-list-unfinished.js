@@ -11,6 +11,8 @@ import OrderListNav from '@/components/orderList/order-list-nav'
 import { BUYER_ORDER_FIN } from '@/configs/configs-buyer'
 import DefaultLayout from '@/components/common/default-layout'
 import Styles from '@/styles/buyer.module.css'
+import Link from 'next/link'
+import Head from 'next/head'
 
 export default function OrderList() {
   const router = useRouter()
@@ -95,9 +97,12 @@ export default function OrderList() {
   return (
     <>
       <DefaultLayout pageName="od-unfi">
+        <Head>
+          <title>我的訂單：待收貨 | DEAL-2ND HAND SHOP</title>
+        </Head>
         <div className={`${Styles.orderList}`}>
           <OrderListNav pageName="od-unfi" />
-          <div className="row mt-5 mx-5">
+          <div className="row mt-5 mx-5 mb-5">
             <div className="col-sm-8 cart-area">
               {!auth ? (
                 alert('請先登入')
@@ -105,7 +110,6 @@ export default function OrderList() {
                 <div>...loading</div>
               ) : (
                 <>
-                  <h4 className="mb-3">等待收貨的訂單</h4>
                   {data.rows
                     .filter((v) => {
                       return v.complete_status == 1
@@ -113,39 +117,85 @@ export default function OrderList() {
                     .map((v, i) => {
                       return (
                         <div key={i}>
-                          <div className="card mb-3 border-0 cart-card">
+                          <div
+                            className={`card mb-4 border-bottom cart-card ${Styles.imgBox}`}
+                            style={{
+                              overflow: 'auto',
+                            }}
+                          >
                             <div className="row g-0">
                               <div className="col-md-3">
-                                <img
-                                  src={`/${
-                                    v.product_photos.match(/[^,]+\.jpg/)[0]
-                                  }`}
-                                  className="img-fluid rounded-start"
-                                  alt="..."
-                                />
+                                <Link href={`/shop/${v.p_id}`}>
+                                  <img
+                                    src={`/${
+                                      v.product_photos.match(/[^,]+\.jpg/)[0]
+                                    }`}
+                                    className="img-fluid "
+                                    alt="..."
+                                    style={{
+                                      width: '100%',
+                                      height: '330px',
+                                      objectFit: 'cover',
+                                    }}
+                                  />
+                                </Link>
                               </div>
-                              <div className="col-md-9">
+                              <div className="col-md-9 ps-3 d-flex align-items-center">
                                 <div className="card-body">
                                   <h5 className="card-title card-text d-flex justify-content-between align-items-center">
-                                    {v.product_name}
-                                    <span>${v.total_price}</span>
+                                    <strong>
+                                      訂單編號：
+                                      {Math.floor(new Date(v.order_date))}
+                                      {v.id}
+                                    </strong>
                                   </h5>
-                                  <p className="card-text">{v.seller_name}</p>
-                                  <p className="card-text">
+                                  <p className="card-title card-text d-flex justify-content-between align-items-center">
+                                    <Link
+                                      href={`/shop/${v.p_id}`}
+                                      style={{ textDecoration: 'none' }}
+                                    >
+                                      <strong>{v.product_name}</strong>
+                                    </Link>{' '}
                                     <span>
-                                      {v.class === 2 ? '議價訂單' : '一般訂單'}
+                                      <strong>
+                                        ${v.total_price?.toLocaleString()}
+                                      </strong>
                                     </span>
-                                    /
-                                    <span>
-                                      {v.complete_status === 2
-                                        ? '已完成'
-                                        : '進行中'}
-                                    </span>
+                                  </p>
+                                  <br />
+                                  <Link
+                                    className={Styles.sellerLink}
+                                    href={`/member/store/${v.seller_id}`}
+                                    style={{
+                                      textDecoration: 'none',
+                                      color: 'black',
+                                    }}
+                                  >
+                                    <p className="card-text pb-2">
+                                      <strong>
+                                        賣家：{v.seller_name} (點我進入賣家介紹)
+                                      </strong>
+                                    </p>
+                                  </Link>
+                                  <p className="card-text pb-2">
+                                    <strong>
+                                      <span>
+                                        {v.class === 2
+                                          ? '議價訂單'
+                                          : '一般訂單'}
+                                      </span>
+                                      /
+                                      <span>
+                                        {v.complete_status === 2
+                                          ? '已完成'
+                                          : '進行中'}
+                                      </span>
+                                    </strong>
                                   </p>
                                   <p className="card-text">
                                     {' '}
                                     <span style={{ color: '#EBC1EB' }}>
-                                      等待收貨...
+                                      <strong>等待收貨...</strong>
                                     </span>
                                   </p>
                                   <div className="row g-3 align-items-center justify-content-end">
@@ -162,7 +212,7 @@ export default function OrderList() {
                                         onClick={() => onFinish(v.id)}
                                         variant="outline-danger"
                                       >
-                                        訂單完成
+                                        <strong>訂單完成</strong>
                                       </Button>
                                     </div>
                                   </div>
@@ -180,49 +230,12 @@ export default function OrderList() {
                     })}
                 </>
               )}
-              <div className="card mb-3 border-0 cart-card">
-                <div className="row g-0">
-                  <div className="col-md-3">
-                    <img
-                      src="./images/cart-1.jpeg"
-                      className="img-fluid rounded-start"
-                      alt="..."
-                    />
-                  </div>
-                  <div className="col-md-9">
-                    <div className="card-body">
-                      <h5 className="card-title card-text d-flex justify-content-between align-items-center">
-                        Nike Air Force 1 PLT.AF.ORM <span>$4,000.00</span>
-                      </h5>
-                      <p className="card-text">
-                        Pale Ivory/Light Orewood Brown/白/Summit White
-                      </p>
-
-                      <div className="row g-3 align-items-center justify-content-end">
-                        <div className="col-auto">
-                          <Button href="#" variant="outline-warning">
-                            Link
-                          </Button>
-                        </div>
-                        <div className="col-auto  w-auto ">
-                          <Button href="#" variant="outline-warning">
-                            Link
-                          </Button>
-                        </div>
-                      </div>
-
-                      <div className="iconbar">
-                        <i className="bi bi-suit-heart"></i>
-                        <i className="bi bi-trash3"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
               <hr />
             </div>
-            <div className="col-sm-4">
-              <h4 className="mb-3">小炭點</h4>
+            <div className="col-sm-4 mt-2">
+              <h4 className="mb-3">
+                <strong>小碳點</strong>
+              </h4>
 
               <p className="card-text d-flex justify-content-between align-items-center">
                 目前點數 <span></span>

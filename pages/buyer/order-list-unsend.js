@@ -11,6 +11,13 @@ import OrderListNav from '@/components/orderList/order-list-nav'
 import { BUYER_ORDER_FIN } from '@/configs/configs-buyer'
 import DefaultLayout from '@/components/common/default-layout'
 import Styles from '@/styles/buyer.module.css'
+import Link from 'next/link'
+import toast, { Toaster } from 'react-hot-toast'
+import { LINE_PAY_ADD, LINE_PAY_CONFIRM } from '@/configs/config-r'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
+import Head from 'next/head'
 
 export default function OrderList() {
   const router = useRouter()
@@ -93,12 +100,126 @@ export default function OrderList() {
     }
   }
 
+  // Line Pay
+  const [result, setResult] = useState({
+    returnCode: '',
+    returnMessage: '',
+  })
+  const [order, setOrder] = useState({})
+  const [isLoading, setIsLoading] = useState(true)
+
+  const createOrder = async (newData) => {
+    try {
+      const r = await fetch(`${LINE_PAY_ADD}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newData),
+      })
+
+      console.log('Response status:', r.status)
+
+      const result = await r.json()
+      console.log(result)
+
+      if (result.status === 'success') {
+        const orderId = result.data.order.orderId
+        setOrder(orderId)
+        goLinePay(orderId)
+      } else {
+        console.log('訂單建立失敗')
+      }
+    } catch (error) {
+      console.error('Error creating order:', error)
+      toast.error('訂單建立失敗，請重試')
+    }
+  }
+
+  const goLinePay = (orderId) => {
+    MySwal.fire({
+      title: '即將前往Line Pay付款',
+      text: '請確認是否要導向至LINE Pay進行付款？',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '前往付款',
+      cancelButtonText: '取消',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = `http://localhost:3001/line-pay/reserve?orderId=${orderId}`
+      }
+    })
+  }
+
+  const payClomplete = () => {
+    MySwal.fire({
+      title: '您已完成付款！',
+      text: '將回到訂單列表頁面',
+      icon: 'success',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: '確定',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = `http://localhost:3000/buyer/order-list`
+      }
+    })
+  }
+
+  const payNotClomplete = () => {
+    MySwal.fire({
+      title: '您尚未完成付款！',
+      text: '將回到訂單列表頁面',
+      icon: 'warning',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: '確定',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = `http://localhost:3000/buyer/order-list`
+      }
+    })
+  }
+
+  const handleConfirm = async (transactionId) => {
+    const r = await fetch(`${LINE_PAY_CONFIRM}?transactionId=${transactionId}`)
+
+    const result = await r.json()
+    console.log(result)
+    if (result.status === 'success') {
+      payClomplete()
+    } else {
+      payNotClomplete()
+    }
+
+    if (result) {
+      setResult(result)
+    }
+    setIsLoading(false)
+  }
+
+  useEffect(() => {
+    if (router.isReady) {
+      console.log(router.query)
+      const { transactionId, orderId } = router.query
+
+      if (!transactionId || !orderId) {
+        setIsLoading(false)
+        return
+      }
+      handleConfirm(transactionId)
+    }
+  }, [router.isReady])
+
   return (
     <>
       <DefaultLayout pageName="od-unsend">
+        <Head>
+          <title>我的訂單：待出貨 | DEAL-2ND HAND SHOP</title>
+        </Head>
         <div className={`${Styles.orderList}`}>
           <OrderListNav pageName="od-unsend" />
-          <div className="row mt-5 mx-5">
+          <div className="row mt-5 mx-5 mb-5">
             <div className="col-sm-8 cart-area">
               {!auth ? (
                 alert('請先登入')
@@ -106,7 +227,6 @@ export default function OrderList() {
                 <div>...loading</div>
               ) : (
                 <>
-                  <h4 className="mb-3">等待賣家寄出</h4>
                   {data.rows
                     .filter((v) => {
                       return v.complete_status == 1 && v.shipment_status == 1
@@ -114,53 +234,158 @@ export default function OrderList() {
                     .map((v, i) => {
                       return (
                         <div key={i}>
-                          <div className="card mb-3 border-0 cart-card">
+                          <div
+                            className={`card mb-4 border-bottom cart-card ${Styles.imgBox}`}
+                            style={{
+                              overflow: 'auto',
+                            }}
+                          >
                             <div className="row g-0">
-                              <div className="col-md-3">
-                                <img
-                                  src={`/${
-                                    v.product_photos.match(/[^,]+\.jpg/)[0]
-                                  }`}
-                                  className="img-fluid rounded-start"
-                                  alt="..."
-                                />
+                              <div className={`col-md-3 rounded`}>
+                                <Link href={`/shop/${v.p_id}`}>
+                                  <img
+                                    src={`/${
+                                      v.product_photos.match(/[^,]+\.jpg/)[0]
+                                    }`}
+                                    className="img-fluid"
+                                    alt="..."
+                                    style={{
+                                      width: '100%',
+                                      height: '330px',
+                                      objectFit: 'cover',
+                                    }}
+                                  />
+                                </Link>
                               </div>
-                              <div className="col-md-9">
+                              <div className="col-md-9 ps-3 d-flex align-items-center">
                                 <div className="card-body">
                                   <h5 className="card-title card-text d-flex justify-content-between align-items-center">
-                                    {v.product_name}{' '}
-                                    <span>${v.total_price}</span>
+                                    <strong>
+                                      訂單編號：
+                                      {Math.floor(new Date(v.order_date))}
+                                      {v.id}
+                                    </strong>
                                   </h5>
-                                  <p className="card-text">{v.seller_name}</p>
-                                  <p className="card-text">
+                                  <p className="card-title card-text d-flex justify-content-between align-items-center">
+                                    <Link
+                                      href={`/shop/${v.p_id}`}
+                                      style={{ textDecoration: 'none' }}
+                                    >
+                                      <strong>{v.product_name}</strong>
+                                    </Link>{' '}
                                     <span>
-                                      {v.class === 2 ? '議價訂單' : '一般訂單'}
-                                    </span>
-                                    /
-                                    <span>
-                                      {v.complete_status === 2
-                                        ? '已完成'
-                                        : '進行中'}
-                                    </span>
-                                    /
-                                    <span>
-                                      {v.shipment_status === 2
-                                        ? '已寄出'
-                                        : '未寄出'}
+                                      <strong>
+                                        ${v.total_price?.toLocaleString()}
+                                      </strong>
                                     </span>
                                   </p>
+                                  <br />
+                                  <Link
+                                    className={Styles.sellerLink}
+                                    href={`/member/store/${v.seller_id}`}
+                                    style={{
+                                      textDecoration: 'none',
+                                      color: 'black',
+                                    }}
+                                  >
+                                    <p className="card-text pb-2">
+                                      <strong>
+                                        賣家：{v.seller_name} (點我進入賣家介紹)
+                                      </strong>
+                                    </p>
+                                  </Link>
+                                  <p className="card-text pb-2">
+                                    <strong>
+                                      <span>
+                                        {v.class === 2
+                                          ? '議價訂單'
+                                          : '一般訂單'}
+                                      </span>
+                                      /
+                                      <span>
+                                        {v.complete_status === 2
+                                          ? '已完成'
+                                          : '進行中'}
+                                      </span>
+                                      /
+                                      <span>
+                                        {v.shipment_status === 2
+                                          ? '已寄出'
+                                          : '未寄出'}
+                                      </span>
+                                    </strong>
+                                  </p>
+                                  {v.payment_status == 1 ? (
+                                    <>
+                                      <img
+                                        alt=""
+                                        src="/LINEPay.png"
+                                        width={40}
+                                      />
+                                      <button
+                                        className={`btn ${Styles.linepayBtn}`}
+                                        style={{
+                                          backgroundColor: '#2f9456',
+                                          color: 'white',
+                                        }}
+                                        onClick={() => {
+                                          let cp = v.cp !== null ? v.cp : 0
+                                          let totalPrice =
+                                            v.item_price * v.item_qty
+                                          let disTotalPrice = totalPrice - cp
+                                          let price =
+                                            (totalPrice *
+                                              (v.item_price / disTotalPrice)) /
+                                            v.item_qty
+                                          let newPrice = Math.round(price)
+                                          const formData = {
+                                            order_id: v.id,
+                                            user_id: auth.userData.id,
+                                            amount:
+                                              v.item_qty * newPrice +
+                                              1 * v.shipment_fee,
+                                            products: [
+                                              {
+                                                id: 1,
+                                                name: v.product_name,
+                                                quantity: v.item_qty,
+                                                price: newPrice,
+                                              },
+                                              {
+                                                id: 2,
+                                                name: '運費',
+                                                quantity: 1,
+                                                price: v.shipment_fee,
+                                              },
+                                            ],
+                                          }
+                                          createOrder(formData)
+                                        }}
+                                      >
+                                        <strong>去付款</strong>
+                                      </button>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <button
+                                        className="btn"
+                                        style={{
+                                          backgroundColor: 'gray',
+                                          color: 'white',
+                                          cursor: 'not-allowed',
+                                        }}
+                                      >
+                                        <strong>您已付款</strong>
+                                      </button>
+                                    </>
+                                  )}
                                   <div className="row g-3 align-items-center justify-content-end">
                                     <div className="col-auto w-auto ">
                                       <h5 style={{ color: '#EBC1EB' }}>
                                         {' '}
-                                        等候賣家出貨...
+                                        <strong>等候賣家出貨中...</strong>
                                       </h5>
                                     </div>
-                                  </div>
-
-                                  <div className="iconbar">
-                                    <i className="bi bi-suit-heart"></i>
-                                    <i className="bi bi-trash3"></i>
                                   </div>
                                 </div>
                               </div>
@@ -171,49 +396,12 @@ export default function OrderList() {
                     })}
                 </>
               )}
-              <div className="card mb-3 border-0 cart-card">
-                <div className="row g-0">
-                  <div className="col-md-3">
-                    <img
-                      src="./images/cart-1.jpeg"
-                      className="img-fluid rounded-start"
-                      alt="..."
-                    />
-                  </div>
-                  <div className="col-md-9">
-                    <div className="card-body">
-                      <h5 className="card-title card-text d-flex justify-content-between align-items-center">
-                        Nike Air Force 1 PLT.AF.ORM <span>$4,000.00</span>
-                      </h5>
-                      <p className="card-text">
-                        Pale Ivory/Light Orewood Brown/白/Summit White
-                      </p>
-
-                      <div className="row g-3 align-items-center justify-content-end">
-                        <div className="col-auto">
-                          <Button href="#" variant="outline-warning">
-                            Link
-                          </Button>
-                        </div>
-                        <div className="col-auto  w-auto ">
-                          <Button href="#" variant="outline-warning">
-                            Link
-                          </Button>
-                        </div>
-                      </div>
-
-                      <div className="iconbar">
-                        <i className="bi bi-suit-heart"></i>
-                        <i className="bi bi-trash3"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
               <hr />
             </div>
-            <div className="col-sm-4">
-              <h4 className="mb-3">小炭點</h4>
+            <div className="col-sm-4 mt-2">
+              <h4 className="mb-3">
+                <strong>小碳點</strong>
+              </h4>
 
               <p className="card-text d-flex justify-content-between align-items-center">
                 目前點數 <span></span>

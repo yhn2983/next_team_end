@@ -7,18 +7,20 @@ export default function OrderListNav({ pageName = '' }) {
 
   return (
     <>
-      <nav className={Styles.navbarOrder}>
+      <nav className={`px-lg-4 mt-4 ${Styles.navbarOrder}`}>
         {/* <label>
   <FaAlignJustify />
 </label>
 <input type="checkbox" name="check" id="checkBtn" /> */}
-        <ul>
+        <ul style={{ borderRadius: '10px' }}>
           <li>
             <Link
               href="/buyer/order-list"
               style={pageName === 'od' ? myStyle : {}}
             >
-              全部訂單
+              <span style={{ color: 'black' }}>
+                <strong>全部訂單</strong>
+              </span>
             </Link>
           </li>
           <li>
@@ -26,7 +28,9 @@ export default function OrderListNav({ pageName = '' }) {
               href="/buyer/order-list-unsend"
               style={pageName === 'od-unsend' ? myStyle : {}}
             >
-              待出貨
+              <span style={{ color: 'black' }}>
+                <strong>待出貨</strong>
+              </span>
             </Link>
           </li>
           <li>
@@ -34,7 +38,9 @@ export default function OrderListNav({ pageName = '' }) {
               href="/buyer/order-list-unfinished"
               style={pageName === 'od-unfi' ? myStyle : {}}
             >
-              待收貨
+              <span style={{ color: 'black' }}>
+                <strong>待收貨</strong>
+              </span>
             </Link>
           </li>
           <li>
@@ -42,7 +48,9 @@ export default function OrderListNav({ pageName = '' }) {
               href="/buyer/order-list-finished"
               style={pageName === 'od-fi' ? myStyle : {}}
             >
-              已完成
+              <span style={{ color: 'black' }}>
+                <strong>已完成</strong>
+              </span>
             </Link>
           </li>
           <li>
@@ -50,7 +58,9 @@ export default function OrderListNav({ pageName = '' }) {
               href="/buyer/bargain-buyer-req"
               style={pageName === 'bargain-buyer' ? myStyle : {}}
             >
-              我的議價要求
+              <span style={{ color: 'black' }}>
+                <strong>我的議價邀請</strong>
+              </span>
             </Link>
           </li>
         </ul>

@@ -13,6 +13,8 @@ import OrderListNav from '@/components/orderList/order-list-nav'
 import { BUYER_ORDER_FIN } from '@/configs/configs-buyer'
 import DefaultLayout from '@/components/common/default-layout'
 import Styles from '@/styles/buyer.module.css'
+import Link from 'next/link'
+import Head from 'next/head'
 
 export default function OrderList() {
   const router = useRouter()
@@ -97,7 +99,10 @@ export default function OrderList() {
   return (
     <>
       <DefaultLayout pageName="bargain-buyer">
-        <div className={`${Styles.orderList}`}>
+        <Head>
+          <title>我的議價邀請 | DEAL-2ND HAND SHOP</title>
+        </Head>
+        <div className={`px-lg-5 mb-5 ${Styles.orderList}`}>
           <OrderListNav pageName="bargain-buyer" />
           {!auth ? (
             alert('請先登入')
@@ -105,10 +110,9 @@ export default function OrderList() {
             <div>...loading</div>
           ) : (
             <>
-              <h4 className="mb-3"> 我的議價請求</h4>
-              <Table striped bordered hover size="sm">
+              <Table striped bordered hover size="sm" className=" mt-4">
                 <thead>
-                  <tr className="table-dark">
+                  <tr className="table-dark text-nowrap text-center">
                     <th>id</th>
                     <th>商品</th>
                     <th>買家</th>
@@ -122,33 +126,42 @@ export default function OrderList() {
                 <tbody>
                   {bargainData.rows.map((v, i) => (
                     <tr key={i}>
-                      <td>{v.id}</td>
-                      <td>{v.product_name}</td>
-                      <td>{v.nickname}</td>
-
-                      <td>
+                      <td className="text-center align-middle">
+                        <strong>{v.id}</strong>
+                      </td>
+                      <td
+                        className="text-wrap text-truncate"
+                        style={{ maxWidth: '150px' }}
+                      >
+                        {v.product_name}
+                      </td>
+                      <td className="text-center align-middle">{v.nickname}</td>
+                      <td className="text-center align-middle">
                         {v.ans_num
                           ? v.ans_num == 1
                             ? '同意'
                             : '不同意'
                           : '尚未回應'}
                       </td>
-                      <td>{v.after_bargin_price}</td>
-                      <td>
+                      <td className="text-center align-middle">
+                        {v.after_bargin_price}
+                      </td>
+                      <td className="text-center align-middle">
                         {v.ans_num ? (
                           <>
                             <Button
                               href={`/buyer/checkout-bargain/${v.id}`}
-                              className={`${Styles.bargainBtn}`}
+                              className={`btn ${Styles.bargainBtn}`}
+                              style={{ border: 'none' }}
                             >
-                              結帳
+                              <strong>結帳</strong>
                             </Button>
                           </>
                         ) : (
                           '等待賣家回復...'
                         )}
                       </td>
-                      <td>
+                      <td className="text-center align-middle">
                         {' '}
                         <Button
                           href="#"
@@ -156,9 +169,9 @@ export default function OrderList() {
                             e.preventDefault() // 不跳頁
                             deleteItem(v.id)
                           }}
-                          className={`${Styles.bargainNotBtn}`}
+                          className={`btn ${Styles.bargainNotBtn}`}
                         >
-                          刪除
+                          <strong>刪除</strong>
                         </Button>
                       </td>
                     </tr>
