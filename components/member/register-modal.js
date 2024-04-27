@@ -261,7 +261,7 @@ export default function RegisterModal({ show, onHide }) {
                 setUser({
                   name: '陳桂林',
                   email: '12345678@gmail.com',
-                  nickname: '桂林仔',
+                  nickname: 'gray123',
                   password: '123456',
                   mobile: '0912345678',
                   birthday: '1992-01-01',

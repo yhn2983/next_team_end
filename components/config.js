@@ -54,3 +54,6 @@ export const GET_STORE_LIKE = `${API_SERVER}/api/users/getStoreLike`
 
 // 新增或更新賣場的追蹤狀態
 export const POST_STORE_LIKE = `${API_SERVER}/api/users/postStoreLike`
+
+// 取得追蹤的賣場列表
+export const GET_STORE_LIKE_LIST = `${API_SERVER}/api/users/getStoreLikeList`
