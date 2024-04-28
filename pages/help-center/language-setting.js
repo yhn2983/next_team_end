@@ -69,6 +69,17 @@ export default function LanguageSetting() {
           </div>
         </div>
         {/* Breadcrumb End */}
+        {/* language start */}
+        <div
+          className="text-center bg-light d-flex align-items-center justify-content-center"
+          style={{ height: '500px' }}
+        >
+          <h2 style={{ color: '#8e2626' }}>
+            <strong>目前尚在開發中...</strong>
+          </h2>
+        </div>
+
+        {/* language end */}
       </DefaultLayout>
     </>
   )
