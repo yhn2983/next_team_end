@@ -20,8 +20,12 @@ import LoadingBar from 'react-top-loading-bar'
 // hook------
 import { useAuth } from '@/context/auth-context'
 import { CouponAni } from '@/hooks/use-loader/components'
+import { useLoader } from '@/hooks/use-loader'
 
 export default function Coupon() {
+  const { loader } = useLoader()
+  const [isShow, setIsShow] = useState(true)
+
   // Router-----
   const router = useRouter()
 
@@ -132,6 +136,14 @@ export default function Coupon() {
       }, 50)
     }
   }, [isLoading])
+
+  useEffect(() => {
+    if (!isLoading) {
+      setTimeout(() => {
+        setIsShow(false)
+      }, 800)
+    }
+  })
 
   const display = (
     <>
@@ -296,7 +308,16 @@ export default function Coupon() {
   return (
     <>
       <LoadingBar progress={progress} />
-      {isLoading ? <Loader /> : display}
+      {isLoading ? (
+        <>
+          <Loader />
+        </>
+      ) : (
+        <>
+          {isShow ? loader() : ''}
+          {display}
+        </>
+      )}
     </>
   )
 }

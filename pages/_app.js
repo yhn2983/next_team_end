@@ -7,6 +7,8 @@ import { CartProvider } from '@/hooks/use-cart'
 import { LikeProvider } from '@/hooks/use-like'
 import { SocketProvider } from '@/context/socket-context'
 import Modal from 'react-modal'
+import { LoaderProvider } from '@/hooks/use-loader'
+import { CartLoader } from '@/hooks/use-loader/components'
 
 export default function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -18,11 +20,13 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <SocketProvider>
       <AuthContextProvider>
-        <LikeProvider>
-          <CartProvider>
-            <Component {...pageProps} />
-          </CartProvider>
-        </LikeProvider>
+        <LoaderProvider close={3} CustomLoader={CartLoader}>
+          <LikeProvider>
+            <CartProvider>
+              <Component {...pageProps} />
+            </CartProvider>
+          </LikeProvider>
+        </LoaderProvider>
       </AuthContextProvider>
     </SocketProvider>
   )

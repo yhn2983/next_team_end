@@ -1,7 +1,6 @@
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 // parts of pages
-
 import DefaultLayout from '@/components/common/default-layout'
 import CarouselS1 from '@/components/home/carousel/carousel'
 import Category from '@/components/home/category/category'
@@ -12,8 +11,12 @@ import Ad from '@/components/home/ad/ad'
 // loading bar & loading icon
 import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
+// hook
+import { useLoader } from '@/hooks/use-loader'
 
 export default function Home() {
+  const { loader } = useLoader()
+  const [show, setShow] = useState(true)
   const [isLoading, setIsLoading] = useState(true)
   const [progress, setProgress] = useState(0)
 
@@ -23,9 +26,17 @@ export default function Home() {
       setTimeout(() => {
         setIsLoading(false)
         setProgress(100)
-      }, 100)
+      }, 50)
     }
   }, [isLoading])
+
+  useEffect(() => {
+    if (!isLoading) {
+      setTimeout(() => {
+        setShow(false)
+      }, 1500)
+    }
+  })
 
   const display = (
     <>
@@ -46,7 +57,16 @@ export default function Home() {
   return (
     <>
       <LoadingBar progress={progress} />
-      {isLoading ? <Loader /> : display}
+      {isLoading ? (
+        <>
+          <Loader />
+        </>
+      ) : (
+        <>
+          {show ? loader() : ''}
+          {display}
+        </>
+      )}
     </>
   )
 }

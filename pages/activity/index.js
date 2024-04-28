@@ -12,8 +12,12 @@ import style from './activity.module.css'
 import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
 // hook------
+import { useLoader } from '@/hooks/use-loader'
 
 export default function Activity() {
+  const { loader } = useLoader()
+  const [isShow, setIsShow] = useState(true)
+
   // Loading bar-----
   const [isLoading, setIsLoading] = useState(true)
   const [progress, setProgress] = useState(0)
@@ -26,6 +30,14 @@ export default function Activity() {
       }, 50)
     }
   }, [isLoading])
+
+  useEffect(() => {
+    if (!isLoading) {
+      setTimeout(() => {
+        setIsShow(false)
+      }, 800)
+    }
+  })
 
   const display = (
     <>
@@ -76,7 +88,7 @@ export default function Activity() {
                 alt=""
                 width={600}
                 height={300}
-                style={{ objectFit: 'cover' }}
+                style={{ objectFit: 'cover', borderRadius: '10px' }}
               />
             </div>
           </div>
@@ -89,7 +101,16 @@ export default function Activity() {
   return (
     <>
       <LoadingBar progress={progress} />
-      {isLoading ? <Loader /> : display}
+      {isLoading ? (
+        <>
+          <Loader />
+        </>
+      ) : (
+        <>
+          {isShow ? loader() : ''}
+          {display}
+        </>
+      )}
     </>
   )
 }

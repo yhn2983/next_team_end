@@ -34,11 +34,13 @@ import LoadingBar from 'react-top-loading-bar'
 import { useCart } from '@/hooks/use-cart'
 import { useLike } from '@/hooks/use-like'
 import { useAuth } from '@/context/auth-context'
+import { useLoader } from '@/hooks/use-loader'
 
 export default function Detail() {
+  const { loader } = useLoader()
+  const [isShow, setIsShow] = useState(true)
   // Router-----
   const router = useRouter()
-
   const [show, setShow] = useState(false)
 
   // Products-----
@@ -370,9 +372,17 @@ export default function Detail() {
       setTimeout(() => {
         setIsLoading(false)
         setProgress(100)
-      }, 300)
+      }, 50)
     }
   }, [isLoading])
+
+  useEffect(() => {
+    if (!isLoading) {
+      setTimeout(() => {
+        setIsShow(false)
+      }, 800)
+    }
+  })
 
   const display = (
     <>
@@ -998,7 +1008,16 @@ export default function Detail() {
   return (
     <>
       <LoadingBar progress={progress} />
-      {isLoading ? <Loader /> : display}
+      {isLoading ? (
+        <>
+          <Loader />
+        </>
+      ) : (
+        <>
+          {isShow ? loader() : ''}
+          {display}
+        </>
+      )}
     </>
   )
 }

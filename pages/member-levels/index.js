@@ -1,15 +1,11 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import { SEND_EMAIL } from '@/configs/config-r'
 // import Image from 'next/image'
 // pages-----
 import DefaultLayout from '@/components/common/default-layout'
 // style-----
 import style from './memberLevels.module.css'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-const MySwal = withReactContent(Swal)
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/scrollbar'
@@ -22,32 +18,11 @@ import { Keyboard, Scrollbar, Navigation, Pagination } from 'swiper/modules'
 import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
 // hook------
+import { useLoader } from '@/hooks/use-loader'
 
 export default function MemberLevels() {
-  const slides = Array.from({ length: 1000 }).map(
-    (el, index) => `Slide ${index + 1}`
-  )
-
-  // send mail
-  const notifySuccess = () => {
-    MySwal.fire({
-      title: `您的訊息已送出`,
-      text: '請稍待3-5個工作天，我們會盡快回覆您',
-      icon: 'success',
-      confirmButtonText: '關閉',
-      confirmButtonColor: '#3085d6',
-    })
-  }
-
-  const notifyFail = () => {
-    MySwal.fire({
-      title: `您的訊息未順利送出`,
-      text: '請稍待再嘗試，謝謝！',
-      icon: 'info',
-      confirmButtonText: '關閉',
-      confirmButtonColor: '#3085d6',
-    })
-  }
+  const { loader } = useLoader()
+  const [isShow, setIsShow] = useState(true)
 
   // Loading bar-----
   const [isLoading, setIsLoading] = useState(true)
@@ -61,6 +36,14 @@ export default function MemberLevels() {
       }, 50)
     }
   }, [isLoading])
+
+  useEffect(() => {
+    if (!isLoading) {
+      setTimeout(() => {
+        setIsShow(false)
+      }, 800)
+    }
+  })
 
   const display = (
     <>
@@ -624,7 +607,16 @@ export default function MemberLevels() {
   return (
     <>
       <LoadingBar progress={progress} />
-      {isLoading ? <Loader /> : display}
+      {isLoading ? (
+        <>
+          <Loader />
+        </>
+      ) : (
+        <>
+          {isShow ? loader() : ''}
+          {display}
+        </>
+      )}
     </>
   )
 }

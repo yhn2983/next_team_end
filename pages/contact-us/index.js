@@ -17,8 +17,12 @@ import { FaRegFaceSmileWink } from 'react-icons/fa6'
 import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
 // hook------
+import { useLoader } from '@/hooks/use-loader'
 
 export default function ContactUs() {
+  const { loader } = useLoader()
+  const [isShow, setIsShow] = useState(true)
+
   // send mail
   const notifySuccess = () => {
     MySwal.fire({
@@ -103,6 +107,14 @@ export default function ContactUs() {
       }, 50)
     }
   }, [isLoading])
+
+  useEffect(() => {
+    if (!isLoading) {
+      setTimeout(() => {
+        setIsShow(false)
+      }, 800)
+    }
+  })
 
   const display = (
     <>
@@ -236,7 +248,16 @@ export default function ContactUs() {
   return (
     <>
       <LoadingBar progress={progress} />
-      {isLoading ? <Loader /> : display}
+      {isLoading ? (
+        <>
+          <Loader />
+        </>
+      ) : (
+        <>
+          {isShow ? loader() : ''}
+          {display}
+        </>
+      )}
     </>
   )
 }
