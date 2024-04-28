@@ -34,7 +34,6 @@ export default function Checkout() {
   }, [router.query])
 
   console.log(productData)
-  console.log(productData.rows)
 
   // -----------
   //--議價部分
@@ -83,6 +82,7 @@ export default function Checkout() {
     buyer_id: '1',
     item_qty: '',
     carbon_points_available: [],
+    after_bargin_price: null,
   })
 
   //設一個狀態儲存totalPrice
@@ -156,7 +156,7 @@ export default function Checkout() {
     }
   }, [auth])
   console.log({ auth })
-  console.log({ formData })
+
   //取得購物車的資料
 
   useEffect(() => {
@@ -267,22 +267,35 @@ export default function Checkout() {
                         </div>
                       </div>
                       <div className="col-md-6 form-group">
-                        <label htmlFor="total_amount">數量</label>
-                        <input
-                          className="form-control"
-                          type="number"
-                          min="1"
-                          placeholder="請選擇數量"
-                          name="total_amount"
-                          onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              total_amount: e.target.value,
-                            })
-                          }
-                          readOnly
-                          value={formData.total_amount}
-                        />
+                        <label htmlFor="carbon_points_have">小碳點數量</label>
+                        {productData.ct &&
+                          productData.ct.map((v, i) => {
+                            return (
+                              <input
+                                key={i}
+                                className="form-control"
+                                type="number"
+                                min="0"
+                                max={parseInt(v.carbon_points_have)}
+                                placeholder="請選擇數量"
+                                name="carbon_points_have"
+                                onBlur={(e) =>
+                                  setFormData({
+                                    ...formData,
+                                    total_price: formData.product_price.map(
+                                      (val, ind) => {
+                                        return ind == 0
+                                          ? +val - +e.target.value
+                                          : val
+                                      }
+                                    ),
+                                  })
+                                }
+
+                                // value={}
+                              />
+                            )
+                          })}
                       </div>
                       <div className="col-md-6 form-group">
                         <label htmlFor="shipment">寄送方式</label>
@@ -368,12 +381,12 @@ export default function Checkout() {
                         <table class="table">
                           <thead>
                             <tr>
-                              <th scope="col">#</th>
-                              <th scope="col">First</th>
-                              <th scope="col">Last</th>
-                              <th scope="col">Handle</th>
-                              <th scope="col">Handle</th>
-                              <th scope="col">Handle</th>
+                              <th scope="col">商品名稱 </th>
+                              <th scope="col">優惠卷</th>
+                              <th scope="col">單價</th>
+                              <th scope="col">數量</th>
+                              <th scope="col">總價</th>
+                              <th scope="col">議價</th>
                             </tr>{' '}
                           </thead>
                           <tbody>
@@ -421,11 +434,37 @@ export default function Checkout() {
                                             }}
                                             value={formData.discount_coupon[i]}
                                           >
-                                            <option value="0">
+                                            {/* <option value="0">
                                               選擇優惠卷
                                             </option>
                                             <option value="1">運費半價</option>
-                                            <option value="2">免運</option>
+                                            <option value="2">免運</option> */}
+                                            {/* {productData.cp &&
+                                              productData.cp.map((v, i) => {
+                                                return (
+                                                  <option
+                                                    value={`${v.coupon_discount}`}
+                                                    key={i}
+                                                  >
+                                                    {v.coupon_name}
+                                                  </option>
+                                                )
+                                              })} */}
+
+                                            {productData.cp &&
+                                              productData.cp.find(
+                                                (v) => v.coupon_discount == 30
+                                              ) && (
+                                                <option value="1">
+                                                  運費半價
+                                                </option>
+                                              )}
+                                            {productData.cp &&
+                                              productData.cp.find(
+                                                (v) => v.coupon_discount == 60
+                                              ) && (
+                                                <option value="2">免運</option>
+                                              )}
                                           </select>
                                         </div>
                                       </div>
@@ -468,7 +507,7 @@ export default function Checkout() {
                       </div> */}
                       <div className="d-flex justify-content-between">
                         <p>運費</p>
-                        <p>{formData.shipment_fee}</p>
+                        <p>{formData.shipment_fee[0]}</p>
                       </div>{' '}
                     </div>{' '}
                     <div className="pt-2">

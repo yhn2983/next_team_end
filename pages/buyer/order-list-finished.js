@@ -10,11 +10,24 @@ import { useState, useEffect } from 'react'
 import OrderListNav from '@/components/orderList/order-list-nav'
 import { BUYER_ORDER_FIN } from '@/configs/configs-buyer'
 import DefaultLayout from '@/components/common/default-layout'
+import Modal from 'react-bootstrap/Modal'
 
 export default function OrderList() {
   const router = useRouter()
 
   const { checkAuth, auth } = useAuth()
+
+  //modal
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+  //---
+
+  //--抓取order-items
+  const [evaData, setEvaData] = useState()
+
+  //----
+
   const [data, setData] = useState({
     success: false,
     page: 0,
@@ -81,9 +94,16 @@ export default function OrderList() {
                             <div className="row g-0">
                               <div className="col-md-3">
                                 <img
-                                  src={`/${
-                                    v.product_photos.match(/[^,]+\.jpg/)[0]
-                                  }`}
+                                  src={
+                                    v.product_photos &&
+                                    v.product_photos.match(/[^,]+\.jpg/)
+                                      ? `/${
+                                          v.product_photos.match(
+                                            /[^,]+\.jpg/
+                                          )[0]
+                                        }`
+                                      : ''
+                                  }
                                   className="img-fluid rounded-start"
                                   alt="..."
                                 />
@@ -116,9 +136,13 @@ export default function OrderList() {
                                     </div>
                                     <div className="col-auto">
                                       <Button
-                                        href={`/buyer/evaluation/${v.id}`}
+                                        // href={`/buyer/evaluation/${v.id}`}
                                         variant="outline-warning"
                                         className={`${Styles.btn}`}
+                                        onClick={(e) => {
+                                          setEvaData(v.id)
+                                          handleShow()
+                                        }}
                                       >
                                         評論
                                       </Button>
@@ -160,6 +184,45 @@ export default function OrderList() {
             </div>
           </div>
         </div>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>請選擇要評論的商品</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {' '}
+            {!data.rows ? (
+              <div>loading</div>
+            ) : (
+              data.rows
+                .filter((v) => {
+                  return v.id == evaData
+                })
+                .map((v, i) => {
+                  return (
+                    <div key={i}>
+                      <p>{v.items_id}</p>
+                      <p>{v.product_name}</p>
+                      <p>
+                        {' '}
+                        <Button
+                          variant="outline-warning"
+                          href={`/buyer/evaluation/${v.items_id}`}
+                        >
+                          前往評論
+                        </Button>
+                      </p>
+                      <hr />
+                    </div>
+                  )
+                })
+            )}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={handleClose}>
+              暫時不要
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </DefaultLayout>
     </>
   )

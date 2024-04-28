@@ -118,9 +118,16 @@ export default function OrderList() {
                             <div className="row g-0">
                               <div className="col-md-3">
                                 <img
-                                  src={`/${
-                                    v.product_photos.match(/[^,]+\.jpg/)[0]
-                                  }`}
+                                  src={
+                                    v.product_photos &&
+                                    v.product_photos.match(/[^,]+\.jpg/)
+                                      ? `/${
+                                          v.product_photos.match(
+                                            /[^,]+\.jpg/
+                                          )[0]
+                                        }`
+                                      : ''
+                                  }
                                   className="img-fluid rounded-start"
                                   alt="..."
                                 />

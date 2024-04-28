@@ -2,8 +2,8 @@ import React from 'react'
 import Styles from '@/styles/evalute.module.css'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { EVALUATION } from '@/configs/configs-buyer'
-import { EVALUATION_GET } from '@/configs/configs-buyer'
+import { EVALUATION_BARTER } from '@/configs/configs-buyer'
+import { EVALUATION_BARTER_EDIT } from '@/configs/configs-buyer'
 import { useRouter } from 'next/router'
 import DefaultLayout from '@/components/common/default-layout'
 
@@ -55,7 +55,7 @@ export default function Evaluation() {
     //   rating: rating,
     // }))
     console.log(formData)
-    const r = await fetch(`${EVALUATION}/${eid}`, {
+    const r = await fetch(`${EVALUATION_BARTER_EDIT}/${eid}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ export default function Evaluation() {
 
   useEffect(() => {
     // if (!eid) return // 如果沒有 sid 的值, 就不用發 AJAX
-    fetch(`${EVALUATION_GET}/${eid}`, {
+    fetch(`${EVALUATION_BARTER}/${eid}`, {
       headers: { 'Content-Type': 'application/json' },
     })
       .then((r) => r.json())

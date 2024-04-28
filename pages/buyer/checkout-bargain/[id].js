@@ -45,6 +45,7 @@ export default function CheckoutBargain() {
     buyer_id: '1',
     item_qty: '',
     carbon_points_available: [],
+    after_bargin_price: null,
   })
   //設一個狀態儲存totalPrice
   const [totalPrice, setTotalPrice] = useState([])
@@ -67,6 +68,7 @@ export default function CheckoutBargain() {
       let shipmentFee = []
       let discountCoupon = []
       let carbonPointsAvailable = []
+      let newBargain = productData.rows.after_bargin_price
 
       productData.rows.forEach((v) => {
         newProductId.push(v.id)
@@ -130,7 +132,7 @@ export default function CheckoutBargain() {
     console.log(result)
     if (result) {
       alert('資料新增成功')
-      router.push('/address-book')
+      router.push('/buyer/order-list')
     } else {
       alert('資料沒有新增')
     }
