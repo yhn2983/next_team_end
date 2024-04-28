@@ -19,6 +19,7 @@ import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
 // hook------
 import { useAuth } from '@/context/auth-context'
+import { CouponAni } from '@/hooks/use-loader/components'
 
 export default function Coupon() {
   // Router-----
@@ -111,6 +112,14 @@ export default function Coupon() {
     }
   }
 
+  // counpon Animation
+  const [move, setMove] = useState(true)
+  useEffect(() => {
+    setTimeout(() => {
+      setMove(false)
+    }, 9000)
+  })
+
   // Loading bar-----
   const [isLoading, setIsLoading] = useState(true)
   const [progress, setProgress] = useState(0)
@@ -163,15 +172,22 @@ export default function Coupon() {
           <div className="row px-xl-5 bg-light">
             <div className="col-lg-12 px-lg-5">
               <div
-                className="contact-form p-5 text-center"
+                className="contact-form p-3 text-center d-flex align-items-center justify-content-center"
                 style={{ color: '#8e2626' }}
               >
-                <h4>
-                  <strong>想省運費嗎？登入會員後領取！</strong>
-                </h4>
-                <h4>
-                  <strong>人人都有份！</strong>
-                </h4>
+                {move ? (
+                  <CouponAni style={{ width: '100px', height: '100px' }} />
+                ) : (
+                  <img src="/couponImg.png" alt="" />
+                )}
+                <div className="">
+                  <h4>
+                    <strong>想省運費嗎？登入會員後領取！</strong>
+                  </h4>
+                  <h4>
+                    <strong>人人都有份！</strong>
+                  </h4>
+                </div>
               </div>
             </div>
           </div>
