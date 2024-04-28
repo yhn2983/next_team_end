@@ -287,6 +287,22 @@ export default function BarterInvite() {
                               您尚未填寫運送資訊
                             </span>
                           ) : null}
+                          {data.ob.find(
+                            (v4) =>
+                              v4.id === v.id &&
+                              v4.complete_status_m1 == 2 &&
+                              v4.complete_status_m2 == 2
+                          ) ? (
+                            <span style={{ color: 'blue' }}>訂單已完成</span>
+                          ) : null}
+                          {data.ob.find(
+                            (v4) =>
+                              v4.id === v.id &&
+                              (!v4.complete_date_m1 || !v4.complete_date_m2) &&
+                              (v4.name711_m2 || v4.name711_m1)
+                          ) ? (
+                            <span style={{ color: 'red' }}>訂單尚未完成</span>
+                          ) : null}
                         </span>
                       )
                     const result = () => {
@@ -546,6 +562,23 @@ export default function BarterInvite() {
                             <span style={{ color: 'red' }}>
                               您尚未填寫運送資訊
                             </span>
+                          ) : null}
+                          {data.ob.find(
+                            (v4) =>
+                              v4.id === v2.id &&
+                              v4.complete_status_m1 == 2 &&
+                              v4.complete_status_m2 == 2
+                          ) ? (
+                            <span style={{ color: 'blue' }}>訂單已完成</span>
+                          ) : null}
+                          {data.ob.find(
+                            (v4) =>
+                              v4.id === v2.id &&
+                              (!v4.complete_date_m1 || !v4.complete_date_m2) &&
+                              v4.name711_m2 &&
+                              v4.name711_m1
+                          ) ? (
+                            <span style={{ color: 'red' }}>訂單尚未完成</span>
                           ) : null}
                         </span>
                       )
