@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -54,23 +55,33 @@ import axios from 'axios'
 //  } <-- 將這個 } 移動到下面
 
 function IndexMaket() {
-  const [state, setState] = useState()
+  const [todoCounts, setTodoCounts] = useState({
+    pendingOrders: 0,
+    completedOrders: 0,
+    unlistedProducts: 0,
+    listedProducts: 0,
+  })
+  console.log('456')
+  console.log(todoCounts)
 
   useEffect(() => {
-    console.log('123')
-    const data = async () => {
+    const fetchData = async () => {
       try {
-        const statedata = await axios.get(`${BACKSTAGE_MANAGER}`)
-        setState(statedata)
-        console.log(
-          statedata,
-          'gkjohbesiughbuieoawbgnoiuewajngoujeksanviaoeujgfhbqeiajkfb'
-        )
+        const response = await axios.get(`${BACKSTAGE_MANAGER}`)
+        const data = response.data
+        console.log(response.data)
+        setTodoCounts({
+          pendingOrders: data.list.order_no[0].C || 0,
+          completedOrders: data.list.order_yes[0].D || 0,
+          unlistedProducts: data.list.prodduct_no[0].B || 0,
+          listedProducts: data.list.product_yes[0].A || 0,
+        })
       } catch (error) {
-        console.log(error)
+        console.error('Error fetching data:', error)
       }
     }
-    data()
+
+    fetchData()
   }, [])
   //123
   return (
@@ -84,7 +95,6 @@ function IndexMaket() {
             className={Styles['accordion-container']}
             id="accordionPanelsStayOpenExample"
           >
-            {/* 手风琴项 1 */}
             {/* 手风琴项 2 */}
             <div className={Styles['accordion-item']}>
               <h2
@@ -172,19 +182,27 @@ function IndexMaket() {
                 <h2 className={Styles['todo-title']}>待辦事項清單</h2>
                 <div className={Styles['todo-list']}>
                   <div className={Styles['item']}>
-                    <span className={Styles['count']}>0</span>
+                    <span className={Styles['count']}>
+                      {todoCounts.pendingOrders}
+                    </span>
                     <span className={Styles['label']}>待付款訂單</span>
                   </div>
                   <div className={Styles['item']}>
-                    <span className={Styles['count']}>0</span>
+                    <span className={Styles['count']}>
+                      {todoCounts.completedOrders}
+                    </span>
                     <span className={Styles['label']}>已完成訂單</span>
                   </div>
                   <div className={Styles['item']}>
-                    <span className={Styles['count']}>0</span>
+                    <span className={Styles['count']}>
+                      {todoCounts.unlistedProducts}
+                    </span>
                     <span className={Styles['label']}>未上架商品</span>
                   </div>
                   <div className={Styles['item']}>
-                    <span className={Styles['count']}>0</span>
+                    <span className={Styles['count']}>
+                      {todoCounts.listedProducts}
+                    </span>
                     <span className={Styles['label']}>已上架商品</span>
                   </div>
                 </div>
