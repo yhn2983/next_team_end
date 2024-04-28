@@ -17,8 +17,12 @@ import { FaRegFaceSmileWink } from 'react-icons/fa6'
 import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
 // hook------
+import { useLoader } from '@/hooks/use-loader'
 
 export default function ContactUs() {
+  const { loader } = useLoader()
+  const [isShow, setIsShow] = useState(true)
+
   // send mail
   const notifySuccess = () => {
     MySwal.fire({
@@ -30,8 +34,43 @@ export default function ContactUs() {
     })
   }
 
-  const handleSubmit = async (formData) => {
-    formData.preventDefault()
+  const notifyFail = () => {
+    MySwal.fire({
+      title: `您的訊息未順利送出`,
+      text: '請稍待再嘗試，謝謝！',
+      icon: 'info',
+      confirmButtonText: '關閉',
+      confirmButtonColor: '#3085d6',
+    })
+  }
+
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [subject, setSubject] = useState('')
+  const [message, setMessage] = useState('')
+
+  const handleName = (e) => {
+    setName(e.currentTarget.value)
+  }
+  const handleEmail = (e) => {
+    setEmail(e.currentTarget.value)
+  }
+  const handleSubject = (e) => {
+    setSubject(e.currentTarget.value)
+  }
+  const handleMessage = (e) => {
+    setMessage(e.currentTarget.value)
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const formData = {
+      name: name,
+      email: email,
+      subject: subject,
+      message: message,
+    }
 
     try {
       const r = await fetch(`${SEND_EMAIL}`, {
@@ -42,11 +81,14 @@ export default function ContactUs() {
         body: JSON.stringify(formData),
       })
 
-      if (r.success) {
+      if (r.status === 200) {
         notifySuccess()
-        formData.target.reset()
+        setName('')
+        setEmail('')
+        setSubject('')
+        setMessage('')
       } else {
-        alert('郵件發送失敗')
+        notifyFail()
       }
     } catch (e) {
       console.error('Error', e)
@@ -65,6 +107,14 @@ export default function ContactUs() {
       }, 50)
     }
   }, [isLoading])
+
+  useEffect(() => {
+    if (!isLoading) {
+      setTimeout(() => {
+        setIsShow(false)
+      }, 800)
+    }
+  })
 
   const display = (
     <>
@@ -110,17 +160,21 @@ export default function ContactUs() {
                     className="col-lg-7 mb-5"
                     style={{ paddingLeft: '120px' }}
                   >
-                    <div className="contact-form bg-light p-5 ">
+                    <div
+                      className={`contact-form bg-light p-5 ${style.bgHover}`}
+                      style={{ borderRadius: '10px' }}
+                    >
                       <div id="success"></div>
-                      <form name="sentMessage" id="contactForm">
+                      <form onSubmit={handleSubmit}>
                         <div className="control-group mb-4">
                           <input
                             type="text"
                             className="form-control"
                             name="name"
+                            value={name}
                             placeholder="您的姓名"
                             required="required"
-                            data-validation-required-message="Please enter your name"
+                            onChange={handleName}
                           />
                           <p className="help-block text-danger"></p>
                         </div>
@@ -129,9 +183,10 @@ export default function ContactUs() {
                             type="email"
                             className="form-control"
                             name="email"
+                            value={email}
                             placeholder="您的信箱"
                             required="required"
-                            data-validation-required-message="Please enter your email"
+                            onChange={handleEmail}
                           />
                           <p className="help-block text-danger"></p>
                         </div>
@@ -140,9 +195,10 @@ export default function ContactUs() {
                             type="text"
                             className="form-control"
                             name="subject"
+                            value={subject}
                             placeholder="訊息主旨"
                             required="required"
-                            data-validation-required-message="Please enter a subject"
+                            onChange={handleSubject}
                           />
                           <p className="help-block text-danger"></p>
                         </div>
@@ -151,9 +207,10 @@ export default function ContactUs() {
                             className="form-control"
                             rows="8"
                             name="message"
+                            value={message}
                             placeholder="您的訊息"
                             required="required"
-                            data-validation-required-message="Please enter your message"
+                            onChange={handleMessage}
                           ></textarea>
                           <p className="help-block text-danger"></p>
                         </div>
@@ -165,15 +222,6 @@ export default function ContactUs() {
                             style={{
                               backgroundColor: '#e96d3f',
                               color: 'white',
-                            }}
-                            onClick={(e) => {
-                              const formData = {
-                                name: e.target.name.value,
-                                email: e.target.email.value,
-                                subjuect: e.target.subjuect.value,
-                                message: e.target.message.value,
-                              }
-                              handleSubmit(formData)
                             }}
                           >
                             <span style={{ fontSize: '18px' }}>
@@ -200,7 +248,16 @@ export default function ContactUs() {
   return (
     <>
       <LoadingBar progress={progress} />
-      {isLoading ? <Loader /> : display}
+      {isLoading ? (
+        <>
+          <Loader />
+        </>
+      ) : (
+        <>
+          {isShow ? loader() : ''}
+          {display}
+        </>
+      )}
     </>
   )
 }

@@ -8,9 +8,6 @@ import DefaultLayout from '@/components/common/default-layout'
 import LoginPage from '@/components/member/login-modal'
 // style-----
 import style from './coupon.module.css'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-const MySwal = withReactContent(Swal)
 // react bootstrap
 // react icons-----
 import { FaHandPointRight } from 'react-icons/fa'
@@ -19,8 +16,12 @@ import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
 // hook------
 import { useAuth } from '@/context/auth-context'
+import { useLoader } from '@/hooks/use-loader'
 
-export default function Coupon() {
+export default function CouponList() {
+  const { loader } = useLoader()
+  const [isShow, setIsShow] = useState(true)
+
   // Router-----
   const router = useRouter()
 
@@ -66,7 +67,7 @@ export default function Coupon() {
   })
 
   useEffect(() => {
-    const member_id = auth.userData.id
+    const member_id = auth.userData.id ? auth.userData.id : null
     fetch(`${PROD_LIST}${location.search}?member_id=${member_id}`)
       .then((r) => r.json())
       .then((dataObj) => {
@@ -76,19 +77,6 @@ export default function Coupon() {
         console.error('Error fetching data:', e)
       })
   }, [router.query.member_id, auth.isAuth, auth.userData])
-
-  const notifySuccess = (coupon_name) => {
-    MySwal.fire({
-      title: `您已領取${coupon_name}`,
-      icon: 'success',
-      confirmButtonText: '關閉',
-      confirmButtonColor: '#3085d6',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        window.location.reload()
-      }
-    })
-  }
 
   // Loading bar-----
   const [isLoading, setIsLoading] = useState(true)
@@ -102,6 +90,14 @@ export default function Coupon() {
       }, 50)
     }
   }, [isLoading])
+
+  useEffect(() => {
+    if (!isLoading) {
+      setTimeout(() => {
+        setIsShow(false)
+      }, 800)
+    }
+  })
 
   const display = (
     <>
@@ -237,7 +233,16 @@ export default function Coupon() {
   return (
     <>
       <LoadingBar progress={progress} />
-      {isLoading ? <Loader /> : display}
+      {isLoading ? (
+        <>
+          <Loader />
+        </>
+      ) : (
+        <>
+          {isShow ? loader() : ''}
+          {display}
+        </>
+      )}
     </>
   )
 }

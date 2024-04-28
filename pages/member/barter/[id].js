@@ -27,8 +27,12 @@ import LoadingBar from 'react-top-loading-bar'
 // hook------
 import { useAuth } from '@/context/auth-context'
 import { useShip711StoreOpener } from '@/hooks/use-ship-711-store'
+import { useLoader } from '@/hooks/use-loader'
 
 export default function BarterCheckout() {
+  const { loader } = useLoader()
+  const [isShow, setIsShow] = useState(true)
+
   // Router-----
   const router = useRouter()
 
@@ -364,6 +368,14 @@ export default function BarterCheckout() {
       }, 300)
     }
   }, [isLoading])
+
+  useEffect(() => {
+    if (!isLoading) {
+      setTimeout(() => {
+        setIsShow(false)
+      }, 800)
+    }
+  })
 
   const display = (
     <>
@@ -1632,7 +1644,16 @@ export default function BarterCheckout() {
   return (
     <>
       <LoadingBar progress={progress} />
-      {isLoading ? <Loader /> : display}
+      {isLoading ? (
+        <>
+          <Loader />
+        </>
+      ) : (
+        <>
+          {isShow ? loader() : ''}
+          {display}
+        </>
+      )}
     </>
   )
 }

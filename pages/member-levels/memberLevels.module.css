@@ -8,6 +8,13 @@
   font-weight: 900;
 }
 
+.bgword{
+  background-image: url('/bgword2.png');
+  background-position: center center;
+  background-size: cover;
+  
+}
+
 .sendBtn{
   box-shadow: 0 0 10px gray;
   text-decoration: none;

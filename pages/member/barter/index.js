@@ -27,8 +27,12 @@ import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
 // hook------
 import { useAuth } from '@/context/auth-context'
+import { useLoader } from '@/hooks/use-loader'
 
 export default function BarterInvite() {
+  const { loader } = useLoader()
+  const [isShow, setIsShow] = useState(true)
+
   // Router-----
   const router = useRouter()
 
@@ -195,6 +199,14 @@ export default function BarterInvite() {
       }, 300)
     }
   }, [isLoading])
+
+  useEffect(() => {
+    if (!isLoading) {
+      setTimeout(() => {
+        setIsShow(false)
+      }, 800)
+    }
+  })
 
   const display = (
     <>
@@ -850,7 +862,16 @@ export default function BarterInvite() {
   return (
     <>
       <LoadingBar progress={progress} />
-      {isLoading ? <Loader /> : display}
+      {isLoading ? (
+        <>
+          <Loader />
+        </>
+      ) : (
+        <>
+          {isShow ? loader() : ''}
+          {display}
+        </>
+      )}
     </>
   )
 }

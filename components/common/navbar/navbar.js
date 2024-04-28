@@ -233,6 +233,16 @@ export default function CustomNavbar({ pageName = '' }) {
                         <strong>會員中心</strong>
                       </Dropdown.Item>
                       <Dropdown.Item
+                        href="/member-levels"
+                        style={{ fontSize: '20px' }}
+                      >
+                        <FaTreeCity
+                          className={(style.fs20, style.mr2)}
+                          style={{ color: '#0d8209' }}
+                        />
+                        &nbsp;<strong>會員等級</strong>
+                      </Dropdown.Item>
+                      <Dropdown.Item
                         href="#/action-2"
                         style={{ fontSize: '20px' }}
                       >
@@ -241,16 +251,6 @@ export default function CustomNavbar({ pageName = '' }) {
                           style={{ color: '#5a0982' }}
                         />
                         &nbsp;<strong>訂購紀錄</strong>
-                      </Dropdown.Item>
-                      <Dropdown.Item
-                        href="#/action-3"
-                        style={{ fontSize: '20px' }}
-                      >
-                        <FaTreeCity
-                          className={(style.fs20, style.mr2)}
-                          style={{ color: '#0d8209' }}
-                        />
-                        &nbsp;<strong>小碳點紀錄</strong>
                       </Dropdown.Item>
                       <Dropdown.Item
                         href="/coupon/list"
@@ -262,10 +262,7 @@ export default function CustomNavbar({ pageName = '' }) {
                         />
                         &nbsp;<strong>優惠券紀錄</strong>
                       </Dropdown.Item>
-                      <Dropdown.Item
-                        href="#/action-5"
-                        style={{ fontSize: '20px' }}
-                      >
+                      <Dropdown.Item style={{ fontSize: '20px' }}>
                         <RiLogoutBoxRFill className={(style.fs20, style.mr2)} />
                         &nbsp;
                         <strong>
@@ -301,6 +298,16 @@ export default function CustomNavbar({ pageName = '' }) {
                           }}
                         />
                         &nbsp;<strong> 註冊</strong>
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        href="/member-levels"
+                        style={{ fontSize: '20px' }}
+                      >
+                        <FaTreeCity
+                          className={(style.fs20, style.mr2)}
+                          style={{ color: '#0d8209' }}
+                        />
+                        &nbsp;<strong>會員等級</strong>
                       </Dropdown.Item>
                     </>
                   )}
