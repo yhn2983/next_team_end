@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -90,9 +89,9 @@ function IndexMaket() {
         <Head>
           <title>賣場中心 | DEAL-2ND HAND SHOP</title>
         </Head>
-        <div className={Styles['container']}>
+        <div className={`ps-5 ${Styles.container}`}>
           <div
-            className={Styles['accordion-container']}
+            className={`mt-3 ${Styles['accordion-container']}`}
             id="accordionPanelsStayOpenExample"
           >
             {/* 手风琴项 2 */}
@@ -115,7 +114,7 @@ function IndexMaket() {
                   aria-expanded="false"
                   aria-controls="panelsStayOpen-collapseTwo"
                 >
-                  訂單管理
+                  <strong>訂單管理</strong>
                 </span>
               </h2>
               <div
@@ -125,8 +124,13 @@ function IndexMaket() {
               >
                 <div className={Styles['accordion-content']}>
                   <div className={Styles['accordion-body']}>
-                    <Link href="/Maket/unpaid-maket">
-                      <div className="accordion-body">我的銷售</div>
+                    <Link
+                      href="/Maket/unpaid-maket"
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <div className="accordion-body">
+                        <strong>我的銷售</strong>
+                      </div>
                     </Link>
                   </div>
                 </div>
@@ -153,7 +157,7 @@ function IndexMaket() {
                   aria-expanded="false"
                   aria-controls="panelsStayOpen-collapseThree"
                 >
-                  商品管理
+                  <strong>商品管理</strong>
                 </span>
               </h2>
               <div
@@ -163,11 +167,21 @@ function IndexMaket() {
               >
                 <div className={Styles['accordion-content']}>
                   <div className={Styles['accordion-body']}>
-                    <Link href="/Maket/return">
-                      <div className="accordion-body">我的商品</div>
+                    <Link
+                      href="/Maket/return"
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <div className="accordion-body">
+                        <strong>我的商品</strong>
+                      </div>
                     </Link>
-                    <Link href="/Maket/list-maket">
-                      <div className="accordion-body">新增商品</div>
+                    <Link
+                      href="/Maket/list-maket"
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <div className="accordion-body">
+                        <strong>新增商品</strong>
+                      </div>
                     </Link>
                   </div>
                 </div>
@@ -185,25 +199,33 @@ function IndexMaket() {
                     <span className={Styles['count']}>
                       {todoCounts.pendingOrders}
                     </span>
-                    <span className={Styles['label']}>待付款訂單</span>
+                    <span className={Styles['label']}>
+                      <strong>待付款訂單</strong>
+                    </span>
                   </div>
                   <div className={Styles['item']}>
                     <span className={Styles['count']}>
                       {todoCounts.completedOrders}
                     </span>
-                    <span className={Styles['label']}>已完成訂單</span>
+                    <span className={Styles['label']}>
+                      <strong>已完成訂單</strong>
+                    </span>
                   </div>
                   <div className={Styles['item']}>
                     <span className={Styles['count']}>
                       {todoCounts.unlistedProducts}
                     </span>
-                    <span className={Styles['label']}>未上架商品</span>
+                    <span className={Styles['label']}>
+                      <strong>未上架商品</strong>
+                    </span>
                   </div>
                   <div className={Styles['item']}>
                     <span className={Styles['count']}>
                       {todoCounts.listedProducts}
                     </span>
-                    <span className={Styles['label']}>已上架商品</span>
+                    <span className={Styles['label']}>
+                      <strong>已上架商品</strong>
+                    </span>
                   </div>
                 </div>
               </div>
