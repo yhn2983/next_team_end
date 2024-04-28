@@ -23,6 +23,7 @@
     "firebase": "^10.10.0",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
+    "lottie-react": "^2.4.0",
     "mdb-react-ui-kit": "^8.0.0",
     "next": "^14.0.1",
     "prop-types": "^15.8.1",
