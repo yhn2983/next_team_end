@@ -146,7 +146,7 @@ export default function ContactUs() {
               {/* Contact Start */}
               <div className="container-fluid mt-3 px-5">
                 <div className="d-flex justify-content-center">
-                  <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4">
+                  <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4 text-center">
                     <span className="pr-3" style={{ color: '#8e2626' }}>
                       <strong>
                         聯絡我們：留下您的訊息
@@ -156,10 +156,7 @@ export default function ContactUs() {
                   </h2>
                 </div>
                 <div className="row px-xl-5 mt-4">
-                  <div
-                    className="col-lg-7 mb-5"
-                    style={{ paddingLeft: '120px' }}
-                  >
+                  <div className="col-lg-7 col-md-12 mb-5 mx-auto px-lg-5">
                     <div
                       className={`contact-form bg-light p-5 ${style.bgHover}`}
                       style={{ borderRadius: '10px' }}
@@ -223,16 +220,37 @@ export default function ContactUs() {
                               backgroundColor: '#e96d3f',
                               color: 'white',
                             }}
+                            onClick={() => {}}
                           >
                             <span style={{ fontSize: '18px' }}>
                               <strong>送出訊息</strong>
+                            </span>
+                          </button>
+                          <button
+                            type="button"
+                            className={`btn py-2 px-3 ms-3 ${style.sendBtn}`}
+                            style={{
+                              backgroundColor: '#3168e9',
+                              color: 'white',
+                            }}
+                            onClick={() => {
+                              setName('陳大東先生')
+                              setEmail('moritairohadesu@gmail.com')
+                              setSubject('您好，欲了解貴司廣告合作模式')
+                              setMessage(
+                                '您好，我是娛樂公司的行銷部主任，近期注意到貴司在線上網路的啟用，欲了解貴司的廣告合作模式，煩請撥空聯繫。謝謝！'
+                              )
+                            }}
+                          >
+                            <span style={{ fontSize: '18px' }}>
+                              <strong>一鍵輸入</strong>
                             </span>
                           </button>
                         </div>
                       </form>
                     </div>
                   </div>
-                  <div className="col-lg-5 mb-3 mt-3">
+                  <div className="col-lg-5 col-md-12 mb-3 mt-3 text-center px-lg-5">
                     <img src="/logo9.png" alt="" width={500} height={500} />
                   </div>
                 </div>
