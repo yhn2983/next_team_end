@@ -337,6 +337,9 @@ export default function Like() {
       ) : (
         <>
           <DefaultLayout>
+            <Head>
+              <title>收藏商品 | DEAL-2ND HAND SHOP</title>
+            </Head>
             <div className="row mt-5">
               <div className="col-12 text-center">
                 <Link
