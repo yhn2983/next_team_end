@@ -15,13 +15,14 @@ import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
 import { Navbar, Nav } from 'react-bootstrap'
 // react icons-----
-import { TbMessage } from 'react-icons/tb'
+import { TbMessage, TbArrowsExchange } from 'react-icons/tb'
 import {
   FaUser,
   FaClipboardList,
   FaShoppingCart,
   FaHeart,
   FaHandPointRight,
+  FaHouseUser,
 } from 'react-icons/fa'
 import { IoLogIn, IoLanguage } from 'react-icons/io5'
 import { GiArchiveRegister } from 'react-icons/gi'
@@ -220,6 +221,16 @@ export default function CustomNavbar({ pageName = '' }) {
                         &nbsp;<strong>會員等級</strong>
                       </Dropdown.Item>
                       <Dropdown.Item
+                        href="/Maket/index-maket"
+                        style={{ fontSize: '20px' }}
+                      >
+                        <FaHouseUser
+                          className={(style.fs20, style.mr2)}
+                          style={{ color: '#5a7be8' }}
+                        />
+                        &nbsp;<strong>我的賣場</strong>
+                      </Dropdown.Item>
+                      <Dropdown.Item
                         href="/buyer/order-list"
                         style={{ fontSize: '20px' }}
                       >
@@ -227,7 +238,17 @@ export default function CustomNavbar({ pageName = '' }) {
                           className={(style.fs20, style.mr2)}
                           style={{ color: '#5a0982' }}
                         />
-                        &nbsp;<strong>訂購紀錄</strong>
+                        &nbsp;<strong>我的訂單</strong>
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        href="/member/barter"
+                        style={{ fontSize: '20px' }}
+                      >
+                        <TbArrowsExchange
+                          className={(style.fs20, style.mr2)}
+                          style={{ color: '#41ca73' }}
+                        />
+                        &nbsp;<strong>我的以物易物</strong>
                       </Dropdown.Item>
                       <Dropdown.Item
                         href="/coupon/list"
