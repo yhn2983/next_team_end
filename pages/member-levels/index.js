@@ -7,13 +7,7 @@ import DefaultLayout from '@/components/common/default-layout'
 // style-----
 import style from './memberLevels.module.css'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import {
-  EffectCoverflow,
-  Keyboard,
-  Scrollbar,
-  Navigation,
-  Pagination,
-} from 'swiper/modules'
+import { EffectCoverflow, Keyboard, Pagination } from 'swiper/modules'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css'
 import 'swiper/css/scrollbar'
