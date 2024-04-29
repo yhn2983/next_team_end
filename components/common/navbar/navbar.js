@@ -176,31 +176,8 @@ export default function CustomNavbar({ pageName = '' }) {
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item href="#/action-1">
-                    <div className="textBox d-flex align-items-center justify-content-between border-bottom border-2">
-                      <div className="boxLeft d-flex">
-                        <div className="mt-3 position-relative">
-                          <img
-                            className="border border-1 rounded-circle"
-                            src="/logo-sm.png"
-                            alt=""
-                            width={50}
-                            height={50}
-                          />
-                        </div>
-                        <div className="mx-2">
-                          <div className="boxId pt-2">
-                            <p>
-                              <strong>kjljkrh</strong>
-                            </p>
-                          </div>
-                          <div className="boxContent pt-0">
-                            <p>請問這個商品還有嗎?</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="boxRight pt-3 me-2">
-                        <p>時間</p>
-                      </div>
+                    <div className="textBox d-flex align-items-center justify-content-center border-bottom border-2">
+                      <strong>尚待開發中</strong>
                     </div>
                   </Dropdown.Item>
                 </Dropdown.Menu>
