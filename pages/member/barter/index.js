@@ -230,7 +230,7 @@ export default function BarterInvite() {
                     </Link>
                     <Link
                       className="breadcrumb-item text-dark"
-                      href="/member"
+                      href="/member/profile"
                       style={{ textDecoration: 'none', fontSize: '20px' }}
                     >
                       <span>會員中心</span>
