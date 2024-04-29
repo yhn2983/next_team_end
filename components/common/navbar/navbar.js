@@ -385,7 +385,7 @@ export default function CustomNavbar({ pageName = '' }) {
                     <strong>已經有想要的商品？</strong>
                   </h5>
                   <span>
-                    前往這裡&nbsp;
+                    <strong>前往這裡</strong>&nbsp;
                     <FaHandPointRight style={{ color: '#8e2626' }} />
                     &nbsp;
                     <Link href="/shop">
@@ -408,7 +408,7 @@ export default function CustomNavbar({ pageName = '' }) {
                     <strong>不知道從哪裡開始？</strong>
                   </h5>
                   <span style={{ paddingLeft: '25px' }}>
-                    試試這個&nbsp;
+                    <strong>試試這個</strong>&nbsp;
                     <FaHandPointRight style={{ color: '#8e2626' }} />
                     &nbsp;
                     <Link href="/shop/random-search">
