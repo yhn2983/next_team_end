@@ -1409,7 +1409,11 @@ export default function Shop() {
                             <li className={`page-item ${active}`} key={p}>
                               <Link
                                 className="page-link"
-                                style={{ color: active ? 'white' : '#e96d3f' }}
+                                style={{
+                                  color: active ? 'white' : '#e96d3f',
+                                  backgroundColor: active ? '#e96d3f' : 'white',
+                                  border: active ? '1px solid #e96d3f' : '',
+                                }}
                                 href={`?${usp}`}
                               >
                                 {p}
