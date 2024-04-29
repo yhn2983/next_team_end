@@ -243,7 +243,7 @@ export default function CustomNavbar({ pageName = '' }) {
                         &nbsp;<strong>會員等級</strong>
                       </Dropdown.Item>
                       <Dropdown.Item
-                        href="#/action-2"
+                        href="/buyer/order-list"
                         style={{ fontSize: '20px' }}
                       >
                         <FaClipboardList
