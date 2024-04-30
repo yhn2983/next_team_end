@@ -481,106 +481,112 @@ export default function Like() {
                       </tr>
                     </thead>
                     <tbody className="align-middle text-center">
-                      {prods.likeProd.map((v, i) => {
-                        return (
-                          <>
-                            <tr key={v.product_id}>
-                              <td>
-                                <input
-                                  type="checkbox"
-                                  onChange={() => {
-                                    handleChecked(v.product_id)
+                      {prods.likeProd.length !== 0 ? (
+                        prods.likeProd.map((v, i) => (
+                          <tr key={v.product_id}>
+                            <td>
+                              <input
+                                type="checkbox"
+                                onChange={() => {
+                                  handleChecked(v.product_id)
+                                }}
+                              />
+                            </td>
+                            <td>
+                              <button
+                                style={{ border: 'none' }}
+                                className="btn btn-sm"
+                                onClick={() => {
+                                  addItem(v)
+                                  const productData = {
+                                    member_id: auth.userData.id,
+                                    product_id: v.product_id,
+                                    p_photos: v.p_photos,
+                                    p_name: v.p_name,
+                                    p_price: v.p_price,
+                                    p_qty: 1,
+                                    total_price: v.p_price,
+                                    available_cp: v.available_cp,
+                                  }
+                                  console.log(productData)
+                                  cartClick(productData)
+                                }}
+                              >
+                                <FaCartPlus
+                                  className={`mb-1 ${style.trashBtn}`}
+                                  style={{
+                                    fontSize: '25px',
+                                    color: '#8e2626',
                                   }}
                                 />
-                              </td>
-                              <td>
-                                <button
-                                  style={{ border: 'none' }}
-                                  className="btn btn-sm"
-                                  onClick={() => {
-                                    addItem(v)
-                                    const productData = {
-                                      member_id: auth.userData.id,
-                                      product_id: v.product_id,
-                                      p_photos: v.p_photos,
-                                      p_name: v.p_name,
-                                      p_price: v.p_price,
-                                      p_qty: 1,
-                                      total_price: v.p_price,
-                                      available_cp: v.available_cp,
-                                    }
-                                    console.log(productData)
-                                    cartClick(productData)
-                                  }}
-                                >
-                                  <FaCartPlus
-                                    className={`mb-1 ${style.trashBtn}`}
-                                    style={{
-                                      fontSize: '25px',
-                                      color: '#8e2626',
-                                    }}
-                                  />
-                                </button>
-                              </td>
-                              <td>
-                                <Link href={`/shop/${v.product_id}`}>
-                                  <img
-                                    src={
-                                      v.p_photos?.includes(',')
-                                        ? `/${v.p_photos.split(',')[0]}`
-                                        : `/${v.p_photos}`
-                                    }
-                                    alt=""
-                                    width={150}
-                                    height={150}
-                                    style={{ objectFit: 'cover' }}
-                                  />
-                                </Link>
-                              </td>
-                              <td
-                                className="align-middle text-wrap"
-                                style={{ fontSize: '20px', width: '500px' }}
-                              >
-                                <Link
-                                  href={`/shop/${v.product_id}`}
-                                  style={{
-                                    textDecoration: 'none',
-                                    color: 'black',
-                                  }}
-                                >
-                                  {v.p_name}
-                                </Link>
-                              </td>
-                              <td
-                                className="align-middle"
-                                style={{ fontSize: '20px' }}
-                              >
-                                ${v.p_price?.toLocaleString()}
-                              </td>
-                              <td style={{ fontSize: '20px' }}>
-                                {v.available_cp}
-                              </td>
-                              <td className="align-middle">
-                                <button
-                                  style={{ border: 'none' }}
-                                  className="btn btn-sm"
-                                  onClick={() =>
-                                    deleteItem(v.p_name, v.product_id)
+                              </button>
+                            </td>
+                            <td>
+                              <Link href={`/shop/${v.product_id}`}>
+                                <img
+                                  src={
+                                    v.p_photos?.includes(',')
+                                      ? `/${v.p_photos.split(',')[0]}`
+                                      : `/${v.p_photos}`
                                   }
-                                >
-                                  <FaTrashCan
-                                    className={`mb-1 ${style.trashBtn}`}
-                                    style={{
-                                      fontSize: '20px',
-                                      color: '#8e2626',
-                                    }}
-                                  />
-                                </button>
-                              </td>
-                            </tr>
-                          </>
-                        )
-                      })}
+                                  alt=""
+                                  width={150}
+                                  height={150}
+                                  style={{ objectFit: 'cover' }}
+                                />
+                              </Link>
+                            </td>
+                            <td
+                              className="align-middle text-wrap"
+                              style={{ fontSize: '20px', width: '500px' }}
+                            >
+                              <Link
+                                href={`/shop/${v.product_id}`}
+                                style={{
+                                  textDecoration: 'none',
+                                  color: 'black',
+                                }}
+                              >
+                                {v.p_name}
+                              </Link>
+                            </td>
+                            <td
+                              className="align-middle"
+                              style={{ fontSize: '20px' }}
+                            >
+                              ${v.p_price?.toLocaleString()}
+                            </td>
+                            <td style={{ fontSize: '20px' }}>
+                              {v.available_cp}
+                            </td>
+                            <td className="align-middle">
+                              <button
+                                style={{ border: 'none' }}
+                                className="btn btn-sm"
+                                onClick={() =>
+                                  deleteItem(v.p_name, v.product_id)
+                                }
+                              >
+                                <FaTrashCan
+                                  className={`mb-1 ${style.trashBtn}`}
+                                  style={{
+                                    fontSize: '20px',
+                                    color: '#8e2626',
+                                  }}
+                                />
+                              </button>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="7" className="text-center py-5">
+                            <h2 style={{ color: '#8e2626' }}>
+                              <strong>目前沒有收藏商品...</strong>
+                            </h2>
+                          </td>
+                        </tr>
+                      )}
                     </tbody>
                   </table>
                 </div>
