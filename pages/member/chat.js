@@ -5,6 +5,7 @@ import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
 import ChatPageCom from '@/components/chat-app/ChatPageCom'
 import { useSocket } from '@/context/socket-context'
+import Head from 'next/head'
 
 export default function Chat() {
   const [isLoading, setIsLoading] = useState(true)
@@ -23,7 +24,12 @@ export default function Chat() {
 
   const display = (
     // <DefaultLayout pageName="home">
-    <ChatPageCom socket={socket} />
+    <>
+      <Head>
+        <title>聊天室 | DEAL-2ND HAND SHOP</title>
+      </Head>
+      <ChatPageCom socket={socket} />
+    </>
     // </DefaultLayout>
   )
 

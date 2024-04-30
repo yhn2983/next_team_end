@@ -26,7 +26,7 @@ import {
 import { IoLogIn, IoLanguage } from 'react-icons/io5'
 import { GiArchiveRegister } from 'react-icons/gi'
 import { FaCircleUser, FaTreeCity, FaBars } from 'react-icons/fa6'
-import { RiCoupon3Fill, RiLogoutBoxRFill } from 'react-icons/ri'
+import { RiCoupon3Fill } from 'react-icons/ri'
 // hook------
 import { useAuth } from '@/context/auth-context'
 import { useCart } from '@/hooks/use-cart'
@@ -263,8 +263,6 @@ export default function CustomNavbar({ pageName = '' }) {
                         &nbsp;<strong>優惠券紀錄</strong>
                       </Dropdown.Item>
                       <Dropdown.Item style={{ fontSize: '20px' }}>
-                        <RiLogoutBoxRFill className={(style.fs20, style.mr2)} />
-                        &nbsp;
                         <strong>
                           <LogoutButton />
                         </strong>

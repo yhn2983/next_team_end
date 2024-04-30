@@ -6,6 +6,7 @@ import DefaultLayout from '@/components/common/default-layout'
 import toast, { Toaster } from 'react-hot-toast'
 import Loader from '@/components/common/loading/loader'
 import LoadingBar from 'react-top-loading-bar'
+import Head from 'next/head'
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('')
@@ -54,12 +55,17 @@ export default function ForgotPasswordPage() {
   const display = (
     <>
       <Toaster />
+      <Head>
+        <title>忘記密碼 | DEAL-2ND HAND SHOP</title>
+      </Head>
       <DefaultLayout pageName="home">
         <div className="container d-flex justify-content-center mt-5 mb-3">
           <div className={`p-3 round ${styles.myloginform}`}>
             <form name="form1" onSubmit={onSubmit}>
               <div className="mb-4">
-                <h2 className="text-center">忘記密碼</h2>
+                <h2 className="text-center">
+                  <strong>忘記密碼</strong>
+                </h2>
               </div>
               <div className="mb-3">
                 <label className="form-label ms-2" htmlFor="email">

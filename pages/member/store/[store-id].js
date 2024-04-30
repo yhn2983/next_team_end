@@ -21,6 +21,7 @@ import { POST_STORE_LIKE } from '@/components/config'
 import { GET_STORE_LIKE_LIST } from '@/components/config'
 import RatingStars from '@/components/member/rating-stars'
 import StoreFollowModal from '@/components/member/store-follow-modal'
+import Head from 'next/head'
 
 export default function StoreInfo() {
   const { auth, checkAuth } = useAuth()
@@ -230,6 +231,9 @@ export default function StoreInfo() {
 
   const display = (
     <>
+      <Head>
+        <title>賣場介紹 | DEAL-2ND HAND SHOP</title>
+      </Head>
       <DefaultLayout>
         {/* 三個判斷        
         1.已登入且不是自己的賣場，顯示追蹤和傳訊息按鈕
