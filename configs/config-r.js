@@ -9,6 +9,8 @@ export const CART_ADD = `${API_SERVER}/products/api`
 // PROD_ITEM_DELETE: `${PROD_ITEM_DELETE}/17`
 export const CART_ITEM_DELETE = `${API_SERVER}/products/api`
 
+export const CART_ITEM_DELETE2 = `${API_SERVER}/products/api2`
+
 // 修改單筆資料 主鍵為 sid,  `${PROD_ITEM_UPDATE_PUT}/${sid}`
 export const CART_ITEM_UPDATE_PUT = `${API_SERVER}/products/cart`
 
