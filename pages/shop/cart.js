@@ -190,281 +190,270 @@ export default function Cart() {
       </Head>
       {auth.isAuth ? (
         <>
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col bg-light container-fluid d-flex justify-content-center">
-                <h5 className="align-middle mt-2 py-2">
-                  <FaSeedling style={{ color: '#51c332' }} />
-                  <Link
-                    className="colorSlogan text-decoration-none"
-                    href="/activity"
-                    style={{ color: '#8e2626' }}
-                  >
-                    <strong style={{ fontSize: '24px' }}>
-                      {' '}
-                      \ 歡慶DEAL線上開通試營運 企業親子二手市集活動 /{' '}
-                    </strong>
-                  </Link>
-                  <FaPersonBreastfeeding style={{ color: '#2055b1' }} />
-                </h5>
-              </div>
-            </div>
-            {/* Breadcrumb Start */}
-            <div className={`container-fluid ${style.breadcrumbArea}`}>
-              <div className="row px-xl-5">
-                <div className="col-12">
-                  <nav className="breadcrumb">
-                    <Link
-                      className="breadcrumb-item text-dark"
-                      href="/"
-                      style={{ textDecoration: 'none' }}
-                    >
-                      <span style={{ fontSize: '20px' }}>首頁</span>
-                    </Link>
-                    <Link
-                      className="breadcrumb-item text-dark"
-                      href="/shop"
-                      style={{ textDecoration: 'none', fontSize: '20px' }}
-                    >
-                      <span>探索商品</span>
-                    </Link>
-                    <span
-                      className="breadcrumb-item active"
-                      style={{ fontSize: '20px' }}
-                    >
-                      購物車
-                    </span>
-                  </nav>
-                </div>
-              </div>
-            </div>
-            {/* Breadcrumb End */}
-
-            {/* Cart Start */}
-            <div className="container-fluid mt-3">
-              <div className="row px-xl-5">
-                <div className="col-lg-8 table-responsive mb-5">
-                  <table className="table table-light table-borderless table-hover">
-                    <thead className="text-center table-dark">
-                      <tr
-                        className="fw-5 text-nowrap"
+          <DefaultLayout>
+            <div className="container-fluid">
+              {/* Breadcrumb Start */}
+              <div className={`container-fluid ${style.breadcrumbArea}`}>
+                <div className="row px-xl-5">
+                  <div className="col-12">
+                    <nav className="breadcrumb">
+                      <Link
+                        className="breadcrumb-item text-dark"
+                        href="/"
+                        style={{ textDecoration: 'none' }}
+                      >
+                        <span style={{ fontSize: '20px' }}>首頁</span>
+                      </Link>
+                      <Link
+                        className="breadcrumb-item text-dark"
+                        href="/shop"
+                        style={{ textDecoration: 'none', fontSize: '20px' }}
+                      >
+                        <span>探索商品</span>
+                      </Link>
+                      <span
+                        className="breadcrumb-item active"
                         style={{ fontSize: '20px' }}
                       >
-                        <th>商品</th>
-                        <th>商品名稱</th>
-                        <th>價格</th>
-                        <th>數量</th>
-                        <th>金額</th>
-                        <th className="text-wrap">可獲得小碳點</th>
-                        <th>移除</th>
-                      </tr>
-                    </thead>
-                    <tbody className="align-middle text-center">
-                      {items.cartProd.map((v, i) => {
-                        return (
-                          <>
-                            <tr key={v.id}>
-                              <td>
-                                <Link href={`/shop/${v.id}`}>
-                                  <img
-                                    src={
-                                      v.p_photos?.includes(',')
-                                        ? `/${v.p_photos.split(',')[0]}`
-                                        : `/${v.p_photos}`
-                                    }
-                                    alt=""
-                                    width={150}
-                                    height={150}
-                                    style={{ objectFit: 'cover' }}
-                                  />
-                                </Link>
-                              </td>
-                              <td
-                                className="align-middle text-wrap text-truncate"
-                                style={{ fontSize: '20px', maxWidth: '120px' }}
-                              >
-                                <Link
-                                  href={`/shop/${v.id}`}
+                        購物車
+                      </span>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+              {/* Breadcrumb End */}
+
+              {/* Cart Start */}
+              <div className="container-fluid mt-3">
+                <div className="row px-xl-5">
+                  <div className="col-lg-8 table-responsive mb-5">
+                    <table className="table table-light table-borderless table-hover">
+                      <thead className="text-center table-dark">
+                        <tr
+                          className="fw-5 text-nowrap"
+                          style={{ fontSize: '20px' }}
+                        >
+                          <th>商品</th>
+                          <th>商品名稱</th>
+                          <th>價格</th>
+                          <th>數量</th>
+                          <th>金額</th>
+                          <th className="text-wrap">可獲得小碳點</th>
+                          <th>移除</th>
+                        </tr>
+                      </thead>
+                      <tbody className="align-middle text-center">
+                        {items.cartProd.map((v, i) => {
+                          return (
+                            <>
+                              <tr key={v.id}>
+                                <td>
+                                  <Link href={`/shop/${v.id}`}>
+                                    <img
+                                      src={
+                                        v.p_photos?.includes(',')
+                                          ? `/${v.p_photos.split(',')[0]}`
+                                          : `/${v.p_photos}`
+                                      }
+                                      alt=""
+                                      width={150}
+                                      height={150}
+                                      style={{ objectFit: 'cover' }}
+                                    />
+                                  </Link>
+                                </td>
+                                <td
+                                  className="align-middle text-wrap text-truncate"
                                   style={{
-                                    textDecoration: 'none',
-                                    color: 'black',
+                                    fontSize: '20px',
+                                    maxWidth: '120px',
                                   }}
                                 >
-                                  {v.p_name}
-                                </Link>
-                              </td>
-                              <td
-                                className="align-middle"
-                                style={{ fontSize: '20px' }}
-                              >
-                                ${v.p_price?.toLocaleString()}
-                              </td>
-                              <td className="align-middle">
-                                <div
-                                  className="input-group quantity mx-auto"
-                                  style={{ width: '100px' }}
+                                  <Link
+                                    href={`/shop/${v.id}`}
+                                    style={{
+                                      textDecoration: 'none',
+                                      color: 'black',
+                                    }}
+                                  >
+                                    {v.p_name}
+                                  </Link>
+                                </td>
+                                <td
+                                  className="align-middle"
+                                  style={{ fontSize: '20px' }}
                                 >
-                                  <div className="input-group-btn">
-                                    <button
-                                      className={`btn btn-sm btn-minus ${style.btnHover}`}
-                                      style={{
-                                        backgroundColor: '#8e2626',
-                                        color: 'white',
-                                      }}
-                                      onClick={() => {
-                                        const nextQty = v.p_qty - 1
-                                        if (nextQty === 0) {
-                                          deleteItem(v.p_name, v.id)
-                                        } else {
-                                          decrementItemById(v.id)
-                                          prodMinus(v.p_name)
+                                  ${v.p_price?.toLocaleString()}
+                                </td>
+                                <td className="align-middle">
+                                  <div
+                                    className="input-group quantity mx-auto"
+                                    style={{ width: '100px' }}
+                                  >
+                                    <div className="input-group-btn">
+                                      <button
+                                        className={`btn btn-sm btn-minus ${style.btnHover}`}
+                                        style={{
+                                          backgroundColor: '#8e2626',
+                                          color: 'white',
+                                        }}
+                                        onClick={() => {
+                                          const nextQty = v.p_qty - 1
+                                          if (nextQty === 0) {
+                                            deleteItem(v.p_name, v.id)
+                                          } else {
+                                            decrementItemById(v.id)
+                                            prodMinus(v.p_name)
+                                            const newData = {
+                                              member_id: auth.userData.id,
+                                              product_id: v.id,
+                                              p_qty: v.p_qty - 1,
+                                              p_price: v.p_price,
+                                              total_price:
+                                                (v.p_qty - 1) * v.p_price,
+                                            }
+                                            console.log(newData)
+                                            updateItem(newData)
+                                          }
+                                        }}
+                                      >
+                                        <FaMinus className="mb-1" />
+                                      </button>
+                                    </div>
+                                    <input
+                                      type="text"
+                                      className="form-control form-control-sm border-0 text-center"
+                                      value={v.p_qty}
+                                      readOnly
+                                    />
+                                    <div className="input-group-btn">
+                                      <button
+                                        className={`btn btn-sm btn-plus ${style.btnHover}`}
+                                        style={{
+                                          backgroundColor: '#8e2626',
+                                          color: 'white',
+                                        }}
+                                        onClick={() => {
+                                          incrementItemById(v.id)
+                                          prodPlus(v.p_name)
                                           const newData = {
                                             member_id: auth.userData.id,
                                             product_id: v.id,
-                                            p_qty: v.p_qty - 1,
+                                            p_qty: v.p_qty + 1,
                                             p_price: v.p_price,
                                             total_price:
-                                              (v.p_qty - 1) * v.p_price,
+                                              (v.p_qty + 1) * v.p_price,
                                           }
                                           console.log(newData)
                                           updateItem(newData)
-                                        }
-                                      }}
-                                    >
-                                      <FaMinus className="mb-1" />
-                                    </button>
+                                        }}
+                                      >
+                                        <FaPlus className="mb-1" />
+                                      </button>
+                                    </div>
                                   </div>
-                                  <input
-                                    type="text"
-                                    className="form-control form-control-sm border-0 text-center"
-                                    value={v.p_qty}
-                                    readOnly
-                                  />
-                                  <div className="input-group-btn">
-                                    <button
-                                      className={`btn btn-sm btn-plus ${style.btnHover}`}
-                                      style={{
-                                        backgroundColor: '#8e2626',
-                                        color: 'white',
-                                      }}
-                                      onClick={() => {
-                                        incrementItemById(v.id)
-                                        prodPlus(v.p_name)
-                                        const newData = {
-                                          member_id: auth.userData.id,
-                                          product_id: v.id,
-                                          p_qty: v.p_qty + 1,
-                                          p_price: v.p_price,
-                                          total_price:
-                                            (v.p_qty + 1) * v.p_price,
-                                        }
-                                        console.log(newData)
-                                        updateItem(newData)
-                                      }}
-                                    >
-                                      <FaPlus className="mb-1" />
-                                    </button>
-                                  </div>
-                                </div>
-                              </td>
-                              <td
-                                className="align-middle"
-                                style={{ fontSize: '20px' }}
-                              >
-                                ${(v.p_qty * v.p_price).toLocaleString()}
-                              </td>
-                              <td style={{ fontSize: '20px' }}>
-                                {v.available_cp}
-                              </td>
-                              <td className="align-middle">
-                                <button
-                                  className="btn btn-sm"
-                                  onClick={() => {
-                                    deleteItem(v.p_name, v.id)
-                                  }}
-                                  style={{ border: 'none' }}
+                                </td>
+                                <td
+                                  className="align-middle"
+                                  style={{ fontSize: '20px' }}
                                 >
-                                  <FaTrashCan
-                                    className={`mb-1 ${style.trashBtn}`}
-                                    style={{
-                                      fontSize: '20px',
-                                      color: '#8e2626',
+                                  ${(v.p_qty * v.p_price).toLocaleString()}
+                                </td>
+                                <td style={{ fontSize: '20px' }}>
+                                  {v.available_cp}
+                                </td>
+                                <td className="align-middle">
+                                  <button
+                                    className="btn btn-sm"
+                                    onClick={() => {
+                                      deleteItem(v.p_name, v.id)
                                     }}
-                                  />
-                                </button>
-                              </td>
-                            </tr>
-                          </>
-                        )
-                      })}
-                    </tbody>
-                  </table>
-                </div>
-                <div className="col-lg-4">
-                  <div className="d-flex mb-3 justify-content-center">
-                    <h3 className="mb-2" style={{ color: '#8e2626' }}>
-                      <strong>– 購物車詳情 –</strong>
-                    </h3>
+                                    style={{ border: 'none' }}
+                                  >
+                                    <FaTrashCan
+                                      className={`mb-1 ${style.trashBtn}`}
+                                      style={{
+                                        fontSize: '20px',
+                                        color: '#8e2626',
+                                      }}
+                                    />
+                                  </button>
+                                </td>
+                              </tr>
+                            </>
+                          )
+                        })}
+                      </tbody>
+                    </table>
                   </div>
-                  <div className="bg-light p-30 mb-5">
-                    <div className="border-bottom px-4 pt-4 pb-3">
-                      <div className="d-flex justify-content-between mb-2">
-                        <h5 className="font-weight-medium">運費</h5>
-                        <h5 className="font-weight-medium">$60</h5>
-                      </div>
-                      <div className="d-flex justify-content-between mb-2">
-                        <h5 className="font-weight-medium">總金額</h5>
-                        <h5 className="font-weight-medium">
-                          ${totalPrice.toLocaleString()}
-                        </h5>
-                      </div>
-                      <div className="d-flex justify-content-between mb-2">
-                        <h5 className="font-weight-medium">總小碳點</h5>
-                        <h5 className="font-weight-medium">{totalCP}</h5>
-                      </div>
+                  <div className="col-lg-4">
+                    <div className="d-flex mb-3 justify-content-center">
+                      <h3 className="mb-2" style={{ color: '#8e2626' }}>
+                        <strong>– 購物車詳情 –</strong>
+                      </h3>
                     </div>
-                    <div className="p-4">
-                      <div className="d-flex justify-content-between mt-2 mb-3">
-                        <h5>
-                          <strong>總付款金額</strong>
-                        </h5>
-                        <h5>
-                          <strong>${(totalPrice + 60).toLocaleString()}</strong>
-                        </h5>
+                    <div className="bg-light p-30 mb-5">
+                      <div className="border-bottom px-4 pt-4 pb-3">
+                        <div className="d-flex justify-content-between mb-2">
+                          <h5 className="font-weight-medium">運費</h5>
+                          <h5 className="font-weight-medium">$60</h5>
+                        </div>
+                        <div className="d-flex justify-content-between mb-2">
+                          <h5 className="font-weight-medium">總金額</h5>
+                          <h5 className="font-weight-medium">
+                            ${totalPrice.toLocaleString()}
+                          </h5>
+                        </div>
+                        <div className="d-flex justify-content-between mb-2">
+                          <h5 className="font-weight-medium">總小碳點</h5>
+                          <h5 className="font-weight-medium">{totalCP}</h5>
+                        </div>
                       </div>
-                      <div className="d-flex justify-content-center">
-                        <Link
-                          href="/buyer/checkout"
-                          style={{ textDecoration: 'none' }}
-                        >
-                          <button
-                            className={`btn btn-block font-weight-bold d-flex ${style.checkBtn}`}
-                            style={{
-                              backgroundColor: '#e96d3f',
-                              color: 'white',
-                            }}
+                      <div className="p-4">
+                        <div className="d-flex justify-content-between mt-2 mb-3">
+                          <h5>
+                            <strong>總付款金額</strong>
+                          </h5>
+                          <h5>
+                            <strong>
+                              ${(totalPrice + 60).toLocaleString()}
+                            </strong>
+                          </h5>
+                        </div>
+                        <div className="d-flex justify-content-center">
+                          <Link
+                            href="/buyer/checkout"
+                            style={{ textDecoration: 'none' }}
                           >
-                            <strong style={{ fontSize: '20px' }}>去結帳</strong>
-                          </button>
-                        </Link>
+                            <button
+                              className={`btn btn-block font-weight-bold d-flex ${style.checkBtn}`}
+                              style={{
+                                backgroundColor: '#e96d3f',
+                                color: 'white',
+                              }}
+                            >
+                              <strong style={{ fontSize: '20px' }}>
+                                去結帳
+                              </strong>
+                            </button>
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <Toaster />
+              {/* Cart End */}
+              {/* Back to Top */}
+              <Link href="#top" className="btn">
+                <FaAnglesUp
+                  className={style.backToTop}
+                  style={{ fontSize: '40px' }}
+                />
+              </Link>
             </div>
-            <Toaster />
-            {/* Cart End */}
-            {/* Back to Top */}
-            <Link href="#top" className="btn">
-              <FaAnglesUp
-                className={style.backToTop}
-                style={{ fontSize: '40px' }}
-              />
-            </Link>
-          </div>
-          {/* Footer */}
-          <Footer />
+          </DefaultLayout>
         </>
       ) : (
         <>
