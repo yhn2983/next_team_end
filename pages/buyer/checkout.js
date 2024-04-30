@@ -435,14 +435,13 @@ export default function Checkout() {
                                     onBlur={(e) =>
                                       setFormData({
                                         ...formData,
-                                        total_price:
-                                          formData.product_price[0].map(
-                                            (val, ind) => {
-                                              return ind == 0
-                                                ? +val - +e.target.value * 0.01
-                                                : val
-                                            }
-                                          ),
+                                        total_price: formData.product_price.map(
+                                          (val, ind) => {
+                                            return ind == 0
+                                              ? +val - +e.target.value * 0.01
+                                              : val
+                                          }
+                                        ),
                                       })
                                     }
                                     // value={}
@@ -725,7 +724,7 @@ export default function Checkout() {
                             }
                             value={formData.payment_way}
                           >
-                            <option value="0"></option>
+                            <option value="0">請選擇付款方式</option>
                             <option value="1">Line Pay</option>
                             <option value="2">貨到付款</option>
                           </select>
