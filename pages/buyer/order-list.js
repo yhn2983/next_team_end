@@ -20,7 +20,7 @@ import Head from 'next/head'
 
 export default function OrderList() {
   const router = useRouter()
-
+  const uniqueIds = new Set()
   const { checkAuth, auth } = useAuth()
   const [data, setData] = useState({
     success: false,
@@ -188,6 +188,13 @@ export default function OrderList() {
                     </strong>
                   </h4>
                   {data.rows.map((v) => {
+                    // 如果這個 id 已經存在於 Set 中，則跳過此項
+                    if (uniqueIds.has(v.id)) {
+                      return null // 不渲染這個項目
+                    }
+
+                    // 否則，將 id 添加到 Set 中，並渲染這個項目
+                    uniqueIds.add(v.id)
                     return (
                       <>
                         <div
@@ -385,7 +392,14 @@ export default function OrderList() {
               </h4>
 
               <p className="card-text d-flex justify-content-between align-items-center">
-                目前點數 <span></span>
+                目前點數{' '}
+                <span>
+                  {!data.rows
+                    ? '0'
+                    : data.rows[0]
+                    ? data.rows[0].buyer_point
+                    : '0'}
+                </span>
               </p>
               <hr />
               {/* <p className="card-text d-flex justify-content-between align-items-center">

@@ -6,6 +6,9 @@ import { EVALUATION } from '@/configs/configs-buyer'
 import { EVALUATION_GET } from '@/configs/configs-buyer'
 import { useRouter } from 'next/router'
 import DefaultLayout from '@/components/common/default-layout'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 
 export default function Evaluation() {
   const router = useRouter()
@@ -67,11 +70,23 @@ export default function Evaluation() {
 
     console.log(result)
     if (result.success) {
-      alert('資料修改成功')
-      window.location.reload()
-      console.log(document.referrer)
+      MySwal.fire({
+        title: '是否確定送出評價',
+
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '確定',
+        cancelButtonText: '取消',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload()
+          console.log(document.referrer)
+        }
+      })
     } else {
-      alert('資料沒有修改')
+      alert('訂單評論失敗')
     }
   }
 
@@ -93,9 +108,9 @@ export default function Evaluation() {
       {/* Contact Start */}
       <DefaultLayout>
         <div className={`container-fluid ${Styles.evalution}`}>
-          <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4">
-            <span className="bg-secondary pr-3">評價訂單{eid}</span>
-          </h2>
+          <h4 className="mb-3" style={{ color: '#8e2626' }}>
+            <strong>評價訂單{eid}</strong>
+          </h4>
           <div className="row px-xl-5">
             <div className="col-lg-7 mb-5">
               <div className="contact-form bg-light p-30">
@@ -116,7 +131,9 @@ export default function Evaluation() {
                             <div className="row product-line align-items-center">
                               <div className="col-6">
                                 <Image
-                                  src={`/${val.product_photos}`}
+                                  src={`/${
+                                    val.product_photos.match(/[^,]+\.jpg/)[0]
+                                  }`}
                                   className="img-fluid sec1-img"
                                   alt=""
                                   width={30}
