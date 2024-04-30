@@ -8,6 +8,9 @@ import { useRouter } from 'next/router'
 import DefaultLayout from '@/components/common/default-layout'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 
 export default function GetBargain() {
   const router = useRouter()
@@ -36,10 +39,19 @@ export default function GetBargain() {
     const result = await r.json()
     console.log(result)
     if (result) {
-      alert('資料新增成功')
-      router.push('/buyer/bargain-seller')
+      MySwal.fire({
+        title: '回覆完成',
+
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '確定',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push('/buyer/bargain-seller')
+        }
+      })
     } else {
-      alert('資料沒有新增')
+      alert('回覆沒有成功')
     }
   }
 

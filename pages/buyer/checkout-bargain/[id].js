@@ -7,6 +7,9 @@ import { BARGAIN_CHECKOUT } from '@/configs/configs-buyer'
 import { useAuth } from '@/context/auth-context'
 import Styles from '@/styles/buyer.module.css'
 import DefaultLayout from '@/components/common/default-layout'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 
 export default function CheckoutBargain() {
   const [show, setShow] = useState(false)
@@ -131,10 +134,26 @@ export default function CheckoutBargain() {
     const result = await r.json()
     console.log(result)
     if (result) {
-      alert('資料新增成功')
-      router.push('/buyer/order-list')
+      MySwal.fire({
+        title: '是否送出訂單',
+        text: '請確認是否要購買？',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '確定',
+        cancelButtonText: '取消',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          MySwal.fire({
+            title: '訂單送出',
+            confirmButtonText: '確定',
+          })
+          router.push('/buyer/order-list')
+        }
+      })
     } else {
-      alert('資料沒有新增')
+      alert('訂單新增失敗')
     }
   }
 
@@ -152,11 +171,11 @@ export default function CheckoutBargain() {
         <div className={`${Styles.checkout}`}>
           {/* Checkout Start */}
           <form name="form1" onSubmit={formSubmit}>
-            <div className="container-fluid">
+            <div className="container">
               <div className="row px-xl-5">
-                <div className="col-lg-8">
-                  <h5 className="section-title position-relative text-uppercase mb-3">
-                    <span className="bg-secondary pr-3">訂單資料</span>
+                <div className="col-lg-7">
+                  <h5 className="mb-3" style={{ color: '#8e2626' }}>
+                    <strong>訂單資料</strong>
                   </h5>
                   <div className="bg-light p-30 mb-5">
                     <div className="row">
@@ -193,21 +212,51 @@ export default function CheckoutBargain() {
                           </select>
                         </div>
                       </div>
+                      {/* <div className="col-md-6 form-group">
+                        <label htmlFor="carbon_points_have">小碳點數量</label>
+                        {productData.ct &&
+                          productData.ct.map((v, i) => {
+                            return (
+                              <input
+                                key={i}
+                                className="form-control"
+                                type="number"
+                                min="0"
+                                max={parseInt(v.carbon_points_have)}
+                                placeholder="請選擇數量"
+                                name="carbon_points_have"
+                                onBlur={(e) =>
+                                  setFormData({
+                                    ...formData,
+                                    total_price: formData.product_price.map(
+                                      (val, ind) => {
+                                        return ind == 0
+                                          ? +val - +e.target.value * 0.01
+                                          : val
+                                      }
+                                    ),
+                                  })
+                                }
+
+                                // value={}
+                              />
+                            )
+                          })}
+                      </div> */}
+
                       <div className="col-md-6 form-group">
-                        <label htmlFor="total_amount">數量</label>
+                        <label htmlFor="address">地址</label>
                         <input
                           className="form-control"
-                          type="number"
-                          min="1"
-                          placeholder="請選擇數量"
-                          name="total_amount"
+                          type="text"
+                          placeholder="請輸入地址"
                           onChange={(e) =>
                             setFormData({
                               ...formData,
-                              total_amount: e.target.value,
+                              address: e.target.value,
                             })
                           }
-                          value={formData.total_amount}
+                          value={formData.address}
                         />
                       </div>
                       <div className="col-md-6 form-group">
@@ -229,23 +278,6 @@ export default function CheckoutBargain() {
                           </select>
                         </div>
                       </div>
-
-                      <div className="col-md-6 form-group">
-                        <label htmlFor="address">地址</label>
-                        <input
-                          className="form-control"
-                          type="text"
-                          placeholder="請輸入地址"
-                          onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              address: e.target.value,
-                            })
-                          }
-                          value={formData.address}
-                        />
-                      </div>
-
                       {/* <div className="col-md-12 form-group">
                   <div className="custom-control custom-checkbox">
                     <input
@@ -281,22 +313,31 @@ export default function CheckoutBargain() {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-4">
-                  <h5 className="section-title position-relative text-uppercase mb-3">
-                    <span className="bg-secondary pr-3">商品價格</span>
+                <div className="col-lg-5">
+                  <h5 className="mb-3" style={{ color: '#8e2626' }}>
+                    <strong>商品價格</strong>
                   </h5>
                   <div className="bg-light p-30 mb-5">
                     <div className="border-bottom">
-                      <h6 className="mb-3">購買商品</h6>{' '}
                       <div className="d-flex justify-content-between">
                         <table class="table">
                           <thead>
                             <tr>
-                              <th scope="col">#</th>
-                              <th scope="col">First</th>
-                              <th scope="col">Last</th>
-                              <th scope="col">Handle</th>
-                              <th scope="col">Handle</th>
+                              <th scope="col" class="text-nowrap">
+                                商品
+                              </th>
+                              <th scope="col" class="text-nowrap">
+                                優惠卷
+                              </th>
+                              <th scope="col" class="text-nowrap">
+                                原價
+                              </th>
+                              <th scope="col" class="text-nowrap">
+                                數量
+                              </th>
+                              <th scope="col" class="text-nowrap">
+                                議價後
+                              </th>
                             </tr>{' '}
                           </thead>
                           <tbody>
@@ -308,9 +349,9 @@ export default function CheckoutBargain() {
                                     <td>
                                       {' '}
                                       <div className="col-md-6 form-group">
-                                        <label htmlFor="discount_coupon">
+                                        {/* <label htmlFor="discount_coupon">
                                           優惠卷
-                                        </label>
+                                        </label> */}
                                         <div>
                                           <select
                                             className="custom-select"
@@ -399,8 +440,8 @@ export default function CheckoutBargain() {
                 </div> */}
                 </div>
                 <div className="mb-5">
-                  <h5 className="section-title position-relative text-uppercase mb-3">
-                    <span className="bg-secondary pr-3">結帳</span>
+                  <h5 className="mb-3" style={{ color: '#8e2626' }}>
+                    <strong>結帳</strong>
                   </h5>
                   <div className="bg-light p-30">
                     <div className="col-md form-group">
@@ -416,7 +457,7 @@ export default function CheckoutBargain() {
                         value={formData.payment_way}
                       >
                         <option value="0"></option>
-                        <option value="1">信用卡</option>
+                        <option value="1">Line Pay</option>
                         <option value="2">貨到付款</option>
                       </select>
                     </div>

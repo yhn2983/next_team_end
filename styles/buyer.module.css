@@ -1,13 +1,14 @@
 .checkout{
   margin-top: 30px;
   margin-bottom: 10px;
-
+margin-right: 10px;
+margin-left: 10px;
   
 }
 
-.checkout button{
+/* .checkout button{
   position: relative;
-  min-width: 70px;
+  min-width: 30px;
   background: transparent;
   color: #E1332D;
   font-size: 1rem;
@@ -23,7 +24,7 @@
   outline-offset: 0px;
   text-shadow: none;
   transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
-}
+} */
 .checkoutBtn{
   background: transparent !important;
   color: #E1332D !important;
