@@ -20,6 +20,7 @@ import Footer from '@/components/common/footer/footer'
 import Link from 'next/link'
 import { FaPersonBreastfeeding, FaSeedling } from 'react-icons/fa6'
 import style from '@/pages/shop/cart.module.css'
+import { CART_ITEM_DELETE2 } from '@/configs/config-r'
 
 export default function Checkout() {
   const [show, setShow] = useState(false)
@@ -228,8 +229,18 @@ export default function Checkout() {
         cancelButtonText: '取消',
       }).then((result) => {
         if (result.isConfirmed) {
+          fetch(`${CART_ITEM_DELETE2}`, {
+            method: 'DELETE',
+          })
+            .then((r) => r.json())
+            .then((result) => {
+              console.log(result)
+            })
+            .catch((error) => {
+              console.error('Error deleting item:', error)
+            })
           MySwal.fire({
-            title: '訂單送出',
+            title: '訂單已送出',
             confirmButtonText: '確定',
           })
           router.push('/buyer/order-list')
