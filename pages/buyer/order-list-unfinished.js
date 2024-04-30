@@ -13,10 +13,13 @@ import DefaultLayout from '@/components/common/default-layout'
 import Styles from '@/styles/buyer.module.css'
 import Link from 'next/link'
 import Head from 'next/head'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 
 export default function OrderList() {
   const router = useRouter()
-  // const { auth, getAuthHeader } = useAuth()
+  const uniqueIds = new Set()
   const { checkAuth, auth } = useAuth()
   const [data, setData] = useState({
     success: false,
@@ -86,11 +89,26 @@ export default function OrderList() {
 
     console.log(result)
     if (result.success) {
-      alert('資料修改成功')
-      console.log(document.referrer)
-      router.back()
+      MySwal.fire({
+        title: '是否收到物品',
+
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '確定',
+        cancelButtonText: '取消',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          MySwal.fire({
+            title: '訂單完成',
+            confirmButtonText: '確定',
+          })
+          router.push('/buyer/order-list-finished')
+        }
+      })
     } else {
-      alert('資料沒有修改')
+      alert('訂單未完成')
     }
   }
 
@@ -115,6 +133,13 @@ export default function OrderList() {
                       return v.complete_status == 1
                     })
                     .map((v, i) => {
+                      // 如果這個 id 已經存在於 Set 中，則跳過此項
+                      if (uniqueIds.has(v.id)) {
+                        return null // 不渲染這個項目
+                      }
+
+                      // 否則，將 id 添加到 Set 中，並渲染這個項目
+                      uniqueIds.add(v.id)
                       return (
                         <div key={i}>
                           <div
@@ -238,7 +263,14 @@ export default function OrderList() {
               </h4>
 
               <p className="card-text d-flex justify-content-between align-items-center">
-                目前點數 <span></span>
+                目前點數{' '}
+                <span>
+                  {!data.rows
+                    ? '0'
+                    : data.rows[0]
+                    ? data.rows[0].buyer_point
+                    : '0'}
+                </span>
               </p>
               <hr />
               {/* <p className="card-text d-flex justify-content-between align-items-center">

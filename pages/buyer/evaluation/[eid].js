@@ -93,9 +93,9 @@ export default function Evaluation() {
       {/* Contact Start */}
       <DefaultLayout>
         <div className={`container-fluid ${Styles.evalution}`}>
-          <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4">
-            <span className="bg-secondary pr-3">評價訂單{eid}</span>
-          </h2>
+          <h4 className="mb-3" style={{ color: '#8e2626' }}>
+            <strong>評價訂單{eid}</strong>
+          </h4>
           <div className="row px-xl-5">
             <div className="col-lg-7 mb-5">
               <div className="contact-form bg-light p-30">

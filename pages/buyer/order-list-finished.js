@@ -13,10 +13,13 @@ import DefaultLayout from '@/components/common/default-layout'
 import Link from 'next/link'
 import Head from 'next/head'
 import Modal from 'react-bootstrap/Modal'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 
 export default function OrderList() {
   const router = useRouter()
-
+  const uniqueIds = new Set()
   const { checkAuth, auth } = useAuth()
 
   //modal
@@ -95,6 +98,13 @@ export default function OrderList() {
                       return v.complete_status == 2
                     })
                     .map((v, i) => {
+                      // 如果這個 id 已經存在於 Set 中，則跳過此項
+                      if (uniqueIds.has(v.id)) {
+                        return null // 不渲染這個項目
+                      }
+
+                      // 否則，將 id 添加到 Set 中，並渲染這個項目
+                      uniqueIds.add(v.id)
                       return (
                         <div key={i}>
                           <div
@@ -216,7 +226,14 @@ export default function OrderList() {
               </h4>
 
               <p className="card-text d-flex justify-content-between align-items-center">
-                目前點數 <span></span>
+                目前點數{' '}
+                <span>
+                  {!data.rows
+                    ? '0'
+                    : data.rows[0]
+                    ? data.rows[0].buyer_point
+                    : '0'}
+                </span>
               </p>
               <hr />
               {/* <p className="card-text d-flex justify-content-between align-items-center">
@@ -248,7 +265,7 @@ export default function OrderList() {
                 .map((v, i) => {
                   return (
                     <div key={i}>
-                      <p>{v.items_id}</p>
+                      {/* <p>{v.items_id}</p> */}
                       <p>{v.product_name}</p>
                       <p>
                         {' '}

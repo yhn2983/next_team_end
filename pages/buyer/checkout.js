@@ -13,6 +13,9 @@ import Head from 'next/head'
 import DefaultLayout from '@/components/common/default-layout'
 import Styles from '@/styles/buyer.module.css'
 import { FaNpm } from 'react-icons/fa'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 
 export default function Checkout() {
   const [show, setShow] = useState(false)
@@ -59,10 +62,19 @@ export default function Checkout() {
     const result = await r.json()
     console.log(result)
     if (result) {
-      alert('資料新增成功')
-      router.push('/buyer/bargain-buyer-req')
+      MySwal.fire({
+        title: '提出議價成功',
+
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '確定',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push('/buyer/bargain-buyer-req')
+        }
+      })
     } else {
-      alert('資料沒有新增')
+      alert('議價提出失敗')
     }
   }
   //----------
@@ -201,8 +213,24 @@ export default function Checkout() {
     const result = await r.json()
     console.log(result)
     if (result) {
-      alert('資料新增成功')
-      router.push('/buyer/order-list')
+      MySwal.fire({
+        title: '是否送出訂單',
+        text: '請確認是否要購買？',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '確定',
+        cancelButtonText: '取消',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          MySwal.fire({
+            title: '訂單送出',
+            confirmButtonText: '確定',
+          })
+          router.push('/buyer/order-list')
+        }
+      })
     } else {
       alert('資料沒有新增')
     }
@@ -223,13 +251,11 @@ export default function Checkout() {
         <Head>訂單結帳</Head>
         <div className={`${Styles.checkout}`}>
           <form name="form1" onSubmit={formSubmit}>
-            <div className={`container-fluid `}>
+            <div className={`container `}>
               <div className="row px-xl-5">
-                <div className="col-lg-8">
-                  <h5
-                    className={`section-title position-relative text-uppercase mb-3`}
-                  >
-                    <span className="bg-secondary pr-3">訂單資料</span>
+                <div className="col-lg-7">
+                  <h5 className="mb-3" style={{ color: '#8e2626' }}>
+                    <strong>訂單資料</strong>
                   </h5>
                   <div className="bg-light p-30 mb-5">
                     <div className="row">
@@ -285,7 +311,7 @@ export default function Checkout() {
                                     total_price: formData.product_price.map(
                                       (val, ind) => {
                                         return ind == 0
-                                          ? +val - +e.target.value
+                                          ? +val - +e.target.value * 0.01
                                           : val
                                       }
                                     ),
@@ -368,25 +394,34 @@ export default function Checkout() {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-4">
-                  <h5
-                    className={`section-title position-relative text-uppercase mb-3`}
-                  >
-                    <span className="bg-secondary pr-3">商品價格</span>
+                <div className="col-lg-5">
+                  <h5 className="mb-3" style={{ color: '#8e2626' }}>
+                    <strong>商品價格</strong>
                   </h5>
                   <div className="bg-light p-30 mb-5">
                     <div className="border-bottom">
-                      <h6 className="mb-3">購買商品</h6>{' '}
                       <div className="d-flex justify-content-between">
                         <table class="table">
                           <thead>
                             <tr>
-                              <th scope="col">商品名稱 </th>
-                              <th scope="col">優惠卷</th>
-                              <th scope="col">單價</th>
-                              <th scope="col">數量</th>
-                              <th scope="col">總價</th>
-                              <th scope="col">議價</th>
+                              <th scope="col" class="text-nowrap">
+                                商品名稱{' '}
+                              </th>
+                              <th scope="col" class="text-nowrap">
+                                優惠卷
+                              </th>
+                              <th scope="col" class="text-nowrap">
+                                單價
+                              </th>
+                              <th scope="col" class="text-nowrap">
+                                數量
+                              </th>
+                              <th scope="col" class="text-nowrap">
+                                總價
+                              </th>
+                              <th scope="col" class="text-nowrap">
+                                議價
+                              </th>
                             </tr>{' '}
                           </thead>
                           <tbody>
@@ -398,9 +433,9 @@ export default function Checkout() {
                                     <td>
                                       {' '}
                                       <div className="col-md-6 form-group">
-                                        <label htmlFor="discount_coupon">
+                                        {/* <label htmlFor="discount_coupon">
                                           優惠卷
-                                        </label>
+                                        </label> */}
                                         <div>
                                           <select
                                             className="custom-select"
@@ -450,7 +485,9 @@ export default function Checkout() {
                                                   </option>
                                                 )
                                               })} */}
-
+                                            <option value="0">
+                                              選擇優惠卷
+                                            </option>
                                             {productData.cp &&
                                               productData.cp.find(
                                                 (v) => v.coupon_discount == 30
@@ -487,7 +524,7 @@ export default function Checkout() {
                                           handleShow()
                                         }}
                                       >
-                                        提出議價
+                                        議價
                                       </Button>
                                     </td>
                                     {/* <input
@@ -522,18 +559,16 @@ export default function Checkout() {
                         </h5>
                       </div>
                     </div>
-                    <div className="d-flex justify-content-between mt-2">
+                    {/* <div className="d-flex justify-content-between mt-2">
                       <p></p>
                       <Button variant="danger" onClick={handleShow}>
                         提出議價
                       </Button>
-                    </div>
+                    </div> */}
                   </div>
                   <div className="mb-5">
-                    <h5
-                      className={`section-title position-relative text-uppercase mb-3`}
-                    >
-                      <span className="bg-secondary pr-3">結帳</span>
+                    <h5 className="mb-3" style={{ color: '#8e2626' }}>
+                      <strong>結帳</strong>
                     </h5>
                     <div className="bg-light p-30">
                       <div className="col-md form-group">
@@ -549,16 +584,16 @@ export default function Checkout() {
                           value={formData.payment_way}
                         >
                           <option value="0"></option>
-                          <option value="1">信用卡</option>
+                          <option value="1">Line Pay</option>
                           <option value="2">貨到付款</option>
                         </select>
                       </div>
                       <div className="d-flex justify-content-between mt-2">
                         <p></p>
                         <Button
-                          className="primary"
                           type="submit"
                           variant="danger"
+                          className={`${Styles.checkoutBtn}`}
                         >
                           送出訂單
                         </Button>
