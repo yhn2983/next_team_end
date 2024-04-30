@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import { useAuth } from '@/context/auth-context'
 import { JWT_UPDATE_PASSWORD_PUT } from '@/components/config'
 import DefaultLayout from '@/components/common/default-layout'
+import Head from 'next/head'
 
 export default function ChangePasswordPage() {
   const MySwal = withReactContent(Swal)
@@ -118,6 +119,9 @@ export default function ChangePasswordPage() {
 
   return (
     <>
+      <Head>
+        <title>更改密碼 | DEAL-2ND HAND SHOP</title>
+      </Head>
       <DefaultLayout>
         <div className="container d-flex justify-content-center mt-5 mb-3">
           <div className={`p-3 round ${styles.myloginform}`}>

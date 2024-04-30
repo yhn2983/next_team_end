@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import DefaultLayout from '@/components/common/default-layout'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import Head from 'next/head'
 
 export default function ResetPasswordPage() {
   const [email, setEmail] = useState('')
@@ -59,12 +60,17 @@ export default function ResetPasswordPage() {
 
   return (
     <>
+      <Head>
+        <title>重設密碼 | DEAL-2ND HAND SHOP</title>
+      </Head>
       <DefaultLayout>
         <div className="container d-flex justify-content-center mt-5 mb-4">
           <div className={`p-3 round ${styles.myloginform}`}>
             <form name="form1" onSubmit={onSubmit}>
               <div className="mb-4">
-                <h2 className="text-center">重設密碼</h2>
+                <h2 className="text-center">
+                  <strong>重設密碼</strong>
+                </h2>
               </div>
               <div className="mb-3">
                 <label className="form-label ms-2" htmlFor="email">

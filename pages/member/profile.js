@@ -13,6 +13,7 @@ import UpdateProfileModal from '@/components/member/update-profile-modal'
 import toast, { Toaster } from 'react-hot-toast'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import Head from 'next/head'
 
 export default function Profile() {
   const { checkAuth } = useAuth()
@@ -151,9 +152,11 @@ export default function Profile() {
     router.push('/Maket/index-maket')
   }
 
-  //
   return (
     <>
+      <Head>
+        <title>會員中心 | DEAL-2ND HAND SHOP</title>
+      </Head>
       <DefaultLayout>
         <section className={`${styles.profilesStyle}`}>
           <div className="container py-5">

@@ -3,12 +3,15 @@ import { useAuth } from '@/context/auth-context'
 import useFirebase from '@/hooks/use-firebase'
 import toast from 'react-hot-toast'
 import style from '@/styles/lee-form.module.scss'
+import { RiLogoutBoxRFill } from 'react-icons/ri'
 
 export default function LogoutButton() {
   const { logout, setAuth, initUserData } = useAuth()
   const { logoutFirebase } = useFirebase()
 
-  const handleLogout = async () => {
+  const handleLogout = async (e) => {
+    e.preventDefault() // 防止頁面跳轉
+
     // firebase logout
     logoutFirebase()
 
@@ -28,15 +31,28 @@ export default function LogoutButton() {
   }
 
   return (
-    <a
-      href="#logout"
-      onClick={(e) => {
-        e.preventDefault() // 防止頁面跳轉
-        handleLogout()
+    <button
+      onClick={handleLogout}
+      style={{
+        cursor: 'pointer',
+        background: 'none',
+        border: 'none',
+        padding: '0',
+        display: 'flex', // 使用 flex 佈局
+        width: '100%', // 寬度 100%
+        justifyContent: 'flex-start', // 將內容靠左對齊
+        alignItems: 'center', // 將內容垂直置中對齊
       }}
-      style={{ textDecoration: 'none', color: 'inherit' }} // 移除所有樣式
     >
-      登出
-    </a>
+      <RiLogoutBoxRFill className={(style.fs20, style.mr2)} />
+      <span
+        style={{
+          textDecoration: 'none',
+          color: 'inherit',
+        }}
+      >
+        &nbsp;<strong>登出</strong>
+      </span>
+    </button>
   )
 }
