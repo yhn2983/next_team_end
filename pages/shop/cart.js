@@ -310,14 +310,14 @@ export default function Cart() {
                   <div className="col-12 d-flex justify-content-start">
                     <div className="d-flex ms-2">
                       <button
-                        className="btn me-2"
+                        className={`btn me-2 ${style.btnHover}`}
                         style={{ backgroundColor: '#ba4014', color: 'white' }}
                         onClick={deleteSelectedItems}
                       >
                         <strong>選定刪除</strong>
                       </button>
                       <button
-                        className="btn"
+                        className={`btn ${style.btnHover}`}
                         style={{ backgroundColor: '#5a1b1b', color: 'white' }}
                         onClick={deleteAll}
                       >

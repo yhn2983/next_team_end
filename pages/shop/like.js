@@ -432,14 +432,14 @@ export default function Like() {
                 <div className="col-12 d-flex justify-content-between">
                   <div className="d-flex ms-2">
                     <button
-                      className="btn me-2"
+                      className={`btn me-2 ${style.btnHover}`}
                       style={{ backgroundColor: '#0a5d1b', color: 'white' }}
                       onClick={cartSelectClick}
                     >
                       <strong>選定加入購物車</strong>
                     </button>
                     <button
-                      className="btn"
+                      className={`btn ${style.btnHover}`}
                       style={{ backgroundColor: '#387690', color: 'white' }}
                       onClick={cartSelectAll}
                     >
@@ -448,14 +448,14 @@ export default function Like() {
                   </div>
                   <div className="d-flex me-2">
                     <button
-                      className="btn me-2"
+                      className={`btn me-2 ${style.btnHover}`}
                       style={{ backgroundColor: '#ba4014', color: 'white' }}
                       onClick={deleteSelectedItems}
                     >
                       <strong>選定刪除</strong>
                     </button>
                     <button
-                      className="btn"
+                      className={`btn ${style.btnHover}`}
                       style={{ backgroundColor: '#5a1b1b', color: 'white' }}
                       onClick={deleteAll}
                     >
