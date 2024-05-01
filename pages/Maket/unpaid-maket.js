@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 //page
 import DefaultLayout from '@/components/common/default-layout'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { useAuth } from '@/context/auth-context'
 import {
   faTruckFast,
   faFileLines,
@@ -25,6 +26,7 @@ import dayjs from 'dayjs'
 //123
 export default function UnpaidMaket() {
   const router = useRouter()
+  const { checkAuth, auth } = useAuth()
 
   const [data, setData] = useState({
     success: false,
@@ -465,11 +467,9 @@ export default function UnpaidMaket() {
           <div className={Styles.containerPage}>
             <table className={Styles.table}>
               <thead>
-                <tr>
-                  <th>編號</th>
+                <tr className="text-nowrap fw-5">
                   <th>訂單分類</th>
-                  <th>賣家編號</th>
-                  <th>買家編號</th>
+                  <th>買家暱稱</th>
                   <th>總金額</th>
                   <th>總數量</th>
                   <th>運費</th>
@@ -495,12 +495,10 @@ export default function UnpaidMaket() {
 
                       return (
                         <tr key={v.id}>
-                          <td>{v.id}</td>
                           <td>
                             <strong>{v.class == '1' ? '一般' : '議價'}</strong>
                           </td>
-                          <td>{v.seller_id}</td>
-                          <td>{v.buyer_id}</td>
+                          <td>{v.nickname}</td>
                           <td>{v.total_price}</td>
                           <td>{v.total_amount}</td>
                           <td>{v.shipment_fee}</td>
@@ -521,7 +519,7 @@ export default function UnpaidMaket() {
                             </strong>
                           </td>
                           <td>{v.discount_cp}</td>
-                          <td>{v.discount_coupon}</td>
+                          <td>{v.coupon_name}</td>
                           {/* 使用格式化後的日期時間 */}
                           <td>{order_date}</td>
                           <td>
@@ -544,12 +542,10 @@ export default function UnpaidMaket() {
 
                       return (
                         <tr key={v.id}>
-                          <td>{v.id}</td>
                           <td>
                             <strong>{v.class == '1' ? '一般' : '議價'}</strong>
                           </td>
-                          <td>{v.seller_id}</td>
-                          <td>{v.buyer_id}</td>
+                          <td>{v.nickname}</td>
                           <td>{v.total_price}</td>
                           <td>{v.total_amount}</td>
                           <td>{v.shipment_fee}</td>
@@ -570,7 +566,7 @@ export default function UnpaidMaket() {
                             </strong>
                           </td>
                           <td>{v.discount_cp}</td>
-                          <td>{v.discount_coupon}</td>
+                          <td>{v.coupon_name}</td>
                           {/* 使用格式化後的日期時間 */}
                           <td>{order_date}</td>
                           <td>
@@ -592,12 +588,10 @@ export default function UnpaidMaket() {
 
                       return (
                         <tr key={v.id}>
-                          <td>{v.id}</td>
                           <td>
                             <strong>{v.class == '1' ? '一般' : '議價'}</strong>
                           </td>
-                          <td>{v.seller_id}</td>
-                          <td>{v.buyer_id}</td>
+                          <td>{v.nickname}</td>
                           <td>{v.total_price}</td>
                           <td>{v.total_amount}</td>
                           <td>{v.shipment_fee}</td>
@@ -618,7 +612,7 @@ export default function UnpaidMaket() {
                             </strong>
                           </td>
                           <td>{v.discount_cp}</td>
-                          <td>{v.discount_coupon}</td>
+                          <td>{v.coupon_name}</td>
                           {/* 使用格式化後的日期時間 */}
                           <td>{order_date}</td>
                           <td>
@@ -641,9 +635,7 @@ export default function UnpaidMaket() {
               >
                 上一頁
               </button>
-              <span>
-                第 {currentPage} 頁 / 共 {data.totalPages} 頁
-              </span>
+              <span>第 {currentPage} 頁 / 共 1 頁</span>
               <button
                 onClick={handleNextPage}
                 disabled={currentPage === data.totalPages}
