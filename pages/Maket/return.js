@@ -471,9 +471,8 @@ export default function Return() {
               <thead>
                 <tr>
                   <th>編輯</th>
-                  <th>編號</th>
-                  <th>賣家編號</th>
-                  <th>主分類編號</th>
+                  <th>主分類</th>
+                  <th>子分類</th>
                   <th>產品照片</th>
                   <th>產品名稱</th>
                   <th>產品價格</th>
@@ -494,7 +493,7 @@ export default function Return() {
                     const edited_at = dayjs(v.edited_at).format('YYYY-MM-DD')
 
                     return (
-                      <tr key={v.id}>
+                      <tr className="text-nowrap" key={v.id}>
                         <td>
                           <div
                             style={{
@@ -512,10 +511,8 @@ export default function Return() {
                             </Link>
                           </div>
                         </td>
-
-                        <td>{v.id}</td>
-                        <td>{v.seller_id}</td>
-                        <td>{v.category_id}</td>
+                        <td>{v.m}</td>
+                        <td>{v.s}</td>
                         <td>
                           <Image
                             src={
@@ -530,7 +527,12 @@ export default function Return() {
                             alt="Product Photo"
                           />
                         </td>
-                        <td>{v.product_name}</td>
+                        <td
+                          className="text-wrap text-truncate"
+                          style={{ width: '80px' }}
+                        >
+                          {v.product_name}
+                        </td>
                         <td>{v.product_price}</td>
                         <td>{v.product_qty}</td>
                         <td
@@ -545,7 +547,12 @@ export default function Return() {
                             {v.product_status == '1' ? '二手' : '全新'}
                           </strong>
                         </td>
-                        <td>{v.product_intro}</td>
+                        <td
+                          className="text-wrap text-truncate"
+                          style={{ width: '80px' }}
+                        >
+                          {v.product_intro}
+                        </td>
                         <td>{created_at}</td>
                         <td>{edited_at}</td>
                         <td>{v.status}</td>
@@ -588,9 +595,7 @@ export default function Return() {
               >
                 上一頁
               </button>
-              <span>
-                第 {currentPage} 頁 / 共 {data.totalPages} 頁
-              </span>
+              <span>第 {currentPage} 頁 / 共 1 頁</span>
               <button
                 onClick={handleNextPage}
                 disabled={currentPage === data.totalPages}
