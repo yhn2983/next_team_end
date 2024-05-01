@@ -208,7 +208,8 @@ export default function MemberLevels() {
                       style={{ paddingTop: '180px', color: '#8e2626' }}
                     >
                       <strong>
-                        DEAL的LEVEL 1會員：初學探險家
+                        DEAL的LEVEL 1會員：初學探險家，您的小碳點回饋為點數 *
+                        0.01
                         <br />
                         剛進入減碳之旅很迷惘嗎？
                         <br />
@@ -287,7 +288,8 @@ export default function MemberLevels() {
                       style={{ paddingTop: '200px', color: '#8e2626' }}
                     >
                       <strong>
-                        DEAL的LEVEL 2會員：樹木保衛家
+                        DEAL的LEVEL 2會員：樹木保衛家，您的小碳點回饋為點數 *
+                        0.05
                         <br />
                         不簡單！
                         <br />
@@ -386,7 +388,8 @@ export default function MemberLevels() {
                       style={{ paddingTop: '180px', color: '#8e2626' }}
                     >
                       <strong>
-                        DEAL的LEVEL 3會員：森林保安官
+                        DEAL的LEVEL 3會員：森林保安官，您的小碳點回饋為點數 *
+                        0.08
                         <br />
                         真的太厲害了！
                         <br />
@@ -465,7 +468,8 @@ export default function MemberLevels() {
                       style={{ paddingTop: '160px', color: '#8e2626' }}
                     >
                       <strong>
-                        DEAL的LEVEL 4會員：亞馬遜守護者
+                        DEAL的LEVEL 4會員：亞馬遜守護者，您的小碳點回饋為點數 *
+                        0.1
                         <br />
                         不可思議！
                         <br />
@@ -564,7 +568,8 @@ export default function MemberLevels() {
                       style={{ paddingTop: '200px', color: '#8e2626' }}
                     >
                       <strong>
-                        DEAL的LEVEL 5會員：世界拯救者
+                        DEAL的LEVEL 5會員：世界拯救者，您的小碳點回饋為點數 *
+                        0.3
                         <br />
                         您已成為DEAL最高等級會員！
                         <br />
