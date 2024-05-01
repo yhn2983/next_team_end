@@ -299,7 +299,7 @@ export default function Return() {
               <div className={Styles['accordion-content']}>
                 <div className={Styles['accordion-body']}>
                   <Link href="/Maket/return" style={{ textDecoration: 'none' }}>
-                    <div className="accordion-body text-center">
+                    <div className="accordion-body text-center mb-2">
                       <strong>我的商品</strong>
                     </div>
                   </Link>
