@@ -459,7 +459,7 @@ export default function Like() {
                       style={{ backgroundColor: '#5a1b1b', color: 'white' }}
                       onClick={deleteAll}
                     >
-                      <strong>全部刪除</strong>
+                      <strong>清空收藏</strong>
                     </button>
                   </div>
                 </div>

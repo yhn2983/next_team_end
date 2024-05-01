@@ -817,7 +817,7 @@ export default function BarterInvite() {
                                             agreeBtnClick(newFormData)
                                           }}
                                         >
-                                          同意
+                                          <strong>同意</strong>
                                         </button>
                                         <button
                                           className={`btn ${style.btnHover}`}
@@ -836,7 +836,7 @@ export default function BarterInvite() {
                                             declineBtnClick(newFormData)
                                           }}
                                         >
-                                          婉拒
+                                          <strong>婉拒</strong>
                                         </button>
                                       </>
                                     ) : (

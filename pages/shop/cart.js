@@ -321,7 +321,7 @@ export default function Cart() {
                         style={{ backgroundColor: '#5a1b1b', color: 'white' }}
                         onClick={deleteAll}
                       >
-                        <strong>全部刪除</strong>
+                        <strong>清空購物車</strong>
                       </button>
                     </div>
                   </div>
