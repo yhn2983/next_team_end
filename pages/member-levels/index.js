@@ -7,11 +7,12 @@ import DefaultLayout from '@/components/common/default-layout'
 // style-----
 import style from './memberLevels.module.css'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { EffectCoverflow, Keyboard, Pagination } from 'swiper/modules'
+import 'swiper/css/effect-coverflow'
 import 'swiper/css'
 import 'swiper/css/scrollbar'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import { Keyboard, Scrollbar, Navigation, Pagination } from 'swiper/modules'
 // react bootstrap
 // react icons-----
 // loading bar & loading icon
@@ -73,26 +74,24 @@ export default function MemberLevels() {
               </div>
               {/* Breadcrumb End */}
               {/* MemberLevels Start */}
+              {/* Level 0 */}
               <Swiper
-                slidesPerView={1}
-                centeredSlides={false}
-                slidesPerGroupSkip={1}
+                effect={'coverflow'}
                 grabCursor={true}
+                centeredSlides={true}
+                slidesPerView={'auto'}
                 keyboard={{
                   enabled: true,
                 }}
-                breakpoints={{
-                  769: {
-                    slidesPerView: 2,
-                    slidesPerGroup: 2,
-                  },
+                coverflowEffect={{
+                  rotate: 50,
+                  stretch: 0,
+                  depth: 100,
+                  modifier: 1,
+                  slideShadows: true,
                 }}
-                scrollbar={true}
-                navigation={true}
-                pagination={{
-                  clickable: true,
-                }}
-                modules={[Keyboard, Scrollbar, Navigation, Pagination]}
+                pagination={true}
+                modules={[Keyboard, EffectCoverflow, Pagination]}
                 className="mb-5"
                 style={{ height: '550px' }}
               >
@@ -102,7 +101,7 @@ export default function MemberLevels() {
                     src="/l0.png"
                     style={{
                       objectFit: 'cover',
-                      width: '90%',
+                      width: '50%',
                     }}
                   />
                 </SwiperSlide>
@@ -127,7 +126,7 @@ export default function MemberLevels() {
                     src="/02.png"
                     style={{
                       objectFit: 'cover',
-                      width: '95%',
+                      width: '40%',
                     }}
                   />
                 </SwiperSlide>
@@ -135,7 +134,7 @@ export default function MemberLevels() {
                   <div style={{ height: '100%' }} className={style.bgword}>
                     <h2
                       className="text-center align-middle lh-lg"
-                      style={{ paddingTop: '200px', color: '#8e2626' }}
+                      style={{ paddingTop: '220px', color: '#8e2626' }}
                     >
                       <strong>
                         LEVEL 0的會員們，您是DEAL等待任務中的一群夥伴
@@ -151,33 +150,36 @@ export default function MemberLevels() {
                     src="/03.png"
                     style={{
                       objectFit: 'cover',
-                      width: '95%',
+                      width: '40%',
                     }}
                   />
                 </SwiperSlide>
               </Swiper>
+              <br />
+              <br />
+              <hr />
+              <br />
+              <br />
+              {/* Level 1 */}
               <Swiper
-                slidesPerView={1}
-                centeredSlides={false}
-                slidesPerGroupSkip={1}
+                effect={'coverflow'}
                 grabCursor={true}
+                centeredSlides={true}
+                slidesPerView={'auto'}
                 keyboard={{
                   enabled: true,
                 }}
-                breakpoints={{
-                  769: {
-                    slidesPerView: 2,
-                    slidesPerGroup: 2,
-                  },
+                coverflowEffect={{
+                  rotate: 50,
+                  stretch: 0,
+                  depth: 100,
+                  modifier: 1,
+                  slideShadows: true,
                 }}
-                scrollbar={true}
-                navigation={true}
-                pagination={{
-                  clickable: true,
-                }}
-                modules={[Keyboard, Scrollbar, Navigation, Pagination]}
+                pagination={true}
+                modules={[Keyboard, EffectCoverflow, Pagination]}
                 className="mb-5"
-                style={{ height: '500px' }}
+                style={{ height: '550px' }}
               >
                 <SwiperSlide>
                   <img
@@ -185,7 +187,7 @@ export default function MemberLevels() {
                     src="/l1.png"
                     style={{
                       objectFit: 'cover',
-                      width: '90%',
+                      width: '50%',
                     }}
                   />
                 </SwiperSlide>
@@ -195,7 +197,7 @@ export default function MemberLevels() {
                     src="/level2.png"
                     style={{
                       objectFit: 'cover',
-                      width: '90%',
+                      width: '50%',
                     }}
                   />
                 </SwiperSlide>
@@ -203,7 +205,7 @@ export default function MemberLevels() {
                   <div style={{ height: '100%' }} className={style.bgword}>
                     <h2
                       className="text-center align-middle lh-lg"
-                      style={{ paddingTop: '160px', color: '#8e2626' }}
+                      style={{ paddingTop: '180px', color: '#8e2626' }}
                     >
                       <strong>
                         DEAL的LEVEL 1會員：初學探險家
@@ -221,7 +223,7 @@ export default function MemberLevels() {
                     src="/level22.png"
                     style={{
                       objectFit: 'cover',
-                      width: '90%',
+                      width: '40%',
                     }}
                   />
                 </SwiperSlide>
@@ -229,7 +231,7 @@ export default function MemberLevels() {
                   <div style={{ height: '100%' }} className={style.bgword}>
                     <h2
                       className="text-center align-middle lh-lg"
-                      style={{ paddingTop: '160px', color: '#8e2626' }}
+                      style={{ paddingTop: '180px', color: '#8e2626' }}
                     >
                       <strong>
                         一步一步累積
@@ -242,28 +244,31 @@ export default function MemberLevels() {
                   </div>
                 </SwiperSlide>
               </Swiper>
+              <br />
+              <br />
+              <hr />
+              <br />
+              <br />
+              {/* Level 2 */}
               <Swiper
-                slidesPerView={1}
-                centeredSlides={false}
-                slidesPerGroupSkip={1}
+                effect={'coverflow'}
                 grabCursor={true}
+                centeredSlides={true}
+                slidesPerView={'auto'}
                 keyboard={{
                   enabled: true,
                 }}
-                breakpoints={{
-                  769: {
-                    slidesPerView: 2,
-                    slidesPerGroup: 2,
-                  },
+                coverflowEffect={{
+                  rotate: 50,
+                  stretch: 0,
+                  depth: 100,
+                  modifier: 1,
+                  slideShadows: true,
                 }}
-                scrollbar={true}
-                navigation={true}
-                pagination={{
-                  clickable: true,
-                }}
-                modules={[Keyboard, Scrollbar, Navigation, Pagination]}
+                pagination={true}
+                modules={[Keyboard, EffectCoverflow, Pagination]}
                 className="mb-5"
-                style={{ height: '500px' }}
+                style={{ height: '550px' }}
               >
                 <SwiperSlide>
                   <img
@@ -271,7 +276,7 @@ export default function MemberLevels() {
                     src="/l2.png"
                     style={{
                       objectFit: 'cover',
-                      width: '90%',
+                      width: '50%',
                     }}
                   />
                 </SwiperSlide>
@@ -279,7 +284,7 @@ export default function MemberLevels() {
                   <div style={{ height: '100%' }} className={style.bgword}>
                     <h2
                       className="text-center align-middle lh-lg"
-                      style={{ paddingTop: '160px', color: '#8e2626' }}
+                      style={{ paddingTop: '200px', color: '#8e2626' }}
                     >
                       <strong>
                         DEAL的LEVEL 2會員：樹木保衛家
@@ -297,7 +302,7 @@ export default function MemberLevels() {
                     src="/level21.png"
                     style={{
                       objectFit: 'cover',
-                      width: '90%',
+                      width: '50%',
                     }}
                   />
                 </SwiperSlide>
@@ -305,7 +310,7 @@ export default function MemberLevels() {
                   <div style={{ height: '100%' }} className={style.bgword}>
                     <h2
                       className="text-center align-middle lh-lg"
-                      style={{ paddingTop: '160px', color: '#8e2626' }}
+                      style={{ paddingTop: '200px', color: '#8e2626' }}
                     >
                       <strong>
                         一步一步累積
@@ -323,33 +328,36 @@ export default function MemberLevels() {
                     src="/level23.png"
                     style={{
                       objectFit: 'cover',
-                      width: '80%',
+                      width: '40%',
                     }}
                   />
                 </SwiperSlide>
               </Swiper>
+              <br />
+              <br />
+              <hr />
+              <br />
+              <br />
+              {/* Level 3 */}
               <Swiper
-                slidesPerView={1}
-                centeredSlides={false}
-                slidesPerGroupSkip={1}
+                effect={'coverflow'}
                 grabCursor={true}
+                centeredSlides={true}
+                slidesPerView={'auto'}
                 keyboard={{
                   enabled: true,
                 }}
-                breakpoints={{
-                  769: {
-                    slidesPerView: 2,
-                    slidesPerGroup: 2,
-                  },
+                coverflowEffect={{
+                  rotate: 50,
+                  stretch: 0,
+                  depth: 100,
+                  modifier: 1,
+                  slideShadows: true,
                 }}
-                scrollbar={true}
-                navigation={true}
-                pagination={{
-                  clickable: true,
-                }}
-                modules={[Keyboard, Scrollbar, Navigation, Pagination]}
+                pagination={true}
+                modules={[Keyboard, EffectCoverflow, Pagination]}
                 className="mb-5"
-                style={{ height: '500px' }}
+                style={{ height: '550px' }}
               >
                 <SwiperSlide>
                   <img
@@ -357,7 +365,7 @@ export default function MemberLevels() {
                     src="/l3.png"
                     style={{
                       objectFit: 'cover',
-                      width: '90%',
+                      width: '50%',
                     }}
                   />
                 </SwiperSlide>
@@ -367,7 +375,7 @@ export default function MemberLevels() {
                     src="/level31.png"
                     style={{
                       objectFit: 'cover',
-                      width: '80%',
+                      width: '40%',
                     }}
                   />
                 </SwiperSlide>
@@ -375,7 +383,7 @@ export default function MemberLevels() {
                   <div style={{ height: '100%' }} className={style.bgword}>
                     <h2
                       className="text-center align-middle lh-lg"
-                      style={{ paddingTop: '160px', color: '#8e2626' }}
+                      style={{ paddingTop: '180px', color: '#8e2626' }}
                     >
                       <strong>
                         DEAL的LEVEL 3會員：森林保安官
@@ -393,7 +401,7 @@ export default function MemberLevels() {
                     src="/level32.png"
                     style={{
                       objectFit: 'cover',
-                      width: '80%',
+                      width: '40%',
                     }}
                   />
                 </SwiperSlide>
@@ -401,7 +409,7 @@ export default function MemberLevels() {
                   <div style={{ height: '100%' }} className={style.bgword}>
                     <h2
                       className="text-center align-middle lh-lg"
-                      style={{ paddingTop: '160px', color: '#8e2626' }}
+                      style={{ paddingTop: '180px', color: '#8e2626' }}
                     >
                       <strong>
                         一步一步累積
@@ -414,28 +422,31 @@ export default function MemberLevels() {
                   </div>
                 </SwiperSlide>
               </Swiper>
+              <br />
+              <br />
+              <hr />
+              <br />
+              <br />
+              {/* Level 4 */}
               <Swiper
-                slidesPerView={1}
-                centeredSlides={false}
-                slidesPerGroupSkip={1}
+                effect={'coverflow'}
                 grabCursor={true}
+                centeredSlides={true}
+                slidesPerView={'auto'}
                 keyboard={{
                   enabled: true,
                 }}
-                breakpoints={{
-                  769: {
-                    slidesPerView: 2,
-                    slidesPerGroup: 2,
-                  },
+                coverflowEffect={{
+                  rotate: 50,
+                  stretch: 0,
+                  depth: 100,
+                  modifier: 1,
+                  slideShadows: true,
                 }}
-                scrollbar={true}
-                navigation={true}
-                pagination={{
-                  clickable: true,
-                }}
-                modules={[Keyboard, Scrollbar, Navigation, Pagination]}
+                pagination={true}
+                modules={[Keyboard, EffectCoverflow, Pagination]}
                 className="mb-5"
-                style={{ height: '500px' }}
+                style={{ height: '550px' }}
               >
                 <SwiperSlide>
                   <img
@@ -443,7 +454,7 @@ export default function MemberLevels() {
                     src="/l4.png"
                     style={{
                       objectFit: 'cover',
-                      width: '90%',
+                      width: '50%',
                     }}
                   />
                 </SwiperSlide>
@@ -469,7 +480,7 @@ export default function MemberLevels() {
                     src="/level51.png"
                     style={{
                       objectFit: 'cover',
-                      width: '90%',
+                      width: '40%',
                     }}
                   />
                 </SwiperSlide>
@@ -495,33 +506,36 @@ export default function MemberLevels() {
                     src="/level52.png"
                     style={{
                       objectFit: 'cover',
-                      width: '90%',
+                      width: '40%',
                     }}
                   />
                 </SwiperSlide>
               </Swiper>
+              <br />
+              <br />
+              <hr />
+              <br />
+              <br />
+              {/* Level 5 */}
               <Swiper
-                slidesPerView={1}
-                centeredSlides={false}
-                slidesPerGroupSkip={1}
+                effect={'coverflow'}
                 grabCursor={true}
+                centeredSlides={true}
+                slidesPerView={'auto'}
                 keyboard={{
                   enabled: true,
                 }}
-                breakpoints={{
-                  769: {
-                    slidesPerView: 2,
-                    slidesPerGroup: 2,
-                  },
+                coverflowEffect={{
+                  rotate: 50,
+                  stretch: 0,
+                  depth: 100,
+                  modifier: 1,
+                  slideShadows: true,
                 }}
-                scrollbar={true}
-                navigation={true}
-                pagination={{
-                  clickable: true,
-                }}
-                modules={[Keyboard, Scrollbar, Navigation, Pagination]}
+                pagination={true}
+                modules={[Keyboard, EffectCoverflow, Pagination]}
                 className="mb-5"
-                style={{ height: '500px' }}
+                style={{ height: '550px' }}
               >
                 <SwiperSlide>
                   <img
@@ -529,7 +543,7 @@ export default function MemberLevels() {
                     src="/l5.png"
                     style={{
                       objectFit: 'cover',
-                      width: '90%',
+                      width: '50%',
                     }}
                   />
                 </SwiperSlide>
@@ -539,7 +553,7 @@ export default function MemberLevels() {
                     src="/level41.png"
                     style={{
                       objectFit: 'cover',
-                      width: '90%',
+                      width: '40%',
                     }}
                   />
                 </SwiperSlide>
@@ -547,7 +561,7 @@ export default function MemberLevels() {
                   <div style={{ height: '100%' }} className={style.bgword}>
                     <h2
                       className="text-center align-middle lh-lg"
-                      style={{ paddingTop: '160px', color: '#8e2626' }}
+                      style={{ paddingTop: '200px', color: '#8e2626' }}
                     >
                       <strong>
                         DEAL的LEVEL 5會員：世界拯救者
@@ -565,7 +579,7 @@ export default function MemberLevels() {
                     src="/level42.png"
                     style={{
                       objectFit: 'cover',
-                      width: '90%',
+                      width: '40%',
                     }}
                   />
                 </SwiperSlide>
@@ -573,7 +587,7 @@ export default function MemberLevels() {
                   <div style={{ height: '100%' }} className={style.bgword}>
                     <h2
                       className="text-center align-middle lh-lg"
-                      style={{ paddingTop: '200px', color: '#8e2626' }}
+                      style={{ paddingTop: '220px', color: '#8e2626' }}
                     >
                       <strong>
                         謝謝您加入DEAL！
@@ -583,19 +597,9 @@ export default function MemberLevels() {
                     </h2>
                   </div>
                 </SwiperSlide>
-                <SwiperSlide>
-                  <img src="https://cdn.magloft.com/github/swiper/images/page-006.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src="https://cdn.magloft.com/github/swiper/images/page-007.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src="https://cdn.magloft.com/github/swiper/images/page-008.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src="https://cdn.magloft.com/github/swiper/images/page-009.jpg" />
-                </SwiperSlide>
               </Swiper>
+              <br />
+              <br />
               {/* MemberLevels End */}
             </div>
           </div>

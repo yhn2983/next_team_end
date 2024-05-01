@@ -342,7 +342,7 @@ export default function Footer() {
                   </strong>
                 </h5>
                 <span className={style.option}>
-                  還沒成為DEAL會員嗎？快來註冊！
+                  還沒成為DEAL會員嗎？快來註冊吧！
                 </span>
                 <div className="mt-2">
                   <FaHandPointRight
@@ -364,7 +364,9 @@ export default function Footer() {
                     onClick={handleRegisterClick}
                     href="#register"
                   >
-                    <span style={{ fontSize: '18px' }}>註冊</span>
+                    <span style={{ fontSize: '18px' }}>
+                      <strong>註冊</strong>
+                    </span>
                   </button>
                 </div>
                 <h6 className="text-uppercase mt-5 mb-3">

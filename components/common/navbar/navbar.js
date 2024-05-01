@@ -15,13 +15,14 @@ import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
 import { Navbar, Nav } from 'react-bootstrap'
 // react icons-----
-import { TbMessage } from 'react-icons/tb'
+import { TbMessage, TbArrowsExchange } from 'react-icons/tb'
 import {
   FaUser,
   FaClipboardList,
   FaShoppingCart,
   FaHeart,
   FaHandPointRight,
+  FaHouseUser,
 } from 'react-icons/fa'
 import { IoLogIn, IoLanguage } from 'react-icons/io5'
 import { GiArchiveRegister } from 'react-icons/gi'
@@ -176,31 +177,8 @@ export default function CustomNavbar({ pageName = '' }) {
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item href="#/action-1">
-                    <div className="textBox d-flex align-items-center justify-content-between border-bottom border-2">
-                      <div className="boxLeft d-flex">
-                        <div className="mt-3 position-relative">
-                          <img
-                            className="border border-1 rounded-circle"
-                            src="/logo-sm.png"
-                            alt=""
-                            width={50}
-                            height={50}
-                          />
-                        </div>
-                        <div className="mx-2">
-                          <div className="boxId pt-2">
-                            <p>
-                              <strong>kjljkrh</strong>
-                            </p>
-                          </div>
-                          <div className="boxContent pt-0">
-                            <p>請問這個商品還有嗎?</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="boxRight pt-3 me-2">
-                        <p>時間</p>
-                      </div>
+                    <div className="textBox d-flex align-items-center justify-content-center border-bottom border-2">
+                      <strong>尚待開發中</strong>
                     </div>
                   </Dropdown.Item>
                 </Dropdown.Menu>
@@ -243,14 +221,34 @@ export default function CustomNavbar({ pageName = '' }) {
                         &nbsp;<strong>會員等級</strong>
                       </Dropdown.Item>
                       <Dropdown.Item
-                        href="#/action-2"
+                        href="/Maket/index-maket"
+                        style={{ fontSize: '20px' }}
+                      >
+                        <FaHouseUser
+                          className={(style.fs20, style.mr2)}
+                          style={{ color: '#5a7be8' }}
+                        />
+                        &nbsp;<strong>我的賣場</strong>
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        href="/buyer/order-list"
                         style={{ fontSize: '20px' }}
                       >
                         <FaClipboardList
                           className={(style.fs20, style.mr2)}
                           style={{ color: '#5a0982' }}
                         />
-                        &nbsp;<strong>訂購紀錄</strong>
+                        &nbsp;<strong>我的訂單</strong>
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        href="/member/barter"
+                        style={{ fontSize: '20px' }}
+                      >
+                        <TbArrowsExchange
+                          className={(style.fs20, style.mr2)}
+                          style={{ color: '#41ca73' }}
+                        />
+                        &nbsp;<strong>我的以物易物</strong>
                       </Dropdown.Item>
                       <Dropdown.Item
                         href="/coupon/list"
@@ -385,7 +383,7 @@ export default function CustomNavbar({ pageName = '' }) {
                     <strong>已經有想要的商品？</strong>
                   </h5>
                   <span>
-                    前往這裡&nbsp;
+                    <strong>前往這裡</strong>&nbsp;
                     <FaHandPointRight style={{ color: '#8e2626' }} />
                     &nbsp;
                     <Link href="/shop">
@@ -408,7 +406,7 @@ export default function CustomNavbar({ pageName = '' }) {
                     <strong>不知道從哪裡開始？</strong>
                   </h5>
                   <span style={{ paddingLeft: '25px' }}>
-                    試試這個&nbsp;
+                    <strong>試試這個</strong>&nbsp;
                     <FaHandPointRight style={{ color: '#8e2626' }} />
                     &nbsp;
                     <Link href="/shop/random-search">

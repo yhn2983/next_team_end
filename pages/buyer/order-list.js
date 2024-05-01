@@ -304,7 +304,7 @@ export default function OrderList() {
                                           (totalPrice *
                                             (v.item_price / disTotalPrice)) /
                                           v.item_qty
-                                        let newPrice = Math.round(price)
+                                        let newPrice = Math.floor(price) - 1
                                         const formData = {
                                           order_id: v.id,
                                           user_id: auth.userData.id,

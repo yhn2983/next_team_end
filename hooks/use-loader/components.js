@@ -2,6 +2,8 @@
 import Lottie from 'lottie-react'
 import cartAnimation from '@/assets/loader-cart.json'
 import couponAnimation from '@/assets/coupon.json'
+import shopAnimation from '@/assets/shop.json'
+import marketAnimation from '@/assets/market.json'
 
 // 展示用載入元件
 export function DefaultLoader({ show = false }) {
@@ -39,8 +41,8 @@ export function CartLoader({ show = false }) {
     >
       <Lottie
         style={{
-          paddingTop: '100px',
-          width: '60%',
+          paddingTop: '150px',
+          width: '50%',
           margin: 'auto',
         }}
         className={`nike-loader ${show ? '' : 'nike-loader--hide'}`}
@@ -56,6 +58,31 @@ export function CouponAni({ show = false }) {
       <Lottie
         className={`nike-loader ${show ? '' : 'nike-loader--hide'}`}
         animationData={couponAnimation}
+      />
+    </div>
+  )
+}
+
+export function ShopAni({ show = false }) {
+  return (
+    <div className={`nike-loader-bg ${show ? '' : 'nike-loader--hide'}`}>
+      <Lottie
+        className={`nike-loader ${show ? '' : 'nike-loader--hide'}`}
+        animationData={shopAnimation}
+      />
+    </div>
+  )
+}
+
+export function MarketAni({ show = false }) {
+  return (
+    <div className={`nike-loader-bg ${show ? '' : 'nike-loader--hide'}`}>
+      <Lottie
+        style={{
+          height: '500px',
+        }}
+        className={`nike-loader ${show ? '' : 'nike-loader--hide'}`}
+        animationData={marketAnimation}
       />
     </div>
   )

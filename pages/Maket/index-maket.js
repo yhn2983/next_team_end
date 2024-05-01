@@ -9,6 +9,15 @@ import Styles from '@/styles/index-maket.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileLines, faBagShopping } from '@fortawesome/free-solid-svg-icons'
 import { BACKSTAGE_MANAGER } from '@/configs/config-lee'
+import { ShopAni, MarketAni } from '@/hooks/use-loader/components'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { EffectCoverflow, Keyboard, Pagination } from 'swiper/modules'
+import 'swiper/css/effect-coverflow'
+import 'swiper/css'
+import 'swiper/css/scrollbar'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import style from '@/pages/member-levels/memberLevels.module.css'
 
 import axios from 'axios'
 // function MyChart() {
@@ -89,15 +98,108 @@ function IndexMaket() {
         <Head>
           <title>賣場中心 | DEAL-2ND HAND SHOP</title>
         </Head>
-        <div className={`ps-5 ${Styles.container}`}>
+        <div
+          className="d-flex justify-content-center"
+          style={{
+            borderRadius: '10px',
+            // border: '10px solid #e6e8e9',
+            margin: '0 80px',
+            marginTop: '30px',
+            backgroundColor: '#f1e4af',
+            position: 'relative',
+          }}
+        >
           <div
-            className={`mt-3 ${Styles['accordion-container']}`}
+            className=""
+            style={{
+              width: '50px',
+              height: '50px',
+              borderRadius: '50%',
+              position: 'absolute',
+              backgroundColor: 'white',
+              top: '50px',
+              left: '100px',
+            }}
+          ></div>
+          <div
+            className=""
+            style={{
+              width: '100px',
+              height: '100px',
+              borderRadius: '50%',
+              position: 'absolute',
+              backgroundColor: 'white',
+              bottom: '50px',
+              left: '180px',
+            }}
+          ></div>
+          <div
+            className=""
+            style={{
+              width: '30px',
+              height: '30px',
+              borderRadius: '50%',
+              position: 'absolute',
+              backgroundColor: 'white',
+              top: '10px',
+              left: '350px',
+            }}
+          ></div>
+          <div
+            className=""
+            style={{
+              width: '100px',
+              height: '100px',
+              borderRadius: '50%',
+              position: 'absolute',
+              backgroundColor: 'white',
+              top: '100px',
+              right: '100px',
+            }}
+          ></div>
+          <div
+            className=""
+            style={{
+              width: '30px',
+              height: '30px',
+              borderRadius: '50%',
+              position: 'absolute',
+              backgroundColor: 'white',
+              bottom: '40px',
+              right: '200px',
+            }}
+          ></div>
+          <div
+            className=""
+            style={{
+              width: '80px',
+              height: '80px',
+              borderRadius: '50%',
+              position: 'absolute',
+              backgroundColor: 'white',
+              top: '-10px',
+              right: '350px',
+            }}
+          ></div>
+          <img
+            src="/market.png"
+            alt=""
+            style={{ width: '250px', height: '350px' }}
+            className="mt-5 me-5"
+          />
+          <MarketAni />
+        </div>
+
+        <div className={`ps-5 d-flex ${Styles.container}`}>
+          <div
+            className={`mt-3 ms-5 ${Styles['accordion-container']}`}
             id="accordionPanelsStayOpenExample"
           >
             {/* 手风琴项 2 */}
             <div className={Styles['accordion-item']}>
+              <ShopAni style={{ width: '100px', height: '100px' }} />
               <h2
-                className={Styles['accordion-header']}
+                className={`mt-4 ${Styles['accordion-header']}`}
                 id="panelsStayOpen-headingTwo"
               >
                 <span className={Styles['icon-wrapper']}>
@@ -136,7 +238,6 @@ function IndexMaket() {
                 </div>
               </div>
             </div>
-
             {/* 手风琴项 3 */}
             <div className={Styles['accordion-item']}>
               <h2
@@ -171,7 +272,7 @@ function IndexMaket() {
                       href="/Maket/return"
                       style={{ textDecoration: 'none' }}
                     >
-                      <div className="accordion-body">
+                      <div className="accordion-body mb-2">
                         <strong>我的商品</strong>
                       </div>
                     </Link>
@@ -188,12 +289,17 @@ function IndexMaket() {
               </div>
             </div>
           </div>
-          <div className={Styles['content-container']}>
+          <div className={`mt-5 container`}>
             <div className={Styles['rightContent']} id="rightContent" />
             {/* 代辦事項 */}
-            <div className={Styles['enlarge-container']} id="productList">
-              <div className={Styles['toto-container']}>
-                <h2 className={Styles['todo-title']}>待辦事項清單</h2>
+            <div className={`${Styles['enlarge-container']}`} id="productList">
+              <div
+                className="container p-5"
+                style={{ border: '2px solid gray', borderRadius: '10px' }}
+              >
+                <h2 className={`text-center mb-4 ${Styles['todo-title']}`}>
+                  待辦事項清單
+                </h2>
                 <div className={Styles['todo-list']}>
                   <div className={Styles['item']}>
                     <span className={Styles['count']}>
