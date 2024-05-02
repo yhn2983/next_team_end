@@ -198,24 +198,26 @@ export default function GetBargain() {
         </div>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>對於編號{bargainData.id}的議價要求</Modal.Title>
+            <Modal.Title>
+              <strong>對於編號{bargainData.id}的議價要求</strong>
+            </Modal.Title>
           </Modal.Header>
           <form onSubmit={formSubmit}>
             <Modal.Body>{bargainData.ans}</Modal.Body>
             <Modal.Footer>
-              <Button
-                variant="secondary"
-                onClick={handleClose}
-                className={`py-3 ${Styles.bargainNotBtn}`}
-              >
-                取消
-              </Button>
               <button
-                className={`btn btn-block  ${Styles.bargainBtn} font-weight-bold py-3`}
+                className={`btn btn-block  ${Styles.bargainBtn} font-weight-bold`}
                 type="submit"
               >
                 送出
               </button>
+              <Button
+                variant="secondary"
+                onClick={handleClose}
+                className={` ${Styles.bargainNotBtn}`}
+              >
+                取消
+              </Button>
             </Modal.Footer>
           </form>
         </Modal>
