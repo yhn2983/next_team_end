@@ -230,8 +230,16 @@ function IndexMaket() {
                       href="/Maket/unpaid-maket"
                       style={{ textDecoration: 'none' }}
                     >
-                      <div className="accordion-body">
+                      <div className="accordion-body mb-2">
                         <strong>我的銷售</strong>
+                      </div>
+                    </Link>
+                    <Link
+                      href="/buyer/bargain-seller"
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <div className="accordion-body">
+                        <strong>我的議價申請</strong>
                       </div>
                     </Link>
                   </div>
