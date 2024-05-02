@@ -29,7 +29,7 @@ export default function ListMaket() {
     e.preventDefault()
 
     const fd = new FormData(e.target)
-    fd.append('seller_id', 1)
+    fd.append('seller_id', 2)
     fd.append('category_id', fd.get('searchSub'))
 
     if (selectedFile) {

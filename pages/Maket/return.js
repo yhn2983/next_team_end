@@ -55,11 +55,11 @@ export default function Return() {
     let keyword = e.currentTarget.keyword?.value
     if (keyword) {
       router.push(
-        `/Maket/return?keyword=${keyword}&created_at=${formattedDate}&edited_at=${formattedDate2}&minValue=${minValue}&maxValue=${maxValue}`
+        `/Maket/return?keyword=${keyword}&created_at=${formattedDate}&created_at2=${formattedDate2}&minValue=${minValue}&maxValue=${maxValue}`
       )
     } else {
       router.push(
-        `/Maket/return?created_at=${formattedDate}&edited_at=${formattedDate2}&minValue=${minValue}&maxValue=${maxValue}`
+        `/Maket/return?created_at=${formattedDate}&created_at2=${formattedDate2}&minValue=${minValue}&maxValue=${maxValue}`
       )
     }
   }
@@ -77,14 +77,15 @@ export default function Return() {
     searchField,
     searchValue,
     created_at,
-    edited_at,
+    created_at2,
+    edit_at,
     minValue,
     maxValue
   ) => {
     // 在這裡使用fetch函式或其他HTTP客戶端庫來向後端發送請求
     let url = `${PROD_LIST3}?field=${searchField}&value=${searchValue}`
-    if (created_at && edited_at) {
-      url += `&created_at=${created_at}&edited_at=${edited_at}`
+    if (created_at && edit_at) {
+      url += `&created_at=${created_at}&created_at2=${created_at2}`
     }
     if (minValue && maxValue) {
       url += `&minValue=${minValue}&maxValue=${maxValue}`
@@ -258,7 +259,7 @@ export default function Return() {
                 <div className={Styles['accordion-body']}>
                   <Link
                     href="/Maket/unpaid-maket"
-                    style={{ textDecoration: 'none' }}
+                    style={{ textDecoration: 'none', color: '#e96d3f' }}
                   >
                     <div className="accordion-body mb-2">
                       <strong>我的銷售</strong>
@@ -266,7 +267,7 @@ export default function Return() {
                   </Link>
                   <Link
                     href="/buyer/bargain-seller"
-                    style={{ textDecoration: 'none' }}
+                    style={{ textDecoration: 'none', color: '#e96d3f' }}
                   >
                     <div className="accordion-body">
                       <strong>我的議價申請</strong>
@@ -306,14 +307,17 @@ export default function Return() {
             >
               <div className={Styles['accordion-content']}>
                 <div className={Styles['accordion-body']}>
-                  <Link href="/Maket/return" style={{ textDecoration: 'none' }}>
+                  <Link
+                    href="/Maket/return"
+                    style={{ textDecoration: 'none', color: '#e96d3f' }}
+                  >
                     <div className="accordion-body text-center mb-2">
                       <strong>我的商品</strong>
                     </div>
                   </Link>
                   <Link
                     href="/Maket/list-maket"
-                    style={{ textDecoration: 'none' }}
+                    style={{ textDecoration: 'none', color: '#e96d3f' }}
                   >
                     <div className="accordion-body">
                       <strong>新增商品</strong>
@@ -434,7 +438,7 @@ export default function Return() {
                         type="date"
                         className="form-control"
                         style={{ width: '240px' }}
-                        name="edited_at"
+                        name="created_at2"
                         value={
                           searchdate2
                             ? dayjs(searchdate2).format('YYYY-MM-DD')
@@ -498,7 +502,7 @@ export default function Return() {
                   data.rows &&
                   data.rows.map((v, i) => {
                     const created_at = dayjs(v.created_at).format('YYYY-MM-DD')
-                    const edited_at = dayjs(v.edited_at).format('YYYY-MM-DD')
+                    const edit_at = dayjs(v.edit_at).format('YYYY-MM-DD')
 
                     return (
                       <tr className="text-nowrap" key={v.id}>
@@ -562,7 +566,7 @@ export default function Return() {
                           {v.product_intro}
                         </td>
                         <td>{created_at}</td>
-                        <td>{edited_at}</td>
+                        <td>{edit_at}</td>
                         <td>{v.status}</td>
                         <td>
                           <div

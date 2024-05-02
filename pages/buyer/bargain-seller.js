@@ -118,7 +118,10 @@ export default function BargainSeller() {
                           <div className={Style['accordion-body']}>
                             <Link
                               href="/Maket/unpaid-maket"
-                              style={{ textDecoration: 'none' }}
+                              style={{
+                                textDecoration: 'none',
+                                color: '#e96d3f',
+                              }}
                             >
                               <div className="accordion-body mb-2">
                                 <strong>我的銷售</strong>
@@ -126,7 +129,10 @@ export default function BargainSeller() {
                             </Link>
                             <Link
                               href="/buyer/bargain-seller"
-                              style={{ textDecoration: 'none' }}
+                              style={{
+                                textDecoration: 'none',
+                                color: '#e96d3f',
+                              }}
                             >
                               <div className="accordion-body">
                                 <strong>我的議價申請</strong>
@@ -168,7 +174,10 @@ export default function BargainSeller() {
                           <div className={Style['accordion-body']}>
                             <Link
                               href="/Maket/return"
-                              style={{ textDecoration: 'none' }}
+                              style={{
+                                textDecoration: 'none',
+                                color: '#e96d3f',
+                              }}
                             >
                               <div className="accordion-body mb-2">
                                 <strong>我的商品</strong>
@@ -176,7 +185,10 @@ export default function BargainSeller() {
                             </Link>
                             <Link
                               href="/Maket/list-maket"
-                              style={{ textDecoration: 'none' }}
+                              style={{
+                                textDecoration: 'none',
+                                color: '#e96d3f',
+                              }}
                             >
                               <div className="accordion-body">
                                 <strong>新增商品</strong>
