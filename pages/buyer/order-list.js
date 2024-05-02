@@ -117,7 +117,7 @@ export default function OrderList() {
       confirmButtonText: '確定',
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.href = `http://localhost:3000/buyer/order-list`
+        router.push('/buyer/order-list')
       }
     })
   }
@@ -131,7 +131,7 @@ export default function OrderList() {
       confirmButtonText: '確定',
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.href = `http://localhost:3000/buyer/order-list`
+        router.push('/buyer/order-list')
       }
     })
   }
