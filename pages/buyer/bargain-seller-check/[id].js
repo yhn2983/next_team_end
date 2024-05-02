@@ -11,6 +11,9 @@ import Button from 'react-bootstrap/Button'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
+import Link from 'next/link'
+import Head from 'next/head'
+import style from '@/pages/shop/cart.module.css'
 
 export default function GetBargain() {
   const router = useRouter()
@@ -79,64 +82,119 @@ export default function GetBargain() {
   return (
     <>
       <DefaultLayout>
-        <div>
-          <table className={`table  ${Styles.bargain}`}>
-            <thead>
-              <tr className="table-dark">
-                <th scope="col">編號</th>
-                <th scope="col">買家</th>
-                <th scope="col">期望價格</th>
-                <th scope="col">商品</th>
-                <th scope="col">回覆</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data &&
-                data.rows.map((v, i) => {
-                  return (
-                    <tr key={i}>
-                      <td> {v.id}</td>
-                      <td> {v.buyer_id}</td>
-                      <td> ${v.after_bargin_price}</td>
-                      <td>{v.product_name}</td>
-                      <td>
-                        {' '}
-                        <button
-                          className={`btn btn-block  font-weight-bold py-3 `}
-                          type=""
-                          onClick={(e) => {
-                            e.preventDefault()
-                            setbargainData({
-                              id: id,
-                              ans_num: '1',
-                              ans: '同意',
-                            })
-                            handleShow(e)
-                          }}
-                        >
-                          同意
-                        </button>
-                        <button
-                          className={`btn btn-block ${Styles.bargainNotBtn} font-weight-bold py-3`}
-                          type=""
-                          onClick={(e) => {
-                            e.preventDefault()
-                            setbargainData({
-                              id: id,
-                              ans_num: '2',
-                              ans: '不同意',
-                            })
-                            handleShow(e)
-                          }}
-                        >
-                          拒絕
-                        </button>{' '}
-                      </td>
-                    </tr>
-                  )
-                })}
-            </tbody>
-          </table>
+        <Head>
+          <title>議價申請列表 | DEAL-2ND HAND SHOP</title>
+        </Head>
+        <div className="container-fluid mb-5">
+          {/* Breadcrumb Start */}
+          <div className={`container-fluid ${style.breadcrumbArea}`}>
+            <div className="row px-xl-5">
+              <div className="col-12">
+                <nav className="breadcrumb">
+                  <Link
+                    className="breadcrumb-item text-dark"
+                    href="/"
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <span style={{ fontSize: '20px' }}>首頁</span>
+                  </Link>
+                  <Link
+                    className="breadcrumb-item text-dark"
+                    href="/buyer/order-list"
+                    style={{ textDecoration: 'none', fontSize: '20px' }}
+                  >
+                    <span>訂單總覽</span>
+                  </Link>
+                  <span
+                    className="breadcrumb-item active"
+                    style={{ fontSize: '20px' }}
+                  >
+                    議價申請列表
+                  </span>
+                </nav>
+              </div>
+            </div>
+          </div>
+          {/* Breadcrumb End */}
+          <div className="row px-lg-5" style={{ marginBottom: '300px' }}>
+            <div className="col-12 px-lg-5">
+              <table className={`table  ${Styles.bargain}`}>
+                <thead>
+                  <tr className="table-dark">
+                    <th scope="col" className="text-center">
+                      編號
+                    </th>
+                    <th scope="col" className="text-center">
+                      買家
+                    </th>
+                    <th scope="col" className="text-center">
+                      期望價格
+                    </th>
+                    <th scope="col">商品</th>
+                    <th scope="col" className="text-center">
+                      回覆
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data &&
+                    data.rows.map((v, i) => {
+                      return (
+                        <tr key={i} className="align-middle">
+                          <td className="text-center"> {i + 1}</td>
+                          <td className="text-center"> {v.nickname}</td>
+                          <td className="text-center">
+                            {' '}
+                            ${v.after_bargin_price?.toLocaleString()}
+                          </td>
+                          <td>
+                            <Link
+                              href={`/shop/${v.product_id}`}
+                              style={{ textDecoration: 'none', color: 'black' }}
+                            >
+                              {v.product_name}
+                            </Link>
+                          </td>
+                          <td className="text-center">
+                            {' '}
+                            <button
+                              className={`btn btn-block  font-weight-bold`}
+                              type=""
+                              onClick={(e) => {
+                                e.preventDefault()
+                                setbargainData({
+                                  id: id,
+                                  ans_num: '1',
+                                  ans: '同意',
+                                })
+                                handleShow(e)
+                              }}
+                            >
+                              同意
+                            </button>
+                            <button
+                              className={`btn btn-block ${Styles.bargainNotBtn} font-weight-bold`}
+                              type=""
+                              onClick={(e) => {
+                                e.preventDefault()
+                                setbargainData({
+                                  id: id,
+                                  ans_num: '2',
+                                  ans: '不同意',
+                                })
+                                handleShow(e)
+                              }}
+                            >
+                              拒絕
+                            </button>{' '}
+                          </td>
+                        </tr>
+                      )
+                    })}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>

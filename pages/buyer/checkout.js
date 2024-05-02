@@ -265,7 +265,7 @@ export default function Checkout() {
       <div className="container-fluid">
         {/* Checkout Start */}
         <Head>
-          <title>訂單結帳 | DEAL-2ND HAND SHOP</title>
+          <title>一般訂單結帳 | DEAL-2ND HAND SHOP</title>
         </Head>
         <div className="row">
           <div className="col bg-light container-fluid d-flex justify-content-center">
@@ -367,7 +367,7 @@ export default function Checkout() {
                           />
                         </div>
                         <div className="col-md-6 form-group">
-                          <label htmlFor="class" className="ms-2 ">
+                          <label htmlFor="class" className="ms-2">
                             <strong>類型</strong>
                           </label>
                           <div>

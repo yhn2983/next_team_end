@@ -9,6 +9,9 @@ import DefaultLayout from '@/components/common/default-layout'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
+import style from '@/pages/shop/cart.module.css'
+import Head from 'next/head'
+import Link from 'next/link'
 
 export default function Evaluation() {
   const router = useRouter()
@@ -107,13 +110,52 @@ export default function Evaluation() {
     <>
       {/* Contact Start */}
       <DefaultLayout>
-        <div className={`container-fluid ${Styles.evalution}`}>
-          <h4 className="mb-3" style={{ color: '#8e2626' }}>
-            <strong>評價訂單{eid}</strong>
-          </h4>
+        <Head>
+          <title>商品評價 | DEAL-2ND HAND SHOP</title>
+        </Head>
+        {/* Breadcrumb Start */}
+        <div className={`container-fluid ${style.breadcrumbArea}`}>
           <div className="row px-xl-5">
-            <div className="col-lg-7 mb-5">
-              <div className="contact-form bg-light p-30">
+            <div className="col-12">
+              <nav className="breadcrumb">
+                <Link
+                  className="breadcrumb-item text-dark"
+                  href="/"
+                  style={{ textDecoration: 'none' }}
+                >
+                  <span style={{ fontSize: '20px' }}>首頁</span>
+                </Link>
+                <Link
+                  className="breadcrumb-item text-dark"
+                  href="/buyer/order-list"
+                  style={{ textDecoration: 'none', fontSize: '20px' }}
+                >
+                  <span>訂單總覽</span>
+                </Link>
+                <span
+                  className="breadcrumb-item active"
+                  style={{ fontSize: '20px' }}
+                >
+                  商品評價
+                </span>
+              </nav>
+            </div>
+          </div>
+        </div>
+        {/* Breadcrumb End */}
+        <div className={`container-fluid ${Styles.evalution}`}>
+          <h3 className="mb-3 text-center" style={{ color: '#8e2626' }}>
+            <strong>評價訂單：編號{eid}</strong>
+          </h3>
+          <div className="row px-xl-5">
+            <div
+              className="col-12 mb-5 d-flex justify-content-center"
+              style={{ padding: '0 200px' }}
+            >
+              <div
+                className="contact-form bg-light p-30"
+                style={{ width: '100%' }}
+              >
                 <div id="success" />
                 {!product
                   ? '無訂單需評價'
@@ -129,116 +171,173 @@ export default function Evaluation() {
                         >
                           <div className="control-group">
                             <div className="row product-line align-items-center">
-                              <div className="col-6">
+                              <div className="col-6 text-center pt-3">
                                 <Image
                                   src={`/${
                                     val.product_photos.match(/[^,]+\.jpg/)[0]
                                   }`}
                                   className="img-fluid sec1-img"
                                   alt=""
-                                  width={30}
-                                  height={30}
+                                  width={200}
+                                  height={150}
                                 />
-                                <span>{val.product_name}</span>
                               </div>
                               {/* <div className="col-3">$690</div> */}
-                              <div className="col-3">{val.seller_name}</div>
+                              <div className="col-6">
+                                <h4>
+                                  <strong>
+                                    商品名稱：
+                                    <Link
+                                      href={`/shop/${val.pid}`}
+                                      style={{ textDecoration: 'none' }}
+                                    >
+                                      {val.product_name}
+                                    </Link>
+                                  </strong>
+                                </h4>
+                                <br />
+                                <br />
+                                <br />
+                                <h4 className="">
+                                  <strong>
+                                    賣家暱稱：
+                                    <Link
+                                      href={`/member/store/${val.sid}`}
+                                      style={{ textDecoration: 'none' }}
+                                    >
+                                      {val.nickname}
+                                    </Link>
+                                  </strong>
+                                </h4>
+                              </div>
                             </div>
-                            <div>
-                              {/* 
+                            <div className="mt-5 row d-flex justify-content-center mb-5">
+                              <div className="row">
+                                <div className="col-12 text-center">
+                                  <div className="d-flex justify-content-center">
+                                    {/* 
           這裡使用簡易建立5個陣列1...N的語法，可以參考:
           https://github.com/orgs/mfee-react/discussions/50 
         */}
-                              {Array(5)
-                                .fill(1)
-                                .map((v, i) => {
-                                  // 每個星星按鈕的分數，相當於索引值+1
-                                  const score = i + 1
+                                    {Array(5)
+                                      .fill(1)
+                                      .map((v, i) => {
+                                        // 每個星星按鈕的分數，相當於索引值+1
+                                        const score = i + 1
 
-                                  return (
-                                    <button
-                                      key={i}
-                                      className={Styles['star-btn']}
-                                      onMouseEnter={() => {
-                                        // 滑鼠游標移入時設定分數
-                                        setHoverRating(score)
-                                      }}
-                                      // onMouseLeave={() => {
-                                      //   // 滑鼠游標移出時設定分數
-                                      //   setHoverRating(0)
-                                      // }}
-                                      onClick={(e) => {
-                                        e.preventDefault()
-                                        handleRatingClick(score)
-                                        // setFormData((prevFormData) => ({
-                                        //   ...prevFormData,
-                                        //   id: val.id,
-                                        // }))
-                                      }}
+                                        return (
+                                          <button
+                                            key={i}
+                                            className={Styles['star-btn']}
+                                            onMouseEnter={() => {
+                                              // 滑鼠游標移入時設定分數
+                                              setHoverRating(score)
+                                            }}
+                                            // onMouseLeave={() => {
+                                            //   // 滑鼠游標移出時設定分數
+                                            //   setHoverRating(0)
+                                            // }}
+                                            onClick={(e) => {
+                                              e.preventDefault()
+                                              handleRatingClick(score)
+                                              // setFormData((prevFormData) => ({
+                                              //   ...prevFormData,
+                                              //   id: val.id,
+                                              // }))
+                                            }}
+                                          >
+                                            <span
+                                              // 判斷星星是否要點亮。
+                                              // 如果這個星星的分數(score)小於等於目前的評分(rating)，或小於目前的滑鼠游標懸停(hover)評分，則套用亮起樣式
+                                              className={
+                                                score <= rating ||
+                                                score <= hoverRating
+                                                  ? Styles['on']
+                                                  : Styles['off']
+                                              }
+                                              style={{ fontSize: '30px' }}
+                                            >
+                                              &#9733;
+                                            </span>
+                                          </button>
+                                        )
+                                      })}
+                                    <input value={rating} hidden />
+                                    <span
+                                      className="ps-2 mt-2"
+                                      style={{ fontSize: '25px' }}
                                     >
-                                      <span
-                                        // 判斷星星是否要點亮。
-                                        // 如果這個星星的分數(score)小於等於目前的評分(rating)，或小於目前的滑鼠游標懸停(hover)評分，則套用亮起樣式
-                                        className={
-                                          score <= rating ||
-                                          score <= hoverRating
-                                            ? Styles['on']
-                                            : Styles['off']
+                                      <strong>目前評了 {rating} 分</strong>
+                                    </span>
+                                  </div>
+                                  <br />
+                                  <hr style={{ margin: '0 500px' }} />
+                                  <br />
+                                  <div
+                                    className="mb-3 text-center mx-auto"
+                                    style={{ width: '70%' }}
+                                  >
+                                    <label className="mb-2" htmlFor="comments">
+                                      <strong style={{ fontSize: '25px' }}>
+                                        評論
+                                      </strong>
+                                    </label>
+                                    <textarea
+                                      className="form-control"
+                                      name="comments"
+                                      id="comments"
+                                      cols="30"
+                                      rows="3"
+                                      value={formData.comments}
+                                      onChange={(e) => {
+                                        const newFormData = {
+                                          ...formData,
+                                          comments: e.target.value,
                                         }
-                                      >
-                                        &#9733;
-                                      </span>
-                                    </button>
-                                  )
-                                })}
-                            </div>
-                            <input value={rating} hidden />
-                            目前評了 {rating} 分
-                            <div>
-                              <div className="mb-3">
-                                <label htmlFor="comments">評論</label>
-                                <textarea
-                                  className="form-control"
-                                  name="comments"
-                                  id="comments"
-                                  cols="30"
-                                  rows="3"
-                                  value={formData.comments}
-                                  onChange={(e) => {
-                                    const newFormData = {
-                                      ...formData,
-                                      comments: e.target.value,
-                                    }
-                                    setFormData(newFormData)
-                                  }}
-                                ></textarea>
+                                        setFormData(newFormData)
+                                      }}
+                                    ></textarea>
+                                  </div>
+                                </div>
                               </div>
-                              <button
-                                className={`btn btn-outline-danger py-2 px-4 ${Styles.btn}`}
-                                type="submit"
-                                id="sendMessageButton"
-                                // onClick={() => {
-                                //   // 在這裡更新 sentData 狀態
-                                //   setSentData([
-                                //     ...sentData,
-                                //     [formData.id, formData.rating, formData.comments],
-                                //   ])
-                                // }}
-                              >
-                                送出評論
-                              </button>
-                              <button
-                                className={`btn  py-2 px-4 ${Styles.btn}`}
-                                type="button"
-                                id="sendMessageButton"
-                              >
-                                回上一頁
-                              </button>
+                            </div>
+                            <div className="row p-4">
+                              <div className="col-12 d-flex justify-content-center">
+                                <button
+                                  className={`btn me-4 btn-outline-danger ${Styles.btn}`}
+                                  type="submit"
+                                  id="sendMessageButton"
+                                  // onClick={() => {
+                                  //   // 在這裡更新 sentData 狀態
+                                  //   setSentData([
+                                  //     ...sentData,
+                                  //     [formData.id, formData.rating, formData.comments],
+                                  //   ])
+                                  // }}
+                                >
+                                  <strong>送出評論</strong>
+                                </button>
+                                <button
+                                  className={`btn py-2 px-4 ${Styles.btn}`}
+                                  type="button"
+                                  id="sendMessageButton"
+                                >
+                                  <strong>回上一頁</strong>
+                                </button>
+                              </div>
                             </div>
                           </div>
                         </form>
                       ) : (
-                        '訂單已評價'
+                        <div className="pt-3" style={{ marginBottom: '200px' }}>
+                          <div className="row">
+                            <div className="col-12 text-center">
+                              <h4>
+                                <strong>您的訂單已評價！</strong>
+                              </h4>
+                            </div>
+                          </div>
+                        </div>
                       )
                     })}
               </div>
