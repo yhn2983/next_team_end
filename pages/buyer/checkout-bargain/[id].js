@@ -79,7 +79,7 @@ export default function CheckoutBargain() {
       let newBargain = productData.rows.after_bargin_price
 
       productData.rows.forEach((v) => {
-        newProductId.push(v.id)
+        newProductId.push(v.product_id)
         newProductPrice.push(v.after_bargin_price)
         newSellerId.push(v.seller_id)
         // totalPrice = totalPrice + v.product_price
