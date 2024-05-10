@@ -2,7 +2,8 @@
 
 .vscode
 
-
+# img
+/public/img
 
 # dependencies
 /node_modules
